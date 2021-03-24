@@ -1,9 +1,33 @@
 # CRG_Containers_Nextflow_2021
 Slow-paced 4-day containers and Nextflow course for beginners.
 
+## About the course
+
+### Outline
+
+The 4-day Conainers and Nextflow course is a fully hands-on course.
+
+### Learning objectives
+
+* Locate and fetch Docker/Singularity images from public repositories
+* Execute/Run a Docker/Singularity container from the command line
+* Design/Write a Docker recipe
+* Build Docker container from a recipe
+* Convert Docker to Singularity image
+* Execte/Run a Nextflow pipeline
+* Modify 
+* Write Nextflow pipeline
+* Implement short piece of code into a Nextflow pipeline
+
+### Prerequisite
+
+Being comfortable working with the CLI (command-line interface) in a Linux-based environment.
+
 ## Dates, time, location
 
-* Dates: May 2021: 3, 4, 10, 11
+* Dates: May 2021: 
+ * Containers: Monday 3rd, Tuesday 4th
+ * Nextflow: Monday 10th, Tuesday 11th
 
 * Time: 9:30-17:30:
   * Morning coffee break: 11:00-11:30am
@@ -38,7 +62,7 @@ Slow-paced 4-day containers and Nextflow course for beginners.
 
 ### Day 3 & 4: Nextflow
 
-#### Day 3: Run Nextflow
+#### Day 3: Fetch and run
 
 * Nextflow pipeline repositories (e.g. nf-core)
   * hands-on: fetch X pipeline
@@ -48,12 +72,12 @@ Slow-paced 4-day containers and Nextflow course for beginners.
 * Modify a Nextflow pipeline
 * Nextflow configuration files
 
-#### Day 4: Build Nextflow pipeline
+#### Day 4: Build and share
 
 * main.nf
 * Run Nextflow with containers
 * Run Nextflow in computing cluster (e.g. HPC)
-
+* Share pipeline
 
 
 
