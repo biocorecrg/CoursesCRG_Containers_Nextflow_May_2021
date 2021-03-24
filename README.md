@@ -1,23 +1,32 @@
-# CRG_Containers_Nextflow_2021
+# Courses@CRG_Containers_Nextflow_May_2021
+
 Slow-paced 4-day containers and Nextflow course for beginners.
 
 ## About the course
 
 ### Outline
 
-The 4-day Conainers and Nextflow course is a fully hands-on course.
+The 4-day Containers and Nextflow course will train participants to use and build Docker and Singularity containers and Nextflow pipelines.<br>
+It is designed to provide trainees with short and frequent hands-on sessions, while keeping theoretical sessions to a minimum.<br>
+The course will be fully virtual via the Zoom platform.<br>
+Trainees will work with the dedicated AWS Cloud9 environment.
 
 ### Learning objectives
 
-* Locate and fetch Docker/Singularity images from public repositories
+About containers:
+* Locate and fetch Docker/Singularity images from dedicated repositories
 * Execute/Run a Docker/Singularity container from the command line
 * Design/Write a Docker recipe
 * Build Docker container from a recipe
 * Convert Docker to Singularity image
-* Execte/Run a Nextflow pipeline
-* Modify 
-* Write Nextflow pipeline
+
+About Nextflow:
+* Locate and fetch Nextflow pipelines from dedicated repositories
+* Execute/Run a Nextflow pipeline
+* Describe and explain Nextflow's basic concepts
+* Test and modify Nextflow pipeline 
 * Implement short piece of code into a Nextflow pipeline
+* Develop Nextflow pipeline from scratch
 
 ### Prerequisite
 
