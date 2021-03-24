@@ -4,6 +4,9 @@ Slow-paced 4-day containers and Nextflow course for beginners.
 
 ## About the course
 
+Linux containers allow the storage of code and applications in an host-independent lightweight environment. They became a fast and popular way to share and deploy applications in different environments.
+Nextflow is a powerful polyglot workflow language that, coupled with Docker and Singularity containers, provides a robust, scalable and reproducible way to run computational pipelines.
+
 ### Outline
 
 The 4-day Containers and Nextflow course will train participants to use and build Docker and Singularity containers and Nextflow pipelines.<br>
@@ -14,23 +17,23 @@ Trainees will work with the dedicated AWS Cloud9 environment.
 ### Learning objectives
 
 About containers:
-* Locate and fetch Docker/Singularity images from dedicated repositories
-* Execute/Run a Docker/Singularity container from the command line
-* Design/Write a Docker recipe
-* Build Docker container from a recipe
-* Convert Docker to Singularity image
+* Locate and fetch Docker/Singularity images from dedicated repositories.
+* Execute/Run a Docker/Singularity container from the command line.
+* Build Docker container from an existing recipe.
+* Design/Write a Docker recipe.
+* Convert Docker to Singularity image.
 
 About Nextflow:
-* Locate and fetch Nextflow pipelines from dedicated repositories
-* Execute/Run a Nextflow pipeline
-* Describe and explain Nextflow's basic concepts
-* Test and modify Nextflow pipeline 
-* Implement short piece of code into a Nextflow pipeline
-* Develop Nextflow pipeline from scratch
+* Locate and fetch Nextflow pipelines from dedicated repositories.
+* Execute/Run a Nextflow pipeline.
+* Describe and explain Nextflow's basic concepts.
+* Test and modify a Nextflow pipeline.
+* Implement short blocks of code into a Nextflow pipeline.
+* Develop a Nextflow pipeline from scratch.
 
 ### Prerequisite
 
-Being comfortable working with the CLI (command-line interface) in a Linux-based environment.
+Being comfortable working with the CLI (command-line interface) in a Linux-based environment. Applicants are not expected to have used neither Linux containers nor Nextflow workflows before.
 
 ## Dates, time, location
 
@@ -43,50 +46,52 @@ Being comfortable working with the CLI (command-line interface) in a Linux-based
   * Lunch break: 1pm-2pm 
   * Afternoon coffee break: 3:30-4:00pm
 
-* Location: Online via Zoom
+* Location: virtual, via Zoom.
 
 ## Preliminary program
 
 ### Day 1 & 2: Containers
 
-* Containers: introduction and history
-
 #### Day 1: Docker
 
-* Docker hub
-* Fetch (and build) image from Docker hub
-* Run container (interactively)
-* Build image from recipe:
-  * Explain sections
-  * Build options (e.g. cache)
-* Working with volumes
-* Upload image to Docker hub
+* Containers: introduction and history.
+* Docker hub: find existing containers.
+* Fetch (and build) an image from Docker hub.
+* Run Docker container based on an existing image (also run it interactively).
+* Work with volumes.
+* Build image from existing recipe:
+  * Explain sections.
+  * Build options (e.g. cache).
+* Write Docker recipe and build image from it.
+* Upload image to Docker hub.
 
 #### Day 2: Singularity
 
-* Singularity versus Docker
-* Fetch (and build) Singularity from Docker hub
-* Run Singularity container (interactively)
-* Working with volumes
+* Singularity versus Docker.
+* Fetch (and build) Singularity from Docker hub.
+* Run Singularity container (interactively).
+* Work with volumes.
+* Build Singularity image from existing recipe (?).
 
 ### Day 3 & 4: Nextflow
 
-#### Day 3: Fetch and run
+#### Day 3: Fetch, understand, run, modify
 
-* Nextflow pipeline repositories (e.g. nf-core)
-  * hands-on: fetch X pipeline
-* Run a Nextflow pipeline
+* Nextflow pipeline repositories (e.g. nf-core).
+  * hands-on: fetch X pipeline.
+* Run an existing Nextflow pipeline.
+* Understand Nextflow main files (main.nf and config files).
 * Basic concepts:
   * Processes and channels
-* Modify a Nextflow pipeline
-* Nextflow configuration files
+* Nextflow configuration files.
+* Modify and run a Nextflow pipeline.
 
-#### Day 4: Build and share
+#### Day 4: Write and share
 
-* main.nf
-* Run Nextflow with containers
-* Run Nextflow in computing cluster (e.g. HPC)
-* Share pipeline
+* Write Nextflow pipeline from scratch.
+* Run Nextflow with containers.
+* Run Nextflow in computing cluster (e.g. HPC).
+* Share Nextflow pipeline.
 
 
 
