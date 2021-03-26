@@ -60,14 +60,16 @@ Being comfortable working with the CLI (command-line interface) in a Linux-based
 
 * Containers: introduction and history.
 * Docker hub: find existing containers.
-* Fetch (and build) an image from Docker hub.
+* Fetch (and build) an image from public registries (Docker Hub, Quay.io, etc.)
+ * Discovery of different relevant base images
+  * Rocker, continuumio, biocontainers.pro.
 * Run Docker container based on an existing image (also run it interactively).
-* Work with volumes.
-* Build image from existing recipe:
+* Work with volumes and ports.
+* Build an image from an existing recipe:
   * Explain sections and keywords.
   * Build options (e.g. cache or build variables).
 * Write a Docker recipe and build an image from it.
-* Upload image to registries (Docker Hub, Quay.io, local, etc.) 
+* Upload image to registries.
 
 #### Day 2: Singularity
 
