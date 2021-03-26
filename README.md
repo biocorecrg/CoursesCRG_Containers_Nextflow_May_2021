@@ -74,10 +74,14 @@ Being comfortable working with the CLI (command-line interface) in a Linux-based
 #### Day 2: Singularity
 
 * Singularity versus Docker.
-* Fetch (and build) Singularity from public registries.
+ * Differences, pros and cons for each system. 
+* Fetch (and build) Singularity images.
+ * Build from existing public registries.
+ * Build from local Docker instances.
 * Run Singularity container (interactively).
-* Work with volumes.
-* Build Singularity image from existing recipe (?).
+* Understanding and working with volumes.
+* Singularity build recipes.
+* Advanced features: services, etc.
 
 ### Day 3 & 4: Nextflow
 
