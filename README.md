@@ -1,10 +1,13 @@
 # Courses@CRG_Containers_Nextflow_May_2021
 
-Slow-paced 4-day containers and Nextflow course for beginners.
+## Title
+
+Reproducible research and data analysis with Linux containers and Nextflow pipelines 
+
 
 ## About the course
 
-Linux containers allow the storage of code and applications in an host-independent lightweight environment. They became a fast and popular way to share and deploy applications in different environments.
+This slow-paced hands-on course introduces main concepts and how-to  Linux containers allow the storage of code and applications in an host-independent lightweight environment. They became a fast and popular way to share and deploy applications in different environments.
 Nextflow is a powerful polyglot workflow language that, coupled with Docker and Singularity containers, provides a robust, scalable and reproducible way to run computational pipelines.
 
 ### Outline
@@ -15,7 +18,12 @@ It is designed to provide trainees with short and frequent hands-on sessions, wh
 
 The course will be fully virtual via the Zoom platform.
 
-Trainees will work in  a dedicated AWS Cloud9 environment.
+Trainees will work in a dedicated AWS Cloud9 environment.
+
+The course is designed for absolute beginners who want to start using containers and Nextflow pipelines.
+
+
+
 
 ### Learning objectives
 
