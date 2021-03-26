@@ -92,7 +92,7 @@ Applicants are not expected to have used neither Linux containers nor Nextflow w
 
 #### Day 3: Fetch, understand, run, modify
 
-* Nextflow pipeline repositories (e.g. nf-core).
+* Nextflow pipeline repositories.
   * hands-on: fetch X pipeline.
 * Run an existing Nextflow pipeline.
 * Understand Nextflow main files (main.nf and config files).
