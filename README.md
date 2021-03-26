@@ -107,8 +107,8 @@ Applicants are not expected to have used neither Linux containers nor Nextflow w
 * Run Nextflow with containers.
 * Choose either Docker or Singularity.
 * Run Nextflow in a computing cluster (e.g. HPC).
- * Definition of computing requirements and queues.
- * Profiles.
+  * Definition of computing requirements and queues.
+  * Profiles.
 * Share Nextflow pipelines and good practices. 
 
 
