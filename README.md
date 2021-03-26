@@ -64,15 +64,15 @@ Being comfortable working with the CLI (command-line interface) in a Linux-based
 * Run Docker container based on an existing image (also run it interactively).
 * Work with volumes.
 * Build image from existing recipe:
-  * Explain sections.
-  * Build options (e.g. cache).
-* Write Docker recipe and build image from it.
-* Upload image to Docker hub.
+  * Explain sections and keywords.
+  * Build options (e.g. cache or build variables).
+* Write a Docker recipe and build an image from it.
+* Upload image to registries (Docker Hub, Quay.io, local, etc.) 
 
 #### Day 2: Singularity
 
 * Singularity versus Docker.
-* Fetch (and build) Singularity from Docker hub.
+* Fetch (and build) Singularity from public registries.
 * Run Singularity container (interactively).
 * Work with volumes.
 * Build Singularity image from existing recipe (?).
