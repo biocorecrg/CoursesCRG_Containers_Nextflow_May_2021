@@ -10,8 +10,11 @@ Nextflow is a powerful polyglot workflow language that, coupled with Docker and 
 ### Outline
 
 The 4-day Containers and Nextflow course will train participants to use and build Docker and Singularity containers and Nextflow pipelines.
+
 It is designed to provide trainees with short and frequent hands-on sessions, while keeping theoretical sessions to a minimum.
+
 The course will be fully virtual via the Zoom platform.
+
 Trainees will work in  a dedicated AWS Cloud9 environment.
 
 ### Learning objectives
@@ -30,6 +33,7 @@ About Nextflow:
 * Test and modify a Nextflow pipeline.
 * Implement short blocks of code into a Nextflow pipeline.
 * Develop a Nextflow pipeline from scratch.
+* Run pipeline in diverse contexts (local, institutional and cloud computational environments)
 
 ### Prerequisite
 
