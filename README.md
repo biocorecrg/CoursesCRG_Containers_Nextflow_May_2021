@@ -7,8 +7,8 @@ Reproducible research and data analysis with Linux containers and Nextflow pipel
 
 ## About the course
 
-This slow-paced hands-on course introduces main concepts and how-to  Linux containers allow the storage of code and applications in an host-independent lightweight environment. They became a fast and popular way to share and deploy applications in different environments.
-Nextflow is a powerful polyglot workflow language that, coupled with Docker and Singularity containers, provides a robust, scalable and reproducible way to run computational pipelines.
+This slow-paced hands-on course is designed for absolute beginners who want to start using containers and Nextflow pipelines to achieve reproducibility of data analysis. Linux containers allow the storage of code and applications in an host-independent lightweight environment. They became a fast and popular way to share and deploy applications in different environments. Nextflow is a powerful polyglot workflow language that, coupled with Docker and Singularity containers, provides a robust, scalable and reproducible way to run computational pipelines.
+
 
 ### Outline
 
@@ -19,10 +19,6 @@ It is designed to provide trainees with short and frequent hands-on sessions, wh
 The course will be fully virtual via the Zoom platform.
 
 Trainees will work in a dedicated AWS Cloud9 environment.
-
-The course is designed for absolute beginners who want to start using containers and Nextflow pipelines.
-
-
 
 
 ### Learning objectives
@@ -41,11 +37,12 @@ About Nextflow:
 * Test and modify a Nextflow pipeline.
 * Implement short blocks of code into a Nextflow pipeline.
 * Develop a Nextflow pipeline from scratch.
-* Run pipeline in diverse contexts (local, institutional and cloud computational environments)
+* Run pipeline in diverse computational environments (local, HPC, cloud )
 
 ### Prerequisite
 
-Being comfortable working with the CLI (command-line interface) in a Linux-based environment. Applicants are not expected to have used neither Linux containers nor Nextflow workflows before.
+Being comfortable working with the CLI (command-line interface) in a Linux-based environment. 
+Applicants are not expected to have used neither Linux containers nor Nextflow workflows before.
 
 ## Dates, time, location
 
@@ -108,11 +105,11 @@ Being comfortable working with the CLI (command-line interface) in a Linux-based
 
 * Write Nextflow pipeline from scratch.
 * Run Nextflow with containers.
- * Choose either Docker or Singularity.
+* Choose either Docker or Singularity.
 * Run Nextflow in a computing cluster (e.g. HPC).
- * Definition of computing requirements and queues-
+ * Definition of computing requirements and queues.
  * Profiles.
-* Share Nextflow pipeline and good practices. 
+* Share Nextflow pipelines and good practices. 
 
 
 
