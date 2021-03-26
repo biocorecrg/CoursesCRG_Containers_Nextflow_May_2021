@@ -100,9 +100,11 @@ Being comfortable working with the CLI (command-line interface) in a Linux-based
 
 * Write Nextflow pipeline from scratch.
 * Run Nextflow with containers.
-* Run Nextflow in computing cluster (e.g. HPC).
-* Share Nextflow pipeline.
-
+ * Choose either Docker or Singularity.
+* Run Nextflow in a computing cluster (e.g. HPC).
+ * Definition of computing requirements and queues-
+ * Profiles.
+* Share Nextflow pipeline and good practices. 
 
 
 
