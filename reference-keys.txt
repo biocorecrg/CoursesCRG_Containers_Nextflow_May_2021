@@ -1,5 +1,4 @@
-coursescrg-containers-and-nextflow-2021
-title
+reproducible-research-and-data-analysis-with-linux-containers-and-nextflow-pipelines
 about-the-course
 outline
 learning-objectives
