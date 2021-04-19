@@ -1,8 +1,6 @@
 --- 
 title: "Courses@CRG Containers and Nextflow"
 author: "Sarah Bonnin"
-author: "Luca Cozzuto"
-author: "Toni Hermoso Pulido"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 output: bookdown::gitbook
