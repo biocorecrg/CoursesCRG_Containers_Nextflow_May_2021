@@ -1,4 +1,3 @@
-reproducible-research-and-data-analysis-with-linux-containers-and-nextflow-pipelines
 about-the-course
 outline
 learning-objectives
