@@ -1,5 +1,5 @@
 --- 
-title: "Courses@CRG Containers and Nextflow"
+title: "Courses @ CRG: Containers and Nextflow 2021"
 
 author:
   - Sarah Bonnin^[CRG, sarah.bonning@crg.eu]
@@ -7,7 +7,6 @@ author:
   - Toni Hermoso^[CRG, toni.hermoso@crg.eu]
   - Julia Ponomarenko^[CRG, julia.ponomarenko@crg.eu]
   
-date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 output: bookdown::gitbook
 documentclass: book
@@ -15,13 +14,7 @@ bibliography: [book.bib, packages.bib]
 biblio-style: apalike
 link-citations: yes
 ---
-
-# Courses@CRG Containers and Nextflow 2021
-
-## Title
-Reproducible research and data analysis with Linux containers and Nextflow pipelines 
-
-
+# Reproducible research and data analysis with Linux containers and Nextflow pipelines 
 ## About the course
 This slow-paced hands-on course is designed for absolute beginners who want to start using containers and Nextflow pipelines to achieve reproducibility of data analysis. Linux containers allow the storage of code and applications in an host-independent lightweight environment. They became a fast and popular way to share and deploy applications in different environments. Nextflow is a powerful polyglot workflow language that, coupled with Docker and Singularity containers, provides a robust, scalable and reproducible way to run computational pipelines.
 
