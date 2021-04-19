@@ -1,0 +1,9 @@
+# Nextflow
+
+Introduction to Nextflow
+
+## Nextflow basics 
+
+This part will be split into another html page because of the 2 \# (Second-level header).
+Note that you can also have independent .Rmd files starting with \#\# (.Rmd files do NOT need to start with \#): it is useful to know it if the document gets too long, or if different people are working on it.
+

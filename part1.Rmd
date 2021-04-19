@@ -1,0 +1,22 @@
+# Containers
+
+This part will talk about containers
+
+Block of code in R
+eval=FALSE: do not execute the code
+echo=TRUE: show the code
+
+```{r, eval=FALSE, echo=TRUE}
+getwd()
+```
+
+```{r, eval=TRUE, echo=FALSE}
+plot(1:20, col=sample(colors(), 20))
+```
+
+Block of code in bash
+
+```{bash, eval=TRUE, echo=TRUE}
+echo $PATH
+```
+

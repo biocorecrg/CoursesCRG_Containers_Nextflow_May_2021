@@ -1,0 +1,5 @@
+theme: jekyll-theme-dinky
+title: Test bookdown 2021
+markdown: kramdown
+kramdown:
+  parse_block_html: true

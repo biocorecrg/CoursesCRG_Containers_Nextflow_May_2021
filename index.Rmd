@@ -1,0 +1,33 @@
+--- 
+title: "Bookdown test"
+author: "Sarah Bonnin"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+output: bookdown::gitbook
+documentclass: book
+bibliography: [book.bib, packages.bib]
+biblio-style: apalike
+link-citations: yes
+---
+
+# Welcome
+
+To create the book, install bookdown (it has quite a bit of dependencies!):
+
+```{echo=TRUE, eval=FALSE}
+library(bookdown)
+
+# render the book:
+render_book("index.Rmd")
+```
+
+It will create a "docs" folder and you can open the "index.html" in a browser to see the book.
+
+There are different files to consider for how the book will render (I took templates so I didn't touch many parameters):
+
+* _output.yml: you can change the link and the title. Keep the "bookdown::gitbook".
+* _config.yml: same here, just change the title.
+* _bookdown.yml: there are more things to play with here, apart from title and author:
+  * chapter_name: "Part ": every section that starts with "#" (first level header) will be set in the rendered book as "Part " + numbering (Part 1, Part 2, etc.).
+  * rmd_files: here you choose how the files will be organized in the final book. You just need to change the order here so that all sections and numberings get reorganized in the final book.
+  * both ".bib" files should be kept (references to bookdown and related packages), and can be increased with more references.
