@@ -1,7 +1,12 @@
 --- 
 title: "Courses@CRG Containers and Nextflow"
-author: "Sarah Bonnin"
-date: "`r Sys.Date()`"
+author:
+  - Sarah Bonnin^[CRG, sarah.bonning@crg.eu]
+  - Luca Cozzuto^[CRG, luca.cozzuto@crg.eu]
+  - Toni Hermoso^[CRG, toni.hermoso@crg.eu]
+  - Julia Ponomarenko^[CRG, julia.ponomarenko@crg.eu]
+  
+  date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 output: bookdown::gitbook
 documentclass: book
