@@ -1,0 +1,35 @@
+Apr-19 10:59:08.181 [main] DEBUG nextflow.cli.Launcher - $> nextflow run test1.nf
+Apr-19 10:59:08.445 [main] INFO  nextflow.cli.CmdRun - N E X T F L O W  ~  version 20.10.0
+Apr-19 10:59:08.487 [main] INFO  nextflow.cli.CmdRun - Launching `test1.nf` [cheeky_mandelbrot] - revision: 1c33dc1342
+Apr-19 10:59:08.829 [main] DEBUG nextflow.Session - Session uuid: 16df595c-3494-40be-91bd-c893bba00839
+Apr-19 10:59:08.830 [main] DEBUG nextflow.Session - Run name: cheeky_mandelbrot
+Apr-19 10:59:08.835 [main] DEBUG nextflow.Session - Executor pool size: 2
+Apr-19 10:59:08.934 [main] DEBUG nextflow.cli.CmdRun - 
+  Version: 20.10.0 build 5430
+  Created: 01-11-2020 15:14 UTC 
+  System: Linux 4.14.225-169.362.amzn2.x86_64
+  Runtime: Groovy 3.0.5 on OpenJDK 64-Bit Server VM 11.0.9+11-LTS
+  Encoding: UTF-8 (ANSI_X3.4-1968)
+  Process: 6620@ip-172-31-39-98.eu-central-1.compute.internal [172.31.39.98]
+  CPUs: 1 - Mem: 983.3 MB (129.4 MB) - Swap: 0 (0)
+Apr-19 10:59:09.030 [main] DEBUG nextflow.Session - Work-dir: /home/ec2-user/git/ELIXIR_containers_nextflow/nextflow/test1/work [xfs]
+Apr-19 10:59:09.030 [main] DEBUG nextflow.Session - Script base path does not exist or is not a directory: /home/ec2-user/git/ELIXIR_containers_nextflow/nextflow/test1/bin
+Apr-19 10:59:09.157 [main] DEBUG nextflow.Session - Observer factory: TowerFactory
+Apr-19 10:59:09.166 [main] DEBUG nextflow.Session - Observer factory: DefaultObserverFactory
+Apr-19 10:59:09.464 [main] DEBUG nextflow.Session - Session start invoked
+Apr-19 10:59:11.356 [main] DEBUG nextflow.script.ScriptRunner - > Launching execution
+Apr-19 10:59:11.433 [main] DEBUG nextflow.Session - Session aborted -- Cause: No such property: genome_file for class: Script_95ffb485
+Apr-19 10:59:11.483 [main] ERROR nextflow.cli.Launcher - @unknown
+groovy.lang.MissingPropertyException: No such property: genome_file for class: Script_95ffb485
+	at org.codehaus.groovy.runtime.ScriptBytecodeAdapter.unwrap(ScriptBytecodeAdapter.java:65)
+	at org.codehaus.groovy.runtime.callsite.PogoGetPropertySite.getProperty(PogoGetPropertySite.java:51)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callGroovyObjectGetProperty(AbstractCallSite.java:341)
+	at Script_95ffb485.runScript(Script_95ffb485:38)
+	at nextflow.script.BaseScript.runDsl2(BaseScript.groovy:170)
+	at nextflow.script.BaseScript.run(BaseScript.groovy:200)
+	at nextflow.script.ScriptParser.runScript(ScriptParser.groovy:219)
+	at nextflow.script.ScriptRunner.run(ScriptRunner.groovy:219)
+	at nextflow.script.ScriptRunner.execute(ScriptRunner.groovy:127)
+	at nextflow.cli.CmdRun.run(CmdRun.groovy:277)
+	at nextflow.cli.Launcher.run(Launcher.groovy:466)
+	at nextflow.cli.Launcher.main(Launcher.groovy:648)

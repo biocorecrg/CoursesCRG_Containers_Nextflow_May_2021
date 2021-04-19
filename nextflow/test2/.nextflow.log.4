@@ -1,0 +1,75 @@
+Apr-19 11:03:58.004 [main] DEBUG nextflow.cli.Launcher - $> nextflow run test2.nf
+Apr-19 11:03:58.260 [main] INFO  nextflow.cli.CmdRun - N E X T F L O W  ~  version 20.10.0
+Apr-19 11:03:58.301 [main] INFO  nextflow.cli.CmdRun - Launching `test2.nf` [evil_linnaeus] - revision: e3a80b15a2
+Apr-19 11:03:58.372 [main] DEBUG nextflow.config.ConfigBuilder - Found config local: /home/ec2-user/git/ELIXIR_containers_nextflow/nextflow/test2/nextflow.config
+Apr-19 11:03:58.373 [main] DEBUG nextflow.config.ConfigBuilder - Parsing config file: /home/ec2-user/git/ELIXIR_containers_nextflow/nextflow/test2/nextflow.config
+Apr-19 11:03:58.450 [main] DEBUG nextflow.config.ConfigBuilder - Applying config profile: `standard`
+Apr-19 11:04:00.296 [main] DEBUG nextflow.Session - Session uuid: ea5fd5bf-ae0f-4b73-a298-657c5797e26b
+Apr-19 11:04:00.296 [main] DEBUG nextflow.Session - Run name: evil_linnaeus
+Apr-19 11:04:00.298 [main] DEBUG nextflow.Session - Executor pool size: 2
+Apr-19 11:04:00.386 [main] DEBUG nextflow.cli.CmdRun - 
+  Version: 20.10.0 build 5430
+  Created: 01-11-2020 15:14 UTC 
+  System: Linux 4.14.225-169.362.amzn2.x86_64
+  Runtime: Groovy 3.0.5 on OpenJDK 64-Bit Server VM 11.0.9+11-LTS
+  Encoding: UTF-8 (ANSI_X3.4-1968)
+  Process: 7292@ip-172-31-39-98.eu-central-1.compute.internal [172.31.39.98]
+  CPUs: 1 - Mem: 983.3 MB (335.6 MB) - Swap: 0 (0)
+Apr-19 11:04:00.455 [main] DEBUG nextflow.Session - Work-dir: /home/ec2-user/git/ELIXIR_containers_nextflow/nextflow/test2/work [xfs]
+Apr-19 11:04:00.457 [main] DEBUG nextflow.Session - Script base path does not exist or is not a directory: /home/ec2-user/git/ELIXIR_containers_nextflow/nextflow/test2/bin
+Apr-19 11:04:00.685 [main] DEBUG nextflow.Session - Observer factory: TowerFactory
+Apr-19 11:04:00.688 [main] DEBUG nextflow.Session - Observer factory: DefaultObserverFactory
+Apr-19 11:04:00.983 [main] DEBUG nextflow.Session - Session start invoked
+Apr-19 11:04:02.090 [main] DEBUG nextflow.script.ScriptRunner - > Launching execution
+Apr-19 11:04:02.126 [main] INFO  nextflow.Nextflow - 
+BIOCORE@CRG - N F TESTPIPE  ~  version 1.0
+=============================================
+reads                           : /home/ec2-user/git/ELIXIR_containers_nextflow/nextflow/test2/../../testdata/*.fastq.gz
+
+Apr-19 11:04:02.341 [main] DEBUG nextflow.Session - Workflow process names [dsl2]: fastQC, multiQC
+Apr-19 11:04:02.487 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withLabel:twocpus` matches label `twocpus` for process with name fastQC
+Apr-19 11:04:02.507 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Apr-19 11:04:02.508 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Apr-19 11:04:02.521 [main] DEBUG nextflow.executor.Executor - [warm up] executor > local
+Apr-19 11:04:02.541 [main] DEBUG n.processor.LocalPollingMonitor - Creating local task monitor for executor 'local' > cpus=1; memory=983.3 MB; capacity=1; pollInterval=100ms; dumpInterval=5m
+Apr-19 11:04:02.773 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Apr-19 11:04:02.773 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Apr-19 11:04:02.787 [main] DEBUG nextflow.Session - Ignite dataflow network (3)
+Apr-19 11:04:02.800 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > fastQC
+Apr-19 11:04:02.807 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > multiQC
+Apr-19 11:04:02.811 [main] DEBUG nextflow.script.ScriptRunner - > Await termination 
+Apr-19 11:04:02.811 [main] DEBUG nextflow.Session - Session await
+Apr-19 11:04:02.828 [PathVisitor-1] DEBUG nextflow.file.PathVisitor - files for syntax: glob; folder: /home/ec2-user/git/ELIXIR_containers_nextflow/nextflow/test2/../../testdata/; pattern: *.fastq.gz; options: [:]
+Apr-19 11:04:03.156 [Task submitter] DEBUG nextflow.processor.TaskRun - Unable to dump error of process 'fastQC (B7_input_s_chr19.fastq.gz)' -- Cause: java.nio.file.NoSuchFileException: /home/ec2-user/git/ELIXIR_containers_nextflow/nextflow/test2/work/df/8ebaeae02ebf795193f2cfdee927bb/.command.log
+Apr-19 11:04:03.159 [Task submitter] ERROR nextflow.processor.TaskProcessor - Error executing process > 'fastQC (B7_input_s_chr19.fastq.gz)'
+
+Caused by:
+  Process requirement exceed available CPUs -- req: 2; avail: 1
+
+Command executed:
+
+  fastqc B7_input_s_chr19.fastq.gz
+
+Command exit status:
+  -
+
+Command output:
+  (empty)
+
+Work dir:
+  /home/ec2-user/git/ELIXIR_containers_nextflow/nextflow/test2/work/df/8ebaeae02ebf795193f2cfdee927bb
+
+Tip: you can replicate the issue by changing to the process work dir and entering the command `bash .command.run`
+Apr-19 11:04:03.175 [Task submitter] DEBUG nextflow.Session - Session aborted -- Cause: Process requirement exceed available CPUs -- req: 2; avail: 1
+Apr-19 11:04:03.203 [Task submitter] DEBUG nextflow.Session - The following nodes are still active:
+[process] multiQC
+  status=ACTIVE
+  port 0: (value) OPEN  ; channel: inputfiles
+  port 1: (cntrl) -     ; channel: $
+
+Apr-19 11:04:03.207 [main] DEBUG nextflow.Session - Session await > all process finished
+Apr-19 11:04:03.207 [main] DEBUG nextflow.Session - Session await > all barriers passed
+Apr-19 11:04:03.239 [main] DEBUG nextflow.trace.WorkflowStatsObserver - Workflow completed > WorkflowStats[succeededCount=0; failedCount=1; ignoredCount=0; cachedCount=0; pendingCount=2; submittedCount=0; runningCount=-1; retriesCount=0; abortedCount=0; succeedDuration=0ms; failedDuration=0ms; cachedDuration=0ms;loadCpus=-2; loadMemory=0; peakRunning=0; peakCpus=0; peakMemory=0; ]
+Apr-19 11:04:03.387 [main] DEBUG nextflow.CacheDB - Closing CacheDB done
+Apr-19 11:04:03.403 [main] DEBUG nextflow.util.SpuriousDeps - AWS S3 uploader shutdown
+Apr-19 11:04:03.448 [main] DEBUG nextflow.script.ScriptRunner - > Execution complete -- Goodbye

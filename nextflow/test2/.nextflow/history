@@ -1,0 +1,5 @@
+2021-04-19 11:04:00	3.4s	evil_linnaeus	ERR	e3a80b15a2e198494f36df8a908a1c9c	ea5fd5bf-ae0f-4b73-a298-657c5797e26b	nextflow run test2.nf
+2021-04-19 11:04:55	3.8s	agitated_lovelace	ERR	e3a80b15a2e198494f36df8a908a1c9c	3d775aba-1aa7-43ad-bad9-e78888e27b0c	nextflow run test2.nf
+2021-04-19 11:05:33	3.3s	extravagant_legentil	ERR	e3a80b15a2e198494f36df8a908a1c9c	18743d3c-54e4-44da-834c-3972b983ee14	nextflow run test2.nf
+2021-04-19 11:05:49	1m 32s	insane_fermi	ERR	e3a80b15a2e198494f36df8a908a1c9c	f44ce593-216f-4f3a-97f0-2382af7dba86	nextflow run test2.nf -with-docker
+2021-04-19 11:07:55	37.4s	voluminous_hopper	OK	e3a80b15a2e198494f36df8a908a1c9c	22e863dd-3e04-4c64-808f-6a0df9a0ee0a	nextflow run test2.nf -with-docker

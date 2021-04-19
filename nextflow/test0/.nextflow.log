@@ -1,0 +1,44 @@
+Apr-19 10:58:23.628 [main] DEBUG nextflow.cli.Launcher - $> nextflow run test0.nf
+Apr-19 10:58:23.891 [main] INFO  nextflow.cli.CmdRun - N E X T F L O W  ~  version 20.10.0
+Apr-19 10:58:23.941 [main] INFO  nextflow.cli.CmdRun - Launching `test0.nf` [zen_hopper] - revision: c412fbf572
+Apr-19 10:58:24.273 [main] DEBUG nextflow.Session - Session uuid: 942f6ead-f694-43ea-ae7d-66688b8a587a
+Apr-19 10:58:24.274 [main] DEBUG nextflow.Session - Run name: zen_hopper
+Apr-19 10:58:24.282 [main] DEBUG nextflow.Session - Executor pool size: 2
+Apr-19 10:58:24.387 [main] DEBUG nextflow.cli.CmdRun - 
+  Version: 20.10.0 build 5430
+  Created: 01-11-2020 15:14 UTC 
+  System: Linux 4.14.225-169.362.amzn2.x86_64
+  Runtime: Groovy 3.0.5 on OpenJDK 64-Bit Server VM 11.0.9+11-LTS
+  Encoding: UTF-8 (ANSI_X3.4-1968)
+  Process: 6489@ip-172-31-39-98.eu-central-1.compute.internal [172.31.39.98]
+  CPUs: 1 - Mem: 983.3 MB (60.2 MB) - Swap: 0 (0)
+Apr-19 10:58:24.486 [main] DEBUG nextflow.Session - Work-dir: /home/ec2-user/git/ELIXIR_containers_nextflow/nextflow/test0/work [xfs]
+Apr-19 10:58:24.486 [main] DEBUG nextflow.Session - Script base path does not exist or is not a directory: /home/ec2-user/git/ELIXIR_containers_nextflow/nextflow/test0/bin
+Apr-19 10:58:24.604 [main] DEBUG nextflow.Session - Observer factory: TowerFactory
+Apr-19 10:58:24.615 [main] DEBUG nextflow.Session - Observer factory: DefaultObserverFactory
+Apr-19 10:58:24.926 [main] DEBUG nextflow.Session - Session start invoked
+Apr-19 10:58:26.642 [main] DEBUG nextflow.script.ScriptRunner - > Launching execution
+Apr-19 10:58:26.792 [main] DEBUG nextflow.Session - Workflow process names [dsl2]: printHello
+Apr-19 10:58:26.918 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Apr-19 10:58:26.918 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Apr-19 10:58:26.931 [main] DEBUG nextflow.executor.Executor - [warm up] executor > local
+Apr-19 10:58:26.944 [main] DEBUG n.processor.LocalPollingMonitor - Creating local task monitor for executor 'local' > cpus=1; memory=983.3 MB; capacity=1; pollInterval=100ms; dumpInterval=5m
+Apr-19 10:58:27.276 [main] DEBUG nextflow.Session - Ignite dataflow network (2)
+Apr-19 10:58:27.277 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > printHello
+Apr-19 10:58:27.283 [main] DEBUG nextflow.script.ScriptRunner - > Await termination 
+Apr-19 10:58:27.283 [main] DEBUG nextflow.Session - Session await
+Apr-19 10:58:27.642 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Apr-19 10:58:27.670 [Task submitter] INFO  nextflow.Session - [f8/7f50df] Submitted process > printHello (hello)
+Apr-19 10:58:27.766 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 1; name: printHello (hello); status: COMPLETED; exit: 0; error: -; workDir: /home/ec2-user/git/ELIXIR_containers_nextflow/nextflow/test0/work/f8/7f50df371e632fdbb8b55ba5c2c164]
+Apr-19 10:58:27.769 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Apr-19 10:58:27.778 [Task submitter] INFO  nextflow.Session - [25/ed870d] Submitted process > printHello (hola)
+Apr-19 10:58:27.863 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 2; name: printHello (hola); status: COMPLETED; exit: 0; error: -; workDir: /home/ec2-user/git/ELIXIR_containers_nextflow/nextflow/test0/work/25/ed870d777497abf0327fc4ee0226af]
+Apr-19 10:58:27.868 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Apr-19 10:58:27.870 [Task submitter] INFO  nextflow.Session - [c1/49fc7b] Submitted process > printHello (bonjour)
+Apr-19 10:58:27.944 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 3; name: printHello (bonjour); status: COMPLETED; exit: 0; error: -; workDir: /home/ec2-user/git/ELIXIR_containers_nextflow/nextflow/test0/work/c1/49fc7bc6696622b5fe2e0a4398a6c6]
+Apr-19 10:58:27.948 [main] DEBUG nextflow.Session - Session await > all process finished
+Apr-19 10:58:27.951 [main] DEBUG nextflow.Session - Session await > all barriers passed
+Apr-19 10:58:27.965 [main] DEBUG nextflow.trace.WorkflowStatsObserver - Workflow completed > WorkflowStats[succeededCount=3; failedCount=0; ignoredCount=0; cachedCount=0; pendingCount=0; submittedCount=0; runningCount=0; retriesCount=0; abortedCount=0; succeedDuration=33ms; failedDuration=0ms; cachedDuration=0ms;loadCpus=0; loadMemory=0; peakRunning=1; peakCpus=1; peakMemory=0; ]
+Apr-19 10:58:28.105 [main] DEBUG nextflow.CacheDB - Closing CacheDB done
+Apr-19 10:58:28.115 [main] DEBUG nextflow.util.SpuriousDeps - AWS S3 uploader shutdown
+Apr-19 10:58:28.154 [main] DEBUG nextflow.script.ScriptRunner - > Execution complete -- Goodbye
