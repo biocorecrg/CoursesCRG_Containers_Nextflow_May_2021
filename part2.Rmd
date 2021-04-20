@@ -65,18 +65,18 @@ Each process is independent from the other and can be run in parallel depending 
 ## Installation
 We need at least Java version 8.
 
-```{bash, eval=TRUE, echo=TRUE}
+```{bash, eval=FALSE, echo=TRUE}
 java -version
 ```
 
 Then we can install it by typing:
 
-```{bash, eval=TRUE, echo=TRUE}
+```{bash, eval=FALSE, echo=TRUE}
 curl -s https://get.nextflow.io | bash
 ```
 This will create an executable called nextflow that can be moved to /usr/local/bin or where we prefer. We can finally test using:
 
-```{bash, eval=TRUE, echo=TRUE}
+```{bash, eval=FALSE, echo=TRUE}
 ./nextflow run hello
 
 N E X T F L O W  ~  version 20.07.1
@@ -100,7 +100,7 @@ This command download from the a github repository and it runs the test script h
 
 We can make a very simple Nextflow script by writing this code in a file (test.nf):
 
-```{java, eval=TRUE, echo=TRUE}
+```{java, eval=FALSE, echo=TRUE}
 #!/usr/bin/env nextflow
 
 // This is a comment
