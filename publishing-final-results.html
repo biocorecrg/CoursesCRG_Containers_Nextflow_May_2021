@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>3.1 Nextflow basics | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines</title>
-  <meta name="description" content="3.1 Nextflow basics | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
+  <title>3.12 Publishing final results | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines</title>
+  <meta name="description" content="3.12 Publishing final results | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="3.1 Nextflow basics | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
+  <meta property="og:title" content="3.12 Publishing final results | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="3.1 Nextflow basics | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
+  <meta name="twitter:title" content="3.12 Publishing final results | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
   
   
   
@@ -33,8 +33,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="nextflow.html"/>
-
+<link rel="prev" href="decoupling-resources-parameters-and-nextflow-script.html"/>
+<link rel="next" href="adding-a-help-section-for-the-whole-pipeline.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -133,7 +133,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">Bookdown test</a></li>
+<li><a href="./">Biocore@CRG</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About the course</a><ul>
@@ -144,7 +144,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="2" data-path="containers.html"><a href="containers.html"><i class="fa fa-check"></i><b>2</b> Containers</a></li>
 <li class="chapter" data-level="3" data-path="nextflow.html"><a href="nextflow.html"><i class="fa fa-check"></i><b>3</b> Nextflow</a><ul>
-<li class="chapter" data-level="3.1" data-path="nextflow-basics.html"><a href="nextflow-basics.html"><i class="fa fa-check"></i><b>3.1</b> Nextflow basics</a></li>
+<li class="chapter" data-level="3.1" data-path="what-is-nextflow.html"><a href="what-is-nextflow.html"><i class="fa fa-check"></i><b>3.1</b> What is Nextflow?</a></li>
+<li class="chapter" data-level="3.2" data-path="what-is-nextflow-for.html"><a href="what-is-nextflow-for.html"><i class="fa fa-check"></i><b>3.2</b> What is Nextflow for?</a></li>
+<li class="chapter" data-level="3.3" data-path="main-advantages.html"><a href="main-advantages.html"><i class="fa fa-check"></i><b>3.3</b> Main advantages:</a></li>
+<li class="chapter" data-level="3.4" data-path="workflow-structure.html"><a href="workflow-structure.html"><i class="fa fa-check"></i><b>3.4</b> Workflow structure</a></li>
+<li class="chapter" data-level="3.5" data-path="installation.html"><a href="installation.html"><i class="fa fa-check"></i><b>3.5</b> Installation</a></li>
+<li class="chapter" data-level="3.6" data-path="first-scripts.html"><a href="first-scripts.html"><i class="fa fa-check"></i><b>3.6</b> First scripts</a><ul>
+<li class="chapter" data-level="3.6.1" data-path="first-scripts.html"><a href="first-scripts.html#channels"><i class="fa fa-check"></i><b>3.6.1</b> Channels</a></li>
+<li class="chapter" data-level="3.6.2" data-path="first-scripts.html"><a href="first-scripts.html#excercise-1"><i class="fa fa-check"></i><b>3.6.2</b> EXCERCISE 1</a></li>
+<li class="chapter" data-level="3.6.3" data-path="first-scripts.html"><a href="first-scripts.html#processes"><i class="fa fa-check"></i><b>3.6.3</b> Processes</a></li>
+<li class="chapter" data-level="3.6.4" data-path="first-scripts.html"><a href="first-scripts.html#workflow"><i class="fa fa-check"></i><b>3.6.4</b> Workflow</a></li>
+<li class="chapter" data-level="3.6.5" data-path="first-scripts.html"><a href="first-scripts.html#nextflow-log"><i class="fa fa-check"></i><b>3.6.5</b> Nextflow log</a></li>
+</ul></li>
+<li class="chapter" data-level="3.7" data-path="excercise-2.html"><a href="excercise-2.html"><i class="fa fa-check"></i><b>3.7</b> EXCERCISE 2</a></li>
+<li class="chapter" data-level="3.8" data-path="more-complex-scripts.html"><a href="more-complex-scripts.html"><i class="fa fa-check"></i><b>3.8</b> More complex scripts</a></li>
+<li class="chapter" data-level="3.9" data-path="exercise-3.html"><a href="exercise-3.html"><i class="fa fa-check"></i><b>3.9</b> EXERCISE 3</a></li>
+<li class="chapter" data-level="3.10" data-path="resuming-your-pipeline.html"><a href="resuming-your-pipeline.html"><i class="fa fa-check"></i><b>3.10</b> Resuming your pipeline</a></li>
+<li class="chapter" data-level="3.11" data-path="decoupling-resources-parameters-and-nextflow-script.html"><a href="decoupling-resources-parameters-and-nextflow-script.html"><i class="fa fa-check"></i><b>3.11</b> Decoupling resources, parameters and nextflow script</a></li>
+<li class="chapter" data-level="3.12" data-path="publishing-final-results.html"><a href="publishing-final-results.html"><i class="fa fa-check"></i><b>3.12</b> Publishing final results</a></li>
+<li class="chapter" data-level="3.13" data-path="adding-a-help-section-for-the-whole-pipeline.html"><a href="adding-a-help-section-for-the-whole-pipeline.html"><i class="fa fa-check"></i><b>3.13</b> Adding a help section for the whole pipeline</a></li>
+<li class="chapter" data-level="3.14" data-path="using-singularity.html"><a href="using-singularity.html"><i class="fa fa-check"></i><b>3.14</b> Using Singularity</a></li>
+<li class="chapter" data-level="3.15" data-path="adding-more-steps.html"><a href="adding-more-steps.html"><i class="fa fa-check"></i><b>3.15</b> Adding more steps</a></li>
+<li class="chapter" data-level="3.16" data-path="modules-and-re-usage-of-the-code.html"><a href="modules-and-re-usage-of-the-code.html"><i class="fa fa-check"></i><b>3.16</b> Modules and re-usage of the code</a></li>
+<li class="chapter" data-level="3.17" data-path="reporting-and-graphical-interface.html"><a href="reporting-and-graphical-interface.html"><i class="fa fa-check"></i><b>3.17</b> Reporting and graphical interface</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/biocorecrg" target="blank">Published with bookdown</a></li>
@@ -166,29 +188,44 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="nextflow-basics" class="section level2">
-<h2><span class="header-section-number">3.1</span> Nextflow basics</h2>
-<p>This part will be split into another html page because of the 2 # (Second-level header).
-Note that you can also have independent .Rmd files starting with ## (.Rmd files do NOT need to start with #): it is useful to know it if the document gets too long, or if different people are working on it.</p>
+<div id="publishing-final-results" class="section level2">
+<h2><span class="header-section-number">3.12</span> Publishing final results</h2>
+<p>After running the script you see two new folders named <strong>ouptut_fastqc</strong> and <strong>ouptut_fastqc</strong> that contain the result of the pipeline.
+We can indicate which process and which output can be considered the final output of the pipeline by using the <strong>publishDir</strong> directive that has to be specified at the beginning of a process.</p>
+<p>In our pipeline we define these folders here:</p>
+<pre class="nextflow"><code>/*
+ * Defining the output folders.
+ */
+fastqcOutputFolder    = &quot;ouptut_fastqc&quot;
+multiqcOutputFolder   = &quot;ouptut_multiQC&quot;
 
+
+[...]
+
+/*
+ * Process 1. Run FastQC on raw data. A process is the element for executing scripts / programs etc.
+ */
+process fastQC {
+    publishDir fastqcOutputFolder           // where (and whether) to publish the results
+
+[...]
+
+/*
+ * Process 2. Run multiQC on fastQC results
+ */
+process multiQC {
+    publishDir multiqcOutputFolder, mode: &#39;copy&#39;    // this time do not link but copy the output file
+</code></pre>
+<p>You can see that the default mode to publish the results in Nextflow is soft linking. You can change this behaviour by specifying the mode as indicated in the <strong>multiQC</strong> process.</p>
+<p><strong>IMPORTANT: You can also “move” the results but this is not suggested for files that will be needed for other processes. This will likely disrupt your pipeline.</strong></p>
 </div>
-<!-- </div> -->
-
-
-
-
-
-
-
-
-
             </section>
 
           </div>
         </div>
       </div>
-<a href="nextflow.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="decoupling-resources-parameters-and-nextflow-script.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="adding-a-help-section-for-the-whole-pipeline.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

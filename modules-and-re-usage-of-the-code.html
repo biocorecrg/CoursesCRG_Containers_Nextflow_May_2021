@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Part 3 Nextflow | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines</title>
-  <meta name="description" content="Part 3 Nextflow | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
+  <title>3.16 Modules and re-usage of the code | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines</title>
+  <meta name="description" content="3.16 Modules and re-usage of the code | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Part 3 Nextflow | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
+  <meta property="og:title" content="3.16 Modules and re-usage of the code | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Part 3 Nextflow | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
+  <meta name="twitter:title" content="3.16 Modules and re-usage of the code | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
   
   
   
@@ -33,8 +33,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="containers.html"/>
-<link rel="next" href="what-is-nextflow.html"/>
+<link rel="prev" href="adding-more-steps.html"/>
+<link rel="next" href="reporting-and-graphical-interface.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -188,16 +188,182 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="nextflow" class="section level1">
-<h1><span class="header-section-number">Part 3</span> Nextflow</h1>
+<div id="modules-and-re-usage-of-the-code" class="section level2">
+<h2><span class="header-section-number">3.16</span> Modules and re-usage of the code</h2>
+<p>A great advance of the new DLS2 is to allow the modularization of the code. In particular you can move a named workflow within a module and keep it apart for being accessed from different pipelines. Looking at the test4 folder will give you an idea of what is the code using modules.</p>
+<pre class="nextflow"><code>#!/usr/bin/env nextflow
+
+nextflow.enable.dsl=2
+
+/*
+ * Input parameters: read pairs
+ * Params are stored in the params.config file
+ */
+
+version                 = &quot;1.0&quot;
+params.help             = false
+
+// this prints the input parameters
+log.info &quot;&quot;&quot;
+BIOCORE@CRG - N F TESTPIPE  ~  version ${version}
+=============================================
+reads                           : ${params.reads}
+&quot;&quot;&quot;
+
+if (params.help) {
+    log.info &#39;This is the Biocore\&#39;s NF test pipeline&#39;
+    log.info &#39;Enjoy!&#39;
+    log.info &#39;\n&#39;
+    exit 1
+}
+
+/*
+ * Defining the output folders.
+ */
+fastqcOutputFolder    = &quot;ouptut_fastqc&quot;
+multiqcOutputFolder   = &quot;ouptut_multiQC&quot;
+
+
+Channel
+    .fromPath( params.reads )                                                                       
+    .ifEmpty { error &quot;Cannot find any reads matching: ${params.reads}&quot; }
+    .set {reads_for_fastqc}                                             
+
+
+/*
+ * Here we include two modules from two files. We also add the parameter OUTPUT to pass them the folders where to publish the results
+ */
+include { FASTQC } from &quot;${baseDir}/lib/fastqc&quot; addParams(OUTPUT: fastqcOutputFolder)
+include { MULTIQC } from &quot;${baseDir}/lib/multiqc&quot; addParams(OUTPUT: multiqcOutputFolder)
+
+// The main worflow can directly call the named workflows from the modules
+workflow {
+    fastqc_out = FASTQC(reads_for_fastqc)
+    MULTIQC(fastqc_out.collect())
+}
+
+
+workflow.onComplete {
+    println ( workflow.success ? &quot;\nDone! Open the following report in your browser --&gt; ${multiqcOutputFolder}/multiqc_report.html\n&quot; : &quot;Oops .. something went wrong&quot; )
+}</code></pre>
+<p>We now include two modules named <strong>fastqc</strong> and <strong>multiqc</strong> from <code>${baseDir}/lib/fastqc.nf</code> and <code>${baseDir}/lib/multiqc.nf</code>.
+Let’s inspect the <strong>fastqc</strong> module:</p>
+<pre class="nextflow"><code>/*
+*  fastqc module
+*/
+
+params.CONTAINER = &quot;quay.io/biocontainers/fastqc:0.11.9--0&quot;
+params.OUTPUT = &quot;fastqc_output&quot;
+
+process qc {
+    publishDir(params.OUTPUT, mode: &#39;copy&#39;)
+    tag { reads }
+    container params.CONTAINER
+
+    input:
+    path(reads)
+
+    output:
+    path(&quot;*_fastqc*&quot;)
+
+    script:
+    &quot;&quot;&quot;
+    fastqc ${reads}
+    &quot;&quot;&quot;
+}
+
+
+workflow FASTQC {
+    take:
+    input
+
+    main:
+        out =  qc(input)
+    emit:
+        out
+}</code></pre>
+<p>So we have the named workflow <strong>FASTQC</strong> that take an <strong>input</strong> and just launch the process <strong>qc</strong> on that input. Finally it emits the <strong>output</strong> defined in the process qc.</p>
+<p>The process <strong>qc</strong> is quite simple: it contains the directive publishDir, the tag, the container to be used and has similar input, output and script session we saw previously.</p>
+<p>A module can contain its own parameters that can be used for connecting the main script to some variables inside the module.
+in this example we have the declaration of two <strong>parameters</strong> that are defined at the beginning:</p>
+<pre class="nextflow"><code>params.CONTAINER = &quot;quay.io/biocontainers/fastqc:0.11.9--0&quot;
+params.OUTPUT = &quot;fastqc_output&quot;</code></pre>
+<p>They can be overridden from the main script that is calling the module.
+- The parameter <strong>params.OUTPUT</strong> can be used for connecting the definition of the output of this module with the one in the main script.<br />
+- The parameter <strong>params.CONTAINER</strong> instead for deciding which image has to be used for this particular module.</p>
+<p>In this example in our main script we pass only the OUTPUT parameters by writing in this way:</p>
+<pre class="nextflow"><code>include { FASTQC } from &quot;${baseDir}/lib/fastqc&quot; addParams(OUTPUT: fastqcOutputFolder)
+include { MULTIQC } from &quot;${baseDir}/lib/multiqc&quot; addParams(OUTPUT: multiqcOutputFolder)</code></pre>
+<p>While we keep the information of the container inside the module for better reproducibility:</p>
+<pre class="nextflow"><code>params.CONTAINER = = &quot;quay.io/biocontainers/fastqc:0.11.9--0&quot;</code></pre>
+<p>Here you see that we are not using own our image but using directly one provided by biocontainers. Here you can find a list of fastqc images developed and stored by the biocontainers community <a href="https://biocontainers.pro/#/tools/fastqc">https://biocontainers.pro/#/tools/fastqc</a>.</p>
+<p>Let’s have a look now at the <strong>multiqc.nf</strong> module:</p>
+<pre class="nextflow"><code>/*
+*  multiqc module
+*/
+
+params.CONTAINER = &quot;quay.io/biocontainers/multiqc:1.9--pyh9f0ad1d_0&quot;
+params.OUTPUT = &quot;multiqc_output&quot;
+params.LABEL = &quot;&quot;
+
+process qc {
+    publishDir(params.OUTPUT, mode: &#39;copy&#39;)
+    container params.CONTAINER
+    label (params.LABEL)
+
+    input:
+    path (inputfiles)
+
+    output:
+    path &quot;multiqc_report.html&quot;                  
+
+    script:
+    &quot;&quot;&quot;
+    multiqc .
+    &quot;&quot;&quot;
+}
+
+workflow MULTIQC {
+    take:
+    input
+
+    main:
+        out =  qc(input)
+    emit:
+        out
+}</code></pre>
+<p>So it is very similar to the fastqc one, we just add an extra parameter for connecting the resources defined in the nextflow.config file and the label indicated in the <strong>qc</strong> process.</p>
+<p>In case we want to use it we would need to change the main code in this way:</p>
+<pre class="nextflow"><code>include { MULTIQC } from &quot;${baseDir}/lib/multiqc&quot; addParams(OUTPUT: multiqcOutputFolder, LABEL=&quot;onecpu&quot;)</code></pre>
+<p>This because we specified the label <strong>onecpu</strong> in out <strong>nextflow.config</strong> file:</p>
+<pre class="nextflow"><code>includeConfig &quot;$baseDir/params.config&quot;
+
+process {
+     container = &#39;biocorecrg/debian-perlbrew-pyenv3-java&#39;
+     memory=&#39;1G&#39;
+     cpus=&#39;1&#39;
+     time=&#39;6h&#39;
+
+     withLabel: &#39;onecpu&#39;
+    {
+        memory=&#39;1G&#39;
+        cpus=&#39;1&#39;
+    }   
+
+}
+
+singularity.cacheDir = &quot;$baseDir/singularity&quot;</code></pre>
+<p><strong>IMPORTANT: you will need to specify a default image when you want to run nextflow -with-docker or -with-singularity and you have containers defined inside the modules</strong></p>
+<p><strong>EXERCISE</strong>: Try to make a module wrapper of the bowtie tool and change the script accordingly as the test3.</p>
+<p>Solution in the folder test5</p>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="containers.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="what-is-nextflow.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="adding-more-steps.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="reporting-and-graphical-interface.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

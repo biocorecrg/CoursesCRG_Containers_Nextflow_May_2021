@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>3.6 First scripts | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines</title>
+  <meta name="description" content="3.6 First scripts | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="3.6 First scripts | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="3.6 First scripts | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
+  
+  
+  
+
+<meta name="author" content="Sarah Bonnin" />
+<meta name="author" content="Luca Cozzuto" />
+<meta name="author" content="Toni Hermoso" />
+<meta name="author" content="Julia Ponomarenko" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="installation.html"/>
+<link rel="next" href="excercise-2.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Biocore@CRG</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About the course</a><ul>
+<li class="chapter" data-level="1.1" data-path="dates-time-location.html"><a href="dates-time-location.html"><i class="fa fa-check"></i><b>1.1</b> Dates, time, location</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="dates-time-location.html"><a href="dates-time-location.html#day-1-2-containers"><i class="fa fa-check"></i><b>1.1.1</b> Day 1 &amp; 2: Containers</a></li>
+<li class="chapter" data-level="1.1.2" data-path="dates-time-location.html"><a href="dates-time-location.html#day-3-4-nextflow"><i class="fa fa-check"></i><b>1.1.2</b> Day 3 &amp; 4: Nextflow</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="containers.html"><a href="containers.html"><i class="fa fa-check"></i><b>2</b> Containers</a></li>
+<li class="chapter" data-level="3" data-path="nextflow.html"><a href="nextflow.html"><i class="fa fa-check"></i><b>3</b> Nextflow</a><ul>
+<li class="chapter" data-level="3.1" data-path="what-is-nextflow.html"><a href="what-is-nextflow.html"><i class="fa fa-check"></i><b>3.1</b> What is Nextflow?</a></li>
+<li class="chapter" data-level="3.2" data-path="what-is-nextflow-for.html"><a href="what-is-nextflow-for.html"><i class="fa fa-check"></i><b>3.2</b> What is Nextflow for?</a></li>
+<li class="chapter" data-level="3.3" data-path="main-advantages.html"><a href="main-advantages.html"><i class="fa fa-check"></i><b>3.3</b> Main advantages:</a></li>
+<li class="chapter" data-level="3.4" data-path="workflow-structure.html"><a href="workflow-structure.html"><i class="fa fa-check"></i><b>3.4</b> Workflow structure</a></li>
+<li class="chapter" data-level="3.5" data-path="installation.html"><a href="installation.html"><i class="fa fa-check"></i><b>3.5</b> Installation</a></li>
+<li class="chapter" data-level="3.6" data-path="first-scripts.html"><a href="first-scripts.html"><i class="fa fa-check"></i><b>3.6</b> First scripts</a><ul>
+<li class="chapter" data-level="3.6.1" data-path="first-scripts.html"><a href="first-scripts.html#channels"><i class="fa fa-check"></i><b>3.6.1</b> Channels</a></li>
+<li class="chapter" data-level="3.6.2" data-path="first-scripts.html"><a href="first-scripts.html#excercise-1"><i class="fa fa-check"></i><b>3.6.2</b> EXCERCISE 1</a></li>
+<li class="chapter" data-level="3.6.3" data-path="first-scripts.html"><a href="first-scripts.html#processes"><i class="fa fa-check"></i><b>3.6.3</b> Processes</a></li>
+<li class="chapter" data-level="3.6.4" data-path="first-scripts.html"><a href="first-scripts.html#workflow"><i class="fa fa-check"></i><b>3.6.4</b> Workflow</a></li>
+<li class="chapter" data-level="3.6.5" data-path="first-scripts.html"><a href="first-scripts.html#nextflow-log"><i class="fa fa-check"></i><b>3.6.5</b> Nextflow log</a></li>
+</ul></li>
+<li class="chapter" data-level="3.7" data-path="excercise-2.html"><a href="excercise-2.html"><i class="fa fa-check"></i><b>3.7</b> EXCERCISE 2</a></li>
+<li class="chapter" data-level="3.8" data-path="more-complex-scripts.html"><a href="more-complex-scripts.html"><i class="fa fa-check"></i><b>3.8</b> More complex scripts</a></li>
+<li class="chapter" data-level="3.9" data-path="exercise-3.html"><a href="exercise-3.html"><i class="fa fa-check"></i><b>3.9</b> EXERCISE 3</a></li>
+<li class="chapter" data-level="3.10" data-path="resuming-your-pipeline.html"><a href="resuming-your-pipeline.html"><i class="fa fa-check"></i><b>3.10</b> Resuming your pipeline</a></li>
+<li class="chapter" data-level="3.11" data-path="decoupling-resources-parameters-and-nextflow-script.html"><a href="decoupling-resources-parameters-and-nextflow-script.html"><i class="fa fa-check"></i><b>3.11</b> Decoupling resources, parameters and nextflow script</a></li>
+<li class="chapter" data-level="3.12" data-path="publishing-final-results.html"><a href="publishing-final-results.html"><i class="fa fa-check"></i><b>3.12</b> Publishing final results</a></li>
+<li class="chapter" data-level="3.13" data-path="adding-a-help-section-for-the-whole-pipeline.html"><a href="adding-a-help-section-for-the-whole-pipeline.html"><i class="fa fa-check"></i><b>3.13</b> Adding a help section for the whole pipeline</a></li>
+<li class="chapter" data-level="3.14" data-path="using-singularity.html"><a href="using-singularity.html"><i class="fa fa-check"></i><b>3.14</b> Using Singularity</a></li>
+<li class="chapter" data-level="3.15" data-path="adding-more-steps.html"><a href="adding-more-steps.html"><i class="fa fa-check"></i><b>3.15</b> Adding more steps</a></li>
+<li class="chapter" data-level="3.16" data-path="modules-and-re-usage-of-the-code.html"><a href="modules-and-re-usage-of-the-code.html"><i class="fa fa-check"></i><b>3.16</b> Modules and re-usage of the code</a></li>
+<li class="chapter" data-level="3.17" data-path="reporting-and-graphical-interface.html"><a href="reporting-and-graphical-interface.html"><i class="fa fa-check"></i><b>3.17</b> Reporting and graphical interface</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/biocorecrg" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="first-scripts" class="section level2">
+<h2><span class="header-section-number">3.6</span> First scripts</h2>
+<div id="channels" class="section level3">
+<h3><span class="header-section-number">3.6.1</span> Channels</h3>
+<p>We can make a very simple Nextflow script by writing this code in a file (test.nf):</p>
+<pre class="nextflow"><code>#!/usr/bin/env nextflow
+
+// This is a comment
+
+/*
+ * This is a block of comments
+ */
+
+// This is needed for activating the new DLS2
+nextflow.enable.dsl=2
+
+
+//Let&#39;s create a channel from string values
+
+str = Channel.from(&#39;hello&#39;, &#39;hola&#39;, &#39;bonjour&#39;)
+
+/*
+* Let&#39;s print that channel using the operator view()
+* https://www.nextflow.io/docs/latest/operator.html#view
+*/
+str.view()</code></pre>
+<p>Then to execute it you can just run:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="first-scripts.html#cb8-1"></a><span class="va">$nextflow</span> <span class="ex">run</span> test.nf</span>
+<span id="cb8-2"><a href="first-scripts.html#cb8-2"></a><span class="ex">N</span> E X T F L O W  ~  version 20.07.1</span>
+<span id="cb8-3"><a href="first-scripts.html#cb8-3"></a><span class="ex">Launching</span> <span class="kw">`</span><span class="ex">test.nf</span><span class="kw">`</span> [agitated_avogadro] - revision: 61a595c5bf</span>
+<span id="cb8-4"><a href="first-scripts.html#cb8-4"></a><span class="ex">hello</span></span>
+<span id="cb8-5"><a href="first-scripts.html#cb8-5"></a><span class="ex">hola</span></span>
+<span id="cb8-6"><a href="first-scripts.html#cb8-6"></a><span class="ex">bonjour</span></span></code></pre></div>
+<p>As you can see the <strong>Channel</strong> is just a collection of values, but it can be also a collection of file paths.
+Let’s create three files:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="first-scripts.html#cb9-1"></a><span class="fu">touch</span> aa.txt bb.txt cc.txt</span></code></pre></div>
+<p>And let’s create another script:</p>
+<pre class="nextflow"><code>#!/usr/bin/env nextflow
+
+nextflow.enable.dsl=2
+
+/*
+* Let&#39;s create the channel `my_files`
+* using the method fromPath
+*/
+
+Channel
+    .fromPath( &quot;*.txt&quot; )
+    .set {my_fyles}
+
+my_fyles.view()</code></pre>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="first-scripts.html#cb11-1"></a><span class="ex">nextflow</span> run test2.nf</span>
+<span id="cb11-2"><a href="first-scripts.html#cb11-2"></a><span class="ex">N</span> E X T F L O W  ~  version 20.07.1</span>
+<span id="cb11-3"><a href="first-scripts.html#cb11-3"></a><span class="ex">Launching</span> <span class="kw">`</span><span class="ex">test2.nf</span><span class="kw">`</span> [condescending_hugle] - revision: f513c0fac3</span>
+<span id="cb11-4"><a href="first-scripts.html#cb11-4"></a><span class="ex">/Users/lcozzuto/aaa/ELIXIR_containers_nextflow/aa.txt</span></span>
+<span id="cb11-5"><a href="first-scripts.html#cb11-5"></a><span class="ex">/Users/lcozzuto/aaa/ELIXIR_containers_nextflow/bb.txt</span></span>
+<span id="cb11-6"><a href="first-scripts.html#cb11-6"></a><span class="ex">/Users/lcozzuto/aaa/ELIXIR_containers_nextflow/cc.txt</span></span></code></pre></div>
+<p>Once executed we can see that a folder named <strong>work</strong> is generated. In that folder Nextflow will store the intermediate files generated by the processes.</p>
+</div>
+<div id="excercise-1" class="section level3">
+<h3><span class="header-section-number">3.6.2</span> EXCERCISE 1</h3>
+<p>Let’s create couple of files (like paired end reads) and let’s try to read it as they were a tuple.</p>
+<p>See here <a href="https://www.nextflow.io/docs/latest/channel.html#fromfilepairs">https://www.nextflow.io/docs/latest/channel.html#fromfilepairs</a>.</p>
+<p>Here the solution:
+<a href="https://biocorecrg.github.io/ELIXIR_containers_nextflow/solution1.html">https://biocorecrg.github.io/ELIXIR_containers_nextflow/solution1.html</a></p>
+</div>
+<div id="processes" class="section level3">
+<h3><span class="header-section-number">3.6.3</span> Processes</h3>
+<p>Let’s add now a process to our previous script test.nf:</p>
+<pre class="nextflow"><code>#!/usr/bin/env nextflow
+
+nextflow.enable.dsl=2
+
+str = Channel.from(&#39;hello&#39;, &#39;hola&#39;, &#39;bonjour&#39;)
+
+/*
+ * Creates a process which receive an input channel containing values
+ * Each value emitted by the channel triggers the execution
+ * of the process. The process stdout is caputured and send over
+ * the another channel.
+ */
+
+process printHello {
+
+   tag { str_in } // this is for displaying the content of `str_in` in the log file
+
+   input:        
+   val str_in
+
+   output:        
+   stdout
+
+   script:        
+   &quot;&quot;&quot;
+   echo ${str_in} in Italian is ciao
+   &quot;&quot;&quot;
+}</code></pre>
+<p>The process can be seen as a function and is composed by:
+- An <strong>input</strong> part where the input channels are defined
+- An <strong>output</strong> part where we indicates what to store as a result that will be sent to other processes or published as final result
+- A <strong>script</strong> part where we have the block of code to be executed with the data from the input channel and will produce the output for the ouput channel. You can run any kind of code / command line there, it is language agnostic. You can have some trouble with escaping some characters, in that case is better to wrap your code in a file and call it as a program.</p>
+<p>Before the input you can indicate a <strong>tag</strong> that will be reported in the log. This is quite useful for logging / debugging.</p>
+</div>
+<div id="workflow" class="section level3">
+<h3><span class="header-section-number">3.6.4</span> Workflow</h3>
+<p>The code as it is will not produce anything, because you need another part that actually call the process and connect it to the input channel.
+This part is called a <strong>workflow</strong>. So let’s change our code:</p>
+<pre class="nextflow"><code>#!/usr/bin/env nextflow
+
+nextflow.enable.dsl=2
+
+str = Channel.from(&#39;hello&#39;, &#39;hola&#39;, &#39;bonjour&#39;)
+
+process printHello {
+
+   tag { str_in }
+
+   input:        
+   val str_in
+
+   output:        
+   stdout
+
+   script:        
+   &quot;&quot;&quot;
+   echo ${str_in} in Italian is ciao
+   &quot;&quot;&quot;
+}
+
+/*
+ * A workflow consist of a number of invocations of processes
+ * where they are fed with the expected input channels
+ * as they were cutom functions. You can only invoke a process once per workflow.
+ */
+
+workflow {
+ result = printHello(str)
+ result.view()
+}</code></pre>
+<p>We can run the script this time sending the execution in background and sending the log to a file.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb14-1"><a href="first-scripts.html#cb14-1"></a><span class="ex">nextflow</span> run test.nf -bg <span class="op">&gt;</span> log.txt</span></code></pre></div>
+</div>
+<div id="nextflow-log" class="section level3">
+<h3><span class="header-section-number">3.6.5</span> Nextflow log</h3>
+<p>Let’s inspect now the log file:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb15-1"><a href="first-scripts.html#cb15-1"></a><span class="fu">cat</span> log.txt</span>
+<span id="cb15-2"><a href="first-scripts.html#cb15-2"></a><span class="ex">N</span> E X T F L O W  ~  version 20.07.1</span>
+<span id="cb15-3"><a href="first-scripts.html#cb15-3"></a><span class="ex">Launching</span> <span class="kw">`</span><span class="ex">test.nf</span><span class="kw">`</span> [high_fermat] - revision: b129d66e57</span>
+<span id="cb15-4"><a href="first-scripts.html#cb15-4"></a>[<span class="ex">6a</span>/<span class="ex">2dfcaf</span>] Submitted process <span class="op">&gt;</span> printHello (hola)</span>
+<span id="cb15-5"><a href="first-scripts.html#cb15-5"></a>[<span class="ex">24</span>/<span class="ex">a286da</span>] Submitted process <span class="op">&gt;</span> printHello (hello)</span>
+<span id="cb15-6"><a href="first-scripts.html#cb15-6"></a>[<span class="ex">04</span>/<span class="ex">e733db</span>] Submitted process <span class="op">&gt;</span> printHello (bonjour)</span>
+<span id="cb15-7"><a href="first-scripts.html#cb15-7"></a><span class="ex">hola</span> in Italian is ciao</span>
+<span id="cb15-8"><a href="first-scripts.html#cb15-8"></a></span>
+<span id="cb15-9"><a href="first-scripts.html#cb15-9"></a><span class="ex">hello</span> in Italian is ciao</span>
+<span id="cb15-10"><a href="first-scripts.html#cb15-10"></a></span>
+<span id="cb15-11"><a href="first-scripts.html#cb15-11"></a><span class="ex">bonjour</span> in Italian is ciao</span></code></pre></div>
+<p>The <strong>tag</strong> allows us to see that the process <strong>printHello</strong> was launched three times on hola, hello and bonjour values contained in the input channel. In each row there is a code before:</p>
+<p><strong>[6a/2dfcaf]</strong> Submitted process &gt; printHello (hola)</p>
+<p>This code indicates also the path in which is process is “isolated” and where you have the temporary files. Let’s have a look:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb16-1"><a href="first-scripts.html#cb16-1"></a><span class="bu">echo</span> work/6a/2dfcaf*</span>
+<span id="cb16-2"><a href="first-scripts.html#cb16-2"></a><span class="ex">work/6a/2dfcafc01350f475c60b2696047a87</span></span>
+<span id="cb16-3"><a href="first-scripts.html#cb16-3"></a></span>
+<span id="cb16-4"><a href="first-scripts.html#cb16-4"></a><span class="fu">ls</span> -alht work/6a/2dfcaf*</span>
+<span id="cb16-5"><a href="first-scripts.html#cb16-5"></a></span>
+<span id="cb16-6"><a href="first-scripts.html#cb16-6"></a><span class="fu">ls</span> -alht work/6a/2dfcaf*</span>
+<span id="cb16-7"><a href="first-scripts.html#cb16-7"></a><span class="ex">total</span> 40</span>
+<span id="cb16-8"><a href="first-scripts.html#cb16-8"></a><span class="ex">-rw-r--r--</span>  1 lcozzuto  staff     1B Oct  7 13:39 .exitcode</span>
+<span id="cb16-9"><a href="first-scripts.html#cb16-9"></a><span class="ex">drwxr-xr-x</span>  9 lcozzuto  staff   288B Oct  7 13:39 .</span>
+<span id="cb16-10"><a href="first-scripts.html#cb16-10"></a><span class="ex">-rw-r--r--</span>  1 lcozzuto  staff    24B Oct  7 13:39 .command.log</span>
+<span id="cb16-11"><a href="first-scripts.html#cb16-11"></a><span class="ex">-rw-r--r--</span>  1 lcozzuto  staff    24B Oct  7 13:39 .command.out</span>
+<span id="cb16-12"><a href="first-scripts.html#cb16-12"></a><span class="ex">-rw-r--r--</span>  1 lcozzuto  staff     0B Oct  7 13:39 .command.err</span>
+<span id="cb16-13"><a href="first-scripts.html#cb16-13"></a><span class="ex">-rw-r--r--</span>  1 lcozzuto  staff     0B Oct  7 13:39 .command.begin</span>
+<span id="cb16-14"><a href="first-scripts.html#cb16-14"></a><span class="ex">-rw-r--r--</span>  1 lcozzuto  staff    45B Oct  7 13:39 .command.sh</span>
+<span id="cb16-15"><a href="first-scripts.html#cb16-15"></a><span class="ex">-rw-r--r--</span>  1 lcozzuto  staff   2.5K Oct  7 13:39 .command.run</span>
+<span id="cb16-16"><a href="first-scripts.html#cb16-16"></a><span class="ex">drwxr-xr-x</span>  3 lcozzuto  staff    96B Oct  7 13:39 ..</span></code></pre></div>
+<p>You see a lot of “hidden” files:
+- <strong>.exitcode</strong>, contains 0 if everything is ok, another value if there was a problem.
+- <strong>.command.log</strong>, contains the log of the command execution. Often is identical to .command.out
+- <strong>.command.out</strong>, contains the standard output of the command execution
+- <strong>.command.err</strong>, contains the standard error of the command execution
+- <strong>.command.begin</strong>, contains what has to be executed before .command.sh
+- <strong>.command.sh</strong>, contains the block of code indicated in the process
+- <strong>.command.run</strong>, contains the code made by nextflow for the execution of .command.sh and contains environmental variables, eventual invocations of linux containers etc.</p>
+<p>For instance the content of .command.sh is:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb17-1"><a href="first-scripts.html#cb17-1"></a><span class="fu">cat</span> work/6a/2dfcaf*/.command.sh</span>
+<span id="cb17-2"><a href="first-scripts.html#cb17-2"></a><span class="co">#!/bin/bash -ue</span></span>
+<span id="cb17-3"><a href="first-scripts.html#cb17-3"></a><span class="bu">echo</span> hola in Italian is ciao</span></code></pre></div>
+<p>And the content of .command.out is</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb18-1"><a href="first-scripts.html#cb18-1"></a><span class="fu">cat</span> work/6a/2dfcaf*/.command.out</span>
+<span id="cb18-2"><a href="first-scripts.html#cb18-2"></a><span class="ex">hola</span> in Italian is ciao</span></code></pre></div>
+<p>You can also name workflows as they were collections of processes. For instance we can write:</p>
+<pre class="nextflow"><code>#!/usr/bin/env nextflow
+
+nextflow.enable.dsl=2
+
+str = Channel.from(&#39;hello&#39;, &#39;hola&#39;, &#39;bonjour&#39;)
+
+process printHello {
+
+   tag { str_in }
+
+   input:        
+   val str_in
+
+   output:        
+   stdout
+
+   script:        
+   &quot;&quot;&quot;
+   echo ${str_in} in Italian is ciao
+   &quot;&quot;&quot;
+}
+
+/*
+ * A workflow can be named as a function and receive an input using the take keyword
+ */
+
+workflow first_pipeline {
+    take: str_input
+    main:
+    printHello(str_input).view()
+}
+
+
+/*
+ * You can re-use the previous processes an combine as you prefer
+ */
+
+workflow second_pipeline {
+    take: str_input
+    main:
+    printHello(str_input).collect().view()
+}
+
+/*
+ * You can then invoke the different named workflows in this way
+ * passing the same input channel `str` to both  
+ */
+
+workflow {
+    first_pipeline(str)
+    second_pipeline(str)
+}
+</code></pre>
+<p>You can see that with the previous code you can execute two workflows containing the same process. We add the <strong>collect</strong> operator to the second workflow that collects the output from different executions and return the resulting list as a sole emission.</p>
+<p>Let’s run the code:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb20-1"><a href="first-scripts.html#cb20-1"></a><span class="ex">nextflow</span> run test.nf -bg <span class="op">&gt;</span> log2</span>
+<span id="cb20-2"><a href="first-scripts.html#cb20-2"></a></span>
+<span id="cb20-3"><a href="first-scripts.html#cb20-3"></a><span class="fu">cat</span> log2</span>
+<span id="cb20-4"><a href="first-scripts.html#cb20-4"></a></span>
+<span id="cb20-5"><a href="first-scripts.html#cb20-5"></a><span class="fu">cat</span> log2</span>
+<span id="cb20-6"><a href="first-scripts.html#cb20-6"></a><span class="ex">N</span> E X T F L O W  ~  version 20.07.1</span>
+<span id="cb20-7"><a href="first-scripts.html#cb20-7"></a><span class="ex">Launching</span> <span class="kw">`</span><span class="ex">test.nf</span><span class="kw">`</span> [irreverent_davinci] - revision: 25a5511d1d</span>
+<span id="cb20-8"><a href="first-scripts.html#cb20-8"></a>[<span class="ex">de</span>/<span class="ex">105b97</span>] Submitted process <span class="op">&gt;</span> first_pipeline:printHello (hello)</span>
+<span id="cb20-9"><a href="first-scripts.html#cb20-9"></a>[<span class="ex">ba</span>/<span class="ex">051c23</span>] Submitted process <span class="op">&gt;</span> first_pipeline:printHello (bonjour)</span>
+<span id="cb20-10"><a href="first-scripts.html#cb20-10"></a>[<span class="ex">1f</span>/<span class="ex">9b41b2</span>] Submitted process <span class="op">&gt;</span> second_pipeline:printHello (hello)</span>
+<span id="cb20-11"><a href="first-scripts.html#cb20-11"></a>[<span class="ex">8d</span>/<span class="ex">270d93</span>] Submitted process <span class="op">&gt;</span> first_pipeline:printHello (hola)</span>
+<span id="cb20-12"><a href="first-scripts.html#cb20-12"></a>[<span class="ex">18</span>/<span class="ex">7b84c3</span>] Submitted process <span class="op">&gt;</span> second_pipeline:printHello (hola)</span>
+<span id="cb20-13"><a href="first-scripts.html#cb20-13"></a><span class="ex">hello</span> in Italian is ciao</span>
+<span id="cb20-14"><a href="first-scripts.html#cb20-14"></a></span>
+<span id="cb20-15"><a href="first-scripts.html#cb20-15"></a><span class="ex">bonjour</span> in Italian is ciao</span>
+<span id="cb20-16"><a href="first-scripts.html#cb20-16"></a></span>
+<span id="cb20-17"><a href="first-scripts.html#cb20-17"></a>[<span class="ex">0f</span>/<span class="ex">f78baf</span>] Submitted process <span class="op">&gt;</span> second_pipeline:printHello (bonjour)</span>
+<span id="cb20-18"><a href="first-scripts.html#cb20-18"></a><span class="ex">hola</span> in Italian is ciao</span>
+<span id="cb20-19"><a href="first-scripts.html#cb20-19"></a></span>
+<span id="cb20-20"><a href="first-scripts.html#cb20-20"></a>[<span class="st">&#39;hello in Italian is ciao\n&#39;</span>, <span class="st">&#39;hola in Italian is ciao\n&#39;</span>, <span class="st">&#39;bonjour in Italian is ciao\n&#39;</span>]</span></code></pre></div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="installation.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="excercise-2.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["courses_at_crg_2021.pdf", "courses_at_crg_2021.epub"],
+"toc": {
+"collapse": "section"
+},
+"search": true
+});
+});
+</script>
+
+</body>
+
+</html>

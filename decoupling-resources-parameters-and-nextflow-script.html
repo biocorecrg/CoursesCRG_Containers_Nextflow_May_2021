@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>3.11 Decoupling resources, parameters and nextflow script | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines</title>
+  <meta name="description" content="3.11 Decoupling resources, parameters and nextflow script | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="3.11 Decoupling resources, parameters and nextflow script | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="3.11 Decoupling resources, parameters and nextflow script | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
+  
+  
+  
+
+<meta name="author" content="Sarah Bonnin" />
+<meta name="author" content="Luca Cozzuto" />
+<meta name="author" content="Toni Hermoso" />
+<meta name="author" content="Julia Ponomarenko" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="resuming-your-pipeline.html"/>
+<link rel="next" href="publishing-final-results.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Biocore@CRG</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About the course</a><ul>
+<li class="chapter" data-level="1.1" data-path="dates-time-location.html"><a href="dates-time-location.html"><i class="fa fa-check"></i><b>1.1</b> Dates, time, location</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="dates-time-location.html"><a href="dates-time-location.html#day-1-2-containers"><i class="fa fa-check"></i><b>1.1.1</b> Day 1 &amp; 2: Containers</a></li>
+<li class="chapter" data-level="1.1.2" data-path="dates-time-location.html"><a href="dates-time-location.html#day-3-4-nextflow"><i class="fa fa-check"></i><b>1.1.2</b> Day 3 &amp; 4: Nextflow</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="containers.html"><a href="containers.html"><i class="fa fa-check"></i><b>2</b> Containers</a></li>
+<li class="chapter" data-level="3" data-path="nextflow.html"><a href="nextflow.html"><i class="fa fa-check"></i><b>3</b> Nextflow</a><ul>
+<li class="chapter" data-level="3.1" data-path="what-is-nextflow.html"><a href="what-is-nextflow.html"><i class="fa fa-check"></i><b>3.1</b> What is Nextflow?</a></li>
+<li class="chapter" data-level="3.2" data-path="what-is-nextflow-for.html"><a href="what-is-nextflow-for.html"><i class="fa fa-check"></i><b>3.2</b> What is Nextflow for?</a></li>
+<li class="chapter" data-level="3.3" data-path="main-advantages.html"><a href="main-advantages.html"><i class="fa fa-check"></i><b>3.3</b> Main advantages:</a></li>
+<li class="chapter" data-level="3.4" data-path="workflow-structure.html"><a href="workflow-structure.html"><i class="fa fa-check"></i><b>3.4</b> Workflow structure</a></li>
+<li class="chapter" data-level="3.5" data-path="installation.html"><a href="installation.html"><i class="fa fa-check"></i><b>3.5</b> Installation</a></li>
+<li class="chapter" data-level="3.6" data-path="first-scripts.html"><a href="first-scripts.html"><i class="fa fa-check"></i><b>3.6</b> First scripts</a><ul>
+<li class="chapter" data-level="3.6.1" data-path="first-scripts.html"><a href="first-scripts.html#channels"><i class="fa fa-check"></i><b>3.6.1</b> Channels</a></li>
+<li class="chapter" data-level="3.6.2" data-path="first-scripts.html"><a href="first-scripts.html#excercise-1"><i class="fa fa-check"></i><b>3.6.2</b> EXCERCISE 1</a></li>
+<li class="chapter" data-level="3.6.3" data-path="first-scripts.html"><a href="first-scripts.html#processes"><i class="fa fa-check"></i><b>3.6.3</b> Processes</a></li>
+<li class="chapter" data-level="3.6.4" data-path="first-scripts.html"><a href="first-scripts.html#workflow"><i class="fa fa-check"></i><b>3.6.4</b> Workflow</a></li>
+<li class="chapter" data-level="3.6.5" data-path="first-scripts.html"><a href="first-scripts.html#nextflow-log"><i class="fa fa-check"></i><b>3.6.5</b> Nextflow log</a></li>
+</ul></li>
+<li class="chapter" data-level="3.7" data-path="excercise-2.html"><a href="excercise-2.html"><i class="fa fa-check"></i><b>3.7</b> EXCERCISE 2</a></li>
+<li class="chapter" data-level="3.8" data-path="more-complex-scripts.html"><a href="more-complex-scripts.html"><i class="fa fa-check"></i><b>3.8</b> More complex scripts</a></li>
+<li class="chapter" data-level="3.9" data-path="exercise-3.html"><a href="exercise-3.html"><i class="fa fa-check"></i><b>3.9</b> EXERCISE 3</a></li>
+<li class="chapter" data-level="3.10" data-path="resuming-your-pipeline.html"><a href="resuming-your-pipeline.html"><i class="fa fa-check"></i><b>3.10</b> Resuming your pipeline</a></li>
+<li class="chapter" data-level="3.11" data-path="decoupling-resources-parameters-and-nextflow-script.html"><a href="decoupling-resources-parameters-and-nextflow-script.html"><i class="fa fa-check"></i><b>3.11</b> Decoupling resources, parameters and nextflow script</a></li>
+<li class="chapter" data-level="3.12" data-path="publishing-final-results.html"><a href="publishing-final-results.html"><i class="fa fa-check"></i><b>3.12</b> Publishing final results</a></li>
+<li class="chapter" data-level="3.13" data-path="adding-a-help-section-for-the-whole-pipeline.html"><a href="adding-a-help-section-for-the-whole-pipeline.html"><i class="fa fa-check"></i><b>3.13</b> Adding a help section for the whole pipeline</a></li>
+<li class="chapter" data-level="3.14" data-path="using-singularity.html"><a href="using-singularity.html"><i class="fa fa-check"></i><b>3.14</b> Using Singularity</a></li>
+<li class="chapter" data-level="3.15" data-path="adding-more-steps.html"><a href="adding-more-steps.html"><i class="fa fa-check"></i><b>3.15</b> Adding more steps</a></li>
+<li class="chapter" data-level="3.16" data-path="modules-and-re-usage-of-the-code.html"><a href="modules-and-re-usage-of-the-code.html"><i class="fa fa-check"></i><b>3.16</b> Modules and re-usage of the code</a></li>
+<li class="chapter" data-level="3.17" data-path="reporting-and-graphical-interface.html"><a href="reporting-and-graphical-interface.html"><i class="fa fa-check"></i><b>3.17</b> Reporting and graphical interface</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/biocorecrg" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="decoupling-resources-parameters-and-nextflow-script" class="section level2">
+<h2><span class="header-section-number">3.11</span> Decoupling resources, parameters and nextflow script</h2>
+<p>When you make a complex pipelines you might want to keep separated the definition of resources needed, the default parameters and the main script.
+You can achieve this by two additional files:</p>
+<ul>
+<li>nextflow.config</li>
+<li>params.config</li>
+</ul>
+<p>The <strong>nextflow.config</strong> file allows to indicate the resources needed for each class of processes.
+You can label your processes to make a link with the definitions in the nextflow.config file. This is an example of a nextflow.config file:</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb34-1"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb34-1"></a><span class="ex">includeConfig</span> <span class="st">&quot;</span><span class="va">$baseDir</span><span class="st">/params.config&quot;</span></span>
+<span id="cb34-2"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb34-2"></a></span>
+<span id="cb34-3"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb34-3"></a><span class="ex">process</span> {</span>
+<span id="cb34-4"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb34-4"></a>     <span class="va">memory=</span><span class="st">&#39;1G&#39;</span></span>
+<span id="cb34-5"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb34-5"></a>     <span class="va">cpus=</span><span class="st">&#39;1&#39;</span></span>
+<span id="cb34-6"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb34-6"></a>     <span class="va">time=</span><span class="st">&#39;6h&#39;</span></span>
+<span id="cb34-7"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb34-7"></a></span>
+<span id="cb34-8"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb34-8"></a>     <span class="ex">withLabel</span>: <span class="st">&#39;onecpu&#39;</span></span>
+<span id="cb34-9"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb34-9"></a>    <span class="kw">{</span></span>
+<span id="cb34-10"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb34-10"></a>        <span class="va">memory=</span><span class="st">&#39;1G&#39;</span></span>
+<span id="cb34-11"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb34-11"></a>        <span class="va">cpus=</span><span class="st">&#39;1&#39;</span></span>
+<span id="cb34-12"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb34-12"></a>    <span class="kw">}</span>   </span>
+<span id="cb34-13"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb34-13"></a></span>
+<span id="cb34-14"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb34-14"></a>}</span>
+<span id="cb34-15"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb34-15"></a></span>
+<span id="cb34-16"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb34-16"></a><span class="ex">process.container</span> = <span class="st">&#39;biocorecrg/c4lwg-2018:latest&#39;</span></span>
+<span id="cb34-17"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb34-17"></a><span class="ex">singularity.cacheDir</span> = <span class="st">&quot;</span><span class="va">$baseDir</span><span class="st">/singularity&quot;</span></span></code></pre></div>
+<p>The first row indicates to use the information stored in the <strong>params.config</strong> file (described later). Then we have the definition of the default resources for a process:</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb35-1"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb35-1"></a><span class="ex">process</span> {</span>
+<span id="cb35-2"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb35-2"></a>     <span class="va">memory=</span><span class="st">&#39;1G&#39;</span></span>
+<span id="cb35-3"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb35-3"></a>     <span class="va">cpus=</span><span class="st">&#39;1&#39;</span></span>
+<span id="cb35-4"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb35-4"></a>     <span class="va">time=</span><span class="st">&#39;6h&#39;</span></span>
+<span id="cb35-5"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb35-5"></a><span class="ex">...</span></span></code></pre></div>
+<p>Then we have the resources needed for a class of processes in particular labeled with <strong>twocpus</strong></p>
+<pre><code>     withLabel: &#39;twocpus&#39;
+    {
+        memory=&#39;2G&#39;
+        cpus=&#39;2&#39;
+    }   </code></pre>
+<p>If we have a look at the process <strong>fastQC</strong> within the test2.nf file, we can see the use of the label.</p>
+<pre class="nextflow"><code>/*
+ * Process 1. Run FastQC on raw data.
+ */
+process fastQC {
+    publishDir fastqcOutputFolder       
+    tag { reads }                   
+    label &#39;twocpus&#39;
+
+    input:
+    path reads                              
+...</code></pre>
+<p>The latest two rows of the config file indicates which container needs to be used. In this case, it assumes has to be pulled from <a href="https://hub.docker.com/">DockerHub</a>. In case you want to use singularity you can indicate where to store the local image by using the <strong>singularity.cacheDir</strong> setting</p>
+<pre class="nextflow"><code>process.container = &#39;biocorecrg/c4lwg-2018:latest&#39;
+singularity.cacheDir = &quot;$baseDir/singularity&quot;</code></pre>
+<p>Let’s now launch the script test2.nf</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb39-1"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb39-1"></a><span class="bu">cd</span> test2<span class="kw">;</span></span>
+<span id="cb39-2"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb39-2"></a><span class="ex">nextflow</span> run test2.nf</span>
+<span id="cb39-3"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb39-3"></a></span>
+<span id="cb39-4"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb39-4"></a><span class="ex">N</span> E X T F L O W  ~  version 20.07.1</span>
+<span id="cb39-5"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb39-5"></a><span class="ex">Launching</span> <span class="kw">`</span><span class="ex">test2.nf</span><span class="kw">`</span> [distracted_edison] - revision: e3a80b15a2</span>
+<span id="cb39-6"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb39-6"></a><span class="ex">BIOCORE@CRG</span> - N F TESTPIPE  ~  version 1.0</span>
+<span id="cb39-7"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb39-7"></a>=============================================</span>
+<span id="cb39-8"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb39-8"></a><span class="ex">reads</span>                           : /Users/lcozzuto/aaa/ELIXIR_containers_nextflow/nextflow/test2/../testdata/*.fastq.gz</span>
+<span id="cb39-9"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb39-9"></a><span class="ex">executor</span> <span class="op">&gt;</span>  local (2)</span>
+<span id="cb39-10"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb39-10"></a>[<span class="ex">df</span>/<span class="ex">2c45f2</span>] process <span class="op">&gt;</span> fastQC (B7_input_s_chr19.fastq.gz)<span class="bu"> [</span>  0%] 0 of 2</span>
+<span id="cb39-11"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb39-11"></a>[-        ] process <span class="ot">&gt;</span> multiQC                            -</span>
+<span id="cb39-12"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb39-12"></a>Error executing process <span class="ot">&gt;</span> <span class="st">&#39;fastQC (B7_H3K4me1_s_chr19.fastq.gz)&#39;</span></span>
+<span id="cb39-13"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb39-13"></a></span>
+<span id="cb39-14"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb39-14"></a>Caused by:</span>
+<span id="cb39-15"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb39-15"></a>  Process <span class="kw">`</span><span class="ex">fastQC</span> (B7_H3K4me1_s_chr19.fastq.gz)<span class="kw">`</span> terminated with an error exit status (127)</span>
+<span id="cb39-16"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb39-16"></a></span>
+<span id="cb39-17"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb39-17"></a>Command executed:</span>
+<span id="cb39-18"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb39-18"></a></span>
+<span id="cb39-19"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb39-19"></a>  fastqc B7_H3K4me1_s_chr19.fastq.gz</span>
+<span id="cb39-20"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb39-20"></a></span>
+<span id="cb39-21"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb39-21"></a>Command exit status:</span>
+<span id="cb39-22"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb39-22"></a>  127</span>
+<span id="cb39-23"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb39-23"></a></span>
+<span id="cb39-24"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb39-24"></a>executor <span class="ot">&gt;</span>  local (2)</span>
+<span id="cb39-25"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb39-25"></a>[df/2c45f2] process <span class="ot">&gt;</span> fastQC (B7_input_s_chr19.fastq.gz) [100%] 2 of 2, failed: 2 ✘</span>
+<span id="cb39-26"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb39-26"></a>[-        ] process <span class="ot">&gt;</span> multiQC                            -</span>
+<span id="cb39-27"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb39-27"></a>Error executing process <span class="ot">&gt;</span> <span class="st">&#39;fastQC (B7_H3K4me1_s_chr19.fastq.gz)&#39;</span></span>
+<span id="cb39-28"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb39-28"></a></span>
+<span id="cb39-29"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb39-29"></a>Caused by:</span>
+<span id="cb39-30"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb39-30"></a>  Process <span class="kw">`</span><span class="ex">fastQC</span> (B7_H3K4me1_s_chr19.fastq.gz)<span class="kw">`</span> terminated with an error exit status (127)</span>
+<span id="cb39-31"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb39-31"></a></span>
+<span id="cb39-32"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb39-32"></a>Command executed:</span>
+<span id="cb39-33"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb39-33"></a></span>
+<span id="cb39-34"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb39-34"></a>  fastqc B7_H3K4me1_s_chr19.fastq.gz</span>
+<span id="cb39-35"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb39-35"></a></span>
+<span id="cb39-36"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb39-36"></a>Command exit status:</span>
+<span id="cb39-37"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb39-37"></a>  127</span>
+<span id="cb39-38"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb39-38"></a></span>
+<span id="cb39-39"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb39-39"></a>Command output:</span>
+<span id="cb39-40"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb39-40"></a>  (empty)</span>
+<span id="cb39-41"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb39-41"></a></span>
+<span id="cb39-42"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb39-42"></a>Command error:</span>
+<span id="cb39-43"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb39-43"></a>  .command.sh: line 2: fastqc: command not found</span>
+<span id="cb39-44"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb39-44"></a></span>
+<span id="cb39-45"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb39-45"></a>Work dir:</span>
+<span id="cb39-46"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb39-46"></a>  /Users/lcozzuto/aaa/ELIXIR_containers_nextflow/nextflow/test2/work/c5/18e76b2e6ffd64aac2b52e69bedef3</span>
+<span id="cb39-47"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb39-47"></a></span>
+<span id="cb39-48"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb39-48"></a>Tip: when you have fixed the problem you can continue the execution adding the option <span class="kw">`</span><span class="ex">-resume</span><span class="kw">`</span> to the run command line</span></code></pre></div>
+<p>We will get a number of errors since no executable is found in our environment / path. This because they are stored in our docker image! So we can launch it this time with the -with-docker parameter.</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb40-1"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb40-1"></a><span class="ex">nextflow</span> run test2.nf -with-docker</span>
+<span id="cb40-2"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb40-2"></a></span>
+<span id="cb40-3"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb40-3"></a><span class="ex">nextflow</span> run test2.nf -with-docker</span>
+<span id="cb40-4"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb40-4"></a><span class="ex">N</span> E X T F L O W  ~  version 20.07.1</span>
+<span id="cb40-5"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb40-5"></a><span class="ex">Launching</span> <span class="kw">`</span><span class="ex">test2.nf</span><span class="kw">`</span> [boring_hamilton] - revision: e3a80b15a2</span>
+<span id="cb40-6"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb40-6"></a><span class="ex">BIOCORE@CRG</span> - N F TESTPIPE  ~  version 1.0</span>
+<span id="cb40-7"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb40-7"></a>=============================================</span>
+<span id="cb40-8"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb40-8"></a><span class="ex">reads</span>                           : /Users/lcozzuto/aaa/ELIXIR_containers_nextflow/nextflow/test2/../testdata/*.fastq.gz</span>
+<span id="cb40-9"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb40-9"></a><span class="ex">executor</span> <span class="op">&gt;</span>  local (3)</span>
+<span id="cb40-10"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb40-10"></a>[<span class="ex">22</span>/<span class="ex">b437be</span>] process <span class="op">&gt;</span> fastQC (B7_H3K4me1_s_chr19.fastq.gz) [<span class="ex">100%</span>] 2 of 2 ✔</span>
+<span id="cb40-11"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb40-11"></a>[<span class="ex">1a</span>/<span class="ex">cfe63b</span>] process <span class="op">&gt;</span> multiQC                              [  0%] 0 of 1</span>
+<span id="cb40-12"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb40-12"></a><span class="ex">executor</span> <span class="op">&gt;</span>  local (3)</span>
+<span id="cb40-13"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb40-13"></a>[<span class="ex">22</span>/<span class="ex">b437be</span>] process <span class="op">&gt;</span> fastQC (B7_H3K4me1_s_chr19.fastq.gz) [<span class="ex">100%</span>] 2 of 2 ✔</span>
+<span id="cb40-14"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb40-14"></a>[<span class="ex">1a</span>/<span class="ex">cfe63b</span>] process <span class="op">&gt;</span> multiQC                              [100%] 1 of 1 ✔</span></code></pre></div>
+<p>This time it worked beautifully since Nextflow used the image indicated within the nextflow.config file that contains our executables.</p>
+<p>Now we can have a look at the <strong>params.config</strong> file</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb41-1"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb41-1"></a><span class="ex">params</span> {</span>
+<span id="cb41-2"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb41-2"></a>    <span class="ex">reads</span>       = <span class="st">&quot;</span><span class="va">$baseDir</span><span class="st">/../testdata/*.fastq.gz&quot;</span></span>
+<span id="cb41-3"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb41-3"></a>    <span class="ex">email</span>       = <span class="st">&quot;myemail@google.com&quot;</span></span>
+<span id="cb41-4"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb41-4"></a>}</span></code></pre></div>
+<p>As you can see we indicates the pipeline parameters that can be overridden by using <strong>–reads</strong> and <strong>–email</strong>. This is not mandatory but I found quite useful to modify this file instead of using very long command lines with tons of <strong>–something</strong>.</p>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="resuming-your-pipeline.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="publishing-final-results.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["courses_at_crg_2021.pdf", "courses_at_crg_2021.epub"],
+"toc": {
+"collapse": "section"
+},
+"search": true
+});
+});
+</script>
+
+</body>
+
+</html>
