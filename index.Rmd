@@ -7,7 +7,7 @@ author:
   - Toni Hermoso^[CRG, toni.hermoso@crg.eu]
   - Julia Ponomarenko^[CRG, julia.ponomarenko@crg.eu]
   
-site: bookdown::bookdown_site
+site: bookdown::Containers_Nextflow_course
 output: bookdown::gitbook
 documentclass: book
 bibliography: [book.bib, packages.bib]
