@@ -56,8 +56,7 @@ Applicants are not expected to have used neither Linux containers nor Nextflow w
   * Afternoon coffee break: 3:30-4:00pm
 * Location: virtual, via Zoom.
 
-### Day 1 & 2: Containers
-#### Day 1: Docker
+**Day 1: Docker**
 * Containers: introduction and history.
 * Docker hub: find existing containers.
 * Fetch (and build) an image from public registries (Docker Hub, Quay.io, etc.)
@@ -71,7 +70,7 @@ Applicants are not expected to have used neither Linux containers nor Nextflow w
 * Write a Docker recipe and build an image from it.
 * Upload image to registries.
 
-#### Day 2: Singularity
+**Day 2: Singularity**
 * Singularity versus Docker.
  * Differences, pros and cons for each system. 
 * Fetch (and build) Singularity images.
@@ -82,8 +81,7 @@ Applicants are not expected to have used neither Linux containers nor Nextflow w
 * Singularity build recipes.
 * Advanced features: services, etc.
 
-### Day 3 & 4: Nextflow
-#### Day 3: Fetch, understand, run, modify
+**Day 3: Nextflow: fetch, understand, run, modify**
 * Nextflow pipeline repositories.
   * hands-on: fetch X pipeline.
 * Run an existing Nextflow pipeline.
@@ -93,7 +91,7 @@ Applicants are not expected to have used neither Linux containers nor Nextflow w
 * Nextflow configuration files.
 * Modify and run a Nextflow pipeline.
 
-#### Day 4: Write and share
+**Day 4: Nextflow: Write and share**
 * Write Nextflow pipeline from scratch.
 * Run Nextflow with containers.
 * Choose either Docker or Singularity.
