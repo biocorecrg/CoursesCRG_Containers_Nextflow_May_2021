@@ -28,6 +28,7 @@ Trainees will work in a dedicated AWS Cloud9 environment.
 
 ## Learning objectives
 About containers:
+
 - Locate and fetch Docker/Singularity images from dedicated repositories.
 - Execute/Run a Docker/Singularity container from the command line.
 - Build Docker container from an existing recipe.
@@ -35,6 +36,7 @@ About containers:
 - Convert Docker to Singularity image.
 
 About Nextflow:
+
 - Locate and fetch Nextflow pipelines from dedicated repositories.
 - Execute/Run a Nextflow pipeline.
 - Describe and explain Nextflow's basic concepts.
@@ -93,7 +95,7 @@ Applicants are not expected to have used neither Linux containers nor Nextflow w
 - Nextflow configuration files.
 - Modify and run a Nextflow pipeline.
 
-### Day 4: Write and share**
+### Day 4: Write and share
 - Write Nextflow pipeline from scratch.
 - Run Nextflow with containers.
 - Choose either Docker or Singularity.
