@@ -8,7 +8,7 @@ bookdown::gitbook:
       before: |
         <li><a href="./">Biocore@CRG</a></li>
       after: |
-        <li><a href="https://github.com/biocorecrg" target="blank">Published with bookdown</a></li>
+        <li><a href="https://github.com/biocorecrg" target="blank">BIOINFORMATICS CORE @ CRG</a></li>
     download: ["pdf", "epub"]
     search: yes
 bookdown::html_book:
