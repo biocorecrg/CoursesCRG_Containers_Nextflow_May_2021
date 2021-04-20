@@ -34,13 +34,13 @@ About containers:
 - Convert Docker to Singularity image.
 
 About Nextflow:
-* Locate and fetch Nextflow pipelines from dedicated repositories.
-* Execute/Run a Nextflow pipeline.
-* Describe and explain Nextflow's basic concepts.
-* Test and modify a Nextflow pipeline.
-* Implement short blocks of code into a Nextflow pipeline.
-* Develop a Nextflow pipeline from scratch.
-* Run pipeline in diverse computational environments (local, HPC, cloud )
+- Locate and fetch Nextflow pipelines from dedicated repositories.
+- Execute/Run a Nextflow pipeline.
+- Describe and explain Nextflow's basic concepts.
+- Test and modify a Nextflow pipeline.
+- Implement short blocks of code into a Nextflow pipeline.
+- Develop a Nextflow pipeline from scratch.
+- Run pipeline in diverse computational environments (local, HPC, cloud )
 
 ## Prerequisite, Dates, time, location
 Being comfortable working with the CLI (command-line interface) in a Linux-based environment. 
@@ -57,49 +57,49 @@ Applicants are not expected to have used neither Linux containers nor Nextflow w
 
 ## Linux Containers:
 ### Day 1: Docker
-* Containers: introduction and history.
-* Docker hub: find existing containers.
-* Fetch (and build) an image from public registries (Docker Hub, Quay.io, etc.)
- * Discovery of different relevant base images
-  * Rocker, continuumio, biocontainers.pro.
-* Run Docker container based on an existing image (also run it interactively).
-* Work with volumes and ports.
-* Build an image from an existing recipe:
-  * Explain sections and keywords.
-  * Build options (e.g. cache or build variables).
-* Write a Docker recipe and build an image from it.
-* Upload image to registries.
+- Containers: introduction and history.
+- Docker hub: find existing containers.
+- Fetch (and build) an image from public registries (Docker Hub, Quay.io, etc.)
+ - Discovery of different relevant base images
+  - Rocker, continuumio, biocontainers.pro.
+- Run Docker container based on an existing image (also run it interactively).
+- Work with volumes and ports.
+- Build an image from an existing recipe:
+  - Explain sections and keywords.
+  - Build options (e.g. cache or build variables).
+- Write a Docker recipe and build an image from it.
+- Upload image to registries.
 
 ### Day 2: Singularity
-* Singularity versus Docker.
- * Differences, pros and cons for each system. 
-* Fetch (and build) Singularity images.
- * Build from existing public registries.
- * Build from local Docker instances.
-* Run Singularity container (interactively).
-* Understanding and working with volumes.
-* Singularity build recipes.
-* Advanced features: services, etc.
+- Singularity versus Docker.
+ - Differences, pros and cons for each system. 
+- Fetch (and build) Singularity images.
+ - Build from existing public registries.
+ - Build from local Docker instances.
+- Run Singularity container (interactively).
+- Understanding and working with volumes.
+- Singularity build recipes.
+- Advanced features: services, etc.
 
 ## Nextflow
 ### Day 3: fetch, understand, run, modify
-* Nextflow pipeline repositories.
-  * hands-on: fetch X pipeline.
-* Run an existing Nextflow pipeline.
-* Understand Nextflow main files (main.nf and config files).
-* Basic concepts:
-  * Processes and channels
-* Nextflow configuration files.
-* Modify and run a Nextflow pipeline.
+- Nextflow pipeline repositories.
+  - hands-on: fetch X pipeline.
+- Run an existing Nextflow pipeline.
+- Understand Nextflow main files (main.nf and config files).
+- Basic concepts:
+  - Processes and channels
+- Nextflow configuration files.
+- Modify and run a Nextflow pipeline.
 
 ### Day 4: Write and share**
-* Write Nextflow pipeline from scratch.
-* Run Nextflow with containers.
-* Choose either Docker or Singularity.
-* Run Nextflow in a computing cluster (e.g. HPC).
-  * Definition of computing requirements and queues.
-  * Profiles.
-* Share Nextflow pipelines and good practices. 
+- Write Nextflow pipeline from scratch.
+- Run Nextflow with containers.
+- Choose either Docker or Singularity.
+- Run Nextflow in a computing cluster (e.g. HPC).
+  - Definition of computing requirements and queues.
+  - Profiles.
+- Share Nextflow pipelines and good practices. 
 
 
 
