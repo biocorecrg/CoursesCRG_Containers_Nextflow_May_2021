@@ -197,27 +197,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="channels" class="section level3">
 <h3><span class="header-section-number">3.6.1</span> Channels</h3>
 <p>We can make a very simple Nextflow script by writing this code in a file (test.nf):</p>
-<pre class="nextflow"><code>#!/usr/bin/env nextflow
-
-// This is a comment
-
-/*
- * This is a block of comments
- */
-
-// This is needed for activating the new DLS2
-nextflow.enable.dsl=2
-
-
-//Let&#39;s create a channel from string values
-
-str = Channel.from(&#39;hello&#39;, &#39;hola&#39;, &#39;bonjour&#39;)
-
-/*
-* Let&#39;s print that channel using the operator view()
-* https://www.nextflow.io/docs/latest/operator.html#view
-*/
-str.view()</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb7-1"><a href="first-scripts.html#cb7-1"></a>#!/usr/bin/env nextflow</span>
+<span id="cb7-2"><a href="first-scripts.html#cb7-2"></a></span>
+<span id="cb7-3"><a href="first-scripts.html#cb7-3"></a><span class="co">// This is a comment</span></span>
+<span id="cb7-4"><a href="first-scripts.html#cb7-4"></a></span>
+<span id="cb7-5"><a href="first-scripts.html#cb7-5"></a><span class="co">/*</span></span>
+<span id="cb7-6"><a href="first-scripts.html#cb7-6"></a><span class="co"> * This is a block of comments</span></span>
+<span id="cb7-7"><a href="first-scripts.html#cb7-7"></a><span class="co"> */</span></span>
+<span id="cb7-8"><a href="first-scripts.html#cb7-8"></a></span>
+<span id="cb7-9"><a href="first-scripts.html#cb7-9"></a><span class="co">// This is needed for activating the new DLS2</span></span>
+<span id="cb7-10"><a href="first-scripts.html#cb7-10"></a>nextflow.<span class="fu">enable</span>.<span class="fu">dsl</span>=<span class="dv">2</span></span>
+<span id="cb7-11"><a href="first-scripts.html#cb7-11"></a></span>
+<span id="cb7-12"><a href="first-scripts.html#cb7-12"></a></span>
+<span id="cb7-13"><a href="first-scripts.html#cb7-13"></a><span class="co">//Let&#39;s create a channel from string values</span></span>
+<span id="cb7-14"><a href="first-scripts.html#cb7-14"></a></span>
+<span id="cb7-15"><a href="first-scripts.html#cb7-15"></a>str = <span class="bu">Channel</span>.<span class="fu">from</span>(&#39;hello&#39;, &#39;hola&#39;, &#39;bonjour&#39;)</span>
+<span id="cb7-16"><a href="first-scripts.html#cb7-16"></a></span>
+<span id="cb7-17"><a href="first-scripts.html#cb7-17"></a><span class="co">/*</span></span>
+<span id="cb7-18"><a href="first-scripts.html#cb7-18"></a><span class="co">* Let&#39;s print that channel using the operator view()</span></span>
+<span id="cb7-19"><a href="first-scripts.html#cb7-19"></a><span class="co">* https://www.nextflow.io/docs/latest/operator.html#view</span></span>
+<span id="cb7-20"><a href="first-scripts.html#cb7-20"></a><span class="co">*/</span></span>
+<span id="cb7-21"><a href="first-scripts.html#cb7-21"></a>str.<span class="fu">view</span>()</span></code></pre></div>
 <p>Then to execute it you can just run:</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="first-scripts.html#cb8-1"></a><span class="va">$nextflow</span> <span class="ex">run</span> test.nf</span>
 <span id="cb8-2"><a href="first-scripts.html#cb8-2"></a><span class="ex">N</span> E X T F L O W  ~  version 20.07.1</span>
