@@ -1,6 +1,4 @@
-# Nextflow
-
-## What is Nextflow?
+# What is Nextflow?
 
 <a href="https://www.nextflow.io/"><img src="https://biocorecrg.github.io/ELIXIR_containers_nextflow/images/nextf_groovy.png" width="600"></a>
 
@@ -8,7 +6,7 @@
 
 Nextflow has been currently upgrade from DLS1 version to DLS2. In this course we will use exclusively DLS2.  
 
-## What is Nextflow for?
+# What is Nextflow for?
 It is for making pipelines without caring about parallelization, dependencies, intermediate file names, data structures, handling exceptions, resuming executions etc. It was published in [Nature Biotechnology in 2017](https://pubmed.ncbi.nlm.nih.gov/28398311/).
 
 <a href="https://pubmed.ncbi.nlm.nih.gov/28398311/"><img src="https://biocorecrg.github.io/ELIXIR_containers_nextflow/images/NF_pub.png" width="600"></a>
@@ -22,6 +20,7 @@ Here a curated list of [Nextflow pipelines](https://github.com/nextflow-io/aweso
 And here a group of pipelines written in a collaborative way from project [NF-core](https://nf-co.re/pipelines)
 
 Some pipelines written in Nextflow are being used for SARS-Cov-2 analysis like:
+
 - the one from the [artic Network](https://artic.network/ncov-2019): [ncov2019-artic-nf](https://github.com/connor-lab/ncov2019-artic-nf)
 - the one used from the [CRG / EGA viral Beacon](https://covid19beacon.crg.eu/info), [Master of Pores](https://github.com/biocorecrg/master_of_pores)
 - the nf-core pipeline [viralrecon](https://nf-co.re/viralrecon)
@@ -37,6 +36,7 @@ You can reuse your scripts and tools without rewriting / adapting them.
 - Reproducibility
 
 Nextflow supports Docker and Singularity containers technology. Their use will make the pipelines reproducible in any unix environment. Nextflow is integrated with GitHub code sharing platform so you can call directly a specific version of pipeline from a repository, download it and use it on the fly.
+
 - Portable
 
 Nextflow can be executed on multiple platforms without modifiying the code. It supports several schedulers such as SGE, LSF, SLURM, PBS and HTCondor and  cloud platforms like Kubernetes, Amazon AWS and Google Cloud.
@@ -62,18 +62,18 @@ Each process is independent from the other and can be run in parallel depending 
 ## Installation
 We need at least Java version 8.
 
-```bash
+```{bash, eval=TRUE, echo=TRUE}
 java -version
 ```
 
 Then we can install it by typing:
 
-```bash
+```{bash, eval=TRUE, echo=TRUE}
 curl -s https://get.nextflow.io | bash
 ```
 This will create an executable called nextflow that can be moved to /usr/local/bin or where we prefer. We can finally test using:
 
-```bash
+```{bash, eval=TRUE, echo=TRUE}
 ./nextflow run hello
 
 N E X T F L O W  ~  version 20.07.1
@@ -97,7 +97,7 @@ This command download from the a github repository and it runs the test script h
 
 We can make a very simple Nextflow script by writing this code in a file (test.nf):
 
-```nextflow
+```{java, eval=TRUE, echo=TRUE}
 #!/usr/bin/env nextflow
 
 // This is a comment
