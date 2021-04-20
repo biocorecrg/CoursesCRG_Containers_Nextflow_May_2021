@@ -1,7 +1,14 @@
-about-the-course
-dates-time-location
-containers
+summary
+outline
+learning-objectives
+prerequisite-dates-time-location
+linux-containers
+day-1-docker
+day-2-singularity
 nextflow
+day-3-fetch-understand-run-modify
+containers
+nextflow-1
 what-is-nextflow
 what-is-nextflow-for
 main-advantages
