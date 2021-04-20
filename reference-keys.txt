@@ -7,6 +7,7 @@ day-1-docker
 day-2-singularity
 nextflow
 day-3-fetch-understand-run-modify
+day-4-write-and-share
 containers
 nextflow-1
 what-is-nextflow
