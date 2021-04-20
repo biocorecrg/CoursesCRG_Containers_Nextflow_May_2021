@@ -6,7 +6,7 @@ bookdown::gitbook:
     toc:
       collapse: section
       before: |
-        <li><a href="./">Biocore@CRG</a></li>
+        <li><a href="./">Courses@CRG 2021</a></li>
       after: |
         <li><a href="https://github.com/biocorecrg" target="blank">BIOINFORMATICS CORE @ CRG</a></li>
     download: ["pdf", "epub"]
