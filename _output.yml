@@ -6,7 +6,7 @@ bookdown::gitbook:
     toc:
       collapse: section
       before: |
-        <li><a href="./">Bookdown test</a></li>
+        <li><a href="./">Biocore@CRG</a></li>
       after: |
         <li><a href="https://github.com/biocorecrg" target="blank">Published with bookdown</a></li>
     download: ["pdf", "epub"]
