@@ -1,11 +1,5 @@
 about-the-course
 dates-time-location
-day-1-2-containers
-day-1-docker
-day-2-singularity
-day-3-4-nextflow
-day-3-fetch-understand-run-modify
-day-4-write-and-share
 containers
 nextflow
 what-is-nextflow
