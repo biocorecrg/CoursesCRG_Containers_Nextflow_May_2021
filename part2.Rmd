@@ -1,8 +1,7 @@
 # Nextflow
 A DSL for data-driven computational pipelines. [www.nextflow.io](https://www.nextflow.io)
 
-
-<a href="https://www.nextflow.io"><img src="https://biocorecrg.github.io/ELIXIR_containers_nextflow/images/nextflow_logo_deep.png" width="600"></a>
+knitr::include_graphics("docs/images/nextflow_logo_deep.png")
 
 
 ## What is Nextflow?
