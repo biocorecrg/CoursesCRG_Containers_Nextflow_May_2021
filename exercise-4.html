@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>3.15 Using Singularity | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines</title>
-  <meta name="description" content="3.15 Using Singularity | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
+  <title>3.18 EXERCISE 4 | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines</title>
+  <meta name="description" content="3.18 EXERCISE 4 | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="3.15 Using Singularity | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
+  <meta property="og:title" content="3.18 EXERCISE 4 | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="3.15 Using Singularity | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
+  <meta name="twitter:title" content="3.18 EXERCISE 4 | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="adding-a-help-section-for-the-whole-pipeline.html"/>
-<link rel="next" href="adding-more-steps.html"/>
+<link rel="prev" href="modules-and-re-usage-of-the-code.html"/>
+<link rel="next" href="reporting-and-graphical-interface.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -194,22 +194,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="using-singularity" class="section level2">
-<h2><span class="header-section-number">3.15</span> Using Singularity</h2>
-<p>We recommend to use Singularity instead of docker in HPC environments. This can be done by just using the Nextflow parameter <strong>-with-singularity</strong> and without touching the code. Nextflow will take care of pulling, converting and storing the image for you. This will be done just once and then nextflow will use the stored image for further executions.</p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb48-1"><a href="using-singularity.html#cb48-1"></a>nextflow run test2.<span class="fu">nf</span> -with-singularity</span>
-<span id="cb48-2"><a href="using-singularity.html#cb48-2"></a>...</span>
-<span id="cb48-3"><a href="using-singularity.html#cb48-3"></a></span>
-<span id="cb48-4"><a href="using-singularity.html#cb48-4"></a>ls singularity/</span>
-<span id="cb48-5"><a href="using-singularity.html#cb48-5"></a>biocorecrg-c4lwg-<span class="dv">2018</span>-latest.<span class="fu">img</span></span></code></pre></div>
+<div id="exercise-4" class="section level2">
+<h2><span class="header-section-number">3.18</span> EXERCISE 4</h2>
+<p>Try to make a module wrapper of the bowtie tool and change the script accordingly as the test3.</p>
+<details>
+<summary>
+<h5>
+<em>Answer</em>
+</h5>
+</summary>
+Solution in the folder test5
+</details>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="adding-a-help-section-for-the-whole-pipeline.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="adding-more-steps.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="modules-and-re-usage-of-the-code.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="reporting-and-graphical-interface.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
