@@ -219,30 +219,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb7-20"><a href="first-scripts.html#cb7-20"></a><span class="co">*/</span></span>
 <span id="cb7-21"><a href="first-scripts.html#cb7-21"></a>str.<span class="fu">view</span>()</span></code></pre></div>
 <p>Then to execute it you can just run:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="first-scripts.html#cb8-1"></a><span class="va">$nextflow</span> <span class="ex">run</span> test.nf</span>
-<span id="cb8-2"><a href="first-scripts.html#cb8-2"></a><span class="ex">N</span> E X T F L O W  ~  version 20.07.1</span>
-<span id="cb8-3"><a href="first-scripts.html#cb8-3"></a><span class="ex">Launching</span> <span class="kw">`</span><span class="ex">test.nf</span><span class="kw">`</span> [agitated_avogadro] - revision: 61a595c5bf</span>
-<span id="cb8-4"><a href="first-scripts.html#cb8-4"></a><span class="ex">hello</span></span>
-<span id="cb8-5"><a href="first-scripts.html#cb8-5"></a><span class="ex">hola</span></span>
-<span id="cb8-6"><a href="first-scripts.html#cb8-6"></a><span class="ex">bonjour</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="first-scripts.html#cb8-1"></a></span>
+<span id="cb8-2"><a href="first-scripts.html#cb8-2"></a><span class="va">$nextflow</span> <span class="ex">run</span> test.nf</span>
+<span id="cb8-3"><a href="first-scripts.html#cb8-3"></a><span class="ex">N</span> E X T F L O W  ~  version 20.07.1</span>
+<span id="cb8-4"><a href="first-scripts.html#cb8-4"></a><span class="ex">Launching</span> <span class="kw">`</span><span class="ex">test.nf</span><span class="kw">`</span> [agitated_avogadro] - revision: 61a595c5bf</span>
+<span id="cb8-5"><a href="first-scripts.html#cb8-5"></a><span class="ex">hello</span></span>
+<span id="cb8-6"><a href="first-scripts.html#cb8-6"></a><span class="ex">hola</span></span>
+<span id="cb8-7"><a href="first-scripts.html#cb8-7"></a><span class="ex">bonjour</span></span></code></pre></div>
 <p>As you can see the <strong>Channel</strong> is just a collection of values, but it can be also a collection of file paths.
 Let’s create three files:</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="first-scripts.html#cb9-1"></a><span class="fu">touch</span> aa.txt bb.txt cc.txt</span></code></pre></div>
 <p>And let’s create another script:</p>
-<pre class="nextflow"><code>#!/usr/bin/env nextflow
-
-nextflow.enable.dsl=2
-
-/*
-* Let&#39;s create the channel `my_files`
-* using the method fromPath
-*/
-
-Channel
-    .fromPath( &quot;*.txt&quot; )
-    .set {my_fyles}
-
-my_fyles.view()</code></pre>
+<div class="sourceCode" id="cb10"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb10-1"><a href="first-scripts.html#cb10-1"></a>#!/usr/bin/env nextflow</span>
+<span id="cb10-2"><a href="first-scripts.html#cb10-2"></a></span>
+<span id="cb10-3"><a href="first-scripts.html#cb10-3"></a>nextflow.<span class="fu">enable</span>.<span class="fu">dsl</span>=<span class="dv">2</span></span>
+<span id="cb10-4"><a href="first-scripts.html#cb10-4"></a></span>
+<span id="cb10-5"><a href="first-scripts.html#cb10-5"></a><span class="co">/*</span></span>
+<span id="cb10-6"><a href="first-scripts.html#cb10-6"></a><span class="co">* Let&#39;s create the channel `my_files`</span></span>
+<span id="cb10-7"><a href="first-scripts.html#cb10-7"></a><span class="co">* using the method fromPath</span></span>
+<span id="cb10-8"><a href="first-scripts.html#cb10-8"></a><span class="co">*/</span></span>
+<span id="cb10-9"><a href="first-scripts.html#cb10-9"></a></span>
+<span id="cb10-10"><a href="first-scripts.html#cb10-10"></a><span class="bu">Channel</span></span>
+<span id="cb10-11"><a href="first-scripts.html#cb10-11"></a>    .<span class="fu">fromPath</span>( <span class="st">&quot;*.txt&quot;</span> )</span>
+<span id="cb10-12"><a href="first-scripts.html#cb10-12"></a>    .<span class="fu">set</span> {my_fyles}</span>
+<span id="cb10-13"><a href="first-scripts.html#cb10-13"></a></span>
+<span id="cb10-14"><a href="first-scripts.html#cb10-14"></a>my_fyles.<span class="fu">view</span>()</span></code></pre></div>
 <div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="first-scripts.html#cb11-1"></a><span class="ex">nextflow</span> run test2.nf</span>
 <span id="cb11-2"><a href="first-scripts.html#cb11-2"></a><span class="ex">N</span> E X T F L O W  ~  version 20.07.1</span>
 <span id="cb11-3"><a href="first-scripts.html#cb11-3"></a><span class="ex">Launching</span> <span class="kw">`</span><span class="ex">test2.nf</span><span class="kw">`</span> [condescending_hugle] - revision: f513c0fac3</span>
@@ -261,34 +262,34 @@ my_fyles.view()</code></pre>
 <div id="processes" class="section level3">
 <h3><span class="header-section-number">3.6.3</span> Processes</h3>
 <p>Let’s add now a process to our previous script test.nf:</p>
-<pre class="nextflow"><code>#!/usr/bin/env nextflow
-
-nextflow.enable.dsl=2
-
-str = Channel.from(&#39;hello&#39;, &#39;hola&#39;, &#39;bonjour&#39;)
-
-/*
- * Creates a process which receive an input channel containing values
- * Each value emitted by the channel triggers the execution
- * of the process. The process stdout is caputured and send over
- * the another channel.
- */
-
-process printHello {
-
-   tag { str_in } // this is for displaying the content of `str_in` in the log file
-
-   input:        
-   val str_in
-
-   output:        
-   stdout
-
-   script:        
-   &quot;&quot;&quot;
-   echo ${str_in} in Italian is ciao
-   &quot;&quot;&quot;
-}</code></pre>
+<div class="sourceCode" id="cb12"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb12-1"><a href="first-scripts.html#cb12-1"></a>#!/usr/bin/env nextflow</span>
+<span id="cb12-2"><a href="first-scripts.html#cb12-2"></a></span>
+<span id="cb12-3"><a href="first-scripts.html#cb12-3"></a>nextflow.<span class="fu">enable</span>.<span class="fu">dsl</span>=<span class="dv">2</span></span>
+<span id="cb12-4"><a href="first-scripts.html#cb12-4"></a></span>
+<span id="cb12-5"><a href="first-scripts.html#cb12-5"></a>str = <span class="bu">Channel</span>.<span class="fu">from</span>(&#39;hello&#39;, &#39;hola&#39;, &#39;bonjour&#39;)</span>
+<span id="cb12-6"><a href="first-scripts.html#cb12-6"></a></span>
+<span id="cb12-7"><a href="first-scripts.html#cb12-7"></a><span class="co">/*</span></span>
+<span id="cb12-8"><a href="first-scripts.html#cb12-8"></a><span class="co"> * Creates a process which receive an input channel containing values</span></span>
+<span id="cb12-9"><a href="first-scripts.html#cb12-9"></a><span class="co"> * Each value emitted by the channel triggers the execution</span></span>
+<span id="cb12-10"><a href="first-scripts.html#cb12-10"></a><span class="co"> * of the process. The process stdout is caputured and send over</span></span>
+<span id="cb12-11"><a href="first-scripts.html#cb12-11"></a><span class="co"> * the another channel.</span></span>
+<span id="cb12-12"><a href="first-scripts.html#cb12-12"></a><span class="co"> */</span></span>
+<span id="cb12-13"><a href="first-scripts.html#cb12-13"></a></span>
+<span id="cb12-14"><a href="first-scripts.html#cb12-14"></a>process printHello {</span>
+<span id="cb12-15"><a href="first-scripts.html#cb12-15"></a></span>
+<span id="cb12-16"><a href="first-scripts.html#cb12-16"></a>   tag { str_in } <span class="co">// this is for displaying the content of `str_in` in the log file</span></span>
+<span id="cb12-17"><a href="first-scripts.html#cb12-17"></a></span>
+<span id="cb12-18"><a href="first-scripts.html#cb12-18"></a>   input:        </span>
+<span id="cb12-19"><a href="first-scripts.html#cb12-19"></a>   val str_in</span>
+<span id="cb12-20"><a href="first-scripts.html#cb12-20"></a></span>
+<span id="cb12-21"><a href="first-scripts.html#cb12-21"></a>   output:        </span>
+<span id="cb12-22"><a href="first-scripts.html#cb12-22"></a>   stdout</span>
+<span id="cb12-23"><a href="first-scripts.html#cb12-23"></a></span>
+<span id="cb12-24"><a href="first-scripts.html#cb12-24"></a>   script:        </span>
+<span id="cb12-25"><a href="first-scripts.html#cb12-25"></a>   <span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb12-26"><a href="first-scripts.html#cb12-26"></a>   echo ${str_in} in Italian is ciao</span>
+<span id="cb12-27"><a href="first-scripts.html#cb12-27"></a>   <span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb12-28"><a href="first-scripts.html#cb12-28"></a>}</span></code></pre></div>
 <p>The process can be seen as a function and is composed by:
 - An <strong>input</strong> part where the input channels are defined
 - An <strong>output</strong> part where we indicates what to store as a result that will be sent to other processes or published as final result
@@ -299,38 +300,38 @@ process printHello {
 <h3><span class="header-section-number">3.6.4</span> Workflow</h3>
 <p>The code as it is will not produce anything, because you need another part that actually call the process and connect it to the input channel.
 This part is called a <strong>workflow</strong>. So let’s change our code:</p>
-<pre class="nextflow"><code>#!/usr/bin/env nextflow
-
-nextflow.enable.dsl=2
-
-str = Channel.from(&#39;hello&#39;, &#39;hola&#39;, &#39;bonjour&#39;)
-
-process printHello {
-
-   tag { str_in }
-
-   input:        
-   val str_in
-
-   output:        
-   stdout
-
-   script:        
-   &quot;&quot;&quot;
-   echo ${str_in} in Italian is ciao
-   &quot;&quot;&quot;
-}
-
-/*
- * A workflow consist of a number of invocations of processes
- * where they are fed with the expected input channels
- * as they were cutom functions. You can only invoke a process once per workflow.
- */
-
-workflow {
- result = printHello(str)
- result.view()
-}</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb13-1"><a href="first-scripts.html#cb13-1"></a>#!/usr/bin/env nextflow</span>
+<span id="cb13-2"><a href="first-scripts.html#cb13-2"></a></span>
+<span id="cb13-3"><a href="first-scripts.html#cb13-3"></a>nextflow.<span class="fu">enable</span>.<span class="fu">dsl</span>=<span class="dv">2</span></span>
+<span id="cb13-4"><a href="first-scripts.html#cb13-4"></a></span>
+<span id="cb13-5"><a href="first-scripts.html#cb13-5"></a>str = <span class="bu">Channel</span>.<span class="fu">from</span>(&#39;hello&#39;, &#39;hola&#39;, &#39;bonjour&#39;)</span>
+<span id="cb13-6"><a href="first-scripts.html#cb13-6"></a></span>
+<span id="cb13-7"><a href="first-scripts.html#cb13-7"></a>process printHello {</span>
+<span id="cb13-8"><a href="first-scripts.html#cb13-8"></a></span>
+<span id="cb13-9"><a href="first-scripts.html#cb13-9"></a>   tag { str_in }</span>
+<span id="cb13-10"><a href="first-scripts.html#cb13-10"></a></span>
+<span id="cb13-11"><a href="first-scripts.html#cb13-11"></a>   input:        </span>
+<span id="cb13-12"><a href="first-scripts.html#cb13-12"></a>   val str_in</span>
+<span id="cb13-13"><a href="first-scripts.html#cb13-13"></a></span>
+<span id="cb13-14"><a href="first-scripts.html#cb13-14"></a>   output:        </span>
+<span id="cb13-15"><a href="first-scripts.html#cb13-15"></a>   stdout</span>
+<span id="cb13-16"><a href="first-scripts.html#cb13-16"></a></span>
+<span id="cb13-17"><a href="first-scripts.html#cb13-17"></a>   script:        </span>
+<span id="cb13-18"><a href="first-scripts.html#cb13-18"></a>   <span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb13-19"><a href="first-scripts.html#cb13-19"></a>   echo ${str_in} in Italian is ciao</span>
+<span id="cb13-20"><a href="first-scripts.html#cb13-20"></a>   <span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb13-21"><a href="first-scripts.html#cb13-21"></a>}</span>
+<span id="cb13-22"><a href="first-scripts.html#cb13-22"></a></span>
+<span id="cb13-23"><a href="first-scripts.html#cb13-23"></a><span class="co">/*</span></span>
+<span id="cb13-24"><a href="first-scripts.html#cb13-24"></a><span class="co"> * A workflow consist of a number of invocations of processes</span></span>
+<span id="cb13-25"><a href="first-scripts.html#cb13-25"></a><span class="co"> * where they are fed with the expected input channels</span></span>
+<span id="cb13-26"><a href="first-scripts.html#cb13-26"></a><span class="co"> * as they were cutom functions. You can only invoke a process once per workflow.</span></span>
+<span id="cb13-27"><a href="first-scripts.html#cb13-27"></a><span class="co"> */</span></span>
+<span id="cb13-28"><a href="first-scripts.html#cb13-28"></a></span>
+<span id="cb13-29"><a href="first-scripts.html#cb13-29"></a>workflow {</span>
+<span id="cb13-30"><a href="first-scripts.html#cb13-30"></a> result = <span class="fu">printHello</span>(str)</span>
+<span id="cb13-31"><a href="first-scripts.html#cb13-31"></a> result.<span class="fu">view</span>()</span>
+<span id="cb13-32"><a href="first-scripts.html#cb13-32"></a>}</span></code></pre></div>
 <p>We can run the script this time sending the execution in background and sending the log to a file.</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb14-1"><a href="first-scripts.html#cb14-1"></a><span class="ex">nextflow</span> run test.nf -bg <span class="op">&gt;</span> log.txt</span></code></pre></div>
 </div>
