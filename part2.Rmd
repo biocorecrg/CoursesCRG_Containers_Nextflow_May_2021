@@ -15,7 +15,7 @@ Nextflow has been currently upgrade from DLS1 version to DLS2. In this course we
 ## What is Nextflow for?
 It is for making pipelines without caring about parallelization, dependencies, intermediate file names, data structures, handling exceptions, resuming executions etc. It was published in [Nature Biotechnology in 2017](https://pubmed.ncbi.nlm.nih.gov/28398311/).
 
-<a href="https://pubmed.ncbi.nlm.nih.gov/28398311/"><img src="https://biocorecrg.github.io/ELIXIR_containers_nextflow/images/NF_pub.png" width="600"></a>
+<a href="https://pubmed.ncbi.nlm.nih.gov/28398311/"><img src="https://biocorecrg.github.io/CoursesCRG_Containers_Nextflow_May_2021/docs/images/NF_mentioning.png" width="600"></a>
 
 There is a growing number of publication mentioning Nextflow in PubMed, since many bioinformaticians are starting to write their pipeline in Nextflow.
 
