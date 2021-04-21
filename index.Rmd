@@ -55,7 +55,7 @@ Applicants are not expected to have used neither Linux containers nor Nextflow w
   - Afternoon coffee break: 3:30-4:00pm
 - Location: virtual, via Zoom.
 
-## Linux Containers:
+## Linux Containers
 ### Day 1: Docker
 - Containers: introduction and history.
 - Docker hub: find existing containers.
