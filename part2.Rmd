@@ -7,7 +7,9 @@ knitr::include_graphics('docs/images/nextflow_logo_deep.png')
 
 ## What is Nextflow?
 
-<a href="https://www.nextflow.io/"><img src="https://biocorecrg.github.io/ELIXIR_containers_nextflow/images/nextf_groovy.png" width="600"></a>
+```{r, out.width="600px", echo=FALSE, fig.link='https://www.nextflow.io'}
+knitr::include_graphics('docs/images/nextf_groovy.png')
+```
 
 [Nextflow](https://www.nextflow.io) is a domain specific language for workflow orchestration that stems from [Groovy](https://groovy-lang.org/). It enables scalable and reproducible workflows using software containers. It was developed at [CRG](www.crg.eu) in the Lab of Cedric Notredame by Paolo Di Tommaso [https://github.com/pditommaso](https://github.com/pditommaso). The Nextflow documentantion is [available here](https://www.nextflow.io/docs/latest/) and you can ask help to the community using their [gitter channel](https://gitter.im/nextflow-io/nextflow)
 
@@ -16,11 +18,17 @@ Nextflow has been currently upgrade from DLS1 version to DLS2. In this course we
 ## What is Nextflow for?
 It is for making pipelines without caring about parallelization, dependencies, intermediate file names, data structures, handling exceptions, resuming executions etc. It was published in [Nature Biotechnology in 2017](https://pubmed.ncbi.nlm.nih.gov/28398311/).
 
-<a href="https://pubmed.ncbi.nlm.nih.gov/28398311/"><img src="https://biocorecrg.github.io/CoursesCRG_Containers_Nextflow_May_2021/docs/images/NF_mentioning.png" width="600"></a>
+
+```{r, out.width="600px", echo=FALSE, fig.link='https://pubmed.ncbi.nlm.nih.gov/28398311/'}
+knitr::include_graphics('docs/images/NF_pub.png')
+```
 
 There is a growing number of publication mentioning Nextflow in PubMed, since many bioinformaticians are starting to write their pipeline in Nextflow.
 
-<a href="https://pubmed.ncbi.nlm.nih.gov/?term=nextflow&timeline=expanded&sort=pubdate&sort_order=asc"><img src="https://biocorecrg.github.io/ELIXIR_containers_nextflow/images/NF_mentioning.png" width="600"></a>
+
+```{r, out.width="600px", echo=FALSE, fig.link='https://pubmed.ncbi.nlm.nih.gov/?term=nextflow&timeline=expanded&sort=pubdate&sort_order=asc'}
+knitr::include_graphics('docs/images/NF_mentioning.png')
+```
 
 Here a curated list of [Nextflow pipelines](https://github.com/nextflow-io/awesome-nextflow)
 
@@ -48,7 +56,9 @@ Nextflow supports Docker and Singularity containers technology. Their use will m
 
 Nextflow can be executed on multiple platforms without modifiying the code. It supports several schedulers such as SGE, LSF, SLURM, PBS and HTCondor and  cloud platforms like Kubernetes, Amazon AWS and Google Cloud.
 
-<img src="https://biocorecrg.github.io/ELIXIR_containers_nextflow/images/executors.png" width="600">
+```{r, out.width="600px", echo=FALSE}
+knitr::include_graphics('docs/images/executors.png')
+```
 
 - Scalability
 
@@ -62,7 +72,10 @@ All the intermediate results produced during the pipeline execution are automati
 The workflows can be repesented as graphs where the nodes are the **processes** and the edges are the **channels**.
 The **processes** are block of code that can be executed such as scripts or programs, while the **channels** are asynchronous queue able to connect processess among them via input / output.
 
-<img src="https://biocorecrg.github.io/ELIXIR_containers_nextflow/images/wf_example.png" width="800/">
+
+```{r, out.width="800px", echo=FALSE}
+knitr::include_graphics('docs/images/wf_example.png')
+```
 
 Each process is independent from the other and can be run in parallel depending on the number of elements in a channel. In the previous example the processes A, B and C can be run in parallel and only at their end the process D is triggered.
 
@@ -1283,8 +1296,9 @@ Nextflow has an embedded function for reporting a number of informations about t
 nextflow run test5.nf -with-docker -bg -with-report > log
 ```
 
-<img src="https://biocorecrg.github.io/ELIXIR_containers_nextflow/images/report.png" width="800">
-
+```{r, out.width="800px", echo=FALSE}
+knitr::include_graphics('docs/images/report.png')
+```
 
 Nextflow Tower is an open source monitoring and managing platform for Nextflow workflows. There are two versions:
 - Open source for monitoring of single pipelines
@@ -1294,19 +1308,27 @@ We will show the open source one.
 
 First of all you need to access the tower.nf website and doing the login using one of the methods.
 
-<a href="https://tower.nf/"><img src="https://biocorecrg.github.io/ELIXIR_containers_nextflow/images/tower.png" width="800"></a>
+```{r, out.width="800px", echo=FALSE, fig.link='https://tower.nf/'}
+knitr::include_graphics('docs/images/tower.png')
+```
 
 We select the email for receiving the instructions and the token to be used for the pipeline.
 
-<img src="https://biocorecrg.github.io/ELIXIR_containers_nextflow/images/tower0.png" width="800">
+```{r, out.width="800px", echo=FALSE}
+knitr::include_graphics('docs/images/tower0.png')
+```
 
 So we check the email:
 
-<img src="https://biocorecrg.github.io/ELIXIR_containers_nextflow/images/tower1.png" width="400">
+```{r, out.width="800px", echo=FALSE}
+knitr::include_graphics('docs/images/tower1.png')
+```
 
 We then follow the instructions exporting two environmental variables:
 
-<img src="https://biocorecrg.github.io/ELIXIR_containers_nextflow/images/tower2.png" width="800">
+```{r, out.width="800px", echo=FALSE}
+knitr::include_graphics('docs/images/tower2.png')
+```
 
 ```{bash, eval=FALSE, echo=TRUE}
 export TOWER_ACCESS_TOKEN=*******YOUR***TOKEN*****HERE*******
@@ -1332,11 +1354,8 @@ CAPSULE: Downloading dependency org.codehaus.groovy:groovy-xml:jar:3.0.5
 
 We finally go to the tower website again:
 
-<img src="https://biocorecrg.github.io/ELIXIR_containers_nextflow/images/tower3.png" width="800">
-
-|          |       |      |
-| :------- | :---: | ---: |
-| [Previous page](https://biocorecrg.github.io/ELIXIR_containers_nextflow/singularity.html) | [Home](https://biocorecrg.github.io/ELIXIR_containers_nextflow/)  | [Next page](https://biocorecrg.github.io/ELIXIR_containers_nextflow/resources.html) |
-
+```{r, out.width="800px", echo=FALSE}
+knitr::include_graphics('docs/images/tower3.png')
+```
 
 
