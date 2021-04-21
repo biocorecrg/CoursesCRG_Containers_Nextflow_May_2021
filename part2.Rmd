@@ -472,7 +472,9 @@ workflow pipeline {
 <details>
 <summary>
 <h5>*Answer*</h5>
-	
+</summary>
+
+
 ```{java, eval=FALSE, echo=TRUE}
 
 #!/usr/bin/env nextflow
@@ -530,6 +532,7 @@ workflow {
     out2 = second_pipeline(str)
 }
 ```
+
 </details>
 
 
