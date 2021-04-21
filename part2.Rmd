@@ -74,6 +74,7 @@ Then we can install it by typing:
 ```{bash, eval=FALSE, echo=TRUE}
 curl -s https://get.nextflow.io | bash
 ```
+
 This will create an executable called nextflow that can be moved to /usr/local/bin or where we prefer. We can finally test using:
 
 ```{bash, eval=FALSE, echo=TRUE}
@@ -93,6 +94,7 @@ Hello world!
 
 Hola world!
 ```
+
 This command download from the a github repository and it runs the test script hello.
 
 ## First scripts
@@ -126,7 +128,8 @@ str.view()
 
 Then to execute it you can just run:
 
-```bash
+```{bash, eval=FALSE, echo=TRUE}
+
 $nextflow run test.nf
 N E X T F L O W  ~  version 20.07.1
 Launching `test.nf` [agitated_avogadro] - revision: 61a595c5bf
@@ -137,13 +140,13 @@ bonjour
 As you can see the **Channel** is just a collection of values, but it can be also a collection of file paths.
 Let's create three files:
 
-```bash
+```{bash, eval=FALSE, echo=TRUE}
 touch aa.txt bb.txt cc.txt
 ```
 
 And let's create another script:
 
-```nextflow
+```{java, eval=FALSE, echo=TRUE}
 #!/usr/bin/env nextflow
 
 nextflow.enable.dsl=2
@@ -160,7 +163,7 @@ Channel
 my_fyles.view()
 ```
 
-```bash
+```{bash, eval=FALSE, echo=TRUE}
 nextflow run test2.nf
 N E X T F L O W  ~  version 20.07.1
 Launching `test2.nf` [condescending_hugle] - revision: f513c0fac3
@@ -183,7 +186,7 @@ Here the solution:
 
 Let's add now a process to our previous script test.nf:
 
-```nextflow
+```{java, eval=FALSE, echo=TRUE}
 #!/usr/bin/env nextflow
 
 nextflow.enable.dsl=2
@@ -226,7 +229,7 @@ Before the input you can indicate a **tag** that will be reported in the log. Th
 The code as it is will not produce anything, because you need another part that actually call the process and connect it to the input channel.
 This part is called a **workflow**. So let's change our code:
 
-```nextflow
+```{java, eval=FALSE, echo=TRUE}
 #!/usr/bin/env nextflow
 
 nextflow.enable.dsl=2
