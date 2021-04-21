@@ -196,19 +196,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">3.17</span> Reporting and graphical interface</h2>
 <p>Nextflow has an embedded function for reporting a number of informations about the resources needed by each job and the timing. Just adding a parameter will give you a nice html report.</p>
 <div class="sourceCode" id="cb60"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb60-1"><a href="reporting-and-graphical-interface.html#cb60-1"></a>nextflow run test5.<span class="fu">nf</span> -with-docker -bg -with-report &gt; log</span></code></pre></div>
-<p><img src="https://biocorecrg.github.io/ELIXIR_containers_nextflow/images/report.png" width="800"></p>
+<p><img src="docs/images/report.png" width="800px" /></p>
 <p>Nextflow Tower is an open source monitoring and managing platform for Nextflow workflows. There are two versions:
 - Open source for monitoring of single pipelines
 - Commercial one for workflow management, monitoring and resource optimisation.</p>
 <p>We will show the open source one.</p>
 <p>First of all you need to access the tower.nf website and doing the login using one of the methods.</p>
-<p><a href="https://tower.nf/"><img src="https://biocorecrg.github.io/ELIXIR_containers_nextflow/images/tower.png" width="800"></a></p>
+<p><a href="https://tower.nf/" target="_blank"><img src="docs/images/tower.png" width="800px" /></a></p>
 <p>We select the email for receiving the instructions and the token to be used for the pipeline.</p>
-<p><img src="https://biocorecrg.github.io/ELIXIR_containers_nextflow/images/tower0.png" width="800"></p>
+<p><img src="docs/images/tower0.png" width="800px" /></p>
 <p>So we check the email:</p>
-<p><img src="https://biocorecrg.github.io/ELIXIR_containers_nextflow/images/tower1.png" width="400"></p>
+<p><img src="docs/images/tower1.png" width="800px" /></p>
 <p>We then follow the instructions exporting two environmental variables:</p>
-<p><img src="https://biocorecrg.github.io/ELIXIR_containers_nextflow/images/tower2.png" width="800"></p>
+<p><img src="docs/images/tower2.png" width="800px" /></p>
 <div class="sourceCode" id="cb61"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb61-1"><a href="reporting-and-graphical-interface.html#cb61-1"></a><span class="bu">export</span> <span class="va">TOWER_ACCESS_TOKEN=</span>*******<span class="va">YOUR</span>***<span class="va">TOKEN</span>*****<span class="va">HERE</span>*******</span>
 <span id="cb61-2"><a href="reporting-and-graphical-interface.html#cb61-2"></a><span class="bu">export</span> <span class="va">NXF_VER=</span>20.09.1-edge </span></code></pre></div>
 <p>we then launch the pipeline:</p>
@@ -225,16 +225,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb62-11"><a href="reporting-and-graphical-interface.html#cb62-11"></a><span class="ex">CAPSULE</span>: Downloading dependency org.codehaus.groovy:groovy-templates:jar:3.0.5</span>
 <span id="cb62-12"><a href="reporting-and-graphical-interface.html#cb62-12"></a><span class="ex">CAPSULE</span>: Downloading dependency org.codehaus.groovy:groovy-xml:jar:3.0.5</span></code></pre></div>
 <p>We finally go to the tower website again:</p>
-<p><img src="https://biocorecrg.github.io/ELIXIR_containers_nextflow/images/tower3.png" width="800"></p>
-<table>
-<tbody>
-<tr class="odd">
-<td align="left"><a href="https://biocorecrg.github.io/ELIXIR_containers_nextflow/singularity.html">Previous page</a></td>
-<td align="center"><a href="https://biocorecrg.github.io/ELIXIR_containers_nextflow/">Home</a></td>
-<td align="right"><a href="https://biocorecrg.github.io/ELIXIR_containers_nextflow/resources.html">Next page</a></td>
-</tr>
-</tbody>
-</table>
+<p><img src="docs/images/tower3.png" width="800px" /></p>
 
 </div>
 <!-- </div> -->

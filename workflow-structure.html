@@ -196,7 +196,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">3.4</span> Workflow structure</h2>
 <p>The workflows can be repesented as graphs where the nodes are the <strong>processes</strong> and the edges are the <strong>channels</strong>.
 The <strong>processes</strong> are block of code that can be executed such as scripts or programs, while the <strong>channels</strong> are asynchronous queue able to connect processess among them via input / output.</p>
-<p><img src="https://biocorecrg.github.io/ELIXIR_containers_nextflow/images/wf_example.png" width="800/"></p>
+<p><img src="docs/images/wf_example.png" width="800px" /></p>
 <p>Each process is independent from the other and can be run in parallel depending on the number of elements in a channel. In the previous example the processes A, B and C can be run in parallel and only at their end the process D is triggered.</p>
 </div>
             </section>
