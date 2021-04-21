@@ -1,7 +1,7 @@
 # Nextflow
 A DSL for data-driven computational pipelines. [www.nextflow.io](https://www.nextflow.io)
 
-```{r, out.width="30%", fig.link='https://www.nextflow.io'}
+```{r, out.width="30%", echo=FALSE, fig.link='https://www.nextflow.io'}
 knitr::include_graphics('docs/images/nextflow_logo_deep.png')
 ```
 
