@@ -195,11 +195,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="using-singularity" class="section level2">
 <h2><span class="header-section-number">3.14</span> Using Singularity</h2>
 <p>We recommend to use Singularity instead of docker in HPC environments. This can be done by just using the Nextflow parameter <strong>-with-singularity</strong> and without touching the code. Nextflow will take care of pulling, converting and storing the image for you. This will be done just once and then nextflow will use the stored image for further executions.</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb45-1"><a href="using-singularity.html#cb45-1"></a><span class="ex">nextflow</span> run test2.nf -with-singularity</span>
-<span id="cb45-2"><a href="using-singularity.html#cb45-2"></a><span class="ex">...</span></span>
+<div class="sourceCode" id="cb45"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb45-1"><a href="using-singularity.html#cb45-1"></a>nextflow run test2.<span class="fu">nf</span> -with-singularity</span>
+<span id="cb45-2"><a href="using-singularity.html#cb45-2"></a>...</span>
 <span id="cb45-3"><a href="using-singularity.html#cb45-3"></a></span>
-<span id="cb45-4"><a href="using-singularity.html#cb45-4"></a><span class="fu">ls</span> singularity/</span>
-<span id="cb45-5"><a href="using-singularity.html#cb45-5"></a><span class="ex">biocorecrg-c4lwg-2018-latest.img</span></span></code></pre></div>
+<span id="cb45-4"><a href="using-singularity.html#cb45-4"></a>ls singularity/</span>
+<span id="cb45-5"><a href="using-singularity.html#cb45-5"></a>biocorecrg-c4lwg-<span class="dv">2018</span>-latest.<span class="fu">img</span></span></code></pre></div>
 </div>
             </section>
 

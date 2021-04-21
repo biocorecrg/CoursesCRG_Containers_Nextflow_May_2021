@@ -384,59 +384,58 @@ This part is called a <strong>workflow</strong>. So let’s change our code:</p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb18-1"><a href="first-scripts.html#cb18-1"></a><span class="fu">cat</span> work/6a/2dfcaf*/.command.out</span>
 <span id="cb18-2"><a href="first-scripts.html#cb18-2"></a><span class="ex">hola</span> in Italian is ciao</span></code></pre></div>
 <p>You can also name workflows as they were collections of processes. For instance we can write:</p>
-<pre class="nextflow"><code>#!/usr/bin/env nextflow
-
-nextflow.enable.dsl=2
-
-str = Channel.from(&#39;hello&#39;, &#39;hola&#39;, &#39;bonjour&#39;)
-
-process printHello {
-
-   tag { str_in }
-
-   input:        
-   val str_in
-
-   output:        
-   stdout
-
-   script:        
-   &quot;&quot;&quot;
-   echo ${str_in} in Italian is ciao
-   &quot;&quot;&quot;
-}
-
-/*
- * A workflow can be named as a function and receive an input using the take keyword
- */
-
-workflow first_pipeline {
-    take: str_input
-    main:
-    printHello(str_input).view()
-}
-
-
-/*
- * You can re-use the previous processes an combine as you prefer
- */
-
-workflow second_pipeline {
-    take: str_input
-    main:
-    printHello(str_input).collect().view()
-}
-
-/*
- * You can then invoke the different named workflows in this way
- * passing the same input channel `str` to both  
- */
-
-workflow {
-    first_pipeline(str)
-    second_pipeline(str)
-}
-</code></pre>
+<div class="sourceCode" id="cb19"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb19-1"><a href="first-scripts.html#cb19-1"></a>#!/usr/bin/env nextflow</span>
+<span id="cb19-2"><a href="first-scripts.html#cb19-2"></a></span>
+<span id="cb19-3"><a href="first-scripts.html#cb19-3"></a>nextflow.<span class="fu">enable</span>.<span class="fu">dsl</span>=<span class="dv">2</span></span>
+<span id="cb19-4"><a href="first-scripts.html#cb19-4"></a></span>
+<span id="cb19-5"><a href="first-scripts.html#cb19-5"></a>str = <span class="bu">Channel</span>.<span class="fu">from</span>(&#39;hello&#39;, &#39;hola&#39;, &#39;bonjour&#39;)</span>
+<span id="cb19-6"><a href="first-scripts.html#cb19-6"></a></span>
+<span id="cb19-7"><a href="first-scripts.html#cb19-7"></a>process printHello {</span>
+<span id="cb19-8"><a href="first-scripts.html#cb19-8"></a></span>
+<span id="cb19-9"><a href="first-scripts.html#cb19-9"></a>   tag { str_in }</span>
+<span id="cb19-10"><a href="first-scripts.html#cb19-10"></a></span>
+<span id="cb19-11"><a href="first-scripts.html#cb19-11"></a>   input:        </span>
+<span id="cb19-12"><a href="first-scripts.html#cb19-12"></a>   val str_in</span>
+<span id="cb19-13"><a href="first-scripts.html#cb19-13"></a></span>
+<span id="cb19-14"><a href="first-scripts.html#cb19-14"></a>   output:        </span>
+<span id="cb19-15"><a href="first-scripts.html#cb19-15"></a>   stdout</span>
+<span id="cb19-16"><a href="first-scripts.html#cb19-16"></a></span>
+<span id="cb19-17"><a href="first-scripts.html#cb19-17"></a>   script:        </span>
+<span id="cb19-18"><a href="first-scripts.html#cb19-18"></a>   <span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb19-19"><a href="first-scripts.html#cb19-19"></a>   echo ${str_in} in Italian is ciao</span>
+<span id="cb19-20"><a href="first-scripts.html#cb19-20"></a>   <span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb19-21"><a href="first-scripts.html#cb19-21"></a>}</span>
+<span id="cb19-22"><a href="first-scripts.html#cb19-22"></a></span>
+<span id="cb19-23"><a href="first-scripts.html#cb19-23"></a><span class="co">/*</span></span>
+<span id="cb19-24"><a href="first-scripts.html#cb19-24"></a><span class="co"> * A workflow can be named as a function and receive an input using the take keyword</span></span>
+<span id="cb19-25"><a href="first-scripts.html#cb19-25"></a><span class="co"> */</span></span>
+<span id="cb19-26"><a href="first-scripts.html#cb19-26"></a></span>
+<span id="cb19-27"><a href="first-scripts.html#cb19-27"></a>workflow first_pipeline {</span>
+<span id="cb19-28"><a href="first-scripts.html#cb19-28"></a>    take: str_input</span>
+<span id="cb19-29"><a href="first-scripts.html#cb19-29"></a>    main:</span>
+<span id="cb19-30"><a href="first-scripts.html#cb19-30"></a>    <span class="fu">printHello</span>(str_input).<span class="fu">view</span>()</span>
+<span id="cb19-31"><a href="first-scripts.html#cb19-31"></a>}</span>
+<span id="cb19-32"><a href="first-scripts.html#cb19-32"></a></span>
+<span id="cb19-33"><a href="first-scripts.html#cb19-33"></a></span>
+<span id="cb19-34"><a href="first-scripts.html#cb19-34"></a><span class="co">/*</span></span>
+<span id="cb19-35"><a href="first-scripts.html#cb19-35"></a><span class="co"> * You can re-use the previous processes an combine as you prefer</span></span>
+<span id="cb19-36"><a href="first-scripts.html#cb19-36"></a><span class="co"> */</span></span>
+<span id="cb19-37"><a href="first-scripts.html#cb19-37"></a></span>
+<span id="cb19-38"><a href="first-scripts.html#cb19-38"></a>workflow second_pipeline {</span>
+<span id="cb19-39"><a href="first-scripts.html#cb19-39"></a>    take: str_input</span>
+<span id="cb19-40"><a href="first-scripts.html#cb19-40"></a>    main:</span>
+<span id="cb19-41"><a href="first-scripts.html#cb19-41"></a>    <span class="fu">printHello</span>(str_input).<span class="fu">collect</span>().<span class="fu">view</span>()</span>
+<span id="cb19-42"><a href="first-scripts.html#cb19-42"></a>}</span>
+<span id="cb19-43"><a href="first-scripts.html#cb19-43"></a></span>
+<span id="cb19-44"><a href="first-scripts.html#cb19-44"></a><span class="co">/*</span></span>
+<span id="cb19-45"><a href="first-scripts.html#cb19-45"></a><span class="co"> * You can then invoke the different named workflows in this way</span></span>
+<span id="cb19-46"><a href="first-scripts.html#cb19-46"></a><span class="co"> * passing the same input channel `str` to both  </span></span>
+<span id="cb19-47"><a href="first-scripts.html#cb19-47"></a><span class="co"> */</span></span>
+<span id="cb19-48"><a href="first-scripts.html#cb19-48"></a></span>
+<span id="cb19-49"><a href="first-scripts.html#cb19-49"></a>workflow {</span>
+<span id="cb19-50"><a href="first-scripts.html#cb19-50"></a>    <span class="fu">first_pipeline</span>(str)</span>
+<span id="cb19-51"><a href="first-scripts.html#cb19-51"></a>    <span class="fu">second_pipeline</span>(str)</span>
+<span id="cb19-52"><a href="first-scripts.html#cb19-52"></a>}</span></code></pre></div>
 <p>You can see that with the previous code you can execute two workflows containing the same process. We add the <strong>collect</strong> operator to the second workflow that collects the output from different executions and return the resulting list as a sole emission.</p>
 <p>Let’s run the code:</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb20-1"><a href="first-scripts.html#cb20-1"></a><span class="ex">nextflow</span> run test.nf -bg <span class="op">&gt;</span> log2</span>
