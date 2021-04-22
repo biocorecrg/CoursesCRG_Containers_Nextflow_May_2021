@@ -5,7 +5,7 @@ A DSL for data-driven computational pipelines. [www.nextflow.io](https://www.nex
 knitr::include_graphics('docs/images/nextflow_logo_deep.png')
 ```
 
-## What is Nextflow?
+### What is Nextflow?
 
 ```{r, out.width="600px", echo=FALSE, fig.link='https://www.nextflow.io'}
 knitr::include_graphics('docs/images/nextf_groovy.png')
@@ -15,7 +15,7 @@ knitr::include_graphics('docs/images/nextf_groovy.png')
 
 Nextflow has been currently upgrade from DLS1 version to DLS2. In this course we will use exclusively DLS2.  
 
-**What is Nextflow for?**
+### What is Nextflow for?
 It is for making pipelines without caring about parallelization, dependencies, intermediate file names, data structures, handling exceptions, resuming executions etc. It was published in [Nature Biotechnology in 2017](https://pubmed.ncbi.nlm.nih.gov/28398311/).
 
 
@@ -42,7 +42,7 @@ Some pipelines written in Nextflow are being used for SARS-Cov-2 analysis like:
 
 etc. 
 
-**Main advantages**
+### Main advantages
 
 - Fast prototyping
 
@@ -68,7 +68,7 @@ Nextflow is based on the dataflow programming model which simplifies writing com
 
 All the intermediate results produced during the pipeline execution are automatically tracked. For each process a temporary folder is created and is cached (or not) once resuming an execution.
 
-## Workflow structure and Installation
+### Workflow structure
 The workflows can be repesented as graphs where the nodes are the **processes** and the edges are the **channels**.
 The **processes** are block of code that can be executed such as scripts or programs, while the **channels** are asynchronous queue able to connect processess among them via input / output.
 
