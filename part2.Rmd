@@ -1,4 +1,4 @@
-# Nextflow day 1 
+# Nextflow day 1
 A DSL for data-driven computational pipelines. [www.nextflow.io](https://www.nextflow.io)
 
 ```{r, out.width="30%", echo=FALSE, fig.link='https://www.nextflow.io'}
@@ -15,7 +15,7 @@ knitr::include_graphics('docs/images/nextf_groovy.png')
 
 Nextflow has been currently upgrade from DLS1 version to DLS2. In this course we will use exclusively DLS2.  
 
-### What is Nextflow for?
+## What is Nextflow for?
 It is for making pipelines without caring about parallelization, dependencies, intermediate file names, data structures, handling exceptions, resuming executions etc. It was published in [Nature Biotechnology in 2017](https://pubmed.ncbi.nlm.nih.gov/28398311/).
 
 
@@ -42,7 +42,7 @@ Some pipelines written in Nextflow are being used for SARS-Cov-2 analysis like:
 
 etc. 
 
-### Main advantages
+## Main advantages
 
 - Fast prototyping
 
@@ -68,7 +68,7 @@ Nextflow is based on the dataflow programming model which simplifies writing com
 
 All the intermediate results produced during the pipeline execution are automatically tracked. For each process a temporary folder is created and is cached (or not) once resuming an execution.
 
-### Workflow structure
+## Workflow structure
 The workflows can be repesented as graphs where the nodes are the **processes** and the edges are the **channels**.
 The **processes** are block of code that can be executed such as scripts or programs, while the **channels** are asynchronous queue able to connect processess among them via input / output.
 
@@ -79,7 +79,7 @@ knitr::include_graphics('docs/images/wf_example.png')
 
 Each process is independent from the other and can be run in parallel depending on the number of elements in a channel. In the previous example the processes A, B and C can be run in parallel and only at their end the process D is triggered.
 
-### Installation
+## Installation
 We need at least Java version 8.
 
 ```{bash, eval=FALSE, echo=TRUE}
@@ -114,8 +114,7 @@ Hola world!
 
 This command download from the a github repository and it runs the test script hello.
 
-## First scripts
-### Channels
+## Channels
 
 We can make a very simple Nextflow script by writing this code in a file (test.nf):
 
@@ -263,7 +262,7 @@ The process can be seen as a function and is composed by:
 
 Before the input you can indicate a **tag** that will be reported in the log. This is quite useful for logging / debugging.
 
-### Workflow
+## Workflow
 
 The code as it is will not produce anything, because you need another part that actually call the process and connect it to the input channel.
 This part is called a **workflow**. So let's change our code:
@@ -308,7 +307,7 @@ We can run the script this time sending the execution in background and sending 
 nextflow run test.nf -bg > log.txt
 ```
 
-### Nextflow log
+## Nextflow log
 Let's inspect now the log file:
 
 ```{bash, eval=FALSE, echo=TRUE}
@@ -788,7 +787,6 @@ workflow flow1 {
 
 
 # Nextflow day 2
-
 ## Resuming your pipeline
 
 You can resume the execution after the code modification using the parameter **-resume**. Nextflow is smart enough to cache the execution since input and output were not changed.
@@ -1463,5 +1461,4 @@ We finally go to the tower website again:
 ```{r, out.width="800px", echo=FALSE}
 knitr::include_graphics('docs/images/tower3.png')
 ```
-
 
