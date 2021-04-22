@@ -3,7 +3,8 @@
 ## Title
 
 Reproducible research and data analysis with Linux containers and Nextflow pipelines 
-
+<br>
+Course page: https://biocorecrg.github.io/CoursesCRG_Containers_Nextflow_May_2021/
 
 ## About the course
 
