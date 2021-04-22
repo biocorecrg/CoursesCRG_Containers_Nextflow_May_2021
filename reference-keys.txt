@@ -1,5 +1,5 @@
 welcome-and-about-the-course
-meet-the-instructors
+meet-the-organizers-and-instructors
 about-the-course
 outline
 learning-objectives
@@ -12,13 +12,12 @@ may-10-11-nextflow
 day-3-fetch-understand-run-modify
 day-4-write-and-share
 containers
-nextflow
+nextflow-day-1
 what-is-nextflow
 what-is-nextflow-for
 main-advantages
 workflow-structure
 installation
-first-scripts
 channels
 exercise-1
 processes
@@ -27,6 +26,7 @@ nextflow-log
 exercise-2
 more-complex-scripts
 exercise-3
+nextflow-day-2
 resuming-your-pipeline
 decoupling-resources-parameters-and-nextflow-script
 publishing-final-results

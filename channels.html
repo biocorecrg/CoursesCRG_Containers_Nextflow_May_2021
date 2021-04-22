@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>4.7 EXERCISE 4 | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines</title>
-  <meta name="description" content="4.7 EXERCISE 4 | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
+  <title>3.6 Channels | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines</title>
+  <meta name="description" content="3.6 Channels | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="4.7 EXERCISE 4 | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
+  <meta property="og:title" content="3.6 Channels | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="4.7 EXERCISE 4 | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
+  <meta name="twitter:title" content="3.6 Channels | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="modules-and-re-usage-of-the-code.html"/>
-<link rel="next" href="reporting-and-graphical-interface.html"/>
+<link rel="prev" href="installation.html"/>
+<link rel="next" href="exercise-1.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -193,25 +193,71 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="exercise-4" class="section level2">
-<h2><span class="header-section-number">4.7</span> EXERCISE 4</h2>
-<p>Try to make a module wrapper of the bowtie tool and change the script accordingly as the test3.</p>
-<details>
-<summary>
-<h5>
-<em>Answer</em>
-</h5>
-</summary>
-Solution in the folder test5
-</details>
+<div id="channels" class="section level2">
+<h2><span class="header-section-number">3.6</span> Channels</h2>
+<p>We can make a very simple Nextflow script by writing this code in a file (test.nf):</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb7-1"><a href="channels.html#cb7-1"></a>#!/usr/bin/env nextflow</span>
+<span id="cb7-2"><a href="channels.html#cb7-2"></a></span>
+<span id="cb7-3"><a href="channels.html#cb7-3"></a><span class="co">// This is a comment</span></span>
+<span id="cb7-4"><a href="channels.html#cb7-4"></a></span>
+<span id="cb7-5"><a href="channels.html#cb7-5"></a><span class="co">/*</span></span>
+<span id="cb7-6"><a href="channels.html#cb7-6"></a><span class="co"> * This is a block of comments</span></span>
+<span id="cb7-7"><a href="channels.html#cb7-7"></a><span class="co"> */</span></span>
+<span id="cb7-8"><a href="channels.html#cb7-8"></a></span>
+<span id="cb7-9"><a href="channels.html#cb7-9"></a><span class="co">// This is needed for activating the new DLS2</span></span>
+<span id="cb7-10"><a href="channels.html#cb7-10"></a>nextflow.<span class="fu">enable</span>.<span class="fu">dsl</span>=<span class="dv">2</span></span>
+<span id="cb7-11"><a href="channels.html#cb7-11"></a></span>
+<span id="cb7-12"><a href="channels.html#cb7-12"></a></span>
+<span id="cb7-13"><a href="channels.html#cb7-13"></a><span class="co">//Let&#39;s create a channel from string values</span></span>
+<span id="cb7-14"><a href="channels.html#cb7-14"></a></span>
+<span id="cb7-15"><a href="channels.html#cb7-15"></a>str = <span class="bu">Channel</span>.<span class="fu">from</span>(&#39;hello&#39;, &#39;hola&#39;, &#39;bonjour&#39;)</span>
+<span id="cb7-16"><a href="channels.html#cb7-16"></a></span>
+<span id="cb7-17"><a href="channels.html#cb7-17"></a><span class="co">/*</span></span>
+<span id="cb7-18"><a href="channels.html#cb7-18"></a><span class="co">* Let&#39;s print that channel using the operator view()</span></span>
+<span id="cb7-19"><a href="channels.html#cb7-19"></a><span class="co">* https://www.nextflow.io/docs/latest/operator.html#view</span></span>
+<span id="cb7-20"><a href="channels.html#cb7-20"></a><span class="co">*/</span></span>
+<span id="cb7-21"><a href="channels.html#cb7-21"></a>str.<span class="fu">view</span>()</span></code></pre></div>
+<p>Then to execute it you can just run:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="channels.html#cb8-1"></a></span>
+<span id="cb8-2"><a href="channels.html#cb8-2"></a><span class="va">$nextflow</span> <span class="ex">run</span> test.nf</span>
+<span id="cb8-3"><a href="channels.html#cb8-3"></a><span class="ex">N</span> E X T F L O W  ~  version 20.07.1</span>
+<span id="cb8-4"><a href="channels.html#cb8-4"></a><span class="ex">Launching</span> <span class="kw">`</span><span class="ex">test.nf</span><span class="kw">`</span> [agitated_avogadro] - revision: 61a595c5bf</span>
+<span id="cb8-5"><a href="channels.html#cb8-5"></a><span class="ex">hello</span></span>
+<span id="cb8-6"><a href="channels.html#cb8-6"></a><span class="ex">hola</span></span>
+<span id="cb8-7"><a href="channels.html#cb8-7"></a><span class="ex">bonjour</span></span></code></pre></div>
+<p>As you can see the <strong>Channel</strong> is just a collection of values, but it can be also a collection of file paths.
+Let’s create three files:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="channels.html#cb9-1"></a><span class="fu">touch</span> aa.txt bb.txt cc.txt</span></code></pre></div>
+<p>And let’s create another script:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb10-1"><a href="channels.html#cb10-1"></a>#!/usr/bin/env nextflow</span>
+<span id="cb10-2"><a href="channels.html#cb10-2"></a></span>
+<span id="cb10-3"><a href="channels.html#cb10-3"></a>nextflow.<span class="fu">enable</span>.<span class="fu">dsl</span>=<span class="dv">2</span></span>
+<span id="cb10-4"><a href="channels.html#cb10-4"></a></span>
+<span id="cb10-5"><a href="channels.html#cb10-5"></a><span class="co">/*</span></span>
+<span id="cb10-6"><a href="channels.html#cb10-6"></a><span class="co">* Let&#39;s create the channel `my_files`</span></span>
+<span id="cb10-7"><a href="channels.html#cb10-7"></a><span class="co">* using the method fromPath</span></span>
+<span id="cb10-8"><a href="channels.html#cb10-8"></a><span class="co">*/</span></span>
+<span id="cb10-9"><a href="channels.html#cb10-9"></a></span>
+<span id="cb10-10"><a href="channels.html#cb10-10"></a><span class="bu">Channel</span></span>
+<span id="cb10-11"><a href="channels.html#cb10-11"></a>    .<span class="fu">fromPath</span>( <span class="st">&quot;*.txt&quot;</span> )</span>
+<span id="cb10-12"><a href="channels.html#cb10-12"></a>    .<span class="fu">set</span> {my_fyles}</span>
+<span id="cb10-13"><a href="channels.html#cb10-13"></a></span>
+<span id="cb10-14"><a href="channels.html#cb10-14"></a>my_fyles.<span class="fu">view</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="channels.html#cb11-1"></a><span class="ex">nextflow</span> run test2.nf</span>
+<span id="cb11-2"><a href="channels.html#cb11-2"></a><span class="ex">N</span> E X T F L O W  ~  version 20.07.1</span>
+<span id="cb11-3"><a href="channels.html#cb11-3"></a><span class="ex">Launching</span> <span class="kw">`</span><span class="ex">test2.nf</span><span class="kw">`</span> [condescending_hugle] - revision: f513c0fac3</span>
+<span id="cb11-4"><a href="channels.html#cb11-4"></a><span class="ex">/Users/lcozzuto/aaa/ELIXIR_containers_nextflow/aa.txt</span></span>
+<span id="cb11-5"><a href="channels.html#cb11-5"></a><span class="ex">/Users/lcozzuto/aaa/ELIXIR_containers_nextflow/bb.txt</span></span>
+<span id="cb11-6"><a href="channels.html#cb11-6"></a><span class="ex">/Users/lcozzuto/aaa/ELIXIR_containers_nextflow/cc.txt</span></span></code></pre></div>
+<p>Once executed we can see that a folder named <strong>work</strong> is generated. In that folder Nextflow will store the intermediate files generated by the processes.</p>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="modules-and-re-usage-of-the-code.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="reporting-and-graphical-interface.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="installation.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="exercise-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
