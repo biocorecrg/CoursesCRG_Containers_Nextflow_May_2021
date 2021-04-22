@@ -12,14 +12,22 @@ biblio-style: apalike
 link-citations: yes
 ---
 
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, eval = TRUE, warning = FALSE)
+library(kableExtra)
+```
+
+
 # Welcome and about the course
 
 This slow-paced hands-on course is designed for absolute beginners who want to start using containers and Nextflow pipelines to achieve reproducibility of data analysis. <br>
 Linux containers allow the storage of code and applications in an host-independent lightweight environment. They became a fast and popular way to share and deploy applications in different environments. <br>
 Nextflow is a powerful polyglot workflow language that, coupled with Docker and Singularity containers, provides a robust, scalable and reproducible way to run computational pipelines.
 
-## Meet the instructors
+## Meet the organizers and instructors
 
+[Damjana Kastelic]()
+[Anna Solé]()
 
 [Toni Hermoso]()
 [Luca Cozzuto]()
