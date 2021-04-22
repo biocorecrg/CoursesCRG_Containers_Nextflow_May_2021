@@ -12,19 +12,27 @@ biblio-style: apalike
 link-citations: yes
 ---
 
-# Summary
-This slow-paced hands-on course is designed for absolute beginners who want to start using containers and Nextflow pipelines to achieve reproducibility of data analysis. Linux containers allow the storage of code and applications in an host-independent lightweight environment. They became a fast and popular way to share and deploy applications in different environments. Nextflow is a powerful polyglot workflow language that, coupled with Docker and Singularity containers, provides a robust, scalable and reproducible way to run computational pipelines.
+# Welcome and about the course
 
+This slow-paced hands-on course is designed for absolute beginners who want to start using containers and Nextflow pipelines to achieve reproducibility of data analysis. <br>
+Linux containers allow the storage of code and applications in an host-independent lightweight environment. They became a fast and popular way to share and deploy applications in different environments. <br>
+Nextflow is a powerful polyglot workflow language that, coupled with Docker and Singularity containers, provides a robust, scalable and reproducible way to run computational pipelines.
 
-## Outline
+## Meet the instructors
+
+## About the course
+
+### Outline
+
 The 4-day Containers and Nextflow course will train participants to use and build Docker and Singularity containers and Nextflow pipelines.
 It is designed to provide trainees with short and frequent hands-on sessions, while keeping theoretical sessions to a minimum.
 The course will be fully virtual via the Zoom platform.
 Trainees will work in a dedicated AWS Cloud9 environment.
 
 
-## Learning objectives
-About containers:
+### Learning objectives
+
+About Linux containers:
 
 - Locate and fetch Docker/Singularity images from dedicated repositories.
 - Execute/Run a Docker/Singularity container from the command line.
@@ -42,7 +50,8 @@ About Nextflow:
 - Develop a Nextflow pipeline from scratch.
 - Run pipeline in diverse computational environments (local, HPC, cloud )
 
-## Prerequisite, Dates, time, location
+### Prerequisite, Dates, time, location
+
 Being comfortable working with the CLI (command-line interface) in a Linux-based environment. 
 Applicants are not expected to have used neither Linux containers nor Nextflow workflows before.
 
@@ -55,8 +64,12 @@ Applicants are not expected to have used neither Linux containers nor Nextflow w
   - Afternoon coffee break: 3:30-4:00pm
 - Location: virtual, via Zoom.
 
-## Linux Containers
-### Day 1: Docker
+## Program
+
+### May 3-4: Containers
+
+#### Day 1: Docker
+
 - Containers: introduction and history.
 - Docker hub: find existing containers.
 - Fetch (and build) an image from public registries (Docker Hub, Quay.io, etc.)
@@ -70,7 +83,8 @@ Applicants are not expected to have used neither Linux containers nor Nextflow w
 - Write a Docker recipe and build an image from it.
 - Upload image to registries.
 
-### Day 2: Singularity
+#### Day 2: Singularity
+
 - Singularity versus Docker.
  - Differences, pros and cons for each system. 
 - Fetch (and build) Singularity images.
@@ -81,8 +95,10 @@ Applicants are not expected to have used neither Linux containers nor Nextflow w
 - Singularity build recipes.
 - Advanced features: services, etc.
 
-## Nextflow
-### Day 3: fetch, understand, run, modify
+### May 10-11: Nextflow
+
+#### Day 3: fetch, understand, run, modify
+
 - Nextflow pipeline repositories.
   - hands-on: fetch X pipeline.
 - Run an existing Nextflow pipeline.
@@ -92,7 +108,8 @@ Applicants are not expected to have used neither Linux containers nor Nextflow w
 - Nextflow configuration files.
 - Modify and run a Nextflow pipeline.
 
-### Day 4: Write and share
+#### Day 4: Write and share
+
 - Write Nextflow pipeline from scratch.
 - Run Nextflow with containers.
 - Choose either Docker or Singularity.
@@ -100,8 +117,5 @@ Applicants are not expected to have used neither Linux containers nor Nextflow w
   - Definition of computing requirements and queues.
   - Profiles.
 - Share Nextflow pipelines and good practices. 
-
-
-
 
 
