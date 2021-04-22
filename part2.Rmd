@@ -15,7 +15,7 @@ knitr::include_graphics('docs/images/nextf_groovy.png')
 
 Nextflow has been currently upgrade from DLS1 version to DLS2. In this course we will use exclusively DLS2.  
 
-## What is Nextflow for?
+**What is Nextflow for?**
 It is for making pipelines without caring about parallelization, dependencies, intermediate file names, data structures, handling exceptions, resuming executions etc. It was published in [Nature Biotechnology in 2017](https://pubmed.ncbi.nlm.nih.gov/28398311/).
 
 
@@ -42,7 +42,7 @@ Some pipelines written in Nextflow are being used for SARS-Cov-2 analysis like:
 
 etc. 
 
-## Main advantages:
+**Main advantages**
 
 - Fast prototyping
 
@@ -68,7 +68,7 @@ Nextflow is based on the dataflow programming model which simplifies writing com
 
 All the intermediate results produced during the pipeline execution are automatically tracked. For each process a temporary folder is created and is cached (or not) once resuming an execution.
 
-## Workflow structure
+## Workflow structure and Installation
 The workflows can be repesented as graphs where the nodes are the **processes** and the edges are the **channels**.
 The **processes** are block of code that can be executed such as scripts or programs, while the **channels** are asynchronous queue able to connect processess among them via input / output.
 
@@ -79,7 +79,7 @@ knitr::include_graphics('docs/images/wf_example.png')
 
 Each process is independent from the other and can be run in parallel depending on the number of elements in a channel. In the previous example the processes A, B and C can be run in parallel and only at their end the process D is triggered.
 
-## Installation
+### Installation
 We need at least Java version 8.
 
 ```{bash, eval=FALSE, echo=TRUE}
@@ -221,7 +221,7 @@ my_fyles.view()
 
 </details>
 
-### Processes
+## Processes
 
 Let's add now a process to our previous script test.nf:
 
@@ -994,7 +994,7 @@ params {
 
 As you can see we indicates the pipeline parameters that can be overridden by using **--reads** and **--email**. This is not mandatory but I found quite useful to modify this file instead of using very long command lines with tons of **--something**.
 
-## Publishing final results
+### Publishing final results
 
 After running the script you see two new folders named **ouptut_fastqc** and **ouptut_fastqc** that contain the result of the pipeline.
 We can indicate which process and which output can be considered the final output of the pipeline by using the **publishDir** directive that has to be specified at the beginning of a process.
