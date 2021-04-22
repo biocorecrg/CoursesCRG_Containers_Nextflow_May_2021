@@ -14,7 +14,9 @@ day-4-write-and-share
 containers
 nextflow
 what-is-nextflow
-workflow-structure-and-installation
+what-is-nextflow-for
+main-advantages
+workflow-structure
 installation
 first-scripts
 channels
