@@ -166,12 +166,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.2.1" data-path="using-existing-images.html"><a href="using-existing-images.html#explore-docker-hub"><i class="fa fa-check"></i><b>3.2.1</b> Explore Docker hub</a></li>
 <li class="chapter" data-level="3.2.2" data-path="using-existing-images.html"><a href="using-existing-images.html#docker-pull-import-image"><i class="fa fa-check"></i><b>3.2.2</b> docker pull: import image</a></li>
 <li class="chapter" data-level="3.2.3" data-path="using-existing-images.html"><a href="using-existing-images.html#biocontainers"><i class="fa fa-check"></i><b>3.2.3</b> Biocontainers</a></li>
-<li class="chapter" data-level="3.2.4" data-path="using-existing-images.html"><a href="using-existing-images.html#docker-images-list-images"><i class="fa fa-check"></i><b>3.2.4</b> docker images: list images</a></li>
-<li class="chapter" data-level="3.2.5" data-path="using-existing-images.html"><a href="using-existing-images.html#docker-run-run-image-i.e.-start-a-container"><i class="fa fa-check"></i><b>3.2.5</b> docker run: run image, i.e. start a container</a></li>
-<li class="chapter" data-level="3.2.6" data-path="using-existing-images.html"><a href="using-existing-images.html#docker-ps-check-containers-status"><i class="fa fa-check"></i><b>3.2.6</b> docker ps: check containers status</a></li>
-<li class="chapter" data-level="3.2.7" data-path="using-existing-images.html"><a href="using-existing-images.html#docker-exec-execute-process-in-running-container"><i class="fa fa-check"></i><b>3.2.7</b> docker exec: execute process in running container</a></li>
-<li class="chapter" data-level="3.2.8" data-path="using-existing-images.html"><a href="using-existing-images.html#docker-stop-start-restart-actions-on-container"><i class="fa fa-check"></i><b>3.2.8</b> docker stop, start, restart: actions on container</a></li>
-<li class="chapter" data-level="3.2.9" data-path="using-existing-images.html"><a href="using-existing-images.html#docker-rm-docker-rmi-clean-up"><i class="fa fa-check"></i><b>3.2.9</b> docker rm, docker rmi: clean up!</a></li>
+<li class="chapter" data-level="3.2.4" data-path="using-existing-images.html"><a href="using-existing-images.html#docker-run-run-image-i.e.-start-a-container"><i class="fa fa-check"></i><b>3.2.4</b> docker run: run image, i.e. start a container</a></li>
+<li class="chapter" data-level="3.2.5" data-path="using-existing-images.html"><a href="using-existing-images.html#docker-ps-check-containers-status"><i class="fa fa-check"></i><b>3.2.5</b> docker ps: check containers status</a></li>
+<li class="chapter" data-level="3.2.6" data-path="using-existing-images.html"><a href="using-existing-images.html#docker-exec-execute-process-in-running-container"><i class="fa fa-check"></i><b>3.2.6</b> docker exec: execute process in running container</a></li>
+<li class="chapter" data-level="3.2.7" data-path="using-existing-images.html"><a href="using-existing-images.html#docker-stop-start-restart-actions-on-container"><i class="fa fa-check"></i><b>3.2.7</b> docker stop, start, restart: actions on container</a></li>
+<li class="chapter" data-level="3.2.8" data-path="using-existing-images.html"><a href="using-existing-images.html#docker-rm-docker-rmi-clean-up"><i class="fa fa-check"></i><b>3.2.8</b> docker rm, docker rmi: clean up!</a></li>
 </ul></li>
 <li class="chapter" data-level="3.3" data-path="docker-recipes.html"><a href="docker-recipes.html"><i class="fa fa-check"></i><b>3.3</b> Docker recipes</a><ul>
 <li class="chapter" data-level="3.3.1" data-path="docker-recipes.html"><a href="docker-recipes.html#building-recipes"><i class="fa fa-check"></i><b>3.3.1</b> Building recipes</a></li>
@@ -264,34 +263,34 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="processes" class="section level2">
 <h2><span class="header-section-number">5.8</span> Processes</h2>
 <p>Let’s add now a process to our previous script test.nf:</p>
-<div class="sourceCode" id="cb81"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb81-1"><a href="processes.html#cb81-1"></a>#!/usr/bin/env nextflow</span>
-<span id="cb81-2"><a href="processes.html#cb81-2"></a></span>
-<span id="cb81-3"><a href="processes.html#cb81-3"></a>nextflow.<span class="fu">enable</span>.<span class="fu">dsl</span>=<span class="dv">2</span></span>
-<span id="cb81-4"><a href="processes.html#cb81-4"></a></span>
-<span id="cb81-5"><a href="processes.html#cb81-5"></a>str = <span class="bu">Channel</span>.<span class="fu">from</span>(&#39;hello&#39;, &#39;hola&#39;, &#39;bonjour&#39;)</span>
-<span id="cb81-6"><a href="processes.html#cb81-6"></a></span>
-<span id="cb81-7"><a href="processes.html#cb81-7"></a><span class="co">/*</span></span>
-<span id="cb81-8"><a href="processes.html#cb81-8"></a><span class="co"> * Creates a process which receive an input channel containing values</span></span>
-<span id="cb81-9"><a href="processes.html#cb81-9"></a><span class="co"> * Each value emitted by the channel triggers the execution</span></span>
-<span id="cb81-10"><a href="processes.html#cb81-10"></a><span class="co"> * of the process. The process stdout is caputured and send over</span></span>
-<span id="cb81-11"><a href="processes.html#cb81-11"></a><span class="co"> * the another channel.</span></span>
-<span id="cb81-12"><a href="processes.html#cb81-12"></a><span class="co"> */</span></span>
-<span id="cb81-13"><a href="processes.html#cb81-13"></a></span>
-<span id="cb81-14"><a href="processes.html#cb81-14"></a>process printHello {</span>
-<span id="cb81-15"><a href="processes.html#cb81-15"></a></span>
-<span id="cb81-16"><a href="processes.html#cb81-16"></a>   tag { str_in } <span class="co">// this is for displaying the content of `str_in` in the log file</span></span>
-<span id="cb81-17"><a href="processes.html#cb81-17"></a></span>
-<span id="cb81-18"><a href="processes.html#cb81-18"></a>   input:        </span>
-<span id="cb81-19"><a href="processes.html#cb81-19"></a>   val str_in</span>
-<span id="cb81-20"><a href="processes.html#cb81-20"></a></span>
-<span id="cb81-21"><a href="processes.html#cb81-21"></a>   output:        </span>
-<span id="cb81-22"><a href="processes.html#cb81-22"></a>   stdout</span>
-<span id="cb81-23"><a href="processes.html#cb81-23"></a></span>
-<span id="cb81-24"><a href="processes.html#cb81-24"></a>   script:        </span>
-<span id="cb81-25"><a href="processes.html#cb81-25"></a>   <span class="st">&quot;&quot;&quot;</span></span>
-<span id="cb81-26"><a href="processes.html#cb81-26"></a>   echo ${str_in} in Italian is ciao</span>
-<span id="cb81-27"><a href="processes.html#cb81-27"></a>   <span class="st">&quot;&quot;&quot;</span></span>
-<span id="cb81-28"><a href="processes.html#cb81-28"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb83"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb83-1"><a href="processes.html#cb83-1"></a>#!/usr/bin/env nextflow</span>
+<span id="cb83-2"><a href="processes.html#cb83-2"></a></span>
+<span id="cb83-3"><a href="processes.html#cb83-3"></a>nextflow.<span class="fu">enable</span>.<span class="fu">dsl</span>=<span class="dv">2</span></span>
+<span id="cb83-4"><a href="processes.html#cb83-4"></a></span>
+<span id="cb83-5"><a href="processes.html#cb83-5"></a>str = <span class="bu">Channel</span>.<span class="fu">from</span>(&#39;hello&#39;, &#39;hola&#39;, &#39;bonjour&#39;)</span>
+<span id="cb83-6"><a href="processes.html#cb83-6"></a></span>
+<span id="cb83-7"><a href="processes.html#cb83-7"></a><span class="co">/*</span></span>
+<span id="cb83-8"><a href="processes.html#cb83-8"></a><span class="co"> * Creates a process which receive an input channel containing values</span></span>
+<span id="cb83-9"><a href="processes.html#cb83-9"></a><span class="co"> * Each value emitted by the channel triggers the execution</span></span>
+<span id="cb83-10"><a href="processes.html#cb83-10"></a><span class="co"> * of the process. The process stdout is caputured and send over</span></span>
+<span id="cb83-11"><a href="processes.html#cb83-11"></a><span class="co"> * the another channel.</span></span>
+<span id="cb83-12"><a href="processes.html#cb83-12"></a><span class="co"> */</span></span>
+<span id="cb83-13"><a href="processes.html#cb83-13"></a></span>
+<span id="cb83-14"><a href="processes.html#cb83-14"></a>process printHello {</span>
+<span id="cb83-15"><a href="processes.html#cb83-15"></a></span>
+<span id="cb83-16"><a href="processes.html#cb83-16"></a>   tag { str_in } <span class="co">// this is for displaying the content of `str_in` in the log file</span></span>
+<span id="cb83-17"><a href="processes.html#cb83-17"></a></span>
+<span id="cb83-18"><a href="processes.html#cb83-18"></a>   input:        </span>
+<span id="cb83-19"><a href="processes.html#cb83-19"></a>   val str_in</span>
+<span id="cb83-20"><a href="processes.html#cb83-20"></a></span>
+<span id="cb83-21"><a href="processes.html#cb83-21"></a>   output:        </span>
+<span id="cb83-22"><a href="processes.html#cb83-22"></a>   stdout</span>
+<span id="cb83-23"><a href="processes.html#cb83-23"></a></span>
+<span id="cb83-24"><a href="processes.html#cb83-24"></a>   script:        </span>
+<span id="cb83-25"><a href="processes.html#cb83-25"></a>   <span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb83-26"><a href="processes.html#cb83-26"></a>   echo ${str_in} in Italian is ciao</span>
+<span id="cb83-27"><a href="processes.html#cb83-27"></a>   <span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb83-28"><a href="processes.html#cb83-28"></a>}</span></code></pre></div>
 <p>The process can be seen as a function and is composed by:
 - An <strong>input</strong> part where the input channels are defined
 - An <strong>output</strong> part where we indicates what to store as a result that will be sent to other processes or published as final result

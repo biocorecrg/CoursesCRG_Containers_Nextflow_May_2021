@@ -166,12 +166,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.2.1" data-path="using-existing-images.html"><a href="using-existing-images.html#explore-docker-hub"><i class="fa fa-check"></i><b>3.2.1</b> Explore Docker hub</a></li>
 <li class="chapter" data-level="3.2.2" data-path="using-existing-images.html"><a href="using-existing-images.html#docker-pull-import-image"><i class="fa fa-check"></i><b>3.2.2</b> docker pull: import image</a></li>
 <li class="chapter" data-level="3.2.3" data-path="using-existing-images.html"><a href="using-existing-images.html#biocontainers"><i class="fa fa-check"></i><b>3.2.3</b> Biocontainers</a></li>
-<li class="chapter" data-level="3.2.4" data-path="using-existing-images.html"><a href="using-existing-images.html#docker-images-list-images"><i class="fa fa-check"></i><b>3.2.4</b> docker images: list images</a></li>
-<li class="chapter" data-level="3.2.5" data-path="using-existing-images.html"><a href="using-existing-images.html#docker-run-run-image-i.e.-start-a-container"><i class="fa fa-check"></i><b>3.2.5</b> docker run: run image, i.e. start a container</a></li>
-<li class="chapter" data-level="3.2.6" data-path="using-existing-images.html"><a href="using-existing-images.html#docker-ps-check-containers-status"><i class="fa fa-check"></i><b>3.2.6</b> docker ps: check containers status</a></li>
-<li class="chapter" data-level="3.2.7" data-path="using-existing-images.html"><a href="using-existing-images.html#docker-exec-execute-process-in-running-container"><i class="fa fa-check"></i><b>3.2.7</b> docker exec: execute process in running container</a></li>
-<li class="chapter" data-level="3.2.8" data-path="using-existing-images.html"><a href="using-existing-images.html#docker-stop-start-restart-actions-on-container"><i class="fa fa-check"></i><b>3.2.8</b> docker stop, start, restart: actions on container</a></li>
-<li class="chapter" data-level="3.2.9" data-path="using-existing-images.html"><a href="using-existing-images.html#docker-rm-docker-rmi-clean-up"><i class="fa fa-check"></i><b>3.2.9</b> docker rm, docker rmi: clean up!</a></li>
+<li class="chapter" data-level="3.2.4" data-path="using-existing-images.html"><a href="using-existing-images.html#docker-run-run-image-i.e.-start-a-container"><i class="fa fa-check"></i><b>3.2.4</b> docker run: run image, i.e. start a container</a></li>
+<li class="chapter" data-level="3.2.5" data-path="using-existing-images.html"><a href="using-existing-images.html#docker-ps-check-containers-status"><i class="fa fa-check"></i><b>3.2.5</b> docker ps: check containers status</a></li>
+<li class="chapter" data-level="3.2.6" data-path="using-existing-images.html"><a href="using-existing-images.html#docker-exec-execute-process-in-running-container"><i class="fa fa-check"></i><b>3.2.6</b> docker exec: execute process in running container</a></li>
+<li class="chapter" data-level="3.2.7" data-path="using-existing-images.html"><a href="using-existing-images.html#docker-stop-start-restart-actions-on-container"><i class="fa fa-check"></i><b>3.2.7</b> docker stop, start, restart: actions on container</a></li>
+<li class="chapter" data-level="3.2.8" data-path="using-existing-images.html"><a href="using-existing-images.html#docker-rm-docker-rmi-clean-up"><i class="fa fa-check"></i><b>3.2.8</b> docker rm, docker rmi: clean up!</a></li>
 </ul></li>
 <li class="chapter" data-level="3.3" data-path="docker-recipes.html"><a href="docker-recipes.html"><i class="fa fa-check"></i><b>3.3</b> Docker recipes</a><ul>
 <li class="chapter" data-level="3.3.1" data-path="docker-recipes.html"><a href="docker-recipes.html#building-recipes"><i class="fa fa-check"></i><b>3.3.1</b> Building recipes</a></li>
@@ -264,7 +263,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="reporting-and-graphical-interface" class="section level2">
 <h2><span class="header-section-number">6.8</span> Reporting and graphical interface</h2>
 <p>Nextflow has an embedded function for reporting a number of informations about the resources needed by each job and the timing. Just adding a parameter will give you a nice html report.</p>
-<div class="sourceCode" id="cb131"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb131-1"><a href="reporting-and-graphical-interface.html#cb131-1"></a>nextflow run test5.<span class="fu">nf</span> -with-docker -bg -with-report &gt; log</span></code></pre></div>
+<div class="sourceCode" id="cb133"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb133-1"><a href="reporting-and-graphical-interface.html#cb133-1"></a>nextflow run test5.<span class="fu">nf</span> -with-docker -bg -with-report &gt; log</span></code></pre></div>
 <p>Nextflow Tower is an open source monitoring and managing platform for Nextflow workflows. There are two versions:
 - Open source for monitoring of single pipelines
 - Commercial one for workflow management, monitoring and resource optimisation.</p>
@@ -273,21 +272,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>We select the email for receiving the instructions and the token to be used for the pipeline.</p>
 <p>So we check the email:</p>
 <p>We then follow the instructions exporting two environmental variables:</p>
-<div class="sourceCode" id="cb132"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb132-1"><a href="reporting-and-graphical-interface.html#cb132-1"></a><span class="bu">export</span> <span class="va">TOWER_ACCESS_TOKEN=</span>*******<span class="va">YOUR</span>***<span class="va">TOKEN</span>*****<span class="va">HERE</span>*******</span>
-<span id="cb132-2"><a href="reporting-and-graphical-interface.html#cb132-2"></a><span class="bu">export</span> <span class="va">NXF_VER=</span>20.09.1-edge </span></code></pre></div>
+<div class="sourceCode" id="cb134"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb134-1"><a href="reporting-and-graphical-interface.html#cb134-1"></a><span class="bu">export</span> <span class="va">TOWER_ACCESS_TOKEN=</span>*******<span class="va">YOUR</span>***<span class="va">TOKEN</span>*****<span class="va">HERE</span>*******</span>
+<span id="cb134-2"><a href="reporting-and-graphical-interface.html#cb134-2"></a><span class="bu">export</span> <span class="va">NXF_VER=</span>20.09.1-edge </span></code></pre></div>
 <p>we then launch the pipeline:</p>
-<div class="sourceCode" id="cb133"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb133-1"><a href="reporting-and-graphical-interface.html#cb133-1"></a><span class="ex">nextflow</span> run test5.nf -with-singularity -with-tower -bg <span class="op">&gt;</span> log</span>
-<span id="cb133-2"><a href="reporting-and-graphical-interface.html#cb133-2"></a></span>
-<span id="cb133-3"><a href="reporting-and-graphical-interface.html#cb133-3"></a></span>
-<span id="cb133-4"><a href="reporting-and-graphical-interface.html#cb133-4"></a><span class="ex">CAPSULE</span>: Downloading dependency io.nextflow:nf-tower:jar:20.09.1-edge</span>
-<span id="cb133-5"><a href="reporting-and-graphical-interface.html#cb133-5"></a><span class="ex">CAPSULE</span>: Downloading dependency org.codehaus.groovy:groovy-nio:jar:3.0.5</span>
-<span id="cb133-6"><a href="reporting-and-graphical-interface.html#cb133-6"></a><span class="ex">CAPSULE</span>: Downloading dependency io.nextflow:nextflow:jar:20.09.1-edge</span>
-<span id="cb133-7"><a href="reporting-and-graphical-interface.html#cb133-7"></a><span class="ex">CAPSULE</span>: Downloading dependency io.nextflow:nf-httpfs:jar:20.09.1-edge</span>
-<span id="cb133-8"><a href="reporting-and-graphical-interface.html#cb133-8"></a><span class="ex">CAPSULE</span>: Downloading dependency org.codehaus.groovy:groovy-json:jar:3.0.5</span>
-<span id="cb133-9"><a href="reporting-and-graphical-interface.html#cb133-9"></a><span class="ex">CAPSULE</span>: Downloading dependency org.codehaus.groovy:groovy:jar:3.0.5</span>
-<span id="cb133-10"><a href="reporting-and-graphical-interface.html#cb133-10"></a><span class="ex">CAPSULE</span>: Downloading dependency io.nextflow:nf-amazon:jar:20.09.1-edge</span>
-<span id="cb133-11"><a href="reporting-and-graphical-interface.html#cb133-11"></a><span class="ex">CAPSULE</span>: Downloading dependency org.codehaus.groovy:groovy-templates:jar:3.0.5</span>
-<span id="cb133-12"><a href="reporting-and-graphical-interface.html#cb133-12"></a><span class="ex">CAPSULE</span>: Downloading dependency org.codehaus.groovy:groovy-xml:jar:3.0.5</span></code></pre></div>
+<div class="sourceCode" id="cb135"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb135-1"><a href="reporting-and-graphical-interface.html#cb135-1"></a><span class="ex">nextflow</span> run test5.nf -with-singularity -with-tower -bg <span class="op">&gt;</span> log</span>
+<span id="cb135-2"><a href="reporting-and-graphical-interface.html#cb135-2"></a></span>
+<span id="cb135-3"><a href="reporting-and-graphical-interface.html#cb135-3"></a></span>
+<span id="cb135-4"><a href="reporting-and-graphical-interface.html#cb135-4"></a><span class="ex">CAPSULE</span>: Downloading dependency io.nextflow:nf-tower:jar:20.09.1-edge</span>
+<span id="cb135-5"><a href="reporting-and-graphical-interface.html#cb135-5"></a><span class="ex">CAPSULE</span>: Downloading dependency org.codehaus.groovy:groovy-nio:jar:3.0.5</span>
+<span id="cb135-6"><a href="reporting-and-graphical-interface.html#cb135-6"></a><span class="ex">CAPSULE</span>: Downloading dependency io.nextflow:nextflow:jar:20.09.1-edge</span>
+<span id="cb135-7"><a href="reporting-and-graphical-interface.html#cb135-7"></a><span class="ex">CAPSULE</span>: Downloading dependency io.nextflow:nf-httpfs:jar:20.09.1-edge</span>
+<span id="cb135-8"><a href="reporting-and-graphical-interface.html#cb135-8"></a><span class="ex">CAPSULE</span>: Downloading dependency org.codehaus.groovy:groovy-json:jar:3.0.5</span>
+<span id="cb135-9"><a href="reporting-and-graphical-interface.html#cb135-9"></a><span class="ex">CAPSULE</span>: Downloading dependency org.codehaus.groovy:groovy:jar:3.0.5</span>
+<span id="cb135-10"><a href="reporting-and-graphical-interface.html#cb135-10"></a><span class="ex">CAPSULE</span>: Downloading dependency io.nextflow:nf-amazon:jar:20.09.1-edge</span>
+<span id="cb135-11"><a href="reporting-and-graphical-interface.html#cb135-11"></a><span class="ex">CAPSULE</span>: Downloading dependency org.codehaus.groovy:groovy-templates:jar:3.0.5</span>
+<span id="cb135-12"><a href="reporting-and-graphical-interface.html#cb135-12"></a><span class="ex">CAPSULE</span>: Downloading dependency org.codehaus.groovy:groovy-xml:jar:3.0.5</span></code></pre></div>
 <p>We finally go to the tower website again:</p>
 
 </div>

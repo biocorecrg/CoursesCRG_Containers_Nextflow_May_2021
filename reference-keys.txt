@@ -26,7 +26,6 @@ using-existing-images
 explore-docker-hub
 docker-pull-import-image
 biocontainers
-docker-images-list-images
 docker-run-run-image-i.e.-start-a-container
 docker-ps-check-containers-status
 docker-exec-execute-process-in-running-container
