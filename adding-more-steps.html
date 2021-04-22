@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>4.5 Adding more steps | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines</title>
-  <meta name="description" content="4.5 Adding more steps | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <title>6.5 Adding more steps | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines</title>
+  <meta name="description" content="6.5 Adding more steps | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="4.5 Adding more steps | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
+  <meta property="og:title" content="6.5 Adding more steps | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="4.5 Adding more steps | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
+  <meta name="twitter:title" content="6.5 Adding more steps | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
   
   
   
@@ -50,6 +50,8 @@
 
 
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -117,6 +119,7 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
@@ -145,33 +148,98 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.3.2" data-path="program.html"><a href="program.html#may-10-11-nextflow"><i class="fa fa-check"></i><b>1.3.2</b> May 10-11: Nextflow</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="containers.html"><a href="containers.html"><i class="fa fa-check"></i><b>2</b> Containers</a></li>
-<li class="chapter" data-level="3" data-path="nextflow-day-1.html"><a href="nextflow-day-1.html"><i class="fa fa-check"></i><b>3</b> Nextflow day 1</a><ul>
-<li class="chapter" data-level="3.1" data-path="what-is-nextflow.html"><a href="what-is-nextflow.html"><i class="fa fa-check"></i><b>3.1</b> What is Nextflow?</a></li>
-<li class="chapter" data-level="3.2" data-path="what-is-nextflow-for.html"><a href="what-is-nextflow-for.html"><i class="fa fa-check"></i><b>3.2</b> What is Nextflow for?</a></li>
-<li class="chapter" data-level="3.3" data-path="main-advantages.html"><a href="main-advantages.html"><i class="fa fa-check"></i><b>3.3</b> Main advantages</a></li>
-<li class="chapter" data-level="3.4" data-path="workflow-structure.html"><a href="workflow-structure.html"><i class="fa fa-check"></i><b>3.4</b> Workflow structure</a></li>
-<li class="chapter" data-level="3.5" data-path="installation.html"><a href="installation.html"><i class="fa fa-check"></i><b>3.5</b> Installation</a></li>
-<li class="chapter" data-level="3.6" data-path="channels.html"><a href="channels.html"><i class="fa fa-check"></i><b>3.6</b> Channels</a></li>
-<li class="chapter" data-level="3.7" data-path="exercise-1.html"><a href="exercise-1.html"><i class="fa fa-check"></i><b>3.7</b> EXERCISE 1</a></li>
-<li class="chapter" data-level="3.8" data-path="processes.html"><a href="processes.html"><i class="fa fa-check"></i><b>3.8</b> Processes</a></li>
-<li class="chapter" data-level="3.9" data-path="workflow.html"><a href="workflow.html"><i class="fa fa-check"></i><b>3.9</b> Workflow</a></li>
-<li class="chapter" data-level="3.10" data-path="nextflow-log.html"><a href="nextflow-log.html"><i class="fa fa-check"></i><b>3.10</b> Nextflow log</a></li>
-<li class="chapter" data-level="3.11" data-path="exercise-2.html"><a href="exercise-2.html"><i class="fa fa-check"></i><b>3.11</b> EXERCISE 2</a></li>
-<li class="chapter" data-level="3.12" data-path="more-complex-scripts.html"><a href="more-complex-scripts.html"><i class="fa fa-check"></i><b>3.12</b> More complex scripts</a></li>
-<li class="chapter" data-level="3.13" data-path="exercise-3.html"><a href="exercise-3.html"><i class="fa fa-check"></i><b>3.13</b> EXERCISE 3</a></li>
+<li class="chapter" data-level="2" data-path="introduction-to-containers.html"><a href="introduction-to-containers.html"><i class="fa fa-check"></i><b>2</b> Introduction to containers</a><ul>
+<li class="chapter" data-level="2.1" data-path="what-are-containers.html"><a href="what-are-containers.html"><i class="fa fa-check"></i><b>2.1</b> What are containers ?</a></li>
+<li class="chapter" data-level="2.2" data-path="virtual-machines-or-containers.html"><a href="virtual-machines-or-containers.html"><i class="fa fa-check"></i><b>2.2</b> Virtual machines or containers ?</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="virtual-machines-or-containers.html"><a href="virtual-machines-or-containers.html#virtualisation"><i class="fa fa-check"></i><b>2.2.1</b> Virtualisation</a></li>
+<li class="chapter" data-level="2.2.2" data-path="virtual-machines-or-containers.html"><a href="virtual-machines-or-containers.html#containerisation-aka-lightweight-virtualisation"><i class="fa fa-check"></i><b>2.2.2</b> Containerisation (aka lightweight virtualisation)</a></li>
+<li class="chapter" data-level="2.2.3" data-path="virtual-machines-or-containers.html"><a href="virtual-machines-or-containers.html#virtual-machines-vs-containers"><i class="fa fa-check"></i><b>2.2.3</b> Virtual machines vs containers</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="nextflow-day-2.html"><a href="nextflow-day-2.html"><i class="fa fa-check"></i><b>4</b> Nextflow day 2</a><ul>
-<li class="chapter" data-level="4.1" data-path="resuming-your-pipeline.html"><a href="resuming-your-pipeline.html"><i class="fa fa-check"></i><b>4.1</b> Resuming your pipeline</a></li>
-<li class="chapter" data-level="4.2" data-path="decoupling-resources-parameters-and-nextflow-script.html"><a href="decoupling-resources-parameters-and-nextflow-script.html"><i class="fa fa-check"></i><b>4.2</b> Decoupling resources, parameters and nextflow script</a><ul>
-<li class="chapter" data-level="4.2.1" data-path="decoupling-resources-parameters-and-nextflow-script.html"><a href="decoupling-resources-parameters-and-nextflow-script.html#publishing-final-results"><i class="fa fa-check"></i><b>4.2.1</b> Publishing final results</a></li>
+<li class="chapter" data-level="2.3" data-path="history-of-containers.html"><a href="history-of-containers.html"><i class="fa fa-check"></i><b>2.3</b> History of containers</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="history-of-containers.html"><a href="history-of-containers.html#chroot"><i class="fa fa-check"></i><b>2.3.1</b> chroot</a></li>
+<li class="chapter" data-level="2.3.2" data-path="history-of-containers.html"><a href="history-of-containers.html#additions-in-linux-kernel"><i class="fa fa-check"></i><b>2.3.2</b> Additions in Linux kernel</a></li>
 </ul></li>
-<li class="chapter" data-level="4.3" data-path="adding-a-help-section-for-the-whole-pipeline.html"><a href="adding-a-help-section-for-the-whole-pipeline.html"><i class="fa fa-check"></i><b>4.3</b> Adding a help section for the whole pipeline</a></li>
-<li class="chapter" data-level="4.4" data-path="using-singularity.html"><a href="using-singularity.html"><i class="fa fa-check"></i><b>4.4</b> Using Singularity</a></li>
-<li class="chapter" data-level="4.5" data-path="adding-more-steps.html"><a href="adding-more-steps.html"><i class="fa fa-check"></i><b>4.5</b> Adding more steps</a></li>
-<li class="chapter" data-level="4.6" data-path="modules-and-re-usage-of-the-code.html"><a href="modules-and-re-usage-of-the-code.html"><i class="fa fa-check"></i><b>4.6</b> Modules and re-usage of the code</a></li>
-<li class="chapter" data-level="4.7" data-path="exercise-4.html"><a href="exercise-4.html"><i class="fa fa-check"></i><b>4.7</b> EXERCISE 4</a></li>
-<li class="chapter" data-level="4.8" data-path="reporting-and-graphical-interface.html"><a href="reporting-and-graphical-interface.html"><i class="fa fa-check"></i><b>4.8</b> Reporting and graphical interface</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="docker.html"><a href="docker.html"><i class="fa fa-check"></i><b>3</b> Docker</a><ul>
+<li class="chapter" data-level="3.1" data-path="introduction-to-docker.html"><a href="introduction-to-docker.html"><i class="fa fa-check"></i><b>3.1</b> Introduction to Docker</a></li>
+<li class="chapter" data-level="3.2" data-path="using-existing-images.html"><a href="using-existing-images.html"><i class="fa fa-check"></i><b>3.2</b> Using existing images</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="using-existing-images.html"><a href="using-existing-images.html#explore-docker-hub"><i class="fa fa-check"></i><b>3.2.1</b> Explore Docker hub</a></li>
+<li class="chapter" data-level="3.2.2" data-path="using-existing-images.html"><a href="using-existing-images.html#docker-pull-import-image"><i class="fa fa-check"></i><b>3.2.2</b> docker pull: import image</a></li>
+<li class="chapter" data-level="3.2.3" data-path="using-existing-images.html"><a href="using-existing-images.html#biocontainers"><i class="fa fa-check"></i><b>3.2.3</b> Biocontainers</a></li>
+<li class="chapter" data-level="3.2.4" data-path="using-existing-images.html"><a href="using-existing-images.html#docker-images-list-images"><i class="fa fa-check"></i><b>3.2.4</b> docker images: list images</a></li>
+<li class="chapter" data-level="3.2.5" data-path="using-existing-images.html"><a href="using-existing-images.html#docker-run-run-image-i.e.-start-a-container"><i class="fa fa-check"></i><b>3.2.5</b> docker run: run image, i.e. start a container</a></li>
+<li class="chapter" data-level="3.2.6" data-path="using-existing-images.html"><a href="using-existing-images.html#docker-ps-check-containers-status"><i class="fa fa-check"></i><b>3.2.6</b> docker ps: check containers status</a></li>
+<li class="chapter" data-level="3.2.7" data-path="using-existing-images.html"><a href="using-existing-images.html#docker-exec-execute-process-in-running-container"><i class="fa fa-check"></i><b>3.2.7</b> docker exec: execute process in running container</a></li>
+<li class="chapter" data-level="3.2.8" data-path="using-existing-images.html"><a href="using-existing-images.html#docker-stop-start-restart-actions-on-container"><i class="fa fa-check"></i><b>3.2.8</b> docker stop, start, restart: actions on container</a></li>
+<li class="chapter" data-level="3.2.9" data-path="using-existing-images.html"><a href="using-existing-images.html#docker-rm-docker-rmi-clean-up"><i class="fa fa-check"></i><b>3.2.9</b> docker rm, docker rmi: clean up!</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="docker-recipes.html"><a href="docker-recipes.html"><i class="fa fa-check"></i><b>3.3</b> Docker recipes</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="docker-recipes.html"><a href="docker-recipes.html#building-recipes"><i class="fa fa-check"></i><b>3.3.1</b> Building recipes</a></li>
+<li class="chapter" data-level="3.3.2" data-path="docker-recipes.html"><a href="docker-recipes.html#docker-build"><i class="fa fa-check"></i><b>3.3.2</b> docker build</a></li>
+<li class="chapter" data-level="3.3.3" data-path="docker-recipes.html"><a href="docker-recipes.html#docker-tag"><i class="fa fa-check"></i><b>3.3.3</b> docker tag</a></li>
+<li class="chapter" data-level="3.3.4" data-path="docker-recipes.html"><a href="docker-recipes.html#build-cache"><i class="fa fa-check"></i><b>3.3.4</b> Build cache</a></li>
+<li class="chapter" data-level="3.3.5" data-path="docker-recipes.html"><a href="docker-recipes.html#more-advanced-image-building"><i class="fa fa-check"></i><b>3.3.5</b> More advanced image building</a></li>
+<li class="chapter" data-level="3.3.6" data-path="docker-recipes.html"><a href="docker-recipes.html#additional-commands"><i class="fa fa-check"></i><b>3.3.6</b> Additional commands</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="volumes.html"><a href="volumes.html"><i class="fa fa-check"></i><b>3.4</b> Volumes</a></li>
+<li class="chapter" data-level="3.5" data-path="ports.html"><a href="ports.html"><i class="fa fa-check"></i><b>3.5</b> Ports</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="singularity.html"><a href="singularity.html"><i class="fa fa-check"></i><b>4</b> Singularity</a><ul>
+<li class="chapter" data-level="4.1" data-path="introduction-to-singularity.html"><a href="introduction-to-singularity.html"><i class="fa fa-check"></i><b>4.1</b> Introduction to Singularity</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="introduction-to-singularity.html"><a href="introduction-to-singularity.html#singularity-architecture"><i class="fa fa-check"></i><b>4.1.1</b> Singularity architecture</a></li>
+<li class="chapter" data-level="4.1.2" data-path="introduction-to-singularity.html"><a href="introduction-to-singularity.html#strengths"><i class="fa fa-check"></i><b>4.1.2</b> Strengths</a></li>
+<li class="chapter" data-level="4.1.3" data-path="introduction-to-singularity.html"><a href="introduction-to-singularity.html#weaknesses"><i class="fa fa-check"></i><b>4.1.3</b> Weaknesses</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="build-process.html"><a href="build-process.html"><i class="fa fa-check"></i><b>4.2</b> Build process</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="build-process.html"><a href="build-process.html#examples"><i class="fa fa-check"></i><b>4.2.1</b> Examples</a></li>
+<li class="chapter" data-level="4.2.2" data-path="build-process.html"><a href="build-process.html#registries"><i class="fa fa-check"></i><b>4.2.2</b> Registries</a></li>
+<li class="chapter" data-level="4.2.3" data-path="build-process.html"><a href="build-process.html#sandboxing"><i class="fa fa-check"></i><b>4.2.3</b> Sandboxing</a></li>
+<li class="chapter" data-level="4.2.4" data-path="build-process.html"><a href="build-process.html#singularity-recipes"><i class="fa fa-check"></i><b>4.2.4</b> Singularity recipes</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="remote-building-optional.html"><a href="remote-building-optional.html"><i class="fa fa-check"></i><b>4.3</b> Remote building (optional)</a></li>
+<li class="chapter" data-level="4.4" data-path="run-and-execution-process.html"><a href="run-and-execution-process.html"><i class="fa fa-check"></i><b>4.4</b> Run and execution process</a></li>
+<li class="chapter" data-level="4.5" data-path="singularity-shell.html"><a href="singularity-shell.html"><i class="fa fa-check"></i><b>4.5</b> Singularity shell</a><ul>
+<li class="chapter" data-level="4.5.1" data-path="singularity-shell.html"><a href="singularity-shell.html#singularity-run"><i class="fa fa-check"></i><b>4.5.1</b> Singularity run</a></li>
+<li class="chapter" data-level="4.5.2" data-path="singularity-shell.html"><a href="singularity-shell.html#singularity-exec"><i class="fa fa-check"></i><b>4.5.2</b> Singularity exec</a></li>
+<li class="chapter" data-level="4.5.3" data-path="singularity-shell.html"><a href="singularity-shell.html#environment-control"><i class="fa fa-check"></i><b>4.5.3</b> Environment control</a></li>
+<li class="chapter" data-level="4.5.4" data-path="singularity-shell.html"><a href="singularity-shell.html#execute-from-sandboxed-images-directories"><i class="fa fa-check"></i><b>4.5.4</b> Execute from sandboxed images / directories</a></li>
+<li class="chapter" data-level="4.5.5" data-path="singularity-shell.html"><a href="singularity-shell.html#run-straight-from-registry"><i class="fa fa-check"></i><b>4.5.5</b> Run straight from registry</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="bind-paths-aka-volumes.html"><a href="bind-paths-aka-volumes.html"><i class="fa fa-check"></i><b>4.6</b> Bind paths (aka volumes)</a></li>
+<li class="chapter" data-level="4.7" data-path="exercises.html"><a href="exercises.html"><i class="fa fa-check"></i><b>4.7</b> Exercises:</a></li>
+<li class="chapter" data-level="4.8" data-path="instances.html"><a href="instances.html"><i class="fa fa-check"></i><b>4.8</b> Instances</a></li>
+<li class="chapter" data-level="4.9" data-path="troubleshooting.html"><a href="troubleshooting.html"><i class="fa fa-check"></i><b>4.9</b> Troubleshooting</a><ul>
+<li class="chapter" data-level="4.9.1" data-path="troubleshooting.html"><a href="troubleshooting.html#fakeroot"><i class="fa fa-check"></i><b>4.9.1</b> Fakeroot</a></li>
+<li class="chapter" data-level="4.9.2" data-path="troubleshooting.html"><a href="troubleshooting.html#singularity-cache-directory"><i class="fa fa-check"></i><b>4.9.2</b> Singularity cache directory</a></li>
+<li class="chapter" data-level="4.9.3" data-path="troubleshooting.html"><a href="troubleshooting.html#global-singularity-configuration"><i class="fa fa-check"></i><b>4.9.3</b> Global singularity configuration</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="nextflow-day-1.html"><a href="nextflow-day-1.html"><i class="fa fa-check"></i><b>5</b> Nextflow day 1</a><ul>
+<li class="chapter" data-level="5.1" data-path="what-is-nextflow.html"><a href="what-is-nextflow.html"><i class="fa fa-check"></i><b>5.1</b> What is Nextflow?</a></li>
+<li class="chapter" data-level="5.2" data-path="what-is-nextflow-for.html"><a href="what-is-nextflow-for.html"><i class="fa fa-check"></i><b>5.2</b> What is Nextflow for?</a></li>
+<li class="chapter" data-level="5.3" data-path="main-advantages.html"><a href="main-advantages.html"><i class="fa fa-check"></i><b>5.3</b> Main advantages</a></li>
+<li class="chapter" data-level="5.4" data-path="workflow-structure.html"><a href="workflow-structure.html"><i class="fa fa-check"></i><b>5.4</b> Workflow structure</a></li>
+<li class="chapter" data-level="5.5" data-path="installation.html"><a href="installation.html"><i class="fa fa-check"></i><b>5.5</b> Installation</a></li>
+<li class="chapter" data-level="5.6" data-path="channels.html"><a href="channels.html"><i class="fa fa-check"></i><b>5.6</b> Channels</a></li>
+<li class="chapter" data-level="5.7" data-path="exercise-1.html"><a href="exercise-1.html"><i class="fa fa-check"></i><b>5.7</b> EXERCISE 1</a></li>
+<li class="chapter" data-level="5.8" data-path="processes.html"><a href="processes.html"><i class="fa fa-check"></i><b>5.8</b> Processes</a></li>
+<li class="chapter" data-level="5.9" data-path="workflow.html"><a href="workflow.html"><i class="fa fa-check"></i><b>5.9</b> Workflow</a></li>
+<li class="chapter" data-level="5.10" data-path="nextflow-log.html"><a href="nextflow-log.html"><i class="fa fa-check"></i><b>5.10</b> Nextflow log</a></li>
+<li class="chapter" data-level="5.11" data-path="exercise-2.html"><a href="exercise-2.html"><i class="fa fa-check"></i><b>5.11</b> EXERCISE 2</a></li>
+<li class="chapter" data-level="5.12" data-path="more-complex-scripts.html"><a href="more-complex-scripts.html"><i class="fa fa-check"></i><b>5.12</b> More complex scripts</a></li>
+<li class="chapter" data-level="5.13" data-path="exercise-3.html"><a href="exercise-3.html"><i class="fa fa-check"></i><b>5.13</b> EXERCISE 3</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="nextflow-day-2.html"><a href="nextflow-day-2.html"><i class="fa fa-check"></i><b>6</b> Nextflow day 2</a><ul>
+<li class="chapter" data-level="6.1" data-path="resuming-your-pipeline.html"><a href="resuming-your-pipeline.html"><i class="fa fa-check"></i><b>6.1</b> Resuming your pipeline</a></li>
+<li class="chapter" data-level="6.2" data-path="decoupling-resources-parameters-and-nextflow-script.html"><a href="decoupling-resources-parameters-and-nextflow-script.html"><i class="fa fa-check"></i><b>6.2</b> Decoupling resources, parameters and nextflow script</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="decoupling-resources-parameters-and-nextflow-script.html"><a href="decoupling-resources-parameters-and-nextflow-script.html#publishing-final-results"><i class="fa fa-check"></i><b>6.2.1</b> Publishing final results</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="adding-a-help-section-for-the-whole-pipeline.html"><a href="adding-a-help-section-for-the-whole-pipeline.html"><i class="fa fa-check"></i><b>6.3</b> Adding a help section for the whole pipeline</a></li>
+<li class="chapter" data-level="6.4" data-path="using-singularity.html"><a href="using-singularity.html"><i class="fa fa-check"></i><b>6.4</b> Using Singularity</a></li>
+<li class="chapter" data-level="6.5" data-path="adding-more-steps.html"><a href="adding-more-steps.html"><i class="fa fa-check"></i><b>6.5</b> Adding more steps</a></li>
+<li class="chapter" data-level="6.6" data-path="modules-and-re-usage-of-the-code.html"><a href="modules-and-re-usage-of-the-code.html"><i class="fa fa-check"></i><b>6.6</b> Modules and re-usage of the code</a></li>
+<li class="chapter" data-level="6.7" data-path="exercise-4.html"><a href="exercise-4.html"><i class="fa fa-check"></i><b>6.7</b> EXERCISE 4</a></li>
+<li class="chapter" data-level="6.8" data-path="reporting-and-graphical-interface.html"><a href="reporting-and-graphical-interface.html"><i class="fa fa-check"></i><b>6.8</b> Reporting and graphical interface</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://biocore.crg.eu/wiki/Main_Page" target="blank">BIOINFORMATICS CORE @ CRG</a></li>
@@ -194,7 +262,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="adding-more-steps" class="section level2">
-<h2><span class="header-section-number">4.5</span> Adding more steps</h2>
+<h2><span class="header-section-number">6.5</span> Adding more steps</h2>
 <p>We can make pipelines incrementally by adding more and more processes. Nextflow will take care of the dependencies between the input / output and of the parallelization. Within the test3 folder we have two more steps: the reference indexing and the read alignments with <strong>bowtie</strong> (<a href="http://bowtie-bio.sourceforge.net/index.shtml" class="uri">http://bowtie-bio.sourceforge.net/index.shtml</a>).</p>
 <p>So we add a new input for the reference sequence:</p>
 <pre class="nextflow"><code>log.info &quot;&quot;&quot;
@@ -207,63 +275,63 @@ reference                       : ${params.reference}
 reference = file(params.reference)</code></pre>
 <p>We generate in this way a <strong>singleton channel</strong> called <strong>reference</strong> which content is never consumed and can be indefinitely used.</p>
 <p>We add two more processes. The first one is for the indexing of the reference:</p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb50-1"><a href="adding-more-steps.html#cb50-1"></a><span class="co">/*</span></span>
-<span id="cb50-2"><a href="adding-more-steps.html#cb50-2"></a><span class="co"> * Process 2. Bowtie index</span></span>
-<span id="cb50-3"><a href="adding-more-steps.html#cb50-3"></a><span class="co"> */</span></span>
-<span id="cb50-4"><a href="adding-more-steps.html#cb50-4"></a>process bowtieIdx {</span>
-<span id="cb50-5"><a href="adding-more-steps.html#cb50-5"></a>    tag { ref }                             </span>
-<span id="cb50-6"><a href="adding-more-steps.html#cb50-6"></a></span>
-<span id="cb50-7"><a href="adding-more-steps.html#cb50-7"></a>    input:</span>
-<span id="cb50-8"><a href="adding-more-steps.html#cb50-8"></a>    path ref                            </span>
-<span id="cb50-9"><a href="adding-more-steps.html#cb50-9"></a></span>
-<span id="cb50-10"><a href="adding-more-steps.html#cb50-10"></a>    output:                                 </span>
-<span id="cb50-11"><a href="adding-more-steps.html#cb50-11"></a>    tuple <span class="fu">val</span>(<span class="st">&quot;${ref}&quot;</span>), <span class="fu">path</span> (<span class="st">&quot;${ref}*.ebwt&quot;</span>)</span>
-<span id="cb50-12"><a href="adding-more-steps.html#cb50-12"></a></span>
-<span id="cb50-13"><a href="adding-more-steps.html#cb50-13"></a>    script:                                 </span>
-<span id="cb50-14"><a href="adding-more-steps.html#cb50-14"></a>    <span class="st">&quot;&quot;&quot;</span></span>
-<span id="cb50-15"><a href="adding-more-steps.html#cb50-15"></a>        gunzip -c ${ref} &gt; reference.<span class="fu">fa</span></span>
-<span id="cb50-16"><a href="adding-more-steps.html#cb50-16"></a>        bowtie-build reference.<span class="fu">fa</span> ${ref}</span>
-<span id="cb50-17"><a href="adding-more-steps.html#cb50-17"></a>        rm reference.<span class="fu">fa</span></span>
-<span id="cb50-18"><a href="adding-more-steps.html#cb50-18"></a>    <span class="st">&quot;&quot;&quot;</span></span>
-<span id="cb50-19"><a href="adding-more-steps.html#cb50-19"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb118"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb118-1"><a href="adding-more-steps.html#cb118-1"></a><span class="co">/*</span></span>
+<span id="cb118-2"><a href="adding-more-steps.html#cb118-2"></a><span class="co"> * Process 2. Bowtie index</span></span>
+<span id="cb118-3"><a href="adding-more-steps.html#cb118-3"></a><span class="co"> */</span></span>
+<span id="cb118-4"><a href="adding-more-steps.html#cb118-4"></a>process bowtieIdx {</span>
+<span id="cb118-5"><a href="adding-more-steps.html#cb118-5"></a>    tag { ref }                             </span>
+<span id="cb118-6"><a href="adding-more-steps.html#cb118-6"></a></span>
+<span id="cb118-7"><a href="adding-more-steps.html#cb118-7"></a>    input:</span>
+<span id="cb118-8"><a href="adding-more-steps.html#cb118-8"></a>    path ref                            </span>
+<span id="cb118-9"><a href="adding-more-steps.html#cb118-9"></a></span>
+<span id="cb118-10"><a href="adding-more-steps.html#cb118-10"></a>    output:                                 </span>
+<span id="cb118-11"><a href="adding-more-steps.html#cb118-11"></a>    tuple <span class="fu">val</span>(<span class="st">&quot;${ref}&quot;</span>), <span class="fu">path</span> (<span class="st">&quot;${ref}*.ebwt&quot;</span>)</span>
+<span id="cb118-12"><a href="adding-more-steps.html#cb118-12"></a></span>
+<span id="cb118-13"><a href="adding-more-steps.html#cb118-13"></a>    script:                                 </span>
+<span id="cb118-14"><a href="adding-more-steps.html#cb118-14"></a>    <span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb118-15"><a href="adding-more-steps.html#cb118-15"></a>        gunzip -c ${ref} &gt; reference.<span class="fu">fa</span></span>
+<span id="cb118-16"><a href="adding-more-steps.html#cb118-16"></a>        bowtie-build reference.<span class="fu">fa</span> ${ref}</span>
+<span id="cb118-17"><a href="adding-more-steps.html#cb118-17"></a>        rm reference.<span class="fu">fa</span></span>
+<span id="cb118-18"><a href="adding-more-steps.html#cb118-18"></a>    <span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb118-19"><a href="adding-more-steps.html#cb118-19"></a>}</span></code></pre></div>
 <p>Since bowtie indexing requires unzipped reference we unzip it then we build the reference and remove the unzipped file afterwards. The output channel generated is organized as a <strong>tuple</strong>, i.e. a list of elements. The first element of the list is the name of the index as a value, the second is a list of files constituting the index. The former is needed for building the command line of the alignment step, the latter are the files needed for the alignment.</p>
 <p>The second process is the alignment step:</p>
-<div class="sourceCode" id="cb51"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb51-1"><a href="adding-more-steps.html#cb51-1"></a><span class="co">/*</span></span>
-<span id="cb51-2"><a href="adding-more-steps.html#cb51-2"></a><span class="co"> * Process 3. Bowtie alignment</span></span>
-<span id="cb51-3"><a href="adding-more-steps.html#cb51-3"></a><span class="co"> */</span></span>
-<span id="cb51-4"><a href="adding-more-steps.html#cb51-4"></a>process bowtieAln {</span>
-<span id="cb51-5"><a href="adding-more-steps.html#cb51-5"></a>    publishDir alnOutputFolder, pattern: &#39;*.<span class="fu">sam</span>&#39;</span>
-<span id="cb51-6"><a href="adding-more-steps.html#cb51-6"></a></span>
-<span id="cb51-7"><a href="adding-more-steps.html#cb51-7"></a>    tag { reads }                           </span>
-<span id="cb51-8"><a href="adding-more-steps.html#cb51-8"></a>    label &#39;twocpus&#39;</span>
-<span id="cb51-9"><a href="adding-more-steps.html#cb51-9"></a></span>
-<span id="cb51-10"><a href="adding-more-steps.html#cb51-10"></a>    input:</span>
-<span id="cb51-11"><a href="adding-more-steps.html#cb51-11"></a>    tuple <span class="fu">val</span>(refname), <span class="fu">path</span> (ref_files)</span>
-<span id="cb51-12"><a href="adding-more-steps.html#cb51-12"></a>    path reads                              </span>
-<span id="cb51-13"><a href="adding-more-steps.html#cb51-13"></a></span>
-<span id="cb51-14"><a href="adding-more-steps.html#cb51-14"></a>    output:                                 </span>
-<span id="cb51-15"><a href="adding-more-steps.html#cb51-15"></a>    path <span class="st">&quot;${reads}.sam&quot;</span>, emit: samples_sam</span>
-<span id="cb51-16"><a href="adding-more-steps.html#cb51-16"></a>    path <span class="st">&quot;${reads}.log&quot;</span>, emit: samples_log</span>
-<span id="cb51-17"><a href="adding-more-steps.html#cb51-17"></a></span>
-<span id="cb51-18"><a href="adding-more-steps.html#cb51-18"></a>    script:                                 </span>
-<span id="cb51-19"><a href="adding-more-steps.html#cb51-19"></a>    <span class="st">&quot;&quot;&quot;</span></span>
-<span id="cb51-20"><a href="adding-more-steps.html#cb51-20"></a>    bowtie -p ${task.<span class="fu">cpus</span>} ${refname} -q ${reads} -S &gt; ${reads}.<span class="fu">sam</span> <span class="dv">2</span>&gt; ${reads}.<span class="fu">log</span></span>
-<span id="cb51-21"><a href="adding-more-steps.html#cb51-21"></a>    <span class="st">&quot;&quot;&quot;</span></span>
-<span id="cb51-22"><a href="adding-more-steps.html#cb51-22"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb119"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb119-1"><a href="adding-more-steps.html#cb119-1"></a><span class="co">/*</span></span>
+<span id="cb119-2"><a href="adding-more-steps.html#cb119-2"></a><span class="co"> * Process 3. Bowtie alignment</span></span>
+<span id="cb119-3"><a href="adding-more-steps.html#cb119-3"></a><span class="co"> */</span></span>
+<span id="cb119-4"><a href="adding-more-steps.html#cb119-4"></a>process bowtieAln {</span>
+<span id="cb119-5"><a href="adding-more-steps.html#cb119-5"></a>    publishDir alnOutputFolder, pattern: &#39;*.<span class="fu">sam</span>&#39;</span>
+<span id="cb119-6"><a href="adding-more-steps.html#cb119-6"></a></span>
+<span id="cb119-7"><a href="adding-more-steps.html#cb119-7"></a>    tag { reads }                           </span>
+<span id="cb119-8"><a href="adding-more-steps.html#cb119-8"></a>    label &#39;twocpus&#39;</span>
+<span id="cb119-9"><a href="adding-more-steps.html#cb119-9"></a></span>
+<span id="cb119-10"><a href="adding-more-steps.html#cb119-10"></a>    input:</span>
+<span id="cb119-11"><a href="adding-more-steps.html#cb119-11"></a>    tuple <span class="fu">val</span>(refname), <span class="fu">path</span> (ref_files)</span>
+<span id="cb119-12"><a href="adding-more-steps.html#cb119-12"></a>    path reads                              </span>
+<span id="cb119-13"><a href="adding-more-steps.html#cb119-13"></a></span>
+<span id="cb119-14"><a href="adding-more-steps.html#cb119-14"></a>    output:                                 </span>
+<span id="cb119-15"><a href="adding-more-steps.html#cb119-15"></a>    path <span class="st">&quot;${reads}.sam&quot;</span>, emit: samples_sam</span>
+<span id="cb119-16"><a href="adding-more-steps.html#cb119-16"></a>    path <span class="st">&quot;${reads}.log&quot;</span>, emit: samples_log</span>
+<span id="cb119-17"><a href="adding-more-steps.html#cb119-17"></a></span>
+<span id="cb119-18"><a href="adding-more-steps.html#cb119-18"></a>    script:                                 </span>
+<span id="cb119-19"><a href="adding-more-steps.html#cb119-19"></a>    <span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb119-20"><a href="adding-more-steps.html#cb119-20"></a>    bowtie -p ${task.<span class="fu">cpus</span>} ${refname} -q ${reads} -S &gt; ${reads}.<span class="fu">sam</span> <span class="dv">2</span>&gt; ${reads}.<span class="fu">log</span></span>
+<span id="cb119-21"><a href="adding-more-steps.html#cb119-21"></a>    <span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb119-22"><a href="adding-more-steps.html#cb119-22"></a>}</span></code></pre></div>
 <p>As you see there are two different input channels: the index one and the reads. The index name specified by <strong>refname</strong> is used for building the command line while the index files, indicated by <strong>ref_files</strong>, are just linked in the current directory by using the <strong>path</strong> qualifier.</p>
 <p>We also produced two kind of outputs: the alignments and the logs. The first one is the one we want to keep as a final result. So we specify this using the <strong>publishDir</strong> <strong>pattern</strong> parameter.</p>
-<div class="sourceCode" id="cb52"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb52-1"><a href="adding-more-steps.html#cb52-1"></a>    publishDir alnOutputFolder, pattern: &#39;*.<span class="fu">sam</span>&#39;</span></code></pre></div>
+<div class="sourceCode" id="cb120"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb120-1"><a href="adding-more-steps.html#cb120-1"></a>    publishDir alnOutputFolder, pattern: &#39;*.<span class="fu">sam</span>&#39;</span></code></pre></div>
 <p>The second one will be just passed to the next process for being used by the multiQC process. To distinghuish among them we can assign them different names.</p>
-<div class="sourceCode" id="cb53"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb53-1"><a href="adding-more-steps.html#cb53-1"></a> output:                                    </span>
-<span id="cb53-2"><a href="adding-more-steps.html#cb53-2"></a>    path <span class="st">&quot;${reads}.sam&quot;</span>, emit: samples_sam</span>
-<span id="cb53-3"><a href="adding-more-steps.html#cb53-3"></a>    path <span class="st">&quot;${reads}.log&quot;</span>, emit: samples_log</span></code></pre></div>
+<div class="sourceCode" id="cb121"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb121-1"><a href="adding-more-steps.html#cb121-1"></a> output:                                    </span>
+<span id="cb121-2"><a href="adding-more-steps.html#cb121-2"></a>    path <span class="st">&quot;${reads}.sam&quot;</span>, emit: samples_sam</span>
+<span id="cb121-3"><a href="adding-more-steps.html#cb121-3"></a>    path <span class="st">&quot;${reads}.log&quot;</span>, emit: samples_log</span></code></pre></div>
 <p>This section will allow us to connect these outputs directly with other processes when we call them in the workflow section:</p>
-<div class="sourceCode" id="cb54"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb54-1"><a href="adding-more-steps.html#cb54-1"></a>workflow {</span>
-<span id="cb54-2"><a href="adding-more-steps.html#cb54-2"></a>    fastqc_out = <span class="fu">fastQC</span>(reads)</span>
-<span id="cb54-3"><a href="adding-more-steps.html#cb54-3"></a>    bowtie_index = <span class="fu">bowtieIdx</span>(reference)</span>
-<span id="cb54-4"><a href="adding-more-steps.html#cb54-4"></a>    <span class="fu">bowtieAln</span>(bowtie_index, reads)</span>
-<span id="cb54-5"><a href="adding-more-steps.html#cb54-5"></a>    <span class="fu">multiQC</span>(fastqc_out.<span class="fu">mix</span>(bowtieAln.<span class="fu">out</span>.<span class="fu">samples_log</span>).<span class="fu">collect</span>())</span>
-<span id="cb54-6"><a href="adding-more-steps.html#cb54-6"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb122"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb122-1"><a href="adding-more-steps.html#cb122-1"></a>workflow {</span>
+<span id="cb122-2"><a href="adding-more-steps.html#cb122-2"></a>    fastqc_out = <span class="fu">fastQC</span>(reads)</span>
+<span id="cb122-3"><a href="adding-more-steps.html#cb122-3"></a>    bowtie_index = <span class="fu">bowtieIdx</span>(reference)</span>
+<span id="cb122-4"><a href="adding-more-steps.html#cb122-4"></a>    <span class="fu">bowtieAln</span>(bowtie_index, reads)</span>
+<span id="cb122-5"><a href="adding-more-steps.html#cb122-5"></a>    <span class="fu">multiQC</span>(fastqc_out.<span class="fu">mix</span>(bowtieAln.<span class="fu">out</span>.<span class="fu">samples_log</span>).<span class="fu">collect</span>())</span>
+<span id="cb122-6"><a href="adding-more-steps.html#cb122-6"></a>}</span></code></pre></div>
 <p>So we passed the <strong>samples_log</strong> output to the multiqc process after mixing it with the output channel from the fastqc process.</p>
 </div>
             </section>
@@ -295,6 +363,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
