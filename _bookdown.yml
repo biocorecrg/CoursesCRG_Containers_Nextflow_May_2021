@@ -7,7 +7,9 @@ language:
     chapter_name: "Part "
 delete_merged_file: true
 rmd_files: ["index.Rmd", 
-          "part1.Rmd", 
+          "containers_intro.Rmd",
+          "docker.Rmd",
+          "singularity.Rmd",
           "part2.Rmd"]
 output:
   bookdown::gitbook:

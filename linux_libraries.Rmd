@@ -1,0 +1,10 @@
+# Installing Linux libraries
+
+Get inspiration from: https://www.digitalocean.com/community/tutorials/package-management-basics-apt-yum-dnf-pkg
+
+
+| Operating System | Format | Tool(s) |
+| Debian / Ubuntu / Linux Mint / Raspbian | .deb | apt, apt-cache, apt-get, dpkg |
+| CentOS (RedHat) | .rpm | yum |
+| Fedora (RedHat) | .rpm | dnf |
+| FreeBSD | .txz | make, pkg |
