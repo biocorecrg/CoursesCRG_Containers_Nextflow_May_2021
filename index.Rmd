@@ -12,11 +12,6 @@ biblio-style: apalike
 link-citations: yes
 ---
 
-```{r, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE, eval = TRUE, warning = FALSE)
-library(kableExtra)
-```
-
 
 # Welcome and about the course
 
@@ -39,24 +34,6 @@ Nextflow is a powerful polyglot workflow language that, coupled with Docker and 
 [Leila Mansouri]()
 [Athanasios Baltzis]()
 
-
-```{r, echo=FALSE, eval=TRUE}
-tbl_logos <- data.frame(
-  name = c("Toni Hermoso", "Luca Cozzuto", "Julia Ponomarenko", "Sarah Bonnin"),
-  pic="",
-  description=c("", 
-                "",
-                "",
-                "" 
-             	)
-)
-tbl_logos %>%
-  kbl(booktabs = T) %>%
-  kable_paper(full_width = T) %>%
-  column_spec(2, image = spec_image(
-    c("docs/images/thermoso.jpg", "docs/images/lcozzuto.jpg", "docs/images/jponomarenko.jpg", "docs/images/sbonnin.jpg"), width=380, height=270))
-    
-```
 
 
 ## About the course
