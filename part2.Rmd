@@ -1,4 +1,4 @@
-# Nextflow
+# Nextflow day 1 
 A DSL for data-driven computational pipelines. [www.nextflow.io](https://www.nextflow.io)
 
 ```{r, out.width="30%", echo=FALSE, fig.link='https://www.nextflow.io'}
@@ -787,6 +787,7 @@ workflow flow1 {
 </details>
 
 
+# Nextflow day 2
 
 ## Resuming your pipeline
 
