@@ -57,6 +57,22 @@ docker run --help
 <img src="docs/images/docker_run_help.png" width="700/">
 
 
+<center><h4 style="background-color: #e6fadc; display: inline-block;">**HANDS-ON**</h4></center>
+
+What are the following commands doing?
+
+* `docker pull`
+* `docker export`
+
+<details>
+<summary>
+<h5 style="background-color: #e6fadc; display: inline-block;">*Answer*</h5>
+</summary>
+here
+</details>
+
+
+
 ## Using existing images
 
 ### Explore Docker hub
@@ -71,20 +87,61 @@ Let's search the keyword **ubuntu**:
 <img src="docs/images/dockerhub_ubuntu.png" width="900/">
 
 
+You can also search existing Docker images with the `docker search` command.
+<br>
+Example: let's look for images that have the keyword **blastp** in their name or description.
+
+```{bash}
+docker search blast
+```
+
+Too many results? You can apply some filters:
+
+* Minimum number of **stars**: `docker search blast --filter stars=5`
+* The image is an **official build**: `docker search blast --filter is-official=true`
+* The image is an **automated build**: `docker search blast --filter is-automated=true`
+
+```{bash}
+# Apply one filter
+docker search blast --filter stars=2
+
+# Apply more than one filter
+docker search blast --filter is-automated=true --filter stars=2
+```
+
 <center><h4 style="background-color: #e6fadc; display: inline-block;">**HANDS-ON**</h4></center>
+
+Use `docker search` to find a Docker image for the keyword `ubuntu`. Using the filters, answer the following questions:
+
+* How many images are **official builds**?
+* How many images have **3 or more stars**?
+* How many images are **official builds** AND have **3 or more stars**?
+* What is the NAME of the image with the highest number of stars?
 
 <details>
 <summary>
 <h5 style="background-color: #e6fadc; display: inline-block;">*Answer*</h5>
 </summary>
-here
-</details>
 
+```{bash}
+# Official builds
+docker search ubuntu --filter is-official=true
+
+# 3 or more stars
+docker search ubuntu --filter stars=3
+
+# Both filters
+docker search ubuntu --filter is-official=true --filter stars=3
+```
+
+</details>
 
 
 ### docker pull: import image
 
-* get latest image / latest release
+Say we are now interested in the `ubuntu` image from Docker hub. We can retrieve it with `docker pull`.
+
+* By default, we get the latest image / latest release
 
 ```{bash}
 docker pull ubuntu
@@ -93,21 +150,36 @@ docker pull ubuntu
 <img src="docs/images/docker_pull.png" width="650/">
 
 
-* choose the version of Ubuntu you are fetching: check the different tags
+* You can choose the version of Ubuntu you are fetching: check the different tags on the website:
 
 <img src="docs/images/dockerhub_ubuntu_1804.png" width="850/">
+
+Let's get the Ubuntu image with tag **18.04**:
 
 ```{bash}
 docker pull ubuntu:18.04
 ```
 
+Where is the image?
+<br>
+Run `docker images` in the terminal, to see a list of the most recently created images with information such as the **repository, the unique image ID, the tag and size**.
+
+<img src="docs/images/docker_images_list.png" width="650/">
+
+
 <center><h4 style="background-color: #e6fadc; display: inline-block;">**HANDS-ON**</h4></center>
+
+* Run `docker images`. How many images do you get?
+* What is the size of the `ubuntu` image you just pulled?
+* How many images do you get if you run `docker images --all`? What are those?
 
 <details>
 <summary>
 <h5 style="background-color: #e6fadc; display: inline-block;">*Answer*</h5>
 </summary>
-here
+
+
+
 </details>
 
 
@@ -115,7 +187,7 @@ here
 
 https://biocontainers.pro/
 
-Specific directory of Bioinformatics related entries
+Specific directory of Bioinformatics related entries.
 
 * Entries in [Docker hub](https://hub.docker.com/u/biocontainers) and/or [Quay.io](https://quay.io) (RedHat registry)
 * Normally created from [Bioconda](https://bioconda.github.io)
@@ -136,24 +208,16 @@ here
 </details>
 
 
-### docker images: list images
-
-```{bash}
-docker images
-```
-<img src="docs/images/docker_images_list.png" width="650/">
-
-Each image has a unique **IMAGE ID**.
-
 ### docker run: run image, i.e. start a container
 
 Now we want to use what is **inside** the image.
 <br>
-**docker run** creates a fresh container (active instance of the image) from a **Docker (static) image**, and runs it.
+`docker run` creates a fresh container (active instance of the image) from a **Docker (static) image**, and runs it.
 
 <br>
 The format is:<br>
-docker run image:tag **command**
+
+docker run image:tag **command** (command being a command called *inside the image*)
 
 ```{bash}
 docker run ubuntu:18.04 /bin/ls
@@ -172,13 +236,13 @@ docker run ubuntu:18.04 /bin/whoami
 docker run ubuntu:18.04 cat /etc/issue
 ```
 
-You can either execute programs in the image from the command line (see above) or **execute a container interactively**, i.e. **"enter"** the container.
+You can either execute programs in the image from the command line (see above) or **execute a container interactively**, i.e. **"enter"** the container with `docker run -it`.
 
 ```{bash}
 docker run -it ubuntu:18.04 /bin/bash
 ```
 
-Run container as daemon (in background)
+Run container as daemon (in background) *explain why we would want to do this (run as daemon)!*
 
 ```{bash}
 docker run --detach ubuntu:18.04 tail -f /dev/null
@@ -191,6 +255,8 @@ docker run --detach --name myubuntu ubuntu:18.04 tail -f /dev/null
 ```
 
 <center><h4 style="background-color: #e6fadc; display: inline-block;">**HANDS-ON**</h4></center>
+
+Short hands on with docker run.
 
 <details>
 <summary>
@@ -216,7 +282,14 @@ docker ps -a
 
 Each container has a unique ID.
 
+*Maybe it is interesting to have here docker rm?*
+
 ### docker exec: execute process in running container
+
+Difference between `docker run` and `docker exec`: 
+
+* `docker run` creates a temporary container, runs the command and stops the container.
+* `docker exec` needs an already running container to queried command.
 
 ```{bash}
 docker exec myubuntu uname -a
@@ -230,6 +303,8 @@ docker exec -it myubuntu /bin/bash
 
 <center><h4 style="background-color: #e6fadc; display: inline-block;">**HANDS-ON**</h4></center>
 
+Exercise on playing with run and exec?
+
 <details>
 <summary>
 <h5 style="background-color: #e6fadc; display: inline-block;">*Answer*</h5>
@@ -240,7 +315,7 @@ here
 
 ### docker stop, start, restart: actions on container
 
-Stop a running container:
+Stop a running container with `docker stop`.
 
 ```{bash}
 docker stop myubuntu
@@ -256,7 +331,7 @@ docker start myubuntu
 docker ps -a
 ```
 
-Restart a running container:
+Restart a running container: 
 
 ```{bash}
 docker restart myubuntu
