@@ -5,7 +5,7 @@ A DSL for data-driven computational pipelines. [www.nextflow.io](https://www.nex
 knitr::include_graphics('docs/images/nextflow_logo_deep.png')
 ```
 
-### What is Nextflow?
+## What is Nextflow?
 
 ```{r, out.width="600px", echo=FALSE, fig.link='https://www.nextflow.io'}
 knitr::include_graphics('docs/images/nextf_groovy.png')
