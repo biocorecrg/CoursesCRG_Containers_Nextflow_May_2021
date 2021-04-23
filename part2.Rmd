@@ -7,7 +7,7 @@ knitr::include_graphics('docs/images/nextflow_logo_deep.png')
 
 ## What is Nextflow?
 
-```{r, out.width="600px", echo=FALSE, fig.link='https://www.nextflow.io'}
+```{r, out.width="600px", echo=FALSE, eval = TRUE, fig.link='https://www.nextflow.io'}
 knitr::include_graphics('docs/images/nextf_groovy.png')
 ```
 
@@ -19,14 +19,14 @@ Nextflow has been currently upgrade from DLS1 version to DLS2. In this course we
 It is for making pipelines without caring about parallelization, dependencies, intermediate file names, data structures, handling exceptions, resuming executions etc. It was published in [Nature Biotechnology in 2017](https://pubmed.ncbi.nlm.nih.gov/28398311/).
 
 
-```{r, out.width="600px", echo=FALSE, fig.link='https://pubmed.ncbi.nlm.nih.gov/28398311/'}
+```{r, out.width="600px", echo=FALSE, eval = TRUE, fig.link='https://pubmed.ncbi.nlm.nih.gov/28398311/'}
 knitr::include_graphics('docs/images/NF_pub.png')
 ```
 
 There is a growing number of publication mentioning Nextflow in PubMed, since many bioinformaticians are starting to write their pipeline in Nextflow.
 
 
-```{r, out.width="600px", echo=FALSE, fig.link='https://pubmed.ncbi.nlm.nih.gov/?term=nextflow&timeline=expanded&sort=pubdate&sort_order=asc'}
+```{r, out.width="600px", echo=FALSE, eval = TRUE, fig.link='https://pubmed.ncbi.nlm.nih.gov/?term=nextflow&timeline=expanded&sort=pubdate&sort_order=asc'}
 knitr::include_graphics('docs/images/NF_mentioning.png')
 ```
 
@@ -1412,7 +1412,7 @@ We will show the open source one.
 
 First of all you need to access the tower.nf website and doing the login using one of the methods.
 
-```{r, out.width="800px", echo=FALSE, fig.link='https://tower.nf/'}
+```{r, out.width="800px", echo=FALSE, eval = TRUE, fig.link='https://tower.nf/'}
 knitr::include_graphics('docs/images/tower.png')
 ```
 
@@ -1461,4 +1461,3 @@ We finally go to the tower website again:
 ```{r, out.width="800px", echo=FALSE}
 knitr::include_graphics('docs/images/tower3.png')
 ```
-
