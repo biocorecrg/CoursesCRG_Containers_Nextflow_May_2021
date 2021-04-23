@@ -82,7 +82,7 @@ Channel
 process fastQC {
     publishDir fastqcOutputFolder  			// where (and whether) to publish the results
     tag { reads }  							// during the execution prints the indicated variable for follow-up
-    label 'twocpus' 
+    label 'bigmem' 
 
     input:
     path reads   							// it defines the input of the process. It sets values from a channel
