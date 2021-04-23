@@ -22,9 +22,14 @@ chroot
 additions-in-linux-kernel
 docker
 introduction-to-docker
+what-is-docker
+docker-components
+images-versus-containers
+docker-vocabulary
 using-existing-images
+getting-started
 explore-docker-hub
-docker-pull-import-image
+docker-pull-import-an-image
 biocontainers
 docker-run-run-image-i.e.-start-a-container
 docker-ps-check-containers-status
@@ -32,6 +37,7 @@ docker-exec-execute-process-in-running-container
 docker-stop-start-restart-actions-on-container
 docker-rm-docker-rmi-clean-up
 major-clean
+volumes
 docker-recipes
 building-recipes
 basic-instructions
@@ -41,7 +47,6 @@ docker-tag
 build-cache
 more-advanced-image-building
 additional-commands
-volumes
 ports
 singularity
 introduction-to-singularity
