@@ -8,6 +8,8 @@ knitr::opts_chunk$set(echo = TRUE, eval = FALSE, warning = FALSE)
 
 <a href="https://connpass-tokyo.s3.amazonaws.com/thumbs/80/52/80521f18aec0945dfedbb471dad6aa1a.png"><img src="https://connpass-tokyo.s3.amazonaws.com/thumbs/80/52/80521f18aec0945dfedbb471dad6aa1a.png" width="400/"></a>
 
+### What is Docker?
+
 * Platform for developing, shipping and running applications
 * Infrastructure as application / code
 * First version: 2013
@@ -15,10 +17,12 @@ knitr::opts_chunk$set(echo = TRUE, eval = FALSE, warning = FALSE)
 * Established [Open Container Initiative](https://www.opencontainers.org/)
 
 As a software:
+
 * [Docker Community Edition](https://www.docker.com/products/container-runtime)
 * Docker Enterprise Edition
 
-**Docker components**
+
+### Docker components
 
 <a href="http://apachebooster.com/kb/wp-content/uploads/2017/09/docker-architecture.png"><img src="http://apachebooster.com/kb/wp-content/uploads/2017/09/docker-architecture.png" width="700/"></a>
 
@@ -30,7 +34,7 @@ As a software:
 <a href="https://i.stack.imgur.com/vGuay.png"><img src="https://i.stack.imgur.com/vGuay.png" width="700/"></a>
 
 
-**Images versus containers**
+### Images versus containers
 
 Image: set of layers. read-only templates. Inert.
 An instance of an image is called a container.
@@ -40,13 +44,13 @@ The image is the recipe, the container is the cake.
 
 https://stackoverflow.com/questions/23735149/what-is-the-difference-between-a-docker-image-and-a-container
 
-**Docker vocabulary**
+### Docker vocabulary
 
 ```{bash}
 docker
 ```
 
-<img src="docs/images/docker_vocab.png" width="550/">
+<img src="docs/images/docker_vocab.png" width="600/">
 
 Get help:
 
@@ -54,7 +58,7 @@ Get help:
 docker run --help
 ```
 
-<img src="docs/images/docker_run_help.png" width="700/">
+<img src="docs/images/docker_run_help.png" width="750/">
 
 
 <center><h4 style="background-color: #e6fadc; display: inline-block;">**HANDS-ON**</h4></center>
@@ -74,6 +78,30 @@ here
 
 
 ## Using existing images
+
+### Getting started
+
+Run the following in the terminal:
+
+```{bash}
+docker images
+```
+
+The `docker images` command lists the Docker images that you have on your computer.
+<br>
+Now run the following:
+
+```{bash}
+docker pull hello-world
+```
+
+Run `docker images` again: now you see the "hello-world" image listed!
+<br>
+`docker pull` imports an image from - by default - **Docker hub**.
+
+<br>
+We will see more in details the `docker images` and `docker run` commands, but let's first explore the **Docker images repositories**.
+
 
 ### Explore Docker hub
 
@@ -137,11 +165,11 @@ docker search ubuntu --filter is-official=true --filter stars=3
 </details>
 
 
-### docker pull: import image
+### docker pull: import an image
 
 Say we are now interested in the `ubuntu` image from Docker hub. We can retrieve it with `docker pull`.
 
-* By default, we get the latest image / latest release
+* By default, we get the latest image / latest release.
 
 ```{bash}
 docker pull ubuntu
@@ -149,20 +177,28 @@ docker pull ubuntu
 
 <img src="docs/images/docker_pull.png" width="650/">
 
+* You can choose the version of Ubuntu you are fetching: check the different tags on the website (*latest* is also a tag):
 
-* You can choose the version of Ubuntu you are fetching: check the different tags on the website:
+<img src="docs/images/dockerhub_ubuntu_tags.png" width="850/">
+
+Let's get the Ubuntu image with tag **18.04**:
 
 <img src="docs/images/dockerhub_ubuntu_1804.png" width="850/">
 
-Let's get the Ubuntu image with tag **18.04**:
 
 ```{bash}
 docker pull ubuntu:18.04
 ```
 
-Where is the image?
+**Where is the image now?**
 <br>
-Run `docker images` in the terminal, to see a list of the most recently created images with information such as the **repository, the unique image ID, the tag and size**.
+As we have seen before, you can `docker images` in the terminal, to see a list of the most recently created images. `docker images` gives you information such as:
+
+* Repository
+* Tag
+* Unique image ID
+* Creation date
+* Image size
 
 <img src="docs/images/docker_images_list.png" width="650/">
 
@@ -171,40 +207,53 @@ Run `docker images` in the terminal, to see a list of the most recently created 
 
 * Run `docker images`. How many images do you get?
 * What is the size of the `ubuntu` image you just pulled?
-* How many images do you get if you run `docker images --all`? What are those?
+* How many images do you get if you run `docker images --all`? What are those? Perhaps the [documentation](https://docs.docker.com/engine/reference/commandline/images/) can help.
 
 <details>
 <summary>
 <h5 style="background-color: #e6fadc; display: inline-block;">*Answer*</h5>
 </summary>
 
-
+`docker images --all`: intermediate images.
 
 </details>
 
 
-### Biocontainers
+### BioContainers
 
-https://biocontainers.pro/
+[BioContainers](https://biocontainers.pro/) is a community-driven project that provides the infrastructure and basic guidelines to create, manage and distribute bioinformatics packages and **containers**.
+<br>
+Images are normally created from [Bioconda](https://bioconda.github.io)
+<br><br>
+**How to search for images?**
 
-Specific directory of Bioinformatics related entries.
+* Ready-to use images on the [dedicated website](https://biocontainers.pro/registry)
+* Entries are also stored in [Docker hub](https://hub.docker.com/u/biocontainers) and/or [Quay.io](https://quay.io) (RedHat registry)
+* *Dockerfile recipes* (next topic!) on the [github page](https://github.com/BioContainers/containers).
 
-* Entries in [Docker hub](https://hub.docker.com/u/biocontainers) and/or [Quay.io](https://quay.io) (RedHat registry)
-* Normally created from [Bioconda](https://bioconda.github.io)
+**How to pull images from BioContainers?**
+<br>
+Example: [**FastQC** software](https://biocontainers.pro/#/tools/fastqc)
 
-Example: **FastQC**
+<img src="docs/images/biocontainers_fastqc.png" width="650/">
 
-https://biocontainers.pro/#/tools/fastqc
+Load version / tag **v0.11.9_cv7** as:
 
     docker pull biocontainers/fastqc:v0.11.9_cv7
 
+
 <center><h4 style="background-color: #e6fadc; display: inline-block;">**HANDS-ON**</h4></center>
+
+* [Search](https://biocontainers.pro/registry) for the tool **blast**.
+* Pull the Docker image with version **2.2.31** (check the instructions).
 
 <details>
 <summary>
 <h5 style="background-color: #e6fadc; display: inline-block;">*Answer*</h5>
 </summary>
-here
+
+    docker pull biocontainers/blast:2.2.31
+
 </details>
 
 
@@ -218,6 +267,9 @@ Now we want to use what is **inside** the image.
 The format is:<br>
 
 docker run image:tag **command** (command being a command called *inside the image*)
+
+<br>
+We can start a container from the **ubuntu tag 18.04 image**, executing the command `ls` (stored in /bin).
 
 ```{bash}
 docker run ubuntu:18.04 /bin/ls
@@ -236,19 +288,22 @@ docker run ubuntu:18.04 /bin/whoami
 docker run ubuntu:18.04 cat /etc/issue
 ```
 
-You can either execute programs in the image from the command line (see above) or **execute a container interactively**, i.e. **"enter"** the container with `docker run -it`.
+You can either execute programs in the image from the command line (see above) or **execute a container interactively**, i.e. **"enter"** the container, with `docker run -it`.
 
 ```{bash}
 docker run -it ubuntu:18.04 /bin/bash
 ```
 
-Run container as daemon (in background) *explain why we would want to do this (run as daemon)!*
+If you want to leave and stop the container, type `exit`.
+<br>
+
+You can run the container as daemon (in background), instead of the default foreground running, with the `--detach` parameter:
 
 ```{bash}
 docker run --detach ubuntu:18.04 tail -f /dev/null
 ```
 
-Run container as daemon (in background) with a given name
+Run container as daemon (in background) with a given name:
 
 ```{bash}
 docker run --detach --name myubuntu ubuntu:18.04 tail -f /dev/null
@@ -258,11 +313,34 @@ docker run --detach --name myubuntu ubuntu:18.04 tail -f /dev/null
 
 Short hands on with docker run.
 
+* Run the **hello-world** image:
+  * What is happening?
+* Now run the **blast** image from BioContainers we previously pulled (version 2.2.31):
+  * Is something happening?
+* Start a container **interactively** from the same image:
+  * What is the default working directory? What is inside the directory?
+  * Where is the `blastp` program located in the image?
+  * Exit the container.
+
 <details>
 <summary>
 <h5 style="background-color: #e6fadc; display: inline-block;">*Answer*</h5>
 </summary>
-here
+
+```{bash}
+# Run the hello-world image
+docker run hello-world
+
+# Run the blast image
+docker run biocontainers/blast:2.2.31
+
+# Start a container interactively from the blast image:
+docker run -it biocontainers/blast:2.2.31
+
+# Where is the blastp program located in the image?
+which blastp
+```
+
 </details>
 
 
@@ -282,14 +360,15 @@ docker ps -a
 
 Each container has a unique ID.
 
-*Maybe it is interesting to have here docker rm?*
+<br>
+You can remove a container with `docker rm CONTAINER_ID`.
 
 ### docker exec: execute process in running container
 
 Difference between `docker run` and `docker exec`: 
 
 * `docker run` creates a temporary container, runs the command and stops the container.
-* `docker exec` needs an already running container to queried command.
+* `docker exec` needs an already running container to query the command.
 
 ```{bash}
 docker exec myubuntu uname -a
@@ -303,7 +382,7 @@ docker exec -it myubuntu /bin/bash
 
 <center><h4 style="background-color: #e6fadc; display: inline-block;">**HANDS-ON**</h4></center>
 
-Exercise on playing with run and exec?
+Exercise on playing with exec?
 
 <details>
 <summary>
@@ -339,35 +418,31 @@ docker restart myubuntu
 docker ps -a
 ```
 
-Run with restart enabled
+Run with restart enabled (by default, Docker does not automatically restart the container when it exits):
 
 ```{bash}
 docker run --restart=unless-stopped --detach --name myubuntu2 ubuntu:18.04 tail -f /dev/null
 ```
-* Restart policies: no (default), always, on-failure, unless-stopped
 
-Update restart policy
+* [Restart policies](https://docs.docker.com/engine/reference/commandline/run/#restart-policies---restart): no (default), always, on-failure, unless-stopped
+
+Update restart policy:
 
 ```{bash}
 docker update --restart unless-stopped myubuntu
 ```
 
-<center><h4 style="background-color: #e6fadc; display: inline-block;">**HANDS-ON**</h4></center>
-
-<details>
-<summary>
-<h5 style="background-color: #e6fadc; display: inline-block;">*Answer*</h5>
-</summary>
-here
-</details>
-
 
 ### docker rm, docker rmi: clean up!
+
+`docker rm` is used to remove a **container** (set `-f` is the container is running, to force the removal):
 
 ```{bash}
 docker rm myubuntu
 docker rm -f myubuntu
 ```
+
+`docker rmi` is used to remove an **image**:
 
 ```{bash}
 docker rmi ubuntu:18.04
@@ -385,6 +460,8 @@ here
 
 #### Major clean
 
+*docker system failing for me on a qlogin node: why? (I see from the documentation that it still exists) Version issue perhaps?*
+
 Check used space
 ```{bash}
 docker system df
@@ -401,6 +478,82 @@ docker system prune -a
 ```
 
 * Reference: https://www.digitalocean.com/community/tutorials/how-to-remove-docker-images-containers-and-volumes
+
+
+### Volumes
+
+**I (Sarah) need to review the exercise!**
+
+Let's try and run `blastp` in the **blast** image. <br>
+We will run a simple blastp search following [this example](https://angus.readthedocs.io/en/2016/running-command-line-blast.html).
+
+<br>
+Let's get **fasta** files:
+
+```{bash}
+# We create first a directory where to store the files
+mkdir fasta_files
+
+# "cow" proteins from the NCBI/RefSeq database: let's get just a sample (one protein):
+wget -O - ftp://ftp.ncbi.nih.gov/refseq/B_taurus/mRNA_Prot/cow.1.protein.faa.gz | gunzip | head -6 > fasta_files/cow.small.faa
+
+# "human" proteins from the NCBI/RefSeq database:
+wget -O - wget ftp://ftp.ncbi.nih.gov/refseq/H_sapiens/mRNA_Prot/human.1.protein.faa.gz | gunzip > fasta_files/human.1.protein.faa
+```
+
+Query the help of `blastp`:
+
+```{bash}
+docker run biocontainers/blast:2.2.31 blastp -h
+```
+
+Try to run `blastp`:
+
+```{bash}
+docker run biocontainers/blast:2.2.31 blastp -query fasta_files/cow.small.faa -db fasta_files/human.1.protein.faa
+```
+
+Error! 
+
+<br>
+Docker containers are **fully isolated**. It is necessary to mount volumes in order to handle input/output files.
+
+Syntax: **--volume/-v** *path_in_host:path_in_container*
+
+
+blastp -query cow.small.faa -db human.1.protein.faa
+
+```{bash}
+docker run --volume $(pwd)/fasta_files:/data/fasta biocontainers/blast:2.2.31 blastp -query /data/fasta/cow.small.faa -db /data/fasta/human.1.protein.faa
+```
+
+docker run --volume $(pwd)/fasta_files:/fasta biocontainers/blast:2.2.31 makeblastdb -in /fasta/human.1.protein.faa -dbtype prot
+
+
+```{bash}
+mkdir datatest
+touch datatest/test
+docker run --detach --volume $(pwd)/datatest:/scratch --name fastqc_container biocontainers/fastqc:v0.11.9_cv7 tail -f /dev/null
+docker exec -ti fastqc_container /bin/bash
+> ls -l /scratch
+> exit
+```
+
+* Exercises:
+1. Copy the 2 fastq files from available datasets in Github repository and place them in mounted directory
+2. Run fastqc interactively (inside container): ```fastqc  /scratch/*.gz```
+3. Run fastqc outside the container
+
+<center><h4 style="background-color: #e6fadc; display: inline-block;">**HANDS-ON**</h4></center>
+
+<details>
+<summary>
+<h5 style="background-color: #e6fadc; display: inline-block;">*Answer*</h5>
+</summary>
+here
+</details>
+
+
 
 
 ## Docker recipes
@@ -670,35 +823,6 @@ Good for long-term reproducibility and for critical production environments:
 here
 </details>
 
-
-## Volumes
-
-Docker containers are fully isolated. It is necessary to mount volumes in order to handle input/output files.
-
-Syntax: **--volume/-v** *host:container*
-
-```{bash}
-mkdir datatest
-touch datatest/test
-docker run --detach --volume $(pwd)/datatest:/scratch --name fastqc_container biocontainers/fastqc:v0.11.9_cv7 tail -f /dev/null
-docker exec -ti fastqc_container /bin/bash
-> ls -l /scratch
-> exit
-```
-
-* Exercises:
-1. Copy the 2 fastq files from available datasets in Github repository and place them in mounted directory
-2. Run fastqc interactively (inside container): ```fastqc  /scratch/*.gz```
-3. Run fastqc outside the container
-
-<center><h4 style="background-color: #e6fadc; display: inline-block;">**HANDS-ON**</h4></center>
-
-<details>
-<summary>
-<h5 style="background-color: #e6fadc; display: inline-block;">*Answer*</h5>
-</summary>
-here
-</details>
 
 
 ## Ports
