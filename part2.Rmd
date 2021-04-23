@@ -1,11 +1,7 @@
 # Nextflow day 1
 A DSL for data-driven computational pipelines. [www.nextflow.io](https://www.nextflow.io)
 
-```{r, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE, eval = TRUE, warning = FALSE)
-```
-
-```{r, out.width="30%", echo=FALSE, fig.link='https://www.nextflow.io'}
+```{r, out.width="30%", echo=FALSE, eval = TRUE, fig.link='https://www.nextflow.io'}
 knitr::include_graphics('docs/images/nextflow_logo_deep.png')
 ```
 
