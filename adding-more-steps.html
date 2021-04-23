@@ -274,63 +274,63 @@ reference                       : ${params.reference}
 reference = file(params.reference)</code></pre>
 <p>We generate in this way a <strong>singleton channel</strong> called <strong>reference</strong> which content is never consumed and can be indefinitely used.</p>
 <p>We add two more processes. The first one is for the indexing of the reference:</p>
-<div class="sourceCode" id="cb120"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb120-1"><a href="adding-more-steps.html#cb120-1"></a><span class="co">/*</span></span>
-<span id="cb120-2"><a href="adding-more-steps.html#cb120-2"></a><span class="co"> * Process 2. Bowtie index</span></span>
-<span id="cb120-3"><a href="adding-more-steps.html#cb120-3"></a><span class="co"> */</span></span>
-<span id="cb120-4"><a href="adding-more-steps.html#cb120-4"></a>process bowtieIdx {</span>
-<span id="cb120-5"><a href="adding-more-steps.html#cb120-5"></a>    tag { ref }                             </span>
-<span id="cb120-6"><a href="adding-more-steps.html#cb120-6"></a></span>
-<span id="cb120-7"><a href="adding-more-steps.html#cb120-7"></a>    input:</span>
-<span id="cb120-8"><a href="adding-more-steps.html#cb120-8"></a>    path ref                            </span>
-<span id="cb120-9"><a href="adding-more-steps.html#cb120-9"></a></span>
-<span id="cb120-10"><a href="adding-more-steps.html#cb120-10"></a>    output:                                 </span>
-<span id="cb120-11"><a href="adding-more-steps.html#cb120-11"></a>    tuple <span class="fu">val</span>(<span class="st">&quot;${ref}&quot;</span>), <span class="fu">path</span> (<span class="st">&quot;${ref}*.ebwt&quot;</span>)</span>
-<span id="cb120-12"><a href="adding-more-steps.html#cb120-12"></a></span>
-<span id="cb120-13"><a href="adding-more-steps.html#cb120-13"></a>    script:                                 </span>
-<span id="cb120-14"><a href="adding-more-steps.html#cb120-14"></a>    <span class="st">&quot;&quot;&quot;</span></span>
-<span id="cb120-15"><a href="adding-more-steps.html#cb120-15"></a>        gunzip -c ${ref} &gt; reference.<span class="fu">fa</span></span>
-<span id="cb120-16"><a href="adding-more-steps.html#cb120-16"></a>        bowtie-build reference.<span class="fu">fa</span> ${ref}</span>
-<span id="cb120-17"><a href="adding-more-steps.html#cb120-17"></a>        rm reference.<span class="fu">fa</span></span>
-<span id="cb120-18"><a href="adding-more-steps.html#cb120-18"></a>    <span class="st">&quot;&quot;&quot;</span></span>
-<span id="cb120-19"><a href="adding-more-steps.html#cb120-19"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb122"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb122-1"><a href="adding-more-steps.html#cb122-1"></a><span class="co">/*</span></span>
+<span id="cb122-2"><a href="adding-more-steps.html#cb122-2"></a><span class="co"> * Process 2. Bowtie index</span></span>
+<span id="cb122-3"><a href="adding-more-steps.html#cb122-3"></a><span class="co"> */</span></span>
+<span id="cb122-4"><a href="adding-more-steps.html#cb122-4"></a>process bowtieIdx {</span>
+<span id="cb122-5"><a href="adding-more-steps.html#cb122-5"></a>    tag { ref }                             </span>
+<span id="cb122-6"><a href="adding-more-steps.html#cb122-6"></a></span>
+<span id="cb122-7"><a href="adding-more-steps.html#cb122-7"></a>    input:</span>
+<span id="cb122-8"><a href="adding-more-steps.html#cb122-8"></a>    path ref                            </span>
+<span id="cb122-9"><a href="adding-more-steps.html#cb122-9"></a></span>
+<span id="cb122-10"><a href="adding-more-steps.html#cb122-10"></a>    output:                                 </span>
+<span id="cb122-11"><a href="adding-more-steps.html#cb122-11"></a>    tuple <span class="fu">val</span>(<span class="st">&quot;${ref}&quot;</span>), <span class="fu">path</span> (<span class="st">&quot;${ref}*.ebwt&quot;</span>)</span>
+<span id="cb122-12"><a href="adding-more-steps.html#cb122-12"></a></span>
+<span id="cb122-13"><a href="adding-more-steps.html#cb122-13"></a>    script:                                 </span>
+<span id="cb122-14"><a href="adding-more-steps.html#cb122-14"></a>    <span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb122-15"><a href="adding-more-steps.html#cb122-15"></a>        gunzip -c ${ref} &gt; reference.<span class="fu">fa</span></span>
+<span id="cb122-16"><a href="adding-more-steps.html#cb122-16"></a>        bowtie-build reference.<span class="fu">fa</span> ${ref}</span>
+<span id="cb122-17"><a href="adding-more-steps.html#cb122-17"></a>        rm reference.<span class="fu">fa</span></span>
+<span id="cb122-18"><a href="adding-more-steps.html#cb122-18"></a>    <span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb122-19"><a href="adding-more-steps.html#cb122-19"></a>}</span></code></pre></div>
 <p>Since bowtie indexing requires unzipped reference we unzip it then we build the reference and remove the unzipped file afterwards. The output channel generated is organized as a <strong>tuple</strong>, i.e. a list of elements. The first element of the list is the name of the index as a value, the second is a list of files constituting the index. The former is needed for building the command line of the alignment step, the latter are the files needed for the alignment.</p>
 <p>The second process is the alignment step:</p>
-<div class="sourceCode" id="cb121"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb121-1"><a href="adding-more-steps.html#cb121-1"></a><span class="co">/*</span></span>
-<span id="cb121-2"><a href="adding-more-steps.html#cb121-2"></a><span class="co"> * Process 3. Bowtie alignment</span></span>
-<span id="cb121-3"><a href="adding-more-steps.html#cb121-3"></a><span class="co"> */</span></span>
-<span id="cb121-4"><a href="adding-more-steps.html#cb121-4"></a>process bowtieAln {</span>
-<span id="cb121-5"><a href="adding-more-steps.html#cb121-5"></a>    publishDir alnOutputFolder, pattern: &#39;*.<span class="fu">sam</span>&#39;</span>
-<span id="cb121-6"><a href="adding-more-steps.html#cb121-6"></a></span>
-<span id="cb121-7"><a href="adding-more-steps.html#cb121-7"></a>    tag { reads }                           </span>
-<span id="cb121-8"><a href="adding-more-steps.html#cb121-8"></a>    label &#39;twocpus&#39;</span>
-<span id="cb121-9"><a href="adding-more-steps.html#cb121-9"></a></span>
-<span id="cb121-10"><a href="adding-more-steps.html#cb121-10"></a>    input:</span>
-<span id="cb121-11"><a href="adding-more-steps.html#cb121-11"></a>    tuple <span class="fu">val</span>(refname), <span class="fu">path</span> (ref_files)</span>
-<span id="cb121-12"><a href="adding-more-steps.html#cb121-12"></a>    path reads                              </span>
-<span id="cb121-13"><a href="adding-more-steps.html#cb121-13"></a></span>
-<span id="cb121-14"><a href="adding-more-steps.html#cb121-14"></a>    output:                                 </span>
-<span id="cb121-15"><a href="adding-more-steps.html#cb121-15"></a>    path <span class="st">&quot;${reads}.sam&quot;</span>, emit: samples_sam</span>
-<span id="cb121-16"><a href="adding-more-steps.html#cb121-16"></a>    path <span class="st">&quot;${reads}.log&quot;</span>, emit: samples_log</span>
-<span id="cb121-17"><a href="adding-more-steps.html#cb121-17"></a></span>
-<span id="cb121-18"><a href="adding-more-steps.html#cb121-18"></a>    script:                                 </span>
-<span id="cb121-19"><a href="adding-more-steps.html#cb121-19"></a>    <span class="st">&quot;&quot;&quot;</span></span>
-<span id="cb121-20"><a href="adding-more-steps.html#cb121-20"></a>    bowtie -p ${task.<span class="fu">cpus</span>} ${refname} -q ${reads} -S &gt; ${reads}.<span class="fu">sam</span> <span class="dv">2</span>&gt; ${reads}.<span class="fu">log</span></span>
-<span id="cb121-21"><a href="adding-more-steps.html#cb121-21"></a>    <span class="st">&quot;&quot;&quot;</span></span>
-<span id="cb121-22"><a href="adding-more-steps.html#cb121-22"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb123"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb123-1"><a href="adding-more-steps.html#cb123-1"></a><span class="co">/*</span></span>
+<span id="cb123-2"><a href="adding-more-steps.html#cb123-2"></a><span class="co"> * Process 3. Bowtie alignment</span></span>
+<span id="cb123-3"><a href="adding-more-steps.html#cb123-3"></a><span class="co"> */</span></span>
+<span id="cb123-4"><a href="adding-more-steps.html#cb123-4"></a>process bowtieAln {</span>
+<span id="cb123-5"><a href="adding-more-steps.html#cb123-5"></a>    publishDir alnOutputFolder, pattern: &#39;*.<span class="fu">sam</span>&#39;</span>
+<span id="cb123-6"><a href="adding-more-steps.html#cb123-6"></a></span>
+<span id="cb123-7"><a href="adding-more-steps.html#cb123-7"></a>    tag { reads }                           </span>
+<span id="cb123-8"><a href="adding-more-steps.html#cb123-8"></a>    label &#39;twocpus&#39;</span>
+<span id="cb123-9"><a href="adding-more-steps.html#cb123-9"></a></span>
+<span id="cb123-10"><a href="adding-more-steps.html#cb123-10"></a>    input:</span>
+<span id="cb123-11"><a href="adding-more-steps.html#cb123-11"></a>    tuple <span class="fu">val</span>(refname), <span class="fu">path</span> (ref_files)</span>
+<span id="cb123-12"><a href="adding-more-steps.html#cb123-12"></a>    path reads                              </span>
+<span id="cb123-13"><a href="adding-more-steps.html#cb123-13"></a></span>
+<span id="cb123-14"><a href="adding-more-steps.html#cb123-14"></a>    output:                                 </span>
+<span id="cb123-15"><a href="adding-more-steps.html#cb123-15"></a>    path <span class="st">&quot;${reads}.sam&quot;</span>, emit: samples_sam</span>
+<span id="cb123-16"><a href="adding-more-steps.html#cb123-16"></a>    path <span class="st">&quot;${reads}.log&quot;</span>, emit: samples_log</span>
+<span id="cb123-17"><a href="adding-more-steps.html#cb123-17"></a></span>
+<span id="cb123-18"><a href="adding-more-steps.html#cb123-18"></a>    script:                                 </span>
+<span id="cb123-19"><a href="adding-more-steps.html#cb123-19"></a>    <span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb123-20"><a href="adding-more-steps.html#cb123-20"></a>    bowtie -p ${task.<span class="fu">cpus</span>} ${refname} -q ${reads} -S &gt; ${reads}.<span class="fu">sam</span> <span class="dv">2</span>&gt; ${reads}.<span class="fu">log</span></span>
+<span id="cb123-21"><a href="adding-more-steps.html#cb123-21"></a>    <span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb123-22"><a href="adding-more-steps.html#cb123-22"></a>}</span></code></pre></div>
 <p>As you see there are two different input channels: the index one and the reads. The index name specified by <strong>refname</strong> is used for building the command line while the index files, indicated by <strong>ref_files</strong>, are just linked in the current directory by using the <strong>path</strong> qualifier.</p>
 <p>We also produced two kind of outputs: the alignments and the logs. The first one is the one we want to keep as a final result. So we specify this using the <strong>publishDir</strong> <strong>pattern</strong> parameter.</p>
-<div class="sourceCode" id="cb122"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb122-1"><a href="adding-more-steps.html#cb122-1"></a>    publishDir alnOutputFolder, pattern: &#39;*.<span class="fu">sam</span>&#39;</span></code></pre></div>
+<div class="sourceCode" id="cb124"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb124-1"><a href="adding-more-steps.html#cb124-1"></a>    publishDir alnOutputFolder, pattern: &#39;*.<span class="fu">sam</span>&#39;</span></code></pre></div>
 <p>The second one will be just passed to the next process for being used by the multiQC process. To distinghuish among them we can assign them different names.</p>
-<div class="sourceCode" id="cb123"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb123-1"><a href="adding-more-steps.html#cb123-1"></a> output:                                    </span>
-<span id="cb123-2"><a href="adding-more-steps.html#cb123-2"></a>    path <span class="st">&quot;${reads}.sam&quot;</span>, emit: samples_sam</span>
-<span id="cb123-3"><a href="adding-more-steps.html#cb123-3"></a>    path <span class="st">&quot;${reads}.log&quot;</span>, emit: samples_log</span></code></pre></div>
+<div class="sourceCode" id="cb125"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb125-1"><a href="adding-more-steps.html#cb125-1"></a> output:                                    </span>
+<span id="cb125-2"><a href="adding-more-steps.html#cb125-2"></a>    path <span class="st">&quot;${reads}.sam&quot;</span>, emit: samples_sam</span>
+<span id="cb125-3"><a href="adding-more-steps.html#cb125-3"></a>    path <span class="st">&quot;${reads}.log&quot;</span>, emit: samples_log</span></code></pre></div>
 <p>This section will allow us to connect these outputs directly with other processes when we call them in the workflow section:</p>
-<div class="sourceCode" id="cb124"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb124-1"><a href="adding-more-steps.html#cb124-1"></a>workflow {</span>
-<span id="cb124-2"><a href="adding-more-steps.html#cb124-2"></a>    fastqc_out = <span class="fu">fastQC</span>(reads)</span>
-<span id="cb124-3"><a href="adding-more-steps.html#cb124-3"></a>    bowtie_index = <span class="fu">bowtieIdx</span>(reference)</span>
-<span id="cb124-4"><a href="adding-more-steps.html#cb124-4"></a>    <span class="fu">bowtieAln</span>(bowtie_index, reads)</span>
-<span id="cb124-5"><a href="adding-more-steps.html#cb124-5"></a>    <span class="fu">multiQC</span>(fastqc_out.<span class="fu">mix</span>(bowtieAln.<span class="fu">out</span>.<span class="fu">samples_log</span>).<span class="fu">collect</span>())</span>
-<span id="cb124-6"><a href="adding-more-steps.html#cb124-6"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb126"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb126-1"><a href="adding-more-steps.html#cb126-1"></a>workflow {</span>
+<span id="cb126-2"><a href="adding-more-steps.html#cb126-2"></a>    fastqc_out = <span class="fu">fastQC</span>(reads)</span>
+<span id="cb126-3"><a href="adding-more-steps.html#cb126-3"></a>    bowtie_index = <span class="fu">bowtieIdx</span>(reference)</span>
+<span id="cb126-4"><a href="adding-more-steps.html#cb126-4"></a>    <span class="fu">bowtieAln</span>(bowtie_index, reads)</span>
+<span id="cb126-5"><a href="adding-more-steps.html#cb126-5"></a>    <span class="fu">multiQC</span>(fastqc_out.<span class="fu">mix</span>(bowtieAln.<span class="fu">out</span>.<span class="fu">samples_log</span>).<span class="fu">collect</span>())</span>
+<span id="cb126-6"><a href="adding-more-steps.html#cb126-6"></a>}</span></code></pre></div>
 <p>So we passed the <strong>samples_log</strong> output to the multiqc process after mixing it with the output channel from the fastqc process.</p>
 </div>
             </section>
