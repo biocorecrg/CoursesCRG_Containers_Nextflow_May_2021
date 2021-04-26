@@ -58,10 +58,9 @@ workflow BOWTIE {
 		bow_index = bowtieIdx(reffile)
 		bowtieAln(bow_index, input)
     emit:
-    	bowtieAln.out.samples_sam
-    	bowtieAln.out.samples_log
+    	sam = bowtieAln.out.samples_sam
+    	//log = bowtieAln.out.samples_log
 }
-
 
 
 

@@ -82,8 +82,8 @@ include { multiqc } from "${baseDir}/lib/multiqc" addParams(OUTPUT: multiqcOutpu
 workflow {
 	fastqc_out = fastqc(reads)
 	map_res = BOWTIE(reference, reads)
-	//map_res.samples_sam.view()
-	//multiqc(fastqc_out.mix(map_res.samples_log).collect())
+	map_res.sam.view()
+	//multiqc(fastqc_out.mix(map_res.log).collect())
 }
 
 
