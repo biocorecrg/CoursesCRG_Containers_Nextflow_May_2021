@@ -90,8 +90,8 @@ nextflow-log
 exercise-2
 more-complex-scripts
 exercise-3
-nextflow-day-2
 resuming-your-pipeline
+nextflow-day-2
 decoupling-resources-parameters-and-nextflow-script
 publishing-final-results
 adding-a-help-section-for-the-whole-pipeline
