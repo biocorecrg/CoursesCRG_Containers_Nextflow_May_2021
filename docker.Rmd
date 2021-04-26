@@ -576,6 +576,61 @@ docker rm CONTAINER_ID # check all containers with `docker ps -a`
 </details>
 
 
+## Linux packages
+
+In the next step, we will create Docker images.
+<br>
+For this to go smoothly, you should know your **base system**, and how to interact with it (update, upgrade and install packages for example).
+<br>
+In Linux-based environment, software is usually distributed in the form of **packages**, kept in repositories.
+<br>
+With different operating systems come different tools to fetch and install packages:
+
+| Operating System | Format | Tool(s) |
+| Debian / Ubuntu / Linux Mint / Raspbian | .deb | apt, apt-cache, apt-get, dpkg |
+| CentOS (RedHat) | .rpm | yum |
+| Fedora (RedHat) | .rpm | dnf |
+| FreeBSD | .txz | make, pkg |
+
+During this course, we will see a bit about **Ubuntu** and **CentOS**.
+
+<br>
+> Note that the environment you are working on for this course is *CentOS-based* 
+
+
+### Update and upgrade packages
+
+* In **Ubuntu**:
+
+```
+apt-get update && apt-get upgrade -y
+```
+
+In **CentOS**:
+
+```
+yum check-update && yum update -y
+```
+
+### Search and install packages:
+
+* In **Ubuntu**:
+
+```
+apt search libxml2
+apt install libxml2-dev
+```
+
+* In **CentOS**:
+
+```
+yum search libxml2
+yum install libxml2-devel.x86_64
+```
+
+More on the subject in [this post](https://www.digitalocean.com/community/tutorials/package-management-basics-apt-yum-dnf-pkg)
+
+
 ## Docker recipes
 
 A **Docker recipe** contains a set of instructions and commands that will be used to **create/build a Docker image**.
@@ -616,7 +671,7 @@ RUN apt install -y wget
 Explore this [Dockerfile](https://github.com/BioContainers/containers/blob/master/blast/2.2.31/Dockerfile):
 
 * What is the **base layer**?
-* What is being installed in the email? How?
+* What is being installed in the image? How?
 
 <details>
 <summary>
@@ -624,8 +679,8 @@ Explore this [Dockerfile](https://github.com/BioContainers/containers/blob/maste
 </summary>
 
 Base layer: biocontainers/biocontainers:v1.0.0_cv4
-<b>
-Tool `blast` is installed using *conda**.
+<br>
+Tool `blast` is installed using **conda**.
 
 </details>
 
@@ -701,15 +756,6 @@ RUN apt-get install -y wget
 ENTRYPOINT ["/usr/bin/wget"]
 CMD ["https://cdn.wp.nginx.com/wp-content/uploads/2016/07/docker-swarm-hero2.png"]
 ```
-
-<center><h4 style="background-color: #e6fadc; display: inline-block;">**HANDS-ON**</h4></center>
-
-<details>
-<summary>
-<h5 style="background-color: #e6fadc; display: inline-block;">*Answer*</h5>
-</summary>
-here
-</details>
 
 
 ### docker build
@@ -834,10 +880,9 @@ docker run mytest "Docker course"
 
 </details>
 
-
 ### docker tag
 
-To tag a local image with ID "e23aaea5dff1" into the "ubuntu_wget" image name repository with version "1.0":
+Use ++docker tag` in order to **tag a local image** that has ID "e23aaea5dff1" into the "ubuntu_wget" image name repository with version/tag "1.0":
 
 ```{bash}
 docker tag e23aaea5dff1 --tag ubuntu_wget:1.0
@@ -877,8 +922,11 @@ CMD ["https://cdn-images-1.medium.com/max/1600/1*_NQN6_YnxS29m8vFzWYlEg.png"]
 docker build -t mytestimage2 .
 ```
 
-It will start from the last line.
-This is OK most of the times and very convenient for testing and trying new steps, but it may lead to errors when versions are updated (either FROM image or included packages). For that it is benefitial to start from scratch with ```--no-cache``` tag.
+It will start from the last line, and not re-run commands before the modification that were successfully built.
+<br>
+This is OK most of the times and very convenient for testing and trying new steps, but it may lead to errors when versions are updated (either FROM image or included packages). 
+<br>
+It is beneficial to start from scratch with ```--no-cache``` option when building the image.
 
 ```{bash}
 docker build --no-cache -t mytestimage2 .
