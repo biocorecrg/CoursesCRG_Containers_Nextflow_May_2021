@@ -9,7 +9,7 @@ may-3-4-containers
 day-1-docker
 day-2-singularity
 may-10-11-nextflow
-day-3-fetch-understand-run-modify
+day-3-understand-the-code-run-modify
 day-4-write-and-share
 introduction-to-containers
 what-are-containers
