@@ -1201,6 +1201,112 @@ workflow {
 
 So we passed the **samples_log** output to the multiqc process after mixing it with the output channel from the fastqc process.
 
+## Profiles 
+For deploying a pipeline on a cluster environment or a cloud we need to indicate some information on the **nextflow.config** file. 
+
+In particular we need to indicate the kind of [executor](https://www.nextflow.io/docs/latest/process.html#executor) to be used. In the Nextflow framework architecture, the executor indicates which is the batch-queuing system to use to submit jobs to the HPC or to the cloud. 
+The executor is completely abstracted, so you can switch from SGE to SLURM just by changing this parameter in the configuration file.
+
+You can group different class of configuration or **profiles** within a single **nextflow.config** file. In this way that you can indicate at run time which executor and resources to use for a pipeline execution.
+
+Let's inspect the **nextflow.config** file in **test3** folder. We can look at three different profiles:
+
+- standard
+- cluster
+- cloud
+
+The first one indicates the resources needed for running the pipeline locally. They are quite small since we have little power and CPUs on the test node.
+
+```{java, eval=FALSE, echo=TRUE}
+
+profiles {
+  standard {
+     process {
+        containerOptions = { workflow.containerEngine == "docker" ? '-u $(id -u):$(id -g)': null}
+        executor="local"
+        memory='0.6G'
+        cpus='1'
+        time='6h'
+
+        withLabel: 'twocpus' {
+            memory='0.6G'
+            cpus='1'
+        }
+   	  }
+   }
+ ```
+ 
+As you can see we indicate explicitly the **local** executor. So this will be the default when running the pipeline indicating no profiles.
+
+The second one is **cluster**
+
+```{java, eval=FALSE, echo=TRUE}
+
+   cluster {
+     process {
+        containerOptions = { workflow.containerEngine == "docker" ? '-u $(id -u):$(id -g)': null}
+        executor="SGE"
+        queue="smallcpus"
+
+        memory='1G'
+        cpus='1'
+        time='6h'
+
+        withLabel: 'twocpus' {
+            queue="bigcpus"
+            memory='4G'
+            cpus='2'
+        }
+      }
+   }
+```
+
+This indicates that the system uses Sun Grid Engine as job scheduler and that we have different queues for small jobs and more intensive ones.
+
+
+## Deployment in the AWS cloud 
+
+The final profile is for running the pipeline in the Amazon Cloud, known as Amazon Web Services or AWS. In particular we will use AWS Batch that allows the execution of containerised workloads in the Amazon cloud infrastructure.
+
+```{java, eval=FALSE, echo=TRUE}
+
+   cloud {
+    workDir = 's3://class-bucket-1/work'
+    aws.region = 'eu-central-1'
+    aws.batch.cliPath = '/home/ec2-user/miniconda/bin/aws'
+    
+   process {
+       containerOptions = { workflow.containerEngine == "docker" ? '-u $(id -u):$(id -g)': null}
+       executor = 'awsbatch'
+       queue = 'spot'
+       memory='1G'
+       cpus='1'
+       time='6h'
+
+       withLabel: 'twocpus' {
+           memory='0.6G'
+           cpus='2'
+       }
+    }
+  }
+```
+
+We indicate some aws specific parameters (region and cliPath) and the executor that is awsbatch. Then we indicates that the working directory, that is normally written locally, to be mounted as [S3 volume](https://aws.amazon.com/s3/). This is mandatory when running nextflow on the cloud.
+We can now launch the pipeline indicating **-profile cloud**
+
+```{bash, eval=FALSE, echo=TRUE}
+nextflow run test3.nf -bg -with-docker -profile cloud > log
+```
+
+We can see that there is no more a **work** folder because is on the AWS cloud and that the output is then copied locally. 
+
+Sometimes you can find that the Nextflow process itself is very memory intensive and the main node can run out of memory. To avoid this you can reduce the memory needed by setting an environmental variable:
+
+```{bash, eval=FALSE, echo=TRUE}
+export NXF_OPTS="-Xms50m -Xmx500m"
+
+```
+
 ## Modules and re-usage of the code
 A great advance of the new DLS2 is to allow the modularization of the code. In particular you can move a named workflow within a module and keep it apart for being accessed from different pipelines. Looking at the test4 folder will give you an idea of what is the code using modules.
 
@@ -1482,11 +1588,6 @@ We finally go to the tower website again:
 
 ```{r, out.width="800px", echo=FALSE, eval = TRUE }
 knitr::include_graphics('docs/images/tower3.png')
-```
-
-
-```{r, out.width="800px", echo=FALSE, eval = TRUE }
-knitr::include_graphics('docs/images/tower4.png')
 ```
 
 ## Share Nextflow pipelines and good practices
