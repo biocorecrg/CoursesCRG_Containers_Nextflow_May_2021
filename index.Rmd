@@ -113,25 +113,24 @@ Applicants are not expected to have used neither Linux containers nor Nextflow w
 
 ### May 10-11: Nextflow
 
-#### Day 3: fetch, understand, run, modify
+#### Day 3: Understand the code, run, modify
 
-- Nextflow pipeline repositories.
-  - hands-on: fetch X pipeline.
-- Run an existing Nextflow pipeline.
-- Understand Nextflow main files (main.nf and config files).
+- Introduction to Nextflow
+- Scripting
 - Basic concepts:
-  - Processes and channels
-- Nextflow configuration files.
-- Modify and run a Nextflow pipeline.
+  - Channels, processes and workflows
+- The work folder and its structure
+- The log file
+- Resuming pipelines
 
 #### Day 4: Write and share
 
-- Write Nextflow pipeline from scratch.
-- Run Nextflow with containers.
-- Choose either Docker or Singularity.
-- Run Nextflow in a computing cluster (e.g. HPC).
-  - Definition of computing requirements and queues.
-  - Profiles.
-- Share Nextflow pipelines and good practices. 
+- Decoupling configuration and main script
+- Run Nextflow with containers
+- Run Nextflow in a computing cluster (e.g. HPC)
+  - Definition of computing requirements and queues
+  - Profiles
+- Modules, subworkflows and reuse of the code
+- Share Nextflow pipelines and good practices 
 
 
