@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>5.13 EXERCISE 3 | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines</title>
-  <meta name="description" content="5.13 EXERCISE 3 | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
+  <title>6.6 Deployment in the AWS cloud | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines</title>
+  <meta name="description" content="6.6 Deployment in the AWS cloud | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="5.13 EXERCISE 3 | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
+  <meta property="og:title" content="6.6 Deployment in the AWS cloud | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="5.13 EXERCISE 3 | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
+  <meta name="twitter:title" content="6.6 Deployment in the AWS cloud | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="more-complex-scripts.html"/>
-<link rel="next" href="resuming-your-pipeline.html"/>
+<link rel="prev" href="profiles.html"/>
+<link rel="next" href="modules-and-re-usage-of-the-code.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -270,31 +270,43 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="exercise-3" class="section level2">
-<h2><span class="header-section-number">5.13</span> EXERCISE 3</h2>
-<p>Write the first workflow using pipes. Nextflow DLS2 allows you to use pipes for connecting channels via input / output.
-See documentation here:</p>
-<p><a href="https://www.nextflow.io/docs/latest/dsl2.html#pipes">https://www.nextflow.io/docs/latest/dsl2.html#pipes</a></p>
-<details>
-<summary>
-<h5>
-<em>Answer</em>
-</h5>
-<p></summary></p>
-<pre class="nextflow"><code>workflow flow1 {
-    take: sequences
-    main:
-    splitSequences(sequences) | reverseSequence | view()
-}</code></pre>
-</details>
+<div id="deployment-in-the-aws-cloud" class="section level2">
+<h2><span class="header-section-number">6.6</span> Deployment in the AWS cloud</h2>
+<p>The final profile is for running the pipeline in the Amazon Cloud, known as Amazon Web Services or AWS. In particular we will use AWS Batch that allows the execution of containerised workloads in the Amazon cloud infrastructure.</p>
+<div class="sourceCode" id="cb140"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb140-1"><a href="deployment-in-the-aws-cloud.html#cb140-1"></a></span>
+<span id="cb140-2"><a href="deployment-in-the-aws-cloud.html#cb140-2"></a>   cloud {</span>
+<span id="cb140-3"><a href="deployment-in-the-aws-cloud.html#cb140-3"></a>    workDir = &#39;s3:<span class="co">//class-bucket-1/work&#39;</span></span>
+<span id="cb140-4"><a href="deployment-in-the-aws-cloud.html#cb140-4"></a>    aws.<span class="fu">region</span> = &#39;eu-central-<span class="dv">1</span>&#39;</span>
+<span id="cb140-5"><a href="deployment-in-the-aws-cloud.html#cb140-5"></a>    aws.<span class="fu">batch</span>.<span class="fu">cliPath</span> = &#39;/home/ec2-user/miniconda/bin/aws&#39;</span>
+<span id="cb140-6"><a href="deployment-in-the-aws-cloud.html#cb140-6"></a>    </span>
+<span id="cb140-7"><a href="deployment-in-the-aws-cloud.html#cb140-7"></a>   process {</span>
+<span id="cb140-8"><a href="deployment-in-the-aws-cloud.html#cb140-8"></a>       containerOptions = { workflow.<span class="fu">containerEngine</span> == <span class="st">&quot;docker&quot;</span> ? &#39;-u $(id -u):$(id -g)&#39;: <span class="kw">null</span>}</span>
+<span id="cb140-9"><a href="deployment-in-the-aws-cloud.html#cb140-9"></a>       executor = &#39;awsbatch&#39;</span>
+<span id="cb140-10"><a href="deployment-in-the-aws-cloud.html#cb140-10"></a>       queue = &#39;spot&#39;</span>
+<span id="cb140-11"><a href="deployment-in-the-aws-cloud.html#cb140-11"></a>       memory=&#39;1G&#39;</span>
+<span id="cb140-12"><a href="deployment-in-the-aws-cloud.html#cb140-12"></a>       cpus=<span class="ch">&#39;1&#39;</span></span>
+<span id="cb140-13"><a href="deployment-in-the-aws-cloud.html#cb140-13"></a>       time=&#39;6h&#39;</span>
+<span id="cb140-14"><a href="deployment-in-the-aws-cloud.html#cb140-14"></a></span>
+<span id="cb140-15"><a href="deployment-in-the-aws-cloud.html#cb140-15"></a>       withLabel: &#39;twocpus&#39; {</span>
+<span id="cb140-16"><a href="deployment-in-the-aws-cloud.html#cb140-16"></a>           memory=&#39;<span class="fl">0.</span>6G&#39;</span>
+<span id="cb140-17"><a href="deployment-in-the-aws-cloud.html#cb140-17"></a>           cpus=<span class="ch">&#39;2&#39;</span></span>
+<span id="cb140-18"><a href="deployment-in-the-aws-cloud.html#cb140-18"></a>       }</span>
+<span id="cb140-19"><a href="deployment-in-the-aws-cloud.html#cb140-19"></a>    }</span>
+<span id="cb140-20"><a href="deployment-in-the-aws-cloud.html#cb140-20"></a>  }</span></code></pre></div>
+<p>We indicate some aws specific parameters (region and cliPath) and the executor that is awsbatch. Then we indicates that the working directory, that is normally written locally, to be mounted as <a href="https://aws.amazon.com/s3/">S3 volume</a>. This is mandatory when running nextflow on the cloud.
+We can now launch the pipeline indicating <strong>-profile cloud</strong></p>
+<div class="sourceCode" id="cb141"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb141-1"><a href="deployment-in-the-aws-cloud.html#cb141-1"></a><span class="ex">nextflow</span> run test3.nf -bg -with-docker -profile cloud <span class="op">&gt;</span> log</span></code></pre></div>
+<p>We can see that there is no more a <strong>work</strong> folder because is on the AWS cloud and that the output is then copied locally.</p>
+<p>Sometimes you can find that the Nextflow process itself is very memory intensive and the main node can run out of memory. To avoid this you can reduce the memory needed by setting an environmental variable:</p>
+<div class="sourceCode" id="cb142"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb142-1"><a href="deployment-in-the-aws-cloud.html#cb142-1"></a><span class="bu">export</span> <span class="va">NXF_OPTS=</span><span class="st">&quot;-Xms50m -Xmx500m&quot;</span></span></code></pre></div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="more-complex-scripts.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="resuming-your-pipeline.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="profiles.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="modules-and-re-usage-of-the-code.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

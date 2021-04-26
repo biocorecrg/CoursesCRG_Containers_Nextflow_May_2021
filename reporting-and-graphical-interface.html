@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>6.7 Reporting and graphical interface | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines</title>
-  <meta name="description" content="6.7 Reporting and graphical interface | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
+  <title>6.9 Reporting and graphical interface | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines</title>
+  <meta name="description" content="6.9 Reporting and graphical interface | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="6.7 Reporting and graphical interface | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
+  <meta property="og:title" content="6.9 Reporting and graphical interface | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="6.7 Reporting and graphical interface | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
+  <meta name="twitter:title" content="6.9 Reporting and graphical interface | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
   
   
   
@@ -243,10 +243,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.2" data-path="adding-a-help-section-for-the-whole-pipeline.html"><a href="adding-a-help-section-for-the-whole-pipeline.html"><i class="fa fa-check"></i><b>6.2</b> Adding a help section for the whole pipeline</a></li>
 <li class="chapter" data-level="6.3" data-path="using-singularity.html"><a href="using-singularity.html"><i class="fa fa-check"></i><b>6.3</b> Using Singularity</a></li>
 <li class="chapter" data-level="6.4" data-path="adding-more-steps.html"><a href="adding-more-steps.html"><i class="fa fa-check"></i><b>6.4</b> Adding more steps</a></li>
-<li class="chapter" data-level="6.5" data-path="modules-and-re-usage-of-the-code.html"><a href="modules-and-re-usage-of-the-code.html"><i class="fa fa-check"></i><b>6.5</b> Modules and re-usage of the code</a></li>
-<li class="chapter" data-level="6.6" data-path="exercise-4.html"><a href="exercise-4.html"><i class="fa fa-check"></i><b>6.6</b> EXERCISE 4</a></li>
-<li class="chapter" data-level="6.7" data-path="reporting-and-graphical-interface.html"><a href="reporting-and-graphical-interface.html"><i class="fa fa-check"></i><b>6.7</b> Reporting and graphical interface</a></li>
-<li class="chapter" data-level="6.8" data-path="share-nextflow-pipelines-and-good-practices.html"><a href="share-nextflow-pipelines-and-good-practices.html"><i class="fa fa-check"></i><b>6.8</b> Share Nextflow pipelines and good practices</a></li>
+<li class="chapter" data-level="6.5" data-path="profiles.html"><a href="profiles.html"><i class="fa fa-check"></i><b>6.5</b> Profiles</a></li>
+<li class="chapter" data-level="6.6" data-path="deployment-in-the-aws-cloud.html"><a href="deployment-in-the-aws-cloud.html"><i class="fa fa-check"></i><b>6.6</b> Deployment in the AWS cloud</a></li>
+<li class="chapter" data-level="6.7" data-path="modules-and-re-usage-of-the-code.html"><a href="modules-and-re-usage-of-the-code.html"><i class="fa fa-check"></i><b>6.7</b> Modules and re-usage of the code</a></li>
+<li class="chapter" data-level="6.8" data-path="exercise-4.html"><a href="exercise-4.html"><i class="fa fa-check"></i><b>6.8</b> EXERCISE 4</a></li>
+<li class="chapter" data-level="6.9" data-path="reporting-and-graphical-interface.html"><a href="reporting-and-graphical-interface.html"><i class="fa fa-check"></i><b>6.9</b> Reporting and graphical interface</a></li>
+<li class="chapter" data-level="6.10" data-path="share-nextflow-pipelines-and-good-practices.html"><a href="share-nextflow-pipelines-and-good-practices.html"><i class="fa fa-check"></i><b>6.10</b> Share Nextflow pipelines and good practices</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://biocore.crg.eu/wiki/Main_Page" target="blank">BIOINFORMATICS CORE @ CRG</a></li>
@@ -269,9 +271,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="reporting-and-graphical-interface" class="section level2">
-<h2><span class="header-section-number">6.7</span> Reporting and graphical interface</h2>
+<h2><span class="header-section-number">6.9</span> Reporting and graphical interface</h2>
 <p>Nextflow has an embedded function for reporting a number of informations about the resources needed by each job and the timing. Just adding a parameter will give you a nice html report.</p>
-<div class="sourceCode" id="cb146"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb146-1"><a href="reporting-and-graphical-interface.html#cb146-1"></a>nextflow run test5.<span class="fu">nf</span> -with-docker -bg -with-report &gt; log</span></code></pre></div>
+<div class="sourceCode" id="cb151"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb151-1"><a href="reporting-and-graphical-interface.html#cb151-1"></a>nextflow run test5.<span class="fu">nf</span> -with-docker -bg -with-report &gt; log</span></code></pre></div>
 <p>Nextflow Tower is an open source monitoring and managing platform for Nextflow workflows. There are two versions:
 - Open source for monitoring of single pipelines
 - Commercial one for workflow management, monitoring and resource optimisation.</p>
@@ -284,24 +286,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="docs/images/tower1.png" width="800px" /></p>
 <p>We then follow the instructions exporting two environmental variables:</p>
 <p><img src="docs/images/tower2.png" width="800px" /></p>
-<div class="sourceCode" id="cb147"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb147-1"><a href="reporting-and-graphical-interface.html#cb147-1"></a><span class="bu">export</span> <span class="va">TOWER_ACCESS_TOKEN=</span>*******<span class="va">YOUR</span>***<span class="va">TOKEN</span>*****<span class="va">HERE</span>*******</span>
-<span id="cb147-2"><a href="reporting-and-graphical-interface.html#cb147-2"></a><span class="bu">export</span> <span class="va">NXF_VER=</span>20.09.1-edge </span></code></pre></div>
+<div class="sourceCode" id="cb152"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb152-1"><a href="reporting-and-graphical-interface.html#cb152-1"></a><span class="bu">export</span> <span class="va">TOWER_ACCESS_TOKEN=</span>*******<span class="va">YOUR</span>***<span class="va">TOKEN</span>*****<span class="va">HERE</span>*******</span>
+<span id="cb152-2"><a href="reporting-and-graphical-interface.html#cb152-2"></a><span class="bu">export</span> <span class="va">NXF_VER=</span>20.09.1-edge </span></code></pre></div>
 <p>we then launch the pipeline:</p>
-<div class="sourceCode" id="cb148"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb148-1"><a href="reporting-and-graphical-interface.html#cb148-1"></a><span class="ex">nextflow</span> run test5.nf -with-singularity -with-tower -bg <span class="op">&gt;</span> log</span>
-<span id="cb148-2"><a href="reporting-and-graphical-interface.html#cb148-2"></a></span>
-<span id="cb148-3"><a href="reporting-and-graphical-interface.html#cb148-3"></a></span>
-<span id="cb148-4"><a href="reporting-and-graphical-interface.html#cb148-4"></a><span class="ex">CAPSULE</span>: Downloading dependency io.nextflow:nf-tower:jar:20.09.1-edge</span>
-<span id="cb148-5"><a href="reporting-and-graphical-interface.html#cb148-5"></a><span class="ex">CAPSULE</span>: Downloading dependency org.codehaus.groovy:groovy-nio:jar:3.0.5</span>
-<span id="cb148-6"><a href="reporting-and-graphical-interface.html#cb148-6"></a><span class="ex">CAPSULE</span>: Downloading dependency io.nextflow:nextflow:jar:20.09.1-edge</span>
-<span id="cb148-7"><a href="reporting-and-graphical-interface.html#cb148-7"></a><span class="ex">CAPSULE</span>: Downloading dependency io.nextflow:nf-httpfs:jar:20.09.1-edge</span>
-<span id="cb148-8"><a href="reporting-and-graphical-interface.html#cb148-8"></a><span class="ex">CAPSULE</span>: Downloading dependency org.codehaus.groovy:groovy-json:jar:3.0.5</span>
-<span id="cb148-9"><a href="reporting-and-graphical-interface.html#cb148-9"></a><span class="ex">CAPSULE</span>: Downloading dependency org.codehaus.groovy:groovy:jar:3.0.5</span>
-<span id="cb148-10"><a href="reporting-and-graphical-interface.html#cb148-10"></a><span class="ex">CAPSULE</span>: Downloading dependency io.nextflow:nf-amazon:jar:20.09.1-edge</span>
-<span id="cb148-11"><a href="reporting-and-graphical-interface.html#cb148-11"></a><span class="ex">CAPSULE</span>: Downloading dependency org.codehaus.groovy:groovy-templates:jar:3.0.5</span>
-<span id="cb148-12"><a href="reporting-and-graphical-interface.html#cb148-12"></a><span class="ex">CAPSULE</span>: Downloading dependency org.codehaus.groovy:groovy-xml:jar:3.0.5</span></code></pre></div>
+<div class="sourceCode" id="cb153"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb153-1"><a href="reporting-and-graphical-interface.html#cb153-1"></a><span class="ex">nextflow</span> run test5.nf -with-singularity -with-tower -bg <span class="op">&gt;</span> log</span>
+<span id="cb153-2"><a href="reporting-and-graphical-interface.html#cb153-2"></a></span>
+<span id="cb153-3"><a href="reporting-and-graphical-interface.html#cb153-3"></a></span>
+<span id="cb153-4"><a href="reporting-and-graphical-interface.html#cb153-4"></a><span class="ex">CAPSULE</span>: Downloading dependency io.nextflow:nf-tower:jar:20.09.1-edge</span>
+<span id="cb153-5"><a href="reporting-and-graphical-interface.html#cb153-5"></a><span class="ex">CAPSULE</span>: Downloading dependency org.codehaus.groovy:groovy-nio:jar:3.0.5</span>
+<span id="cb153-6"><a href="reporting-and-graphical-interface.html#cb153-6"></a><span class="ex">CAPSULE</span>: Downloading dependency io.nextflow:nextflow:jar:20.09.1-edge</span>
+<span id="cb153-7"><a href="reporting-and-graphical-interface.html#cb153-7"></a><span class="ex">CAPSULE</span>: Downloading dependency io.nextflow:nf-httpfs:jar:20.09.1-edge</span>
+<span id="cb153-8"><a href="reporting-and-graphical-interface.html#cb153-8"></a><span class="ex">CAPSULE</span>: Downloading dependency org.codehaus.groovy:groovy-json:jar:3.0.5</span>
+<span id="cb153-9"><a href="reporting-and-graphical-interface.html#cb153-9"></a><span class="ex">CAPSULE</span>: Downloading dependency org.codehaus.groovy:groovy:jar:3.0.5</span>
+<span id="cb153-10"><a href="reporting-and-graphical-interface.html#cb153-10"></a><span class="ex">CAPSULE</span>: Downloading dependency io.nextflow:nf-amazon:jar:20.09.1-edge</span>
+<span id="cb153-11"><a href="reporting-and-graphical-interface.html#cb153-11"></a><span class="ex">CAPSULE</span>: Downloading dependency org.codehaus.groovy:groovy-templates:jar:3.0.5</span>
+<span id="cb153-12"><a href="reporting-and-graphical-interface.html#cb153-12"></a><span class="ex">CAPSULE</span>: Downloading dependency org.codehaus.groovy:groovy-xml:jar:3.0.5</span></code></pre></div>
 <p>We finally go to the tower website again:</p>
 <p><img src="docs/images/tower3.png" width="800px" /></p>
-<p><img src="docs/images/tower4.png" width="800px" /></p>
 </div>
             </section>
 
