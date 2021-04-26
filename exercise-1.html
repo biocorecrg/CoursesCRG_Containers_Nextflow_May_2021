@@ -177,7 +177,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.2.7" data-path="using-existing-images.html"><a href="using-existing-images.html#docker-exec-execute-process-in-running-container"><i class="fa fa-check"></i><b>3.2.7</b> docker exec: execute process in running container</a></li>
 <li class="chapter" data-level="3.2.8" data-path="using-existing-images.html"><a href="using-existing-images.html#docker-stop-start-restart-actions-on-container"><i class="fa fa-check"></i><b>3.2.8</b> docker stop, start, restart: actions on container</a></li>
 <li class="chapter" data-level="3.2.9" data-path="using-existing-images.html"><a href="using-existing-images.html#docker-rm-docker-rmi-clean-up"><i class="fa fa-check"></i><b>3.2.9</b> docker rm, docker rmi: clean up!</a></li>
-<li class="chapter" data-level="3.2.10" data-path="using-existing-images.html"><a href="using-existing-images.html#volumes"><i class="fa fa-check"></i><b>3.2.10</b> Volumes</a></li>
+<li class="chapter" data-level="3.2.10" data-path="using-existing-images.html"><a href="using-existing-images.html#exercise"><i class="fa fa-check"></i><b>3.2.10</b> Exercise</a></li>
 </ul></li>
 <li class="chapter" data-level="3.3" data-path="docker-recipes.html"><a href="docker-recipes.html"><i class="fa fa-check"></i><b>3.3</b> Docker recipes</a><ul>
 <li class="chapter" data-level="3.3.1" data-path="docker-recipes.html"><a href="docker-recipes.html#building-recipes"><i class="fa fa-check"></i><b>3.3.1</b> Building recipes</a></li>
@@ -187,7 +187,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.3.5" data-path="docker-recipes.html"><a href="docker-recipes.html#more-advanced-image-building"><i class="fa fa-check"></i><b>3.3.5</b> More advanced image building</a></li>
 <li class="chapter" data-level="3.3.6" data-path="docker-recipes.html"><a href="docker-recipes.html#additional-commands"><i class="fa fa-check"></i><b>3.3.6</b> Additional commands</a></li>
 </ul></li>
-<li class="chapter" data-level="3.4" data-path="ports.html"><a href="ports.html"><i class="fa fa-check"></i><b>3.4</b> Ports</a></li>
+<li class="chapter" data-level="3.4" data-path="volumes.html"><a href="volumes.html"><i class="fa fa-check"></i><b>3.4</b> Volumes</a></li>
+<li class="chapter" data-level="3.5" data-path="ports.html"><a href="ports.html"><i class="fa fa-check"></i><b>3.5</b> Ports</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="singularity.html"><a href="singularity.html"><i class="fa fa-check"></i><b>4</b> Singularity</a><ul>
 <li class="chapter" data-level="4.1" data-path="introduction-to-singularity.html"><a href="introduction-to-singularity.html"><i class="fa fa-check"></i><b>4.1</b> Introduction to Singularity</a><ul>
@@ -276,20 +277,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <em>Answer</em>
 </h5>
 <p></summary></p>
-<div class="sourceCode" id="cb90"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb90-1"><a href="exercise-1.html#cb90-1"></a>#!/usr/bin/env nextflow</span>
-<span id="cb90-2"><a href="exercise-1.html#cb90-2"></a></span>
-<span id="cb90-3"><a href="exercise-1.html#cb90-3"></a>nextflow.<span class="fu">enable</span>.<span class="fu">dsl</span>=<span class="dv">2</span></span>
-<span id="cb90-4"><a href="exercise-1.html#cb90-4"></a></span>
-<span id="cb90-5"><a href="exercise-1.html#cb90-5"></a><span class="co">/*</span></span>
-<span id="cb90-6"><a href="exercise-1.html#cb90-6"></a><span class="co">* Let&#39;s create the channel `my_files`</span></span>
-<span id="cb90-7"><a href="exercise-1.html#cb90-7"></a><span class="co">* using the method fromPath </span></span>
-<span id="cb90-8"><a href="exercise-1.html#cb90-8"></a><span class="co">*/</span></span>
-<span id="cb90-9"><a href="exercise-1.html#cb90-9"></a></span>
-<span id="cb90-10"><a href="exercise-1.html#cb90-10"></a><span class="bu">Channel</span></span>
-<span id="cb90-11"><a href="exercise-1.html#cb90-11"></a>    .<span class="fu">fromFilePairs</span>( <span class="st">&quot;file_{1,2}.txt&quot;</span> )</span>
-<span id="cb90-12"><a href="exercise-1.html#cb90-12"></a>    .<span class="fu">set</span> {my_fyles}</span>
-<span id="cb90-13"><a href="exercise-1.html#cb90-13"></a></span>
-<span id="cb90-14"><a href="exercise-1.html#cb90-14"></a>my_fyles.<span class="fu">view</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb89"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb89-1"><a href="exercise-1.html#cb89-1"></a>#!/usr/bin/env nextflow</span>
+<span id="cb89-2"><a href="exercise-1.html#cb89-2"></a></span>
+<span id="cb89-3"><a href="exercise-1.html#cb89-3"></a>nextflow.<span class="fu">enable</span>.<span class="fu">dsl</span>=<span class="dv">2</span></span>
+<span id="cb89-4"><a href="exercise-1.html#cb89-4"></a></span>
+<span id="cb89-5"><a href="exercise-1.html#cb89-5"></a><span class="co">/*</span></span>
+<span id="cb89-6"><a href="exercise-1.html#cb89-6"></a><span class="co">* Let&#39;s create the channel `my_files`</span></span>
+<span id="cb89-7"><a href="exercise-1.html#cb89-7"></a><span class="co">* using the method fromPath </span></span>
+<span id="cb89-8"><a href="exercise-1.html#cb89-8"></a><span class="co">*/</span></span>
+<span id="cb89-9"><a href="exercise-1.html#cb89-9"></a></span>
+<span id="cb89-10"><a href="exercise-1.html#cb89-10"></a><span class="bu">Channel</span></span>
+<span id="cb89-11"><a href="exercise-1.html#cb89-11"></a>    .<span class="fu">fromFilePairs</span>( <span class="st">&quot;file_{1,2}.txt&quot;</span> )</span>
+<span id="cb89-12"><a href="exercise-1.html#cb89-12"></a>    .<span class="fu">set</span> {my_fyles}</span>
+<span id="cb89-13"><a href="exercise-1.html#cb89-13"></a></span>
+<span id="cb89-14"><a href="exercise-1.html#cb89-14"></a>my_fyles.<span class="fu">view</span>()</span></code></pre></div>
 </details>
 </div>
             </section>

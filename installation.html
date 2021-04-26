@@ -177,7 +177,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.2.7" data-path="using-existing-images.html"><a href="using-existing-images.html#docker-exec-execute-process-in-running-container"><i class="fa fa-check"></i><b>3.2.7</b> docker exec: execute process in running container</a></li>
 <li class="chapter" data-level="3.2.8" data-path="using-existing-images.html"><a href="using-existing-images.html#docker-stop-start-restart-actions-on-container"><i class="fa fa-check"></i><b>3.2.8</b> docker stop, start, restart: actions on container</a></li>
 <li class="chapter" data-level="3.2.9" data-path="using-existing-images.html"><a href="using-existing-images.html#docker-rm-docker-rmi-clean-up"><i class="fa fa-check"></i><b>3.2.9</b> docker rm, docker rmi: clean up!</a></li>
-<li class="chapter" data-level="3.2.10" data-path="using-existing-images.html"><a href="using-existing-images.html#volumes"><i class="fa fa-check"></i><b>3.2.10</b> Volumes</a></li>
+<li class="chapter" data-level="3.2.10" data-path="using-existing-images.html"><a href="using-existing-images.html#exercise"><i class="fa fa-check"></i><b>3.2.10</b> Exercise</a></li>
 </ul></li>
 <li class="chapter" data-level="3.3" data-path="docker-recipes.html"><a href="docker-recipes.html"><i class="fa fa-check"></i><b>3.3</b> Docker recipes</a><ul>
 <li class="chapter" data-level="3.3.1" data-path="docker-recipes.html"><a href="docker-recipes.html#building-recipes"><i class="fa fa-check"></i><b>3.3.1</b> Building recipes</a></li>
@@ -187,7 +187,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.3.5" data-path="docker-recipes.html"><a href="docker-recipes.html#more-advanced-image-building"><i class="fa fa-check"></i><b>3.3.5</b> More advanced image building</a></li>
 <li class="chapter" data-level="3.3.6" data-path="docker-recipes.html"><a href="docker-recipes.html#additional-commands"><i class="fa fa-check"></i><b>3.3.6</b> Additional commands</a></li>
 </ul></li>
-<li class="chapter" data-level="3.4" data-path="ports.html"><a href="ports.html"><i class="fa fa-check"></i><b>3.4</b> Ports</a></li>
+<li class="chapter" data-level="3.4" data-path="volumes.html"><a href="volumes.html"><i class="fa fa-check"></i><b>3.4</b> Volumes</a></li>
+<li class="chapter" data-level="3.5" data-path="ports.html"><a href="ports.html"><i class="fa fa-check"></i><b>3.5</b> Ports</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="singularity.html"><a href="singularity.html"><i class="fa fa-check"></i><b>4</b> Singularity</a><ul>
 <li class="chapter" data-level="4.1" data-path="introduction-to-singularity.html"><a href="introduction-to-singularity.html"><i class="fa fa-check"></i><b>4.1</b> Introduction to Singularity</a><ul>
@@ -269,25 +270,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="installation" class="section level2">
 <h2><span class="header-section-number">5.5</span> Installation</h2>
 <p>We need at least Java version 8.</p>
-<div class="sourceCode" id="cb82"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb82-1"><a href="installation.html#cb82-1"></a><span class="ex">java</span> -version</span></code></pre></div>
+<div class="sourceCode" id="cb81"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb81-1"><a href="installation.html#cb81-1"></a><span class="ex">java</span> -version</span></code></pre></div>
 <p>Then we can install it by typing:</p>
-<div class="sourceCode" id="cb83"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb83-1"><a href="installation.html#cb83-1"></a><span class="ex">curl</span> -s https://get.nextflow.io <span class="kw">|</span> <span class="fu">bash</span></span></code></pre></div>
+<div class="sourceCode" id="cb82"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb82-1"><a href="installation.html#cb82-1"></a><span class="ex">curl</span> -s https://get.nextflow.io <span class="kw">|</span> <span class="fu">bash</span></span></code></pre></div>
 <p>This will create an executable called nextflow that can be moved to /usr/local/bin or where we prefer. We can finally test using:</p>
-<div class="sourceCode" id="cb84"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb84-1"><a href="installation.html#cb84-1"></a><span class="ex">./nextflow</span> run hello</span>
-<span id="cb84-2"><a href="installation.html#cb84-2"></a></span>
-<span id="cb84-3"><a href="installation.html#cb84-3"></a><span class="ex">N</span> E X T F L O W  ~  version 20.07.1</span>
-<span id="cb84-4"><a href="installation.html#cb84-4"></a><span class="ex">Pulling</span> nextflow-io/hello ...</span>
-<span id="cb84-5"><a href="installation.html#cb84-5"></a><span class="ex">downloaded</span> from https://github.com/nextflow-io/hello.git</span>
-<span id="cb84-6"><a href="installation.html#cb84-6"></a><span class="ex">Launching</span> <span class="kw">`</span><span class="ex">nextflow-io/hello</span><span class="kw">`</span> [peaceful_brahmagupta] - revision: 96eb04d6a4 [master]</span>
-<span id="cb84-7"><a href="installation.html#cb84-7"></a><span class="ex">executor</span> <span class="op">&gt;</span>  local (4)</span>
-<span id="cb84-8"><a href="installation.html#cb84-8"></a>[<span class="ex">d7</span>/<span class="ex">d053b5</span>] process <span class="op">&gt;</span> sayHello (4) [<span class="ex">100%</span>] 4 of 4 ✔</span>
-<span id="cb84-9"><a href="installation.html#cb84-9"></a><span class="ex">Ciao</span> world!</span>
-<span id="cb84-10"><a href="installation.html#cb84-10"></a></span>
-<span id="cb84-11"><a href="installation.html#cb84-11"></a><span class="ex">Bonjour</span> world!</span>
-<span id="cb84-12"><a href="installation.html#cb84-12"></a></span>
-<span id="cb84-13"><a href="installation.html#cb84-13"></a><span class="ex">Hello</span> world!</span>
-<span id="cb84-14"><a href="installation.html#cb84-14"></a></span>
-<span id="cb84-15"><a href="installation.html#cb84-15"></a><span class="ex">Hola</span> world!</span></code></pre></div>
+<div class="sourceCode" id="cb83"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb83-1"><a href="installation.html#cb83-1"></a><span class="ex">./nextflow</span> run hello</span>
+<span id="cb83-2"><a href="installation.html#cb83-2"></a></span>
+<span id="cb83-3"><a href="installation.html#cb83-3"></a><span class="ex">N</span> E X T F L O W  ~  version 20.07.1</span>
+<span id="cb83-4"><a href="installation.html#cb83-4"></a><span class="ex">Pulling</span> nextflow-io/hello ...</span>
+<span id="cb83-5"><a href="installation.html#cb83-5"></a><span class="ex">downloaded</span> from https://github.com/nextflow-io/hello.git</span>
+<span id="cb83-6"><a href="installation.html#cb83-6"></a><span class="ex">Launching</span> <span class="kw">`</span><span class="ex">nextflow-io/hello</span><span class="kw">`</span> [peaceful_brahmagupta] - revision: 96eb04d6a4 [master]</span>
+<span id="cb83-7"><a href="installation.html#cb83-7"></a><span class="ex">executor</span> <span class="op">&gt;</span>  local (4)</span>
+<span id="cb83-8"><a href="installation.html#cb83-8"></a>[<span class="ex">d7</span>/<span class="ex">d053b5</span>] process <span class="op">&gt;</span> sayHello (4) [<span class="ex">100%</span>] 4 of 4 ✔</span>
+<span id="cb83-9"><a href="installation.html#cb83-9"></a><span class="ex">Ciao</span> world!</span>
+<span id="cb83-10"><a href="installation.html#cb83-10"></a></span>
+<span id="cb83-11"><a href="installation.html#cb83-11"></a><span class="ex">Bonjour</span> world!</span>
+<span id="cb83-12"><a href="installation.html#cb83-12"></a></span>
+<span id="cb83-13"><a href="installation.html#cb83-13"></a><span class="ex">Hello</span> world!</span>
+<span id="cb83-14"><a href="installation.html#cb83-14"></a></span>
+<span id="cb83-15"><a href="installation.html#cb83-15"></a><span class="ex">Hola</span> world!</span></code></pre></div>
 <p>This command download from the a github repository and it runs the test script hello.</p>
 </div>
             </section>

@@ -37,7 +37,7 @@ docker-exec-execute-process-in-running-container
 docker-stop-start-restart-actions-on-container
 docker-rm-docker-rmi-clean-up
 major-clean
-volumes
+exercise
 docker-recipes
 building-recipes
 basic-instructions
@@ -47,6 +47,7 @@ docker-tag
 build-cache
 more-advanced-image-building
 additional-commands
+volumes
 ports
 singularity
 introduction-to-singularity

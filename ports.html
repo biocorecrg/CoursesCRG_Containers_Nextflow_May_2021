@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>3.4 Ports | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines</title>
-  <meta name="description" content="3.4 Ports | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
+  <title>3.5 Ports | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines</title>
+  <meta name="description" content="3.5 Ports | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="3.4 Ports | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
+  <meta property="og:title" content="3.5 Ports | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="3.4 Ports | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
+  <meta name="twitter:title" content="3.5 Ports | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
   
   
   
@@ -30,7 +30,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="docker-recipes.html"/>
+<link rel="prev" href="volumes.html"/>
 <link rel="next" href="singularity.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -177,7 +177,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.2.7" data-path="using-existing-images.html"><a href="using-existing-images.html#docker-exec-execute-process-in-running-container"><i class="fa fa-check"></i><b>3.2.7</b> docker exec: execute process in running container</a></li>
 <li class="chapter" data-level="3.2.8" data-path="using-existing-images.html"><a href="using-existing-images.html#docker-stop-start-restart-actions-on-container"><i class="fa fa-check"></i><b>3.2.8</b> docker stop, start, restart: actions on container</a></li>
 <li class="chapter" data-level="3.2.9" data-path="using-existing-images.html"><a href="using-existing-images.html#docker-rm-docker-rmi-clean-up"><i class="fa fa-check"></i><b>3.2.9</b> docker rm, docker rmi: clean up!</a></li>
-<li class="chapter" data-level="3.2.10" data-path="using-existing-images.html"><a href="using-existing-images.html#volumes"><i class="fa fa-check"></i><b>3.2.10</b> Volumes</a></li>
+<li class="chapter" data-level="3.2.10" data-path="using-existing-images.html"><a href="using-existing-images.html#exercise"><i class="fa fa-check"></i><b>3.2.10</b> Exercise</a></li>
 </ul></li>
 <li class="chapter" data-level="3.3" data-path="docker-recipes.html"><a href="docker-recipes.html"><i class="fa fa-check"></i><b>3.3</b> Docker recipes</a><ul>
 <li class="chapter" data-level="3.3.1" data-path="docker-recipes.html"><a href="docker-recipes.html#building-recipes"><i class="fa fa-check"></i><b>3.3.1</b> Building recipes</a></li>
@@ -187,7 +187,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.3.5" data-path="docker-recipes.html"><a href="docker-recipes.html#more-advanced-image-building"><i class="fa fa-check"></i><b>3.3.5</b> More advanced image building</a></li>
 <li class="chapter" data-level="3.3.6" data-path="docker-recipes.html"><a href="docker-recipes.html#additional-commands"><i class="fa fa-check"></i><b>3.3.6</b> Additional commands</a></li>
 </ul></li>
-<li class="chapter" data-level="3.4" data-path="ports.html"><a href="ports.html"><i class="fa fa-check"></i><b>3.4</b> Ports</a></li>
+<li class="chapter" data-level="3.4" data-path="volumes.html"><a href="volumes.html"><i class="fa fa-check"></i><b>3.4</b> Volumes</a></li>
+<li class="chapter" data-level="3.5" data-path="ports.html"><a href="ports.html"><i class="fa fa-check"></i><b>3.5</b> Ports</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="singularity.html"><a href="singularity.html"><i class="fa fa-check"></i><b>4</b> Singularity</a><ul>
 <li class="chapter" data-level="4.1" data-path="introduction-to-singularity.html"><a href="introduction-to-singularity.html"><i class="fa fa-check"></i><b>4.1</b> Introduction to Singularity</a><ul>
@@ -267,22 +268,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="ports" class="section level2">
-<h2><span class="header-section-number">3.4</span> Ports</h2>
+<h2><span class="header-section-number">3.5</span> Ports</h2>
 <p>The same as with volumes, but with ports, to access Internet services.</p>
 <p>Syntax: <strong>–publish/-p</strong> <em>host:container</em></p>
-<div class="sourceCode" id="cb55"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb55-1"><a href="ports.html#cb55-1"></a><span class="ex">docker</span> run --detach --name webserver nginx</span>
+<div class="sourceCode" id="cb54"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb54-1"><a href="ports.html#cb54-1"></a><span class="ex">docker</span> run --detach --name webserver nginx</span>
+<span id="cb54-2"><a href="ports.html#cb54-2"></a><span class="ex">curl</span> localhost:80</span>
+<span id="cb54-3"><a href="ports.html#cb54-3"></a><span class="ex">docker</span> exec webserver curl localhost:80</span>
+<span id="cb54-4"><a href="ports.html#cb54-4"></a><span class="ex">docker</span> rm -f webserver</span></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb55-1"><a href="ports.html#cb55-1"></a><span class="ex">docker</span> run --detach --name webserver --publish 80:80 nginx</span>
 <span id="cb55-2"><a href="ports.html#cb55-2"></a><span class="ex">curl</span> localhost:80</span>
-<span id="cb55-3"><a href="ports.html#cb55-3"></a><span class="ex">docker</span> exec webserver curl localhost:80</span>
-<span id="cb55-4"><a href="ports.html#cb55-4"></a><span class="ex">docker</span> rm -f webserver</span></code></pre></div>
-<div class="sourceCode" id="cb56"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb56-1"><a href="ports.html#cb56-1"></a><span class="ex">docker</span> run --detach --name webserver --publish 80:80 nginx</span>
+<span id="cb55-3"><a href="ports.html#cb55-3"></a><span class="ex">docker</span> rm -f webserver</span></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb56-1"><a href="ports.html#cb56-1"></a><span class="ex">docker</span> run --detach --name webserver -p 8080:80 nginx</span>
 <span id="cb56-2"><a href="ports.html#cb56-2"></a><span class="ex">curl</span> localhost:80</span>
-<span id="cb56-3"><a href="ports.html#cb56-3"></a><span class="ex">docker</span> rm -f webserver</span></code></pre></div>
-<div class="sourceCode" id="cb57"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb57-1"><a href="ports.html#cb57-1"></a><span class="ex">docker</span> run --detach --name webserver -p 8080:80 nginx</span>
-<span id="cb57-2"><a href="ports.html#cb57-2"></a><span class="ex">curl</span> localhost:80</span>
-<span id="cb57-3"><a href="ports.html#cb57-3"></a><span class="ex">curl</span> localhost:8080</span>
-<span id="cb57-4"><a href="ports.html#cb57-4"></a><span class="ex">docker</span> exec webserver curl localhost:80</span>
-<span id="cb57-5"><a href="ports.html#cb57-5"></a><span class="ex">docker</span> exec webserver curl localhost:8080</span>
-<span id="cb57-6"><a href="ports.html#cb57-6"></a><span class="ex">docker</span> rm -f webserver</span></code></pre></div>
+<span id="cb56-3"><a href="ports.html#cb56-3"></a><span class="ex">curl</span> localhost:8080</span>
+<span id="cb56-4"><a href="ports.html#cb56-4"></a><span class="ex">docker</span> exec webserver curl localhost:80</span>
+<span id="cb56-5"><a href="ports.html#cb56-5"></a><span class="ex">docker</span> exec webserver curl localhost:8080</span>
+<span id="cb56-6"><a href="ports.html#cb56-6"></a><span class="ex">docker</span> rm -f webserver</span></code></pre></div>
 
 </div>
 <!-- </div> -->
@@ -291,7 +292,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="docker-recipes.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="volumes.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="singularity.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>

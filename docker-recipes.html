@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="using-existing-images.html"/>
-<link rel="next" href="ports.html"/>
+<link rel="next" href="volumes.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -177,7 +177,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.2.7" data-path="using-existing-images.html"><a href="using-existing-images.html#docker-exec-execute-process-in-running-container"><i class="fa fa-check"></i><b>3.2.7</b> docker exec: execute process in running container</a></li>
 <li class="chapter" data-level="3.2.8" data-path="using-existing-images.html"><a href="using-existing-images.html#docker-stop-start-restart-actions-on-container"><i class="fa fa-check"></i><b>3.2.8</b> docker stop, start, restart: actions on container</a></li>
 <li class="chapter" data-level="3.2.9" data-path="using-existing-images.html"><a href="using-existing-images.html#docker-rm-docker-rmi-clean-up"><i class="fa fa-check"></i><b>3.2.9</b> docker rm, docker rmi: clean up!</a></li>
-<li class="chapter" data-level="3.2.10" data-path="using-existing-images.html"><a href="using-existing-images.html#volumes"><i class="fa fa-check"></i><b>3.2.10</b> Volumes</a></li>
+<li class="chapter" data-level="3.2.10" data-path="using-existing-images.html"><a href="using-existing-images.html#exercise"><i class="fa fa-check"></i><b>3.2.10</b> Exercise</a></li>
 </ul></li>
 <li class="chapter" data-level="3.3" data-path="docker-recipes.html"><a href="docker-recipes.html"><i class="fa fa-check"></i><b>3.3</b> Docker recipes</a><ul>
 <li class="chapter" data-level="3.3.1" data-path="docker-recipes.html"><a href="docker-recipes.html#building-recipes"><i class="fa fa-check"></i><b>3.3.1</b> Building recipes</a></li>
@@ -187,7 +187,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.3.5" data-path="docker-recipes.html"><a href="docker-recipes.html#more-advanced-image-building"><i class="fa fa-check"></i><b>3.3.5</b> More advanced image building</a></li>
 <li class="chapter" data-level="3.3.6" data-path="docker-recipes.html"><a href="docker-recipes.html#additional-commands"><i class="fa fa-check"></i><b>3.3.6</b> Additional commands</a></li>
 </ul></li>
-<li class="chapter" data-level="3.4" data-path="ports.html"><a href="ports.html"><i class="fa fa-check"></i><b>3.4</b> Ports</a></li>
+<li class="chapter" data-level="3.4" data-path="volumes.html"><a href="volumes.html"><i class="fa fa-check"></i><b>3.4</b> Volumes</a></li>
+<li class="chapter" data-level="3.5" data-path="ports.html"><a href="ports.html"><i class="fa fa-check"></i><b>3.5</b> Ports</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="singularity.html"><a href="singularity.html"><i class="fa fa-check"></i><b>4</b> Singularity</a><ul>
 <li class="chapter" data-level="4.1" data-path="introduction-to-singularity.html"><a href="introduction-to-singularity.html"><i class="fa fa-check"></i><b>4.1</b> Introduction to Singularity</a><ul>
@@ -319,7 +320,7 @@ COPY ~/.bashrc .</code></pre>
 <li><strong>ARG</strong> values: available only while the image is built.</li>
 <li><strong>ENV</strong> values: available for the future running containers.</li>
 </ul>
-<div class="sourceCode" id="cb43"><pre class="sourceCode bash"><code class="sourceCode bash"></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode bash"><code class="sourceCode bash"></code></pre></div>
 <p><strong>CMD, ENTRYPOINT</strong>: command to execute when generated container starts</p>
 <p>The ENTRYPOINT specifies a command that will always be executed when the container starts. The CMD specifies arguments that will be fed to the ENTRYPOINT</p>
 <p><br></p>
@@ -358,23 +359,23 @@ here
 <div id="docker-build" class="section level3">
 <h3><span class="header-section-number">3.3.2</span> docker build</h3>
 <p>Implicitely looks for a <strong>Dockerfile</strong> file in the current directory:</p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb46-1"><a href="docker-recipes.html#cb46-1"></a><span class="ex">docker</span> build .</span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb44-1"><a href="docker-recipes.html#cb44-1"></a><span class="ex">docker</span> build .</span></code></pre></div>
 <p>Same as:</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb47-1"><a href="docker-recipes.html#cb47-1"></a><span class="ex">docker</span> build --file Dockerfile .</span></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb45-1"><a href="docker-recipes.html#cb45-1"></a><span class="ex">docker</span> build --file Dockerfile .</span></code></pre></div>
 <p>Syntax: <strong>–file / -f</strong></p>
 <p><strong>.</strong> stands for the context (in this case, current directory) of the build process. This makes sense if copying files from filesystem, for instance. <strong>IMPORTANT</strong>: Avoid contexts (directories) overpopulated with files (even if not actually used in the recipe).</p>
 <p>You can define a specific name for the image during the build process.</p>
 <p>Syntax: <strong>-t</strong> <em>imagename:tag</em>. If not defined <code>:tag</code> default is latest.</p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb48-1"><a href="docker-recipes.html#cb48-1"></a><span class="ex">docker</span> build -t mytestimage .</span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb46-1"><a href="docker-recipes.html#cb46-1"></a><span class="ex">docker</span> build -t mytestimage .</span></code></pre></div>
 <p>The last line of installation should be <strong>Successfully built …</strong>: then you are good to go.
 <br>
 Check with <code>docker images</code> that you see the newly built image in the list…</p>
 <p>Then let’s check the ID of the image and run it!</p>
-<div class="sourceCode" id="cb49"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb49-1"><a href="docker-recipes.html#cb49-1"></a><span class="ex">docker</span> images</span>
-<span id="cb49-2"><a href="docker-recipes.html#cb49-2"></a></span>
-<span id="cb49-3"><a href="docker-recipes.html#cb49-3"></a><span class="ex">docker</span> run f9f41698e2f8</span>
-<span id="cb49-4"><a href="docker-recipes.html#cb49-4"></a><span class="ex">docker</span> run mytestimage</span></code></pre></div>
-<div class="sourceCode" id="cb50"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb50-1"><a href="docker-recipes.html#cb50-1"></a><span class="ex">docker</span> run f9f41698e2f8 https://cdn-images-1.medium.com/max/1600/1*_NQN6_YnxS29m8vFzWYlEg.png</span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb47-1"><a href="docker-recipes.html#cb47-1"></a><span class="ex">docker</span> images</span>
+<span id="cb47-2"><a href="docker-recipes.html#cb47-2"></a></span>
+<span id="cb47-3"><a href="docker-recipes.html#cb47-3"></a><span class="ex">docker</span> run f9f41698e2f8</span>
+<span id="cb47-4"><a href="docker-recipes.html#cb47-4"></a><span class="ex">docker</span> run mytestimage</span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb48-1"><a href="docker-recipes.html#cb48-1"></a><span class="ex">docker</span> run f9f41698e2f8 https://cdn-images-1.medium.com/max/1600/1*_NQN6_YnxS29m8vFzWYlEg.png</span></code></pre></div>
 <center>
 <h4 style="background-color: #e6fadc; display: inline-block;">
 <strong>HANDS-ON</strong>
@@ -392,7 +393,7 @@ here
 <div id="docker-tag" class="section level3">
 <h3><span class="header-section-number">3.3.3</span> docker tag</h3>
 <p>To tag a local image with ID “e23aaea5dff1” into the “ubuntu_wget” image name repository with version “1.0”:</p>
-<div class="sourceCode" id="cb51"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb51-1"><a href="docker-recipes.html#cb51-1"></a><span class="ex">docker</span> tag e23aaea5dff1 --tag ubuntu_wget:1.0</span></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb49-1"><a href="docker-recipes.html#cb49-1"></a><span class="ex">docker</span> tag e23aaea5dff1 --tag ubuntu_wget:1.0</span></code></pre></div>
 <center>
 <h4 style="background-color: #e6fadc; display: inline-block;">
 <strong>HANDS-ON</strong>
@@ -422,10 +423,10 @@ RUN apt-get install -y wget
 
 ENTRYPOINT [&quot;/usr/bin/wget&quot;]
 CMD [&quot;https://cdn-images-1.medium.com/max/1600/1*_NQN6_YnxS29m8vFzWYlEg.png&quot;]</code></pre>
-<div class="sourceCode" id="cb53"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb53-1"><a href="docker-recipes.html#cb53-1"></a><span class="ex">docker</span> build -t mytestimage2 .</span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb51-1"><a href="docker-recipes.html#cb51-1"></a><span class="ex">docker</span> build -t mytestimage2 .</span></code></pre></div>
 <p>It will start from the last line.
 This is OK most of the times and very convenient for testing and trying new steps, but it may lead to errors when versions are updated (either FROM image or included packages). For that it is benefitial to start from scratch with <code>--no-cache</code> tag.</p>
-<div class="sourceCode" id="cb54"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb54-1"><a href="docker-recipes.html#cb54-1"></a><span class="ex">docker</span> build --no-cache -t mytestimage2 .</span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb52-1"><a href="docker-recipes.html#cb52-1"></a><span class="ex">docker</span> build --no-cache -t mytestimage2 .</span></code></pre></div>
 </div>
 <div id="more-advanced-image-building" class="section level3">
 <h3><span class="header-section-number">3.3.5</span> More advanced image building</h3>
@@ -470,7 +471,7 @@ here
         </div>
       </div>
 <a href="using-existing-images.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="ports.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="volumes.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

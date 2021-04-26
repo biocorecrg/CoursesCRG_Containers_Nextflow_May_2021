@@ -177,7 +177,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.2.7" data-path="using-existing-images.html"><a href="using-existing-images.html#docker-exec-execute-process-in-running-container"><i class="fa fa-check"></i><b>3.2.7</b> docker exec: execute process in running container</a></li>
 <li class="chapter" data-level="3.2.8" data-path="using-existing-images.html"><a href="using-existing-images.html#docker-stop-start-restart-actions-on-container"><i class="fa fa-check"></i><b>3.2.8</b> docker stop, start, restart: actions on container</a></li>
 <li class="chapter" data-level="3.2.9" data-path="using-existing-images.html"><a href="using-existing-images.html#docker-rm-docker-rmi-clean-up"><i class="fa fa-check"></i><b>3.2.9</b> docker rm, docker rmi: clean up!</a></li>
-<li class="chapter" data-level="3.2.10" data-path="using-existing-images.html"><a href="using-existing-images.html#volumes"><i class="fa fa-check"></i><b>3.2.10</b> Volumes</a></li>
+<li class="chapter" data-level="3.2.10" data-path="using-existing-images.html"><a href="using-existing-images.html#exercise"><i class="fa fa-check"></i><b>3.2.10</b> Exercise</a></li>
 </ul></li>
 <li class="chapter" data-level="3.3" data-path="docker-recipes.html"><a href="docker-recipes.html"><i class="fa fa-check"></i><b>3.3</b> Docker recipes</a><ul>
 <li class="chapter" data-level="3.3.1" data-path="docker-recipes.html"><a href="docker-recipes.html#building-recipes"><i class="fa fa-check"></i><b>3.3.1</b> Building recipes</a></li>
@@ -187,7 +187,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.3.5" data-path="docker-recipes.html"><a href="docker-recipes.html#more-advanced-image-building"><i class="fa fa-check"></i><b>3.3.5</b> More advanced image building</a></li>
 <li class="chapter" data-level="3.3.6" data-path="docker-recipes.html"><a href="docker-recipes.html#additional-commands"><i class="fa fa-check"></i><b>3.3.6</b> Additional commands</a></li>
 </ul></li>
-<li class="chapter" data-level="3.4" data-path="ports.html"><a href="ports.html"><i class="fa fa-check"></i><b>3.4</b> Ports</a></li>
+<li class="chapter" data-level="3.4" data-path="volumes.html"><a href="volumes.html"><i class="fa fa-check"></i><b>3.4</b> Volumes</a></li>
+<li class="chapter" data-level="3.5" data-path="ports.html"><a href="ports.html"><i class="fa fa-check"></i><b>3.5</b> Ports</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="singularity.html"><a href="singularity.html"><i class="fa fa-check"></i><b>4</b> Singularity</a><ul>
 <li class="chapter" data-level="4.1" data-path="introduction-to-singularity.html"><a href="introduction-to-singularity.html"><i class="fa fa-check"></i><b>4.1</b> Introduction to Singularity</a><ul>
@@ -280,7 +281,7 @@ Now run the following:</p>
 <br>
 <code>docker pull</code> imports an image from - by default - <strong>Docker hub</strong>.</p>
 <p><br>
-We will see more in details the <code>docker images</code> and <code>docker run</code> commands, but let’s first explore the <strong>Docker images repositories</strong>.</p>
+We will see in more details the <code>docker images</code> and <code>docker run</code> commands, but let’s first explore the <strong>Docker images repositories</strong>.</p>
 </div>
 <div id="explore-docker-hub" class="section level3">
 <h3><span class="header-section-number">3.2.2</span> Explore Docker hub</h3>
@@ -292,7 +293,7 @@ We will see more in details the <code>docker images</code> and <code>docker run<
 <p><img src="docs/images/dockerhub_ubuntu.png" width="900/"></p>
 <p>You can also search existing Docker images with the <code>docker search</code> command.
 <br>
-Example: let’s look for images that have the keyword <strong>blastp</strong> in their name or description.</p>
+Example: let’s look for images that have the keyword <strong>blast</strong> in their name or description.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="using-existing-images.html#cb5-1"></a><span class="ex">docker</span> search blast</span></code></pre></div>
 <p>Too many results? You can apply some filters:</p>
 <ul>
@@ -345,7 +346,10 @@ Example: let’s look for images that have the keyword <strong>blastp</strong> i
 <li>You can choose the version of Ubuntu you are fetching: check the different tags on the website (<em>latest</em> is also a tag):</li>
 </ul>
 <p><img src="docs/images/dockerhub_ubuntu_tags.png" width="850/"></p>
-<p>Let’s get the Ubuntu image with tag <strong>18.04</strong>:</p>
+<blockquote>
+<p>Note: <code>docker search</code> doesn’t allow to search for tags.</p>
+</blockquote>
+<p>Let’s get the Ubuntu image with tag <strong>18.04</strong> (version 18.04 of Ubuntu = bionic):</p>
 <p><img src="docs/images/dockerhub_ubuntu_1804.png" width="850/"></p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="using-existing-images.html#cb9-1"></a><span class="ex">docker</span> pull ubuntu:18.04</span></code></pre></div>
 <p><strong>Where is the image now?</strong>
@@ -423,28 +427,21 @@ Example: <a href="https://biocontainers.pro/#/tools/fastqc"><strong>FastQC</stro
 The format is:<br></p>
 <p>docker run image:tag <strong>command</strong> (command being a command called <em>inside the image</em>)</p>
 <p><br>
-We can start a container from the <strong>ubuntu tag 18.04 image</strong>, executing the command <code>ls</code> (stored in /bin).</p>
+We can start a container from the <strong>ubuntu tag 18.04 image</strong>, executing the command <code>ls</code> (stored in /bin in the container).</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="using-existing-images.html#cb12-1"></a><span class="ex">docker</span> run ubuntu:18.04 /bin/ls</span></code></pre></div>
 <p><img src="docs/images/docker_run_ls.png" width="200/"></p>
 <p>Now execute <strong>ls</strong> in your current working directory: is the result the same?</p>
-<p><br></p>
 <p>You can execute any program/command that is stored inside the image:</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="using-existing-images.html#cb13-1"></a><span class="ex">docker</span> run ubuntu:18.04 /bin/whoami</span>
 <span id="cb13-2"><a href="using-existing-images.html#cb13-2"></a><span class="ex">docker</span> run ubuntu:18.04 cat /etc/issue</span></code></pre></div>
 <p>You can either execute programs in the image from the command line (see above) or <strong>execute a container interactively</strong>, i.e. <strong>“enter”</strong> the container, with <code>docker run -it</code>.</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb14-1"><a href="using-existing-images.html#cb14-1"></a><span class="ex">docker</span> run -it ubuntu:18.04 /bin/bash</span></code></pre></div>
-<p>If you want to leave and stop the container, type <code>exit</code>.
-<br></p>
-<p>You can run the container as daemon (in background), instead of the default foreground running, with the <code>--detach</code> parameter:</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb15-1"><a href="using-existing-images.html#cb15-1"></a><span class="ex">docker</span> run --detach ubuntu:18.04 tail -f /dev/null</span></code></pre></div>
-<p>Run container as daemon (in background) with a given name:</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb16-1"><a href="using-existing-images.html#cb16-1"></a><span class="ex">docker</span> run --detach --name myubuntu ubuntu:18.04 tail -f /dev/null</span></code></pre></div>
+<p>If you want to leave and stop the container, type <code>exit</code> and ENTER.</p>
 <center>
 <h4 style="background-color: #e6fadc; display: inline-block;">
 <strong>HANDS-ON</strong>
 </h4>
 </center>
-<p>Short hands on with docker run.</p>
 <ul>
 <li>Run the <strong>hello-world</strong> image:
 <ul>
@@ -454,7 +451,8 @@ We can start a container from the <strong>ubuntu tag 18.04 image</strong>, execu
 <ul>
 <li>Is something happening?</li>
 </ul></li>
-<li>Start a container <strong>interactively</strong> from the same image:
+<li>Start again a container from the same <strong>blast</strong> image (not interactively), and run <strong>the blastp command</strong>. What happens?</li>
+<li>Start a container <strong>interactively</strong> from the same <strong>blast</strong> image:
 <ul>
 <li>What is the default working directory? What is inside the directory?</li>
 <li>Where is the <code>blastp</code> program located in the image?</li>
@@ -467,18 +465,31 @@ We can start a container from the <strong>ubuntu tag 18.04 image</strong>, execu
 <em>Answer</em>
 </h5>
 <p></summary></p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb17-1"><a href="using-existing-images.html#cb17-1"></a><span class="co"># Run the hello-world image</span></span>
-<span id="cb17-2"><a href="using-existing-images.html#cb17-2"></a><span class="ex">docker</span> run hello-world</span>
-<span id="cb17-3"><a href="using-existing-images.html#cb17-3"></a></span>
-<span id="cb17-4"><a href="using-existing-images.html#cb17-4"></a><span class="co"># Run the blast image</span></span>
-<span id="cb17-5"><a href="using-existing-images.html#cb17-5"></a><span class="ex">docker</span> run biocontainers/blast:2.2.31</span>
-<span id="cb17-6"><a href="using-existing-images.html#cb17-6"></a></span>
-<span id="cb17-7"><a href="using-existing-images.html#cb17-7"></a><span class="co"># Start a container interactively from the blast image:</span></span>
-<span id="cb17-8"><a href="using-existing-images.html#cb17-8"></a><span class="ex">docker</span> run -it biocontainers/blast:2.2.31</span>
-<span id="cb17-9"><a href="using-existing-images.html#cb17-9"></a></span>
-<span id="cb17-10"><a href="using-existing-images.html#cb17-10"></a><span class="co"># Where is the blastp program located in the image?</span></span>
-<span id="cb17-11"><a href="using-existing-images.html#cb17-11"></a><span class="fu">which</span> blastp</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb15-1"><a href="using-existing-images.html#cb15-1"></a><span class="co"># Run the hello-world image</span></span>
+<span id="cb15-2"><a href="using-existing-images.html#cb15-2"></a><span class="ex">docker</span> run hello-world</span>
+<span id="cb15-3"><a href="using-existing-images.html#cb15-3"></a></span>
+<span id="cb15-4"><a href="using-existing-images.html#cb15-4"></a><span class="co"># Run the blast image</span></span>
+<span id="cb15-5"><a href="using-existing-images.html#cb15-5"></a><span class="ex">docker</span> run biocontainers/blast:2.2.31</span>
+<span id="cb15-6"><a href="using-existing-images.html#cb15-6"></a></span>
+<span id="cb15-7"><a href="using-existing-images.html#cb15-7"></a><span class="co">#  Start again a container from the same blast image, and run the path to the blastp command:</span></span>
+<span id="cb15-8"><a href="using-existing-images.html#cb15-8"></a><span class="ex">docker</span> run biocontainers/blast:2.2.31 blastp</span>
+<span id="cb15-9"><a href="using-existing-images.html#cb15-9"></a></span>
+<span id="cb15-10"><a href="using-existing-images.html#cb15-10"></a><span class="co"># Start a container interactively from the same blast image:</span></span>
+<span id="cb15-11"><a href="using-existing-images.html#cb15-11"></a><span class="ex">docker</span> run -ti biocontainers/blast:2.2.31</span>
+<span id="cb15-12"><a href="using-existing-images.html#cb15-12"></a></span>
+<span id="cb15-13"><a href="using-existing-images.html#cb15-13"></a><span class="co"># What is the default working directory? </span></span>
+<span id="cb15-14"><a href="using-existing-images.html#cb15-14"></a><span class="bu">pwd</span><span class="kw">;</span> <span class="fu">ls</span></span>
+<span id="cb15-15"><a href="using-existing-images.html#cb15-15"></a></span>
+<span id="cb15-16"><a href="using-existing-images.html#cb15-16"></a><span class="co"># Where is the `blastp` program located in the image? </span></span>
+<span id="cb15-17"><a href="using-existing-images.html#cb15-17"></a><span class="fu">which</span> blastp</span>
+<span id="cb15-18"><a href="using-existing-images.html#cb15-18"></a></span>
+<span id="cb15-19"><a href="using-existing-images.html#cb15-19"></a><span class="co"># Exit the container.</span></span>
+<span id="cb15-20"><a href="using-existing-images.html#cb15-20"></a><span class="bu">exit</span></span></code></pre></div>
 </details>
+<p>You can run the container as daemon (in background), instead of the default foreground running, with the <code>--detach</code> parameter:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb16-1"><a href="using-existing-images.html#cb16-1"></a><span class="ex">docker</span> run --detach ubuntu:18.04 tail -f /dev/null</span></code></pre></div>
+<p>Run container as daemon (in background) with a given name:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb17-1"><a href="using-existing-images.html#cb17-1"></a><span class="ex">docker</span> run --detach --name myubuntu ubuntu:18.04 tail -f /dev/null</span></code></pre></div>
 </div>
 <div id="docker-ps-check-containers-status" class="section level3">
 <h3><span class="header-section-number">3.2.6</span> docker ps: check containers status</h3>
@@ -486,43 +497,32 @@ We can start a container from the <strong>ubuntu tag 18.04 image</strong>, execu
 <div class="sourceCode" id="cb18"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb18-1"><a href="using-existing-images.html#cb18-1"></a><span class="ex">docker</span> ps</span></code></pre></div>
 <p>List all containers (whether they are running or not):</p>
 <div class="sourceCode" id="cb19"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb19-1"><a href="using-existing-images.html#cb19-1"></a><span class="ex">docker</span> ps -a</span></code></pre></div>
-<p>Each container has a unique ID.</p>
-<p><br>
-You can remove a container with <code>docker rm CONTAINER_ID</code>.</p>
+<p>Each container has a <strong>unique ID</strong>.</p>
 </div>
 <div id="docker-exec-execute-process-in-running-container" class="section level3">
 <h3><span class="header-section-number">3.2.7</span> docker exec: execute process in running container</h3>
 <p>Difference between <code>docker run</code> and <code>docker exec</code>:</p>
 <ul>
 <li><code>docker run</code> creates a temporary container, runs the command and stops the container.</li>
-<li><code>docker exec</code> needs an already running container to query the command.</li>
+<li><code>docker exec</code> needs an already running container to query the command (i.e. a <em>detached</em> container).</li>
 </ul>
 <div class="sourceCode" id="cb20"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb20-1"><a href="using-existing-images.html#cb20-1"></a><span class="ex">docker</span> exec myubuntu uname -a</span></code></pre></div>
 <ul>
 <li>Interactively</li>
 </ul>
 <div class="sourceCode" id="cb21"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb21-1"><a href="using-existing-images.html#cb21-1"></a><span class="ex">docker</span> exec -it myubuntu /bin/bash</span></code></pre></div>
-<center>
-<h4 style="background-color: #e6fadc; display: inline-block;">
-<strong>HANDS-ON</strong>
-</h4>
-</center>
-<p>Exercise on playing with exec?</p>
-<details>
-<summary>
-<h5 style="background-color: #e6fadc; display: inline-block;">
-<em>Answer</em>
-</h5>
-</summary>
-here
-</details>
 </div>
 <div id="docker-stop-start-restart-actions-on-container" class="section level3">
 <h3><span class="header-section-number">3.2.8</span> docker stop, start, restart: actions on container</h3>
 <p>Stop a running container with <code>docker stop</code>.</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb22-1"><a href="using-existing-images.html#cb22-1"></a><span class="ex">docker</span> stop myubuntu</span>
-<span id="cb22-2"><a href="using-existing-images.html#cb22-2"></a></span>
-<span id="cb22-3"><a href="using-existing-images.html#cb22-3"></a><span class="ex">docker</span> ps -a</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb22-1"><a href="using-existing-images.html#cb22-1"></a><span class="co"># check the list of running containers</span></span>
+<span id="cb22-2"><a href="using-existing-images.html#cb22-2"></a><span class="ex">docker</span> ps</span>
+<span id="cb22-3"><a href="using-existing-images.html#cb22-3"></a></span>
+<span id="cb22-4"><a href="using-existing-images.html#cb22-4"></a><span class="co"># stop the myubuntu container</span></span>
+<span id="cb22-5"><a href="using-existing-images.html#cb22-5"></a><span class="ex">docker</span> stop myubuntu</span>
+<span id="cb22-6"><a href="using-existing-images.html#cb22-6"></a></span>
+<span id="cb22-7"><a href="using-existing-images.html#cb22-7"></a><span class="co"># check the list of all containers</span></span>
+<span id="cb22-8"><a href="using-existing-images.html#cb22-8"></a><span class="ex">docker</span> ps -a</span></code></pre></div>
 <p>Start a stopped container (does NOT create a new one):</p>
 <div class="sourceCode" id="cb23"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb23-1"><a href="using-existing-images.html#cb23-1"></a><span class="ex">docker</span> start myubuntu</span>
 <span id="cb23-2"><a href="using-existing-images.html#cb23-2"></a></span>
@@ -531,100 +531,138 @@ here
 <div class="sourceCode" id="cb24"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb24-1"><a href="using-existing-images.html#cb24-1"></a><span class="ex">docker</span> restart myubuntu</span>
 <span id="cb24-2"><a href="using-existing-images.html#cb24-2"></a></span>
 <span id="cb24-3"><a href="using-existing-images.html#cb24-3"></a><span class="ex">docker</span> ps -a</span></code></pre></div>
-<p>Run with restart enabled (by default, Docker does not automatically restart the container when it exits):</p>
+<p>Run with restart enabled (by default, Docker does not automatically restart the container when it exits).
+<br>
+In the example below we start a <strong>detached container named “myubuntu2”</strong> with the <strong>unless-stopped</strong> restart policy: <em>restart the container unless it is explicitly stopped or Docker itself is stopped or restarted.</em></p>
 <div class="sourceCode" id="cb25"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb25-1"><a href="using-existing-images.html#cb25-1"></a><span class="ex">docker</span> run --restart=unless-stopped --detach --name myubuntu2 ubuntu:18.04 tail -f /dev/null</span></code></pre></div>
 <ul>
 <li><a href="https://docs.docker.com/engine/reference/commandline/run/#restart-policies---restart">Restart policies</a>: no (default), always, on-failure, unless-stopped</li>
 </ul>
 <p>Update restart policy:</p>
 <div class="sourceCode" id="cb26"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb26-1"><a href="using-existing-images.html#cb26-1"></a><span class="ex">docker</span> update --restart unless-stopped myubuntu</span></code></pre></div>
-</div>
-<div id="docker-rm-docker-rmi-clean-up" class="section level3">
-<h3><span class="header-section-number">3.2.9</span> docker rm, docker rmi: clean up!</h3>
-<p><code>docker rm</code> is used to remove a <strong>container</strong> (set <code>-f</code> is the container is running, to force the removal):</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb27-1"><a href="using-existing-images.html#cb27-1"></a><span class="ex">docker</span> rm myubuntu</span>
-<span id="cb27-2"><a href="using-existing-images.html#cb27-2"></a><span class="ex">docker</span> rm -f myubuntu</span></code></pre></div>
-<p><code>docker rmi</code> is used to remove an <strong>image</strong>:</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb28-1"><a href="using-existing-images.html#cb28-1"></a><span class="ex">docker</span> rmi ubuntu:18.04</span></code></pre></div>
 <center>
 <h4 style="background-color: #e6fadc; display: inline-block;">
 <strong>HANDS-ON</strong>
 </h4>
 </center>
+<ul>
+<li>Start a container from the “hello-world” image <strong>in the background</strong>. Give it a name.
+<ul>
+<li>Is your container running? Can you explain why (or why not)?</li>
+</ul></li>
+<li>Start another detached container from the same image (with a new name), with the <strong>always restart policy</strong>.
+<ul>
+<li>Is the container running?</li>
+</ul></li>
+</ul>
 <details>
 <summary>
 <h5 style="background-color: #e6fadc; display: inline-block;">
 <em>Answer</em>
 </h5>
-</summary>
-here
+<p></summary></p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb27-1"><a href="using-existing-images.html#cb27-1"></a><span class="co"># start a &quot;detached&quot; container (in the background)</span></span>
+<span id="cb27-2"><a href="using-existing-images.html#cb27-2"></a><span class="ex">docker</span> run --detach --name helloworld1 hello-world</span>
+<span id="cb27-3"><a href="using-existing-images.html#cb27-3"></a></span>
+<span id="cb27-4"><a href="using-existing-images.html#cb27-4"></a><span class="co"># start a &quot;detached&quot; container with the &quot;--restart=always&quot; option</span></span>
+<span id="cb27-5"><a href="using-existing-images.html#cb27-5"></a><span class="ex">docker</span> run --detach --restart=always --name helloworld2 hello-world </span></code></pre></div>
+</details>
+</div>
+<div id="docker-rm-docker-rmi-clean-up" class="section level3">
+<h3><span class="header-section-number">3.2.9</span> docker rm, docker rmi: clean up!</h3>
+<p><code>docker rm</code> is used to remove a <strong>container</strong> (set <code>-f</code> is the container is running, to force the removal):</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb28-1"><a href="using-existing-images.html#cb28-1"></a><span class="ex">docker</span> rm myubuntu</span>
+<span id="cb28-2"><a href="using-existing-images.html#cb28-2"></a><span class="ex">docker</span> rm -f myubuntu</span></code></pre></div>
+<p><code>docker rmi</code> is used to remove an <strong>image</strong>:</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb29-1"><a href="using-existing-images.html#cb29-1"></a><span class="ex">docker</span> rmi ubuntu:18.04</span></code></pre></div>
+<center>
+<h4 style="background-color: #e6fadc; display: inline-block;">
+<strong>HANDS-ON</strong>
+</h4>
+</center>
+<ul>
+<li>Remove any container (whether it is running or not).</li>
+<li>Remove the “hello-world” image.</li>
+</ul>
+<details>
+<summary>
+<h5 style="background-color: #e6fadc; display: inline-block;">
+<em>Answer</em>
+</h5>
+<p></summary></p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb30-1"><a href="using-existing-images.html#cb30-1"></a><span class="co"># check all containers</span></span>
+<span id="cb30-2"><a href="using-existing-images.html#cb30-2"></a><span class="ex">docker</span> ps -a </span>
+<span id="cb30-3"><a href="using-existing-images.html#cb30-3"></a></span>
+<span id="cb30-4"><a href="using-existing-images.html#cb30-4"></a><span class="co"># remove by their ID:</span></span>
+<span id="cb30-5"><a href="using-existing-images.html#cb30-5"></a><span class="ex">docker</span> rm -f CONTAINER1_ID CONTAINER2_ID ...</span>
+<span id="cb30-6"><a href="using-existing-images.html#cb30-6"></a></span>
+<span id="cb30-7"><a href="using-existing-images.html#cb30-7"></a><span class="co"># remove the &quot;hello-world&quot; image</span></span>
+<span id="cb30-8"><a href="using-existing-images.html#cb30-8"></a><span class="ex">docker</span> rmi hello-world</span></code></pre></div>
 </details>
 <div id="major-clean" class="section level4">
 <h4><span class="header-section-number">3.2.9.1</span> Major clean</h4>
-<p><em>docker system failing for me on a qlogin node: why? (I see from the documentation that it still exists) Version issue perhaps?</em></p>
+<p><em>docker system failing for me (Sarah) on a qlogin node: why? (I see from the documentation that it still exists) Version issue perhaps?</em></p>
 <p>Check used space</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb29-1"><a href="using-existing-images.html#cb29-1"></a><span class="ex">docker</span> system df</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb31-1"><a href="using-existing-images.html#cb31-1"></a><span class="ex">docker</span> system df</span></code></pre></div>
 <p>Remove unused containers (and others) - <strong>DO WITH CARE</strong></p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb30-1"><a href="using-existing-images.html#cb30-1"></a><span class="ex">docker</span> system prune</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb32-1"><a href="using-existing-images.html#cb32-1"></a><span class="ex">docker</span> system prune</span></code></pre></div>
 <p>Remove ALL non-running containers, images, etc. - <strong>DO WITH MUCH MORE CARE!!!</strong></p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb31-1"><a href="using-existing-images.html#cb31-1"></a><span class="ex">docker</span> system prune -a</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb33-1"><a href="using-existing-images.html#cb33-1"></a><span class="ex">docker</span> system prune -a</span></code></pre></div>
 <ul>
 <li>Reference: <a href="https://www.digitalocean.com/community/tutorials/how-to-remove-docker-images-containers-and-volumes" class="uri">https://www.digitalocean.com/community/tutorials/how-to-remove-docker-images-containers-and-volumes</a></li>
 </ul>
 </div>
 </div>
-<div id="volumes" class="section level3">
-<h3><span class="header-section-number">3.2.10</span> Volumes</h3>
-<p><strong>I (Sarah) need to review the exercise!</strong></p>
-<p>Let’s try and run <code>blastp</code> in the <strong>blast</strong> image. <br>
-We will run a simple blastp search following <a href="https://angus.readthedocs.io/en/2016/running-command-line-blast.html">this example</a>.</p>
-<p><br>
-Let’s get <strong>fasta</strong> files:</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb32-1"><a href="using-existing-images.html#cb32-1"></a><span class="co"># We create first a directory where to store the files</span></span>
-<span id="cb32-2"><a href="using-existing-images.html#cb32-2"></a><span class="fu">mkdir</span> fasta_files</span>
-<span id="cb32-3"><a href="using-existing-images.html#cb32-3"></a></span>
-<span id="cb32-4"><a href="using-existing-images.html#cb32-4"></a><span class="co"># &quot;cow&quot; proteins from the NCBI/RefSeq database: let&#39;s get just a sample (one protein):</span></span>
-<span id="cb32-5"><a href="using-existing-images.html#cb32-5"></a><span class="fu">wget</span> -O - ftp://ftp.ncbi.nih.gov/refseq/B_taurus/mRNA_Prot/cow.1.protein.faa.gz <span class="kw">|</span> <span class="fu">gunzip</span> <span class="kw">|</span> <span class="fu">head</span> -6 <span class="op">&gt;</span> fasta_files/cow.small.faa</span>
-<span id="cb32-6"><a href="using-existing-images.html#cb32-6"></a></span>
-<span id="cb32-7"><a href="using-existing-images.html#cb32-7"></a><span class="co"># &quot;human&quot; proteins from the NCBI/RefSeq database:</span></span>
-<span id="cb32-8"><a href="using-existing-images.html#cb32-8"></a><span class="fu">wget</span> -O - wget ftp://ftp.ncbi.nih.gov/refseq/H_sapiens/mRNA_Prot/human.1.protein.faa.gz <span class="kw">|</span> <span class="fu">gunzip</span> <span class="op">&gt;</span> fasta_files/human.1.protein.faa</span></code></pre></div>
-<p>Query the help of <code>blastp</code>:</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb33-1"><a href="using-existing-images.html#cb33-1"></a><span class="ex">docker</span> run biocontainers/blast:2.2.31 blastp -h</span></code></pre></div>
-<p>Try to run <code>blastp</code>:</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb34-1"><a href="using-existing-images.html#cb34-1"></a><span class="ex">docker</span> run biocontainers/blast:2.2.31 blastp -query fasta_files/cow.small.faa -db fasta_files/human.1.protein.faa</span></code></pre></div>
-<p>Error!</p>
-<p><br>
-Docker containers are <strong>fully isolated</strong>. It is necessary to mount volumes in order to handle input/output files.</p>
-<p>Syntax: <strong>–volume/-v</strong> <em>path_in_host:path_in_container</em></p>
-<p>blastp -query cow.small.faa -db human.1.protein.faa</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb35-1"><a href="using-existing-images.html#cb35-1"></a><span class="ex">docker</span> run --volume <span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span>/fasta_files:/data/fasta biocontainers/blast:2.2.31 blastp -query /data/fasta/cow.small.faa -db /data/fasta/human.1.protein.faa</span></code></pre></div>
-<p>docker run –volume $(pwd)/fasta_files:/fasta biocontainers/blast:2.2.31 makeblastdb -in /fasta/human.1.protein.faa -dbtype prot</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb36-1"><a href="using-existing-images.html#cb36-1"></a><span class="fu">mkdir</span> datatest</span>
-<span id="cb36-2"><a href="using-existing-images.html#cb36-2"></a><span class="fu">touch</span> datatest/test</span>
-<span id="cb36-3"><a href="using-existing-images.html#cb36-3"></a><span class="ex">docker</span> run --detach --volume <span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span>/datatest:/scratch --name fastqc_container biocontainers/fastqc:v0.11.9_cv7 tail -f /dev/null</span>
-<span id="cb36-4"><a href="using-existing-images.html#cb36-4"></a><span class="ex">docker</span> exec -ti fastqc_container /bin/bash</span>
-<span id="cb36-5"><a href="using-existing-images.html#cb36-5"></a><span class="op">&gt;</span> <span class="fu">ls</span> -l /scratch</span>
-<span id="cb36-6"><a href="using-existing-images.html#cb36-6"></a><span class="op">&gt;</span> <span class="bu">exit</span></span></code></pre></div>
+<div id="exercise" class="section level3">
+<h3><span class="header-section-number">3.2.10</span> Exercise</h3>
 <ul>
-<li>Exercises:</li>
+<li><strong>Search</strong> and <strong>pull</strong> the <code>alpine</code> image (tag <strong>3.12</strong>) - it is an <strong>official build</strong>.</li>
+<li>Can you run a container from this image and make it print a “hello world” message?</li>
+<li>Now run a container <strong>interactively</strong> from the same image.
+<ul>
+<li>Run <code>uname -a</code></li>
+<li>Exit the container.</li>
+</ul></li>
+<li>Restart the container you just exited:
+<ul>
+<li>Is it now running?</li>
+<li>Make the container execute the command <code>ls</code></li>
+<li>Stop the container</li>
+</ul></li>
+<li>Remove the alpine image and all its containers (running or stopped)</li>
 </ul>
-<ol style="list-style-type: decimal">
-<li>Copy the 2 fastq files from available datasets in Github repository and place them in mounted directory</li>
-<li>Run fastqc interactively (inside container): <code>fastqc  /scratch/*.gz</code></li>
-<li>Run fastqc outside the container</li>
-</ol>
-<center>
-<h4 style="background-color: #e6fadc; display: inline-block;">
-<strong>HANDS-ON</strong>
-</h4>
-</center>
 <details>
 <summary>
 <h5 style="background-color: #e6fadc; display: inline-block;">
 <em>Answer</em>
 </h5>
-</summary>
-here
+<p></summary></p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb34-1"><a href="using-existing-images.html#cb34-1"></a><span class="co"># Search and pull the alpine image (tag 3.12) - it is an official build.</span></span>
+<span id="cb34-2"><a href="using-existing-images.html#cb34-2"></a><span class="ex">docker</span> search alpine --filter is-official=true</span>
+<span id="cb34-3"><a href="using-existing-images.html#cb34-3"></a><span class="ex">docker</span> pull  alpine:3.12</span>
+<span id="cb34-4"><a href="using-existing-images.html#cb34-4"></a></span>
+<span id="cb34-5"><a href="using-existing-images.html#cb34-5"></a><span class="co"># Can you run a container from this image and make it print a “hello world” message?</span></span>
+<span id="cb34-6"><a href="using-existing-images.html#cb34-6"></a><span class="ex">docker</span> run alpine:3.12 echo <span class="st">&quot;hello world&quot;</span></span>
+<span id="cb34-7"><a href="using-existing-images.html#cb34-7"></a></span>
+<span id="cb34-8"><a href="using-existing-images.html#cb34-8"></a><span class="co"># Now run a container **interactively** from the same image. </span></span>
+<span id="cb34-9"><a href="using-existing-images.html#cb34-9"></a><span class="ex">docker</span> run -ti alpine:3.12</span>
+<span id="cb34-10"><a href="using-existing-images.html#cb34-10"></a>  <span class="co"># Run `uname -a`</span></span>
+<span id="cb34-11"><a href="using-existing-images.html#cb34-11"></a>  <span class="fu">uname</span> -a </span>
+<span id="cb34-12"><a href="using-existing-images.html#cb34-12"></a>  <span class="co"># Exit the container.</span></span>
+<span id="cb34-13"><a href="using-existing-images.html#cb34-13"></a>  <span class="bu">exit</span></span>
+<span id="cb34-14"><a href="using-existing-images.html#cb34-14"></a></span>
+<span id="cb34-15"><a href="using-existing-images.html#cb34-15"></a><span class="co"># Restart the container you just exited: is it now running?</span></span>
+<span id="cb34-16"><a href="using-existing-images.html#cb34-16"></a><span class="ex">docker</span> restart CONTAINER_ID <span class="co"># find it with `docker ps -a`</span></span>
+<span id="cb34-17"><a href="using-existing-images.html#cb34-17"></a></span>
+<span id="cb34-18"><a href="using-existing-images.html#cb34-18"></a><span class="co"># Make the container execute the command `ls`</span></span>
+<span id="cb34-19"><a href="using-existing-images.html#cb34-19"></a><span class="ex">docker</span> exec CONTAINER_ID ls</span>
+<span id="cb34-20"><a href="using-existing-images.html#cb34-20"></a></span>
+<span id="cb34-21"><a href="using-existing-images.html#cb34-21"></a><span class="co"># Stop the container</span></span>
+<span id="cb34-22"><a href="using-existing-images.html#cb34-22"></a><span class="ex">docker</span> stop CONTAINER_ID</span>
+<span id="cb34-23"><a href="using-existing-images.html#cb34-23"></a></span>
+<span id="cb34-24"><a href="using-existing-images.html#cb34-24"></a><span class="co"># Remove the alpine image and all its containers (running or stopped)</span></span>
+<span id="cb34-25"><a href="using-existing-images.html#cb34-25"></a><span class="ex">docker</span> rmi alpine:3.12</span>
+<span id="cb34-26"><a href="using-existing-images.html#cb34-26"></a><span class="ex">docker</span> rm CONTAINER_ID <span class="co"># check all containers with `docker ps -a`</span></span></code></pre></div>
 </details>
 </div>
 </div>

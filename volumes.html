@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>4.8 Instances | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines</title>
-  <meta name="description" content="4.8 Instances | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
+  <title>3.4 Volumes | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines</title>
+  <meta name="description" content="3.4 Volumes | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="4.8 Instances | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
+  <meta property="og:title" content="3.4 Volumes | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="4.8 Instances | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
+  <meta name="twitter:title" content="3.4 Volumes | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="exercises.html"/>
-<link rel="next" href="troubleshooting.html"/>
+<link rel="prev" href="docker-recipes.html"/>
+<link rel="next" href="ports.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -267,41 +267,45 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="instances" class="section level2">
-<h2><span class="header-section-number">4.8</span> Instances</h2>
-<p>Also know as <strong>services</strong>. Despite Docker it is still more convenient for these tasks, it allows enabling thing such as webservices (e.g., via APIs) in HPC workflows.</p>
-<p>Simple example:</p>
-<pre><code>Bootstrap: docker
-From: library/mariadb:10.3
-
-%startscript
-        mysqld</code></pre>
-<pre><code>sudo singularity build mariadb.sif mariadb.singularity
-
-mkdir -p testdir
-mkdir -p testdir/db
-mkdir -p testdir/socket
-
-singularity exec -B ./testdir/db:/var/lib/mysql mariadb.sif mysql_install_db
-
-singularity instance start -B ./testdir/db:/var/lib/mysql -B ./testdir/socket:/run/mysqld mariadb.sif mydb
-
-singularity instance list
-
-singularity exec instance://mydb mysql -uroot
-
-singularity instance stop mydb</code></pre>
-<p>More information:
-* <a href="https://sylabs.io/guides/3.6/user-guide/running_services.html">https://sylabs.io/guides/3.6/user-guide/running_services.html</a>
-* <a href="https://sylabs.io/guides/3.6/user-guide/networking.html">https://sylabs.io/guides/3.6/user-guide/networking.html</a></p>
+<div id="volumes" class="section level2">
+<h2><span class="header-section-number">3.4</span> Volumes</h2>
+<p>Docker containers are fully isolated. It is necessary to mount volumes in order to handle input/output files.</p>
+<p>Syntax: <strong>–volume/-v</strong> <em>host:container</em></p>
+<div class="sourceCode" id="cb53"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb53-1"><a href="volumes.html#cb53-1"></a><span class="fu">mkdir</span> datatest</span>
+<span id="cb53-2"><a href="volumes.html#cb53-2"></a><span class="fu">touch</span> datatest/test</span>
+<span id="cb53-3"><a href="volumes.html#cb53-3"></a><span class="ex">docker</span> run --detach --volume <span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span>/datatest:/scratch --name fastqc_container biocontainers/fastqc:v0.11.9_cv7 tail -f /dev/null</span>
+<span id="cb53-4"><a href="volumes.html#cb53-4"></a><span class="ex">docker</span> exec -ti fastqc_container /bin/bash</span>
+<span id="cb53-5"><a href="volumes.html#cb53-5"></a><span class="op">&gt;</span> <span class="fu">ls</span> -l /scratch</span>
+<span id="cb53-6"><a href="volumes.html#cb53-6"></a><span class="op">&gt;</span> <span class="bu">exit</span></span></code></pre></div>
+<ul>
+<li>Exercises:</li>
+</ul>
+<ol style="list-style-type: decimal">
+<li>Copy the 2 fastq files from available datasets in Github repository and place them in mounted directory</li>
+<li>Run fastqc interactively (inside container): <code>fastqc  /scratch/*.gz</code></li>
+<li>Run fastqc outside the container</li>
+</ol>
+<center>
+<h4 style="background-color: #e6fadc; display: inline-block;">
+<strong>HANDS-ON</strong>
+</h4>
+</center>
+<details>
+<summary>
+<h5 style="background-color: #e6fadc; display: inline-block;">
+<em>Answer</em>
+</h5>
+</summary>
+here
+</details>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="exercises.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="troubleshooting.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="docker-recipes.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="ports.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
