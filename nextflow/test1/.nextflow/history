@@ -1,3 +1,0 @@
-2021-04-19 10:59:08	-	cheeky_mandelbrot	-	1c33dc13427f44a886c4c8bf3938dcba	16df595c-3494-40be-91bd-c893bba00839	nextflow run test1.nf
-2021-04-19 11:02:15	-	cheesy_pare	-	0aa3ad601a68ba1a93908c466fd6502b	0c7ebbd0-5584-4779-8b51-1cd9a141ebfc	nextflow run test1.nf
-2021-04-19 11:03:17	4.3s	tiny_montalcini	OK	6c30bc4c74a03bc96f48d0e39050fbb9	a80f628a-2c4f-4c96-889c-bef19121e71f	nextflow run test1.nf
