@@ -1480,6 +1480,8 @@ CAPSULE: Downloading dependency org.codehaus.groovy:groovy-xml:jar:3.0.5
 
 We finally go to the tower website again:
 
-```{r, out.width="800px", echo=FALSE}
+```{r, out.width="800px", eval=FALSE, echo=FALSE}
 knitr::include_graphics('docs/images/tower3.png')
 ```
+
+## Share Nextflow pipelines and good practices
