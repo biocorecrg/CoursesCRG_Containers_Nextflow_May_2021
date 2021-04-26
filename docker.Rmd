@@ -587,15 +587,18 @@ In Linux-based environment, software is usually distributed in the form of **pac
 With different operating systems come different tools to fetch and install packages:
 
 | Operating System | Format | Tool(s) |
-| Debian / Ubuntu / Linux Mint / Raspbian | .deb | apt, apt-cache, apt-get, dpkg |
-| CentOS (RedHat) | .rpm | yum |
+| [Debian](https://packages.debian.org) / Ubuntu / Linux Mint / Raspbian | .deb | apt, apt-cache, apt-get, dpkg |
+| [CentOS](https://centos.pkgs.org/) (RedHat) | .rpm | yum |
 | Fedora (RedHat) | .rpm | dnf |
 | FreeBSD | .txz | make, pkg |
+| Alpine | | apk |
 
-During this course, we will see a bit about **Ubuntu** and **CentOS**.
+More on the subject in [this post](https://www.digitalocean.com/community/tutorials/package-management-basics-apt-yum-dnf-pkg)
+
+> Note that the environment you are working on for this course is *CentOS-based* 
 
 <br>
-> Note that the environment you are working on for this course is *CentOS-based* 
+During this course, we will build images based on **Ubuntu** and **CentOS**. 
 
 
 ### Update and upgrade packages
@@ -618,17 +621,26 @@ yum check-update && yum update -y
 
 ```
 apt search libxml2
-apt install libxml2-dev
+apt install -y libxml2-dev
 ```
 
 * In **CentOS**:
 
 ```
 yum search libxml2
-yum install libxml2-devel.x86_64
+yum install -y libxml2-devel.x86_64
 ```
 
-More on the subject in [this post](https://www.digitalocean.com/community/tutorials/package-management-basics-apt-yum-dnf-pkg)
+Note the **-y** option that we set for updating and for installing.<br>
+It is an important option in the context of Docker: it means that you *answer yes for all questions*, regarding whether you want to confirm the installation, for example.
+
+<br>
+
+Note that Conda is a nice and easy way to install software:
+  * [Anaconda](https://anaconda.org/anaconda/repo)
+  * [Conda-forge](https://conda-forge.org/feedstocks/)
+  * [Bioconda](https://anaconda.org/bioconda/repo)
+
 
 
 ## Docker recipes
@@ -880,9 +892,10 @@ docker run mytest "Docker course"
 
 </details>
 
+
 ### docker tag
 
-Use ++docker tag` in order to **tag a local image** that has ID "e23aaea5dff1" into the "ubuntu_wget" image name repository with version/tag "1.0":
+Use `docker tag` in order to **tag a local image** that has - for example - ID "e23aaea5dff1" into the "ubuntu_wget" image name repository with version/tag "1.0":
 
 ```{bash}
 docker tag e23aaea5dff1 --tag ubuntu_wget:1.0
@@ -932,15 +945,45 @@ It is beneficial to start from scratch with ```--no-cache``` option when buildin
 docker build --no-cache -t mytestimage2 .
 ```
 
-### More advanced image building
+### Exercise: writing more complex recipes
 
-Different ways to build images.
+Build an image based on **CentOS** (use base layer [centos:7](https://hub.docker.com/_/centos?tab=tags&page=1&ordering=last_updated)):
 
-Know your base system and their packages. Popular ones:
-* [Debian](https://packages.debian.org)
-* [CentOS](https://centos.pkgs.org/)
-* [Alpine](https://pkgs.alpinelinux.org/packages)
-* Conda. [Anaconda](https://anaconda.org/anaconda/repo), [Conda-forge](https://conda-forge.org/feedstocks/), [Bioconda](https://anaconda.org/bioconda/repo), etc.
+* Install [**bowtie2**](https://centos.pkgs.org/7/epel-x86_64/bowtie2-2.4.1-1.el7.x86_64.rpm.html) and **show the help page by default**.
+  * you will need to download and install the **.rpm** package inside the image !
+* Change the name (and version) of the image to **bowtie2image:1.0**. Check that the change was taken into account with `docker images`
+
+<details>
+<summary>
+<h5 style="background-color: #e6fadc; display: inline-block;">*Answer*</h5>
+</summary>
+
+File **Dockerfile_bowtie2**:
+
+```
+FROM centos:7
+
+RUN yum update -y
+RUN curl https://download-ib01.fedoraproject.org/pub/epel/7/x86_64/Packages/b/bowtie2-2.4.1-1.el7.x86_64.rpm > bowtie2-2.4.1-1.el7.x86_64.rpm
+RUN yum install -y bowtie2-2.4.1-1.el7.x86_64.rpm
+
+ENTRYPOINT ["bowtie2"]
+CMD ["--help"]
+```
+
+Build:
+
+```
+docker build -t imagebowtie2 -f Dockerfile_bowtie2 .
+```
+
+Change name / tag:
+
+```
+docker tag imagebowtie2 bowtie2image:1.0
+```
+
+</details>
 
 
 ### Additional commands
