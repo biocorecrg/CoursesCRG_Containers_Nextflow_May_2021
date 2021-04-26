@@ -331,9 +331,16 @@ COPY ~/.bashrc .</code></pre>
 <p><strong>ENV, ARG</strong>: run and build environment variables</p>
 <p>Difference between ARG and ENV explained <a href="https://vsupalov.com/docker-arg-vs-env/">here</a>.</p>
 <ul>
-<li><strong>ARG</strong> values: available only while the image is built.</li>
-<li><strong>ENV</strong> values: available for the future running containers.</li>
+<li><strong>ARG</strong> values: available only <em>while the image is built.</em></li>
+<li><strong>ENV</strong> values: available <em>for the future running containers.</em></li>
 </ul>
+<p>An example of <strong>ARG</strong>: you can use it to build a specific version of a software inside the image:</p>
+<pre><code>FROM ubuntu:18.04
+
+ARG PyVersion=2.7
+
+RUN apt update &amp;&amp; apt upgrade -y
+RUN apt install python${PyVersion}</code></pre>
 <p><strong>CMD, ENTRYPOINT</strong>: command to execute when generated container starts</p>
 <p>The ENTRYPOINT specifies a command that will always be executed when the container starts.
 <br>
@@ -361,26 +368,26 @@ CMD [&quot;https://cdn.wp.nginx.com/wp-content/uploads/2016/07/docker-swarm-hero
 <div id="docker-build" class="section level3">
 <h3><span class="header-section-number">3.4.2</span> docker build</h3>
 <p>Implicitely looks for a <strong>Dockerfile</strong> file in the current directory:</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb47-1"><a href="docker-recipes.html#cb47-1"></a><span class="ex">docker</span> build .</span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb48-1"><a href="docker-recipes.html#cb48-1"></a><span class="ex">docker</span> build .</span></code></pre></div>
 <p>Same as:</p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb48-1"><a href="docker-recipes.html#cb48-1"></a><span class="ex">docker</span> build --file Dockerfile .</span></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb49-1"><a href="docker-recipes.html#cb49-1"></a><span class="ex">docker</span> build --file Dockerfile .</span></code></pre></div>
 <p>Syntax: <strong>–file / -f</strong></p>
 <p><strong>.</strong> stands for the context (in this case, current directory) of the build process. This makes sense if copying files from filesystem, for instance.
 <br>
 <strong>IMPORTANT</strong>: Avoid contexts (directories) overpopulated with files (even if not actually used in the recipe).</p>
 <p>You can define a specific name for the image during the build process.</p>
 <p>Syntax: <strong>-t</strong> <em>imagename:tag</em>. If not defined <code>:tag</code> default is latest.</p>
-<div class="sourceCode" id="cb49"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb49-1"><a href="docker-recipes.html#cb49-1"></a><span class="ex">docker</span> build -t mytestimage .</span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb50-1"><a href="docker-recipes.html#cb50-1"></a><span class="ex">docker</span> build -t mytestimage .</span></code></pre></div>
 <p>The last line of installation should be <strong>Successfully built …</strong>: then you are good to go.
 <br>
 Check with <code>docker images</code> that you see the newly built image in the list…</p>
 <p>Then let’s check the ID of the image and run it!</p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb50-1"><a href="docker-recipes.html#cb50-1"></a><span class="ex">docker</span> images</span>
-<span id="cb50-2"><a href="docker-recipes.html#cb50-2"></a></span>
-<span id="cb50-3"><a href="docker-recipes.html#cb50-3"></a><span class="ex">docker</span> run f9f41698e2f8</span>
-<span id="cb50-4"><a href="docker-recipes.html#cb50-4"></a><span class="ex">docker</span> run mytestimage</span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb51-1"><a href="docker-recipes.html#cb51-1"></a><span class="ex">docker</span> images</span>
+<span id="cb51-2"><a href="docker-recipes.html#cb51-2"></a></span>
+<span id="cb51-3"><a href="docker-recipes.html#cb51-3"></a><span class="ex">docker</span> run f9f41698e2f8</span>
+<span id="cb51-4"><a href="docker-recipes.html#cb51-4"></a><span class="ex">docker</span> run mytestimage</span></code></pre></div>
 <p>Try to run it with an argument:</p>
-<div class="sourceCode" id="cb51"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb51-1"><a href="docker-recipes.html#cb51-1"></a><span class="ex">docker</span> run f9f41698e2f8 https://cdn-images-1.medium.com/max/1600/1*_NQN6_YnxS29m8vFzWYlEg.png</span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb52-1"><a href="docker-recipes.html#cb52-1"></a><span class="ex">docker</span> run f9f41698e2f8 https://cdn-images-1.medium.com/max/1600/1*_NQN6_YnxS29m8vFzWYlEg.png</span></code></pre></div>
 <center>
 <h4 style="background-color: #e6fadc; display: inline-block;">
 <strong>HANDS-ON</strong>
@@ -461,11 +468,28 @@ docker run mytest
 # run with argument &quot;Docker course&quot;
 docker run mytest &quot;Docker course&quot;</code></pre>
 </details>
+<p>Building with a specific <strong>ARG</strong>: let’s take the example we had when we introduced the <strong>ARG</strong> command:</p>
+<pre><code>FROM ubuntu:18.04
+
+ARG PyVersion=2.7
+
+RUN apt update &amp;&amp; apt upgrade -y
+RUN apt install python${PyVersion}
+</code></pre>
+<p>We can save the recipe in a file called <strong>Dockerfile_ARG</strong>.
+<br></p>
+<p>Build the image to get the default version of Python (version 2.7, as given by ARG):</p>
+<pre><code>docker build -t Py2.7 -f Dockerfile_ARG .</code></pre>
+<p>Install version 3.8 of Python (give the argument via the <code>--build-arg</code> option):</p>
+<pre><code>docker build --build-arg PyVersion=3.8 -t Py3.8 -f Dockerfile_ARG .</code></pre>
+<p>Now check the python version in each image:</p>
+<pre><code>docker run Py2.7 which python2.7
+docker run Py3.8 which python3.8</code></pre>
 </div>
 <div id="docker-tag" class="section level3">
 <h3><span class="header-section-number">3.4.3</span> docker tag</h3>
 <p>Use <code>docker tag</code> in order to <strong>tag a local image</strong> that has - for example - ID “e23aaea5dff1” into the “ubuntu_wget” image name repository with version/tag “1.0”:</p>
-<div class="sourceCode" id="cb57"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb57-1"><a href="docker-recipes.html#cb57-1"></a><span class="ex">docker</span> tag e23aaea5dff1 --tag ubuntu_wget:1.0</span></code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb62-1"><a href="docker-recipes.html#cb62-1"></a><span class="ex">docker</span> tag e23aaea5dff1 --tag ubuntu_wget:1.0</span></code></pre></div>
 <center>
 <h4 style="background-color: #e6fadc; display: inline-block;">
 <strong>HANDS-ON</strong>
@@ -495,13 +519,13 @@ RUN apt-get install -y wget
 
 ENTRYPOINT [&quot;/usr/bin/wget&quot;]
 CMD [&quot;https://cdn-images-1.medium.com/max/1600/1*_NQN6_YnxS29m8vFzWYlEg.png&quot;]</code></pre>
-<div class="sourceCode" id="cb59"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb59-1"><a href="docker-recipes.html#cb59-1"></a><span class="ex">docker</span> build -t mytestimage2 .</span></code></pre></div>
+<div class="sourceCode" id="cb64"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb64-1"><a href="docker-recipes.html#cb64-1"></a><span class="ex">docker</span> build -t mytestimage2 .</span></code></pre></div>
 <p>It will start from the last line, and not re-run commands before the modification that were successfully built.
 <br>
 This is OK most of the times and very convenient for testing and trying new steps, but it may lead to errors when versions are updated (either FROM image or included packages).
 <br>
 It is beneficial to start from scratch with <code>--no-cache</code> option when building the image.</p>
-<div class="sourceCode" id="cb60"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb60-1"><a href="docker-recipes.html#cb60-1"></a><span class="ex">docker</span> build --no-cache -t mytestimage2 .</span></code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb65-1"><a href="docker-recipes.html#cb65-1"></a><span class="ex">docker</span> build --no-cache -t mytestimage2 .</span></code></pre></div>
 </div>
 <div id="exercise-writing-more-complex-recipes" class="section level3">
 <h3><span class="header-section-number">3.4.5</span> Exercise: writing more complex recipes</h3>

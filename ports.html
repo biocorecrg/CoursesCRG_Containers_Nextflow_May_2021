@@ -278,19 +278,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">3.6</span> Ports</h2>
 <p>The same as with volumes, but with ports, to access Internet services.</p>
 <p>Syntax: <strong>–publish/-p</strong> <em>host:container</em></p>
-<div class="sourceCode" id="cb66"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb66-1"><a href="ports.html#cb66-1"></a><span class="ex">docker</span> run --detach --name webserver nginx</span>
-<span id="cb66-2"><a href="ports.html#cb66-2"></a><span class="ex">curl</span> localhost:80</span>
-<span id="cb66-3"><a href="ports.html#cb66-3"></a><span class="ex">docker</span> exec webserver curl localhost:80</span>
-<span id="cb66-4"><a href="ports.html#cb66-4"></a><span class="ex">docker</span> rm -f webserver</span></code></pre></div>
-<div class="sourceCode" id="cb67"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb67-1"><a href="ports.html#cb67-1"></a><span class="ex">docker</span> run --detach --name webserver --publish 80:80 nginx</span>
-<span id="cb67-2"><a href="ports.html#cb67-2"></a><span class="ex">curl</span> localhost:80</span>
-<span id="cb67-3"><a href="ports.html#cb67-3"></a><span class="ex">docker</span> rm -f webserver</span></code></pre></div>
-<div class="sourceCode" id="cb68"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb68-1"><a href="ports.html#cb68-1"></a><span class="ex">docker</span> run --detach --name webserver -p 8080:80 nginx</span>
-<span id="cb68-2"><a href="ports.html#cb68-2"></a><span class="ex">curl</span> localhost:80</span>
-<span id="cb68-3"><a href="ports.html#cb68-3"></a><span class="ex">curl</span> localhost:8080</span>
-<span id="cb68-4"><a href="ports.html#cb68-4"></a><span class="ex">docker</span> exec webserver curl localhost:80</span>
-<span id="cb68-5"><a href="ports.html#cb68-5"></a><span class="ex">docker</span> exec webserver curl localhost:8080</span>
-<span id="cb68-6"><a href="ports.html#cb68-6"></a><span class="ex">docker</span> rm -f webserver</span></code></pre></div>
+<div class="sourceCode" id="cb71"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb71-1"><a href="ports.html#cb71-1"></a><span class="ex">docker</span> run --detach --name webserver nginx</span>
+<span id="cb71-2"><a href="ports.html#cb71-2"></a><span class="ex">curl</span> localhost:80</span>
+<span id="cb71-3"><a href="ports.html#cb71-3"></a><span class="ex">docker</span> exec webserver curl localhost:80</span>
+<span id="cb71-4"><a href="ports.html#cb71-4"></a><span class="ex">docker</span> rm -f webserver</span></code></pre></div>
+<div class="sourceCode" id="cb72"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb72-1"><a href="ports.html#cb72-1"></a><span class="ex">docker</span> run --detach --name webserver --publish 80:80 nginx</span>
+<span id="cb72-2"><a href="ports.html#cb72-2"></a><span class="ex">curl</span> localhost:80</span>
+<span id="cb72-3"><a href="ports.html#cb72-3"></a><span class="ex">docker</span> rm -f webserver</span></code></pre></div>
+<div class="sourceCode" id="cb73"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb73-1"><a href="ports.html#cb73-1"></a><span class="ex">docker</span> run --detach --name webserver -p 8080:80 nginx</span>
+<span id="cb73-2"><a href="ports.html#cb73-2"></a><span class="ex">curl</span> localhost:80</span>
+<span id="cb73-3"><a href="ports.html#cb73-3"></a><span class="ex">curl</span> localhost:8080</span>
+<span id="cb73-4"><a href="ports.html#cb73-4"></a><span class="ex">docker</span> exec webserver curl localhost:80</span>
+<span id="cb73-5"><a href="ports.html#cb73-5"></a><span class="ex">docker</span> exec webserver curl localhost:8080</span>
+<span id="cb73-6"><a href="ports.html#cb73-6"></a><span class="ex">docker</span> rm -f webserver</span></code></pre></div>
 
 </div>
 <!-- </div> -->

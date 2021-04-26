@@ -276,74 +276,74 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="more-complex-scripts" class="section level2">
 <h2><span class="header-section-number">5.12</span> More complex scripts</h2>
-<div class="sourceCode" id="cb113"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb113-1"><a href="more-complex-scripts.html#cb113-1"></a>#!/usr/bin/env nextflow</span>
-<span id="cb113-2"><a href="more-complex-scripts.html#cb113-2"></a></span>
-<span id="cb113-3"><a href="more-complex-scripts.html#cb113-3"></a>nextflow.<span class="fu">enable</span>.<span class="fu">dsl</span>=<span class="dv">2</span></span>
-<span id="cb113-4"><a href="more-complex-scripts.html#cb113-4"></a></span>
-<span id="cb113-5"><a href="more-complex-scripts.html#cb113-5"></a><span class="co">// this can be overridden by using --inputfile OTHERFILENAME</span></span>
-<span id="cb113-6"><a href="more-complex-scripts.html#cb113-6"></a>params.<span class="fu">inputfile</span> = <span class="st">&quot;$baseDir/testdata/test.fa&quot;</span></span>
-<span id="cb113-7"><a href="more-complex-scripts.html#cb113-7"></a></span>
-<span id="cb113-8"><a href="more-complex-scripts.html#cb113-8"></a><span class="co">// the &quot;file method&quot; returns a file system object given a file path string  </span></span>
-<span id="cb113-9"><a href="more-complex-scripts.html#cb113-9"></a>sequences_file = <span class="fu">file</span>(params.<span class="fu">inputfile</span>)             </span>
-<span id="cb113-10"><a href="more-complex-scripts.html#cb113-10"></a></span>
-<span id="cb113-11"><a href="more-complex-scripts.html#cb113-11"></a><span class="co">// check if the file exists</span></span>
-<span id="cb113-12"><a href="more-complex-scripts.html#cb113-12"></a><span class="kw">if</span>( !sequences_file.<span class="fu">exists</span>() ) exit <span class="dv">1</span>, <span class="st">&quot;Missing genome file: ${genome_file}&quot;</span></span>
-<span id="cb113-13"><a href="more-complex-scripts.html#cb113-13"></a></span>
-<span id="cb113-14"><a href="more-complex-scripts.html#cb113-14"></a></span>
-<span id="cb113-15"><a href="more-complex-scripts.html#cb113-15"></a><span class="co">/*</span></span>
-<span id="cb113-16"><a href="more-complex-scripts.html#cb113-16"></a><span class="co"> * Process 1 for splitting a fasta file in multiple files</span></span>
-<span id="cb113-17"><a href="more-complex-scripts.html#cb113-17"></a><span class="co"> */</span></span>
-<span id="cb113-18"><a href="more-complex-scripts.html#cb113-18"></a></span>
-<span id="cb113-19"><a href="more-complex-scripts.html#cb113-19"></a>process splitSequences {</span>
-<span id="cb113-20"><a href="more-complex-scripts.html#cb113-20"></a></span>
-<span id="cb113-21"><a href="more-complex-scripts.html#cb113-21"></a>    input:</span>
-<span id="cb113-22"><a href="more-complex-scripts.html#cb113-22"></a>    path sequencesFile</span>
-<span id="cb113-23"><a href="more-complex-scripts.html#cb113-23"></a></span>
-<span id="cb113-24"><a href="more-complex-scripts.html#cb113-24"></a>    output:</span>
-<span id="cb113-25"><a href="more-complex-scripts.html#cb113-25"></a>    <span class="fu">path</span> (&#39;seq_*&#39;)    </span>
-<span id="cb113-26"><a href="more-complex-scripts.html#cb113-26"></a></span>
-<span id="cb113-27"><a href="more-complex-scripts.html#cb113-27"></a>    <span class="co">// simple awk command</span></span>
-<span id="cb113-28"><a href="more-complex-scripts.html#cb113-28"></a>    script:</span>
-<span id="cb113-29"><a href="more-complex-scripts.html#cb113-29"></a>    <span class="st">&quot;&quot;&quot;</span></span>
-<span id="cb113-30"><a href="more-complex-scripts.html#cb113-30"></a>    awk &#39;/^&gt;/{f=<span class="st">&quot;seq_&quot;</span>++d} {print &gt; f}&#39; &lt; ${sequencesFile}</span>
-<span id="cb113-31"><a href="more-complex-scripts.html#cb113-31"></a>    <span class="st">&quot;&quot;&quot;</span></span>
-<span id="cb113-32"><a href="more-complex-scripts.html#cb113-32"></a>}</span>
-<span id="cb113-33"><a href="more-complex-scripts.html#cb113-33"></a></span>
-<span id="cb113-34"><a href="more-complex-scripts.html#cb113-34"></a></span>
-<span id="cb113-35"><a href="more-complex-scripts.html#cb113-35"></a><span class="co">/*</span></span>
-<span id="cb113-36"><a href="more-complex-scripts.html#cb113-36"></a><span class="co"> * Process 2 for reversing the sequences</span></span>
-<span id="cb113-37"><a href="more-complex-scripts.html#cb113-37"></a><span class="co"> */</span></span>
-<span id="cb113-38"><a href="more-complex-scripts.html#cb113-38"></a></span>
-<span id="cb113-39"><a href="more-complex-scripts.html#cb113-39"></a>process reverseSequence {</span>
-<span id="cb113-40"><a href="more-complex-scripts.html#cb113-40"></a>    tag <span class="st">&quot;$seq&quot;</span>                  </span>
-<span id="cb113-41"><a href="more-complex-scripts.html#cb113-41"></a>    publishDir <span class="st">&quot;output&quot;</span></span>
-<span id="cb113-42"><a href="more-complex-scripts.html#cb113-42"></a></span>
-<span id="cb113-43"><a href="more-complex-scripts.html#cb113-43"></a>    input:</span>
-<span id="cb113-44"><a href="more-complex-scripts.html#cb113-44"></a>    path seq</span>
-<span id="cb113-45"><a href="more-complex-scripts.html#cb113-45"></a></span>
-<span id="cb113-46"><a href="more-complex-scripts.html#cb113-46"></a>    output:</span>
-<span id="cb113-47"><a href="more-complex-scripts.html#cb113-47"></a>    path <span class="st">&quot;all.rev&quot;</span></span>
-<span id="cb113-48"><a href="more-complex-scripts.html#cb113-48"></a></span>
-<span id="cb113-49"><a href="more-complex-scripts.html#cb113-49"></a>    script:</span>
-<span id="cb113-50"><a href="more-complex-scripts.html#cb113-50"></a>    <span class="st">&quot;&quot;&quot;</span></span>
-<span id="cb113-51"><a href="more-complex-scripts.html#cb113-51"></a>    cat ${seq} | awk &#39;{<span class="kw">if</span> (\$<span class="dv">1</span>~<span class="st">&quot;&gt;&quot;</span>) {print \$<span class="dv">0</span>} <span class="kw">else</span> <span class="fu">system</span>(<span class="st">&quot;echo &quot;</span> \$<span class="dv">0</span> <span class="st">&quot; |rev&quot;</span>)}&#39; &gt; all.<span class="fu">rev</span></span>
-<span id="cb113-52"><a href="more-complex-scripts.html#cb113-52"></a>    <span class="st">&quot;&quot;&quot;</span></span>
-<span id="cb113-53"><a href="more-complex-scripts.html#cb113-53"></a>}</span>
-<span id="cb113-54"><a href="more-complex-scripts.html#cb113-54"></a></span>
-<span id="cb113-55"><a href="more-complex-scripts.html#cb113-55"></a>workflow {</span>
-<span id="cb113-56"><a href="more-complex-scripts.html#cb113-56"></a>    splitted_seq    = <span class="fu">splitSequences</span>(sequences_file)</span>
-<span id="cb113-57"><a href="more-complex-scripts.html#cb113-57"></a></span>
-<span id="cb113-58"><a href="more-complex-scripts.html#cb113-58"></a>    <span class="co">// Here you have the output channel as a collection</span></span>
-<span id="cb113-59"><a href="more-complex-scripts.html#cb113-59"></a>    splitted_seq.<span class="fu">view</span>()</span>
-<span id="cb113-60"><a href="more-complex-scripts.html#cb113-60"></a></span>
-<span id="cb113-61"><a href="more-complex-scripts.html#cb113-61"></a>    <span class="co">// Here you have the same channel reshaped to send separately each value</span></span>
-<span id="cb113-62"><a href="more-complex-scripts.html#cb113-62"></a>    splitted_seq.<span class="fu">flatten</span>().<span class="fu">view</span>()</span>
-<span id="cb113-63"><a href="more-complex-scripts.html#cb113-63"></a></span>
-<span id="cb113-64"><a href="more-complex-scripts.html#cb113-64"></a>    <span class="co">// DLS2 allows you to reuse the channels! In past you had to create many identical</span></span>
-<span id="cb113-65"><a href="more-complex-scripts.html#cb113-65"></a>    <span class="co">// channels for sending the same kind of data to different processes</span></span>
-<span id="cb113-66"><a href="more-complex-scripts.html#cb113-66"></a></span>
-<span id="cb113-67"><a href="more-complex-scripts.html#cb113-67"></a>    rev_single_seq  = <span class="fu">reverseSequence</span>(splitted_seq)</span>
-<span id="cb113-68"><a href="more-complex-scripts.html#cb113-68"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb118"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb118-1"><a href="more-complex-scripts.html#cb118-1"></a>#!/usr/bin/env nextflow</span>
+<span id="cb118-2"><a href="more-complex-scripts.html#cb118-2"></a></span>
+<span id="cb118-3"><a href="more-complex-scripts.html#cb118-3"></a>nextflow.<span class="fu">enable</span>.<span class="fu">dsl</span>=<span class="dv">2</span></span>
+<span id="cb118-4"><a href="more-complex-scripts.html#cb118-4"></a></span>
+<span id="cb118-5"><a href="more-complex-scripts.html#cb118-5"></a><span class="co">// this can be overridden by using --inputfile OTHERFILENAME</span></span>
+<span id="cb118-6"><a href="more-complex-scripts.html#cb118-6"></a>params.<span class="fu">inputfile</span> = <span class="st">&quot;$baseDir/testdata/test.fa&quot;</span></span>
+<span id="cb118-7"><a href="more-complex-scripts.html#cb118-7"></a></span>
+<span id="cb118-8"><a href="more-complex-scripts.html#cb118-8"></a><span class="co">// the &quot;file method&quot; returns a file system object given a file path string  </span></span>
+<span id="cb118-9"><a href="more-complex-scripts.html#cb118-9"></a>sequences_file = <span class="fu">file</span>(params.<span class="fu">inputfile</span>)             </span>
+<span id="cb118-10"><a href="more-complex-scripts.html#cb118-10"></a></span>
+<span id="cb118-11"><a href="more-complex-scripts.html#cb118-11"></a><span class="co">// check if the file exists</span></span>
+<span id="cb118-12"><a href="more-complex-scripts.html#cb118-12"></a><span class="kw">if</span>( !sequences_file.<span class="fu">exists</span>() ) exit <span class="dv">1</span>, <span class="st">&quot;Missing genome file: ${genome_file}&quot;</span></span>
+<span id="cb118-13"><a href="more-complex-scripts.html#cb118-13"></a></span>
+<span id="cb118-14"><a href="more-complex-scripts.html#cb118-14"></a></span>
+<span id="cb118-15"><a href="more-complex-scripts.html#cb118-15"></a><span class="co">/*</span></span>
+<span id="cb118-16"><a href="more-complex-scripts.html#cb118-16"></a><span class="co"> * Process 1 for splitting a fasta file in multiple files</span></span>
+<span id="cb118-17"><a href="more-complex-scripts.html#cb118-17"></a><span class="co"> */</span></span>
+<span id="cb118-18"><a href="more-complex-scripts.html#cb118-18"></a></span>
+<span id="cb118-19"><a href="more-complex-scripts.html#cb118-19"></a>process splitSequences {</span>
+<span id="cb118-20"><a href="more-complex-scripts.html#cb118-20"></a></span>
+<span id="cb118-21"><a href="more-complex-scripts.html#cb118-21"></a>    input:</span>
+<span id="cb118-22"><a href="more-complex-scripts.html#cb118-22"></a>    path sequencesFile</span>
+<span id="cb118-23"><a href="more-complex-scripts.html#cb118-23"></a></span>
+<span id="cb118-24"><a href="more-complex-scripts.html#cb118-24"></a>    output:</span>
+<span id="cb118-25"><a href="more-complex-scripts.html#cb118-25"></a>    <span class="fu">path</span> (&#39;seq_*&#39;)    </span>
+<span id="cb118-26"><a href="more-complex-scripts.html#cb118-26"></a></span>
+<span id="cb118-27"><a href="more-complex-scripts.html#cb118-27"></a>    <span class="co">// simple awk command</span></span>
+<span id="cb118-28"><a href="more-complex-scripts.html#cb118-28"></a>    script:</span>
+<span id="cb118-29"><a href="more-complex-scripts.html#cb118-29"></a>    <span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb118-30"><a href="more-complex-scripts.html#cb118-30"></a>    awk &#39;/^&gt;/{f=<span class="st">&quot;seq_&quot;</span>++d} {print &gt; f}&#39; &lt; ${sequencesFile}</span>
+<span id="cb118-31"><a href="more-complex-scripts.html#cb118-31"></a>    <span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb118-32"><a href="more-complex-scripts.html#cb118-32"></a>}</span>
+<span id="cb118-33"><a href="more-complex-scripts.html#cb118-33"></a></span>
+<span id="cb118-34"><a href="more-complex-scripts.html#cb118-34"></a></span>
+<span id="cb118-35"><a href="more-complex-scripts.html#cb118-35"></a><span class="co">/*</span></span>
+<span id="cb118-36"><a href="more-complex-scripts.html#cb118-36"></a><span class="co"> * Process 2 for reversing the sequences</span></span>
+<span id="cb118-37"><a href="more-complex-scripts.html#cb118-37"></a><span class="co"> */</span></span>
+<span id="cb118-38"><a href="more-complex-scripts.html#cb118-38"></a></span>
+<span id="cb118-39"><a href="more-complex-scripts.html#cb118-39"></a>process reverseSequence {</span>
+<span id="cb118-40"><a href="more-complex-scripts.html#cb118-40"></a>    tag <span class="st">&quot;$seq&quot;</span>                  </span>
+<span id="cb118-41"><a href="more-complex-scripts.html#cb118-41"></a>    publishDir <span class="st">&quot;output&quot;</span></span>
+<span id="cb118-42"><a href="more-complex-scripts.html#cb118-42"></a></span>
+<span id="cb118-43"><a href="more-complex-scripts.html#cb118-43"></a>    input:</span>
+<span id="cb118-44"><a href="more-complex-scripts.html#cb118-44"></a>    path seq</span>
+<span id="cb118-45"><a href="more-complex-scripts.html#cb118-45"></a></span>
+<span id="cb118-46"><a href="more-complex-scripts.html#cb118-46"></a>    output:</span>
+<span id="cb118-47"><a href="more-complex-scripts.html#cb118-47"></a>    path <span class="st">&quot;all.rev&quot;</span></span>
+<span id="cb118-48"><a href="more-complex-scripts.html#cb118-48"></a></span>
+<span id="cb118-49"><a href="more-complex-scripts.html#cb118-49"></a>    script:</span>
+<span id="cb118-50"><a href="more-complex-scripts.html#cb118-50"></a>    <span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb118-51"><a href="more-complex-scripts.html#cb118-51"></a>    cat ${seq} | awk &#39;{<span class="kw">if</span> (\$<span class="dv">1</span>~<span class="st">&quot;&gt;&quot;</span>) {print \$<span class="dv">0</span>} <span class="kw">else</span> <span class="fu">system</span>(<span class="st">&quot;echo &quot;</span> \$<span class="dv">0</span> <span class="st">&quot; |rev&quot;</span>)}&#39; &gt; all.<span class="fu">rev</span></span>
+<span id="cb118-52"><a href="more-complex-scripts.html#cb118-52"></a>    <span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb118-53"><a href="more-complex-scripts.html#cb118-53"></a>}</span>
+<span id="cb118-54"><a href="more-complex-scripts.html#cb118-54"></a></span>
+<span id="cb118-55"><a href="more-complex-scripts.html#cb118-55"></a>workflow {</span>
+<span id="cb118-56"><a href="more-complex-scripts.html#cb118-56"></a>    splitted_seq    = <span class="fu">splitSequences</span>(sequences_file)</span>
+<span id="cb118-57"><a href="more-complex-scripts.html#cb118-57"></a></span>
+<span id="cb118-58"><a href="more-complex-scripts.html#cb118-58"></a>    <span class="co">// Here you have the output channel as a collection</span></span>
+<span id="cb118-59"><a href="more-complex-scripts.html#cb118-59"></a>    splitted_seq.<span class="fu">view</span>()</span>
+<span id="cb118-60"><a href="more-complex-scripts.html#cb118-60"></a></span>
+<span id="cb118-61"><a href="more-complex-scripts.html#cb118-61"></a>    <span class="co">// Here you have the same channel reshaped to send separately each value</span></span>
+<span id="cb118-62"><a href="more-complex-scripts.html#cb118-62"></a>    splitted_seq.<span class="fu">flatten</span>().<span class="fu">view</span>()</span>
+<span id="cb118-63"><a href="more-complex-scripts.html#cb118-63"></a></span>
+<span id="cb118-64"><a href="more-complex-scripts.html#cb118-64"></a>    <span class="co">// DLS2 allows you to reuse the channels! In past you had to create many identical</span></span>
+<span id="cb118-65"><a href="more-complex-scripts.html#cb118-65"></a>    <span class="co">// channels for sending the same kind of data to different processes</span></span>
+<span id="cb118-66"><a href="more-complex-scripts.html#cb118-66"></a></span>
+<span id="cb118-67"><a href="more-complex-scripts.html#cb118-67"></a>    rev_single_seq  = <span class="fu">reverseSequence</span>(splitted_seq)</span>
+<span id="cb118-68"><a href="more-complex-scripts.html#cb118-68"></a>}</span></code></pre></div>
 <p>Here we have two simple processes:</p>
 <ul>
 <li>the former splits the input fasta file in single sequences</li>
@@ -352,120 +352,120 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The input path is fed as a parameter using the script parameters **${seq}*</p>
 <pre><code>params.inputfile</code></pre>
 <p>In this way this value can be overridden when calling the script in this way:</p>
-<div class="sourceCode" id="cb115"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb115-1"><a href="more-complex-scripts.html#cb115-1"></a><span class="ex">nextflow</span> run test.nf --inputfile another_input.fa</span></code></pre></div>
+<div class="sourceCode" id="cb120"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb120-1"><a href="more-complex-scripts.html#cb120-1"></a><span class="ex">nextflow</span> run test.nf --inputfile another_input.fa</span></code></pre></div>
 <p>The workflow part connects the two processes so that the output of the first process is fed to the second one.</p>
 <p>During the execution Nextflow creates a number of temporary folders and this time will make also a soft link to the original input file. Then it will store output files locally.</p>
 <p>The output file is then linked in other folders for being used as input from other processes. In this way there are no clashes and each process is nicely isolated from the others.</p>
-<div class="sourceCode" id="cb116"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb116-1"><a href="more-complex-scripts.html#cb116-1"></a><span class="ex">nextflow</span> run test.nf -bg</span>
-<span id="cb116-2"><a href="more-complex-scripts.html#cb116-2"></a><span class="ex">N</span> E X T F L O W  ~  version 20.07.1</span>
-<span id="cb116-3"><a href="more-complex-scripts.html#cb116-3"></a><span class="ex">Launching</span> <span class="kw">`</span><span class="ex">test.nf</span><span class="kw">`</span> [sad_newton] - revision: 82e66714e4</span>
-<span id="cb116-4"><a href="more-complex-scripts.html#cb116-4"></a>[<span class="ex">09</span>/<span class="ex">53e071</span>] Submitted process <span class="op">&gt;</span> splitSequences</span>
-<span id="cb116-5"><a href="more-complex-scripts.html#cb116-5"></a>[<span class="ex">/home/ec2-user/git/CoursesCRG_Containers_Nextflow_May_2021/nextflow/nextflow/work/09/53e071d286ed66f4020869c8977b59</span>/<span class="ex">seq_1</span>, /home/ec2-user/git/CoursesCRG_Containers_Nextflow_May_2021/nextflow/nextflow/work/09/53e071d286ed66f4020869c8977b59/seq_2, /home/ec2-user/git/CoursesCRG_Containers_Nextflow_May_2021/nextflow/nextflow/work/09/53e071d286ed66f4020869c8977b59/seq_3]</span>
-<span id="cb116-6"><a href="more-complex-scripts.html#cb116-6"></a><span class="ex">/home/ec2-user/git/CoursesCRG_Containers_Nextflow_May_2021/nextflow/nextflow/work/09/53e071d286ed66f4020869c8977b59/seq_1</span></span>
-<span id="cb116-7"><a href="more-complex-scripts.html#cb116-7"></a><span class="ex">/home/ec2-user/git/CoursesCRG_Containers_Nextflow_May_2021/nextflow/nextflow/work/09/53e071d286ed66f4020869c8977b59/seq_2</span></span>
-<span id="cb116-8"><a href="more-complex-scripts.html#cb116-8"></a><span class="ex">/home/ec2-user/git/CoursesCRG_Containers_Nextflow_May_2021/nextflow/nextflow/work/09/53e071d286ed66f4020869c8977b59/seq_3</span></span>
-<span id="cb116-9"><a href="more-complex-scripts.html#cb116-9"></a>[<span class="ex">fe</span>/<span class="ex">0a8640</span>] Submitted process <span class="op">&gt;</span> reverseSequence ([seq_1, seq_2, seq_3])</span></code></pre></div>
+<div class="sourceCode" id="cb121"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb121-1"><a href="more-complex-scripts.html#cb121-1"></a><span class="ex">nextflow</span> run test.nf -bg</span>
+<span id="cb121-2"><a href="more-complex-scripts.html#cb121-2"></a><span class="ex">N</span> E X T F L O W  ~  version 20.07.1</span>
+<span id="cb121-3"><a href="more-complex-scripts.html#cb121-3"></a><span class="ex">Launching</span> <span class="kw">`</span><span class="ex">test.nf</span><span class="kw">`</span> [sad_newton] - revision: 82e66714e4</span>
+<span id="cb121-4"><a href="more-complex-scripts.html#cb121-4"></a>[<span class="ex">09</span>/<span class="ex">53e071</span>] Submitted process <span class="op">&gt;</span> splitSequences</span>
+<span id="cb121-5"><a href="more-complex-scripts.html#cb121-5"></a>[<span class="ex">/home/ec2-user/git/CoursesCRG_Containers_Nextflow_May_2021/nextflow/nextflow/work/09/53e071d286ed66f4020869c8977b59</span>/<span class="ex">seq_1</span>, /home/ec2-user/git/CoursesCRG_Containers_Nextflow_May_2021/nextflow/nextflow/work/09/53e071d286ed66f4020869c8977b59/seq_2, /home/ec2-user/git/CoursesCRG_Containers_Nextflow_May_2021/nextflow/nextflow/work/09/53e071d286ed66f4020869c8977b59/seq_3]</span>
+<span id="cb121-6"><a href="more-complex-scripts.html#cb121-6"></a><span class="ex">/home/ec2-user/git/CoursesCRG_Containers_Nextflow_May_2021/nextflow/nextflow/work/09/53e071d286ed66f4020869c8977b59/seq_1</span></span>
+<span id="cb121-7"><a href="more-complex-scripts.html#cb121-7"></a><span class="ex">/home/ec2-user/git/CoursesCRG_Containers_Nextflow_May_2021/nextflow/nextflow/work/09/53e071d286ed66f4020869c8977b59/seq_2</span></span>
+<span id="cb121-8"><a href="more-complex-scripts.html#cb121-8"></a><span class="ex">/home/ec2-user/git/CoursesCRG_Containers_Nextflow_May_2021/nextflow/nextflow/work/09/53e071d286ed66f4020869c8977b59/seq_3</span></span>
+<span id="cb121-9"><a href="more-complex-scripts.html#cb121-9"></a>[<span class="ex">fe</span>/<span class="ex">0a8640</span>] Submitted process <span class="op">&gt;</span> reverseSequence ([seq_1, seq_2, seq_3])</span></code></pre></div>
 <p>if we inspect the content of work/09/53e071* generated by the process <strong>splitSequences</strong></p>
-<div class="sourceCode" id="cb117"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb117-1"><a href="more-complex-scripts.html#cb117-1"></a><span class="fu">ls</span> -l work/09/53e071*</span>
-<span id="cb117-2"><a href="more-complex-scripts.html#cb117-2"></a><span class="ex">total</span> 24</span>
-<span id="cb117-3"><a href="more-complex-scripts.html#cb117-3"></a><span class="ex">-rw-r--r--</span>  1 lcozzuto  staff  29 Oct  8 19:16 seq_1</span>
-<span id="cb117-4"><a href="more-complex-scripts.html#cb117-4"></a><span class="ex">-rw-r--r--</span>  1 lcozzuto  staff  33 Oct  8 19:16 seq_2</span>
-<span id="cb117-5"><a href="more-complex-scripts.html#cb117-5"></a><span class="ex">-rw-r--r--</span>  1 lcozzuto  staff  27 Oct  8 19:16 seq_3</span>
-<span id="cb117-6"><a href="more-complex-scripts.html#cb117-6"></a><span class="ex">lrwxr-xr-x</span>  1 lcozzuto  staff  69 Oct  8 19:16 test.fa -<span class="op">&gt;</span> /home/ec2-user/git/CoursesCRG_Containers_Nextflow_May_2021/nextflow/nextflow/testdata/test.fa</span></code></pre></div>
+<div class="sourceCode" id="cb122"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb122-1"><a href="more-complex-scripts.html#cb122-1"></a><span class="fu">ls</span> -l work/09/53e071*</span>
+<span id="cb122-2"><a href="more-complex-scripts.html#cb122-2"></a><span class="ex">total</span> 24</span>
+<span id="cb122-3"><a href="more-complex-scripts.html#cb122-3"></a><span class="ex">-rw-r--r--</span>  1 lcozzuto  staff  29 Oct  8 19:16 seq_1</span>
+<span id="cb122-4"><a href="more-complex-scripts.html#cb122-4"></a><span class="ex">-rw-r--r--</span>  1 lcozzuto  staff  33 Oct  8 19:16 seq_2</span>
+<span id="cb122-5"><a href="more-complex-scripts.html#cb122-5"></a><span class="ex">-rw-r--r--</span>  1 lcozzuto  staff  27 Oct  8 19:16 seq_3</span>
+<span id="cb122-6"><a href="more-complex-scripts.html#cb122-6"></a><span class="ex">lrwxr-xr-x</span>  1 lcozzuto  staff  69 Oct  8 19:16 test.fa -<span class="op">&gt;</span> /home/ec2-user/git/CoursesCRG_Containers_Nextflow_May_2021/nextflow/nextflow/testdata/test.fa</span></code></pre></div>
 <p>we have the file test.fa that is a soft link to the orinal input. And inspecting work/fe/0a8640* that is generated by the process <strong>reverseSequence</strong> reveals that the files generated by <strong>splitSequences</strong> are now linked as input.</p>
-<div class="sourceCode" id="cb118"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb118-1"><a href="more-complex-scripts.html#cb118-1"></a><span class="fu">ls</span> -l work/fe/0a8640*</span>
-<span id="cb118-2"><a href="more-complex-scripts.html#cb118-2"></a><span class="ex">total</span> 8</span>
-<span id="cb118-3"><a href="more-complex-scripts.html#cb118-3"></a><span class="ex">-rw-r--r--</span>  1 lcozzuto  staff  89 Oct  8 19:16 all.rev</span>
-<span id="cb118-4"><a href="more-complex-scripts.html#cb118-4"></a><span class="ex">lrwxr-xr-x</span>  1 lcozzuto  staff  97 Oct  8 19:16 seq_1 -<span class="op">&gt;</span> /home/ec2-user/git/CoursesCRG_Containers_Nextflow_May_2021/nextflow/nextflow/work/09/53e071d286ed66f4020869c8977b59/seq_1</span>
-<span id="cb118-5"><a href="more-complex-scripts.html#cb118-5"></a><span class="ex">lrwxr-xr-x</span>  1 lcozzuto  staff  97 Oct  8 19:16 seq_2 -<span class="op">&gt;</span> /home/ec2-user/git/CoursesCRG_Containers_Nextflow_May_2021/nextflow/nextflow/work/09/53e071d286ed66f4020869c8977b59/seq_2</span>
-<span id="cb118-6"><a href="more-complex-scripts.html#cb118-6"></a><span class="ex">lrwxr-xr-x</span>  1 lcozzuto  staff  97 Oct  8 19:16 seq_3 -<span class="op">&gt;</span> /home/ec2-user/git/CoursesCRG_Containers_Nextflow_May_2021/nextflow/nextflow/work/09/53e071d286ed66f4020869c8977b59/seq_3</span></code></pre></div>
+<div class="sourceCode" id="cb123"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb123-1"><a href="more-complex-scripts.html#cb123-1"></a><span class="fu">ls</span> -l work/fe/0a8640*</span>
+<span id="cb123-2"><a href="more-complex-scripts.html#cb123-2"></a><span class="ex">total</span> 8</span>
+<span id="cb123-3"><a href="more-complex-scripts.html#cb123-3"></a><span class="ex">-rw-r--r--</span>  1 lcozzuto  staff  89 Oct  8 19:16 all.rev</span>
+<span id="cb123-4"><a href="more-complex-scripts.html#cb123-4"></a><span class="ex">lrwxr-xr-x</span>  1 lcozzuto  staff  97 Oct  8 19:16 seq_1 -<span class="op">&gt;</span> /home/ec2-user/git/CoursesCRG_Containers_Nextflow_May_2021/nextflow/nextflow/work/09/53e071d286ed66f4020869c8977b59/seq_1</span>
+<span id="cb123-5"><a href="more-complex-scripts.html#cb123-5"></a><span class="ex">lrwxr-xr-x</span>  1 lcozzuto  staff  97 Oct  8 19:16 seq_2 -<span class="op">&gt;</span> /home/ec2-user/git/CoursesCRG_Containers_Nextflow_May_2021/nextflow/nextflow/work/09/53e071d286ed66f4020869c8977b59/seq_2</span>
+<span id="cb123-6"><a href="more-complex-scripts.html#cb123-6"></a><span class="ex">lrwxr-xr-x</span>  1 lcozzuto  staff  97 Oct  8 19:16 seq_3 -<span class="op">&gt;</span> /home/ec2-user/git/CoursesCRG_Containers_Nextflow_May_2021/nextflow/nextflow/work/09/53e071d286ed66f4020869c8977b59/seq_3</span></code></pre></div>
 <p><strong>IMPORTANT: Nextflow will randomly generate temporary folders so they will be named differently in your execution!!!</strong></p>
 <p>At this point we can make two different workflows so that we show how the new DSL allows reusing of the code.</p>
-<div class="sourceCode" id="cb119"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb119-1"><a href="more-complex-scripts.html#cb119-1"></a>#!/usr/bin/env nextflow</span>
-<span id="cb119-2"><a href="more-complex-scripts.html#cb119-2"></a></span>
-<span id="cb119-3"><a href="more-complex-scripts.html#cb119-3"></a>nextflow.<span class="fu">enable</span>.<span class="fu">dsl</span>=<span class="dv">2</span></span>
-<span id="cb119-4"><a href="more-complex-scripts.html#cb119-4"></a></span>
-<span id="cb119-5"><a href="more-complex-scripts.html#cb119-5"></a><span class="co">// this can be overridden by using --inputfile OTHERFILENAME</span></span>
-<span id="cb119-6"><a href="more-complex-scripts.html#cb119-6"></a>params.<span class="fu">inputfile</span> = <span class="st">&quot;$baseDir/testdata/test.fa&quot;</span></span>
-<span id="cb119-7"><a href="more-complex-scripts.html#cb119-7"></a></span>
-<span id="cb119-8"><a href="more-complex-scripts.html#cb119-8"></a><span class="co">// the &quot;file method&quot; returns a file system object given a file path string  </span></span>
-<span id="cb119-9"><a href="more-complex-scripts.html#cb119-9"></a>sequences_file = <span class="fu">file</span>(params.<span class="fu">inputfile</span>)             </span>
-<span id="cb119-10"><a href="more-complex-scripts.html#cb119-10"></a></span>
-<span id="cb119-11"><a href="more-complex-scripts.html#cb119-11"></a><span class="co">// check if the file exists</span></span>
-<span id="cb119-12"><a href="more-complex-scripts.html#cb119-12"></a><span class="kw">if</span>( !sequences_file.<span class="fu">exists</span>() ) exit <span class="dv">1</span>, <span class="st">&quot;Missing genome file: ${genome_file}&quot;</span></span>
-<span id="cb119-13"><a href="more-complex-scripts.html#cb119-13"></a></span>
-<span id="cb119-14"><a href="more-complex-scripts.html#cb119-14"></a></span>
-<span id="cb119-15"><a href="more-complex-scripts.html#cb119-15"></a><span class="co">/*</span></span>
-<span id="cb119-16"><a href="more-complex-scripts.html#cb119-16"></a><span class="co"> * Process 1 for splitting a fasta file in multiple files</span></span>
-<span id="cb119-17"><a href="more-complex-scripts.html#cb119-17"></a><span class="co"> */</span></span>
-<span id="cb119-18"><a href="more-complex-scripts.html#cb119-18"></a></span>
-<span id="cb119-19"><a href="more-complex-scripts.html#cb119-19"></a>process splitSequences {</span>
-<span id="cb119-20"><a href="more-complex-scripts.html#cb119-20"></a></span>
-<span id="cb119-21"><a href="more-complex-scripts.html#cb119-21"></a>    input:</span>
-<span id="cb119-22"><a href="more-complex-scripts.html#cb119-22"></a>    path sequencesFile</span>
-<span id="cb119-23"><a href="more-complex-scripts.html#cb119-23"></a></span>
-<span id="cb119-24"><a href="more-complex-scripts.html#cb119-24"></a>    output:</span>
-<span id="cb119-25"><a href="more-complex-scripts.html#cb119-25"></a>    <span class="fu">path</span> (&#39;seq_*&#39;)    </span>
-<span id="cb119-26"><a href="more-complex-scripts.html#cb119-26"></a></span>
-<span id="cb119-27"><a href="more-complex-scripts.html#cb119-27"></a>    <span class="co">// simple awk command</span></span>
-<span id="cb119-28"><a href="more-complex-scripts.html#cb119-28"></a></span>
-<span id="cb119-29"><a href="more-complex-scripts.html#cb119-29"></a>    script:</span>
-<span id="cb119-30"><a href="more-complex-scripts.html#cb119-30"></a>    <span class="st">&quot;&quot;&quot;</span></span>
-<span id="cb119-31"><a href="more-complex-scripts.html#cb119-31"></a>    awk &#39;/^&gt;/{f=<span class="st">&quot;seq_&quot;</span>++d} {print &gt; f}&#39; &lt; ${sequencesFile}</span>
-<span id="cb119-32"><a href="more-complex-scripts.html#cb119-32"></a>    <span class="st">&quot;&quot;&quot;</span></span>
-<span id="cb119-33"><a href="more-complex-scripts.html#cb119-33"></a>}</span>
-<span id="cb119-34"><a href="more-complex-scripts.html#cb119-34"></a></span>
-<span id="cb119-35"><a href="more-complex-scripts.html#cb119-35"></a></span>
-<span id="cb119-36"><a href="more-complex-scripts.html#cb119-36"></a><span class="co">/*</span></span>
-<span id="cb119-37"><a href="more-complex-scripts.html#cb119-37"></a><span class="co"> * Process 2 for reversing the sequences</span></span>
-<span id="cb119-38"><a href="more-complex-scripts.html#cb119-38"></a><span class="co"> */</span></span>
-<span id="cb119-39"><a href="more-complex-scripts.html#cb119-39"></a></span>
-<span id="cb119-40"><a href="more-complex-scripts.html#cb119-40"></a>process reverseSequence {</span>
-<span id="cb119-41"><a href="more-complex-scripts.html#cb119-41"></a>    tag <span class="st">&quot;$seq&quot;</span>                  </span>
-<span id="cb119-42"><a href="more-complex-scripts.html#cb119-42"></a>    publishDir <span class="st">&quot;output&quot;</span></span>
-<span id="cb119-43"><a href="more-complex-scripts.html#cb119-43"></a></span>
-<span id="cb119-44"><a href="more-complex-scripts.html#cb119-44"></a>    input:</span>
-<span id="cb119-45"><a href="more-complex-scripts.html#cb119-45"></a>    path seq</span>
-<span id="cb119-46"><a href="more-complex-scripts.html#cb119-46"></a></span>
-<span id="cb119-47"><a href="more-complex-scripts.html#cb119-47"></a>    output:</span>
-<span id="cb119-48"><a href="more-complex-scripts.html#cb119-48"></a>    path <span class="st">&quot;all.rev&quot;</span></span>
-<span id="cb119-49"><a href="more-complex-scripts.html#cb119-49"></a></span>
-<span id="cb119-50"><a href="more-complex-scripts.html#cb119-50"></a>    script:</span>
-<span id="cb119-51"><a href="more-complex-scripts.html#cb119-51"></a>    <span class="st">&quot;&quot;&quot;</span></span>
-<span id="cb119-52"><a href="more-complex-scripts.html#cb119-52"></a>    cat ${seq} | awk &#39;{<span class="kw">if</span> (\$<span class="dv">1</span>~<span class="st">&quot;&gt;&quot;</span>) {print \$<span class="dv">0</span>} <span class="kw">else</span> <span class="fu">system</span>(<span class="st">&quot;echo &quot;</span> \$<span class="dv">0</span> <span class="st">&quot; |rev&quot;</span>)}&#39; &gt; all.<span class="fu">rev</span></span>
-<span id="cb119-53"><a href="more-complex-scripts.html#cb119-53"></a>    <span class="st">&quot;&quot;&quot;</span></span>
-<span id="cb119-54"><a href="more-complex-scripts.html#cb119-54"></a>}</span>
-<span id="cb119-55"><a href="more-complex-scripts.html#cb119-55"></a></span>
-<span id="cb119-56"><a href="more-complex-scripts.html#cb119-56"></a>workflow flow1 {</span>
-<span id="cb119-57"><a href="more-complex-scripts.html#cb119-57"></a>    take: sequences</span>
-<span id="cb119-58"><a href="more-complex-scripts.html#cb119-58"></a>    main:</span>
-<span id="cb119-59"><a href="more-complex-scripts.html#cb119-59"></a>    splitted_seq        = <span class="fu">splitSequences</span>(sequences)</span>
-<span id="cb119-60"><a href="more-complex-scripts.html#cb119-60"></a>    rev_single_seq      = <span class="fu">reverseSequence</span>(splitted_seq)</span>
-<span id="cb119-61"><a href="more-complex-scripts.html#cb119-61"></a>}</span>
-<span id="cb119-62"><a href="more-complex-scripts.html#cb119-62"></a></span>
-<span id="cb119-63"><a href="more-complex-scripts.html#cb119-63"></a>workflow flow2 {</span>
-<span id="cb119-64"><a href="more-complex-scripts.html#cb119-64"></a>    take: sequences</span>
-<span id="cb119-65"><a href="more-complex-scripts.html#cb119-65"></a>    main:</span>
-<span id="cb119-66"><a href="more-complex-scripts.html#cb119-66"></a>    splitted_seq        = <span class="fu">splitSequences</span>(sequences).<span class="fu">flatten</span>()</span>
-<span id="cb119-67"><a href="more-complex-scripts.html#cb119-67"></a>    rev_single_seq      = <span class="fu">reverseSequence</span>(splitted_seq)</span>
-<span id="cb119-68"><a href="more-complex-scripts.html#cb119-68"></a></span>
-<span id="cb119-69"><a href="more-complex-scripts.html#cb119-69"></a>}</span>
-<span id="cb119-70"><a href="more-complex-scripts.html#cb119-70"></a></span>
-<span id="cb119-71"><a href="more-complex-scripts.html#cb119-71"></a>workflow {</span>
-<span id="cb119-72"><a href="more-complex-scripts.html#cb119-72"></a>   <span class="fu">flow1</span>(sequences_file)</span>
-<span id="cb119-73"><a href="more-complex-scripts.html#cb119-73"></a>   <span class="fu">flow2</span>(sequences_file)</span>
-<span id="cb119-74"><a href="more-complex-scripts.html#cb119-74"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb124"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb124-1"><a href="more-complex-scripts.html#cb124-1"></a>#!/usr/bin/env nextflow</span>
+<span id="cb124-2"><a href="more-complex-scripts.html#cb124-2"></a></span>
+<span id="cb124-3"><a href="more-complex-scripts.html#cb124-3"></a>nextflow.<span class="fu">enable</span>.<span class="fu">dsl</span>=<span class="dv">2</span></span>
+<span id="cb124-4"><a href="more-complex-scripts.html#cb124-4"></a></span>
+<span id="cb124-5"><a href="more-complex-scripts.html#cb124-5"></a><span class="co">// this can be overridden by using --inputfile OTHERFILENAME</span></span>
+<span id="cb124-6"><a href="more-complex-scripts.html#cb124-6"></a>params.<span class="fu">inputfile</span> = <span class="st">&quot;$baseDir/testdata/test.fa&quot;</span></span>
+<span id="cb124-7"><a href="more-complex-scripts.html#cb124-7"></a></span>
+<span id="cb124-8"><a href="more-complex-scripts.html#cb124-8"></a><span class="co">// the &quot;file method&quot; returns a file system object given a file path string  </span></span>
+<span id="cb124-9"><a href="more-complex-scripts.html#cb124-9"></a>sequences_file = <span class="fu">file</span>(params.<span class="fu">inputfile</span>)             </span>
+<span id="cb124-10"><a href="more-complex-scripts.html#cb124-10"></a></span>
+<span id="cb124-11"><a href="more-complex-scripts.html#cb124-11"></a><span class="co">// check if the file exists</span></span>
+<span id="cb124-12"><a href="more-complex-scripts.html#cb124-12"></a><span class="kw">if</span>( !sequences_file.<span class="fu">exists</span>() ) exit <span class="dv">1</span>, <span class="st">&quot;Missing genome file: ${genome_file}&quot;</span></span>
+<span id="cb124-13"><a href="more-complex-scripts.html#cb124-13"></a></span>
+<span id="cb124-14"><a href="more-complex-scripts.html#cb124-14"></a></span>
+<span id="cb124-15"><a href="more-complex-scripts.html#cb124-15"></a><span class="co">/*</span></span>
+<span id="cb124-16"><a href="more-complex-scripts.html#cb124-16"></a><span class="co"> * Process 1 for splitting a fasta file in multiple files</span></span>
+<span id="cb124-17"><a href="more-complex-scripts.html#cb124-17"></a><span class="co"> */</span></span>
+<span id="cb124-18"><a href="more-complex-scripts.html#cb124-18"></a></span>
+<span id="cb124-19"><a href="more-complex-scripts.html#cb124-19"></a>process splitSequences {</span>
+<span id="cb124-20"><a href="more-complex-scripts.html#cb124-20"></a></span>
+<span id="cb124-21"><a href="more-complex-scripts.html#cb124-21"></a>    input:</span>
+<span id="cb124-22"><a href="more-complex-scripts.html#cb124-22"></a>    path sequencesFile</span>
+<span id="cb124-23"><a href="more-complex-scripts.html#cb124-23"></a></span>
+<span id="cb124-24"><a href="more-complex-scripts.html#cb124-24"></a>    output:</span>
+<span id="cb124-25"><a href="more-complex-scripts.html#cb124-25"></a>    <span class="fu">path</span> (&#39;seq_*&#39;)    </span>
+<span id="cb124-26"><a href="more-complex-scripts.html#cb124-26"></a></span>
+<span id="cb124-27"><a href="more-complex-scripts.html#cb124-27"></a>    <span class="co">// simple awk command</span></span>
+<span id="cb124-28"><a href="more-complex-scripts.html#cb124-28"></a></span>
+<span id="cb124-29"><a href="more-complex-scripts.html#cb124-29"></a>    script:</span>
+<span id="cb124-30"><a href="more-complex-scripts.html#cb124-30"></a>    <span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb124-31"><a href="more-complex-scripts.html#cb124-31"></a>    awk &#39;/^&gt;/{f=<span class="st">&quot;seq_&quot;</span>++d} {print &gt; f}&#39; &lt; ${sequencesFile}</span>
+<span id="cb124-32"><a href="more-complex-scripts.html#cb124-32"></a>    <span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb124-33"><a href="more-complex-scripts.html#cb124-33"></a>}</span>
+<span id="cb124-34"><a href="more-complex-scripts.html#cb124-34"></a></span>
+<span id="cb124-35"><a href="more-complex-scripts.html#cb124-35"></a></span>
+<span id="cb124-36"><a href="more-complex-scripts.html#cb124-36"></a><span class="co">/*</span></span>
+<span id="cb124-37"><a href="more-complex-scripts.html#cb124-37"></a><span class="co"> * Process 2 for reversing the sequences</span></span>
+<span id="cb124-38"><a href="more-complex-scripts.html#cb124-38"></a><span class="co"> */</span></span>
+<span id="cb124-39"><a href="more-complex-scripts.html#cb124-39"></a></span>
+<span id="cb124-40"><a href="more-complex-scripts.html#cb124-40"></a>process reverseSequence {</span>
+<span id="cb124-41"><a href="more-complex-scripts.html#cb124-41"></a>    tag <span class="st">&quot;$seq&quot;</span>                  </span>
+<span id="cb124-42"><a href="more-complex-scripts.html#cb124-42"></a>    publishDir <span class="st">&quot;output&quot;</span></span>
+<span id="cb124-43"><a href="more-complex-scripts.html#cb124-43"></a></span>
+<span id="cb124-44"><a href="more-complex-scripts.html#cb124-44"></a>    input:</span>
+<span id="cb124-45"><a href="more-complex-scripts.html#cb124-45"></a>    path seq</span>
+<span id="cb124-46"><a href="more-complex-scripts.html#cb124-46"></a></span>
+<span id="cb124-47"><a href="more-complex-scripts.html#cb124-47"></a>    output:</span>
+<span id="cb124-48"><a href="more-complex-scripts.html#cb124-48"></a>    path <span class="st">&quot;all.rev&quot;</span></span>
+<span id="cb124-49"><a href="more-complex-scripts.html#cb124-49"></a></span>
+<span id="cb124-50"><a href="more-complex-scripts.html#cb124-50"></a>    script:</span>
+<span id="cb124-51"><a href="more-complex-scripts.html#cb124-51"></a>    <span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb124-52"><a href="more-complex-scripts.html#cb124-52"></a>    cat ${seq} | awk &#39;{<span class="kw">if</span> (\$<span class="dv">1</span>~<span class="st">&quot;&gt;&quot;</span>) {print \$<span class="dv">0</span>} <span class="kw">else</span> <span class="fu">system</span>(<span class="st">&quot;echo &quot;</span> \$<span class="dv">0</span> <span class="st">&quot; |rev&quot;</span>)}&#39; &gt; all.<span class="fu">rev</span></span>
+<span id="cb124-53"><a href="more-complex-scripts.html#cb124-53"></a>    <span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb124-54"><a href="more-complex-scripts.html#cb124-54"></a>}</span>
+<span id="cb124-55"><a href="more-complex-scripts.html#cb124-55"></a></span>
+<span id="cb124-56"><a href="more-complex-scripts.html#cb124-56"></a>workflow flow1 {</span>
+<span id="cb124-57"><a href="more-complex-scripts.html#cb124-57"></a>    take: sequences</span>
+<span id="cb124-58"><a href="more-complex-scripts.html#cb124-58"></a>    main:</span>
+<span id="cb124-59"><a href="more-complex-scripts.html#cb124-59"></a>    splitted_seq        = <span class="fu">splitSequences</span>(sequences)</span>
+<span id="cb124-60"><a href="more-complex-scripts.html#cb124-60"></a>    rev_single_seq      = <span class="fu">reverseSequence</span>(splitted_seq)</span>
+<span id="cb124-61"><a href="more-complex-scripts.html#cb124-61"></a>}</span>
+<span id="cb124-62"><a href="more-complex-scripts.html#cb124-62"></a></span>
+<span id="cb124-63"><a href="more-complex-scripts.html#cb124-63"></a>workflow flow2 {</span>
+<span id="cb124-64"><a href="more-complex-scripts.html#cb124-64"></a>    take: sequences</span>
+<span id="cb124-65"><a href="more-complex-scripts.html#cb124-65"></a>    main:</span>
+<span id="cb124-66"><a href="more-complex-scripts.html#cb124-66"></a>    splitted_seq        = <span class="fu">splitSequences</span>(sequences).<span class="fu">flatten</span>()</span>
+<span id="cb124-67"><a href="more-complex-scripts.html#cb124-67"></a>    rev_single_seq      = <span class="fu">reverseSequence</span>(splitted_seq)</span>
+<span id="cb124-68"><a href="more-complex-scripts.html#cb124-68"></a></span>
+<span id="cb124-69"><a href="more-complex-scripts.html#cb124-69"></a>}</span>
+<span id="cb124-70"><a href="more-complex-scripts.html#cb124-70"></a></span>
+<span id="cb124-71"><a href="more-complex-scripts.html#cb124-71"></a>workflow {</span>
+<span id="cb124-72"><a href="more-complex-scripts.html#cb124-72"></a>   <span class="fu">flow1</span>(sequences_file)</span>
+<span id="cb124-73"><a href="more-complex-scripts.html#cb124-73"></a>   <span class="fu">flow2</span>(sequences_file)</span>
+<span id="cb124-74"><a href="more-complex-scripts.html#cb124-74"></a>}</span></code></pre></div>
 <p>The first workflow will just run like the previous script, while the second will “flatten” the output of the first process and will launch the second process on each single sequence.</p>
 <p>The <strong>reverseSequence</strong> processes of the second workflow will run in parallel if you have enough processors or you are in a cluster environment with a scheduler supported by Nextflow.</p>
-<div class="sourceCode" id="cb120"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb120-1"><a href="more-complex-scripts.html#cb120-1"></a><span class="ex">nextflow</span> run test.nf -bg</span>
-<span id="cb120-2"><a href="more-complex-scripts.html#cb120-2"></a><span class="ex">C02WX1XFHV2Q</span>:nextflow lcozzuto$ N E X T F L O W  ~  version 20.07.1</span>
-<span id="cb120-3"><a href="more-complex-scripts.html#cb120-3"></a><span class="ex">Launching</span> <span class="kw">`</span><span class="ex">test.nf</span><span class="kw">`</span> [insane_plateau] - revision: d33befe154</span>
-<span id="cb120-4"><a href="more-complex-scripts.html#cb120-4"></a>[<span class="ex">bd</span>/<span class="ex">f4e9a6</span>] Submitted process <span class="op">&gt;</span> flow1:splitSequences</span>
-<span id="cb120-5"><a href="more-complex-scripts.html#cb120-5"></a>[<span class="ex">37</span>/<span class="ex">d790ab</span>] Submitted process <span class="op">&gt;</span> flow2:splitSequences</span>
-<span id="cb120-6"><a href="more-complex-scripts.html#cb120-6"></a>[<span class="ex">33</span>/<span class="ex">a6fc72</span>] Submitted process <span class="op">&gt;</span> flow1:reverseSequence ([seq_1, seq_2, seq_3])</span>
-<span id="cb120-7"><a href="more-complex-scripts.html#cb120-7"></a>[<span class="ex">87</span>/<span class="ex">54bfe8</span>] Submitted process <span class="op">&gt;</span> flow2:reverseSequence (seq_2)</span>
-<span id="cb120-8"><a href="more-complex-scripts.html#cb120-8"></a>[<span class="ex">45</span>/<span class="ex">86dd83</span>] Submitted process <span class="op">&gt;</span> flow2:reverseSequence (seq_1)</span>
-<span id="cb120-9"><a href="more-complex-scripts.html#cb120-9"></a>[<span class="ex">93</span>/<span class="ex">c7b1c6</span>] Submitted process <span class="op">&gt;</span> flow2:reverseSequence (seq_3)</span></code></pre></div>
+<div class="sourceCode" id="cb125"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb125-1"><a href="more-complex-scripts.html#cb125-1"></a><span class="ex">nextflow</span> run test.nf -bg</span>
+<span id="cb125-2"><a href="more-complex-scripts.html#cb125-2"></a><span class="ex">C02WX1XFHV2Q</span>:nextflow lcozzuto$ N E X T F L O W  ~  version 20.07.1</span>
+<span id="cb125-3"><a href="more-complex-scripts.html#cb125-3"></a><span class="ex">Launching</span> <span class="kw">`</span><span class="ex">test.nf</span><span class="kw">`</span> [insane_plateau] - revision: d33befe154</span>
+<span id="cb125-4"><a href="more-complex-scripts.html#cb125-4"></a>[<span class="ex">bd</span>/<span class="ex">f4e9a6</span>] Submitted process <span class="op">&gt;</span> flow1:splitSequences</span>
+<span id="cb125-5"><a href="more-complex-scripts.html#cb125-5"></a>[<span class="ex">37</span>/<span class="ex">d790ab</span>] Submitted process <span class="op">&gt;</span> flow2:splitSequences</span>
+<span id="cb125-6"><a href="more-complex-scripts.html#cb125-6"></a>[<span class="ex">33</span>/<span class="ex">a6fc72</span>] Submitted process <span class="op">&gt;</span> flow1:reverseSequence ([seq_1, seq_2, seq_3])</span>
+<span id="cb125-7"><a href="more-complex-scripts.html#cb125-7"></a>[<span class="ex">87</span>/<span class="ex">54bfe8</span>] Submitted process <span class="op">&gt;</span> flow2:reverseSequence (seq_2)</span>
+<span id="cb125-8"><a href="more-complex-scripts.html#cb125-8"></a>[<span class="ex">45</span>/<span class="ex">86dd83</span>] Submitted process <span class="op">&gt;</span> flow2:reverseSequence (seq_1)</span>
+<span id="cb125-9"><a href="more-complex-scripts.html#cb125-9"></a>[<span class="ex">93</span>/<span class="ex">c7b1c6</span>] Submitted process <span class="op">&gt;</span> flow2:reverseSequence (seq_3)</span></code></pre></div>
 </div>
             </section>
 
