@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines</title>
-  <meta name="description" content="Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
+  <title>3.3 Linux packages | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines</title>
+  <meta name="description" content="3.3 Linux packages | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
+  <meta property="og:title" content="3.3 Linux packages | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
+  <meta name="twitter:title" content="3.3 Linux packages | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="meet-the-organizers-and-instructors.html"/>
+<link rel="prev" href="using-existing-images.html"/>
+<link rel="next" href="docker-recipes.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -274,32 +274,54 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines</h1>
-<p class="author"><em>Sarah Bonnin<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>, Luca Cozzuto<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>, Toni Hermoso<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>, Julia Ponomarenko<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a></em></p>
+<div id="linux-packages" class="section level2">
+<h2><span class="header-section-number">3.3</span> Linux packages</h2>
+<p>In the next step, we will create Docker images.
+<br>
+For this to go smoothly, you should know your <strong>base system</strong>, and how to interact with it (update, upgrade and install packages for example).
+<br>
+In Linux-based environment, software is usually distributed in the form of <strong>packages</strong>, kept in repositories.
+<br>
+With different operating systems come different tools to fetch and install packages:</p>
+<div class="line-block">Operating System | Format | Tool(s) |<br />
+Debian / Ubuntu / Linux Mint / Raspbian | .deb | apt, apt-cache, apt-get, dpkg |<br />
+CentOS (RedHat) | .rpm | yum |<br />
+Fedora (RedHat) | .rpm | dnf |<br />
+FreeBSD | .txz | make, pkg |</div>
+<p>During this course, we will see a bit about <strong>Ubuntu</strong> and <strong>CentOS</strong>.</p>
+<p><br>
+&gt; Note that the environment you are working on for this course is <em>CentOS-based</em></p>
+<div id="update-and-upgrade-packages" class="section level3">
+<h3><span class="header-section-number">3.3.1</span> Update and upgrade packages</h3>
+<ul>
+<li>In <strong>Ubuntu</strong>:</li>
+</ul>
+<pre><code>apt-get update &amp;&amp; apt-get upgrade -y</code></pre>
+<p>In <strong>CentOS</strong>:</p>
+<pre><code>yum check-update &amp;&amp; yum update -y</code></pre>
 </div>
-<div id="welcome-and-about-the-course" class="section level1">
-<h1><span class="header-section-number">Part 1</span> Welcome and about the course</h1>
-<p>This slow-paced hands-on course is designed for absolute beginners who want to start using containers and Nextflow pipelines to achieve reproducibility of data analysis. <br>
-Linux containers allow the storage of code and applications in an host-independent lightweight environment. They became a fast and popular way to share and deploy applications in different environments. <br>
-Nextflow is a powerful polyglot workflow language that, coupled with Docker and Singularity containers, provides a robust, scalable and reproducible way to run computational pipelines.</p>
+<div id="search-and-install-packages" class="section level3">
+<h3><span class="header-section-number">3.3.2</span> Search and install packages:</h3>
+<ul>
+<li>In <strong>Ubuntu</strong>:</li>
+</ul>
+<pre><code>apt search libxml2
+apt install libxml2-dev</code></pre>
+<ul>
+<li>In <strong>CentOS</strong>:</li>
+</ul>
+<pre><code>yum search libxml2
+yum install libxml2-devel.x86_64</code></pre>
+<p>More on the subject in <a href="https://www.digitalocean.com/community/tutorials/package-management-basics-apt-yum-dnf-pkg">this post</a></p>
 </div>
-<div class="footnotes">
-<hr />
-<ol start="1">
-<li id="fn1"><p>CRG, <a href="mailto:sarah.bonning@crg.eu" class="email">sarah.bonning@crg.eu</a><a href="#fnref1" class="footnote-back">↩︎</a></p></li>
-<li id="fn2"><p>CRG, <a href="mailto:luca.cozzuto@crg.eu" class="email">luca.cozzuto@crg.eu</a><a href="#fnref2" class="footnote-back">↩︎</a></p></li>
-<li id="fn3"><p>CRG, <a href="mailto:toni.hermoso@crg.eu" class="email">toni.hermoso@crg.eu</a><a href="#fnref3" class="footnote-back">↩︎</a></p></li>
-<li id="fn4"><p>CRG, <a href="mailto:julia.ponomarenko@crg.eu" class="email">julia.ponomarenko@crg.eu</a><a href="#fnref4" class="footnote-back">↩︎</a></p></li>
-</ol>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="meet-the-organizers-and-instructors.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="using-existing-images.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="docker-recipes.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

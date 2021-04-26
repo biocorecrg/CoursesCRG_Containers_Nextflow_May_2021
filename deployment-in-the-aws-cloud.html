@@ -179,16 +179,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.2.9" data-path="using-existing-images.html"><a href="using-existing-images.html#docker-rm-docker-rmi-clean-up"><i class="fa fa-check"></i><b>3.2.9</b> docker rm, docker rmi: clean up!</a></li>
 <li class="chapter" data-level="3.2.10" data-path="using-existing-images.html"><a href="using-existing-images.html#exercise"><i class="fa fa-check"></i><b>3.2.10</b> Exercise</a></li>
 </ul></li>
-<li class="chapter" data-level="3.3" data-path="docker-recipes.html"><a href="docker-recipes.html"><i class="fa fa-check"></i><b>3.3</b> Docker recipes</a><ul>
-<li class="chapter" data-level="3.3.1" data-path="docker-recipes.html"><a href="docker-recipes.html#building-recipes"><i class="fa fa-check"></i><b>3.3.1</b> Building recipes</a></li>
-<li class="chapter" data-level="3.3.2" data-path="docker-recipes.html"><a href="docker-recipes.html#docker-build"><i class="fa fa-check"></i><b>3.3.2</b> docker build</a></li>
-<li class="chapter" data-level="3.3.3" data-path="docker-recipes.html"><a href="docker-recipes.html#docker-tag"><i class="fa fa-check"></i><b>3.3.3</b> docker tag</a></li>
-<li class="chapter" data-level="3.3.4" data-path="docker-recipes.html"><a href="docker-recipes.html#build-cache"><i class="fa fa-check"></i><b>3.3.4</b> Build cache</a></li>
-<li class="chapter" data-level="3.3.5" data-path="docker-recipes.html"><a href="docker-recipes.html#more-advanced-image-building"><i class="fa fa-check"></i><b>3.3.5</b> More advanced image building</a></li>
-<li class="chapter" data-level="3.3.6" data-path="docker-recipes.html"><a href="docker-recipes.html#additional-commands"><i class="fa fa-check"></i><b>3.3.6</b> Additional commands</a></li>
+<li class="chapter" data-level="3.3" data-path="linux-packages.html"><a href="linux-packages.html"><i class="fa fa-check"></i><b>3.3</b> Linux packages</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="linux-packages.html"><a href="linux-packages.html#update-and-upgrade-packages"><i class="fa fa-check"></i><b>3.3.1</b> Update and upgrade packages</a></li>
+<li class="chapter" data-level="3.3.2" data-path="linux-packages.html"><a href="linux-packages.html#search-and-install-packages"><i class="fa fa-check"></i><b>3.3.2</b> Search and install packages:</a></li>
 </ul></li>
-<li class="chapter" data-level="3.4" data-path="volumes.html"><a href="volumes.html"><i class="fa fa-check"></i><b>3.4</b> Volumes</a></li>
-<li class="chapter" data-level="3.5" data-path="ports.html"><a href="ports.html"><i class="fa fa-check"></i><b>3.5</b> Ports</a></li>
+<li class="chapter" data-level="3.4" data-path="docker-recipes.html"><a href="docker-recipes.html"><i class="fa fa-check"></i><b>3.4</b> Docker recipes</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="docker-recipes.html"><a href="docker-recipes.html#building-recipes"><i class="fa fa-check"></i><b>3.4.1</b> Building recipes</a></li>
+<li class="chapter" data-level="3.4.2" data-path="docker-recipes.html"><a href="docker-recipes.html#docker-build"><i class="fa fa-check"></i><b>3.4.2</b> docker build</a></li>
+<li class="chapter" data-level="3.4.3" data-path="docker-recipes.html"><a href="docker-recipes.html#docker-tag"><i class="fa fa-check"></i><b>3.4.3</b> docker tag</a></li>
+<li class="chapter" data-level="3.4.4" data-path="docker-recipes.html"><a href="docker-recipes.html#build-cache"><i class="fa fa-check"></i><b>3.4.4</b> Build cache</a></li>
+<li class="chapter" data-level="3.4.5" data-path="docker-recipes.html"><a href="docker-recipes.html#more-advanced-image-building"><i class="fa fa-check"></i><b>3.4.5</b> More advanced image building</a></li>
+<li class="chapter" data-level="3.4.6" data-path="docker-recipes.html"><a href="docker-recipes.html#additional-commands"><i class="fa fa-check"></i><b>3.4.6</b> Additional commands</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="volumes.html"><a href="volumes.html"><i class="fa fa-check"></i><b>3.5</b> Volumes</a></li>
+<li class="chapter" data-level="3.6" data-path="ports.html"><a href="ports.html"><i class="fa fa-check"></i><b>3.6</b> Ports</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="singularity.html"><a href="singularity.html"><i class="fa fa-check"></i><b>4</b> Singularity</a><ul>
 <li class="chapter" data-level="4.1" data-path="introduction-to-singularity.html"><a href="introduction-to-singularity.html"><i class="fa fa-check"></i><b>4.1</b> Introduction to Singularity</a><ul>
@@ -273,32 +277,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="deployment-in-the-aws-cloud" class="section level2">
 <h2><span class="header-section-number">6.6</span> Deployment in the AWS cloud</h2>
 <p>The final profile is for running the pipeline in the Amazon Cloud, known as Amazon Web Services or AWS. In particular we will use AWS Batch that allows the execution of containerised workloads in the Amazon cloud infrastructure.</p>
-<div class="sourceCode" id="cb140"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb140-1"><a href="deployment-in-the-aws-cloud.html#cb140-1"></a></span>
-<span id="cb140-2"><a href="deployment-in-the-aws-cloud.html#cb140-2"></a>   cloud {</span>
-<span id="cb140-3"><a href="deployment-in-the-aws-cloud.html#cb140-3"></a>    workDir = &#39;s3:<span class="co">//class-bucket-1/work&#39;</span></span>
-<span id="cb140-4"><a href="deployment-in-the-aws-cloud.html#cb140-4"></a>    aws.<span class="fu">region</span> = &#39;eu-central-<span class="dv">1</span>&#39;</span>
-<span id="cb140-5"><a href="deployment-in-the-aws-cloud.html#cb140-5"></a>    aws.<span class="fu">batch</span>.<span class="fu">cliPath</span> = &#39;/home/ec2-user/miniconda/bin/aws&#39;</span>
-<span id="cb140-6"><a href="deployment-in-the-aws-cloud.html#cb140-6"></a>    </span>
-<span id="cb140-7"><a href="deployment-in-the-aws-cloud.html#cb140-7"></a>   process {</span>
-<span id="cb140-8"><a href="deployment-in-the-aws-cloud.html#cb140-8"></a>       containerOptions = { workflow.<span class="fu">containerEngine</span> == <span class="st">&quot;docker&quot;</span> ? &#39;-u $(id -u):$(id -g)&#39;: <span class="kw">null</span>}</span>
-<span id="cb140-9"><a href="deployment-in-the-aws-cloud.html#cb140-9"></a>       executor = &#39;awsbatch&#39;</span>
-<span id="cb140-10"><a href="deployment-in-the-aws-cloud.html#cb140-10"></a>       queue = &#39;spot&#39;</span>
-<span id="cb140-11"><a href="deployment-in-the-aws-cloud.html#cb140-11"></a>       memory=&#39;1G&#39;</span>
-<span id="cb140-12"><a href="deployment-in-the-aws-cloud.html#cb140-12"></a>       cpus=<span class="ch">&#39;1&#39;</span></span>
-<span id="cb140-13"><a href="deployment-in-the-aws-cloud.html#cb140-13"></a>       time=&#39;6h&#39;</span>
-<span id="cb140-14"><a href="deployment-in-the-aws-cloud.html#cb140-14"></a></span>
-<span id="cb140-15"><a href="deployment-in-the-aws-cloud.html#cb140-15"></a>       withLabel: &#39;twocpus&#39; {</span>
-<span id="cb140-16"><a href="deployment-in-the-aws-cloud.html#cb140-16"></a>           memory=&#39;<span class="fl">0.</span>6G&#39;</span>
-<span id="cb140-17"><a href="deployment-in-the-aws-cloud.html#cb140-17"></a>           cpus=<span class="ch">&#39;2&#39;</span></span>
-<span id="cb140-18"><a href="deployment-in-the-aws-cloud.html#cb140-18"></a>       }</span>
-<span id="cb140-19"><a href="deployment-in-the-aws-cloud.html#cb140-19"></a>    }</span>
-<span id="cb140-20"><a href="deployment-in-the-aws-cloud.html#cb140-20"></a>  }</span></code></pre></div>
+<div class="sourceCode" id="cb144"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb144-1"><a href="deployment-in-the-aws-cloud.html#cb144-1"></a></span>
+<span id="cb144-2"><a href="deployment-in-the-aws-cloud.html#cb144-2"></a>   cloud {</span>
+<span id="cb144-3"><a href="deployment-in-the-aws-cloud.html#cb144-3"></a>    workDir = &#39;s3:<span class="co">//class-bucket-1/work&#39;</span></span>
+<span id="cb144-4"><a href="deployment-in-the-aws-cloud.html#cb144-4"></a>    aws.<span class="fu">region</span> = &#39;eu-central-<span class="dv">1</span>&#39;</span>
+<span id="cb144-5"><a href="deployment-in-the-aws-cloud.html#cb144-5"></a>    aws.<span class="fu">batch</span>.<span class="fu">cliPath</span> = &#39;/home/ec2-user/miniconda/bin/aws&#39;</span>
+<span id="cb144-6"><a href="deployment-in-the-aws-cloud.html#cb144-6"></a>    </span>
+<span id="cb144-7"><a href="deployment-in-the-aws-cloud.html#cb144-7"></a>   process {</span>
+<span id="cb144-8"><a href="deployment-in-the-aws-cloud.html#cb144-8"></a>       containerOptions = { workflow.<span class="fu">containerEngine</span> == <span class="st">&quot;docker&quot;</span> ? &#39;-u $(id -u):$(id -g)&#39;: <span class="kw">null</span>}</span>
+<span id="cb144-9"><a href="deployment-in-the-aws-cloud.html#cb144-9"></a>       executor = &#39;awsbatch&#39;</span>
+<span id="cb144-10"><a href="deployment-in-the-aws-cloud.html#cb144-10"></a>       queue = &#39;spot&#39;</span>
+<span id="cb144-11"><a href="deployment-in-the-aws-cloud.html#cb144-11"></a>       memory=&#39;1G&#39;</span>
+<span id="cb144-12"><a href="deployment-in-the-aws-cloud.html#cb144-12"></a>       cpus=<span class="ch">&#39;1&#39;</span></span>
+<span id="cb144-13"><a href="deployment-in-the-aws-cloud.html#cb144-13"></a>       time=&#39;6h&#39;</span>
+<span id="cb144-14"><a href="deployment-in-the-aws-cloud.html#cb144-14"></a></span>
+<span id="cb144-15"><a href="deployment-in-the-aws-cloud.html#cb144-15"></a>       withLabel: &#39;twocpus&#39; {</span>
+<span id="cb144-16"><a href="deployment-in-the-aws-cloud.html#cb144-16"></a>           memory=&#39;<span class="fl">0.</span>6G&#39;</span>
+<span id="cb144-17"><a href="deployment-in-the-aws-cloud.html#cb144-17"></a>           cpus=<span class="ch">&#39;2&#39;</span></span>
+<span id="cb144-18"><a href="deployment-in-the-aws-cloud.html#cb144-18"></a>       }</span>
+<span id="cb144-19"><a href="deployment-in-the-aws-cloud.html#cb144-19"></a>    }</span>
+<span id="cb144-20"><a href="deployment-in-the-aws-cloud.html#cb144-20"></a>  }</span></code></pre></div>
 <p>We indicate some aws specific parameters (region and cliPath) and the executor that is awsbatch. Then we indicates that the working directory, that is normally written locally, to be mounted as <a href="https://aws.amazon.com/s3/">S3 volume</a>. This is mandatory when running nextflow on the cloud.
 We can now launch the pipeline indicating <strong>-profile cloud</strong></p>
-<div class="sourceCode" id="cb141"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb141-1"><a href="deployment-in-the-aws-cloud.html#cb141-1"></a><span class="ex">nextflow</span> run test3.nf -bg -with-docker -profile cloud <span class="op">&gt;</span> log</span></code></pre></div>
+<div class="sourceCode" id="cb145"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb145-1"><a href="deployment-in-the-aws-cloud.html#cb145-1"></a><span class="ex">nextflow</span> run test3.nf -bg -with-docker -profile cloud <span class="op">&gt;</span> log</span></code></pre></div>
 <p>We can see that there is no more a <strong>work</strong> folder because is on the AWS cloud and that the output is then copied locally.</p>
 <p>Sometimes you can find that the Nextflow process itself is very memory intensive and the main node can run out of memory. To avoid this you can reduce the memory needed by setting an environmental variable:</p>
-<div class="sourceCode" id="cb142"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb142-1"><a href="deployment-in-the-aws-cloud.html#cb142-1"></a><span class="bu">export</span> <span class="va">NXF_OPTS=</span><span class="st">&quot;-Xms50m -Xmx500m&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb146"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb146-1"><a href="deployment-in-the-aws-cloud.html#cb146-1"></a><span class="bu">export</span> <span class="va">NXF_OPTS=</span><span class="st">&quot;-Xms50m -Xmx500m&quot;</span></span></code></pre></div>
 </div>
             </section>
 

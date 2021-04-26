@@ -179,16 +179,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.2.9" data-path="using-existing-images.html"><a href="using-existing-images.html#docker-rm-docker-rmi-clean-up"><i class="fa fa-check"></i><b>3.2.9</b> docker rm, docker rmi: clean up!</a></li>
 <li class="chapter" data-level="3.2.10" data-path="using-existing-images.html"><a href="using-existing-images.html#exercise"><i class="fa fa-check"></i><b>3.2.10</b> Exercise</a></li>
 </ul></li>
-<li class="chapter" data-level="3.3" data-path="docker-recipes.html"><a href="docker-recipes.html"><i class="fa fa-check"></i><b>3.3</b> Docker recipes</a><ul>
-<li class="chapter" data-level="3.3.1" data-path="docker-recipes.html"><a href="docker-recipes.html#building-recipes"><i class="fa fa-check"></i><b>3.3.1</b> Building recipes</a></li>
-<li class="chapter" data-level="3.3.2" data-path="docker-recipes.html"><a href="docker-recipes.html#docker-build"><i class="fa fa-check"></i><b>3.3.2</b> docker build</a></li>
-<li class="chapter" data-level="3.3.3" data-path="docker-recipes.html"><a href="docker-recipes.html#docker-tag"><i class="fa fa-check"></i><b>3.3.3</b> docker tag</a></li>
-<li class="chapter" data-level="3.3.4" data-path="docker-recipes.html"><a href="docker-recipes.html#build-cache"><i class="fa fa-check"></i><b>3.3.4</b> Build cache</a></li>
-<li class="chapter" data-level="3.3.5" data-path="docker-recipes.html"><a href="docker-recipes.html#more-advanced-image-building"><i class="fa fa-check"></i><b>3.3.5</b> More advanced image building</a></li>
-<li class="chapter" data-level="3.3.6" data-path="docker-recipes.html"><a href="docker-recipes.html#additional-commands"><i class="fa fa-check"></i><b>3.3.6</b> Additional commands</a></li>
+<li class="chapter" data-level="3.3" data-path="linux-packages.html"><a href="linux-packages.html"><i class="fa fa-check"></i><b>3.3</b> Linux packages</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="linux-packages.html"><a href="linux-packages.html#update-and-upgrade-packages"><i class="fa fa-check"></i><b>3.3.1</b> Update and upgrade packages</a></li>
+<li class="chapter" data-level="3.3.2" data-path="linux-packages.html"><a href="linux-packages.html#search-and-install-packages"><i class="fa fa-check"></i><b>3.3.2</b> Search and install packages:</a></li>
 </ul></li>
-<li class="chapter" data-level="3.4" data-path="volumes.html"><a href="volumes.html"><i class="fa fa-check"></i><b>3.4</b> Volumes</a></li>
-<li class="chapter" data-level="3.5" data-path="ports.html"><a href="ports.html"><i class="fa fa-check"></i><b>3.5</b> Ports</a></li>
+<li class="chapter" data-level="3.4" data-path="docker-recipes.html"><a href="docker-recipes.html"><i class="fa fa-check"></i><b>3.4</b> Docker recipes</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="docker-recipes.html"><a href="docker-recipes.html#building-recipes"><i class="fa fa-check"></i><b>3.4.1</b> Building recipes</a></li>
+<li class="chapter" data-level="3.4.2" data-path="docker-recipes.html"><a href="docker-recipes.html#docker-build"><i class="fa fa-check"></i><b>3.4.2</b> docker build</a></li>
+<li class="chapter" data-level="3.4.3" data-path="docker-recipes.html"><a href="docker-recipes.html#docker-tag"><i class="fa fa-check"></i><b>3.4.3</b> docker tag</a></li>
+<li class="chapter" data-level="3.4.4" data-path="docker-recipes.html"><a href="docker-recipes.html#build-cache"><i class="fa fa-check"></i><b>3.4.4</b> Build cache</a></li>
+<li class="chapter" data-level="3.4.5" data-path="docker-recipes.html"><a href="docker-recipes.html#more-advanced-image-building"><i class="fa fa-check"></i><b>3.4.5</b> More advanced image building</a></li>
+<li class="chapter" data-level="3.4.6" data-path="docker-recipes.html"><a href="docker-recipes.html#additional-commands"><i class="fa fa-check"></i><b>3.4.6</b> Additional commands</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="volumes.html"><a href="volumes.html"><i class="fa fa-check"></i><b>3.5</b> Volumes</a></li>
+<li class="chapter" data-level="3.6" data-path="ports.html"><a href="ports.html"><i class="fa fa-check"></i><b>3.6</b> Ports</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="singularity.html"><a href="singularity.html"><i class="fa fa-check"></i><b>4</b> Singularity</a><ul>
 <li class="chapter" data-level="4.1" data-path="introduction-to-singularity.html"><a href="introduction-to-singularity.html"><i class="fa fa-check"></i><b>4.1</b> Introduction to Singularity</a><ul>
@@ -280,20 +284,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <em>Answer</em>
 </h5>
 <p></summary></p>
-<div class="sourceCode" id="cb93"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb93-1"><a href="exercise-1.html#cb93-1"></a>#!/usr/bin/env nextflow</span>
-<span id="cb93-2"><a href="exercise-1.html#cb93-2"></a></span>
-<span id="cb93-3"><a href="exercise-1.html#cb93-3"></a>nextflow.<span class="fu">enable</span>.<span class="fu">dsl</span>=<span class="dv">2</span></span>
-<span id="cb93-4"><a href="exercise-1.html#cb93-4"></a></span>
-<span id="cb93-5"><a href="exercise-1.html#cb93-5"></a><span class="co">/*</span></span>
-<span id="cb93-6"><a href="exercise-1.html#cb93-6"></a><span class="co">* Let&#39;s create the channel `my_files`</span></span>
-<span id="cb93-7"><a href="exercise-1.html#cb93-7"></a><span class="co">* using the method fromPath </span></span>
-<span id="cb93-8"><a href="exercise-1.html#cb93-8"></a><span class="co">*/</span></span>
-<span id="cb93-9"><a href="exercise-1.html#cb93-9"></a></span>
-<span id="cb93-10"><a href="exercise-1.html#cb93-10"></a><span class="bu">Channel</span></span>
-<span id="cb93-11"><a href="exercise-1.html#cb93-11"></a>    .<span class="fu">fromFilePairs</span>( <span class="st">&quot;file_{1,2}.txt&quot;</span> )</span>
-<span id="cb93-12"><a href="exercise-1.html#cb93-12"></a>    .<span class="fu">set</span> {my_fyles}</span>
-<span id="cb93-13"><a href="exercise-1.html#cb93-13"></a></span>
-<span id="cb93-14"><a href="exercise-1.html#cb93-14"></a>my_fyles.<span class="fu">view</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb97"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb97-1"><a href="exercise-1.html#cb97-1"></a>#!/usr/bin/env nextflow</span>
+<span id="cb97-2"><a href="exercise-1.html#cb97-2"></a></span>
+<span id="cb97-3"><a href="exercise-1.html#cb97-3"></a>nextflow.<span class="fu">enable</span>.<span class="fu">dsl</span>=<span class="dv">2</span></span>
+<span id="cb97-4"><a href="exercise-1.html#cb97-4"></a></span>
+<span id="cb97-5"><a href="exercise-1.html#cb97-5"></a><span class="co">/*</span></span>
+<span id="cb97-6"><a href="exercise-1.html#cb97-6"></a><span class="co">* Let&#39;s create the channel `my_files`</span></span>
+<span id="cb97-7"><a href="exercise-1.html#cb97-7"></a><span class="co">* using the method fromPath </span></span>
+<span id="cb97-8"><a href="exercise-1.html#cb97-8"></a><span class="co">*/</span></span>
+<span id="cb97-9"><a href="exercise-1.html#cb97-9"></a></span>
+<span id="cb97-10"><a href="exercise-1.html#cb97-10"></a><span class="bu">Channel</span></span>
+<span id="cb97-11"><a href="exercise-1.html#cb97-11"></a>    .<span class="fu">fromFilePairs</span>( <span class="st">&quot;file_{1,2}.txt&quot;</span> )</span>
+<span id="cb97-12"><a href="exercise-1.html#cb97-12"></a>    .<span class="fu">set</span> {my_fyles}</span>
+<span id="cb97-13"><a href="exercise-1.html#cb97-13"></a></span>
+<span id="cb97-14"><a href="exercise-1.html#cb97-14"></a>my_fyles.<span class="fu">view</span>()</span></code></pre></div>
 </details>
 </div>
             </section>

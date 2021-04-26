@@ -38,6 +38,9 @@ docker-stop-start-restart-actions-on-container
 docker-rm-docker-rmi-clean-up
 major-clean
 exercise
+linux-packages
+update-and-upgrade-packages
+search-and-install-packages
 docker-recipes
 building-recipes
 basic-instructions
