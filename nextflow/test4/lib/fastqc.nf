@@ -5,7 +5,7 @@
 params.CONTAINER = "quay.io/biocontainers/fastqc:0.11.9--0"
 params.OUTPUT = "fastqc_output"
 
-process qc {
+process fastqc {
     publishDir(params.OUTPUT, mode: 'copy')
     tag { reads }
     container params.CONTAINER
@@ -23,13 +23,4 @@ process qc {
 }
 
 
-workflow FASTQC {
-    take: 
-    input
-    
-    main:
-		out =  qc(input)
-    emit:
-    	out
-}
 

@@ -71,12 +71,12 @@ Channel
     .set {reads_for_fastqc} 											 // make the channel "reads_for_fastqc"
 
 
-include { FASTQC } from "${baseDir}/lib/fastqc" addParams(OUTPUT: fastqcOutputFolder)
-include { MULTIQC } from "${baseDir}/lib/multiqc" addParams(OUTPUT: multiqcOutputFolder)
+include { fastqc } from "${baseDir}/lib/fastqc" addParams(OUTPUT: fastqcOutputFolder)
+include { multiqc } from "${baseDir}/lib/multiqc" addParams(OUTPUT: multiqcOutputFolder)
  
 workflow {
-	fastqc_out = FASTQC(reads_for_fastqc)
-	MULTIQC(fastqc_out.collect())
+	fastqc_out = fastqc(reads_for_fastqc)
+	multiqc(fastqc_out.collect())
 }
 
 
