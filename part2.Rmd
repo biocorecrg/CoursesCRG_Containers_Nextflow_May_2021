@@ -1440,19 +1440,19 @@ knitr::include_graphics('docs/images/tower.png')
 
 We select the email for receiving the instructions and the token to be used for the pipeline.
 
-```{r, out.width="800px", echo=FALSE}
+```{r, out.width="800px", echo=FALSE, eval = TRUE }
 knitr::include_graphics('docs/images/tower0.png')
 ```
 
 So we check the email:
 
-```{r, out.width="800px", echo=FALSE}
+```{r, out.width="800px", echo=FALSE, eval = TRUE }
 knitr::include_graphics('docs/images/tower1.png')
 ```
 
 We then follow the instructions exporting two environmental variables:
 
-```{r, out.width="800px", echo=FALSE}
+```{r, out.width="800px", echo=FALSE, eval = TRUE }
 knitr::include_graphics('docs/images/tower2.png')
 ```
 
@@ -1480,8 +1480,13 @@ CAPSULE: Downloading dependency org.codehaus.groovy:groovy-xml:jar:3.0.5
 
 We finally go to the tower website again:
 
-```{r, out.width="800px", echo=FALSE}
+```{r, out.width="800px", echo=FALSE, eval = TRUE }
 knitr::include_graphics('docs/images/tower3.png')
+```
+
+
+```{r, out.width="800px", echo=FALSE, eval = TRUE }
+knitr::include_graphics('docs/images/tower4.png')
 ```
 
 ## Share Nextflow pipelines and good practices
