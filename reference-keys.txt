@@ -100,3 +100,4 @@ adding-more-steps
 modules-and-re-usage-of-the-code
 exercise-4
 reporting-and-graphical-interface
+share-nextflow-pipelines-and-good-practices
