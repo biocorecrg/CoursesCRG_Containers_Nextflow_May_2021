@@ -638,9 +638,10 @@ It is an important option in the context of Docker: it means that you *answer ye
 <br>
 
 Note that Conda is a nice and easy way to install software:
-  * [Anaconda](https://anaconda.org/anaconda/repo)
-  * [Conda-forge](https://conda-forge.org/feedstocks/)
-  * [Bioconda](https://anaconda.org/bioconda/repo)
+
+* [Anaconda](https://anaconda.org/anaconda/repo)
+* [Conda-forge](https://conda-forge.org/feedstocks/)
+* [Bioconda](https://anaconda.org/bioconda/repo)
 
 
 
@@ -733,9 +734,19 @@ COPY ~/.bashrc .
 Difference between ARG and ENV explained [here](https://vsupalov.com/docker-arg-vs-env/).
 
 
-* **ARG** values: available only while the image is built.
-* **ENV** values: available for the future running containers.
+* **ARG** values: available only *while the image is built.*
+* **ENV** values: available *for the future running containers.*
 
+An example of **ARG**: you can use it to build a specific version of a software inside the image:
+
+```
+FROM ubuntu:18.04
+
+ARG PyVersion=2.7
+
+RUN apt update && apt upgrade -y
+RUN apt install python${PyVersion}
+```
 
 **CMD, ENTRYPOINT**: command to execute when generated container starts
 
@@ -893,6 +904,41 @@ docker run mytest "Docker course"
 
 </details>
 
+Building with a specific **ARG**: let's take the example we had when we introduced the **ARG** command:
+
+```
+FROM ubuntu:18.04
+
+ARG PyVersion=2.7
+
+RUN apt update && apt upgrade -y
+RUN apt install python${PyVersion}
+
+```
+
+We can save the recipe in a file called **Dockerfile_ARG**.
+<br>
+
+
+Build the image to get the default version of Python (version 2.7, as given by ARG):
+
+```
+docker build -t Py2.7 -f Dockerfile_ARG .
+```
+
+Install version 3.8 of Python (give the argument via the `--build-arg` option):
+
+```
+docker build --build-arg PyVersion=3.8 -t Py3.8 -f Dockerfile_ARG .
+```
+
+Now check the python version in each image:
+
+```
+docker run Py2.7 which python2.7
+docker run Py3.8 which python3.8
+```
+
 
 ### docker tag
 
@@ -983,6 +1029,7 @@ Change name / tag:
 ```
 docker tag imagebowtie2 bowtie2image:1.0
 ```
+
 
 </details>
 
