@@ -785,8 +785,6 @@ workflow flow1 {
 	
 </details>
 
-
-# Nextflow day 2
 ## Resuming your pipeline
 
 You can resume the execution after the code modification using the parameter **-resume**. Nextflow is smart enough to cache the execution since input and output were not changed.
@@ -835,6 +833,10 @@ cache = 'lenient' // (Best in HPC and shared file systems) Cache keys are create
 ```
 
 **IMPORTANT On some shared file systems you might have inconsistent files timestamps. So cache lenient prevent you from unwanted restarting of cached processes.**
+
+
+
+# Nextflow day 2
 
 ## Decoupling resources, parameters and nextflow script
 When you make a complex pipelines you might want to keep separated the definition of resources needed, the default parameters and the main script.
