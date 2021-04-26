@@ -188,7 +188,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.4.2" data-path="docker-recipes.html"><a href="docker-recipes.html#docker-build"><i class="fa fa-check"></i><b>3.4.2</b> docker build</a></li>
 <li class="chapter" data-level="3.4.3" data-path="docker-recipes.html"><a href="docker-recipes.html#docker-tag"><i class="fa fa-check"></i><b>3.4.3</b> docker tag</a></li>
 <li class="chapter" data-level="3.4.4" data-path="docker-recipes.html"><a href="docker-recipes.html#build-cache"><i class="fa fa-check"></i><b>3.4.4</b> Build cache</a></li>
-<li class="chapter" data-level="3.4.5" data-path="docker-recipes.html"><a href="docker-recipes.html#more-advanced-image-building"><i class="fa fa-check"></i><b>3.4.5</b> More advanced image building</a></li>
+<li class="chapter" data-level="3.4.5" data-path="docker-recipes.html"><a href="docker-recipes.html#exercise-writing-more-complex-recipes"><i class="fa fa-check"></i><b>3.4.5</b> Exercise: writing more complex recipes</a></li>
 <li class="chapter" data-level="3.4.6" data-path="docker-recipes.html"><a href="docker-recipes.html#additional-commands"><i class="fa fa-check"></i><b>3.4.6</b> Additional commands</a></li>
 </ul></li>
 <li class="chapter" data-level="3.5" data-path="volumes.html"><a href="volumes.html"><i class="fa fa-check"></i><b>3.5</b> Volumes</a></li>
@@ -464,7 +464,7 @@ docker run mytest &quot;Docker course&quot;</code></pre>
 </div>
 <div id="docker-tag" class="section level3">
 <h3><span class="header-section-number">3.4.3</span> docker tag</h3>
-<p>Use ++docker tag` in order to <strong>tag a local image</strong> that has ID “e23aaea5dff1” into the “ubuntu_wget” image name repository with version/tag “1.0”:</p>
+<p>Use <code>docker tag</code> in order to <strong>tag a local image</strong> that has - for example - ID “e23aaea5dff1” into the “ubuntu_wget” image name repository with version/tag “1.0”:</p>
 <div class="sourceCode" id="cb57"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb57-1"><a href="docker-recipes.html#cb57-1"></a><span class="ex">docker</span> tag e23aaea5dff1 --tag ubuntu_wget:1.0</span></code></pre></div>
 <center>
 <h4 style="background-color: #e6fadc; display: inline-block;">
@@ -503,14 +503,36 @@ This is OK most of the times and very convenient for testing and trying new step
 It is beneficial to start from scratch with <code>--no-cache</code> option when building the image.</p>
 <div class="sourceCode" id="cb60"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb60-1"><a href="docker-recipes.html#cb60-1"></a><span class="ex">docker</span> build --no-cache -t mytestimage2 .</span></code></pre></div>
 </div>
-<div id="more-advanced-image-building" class="section level3">
-<h3><span class="header-section-number">3.4.5</span> More advanced image building</h3>
-<p>Different ways to build images.</p>
-<p>Know your base system and their packages. Popular ones:
-* <a href="https://packages.debian.org">Debian</a>
-* <a href="https://centos.pkgs.org/">CentOS</a>
-* <a href="https://pkgs.alpinelinux.org/packages">Alpine</a>
-* Conda. <a href="https://anaconda.org/anaconda/repo">Anaconda</a>, <a href="https://conda-forge.org/feedstocks/">Conda-forge</a>, <a href="https://anaconda.org/bioconda/repo">Bioconda</a>, etc.</p>
+<div id="exercise-writing-more-complex-recipes" class="section level3">
+<h3><span class="header-section-number">3.4.5</span> Exercise: writing more complex recipes</h3>
+<p>Build an image based on <strong>CentOS</strong> (use base layer <a href="https://hub.docker.com/_/centos?tab=tags&amp;page=1&amp;ordering=last_updated">centos:7</a>):</p>
+<ul>
+<li>Install <a href="https://centos.pkgs.org/7/epel-x86_64/bowtie2-2.4.1-1.el7.x86_64.rpm.html"><strong>bowtie2</strong></a> and <strong>show the help page by default</strong>.
+<ul>
+<li>you will need to download and install the <strong>.rpm</strong> package inside the image !</li>
+</ul></li>
+<li>Change the name (and version) of the image to <strong>bowtie2image:1.0</strong>. Check that the change was taken into account with <code>docker images</code></li>
+</ul>
+<details>
+<summary>
+<h5 style="background-color: #e6fadc; display: inline-block;">
+<em>Answer</em>
+</h5>
+<p></summary></p>
+<p>File <strong>Dockerfile_bowtie2</strong>:</p>
+<pre><code>FROM centos:7
+
+RUN yum update -y
+RUN curl https://download-ib01.fedoraproject.org/pub/epel/7/x86_64/Packages/b/bowtie2-2.4.1-1.el7.x86_64.rpm &gt; bowtie2-2.4.1-1.el7.x86_64.rpm
+RUN yum install -y bowtie2-2.4.1-1.el7.x86_64.rpm
+
+ENTRYPOINT [&quot;bowtie2&quot;]
+CMD [&quot;--help&quot;]</code></pre>
+<p>Build:</p>
+<pre><code>docker build -t imagebowtie2 -f Dockerfile_bowtie2 .</code></pre>
+<p>Change name / tag:</p>
+<pre><code>docker tag imagebowtie2 bowtie2image:1.0</code></pre>
+</details>
 </div>
 <div id="additional-commands" class="section level3">
 <h3><span class="header-section-number">3.4.6</span> Additional commands</h3>

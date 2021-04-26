@@ -48,7 +48,7 @@ more-instructions
 docker-build
 docker-tag
 build-cache
-more-advanced-image-building
+exercise-writing-more-complex-recipes
 additional-commands
 volumes
 ports

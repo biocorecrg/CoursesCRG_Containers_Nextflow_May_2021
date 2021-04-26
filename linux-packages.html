@@ -188,7 +188,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.4.2" data-path="docker-recipes.html"><a href="docker-recipes.html#docker-build"><i class="fa fa-check"></i><b>3.4.2</b> docker build</a></li>
 <li class="chapter" data-level="3.4.3" data-path="docker-recipes.html"><a href="docker-recipes.html#docker-tag"><i class="fa fa-check"></i><b>3.4.3</b> docker tag</a></li>
 <li class="chapter" data-level="3.4.4" data-path="docker-recipes.html"><a href="docker-recipes.html#build-cache"><i class="fa fa-check"></i><b>3.4.4</b> Build cache</a></li>
-<li class="chapter" data-level="3.4.5" data-path="docker-recipes.html"><a href="docker-recipes.html#more-advanced-image-building"><i class="fa fa-check"></i><b>3.4.5</b> More advanced image building</a></li>
+<li class="chapter" data-level="3.4.5" data-path="docker-recipes.html"><a href="docker-recipes.html#exercise-writing-more-complex-recipes"><i class="fa fa-check"></i><b>3.4.5</b> Exercise: writing more complex recipes</a></li>
 <li class="chapter" data-level="3.4.6" data-path="docker-recipes.html"><a href="docker-recipes.html#additional-commands"><i class="fa fa-check"></i><b>3.4.6</b> Additional commands</a></li>
 </ul></li>
 <li class="chapter" data-level="3.5" data-path="volumes.html"><a href="volumes.html"><i class="fa fa-check"></i><b>3.5</b> Volumes</a></li>
@@ -284,13 +284,17 @@ In Linux-based environment, software is usually distributed in the form of <stro
 <br>
 With different operating systems come different tools to fetch and install packages:</p>
 <div class="line-block">Operating System | Format | Tool(s) |<br />
-Debian / Ubuntu / Linux Mint / Raspbian | .deb | apt, apt-cache, apt-get, dpkg |<br />
-CentOS (RedHat) | .rpm | yum |<br />
+<a href="https://packages.debian.org">Debian</a> / Ubuntu / Linux Mint / Raspbian | .deb | apt, apt-cache, apt-get, dpkg |<br />
+<a href="https://centos.pkgs.org/">CentOS</a> (RedHat) | .rpm | yum |<br />
 Fedora (RedHat) | .rpm | dnf |<br />
-FreeBSD | .txz | make, pkg |</div>
-<p>During this course, we will see a bit about <strong>Ubuntu</strong> and <strong>CentOS</strong>.</p>
+FreeBSD | .txz | make, pkg |<br />
+Alpine | | apk |</div>
+<p>More on the subject in <a href="https://www.digitalocean.com/community/tutorials/package-management-basics-apt-yum-dnf-pkg">this post</a></p>
+<blockquote>
+<p>Note that the environment you are working on for this course is <em>CentOS-based</em></p>
+</blockquote>
 <p><br>
-&gt; Note that the environment you are working on for this course is <em>CentOS-based</em></p>
+During this course, we will build images based on <strong>Ubuntu</strong> and <strong>CentOS</strong>.</p>
 <div id="update-and-upgrade-packages" class="section level3">
 <h3><span class="header-section-number">3.3.1</span> Update and upgrade packages</h3>
 <ul>
@@ -306,13 +310,19 @@ FreeBSD | .txz | make, pkg |</div>
 <li>In <strong>Ubuntu</strong>:</li>
 </ul>
 <pre><code>apt search libxml2
-apt install libxml2-dev</code></pre>
+apt install -y libxml2-dev</code></pre>
 <ul>
 <li>In <strong>CentOS</strong>:</li>
 </ul>
 <pre><code>yum search libxml2
-yum install libxml2-devel.x86_64</code></pre>
-<p>More on the subject in <a href="https://www.digitalocean.com/community/tutorials/package-management-basics-apt-yum-dnf-pkg">this post</a></p>
+yum install -y libxml2-devel.x86_64</code></pre>
+<p>Note the <strong>-y</strong> option that we set for updating and for installing.<br>
+It is an important option in the context of Docker: it means that you <em>answer yes for all questions</em>, regarding whether you want to confirm the installation, for example.</p>
+<p><br></p>
+<p>Note that Conda is a nice and easy way to install software:
+* <a href="https://anaconda.org/anaconda/repo">Anaconda</a>
+* <a href="https://conda-forge.org/feedstocks/">Conda-forge</a>
+* <a href="https://anaconda.org/bioconda/repo">Bioconda</a></p>
 </div>
 </div>
             </section>

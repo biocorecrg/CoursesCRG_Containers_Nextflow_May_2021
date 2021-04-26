@@ -188,7 +188,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.4.2" data-path="docker-recipes.html"><a href="docker-recipes.html#docker-build"><i class="fa fa-check"></i><b>3.4.2</b> docker build</a></li>
 <li class="chapter" data-level="3.4.3" data-path="docker-recipes.html"><a href="docker-recipes.html#docker-tag"><i class="fa fa-check"></i><b>3.4.3</b> docker tag</a></li>
 <li class="chapter" data-level="3.4.4" data-path="docker-recipes.html"><a href="docker-recipes.html#build-cache"><i class="fa fa-check"></i><b>3.4.4</b> Build cache</a></li>
-<li class="chapter" data-level="3.4.5" data-path="docker-recipes.html"><a href="docker-recipes.html#more-advanced-image-building"><i class="fa fa-check"></i><b>3.4.5</b> More advanced image building</a></li>
+<li class="chapter" data-level="3.4.5" data-path="docker-recipes.html"><a href="docker-recipes.html#exercise-writing-more-complex-recipes"><i class="fa fa-check"></i><b>3.4.5</b> Exercise: writing more complex recipes</a></li>
 <li class="chapter" data-level="3.4.6" data-path="docker-recipes.html"><a href="docker-recipes.html#additional-commands"><i class="fa fa-check"></i><b>3.4.6</b> Additional commands</a></li>
 </ul></li>
 <li class="chapter" data-level="3.5" data-path="volumes.html"><a href="volumes.html"><i class="fa fa-check"></i><b>3.5</b> Volumes</a></li>
@@ -277,25 +277,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="installation" class="section level2">
 <h2><span class="header-section-number">5.5</span> Installation</h2>
 <p>We need at least Java version 8.</p>
-<div class="sourceCode" id="cb89"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb89-1"><a href="installation.html#cb89-1"></a><span class="ex">java</span> -version</span></code></pre></div>
+<div class="sourceCode" id="cb92"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb92-1"><a href="installation.html#cb92-1"></a><span class="ex">java</span> -version</span></code></pre></div>
 <p>Then we can install it by typing:</p>
-<div class="sourceCode" id="cb90"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb90-1"><a href="installation.html#cb90-1"></a><span class="ex">curl</span> -s https://get.nextflow.io <span class="kw">|</span> <span class="fu">bash</span></span></code></pre></div>
+<div class="sourceCode" id="cb93"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb93-1"><a href="installation.html#cb93-1"></a><span class="ex">curl</span> -s https://get.nextflow.io <span class="kw">|</span> <span class="fu">bash</span></span></code></pre></div>
 <p>This will create an executable called nextflow that can be moved to /usr/local/bin or where we prefer. We can finally test using:</p>
-<div class="sourceCode" id="cb91"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb91-1"><a href="installation.html#cb91-1"></a><span class="ex">./nextflow</span> run hello</span>
-<span id="cb91-2"><a href="installation.html#cb91-2"></a></span>
-<span id="cb91-3"><a href="installation.html#cb91-3"></a><span class="ex">N</span> E X T F L O W  ~  version 20.07.1</span>
-<span id="cb91-4"><a href="installation.html#cb91-4"></a><span class="ex">Pulling</span> nextflow-io/hello ...</span>
-<span id="cb91-5"><a href="installation.html#cb91-5"></a><span class="ex">downloaded</span> from https://github.com/nextflow-io/hello.git</span>
-<span id="cb91-6"><a href="installation.html#cb91-6"></a><span class="ex">Launching</span> <span class="kw">`</span><span class="ex">nextflow-io/hello</span><span class="kw">`</span> [peaceful_brahmagupta] - revision: 96eb04d6a4 [master]</span>
-<span id="cb91-7"><a href="installation.html#cb91-7"></a><span class="ex">executor</span> <span class="op">&gt;</span>  local (4)</span>
-<span id="cb91-8"><a href="installation.html#cb91-8"></a>[<span class="ex">d7</span>/<span class="ex">d053b5</span>] process <span class="op">&gt;</span> sayHello (4) [<span class="ex">100%</span>] 4 of 4 ✔</span>
-<span id="cb91-9"><a href="installation.html#cb91-9"></a><span class="ex">Ciao</span> world!</span>
-<span id="cb91-10"><a href="installation.html#cb91-10"></a></span>
-<span id="cb91-11"><a href="installation.html#cb91-11"></a><span class="ex">Bonjour</span> world!</span>
-<span id="cb91-12"><a href="installation.html#cb91-12"></a></span>
-<span id="cb91-13"><a href="installation.html#cb91-13"></a><span class="ex">Hello</span> world!</span>
-<span id="cb91-14"><a href="installation.html#cb91-14"></a></span>
-<span id="cb91-15"><a href="installation.html#cb91-15"></a><span class="ex">Hola</span> world!</span></code></pre></div>
+<div class="sourceCode" id="cb94"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb94-1"><a href="installation.html#cb94-1"></a><span class="ex">./nextflow</span> run hello</span>
+<span id="cb94-2"><a href="installation.html#cb94-2"></a></span>
+<span id="cb94-3"><a href="installation.html#cb94-3"></a><span class="ex">N</span> E X T F L O W  ~  version 20.07.1</span>
+<span id="cb94-4"><a href="installation.html#cb94-4"></a><span class="ex">Pulling</span> nextflow-io/hello ...</span>
+<span id="cb94-5"><a href="installation.html#cb94-5"></a><span class="ex">downloaded</span> from https://github.com/nextflow-io/hello.git</span>
+<span id="cb94-6"><a href="installation.html#cb94-6"></a><span class="ex">Launching</span> <span class="kw">`</span><span class="ex">nextflow-io/hello</span><span class="kw">`</span> [peaceful_brahmagupta] - revision: 96eb04d6a4 [master]</span>
+<span id="cb94-7"><a href="installation.html#cb94-7"></a><span class="ex">executor</span> <span class="op">&gt;</span>  local (4)</span>
+<span id="cb94-8"><a href="installation.html#cb94-8"></a>[<span class="ex">d7</span>/<span class="ex">d053b5</span>] process <span class="op">&gt;</span> sayHello (4) [<span class="ex">100%</span>] 4 of 4 ✔</span>
+<span id="cb94-9"><a href="installation.html#cb94-9"></a><span class="ex">Ciao</span> world!</span>
+<span id="cb94-10"><a href="installation.html#cb94-10"></a></span>
+<span id="cb94-11"><a href="installation.html#cb94-11"></a><span class="ex">Bonjour</span> world!</span>
+<span id="cb94-12"><a href="installation.html#cb94-12"></a></span>
+<span id="cb94-13"><a href="installation.html#cb94-13"></a><span class="ex">Hello</span> world!</span>
+<span id="cb94-14"><a href="installation.html#cb94-14"></a></span>
+<span id="cb94-15"><a href="installation.html#cb94-15"></a><span class="ex">Hola</span> world!</span></code></pre></div>
 <p>This command download from the a github repository and it runs the test script hello.</p>
 </div>
             </section>

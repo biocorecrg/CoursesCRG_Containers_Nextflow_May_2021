@@ -188,7 +188,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.4.2" data-path="docker-recipes.html"><a href="docker-recipes.html#docker-build"><i class="fa fa-check"></i><b>3.4.2</b> docker build</a></li>
 <li class="chapter" data-level="3.4.3" data-path="docker-recipes.html"><a href="docker-recipes.html#docker-tag"><i class="fa fa-check"></i><b>3.4.3</b> docker tag</a></li>
 <li class="chapter" data-level="3.4.4" data-path="docker-recipes.html"><a href="docker-recipes.html#build-cache"><i class="fa fa-check"></i><b>3.4.4</b> Build cache</a></li>
-<li class="chapter" data-level="3.4.5" data-path="docker-recipes.html"><a href="docker-recipes.html#more-advanced-image-building"><i class="fa fa-check"></i><b>3.4.5</b> More advanced image building</a></li>
+<li class="chapter" data-level="3.4.5" data-path="docker-recipes.html"><a href="docker-recipes.html#exercise-writing-more-complex-recipes"><i class="fa fa-check"></i><b>3.4.5</b> Exercise: writing more complex recipes</a></li>
 <li class="chapter" data-level="3.4.6" data-path="docker-recipes.html"><a href="docker-recipes.html#additional-commands"><i class="fa fa-check"></i><b>3.4.6</b> Additional commands</a></li>
 </ul></li>
 <li class="chapter" data-level="3.5" data-path="volumes.html"><a href="volumes.html"><i class="fa fa-check"></i><b>3.5</b> Volumes</a></li>
@@ -284,20 +284,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <em>Answer</em>
 </h5>
 <p></summary></p>
-<div class="sourceCode" id="cb97"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb97-1"><a href="exercise-1.html#cb97-1"></a>#!/usr/bin/env nextflow</span>
-<span id="cb97-2"><a href="exercise-1.html#cb97-2"></a></span>
-<span id="cb97-3"><a href="exercise-1.html#cb97-3"></a>nextflow.<span class="fu">enable</span>.<span class="fu">dsl</span>=<span class="dv">2</span></span>
-<span id="cb97-4"><a href="exercise-1.html#cb97-4"></a></span>
-<span id="cb97-5"><a href="exercise-1.html#cb97-5"></a><span class="co">/*</span></span>
-<span id="cb97-6"><a href="exercise-1.html#cb97-6"></a><span class="co">* Let&#39;s create the channel `my_files`</span></span>
-<span id="cb97-7"><a href="exercise-1.html#cb97-7"></a><span class="co">* using the method fromPath </span></span>
-<span id="cb97-8"><a href="exercise-1.html#cb97-8"></a><span class="co">*/</span></span>
-<span id="cb97-9"><a href="exercise-1.html#cb97-9"></a></span>
-<span id="cb97-10"><a href="exercise-1.html#cb97-10"></a><span class="bu">Channel</span></span>
-<span id="cb97-11"><a href="exercise-1.html#cb97-11"></a>    .<span class="fu">fromFilePairs</span>( <span class="st">&quot;file_{1,2}.txt&quot;</span> )</span>
-<span id="cb97-12"><a href="exercise-1.html#cb97-12"></a>    .<span class="fu">set</span> {my_fyles}</span>
-<span id="cb97-13"><a href="exercise-1.html#cb97-13"></a></span>
-<span id="cb97-14"><a href="exercise-1.html#cb97-14"></a>my_fyles.<span class="fu">view</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb100"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb100-1"><a href="exercise-1.html#cb100-1"></a>#!/usr/bin/env nextflow</span>
+<span id="cb100-2"><a href="exercise-1.html#cb100-2"></a></span>
+<span id="cb100-3"><a href="exercise-1.html#cb100-3"></a>nextflow.<span class="fu">enable</span>.<span class="fu">dsl</span>=<span class="dv">2</span></span>
+<span id="cb100-4"><a href="exercise-1.html#cb100-4"></a></span>
+<span id="cb100-5"><a href="exercise-1.html#cb100-5"></a><span class="co">/*</span></span>
+<span id="cb100-6"><a href="exercise-1.html#cb100-6"></a><span class="co">* Let&#39;s create the channel `my_files`</span></span>
+<span id="cb100-7"><a href="exercise-1.html#cb100-7"></a><span class="co">* using the method fromPath </span></span>
+<span id="cb100-8"><a href="exercise-1.html#cb100-8"></a><span class="co">*/</span></span>
+<span id="cb100-9"><a href="exercise-1.html#cb100-9"></a></span>
+<span id="cb100-10"><a href="exercise-1.html#cb100-10"></a><span class="bu">Channel</span></span>
+<span id="cb100-11"><a href="exercise-1.html#cb100-11"></a>    .<span class="fu">fromFilePairs</span>( <span class="st">&quot;file_{1,2}.txt&quot;</span> )</span>
+<span id="cb100-12"><a href="exercise-1.html#cb100-12"></a>    .<span class="fu">set</span> {my_fyles}</span>
+<span id="cb100-13"><a href="exercise-1.html#cb100-13"></a></span>
+<span id="cb100-14"><a href="exercise-1.html#cb100-14"></a>my_fyles.<span class="fu">view</span>()</span></code></pre></div>
 </details>
 </div>
             </section>
