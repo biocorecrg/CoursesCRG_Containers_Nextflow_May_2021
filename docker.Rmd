@@ -587,6 +587,7 @@ In Linux-based environment, software is usually distributed in the form of **pac
 With different operating systems come different tools to fetch and install packages:
 
 | Operating System | Format | Tool(s) |
+| :-----: | :-----: | :-----: |
 | [Debian](https://packages.debian.org) / Ubuntu / Linux Mint / Raspbian | .deb | apt, apt-cache, apt-get, dpkg |
 | [CentOS](https://centos.pkgs.org/) (RedHat) | .rpm | yum |
 | Fedora (RedHat) | .rpm | dnf |
@@ -595,7 +596,7 @@ With different operating systems come different tools to fetch and install packa
 
 More on the subject in [this post](https://www.digitalocean.com/community/tutorials/package-management-basics-apt-yum-dnf-pkg)
 
-> Note that the environment you are working on for this course is *CentOS-based* 
+>Note that the environment you are working on for this course is *CentOS-based* 
 
 <br>
 During this course, we will build images based on **Ubuntu** and **CentOS**. 
@@ -911,7 +912,7 @@ here
 </details>
 
 
-### Build cache ###
+### Build cache
 
 Every line of a Dockerfile is actually an image/layer by itself.
 
@@ -1004,11 +1005,17 @@ Good for long-term reproducibility and for critical production environments:
 
 <center><h4 style="background-color: #e6fadc; display: inline-block;">**HANDS-ON**</h4></center>
 
+* Save a previously created image into a **tar archive** (Look at the command's options for help)
+
 <details>
 <summary>
 <h5 style="background-color: #e6fadc; display: inline-block;">*Answer*</h5>
 </summary>
-here
+
+```
+docker save -o bowtie2image1.0.tar bowtie2image:1.0
+```
+
 </details>
 
 
