@@ -283,12 +283,42 @@ For this to go smoothly, you should know your <strong>base system</strong>, and 
 In Linux-based environment, software is usually distributed in the form of <strong>packages</strong>, kept in repositories.
 <br>
 With different operating systems come different tools to fetch and install packages:</p>
-<div class="line-block">Operating System | Format | Tool(s) |<br />
-<a href="https://packages.debian.org">Debian</a> / Ubuntu / Linux Mint / Raspbian | .deb | apt, apt-cache, apt-get, dpkg |<br />
-<a href="https://centos.pkgs.org/">CentOS</a> (RedHat) | .rpm | yum |<br />
-Fedora (RedHat) | .rpm | dnf |<br />
-FreeBSD | .txz | make, pkg |<br />
-Alpine | | apk |</div>
+<table>
+<thead>
+<tr class="header">
+<th align="center">Operating System</th>
+<th align="center">Format</th>
+<th align="center">Tool(s)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><a href="https://packages.debian.org">Debian</a> / Ubuntu / Linux Mint / Raspbian</td>
+<td align="center">.deb</td>
+<td align="center">apt, apt-cache, apt-get, dpkg</td>
+</tr>
+<tr class="even">
+<td align="center"><a href="https://centos.pkgs.org/">CentOS</a> (RedHat)</td>
+<td align="center">.rpm</td>
+<td align="center">yum</td>
+</tr>
+<tr class="odd">
+<td align="center">Fedora (RedHat)</td>
+<td align="center">.rpm</td>
+<td align="center">dnf</td>
+</tr>
+<tr class="even">
+<td align="center">FreeBSD</td>
+<td align="center">.txz</td>
+<td align="center">make, pkg</td>
+</tr>
+<tr class="odd">
+<td align="center">Alpine</td>
+<td align="center"></td>
+<td align="center">apk</td>
+</tr>
+</tbody>
+</table>
 <p>More on the subject in <a href="https://www.digitalocean.com/community/tutorials/package-management-basics-apt-yum-dnf-pkg">this post</a></p>
 <blockquote>
 <p>Note that the environment you are working on for this course is <em>CentOS-based</em></p>

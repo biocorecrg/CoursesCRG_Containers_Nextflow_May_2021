@@ -277,32 +277,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="deployment-in-the-aws-cloud" class="section level2">
 <h2><span class="header-section-number">6.6</span> Deployment in the AWS cloud</h2>
 <p>The final profile is for running the pipeline in the Amazon Cloud, known as Amazon Web Services or AWS. In particular we will use AWS Batch that allows the execution of containerised workloads in the Amazon cloud infrastructure.</p>
-<div class="sourceCode" id="cb147"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb147-1"><a href="deployment-in-the-aws-cloud.html#cb147-1"></a></span>
-<span id="cb147-2"><a href="deployment-in-the-aws-cloud.html#cb147-2"></a>   cloud {</span>
-<span id="cb147-3"><a href="deployment-in-the-aws-cloud.html#cb147-3"></a>    workDir = &#39;s3:<span class="co">//class-bucket-1/work&#39;</span></span>
-<span id="cb147-4"><a href="deployment-in-the-aws-cloud.html#cb147-4"></a>    aws.<span class="fu">region</span> = &#39;eu-central-<span class="dv">1</span>&#39;</span>
-<span id="cb147-5"><a href="deployment-in-the-aws-cloud.html#cb147-5"></a>    aws.<span class="fu">batch</span>.<span class="fu">cliPath</span> = &#39;/home/ec2-user/miniconda/bin/aws&#39;</span>
-<span id="cb147-6"><a href="deployment-in-the-aws-cloud.html#cb147-6"></a>    </span>
-<span id="cb147-7"><a href="deployment-in-the-aws-cloud.html#cb147-7"></a>   process {</span>
-<span id="cb147-8"><a href="deployment-in-the-aws-cloud.html#cb147-8"></a>       containerOptions = { workflow.<span class="fu">containerEngine</span> == <span class="st">&quot;docker&quot;</span> ? &#39;-u $(id -u):$(id -g)&#39;: <span class="kw">null</span>}</span>
-<span id="cb147-9"><a href="deployment-in-the-aws-cloud.html#cb147-9"></a>       executor = &#39;awsbatch&#39;</span>
-<span id="cb147-10"><a href="deployment-in-the-aws-cloud.html#cb147-10"></a>       queue = &#39;spot&#39;</span>
-<span id="cb147-11"><a href="deployment-in-the-aws-cloud.html#cb147-11"></a>       memory=&#39;1G&#39;</span>
-<span id="cb147-12"><a href="deployment-in-the-aws-cloud.html#cb147-12"></a>       cpus=<span class="ch">&#39;1&#39;</span></span>
-<span id="cb147-13"><a href="deployment-in-the-aws-cloud.html#cb147-13"></a>       time=&#39;6h&#39;</span>
-<span id="cb147-14"><a href="deployment-in-the-aws-cloud.html#cb147-14"></a></span>
-<span id="cb147-15"><a href="deployment-in-the-aws-cloud.html#cb147-15"></a>       withLabel: &#39;twocpus&#39; {</span>
-<span id="cb147-16"><a href="deployment-in-the-aws-cloud.html#cb147-16"></a>           memory=&#39;<span class="fl">0.</span>6G&#39;</span>
-<span id="cb147-17"><a href="deployment-in-the-aws-cloud.html#cb147-17"></a>           cpus=<span class="ch">&#39;2&#39;</span></span>
-<span id="cb147-18"><a href="deployment-in-the-aws-cloud.html#cb147-18"></a>       }</span>
-<span id="cb147-19"><a href="deployment-in-the-aws-cloud.html#cb147-19"></a>    }</span>
-<span id="cb147-20"><a href="deployment-in-the-aws-cloud.html#cb147-20"></a>  }</span></code></pre></div>
+<div class="sourceCode" id="cb148"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb148-1"><a href="deployment-in-the-aws-cloud.html#cb148-1"></a></span>
+<span id="cb148-2"><a href="deployment-in-the-aws-cloud.html#cb148-2"></a>   cloud {</span>
+<span id="cb148-3"><a href="deployment-in-the-aws-cloud.html#cb148-3"></a>    workDir = &#39;s3:<span class="co">//class-bucket-1/work&#39;</span></span>
+<span id="cb148-4"><a href="deployment-in-the-aws-cloud.html#cb148-4"></a>    aws.<span class="fu">region</span> = &#39;eu-central-<span class="dv">1</span>&#39;</span>
+<span id="cb148-5"><a href="deployment-in-the-aws-cloud.html#cb148-5"></a>    aws.<span class="fu">batch</span>.<span class="fu">cliPath</span> = &#39;/home/ec2-user/miniconda/bin/aws&#39;</span>
+<span id="cb148-6"><a href="deployment-in-the-aws-cloud.html#cb148-6"></a>    </span>
+<span id="cb148-7"><a href="deployment-in-the-aws-cloud.html#cb148-7"></a>   process {</span>
+<span id="cb148-8"><a href="deployment-in-the-aws-cloud.html#cb148-8"></a>       containerOptions = { workflow.<span class="fu">containerEngine</span> == <span class="st">&quot;docker&quot;</span> ? &#39;-u $(id -u):$(id -g)&#39;: <span class="kw">null</span>}</span>
+<span id="cb148-9"><a href="deployment-in-the-aws-cloud.html#cb148-9"></a>       executor = &#39;awsbatch&#39;</span>
+<span id="cb148-10"><a href="deployment-in-the-aws-cloud.html#cb148-10"></a>       queue = &#39;spot&#39;</span>
+<span id="cb148-11"><a href="deployment-in-the-aws-cloud.html#cb148-11"></a>       memory=&#39;1G&#39;</span>
+<span id="cb148-12"><a href="deployment-in-the-aws-cloud.html#cb148-12"></a>       cpus=<span class="ch">&#39;1&#39;</span></span>
+<span id="cb148-13"><a href="deployment-in-the-aws-cloud.html#cb148-13"></a>       time=&#39;6h&#39;</span>
+<span id="cb148-14"><a href="deployment-in-the-aws-cloud.html#cb148-14"></a></span>
+<span id="cb148-15"><a href="deployment-in-the-aws-cloud.html#cb148-15"></a>       withLabel: &#39;twocpus&#39; {</span>
+<span id="cb148-16"><a href="deployment-in-the-aws-cloud.html#cb148-16"></a>           memory=&#39;<span class="fl">0.</span>6G&#39;</span>
+<span id="cb148-17"><a href="deployment-in-the-aws-cloud.html#cb148-17"></a>           cpus=<span class="ch">&#39;2&#39;</span></span>
+<span id="cb148-18"><a href="deployment-in-the-aws-cloud.html#cb148-18"></a>       }</span>
+<span id="cb148-19"><a href="deployment-in-the-aws-cloud.html#cb148-19"></a>    }</span>
+<span id="cb148-20"><a href="deployment-in-the-aws-cloud.html#cb148-20"></a>  }</span></code></pre></div>
 <p>We indicate some aws specific parameters (region and cliPath) and the executor that is awsbatch. Then we indicates that the working directory, that is normally written locally, to be mounted as <a href="https://aws.amazon.com/s3/">S3 volume</a>. This is mandatory when running nextflow on the cloud.
 We can now launch the pipeline indicating <strong>-profile cloud</strong></p>
-<div class="sourceCode" id="cb148"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb148-1"><a href="deployment-in-the-aws-cloud.html#cb148-1"></a><span class="ex">nextflow</span> run test3.nf -bg -with-docker -profile cloud <span class="op">&gt;</span> log</span></code></pre></div>
+<div class="sourceCode" id="cb149"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb149-1"><a href="deployment-in-the-aws-cloud.html#cb149-1"></a><span class="ex">nextflow</span> run test3.nf -bg -with-docker -profile cloud <span class="op">&gt;</span> log</span></code></pre></div>
 <p>We can see that there is no more a <strong>work</strong> folder because is on the AWS cloud and that the output is then copied locally.</p>
 <p>Sometimes you can find that the Nextflow process itself is very memory intensive and the main node can run out of memory. To avoid this you can reduce the memory needed by setting an environmental variable:</p>
-<div class="sourceCode" id="cb149"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb149-1"><a href="deployment-in-the-aws-cloud.html#cb149-1"></a><span class="bu">export</span> <span class="va">NXF_OPTS=</span><span class="st">&quot;-Xms50m -Xmx500m&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb150"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb150-1"><a href="deployment-in-the-aws-cloud.html#cb150-1"></a><span class="bu">export</span> <span class="va">NXF_OPTS=</span><span class="st">&quot;-Xms50m -Xmx500m&quot;</span></span></code></pre></div>
 </div>
             </section>
 

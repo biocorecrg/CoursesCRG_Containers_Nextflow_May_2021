@@ -278,11 +278,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">6.3</span> Using Singularity</h2>
 <p>We recommend to use Singularity instead of docker in HPC environments. This can be done by just using the Nextflow parameter <strong>-with-singularity</strong> and without touching the code. Nextflow will take care of pulling, converting and storing the image for you. This will be done just once and then nextflow will use the stored image for further executions.
 Within the AWS main node both Docker and singularity are available. Within the AWS batch we only have docker.</p>
-<div class="sourceCode" id="cb138"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb138-1"><a href="using-singularity.html#cb138-1"></a>nextflow run test2.<span class="fu">nf</span> -with-singularity</span>
-<span id="cb138-2"><a href="using-singularity.html#cb138-2"></a>...</span>
-<span id="cb138-3"><a href="using-singularity.html#cb138-3"></a></span>
-<span id="cb138-4"><a href="using-singularity.html#cb138-4"></a>ls singularity/</span>
-<span id="cb138-5"><a href="using-singularity.html#cb138-5"></a>biocorecrg-c4lwg-<span class="dv">2018</span>-latest.<span class="fu">img</span></span></code></pre></div>
+<div class="sourceCode" id="cb139"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb139-1"><a href="using-singularity.html#cb139-1"></a>nextflow run test2.<span class="fu">nf</span> -with-singularity</span>
+<span id="cb139-2"><a href="using-singularity.html#cb139-2"></a>...</span>
+<span id="cb139-3"><a href="using-singularity.html#cb139-3"></a></span>
+<span id="cb139-4"><a href="using-singularity.html#cb139-4"></a>ls singularity/</span>
+<span id="cb139-5"><a href="using-singularity.html#cb139-5"></a>biocorecrg-c4lwg-<span class="dv">2018</span>-latest.<span class="fu">img</span></span></code></pre></div>
 </div>
             </section>
 
