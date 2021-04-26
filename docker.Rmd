@@ -578,6 +578,8 @@ docker rm CONTAINER_ID # check all containers with `docker ps -a`
 
 ## Docker recipes
 
+A **Docker recipe** contains a set of instructions and commands that will be used to **create/build a Docker image**.
+
 ### Building recipes
 
 All commands should be saved in a text file, named by default **Dockerfile**.
@@ -586,7 +588,7 @@ All commands should be saved in a text file, named by default **Dockerfile**.
 
 Each row in the recipe corresponds to a **layer** of the final image.
 
-**FROM**: parent image. Typically, an operating system. The **base layer**.
+**FROM**: parent image. Typically, an operating system. This is the **base layer**.
 
 ```docker
 FROM ubuntu:18.04
@@ -600,7 +602,7 @@ Think about it this way: every **RUN** line is essentially what you would run to
 RUN apt install wget
 ```
 
-A basic recipe:
+A basic recipe that is taking the **ubuntu:18.04** image as a base layer, that updates and upgrades Linux packages, and that installs `wget`:
 
 ```docker
 FROM ubuntu:18.04
@@ -611,13 +613,20 @@ RUN apt install -y wget
 
 <center><h4 style="background-color: #e6fadc; display: inline-block;">**HANDS-ON**</h4></center>
 
-Explore this ... Dockerfile:
+Explore this [Dockerfile](https://github.com/BioContainers/containers/blob/master/blast/2.2.31/Dockerfile):
+
+* What is the **base layer**?
+* What is being installed in the email? How?
 
 <details>
 <summary>
 <h5 style="background-color: #e6fadc; display: inline-block;">*Answer*</h5>
 </summary>
-here
+
+Base layer: biocontainers/biocontainers:v1.0.0_cv4
+<b>
+Tool `blast` is installed using *conda**.
+
 </details>
 
 
@@ -660,17 +669,16 @@ Difference between ARG and ENV explained [here](https://vsupalov.com/docker-arg-
 * **ENV** values: available for the future running containers.
 
 
-```{bash}
-```
-
 **CMD, ENTRYPOINT**: command to execute when generated container starts
 
-The ENTRYPOINT specifies a command that will always be executed when the container starts. The CMD specifies arguments that will be fed to the ENTRYPOINT
+The ENTRYPOINT specifies a command that will always be executed when the container starts.
+<br>
+The CMD specifies arguments that will be fed to the ENTRYPOINT.
 
 <br>
 
-In the example below, when the container is run without an argument, it will execute `echo "hello world"`.<br>
-If it is run with the argument **nice** it will execute `echo "nice"`
+In the example below, when the container is run without an argument, it will execute `echo "hello world"` (default).<br>
+If it is run with the argument **nice** it will execute `echo "nice"`.
 
 ```docker
 FROM ubuntu:18.04
@@ -678,9 +686,9 @@ ENTRYPOINT ["/bin/echo"]
 CMD ["hello world"]
 ```
 
-A more complex recipe (save it in a text file named **Dockerfile**:
+A more complex recipe (save it in a text file named **Dockerfile**!):
 
-  ```docker
+```docker
 FROM ubuntu:18.04
 
 MAINTAINER Toni Hermoso Pulido <toni.hermoso@crg.eu>
@@ -720,11 +728,13 @@ docker build --file Dockerfile .
 
 Syntax: **--file / -f**
 
-**.** stands for the context (in this case, current directory) of the build process. This makes sense if copying files from filesystem, for instance. **IMPORTANT**: Avoid contexts (directories) overpopulated with files (even if not actually used in the recipe).
+**.** stands for the context (in this case, current directory) of the build process. This makes sense if copying files from filesystem, for instance. 
+<br>
+**IMPORTANT**: Avoid contexts (directories) overpopulated with files (even if not actually used in the recipe).
 
 You can define a specific name for the image during the build process.
 
-Syntax: **-t** *imagename:tag*. If not defined ```:tag``` default is latest.
+Syntax: **-t** *imagename:tag*. If not defined `:tag` default is latest.
 
 ```{bash}
 docker build -t mytestimage .
@@ -732,7 +742,7 @@ docker build -t mytestimage .
 
 The last line of installation should be **Successfully built ...**: then you are good to go.
 <br>
-Check with ``docker images`` that you see the newly built image in the list...
+Check with `docker images` that you see the newly built image in the list...
 
 
 Then let's check the ID of the image and run it!
@@ -744,17 +754,84 @@ docker run f9f41698e2f8
 docker run mytestimage
 ```
 
+Try to run it with an argument:
+
 ```{bash}
 docker run f9f41698e2f8 https://cdn-images-1.medium.com/max/1600/1*_NQN6_YnxS29m8vFzWYlEg.png
 ```
 
 <center><h4 style="background-color: #e6fadc; display: inline-block;">**HANDS-ON**</h4></center>
 
+1. Write a docker recipe in a file **Dockerfile_test** that: 
+* is based on **ubuntu:18.04**
+* **echoes "I love containers"** by default or any other word/sentence, if given as the argument.
+2. Build the image (give the image the name of your choice)
+3. Run the image:
+* with no argument.
+* with **"Docker course"** as an argument.
+4. Modify the **Dockerfile_test**:
+* add the MAINTAINER field
+* update and upgrade Ubuntu packages.
+* install [**figlet**](https://zoomadmin.com/HowToInstall/UbuntuPackage/figlet)
+* change "echo" to "figlet" in the **ENTRYPOINT**
+5. Build and run the new image, with the default parameter, then with **"Docker course"** as an argument.
+
 <details>
 <summary>
 <h5 style="background-color: #e6fadc; display: inline-block;">*Answer*</h5>
 </summary>
-here
+
+1. Recipe saved in **Dockerfile_test**:
+
+```
+FROM ubuntu:18.04
+ENTRYPOINT ["echo"]
+CMD ["I love containers"]
+```
+
+2. Build:
+
+```
+docker build --file Dockerfile_test -t mytest .
+```
+
+3. Run the image:
+
+```
+# with no argument
+docker run mytest
+
+# with argument "Docker course"
+docker run mytest "Docker course"
+```
+
+4. Recipe:
+
+```
+FROM ubuntu:18.04
+
+MAINTAINER Name Surname <name.surname@mail.com>
+
+RUN apt-get update && apt-get upgrade -y
+RUN apt-get install -y figlet
+
+ENTRYPOINT ["figlet"]
+CMD ["I love containers"]
+```
+
+5. Build and run the new image, with the default parameter, then with **"Docker course"** as an argument.
+
+```
+# Build
+docker build --file Dockerfile_test -t mytest .
+
+# run with no argument
+docker run mytest
+
+# run with argument "Docker course"
+docker run mytest "Docker course"
+```
+
 </details>
 
 
