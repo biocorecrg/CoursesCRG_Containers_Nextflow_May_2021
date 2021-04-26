@@ -74,17 +74,16 @@ Channel
 
 reference = file(params.reference)
 
-include { FASTQC } from "${baseDir}/lib/fastqc" addParams(OUTPUT: fastqcOutputFolder)
-include { BOWTIE_INDEX; BOWTIE_MAP } from "${baseDir}/lib/bowtie" addParams(OUTPUT: alnOutputFolder)
-include { MULTIQC } from "${baseDir}/lib/multiqc" addParams(OUTPUT: multiqcOutputFolder)
+include { fastqc } from "${baseDir}/lib/fastqc" addParams(OUTPUT: fastqcOutputFolder)
+include { BOWTIE } from "${baseDir}/lib/bowtie" addParams(OUTPUT: alnOutputFolder)
+include { multiqc } from "${baseDir}/lib/multiqc" addParams(OUTPUT: multiqcOutputFolder)
  
 
 workflow {
-	fastqc_out = FASTQC(reads)
-	bowtie_index = BOWTIE_INDEX(reference)
-	map_res = BOWTIE_MAP(bowtie_index, reads)
-	map_res.samples_sam.view()
-	MULTIQC(fastqc_out.mix(map_res.samples_log).collect())
+	fastqc_out = fastqc(reads)
+	map_res = BOWTIE(reference, reads)
+	//map_res.samples_sam.view()
+	//multiqc(fastqc_out.mix(map_res.samples_log).collect())
 }
 
 

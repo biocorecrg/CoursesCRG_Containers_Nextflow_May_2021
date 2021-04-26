@@ -48,25 +48,21 @@ process bowtieAln {
     """
 }
 
-workflow BOWTIE_INDEX {
+workflow BOWTIE {
+ 
     take: 
+    reffile
     input
     
     main:
-		out =  bowtieIdx(input)
+		bow_index = bowtieIdx(reffile)
+		bowtieAln(bow_index, input)
     emit:
-    	out
+    	bowtieAln.out.samples_sam
+    	bowtieAln.out.samples_log
 }
 
-workflow BOWTIE_MAP {
-    take: 
-    reads
-    reference
-    
-    main:
-		bowtieAln(reads,reference)
-    emit:
-    	samples_sam = bowtieAln.out.samples_sam
-    	samples_log = bowtieAln.out.samples_log
-}
+
+
+
 
