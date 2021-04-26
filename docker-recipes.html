@@ -270,19 +270,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="docker-recipes" class="section level2">
 <h2><span class="header-section-number">3.3</span> Docker recipes</h2>
+<p>A <strong>Docker recipe</strong> contains a set of instructions and commands that will be used to <strong>create/build a Docker image</strong>.</p>
 <div id="building-recipes" class="section level3">
 <h3><span class="header-section-number">3.3.1</span> Building recipes</h3>
 <p>All commands should be saved in a text file, named by default <strong>Dockerfile</strong>.</p>
 <div id="basic-instructions" class="section level4">
 <h4><span class="header-section-number">3.3.1.1</span> Basic instructions</h4>
 <p>Each row in the recipe corresponds to a <strong>layer</strong> of the final image.</p>
-<p><strong>FROM</strong>: parent image. Typically, an operating system. The <strong>base layer</strong>.</p>
+<p><strong>FROM</strong>: parent image. Typically, an operating system. This is the <strong>base layer</strong>.</p>
 <pre class="docker"><code>FROM ubuntu:18.04</code></pre>
 <p><strong>RUN</strong>: the command to execute inside the image filesystem.
 <br>
 Think about it this way: every <strong>RUN</strong> line is essentially what you would run to install programs on a freshly installed Ubuntu OS.</p>
 <pre class="docker"><code>RUN apt install wget</code></pre>
-<p>A basic recipe:</p>
+<p>A basic recipe that is taking the <strong>ubuntu:18.04</strong> image as a base layer, that updates and upgrades Linux packages, and that installs <code>wget</code>:</p>
 <pre class="docker"><code>FROM ubuntu:18.04
 
 RUN apt update &amp;&amp; apt -y upgrade
@@ -292,14 +293,20 @@ RUN apt install -y wget</code></pre>
 <strong>HANDS-ON</strong>
 </h4>
 </center>
-<p>Explore this … Dockerfile:</p>
+<p>Explore this <a href="https://github.com/BioContainers/containers/blob/master/blast/2.2.31/Dockerfile">Dockerfile</a>:</p>
+<ul>
+<li>What is the <strong>base layer</strong>?</li>
+<li>What is being installed in the email? How?</li>
+</ul>
 <details>
 <summary>
 <h5 style="background-color: #e6fadc; display: inline-block;">
 <em>Answer</em>
 </h5>
-</summary>
-here
+<p></summary></p>
+<p>Base layer: biocontainers/biocontainers:v1.0.0_cv4
+<b>
+Tool <code>blast</code> is installed using *conda**.</p>
 </details>
 </div>
 <div id="more-instructions" class="section level4">
@@ -321,16 +328,17 @@ COPY ~/.bashrc .</code></pre>
 <li><strong>ARG</strong> values: available only while the image is built.</li>
 <li><strong>ENV</strong> values: available for the future running containers.</li>
 </ul>
-<div class="sourceCode" id="cb41"><pre class="sourceCode bash"><code class="sourceCode bash"></code></pre></div>
 <p><strong>CMD, ENTRYPOINT</strong>: command to execute when generated container starts</p>
-<p>The ENTRYPOINT specifies a command that will always be executed when the container starts. The CMD specifies arguments that will be fed to the ENTRYPOINT</p>
+<p>The ENTRYPOINT specifies a command that will always be executed when the container starts.
+<br>
+The CMD specifies arguments that will be fed to the ENTRYPOINT.</p>
 <p><br></p>
-<p>In the example below, when the container is run without an argument, it will execute <code>echo "hello world"</code>.<br>
-If it is run with the argument <strong>nice</strong> it will execute <code>echo "nice"</code></p>
+<p>In the example below, when the container is run without an argument, it will execute <code>echo "hello world"</code> (default).<br>
+If it is run with the argument <strong>nice</strong> it will execute <code>echo "nice"</code>.</p>
 <pre class="docker"><code>FROM ubuntu:18.04
 ENTRYPOINT [&quot;/bin/echo&quot;]
 CMD [&quot;hello world&quot;]</code></pre>
-<p>A more complex recipe (save it in a text file named <strong>Dockerfile</strong>:</p>
+<p>A more complex recipe (save it in a text file named <strong>Dockerfile</strong>!):</p>
 <pre class="docker"><code>FROM ubuntu:18.04
 
 MAINTAINER Toni Hermoso Pulido &lt;toni.hermoso@crg.eu&gt;
@@ -360,41 +368,111 @@ here
 <div id="docker-build" class="section level3">
 <h3><span class="header-section-number">3.3.2</span> docker build</h3>
 <p>Implicitely looks for a <strong>Dockerfile</strong> file in the current directory:</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb44-1"><a href="docker-recipes.html#cb44-1"></a><span class="ex">docker</span> build .</span></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb43-1"><a href="docker-recipes.html#cb43-1"></a><span class="ex">docker</span> build .</span></code></pre></div>
 <p>Same as:</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb45-1"><a href="docker-recipes.html#cb45-1"></a><span class="ex">docker</span> build --file Dockerfile .</span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb44-1"><a href="docker-recipes.html#cb44-1"></a><span class="ex">docker</span> build --file Dockerfile .</span></code></pre></div>
 <p>Syntax: <strong>–file / -f</strong></p>
-<p><strong>.</strong> stands for the context (in this case, current directory) of the build process. This makes sense if copying files from filesystem, for instance. <strong>IMPORTANT</strong>: Avoid contexts (directories) overpopulated with files (even if not actually used in the recipe).</p>
+<p><strong>.</strong> stands for the context (in this case, current directory) of the build process. This makes sense if copying files from filesystem, for instance.
+<br>
+<strong>IMPORTANT</strong>: Avoid contexts (directories) overpopulated with files (even if not actually used in the recipe).</p>
 <p>You can define a specific name for the image during the build process.</p>
 <p>Syntax: <strong>-t</strong> <em>imagename:tag</em>. If not defined <code>:tag</code> default is latest.</p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb46-1"><a href="docker-recipes.html#cb46-1"></a><span class="ex">docker</span> build -t mytestimage .</span></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb45-1"><a href="docker-recipes.html#cb45-1"></a><span class="ex">docker</span> build -t mytestimage .</span></code></pre></div>
 <p>The last line of installation should be <strong>Successfully built …</strong>: then you are good to go.
 <br>
 Check with <code>docker images</code> that you see the newly built image in the list…</p>
 <p>Then let’s check the ID of the image and run it!</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb47-1"><a href="docker-recipes.html#cb47-1"></a><span class="ex">docker</span> images</span>
-<span id="cb47-2"><a href="docker-recipes.html#cb47-2"></a></span>
-<span id="cb47-3"><a href="docker-recipes.html#cb47-3"></a><span class="ex">docker</span> run f9f41698e2f8</span>
-<span id="cb47-4"><a href="docker-recipes.html#cb47-4"></a><span class="ex">docker</span> run mytestimage</span></code></pre></div>
-<div class="sourceCode" id="cb48"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb48-1"><a href="docker-recipes.html#cb48-1"></a><span class="ex">docker</span> run f9f41698e2f8 https://cdn-images-1.medium.com/max/1600/1*_NQN6_YnxS29m8vFzWYlEg.png</span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb46-1"><a href="docker-recipes.html#cb46-1"></a><span class="ex">docker</span> images</span>
+<span id="cb46-2"><a href="docker-recipes.html#cb46-2"></a></span>
+<span id="cb46-3"><a href="docker-recipes.html#cb46-3"></a><span class="ex">docker</span> run f9f41698e2f8</span>
+<span id="cb46-4"><a href="docker-recipes.html#cb46-4"></a><span class="ex">docker</span> run mytestimage</span></code></pre></div>
+<p>Try to run it with an argument:</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb47-1"><a href="docker-recipes.html#cb47-1"></a><span class="ex">docker</span> run f9f41698e2f8 https://cdn-images-1.medium.com/max/1600/1*_NQN6_YnxS29m8vFzWYlEg.png</span></code></pre></div>
 <center>
 <h4 style="background-color: #e6fadc; display: inline-block;">
 <strong>HANDS-ON</strong>
 </h4>
 </center>
+<ol style="list-style-type: decimal">
+<li>Write a docker recipe in a file <strong>Dockerfile_test</strong> that:</li>
+</ol>
+<ul>
+<li>is based on <strong>ubuntu:18.04</strong></li>
+<li><strong>echoes “I love containers”</strong> by default or any other word/sentence, if given as the argument.</li>
+</ul>
+<ol start="2" style="list-style-type: decimal">
+<li>Build the image (give the image the name of your choice)</li>
+<li>Run the image:</li>
+</ol>
+<ul>
+<li>with no argument.</li>
+<li>with <strong>“Docker course”</strong> as an argument.</li>
+</ul>
+<ol start="4" style="list-style-type: decimal">
+<li>Modify the <strong>Dockerfile_test</strong>:</li>
+</ol>
+<ul>
+<li>add the MAINTAINER field</li>
+<li>update and upgrade Ubuntu packages.</li>
+<li>install <a href="https://zoomadmin.com/HowToInstall/UbuntuPackage/figlet"><strong>figlet</strong></a></li>
+<li>change “echo” to “figlet” in the <strong>ENTRYPOINT</strong></li>
+</ul>
+<ol start="5" style="list-style-type: decimal">
+<li>Build and run the new image, with the default parameter, then with <strong>“Docker course”</strong> as an argument.</li>
+</ol>
 <details>
 <summary>
 <h5 style="background-color: #e6fadc; display: inline-block;">
 <em>Answer</em>
 </h5>
-</summary>
-here
+<p></summary></p>
+<ol style="list-style-type: decimal">
+<li>Recipe saved in <strong>Dockerfile_test</strong>:</li>
+</ol>
+<pre><code>FROM ubuntu:18.04
+ENTRYPOINT [&quot;echo&quot;]
+CMD [&quot;I love containers&quot;]</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>Build:</li>
+</ol>
+<pre><code>docker build --file Dockerfile_test -t mytest .</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li>Run the image:</li>
+</ol>
+<pre><code># with no argument
+docker run mytest
+
+# with argument &quot;Docker course&quot;
+docker run mytest &quot;Docker course&quot;</code></pre>
+<ol start="4" style="list-style-type: decimal">
+<li>Recipe:</li>
+</ol>
+<pre><code>FROM ubuntu:18.04
+
+MAINTAINER Name Surname &lt;name.surname@mail.com&gt;
+
+RUN apt-get update &amp;&amp; apt-get upgrade -y
+RUN apt-get install -y figlet
+
+ENTRYPOINT [&quot;figlet&quot;]
+CMD [&quot;I love containers&quot;]</code></pre>
+<ol start="5" style="list-style-type: decimal">
+<li>Build and run the new image, with the default parameter, then with <strong>“Docker course”</strong> as an argument.</li>
+</ol>
+<pre><code># Build
+docker build --file Dockerfile_test -t mytest .
+
+# run with no argument
+docker run mytest
+
+# run with argument &quot;Docker course&quot;
+docker run mytest &quot;Docker course&quot;</code></pre>
 </details>
 </div>
 <div id="docker-tag" class="section level3">
 <h3><span class="header-section-number">3.3.3</span> docker tag</h3>
 <p>To tag a local image with ID “e23aaea5dff1” into the “ubuntu_wget” image name repository with version “1.0”:</p>
-<div class="sourceCode" id="cb49"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb49-1"><a href="docker-recipes.html#cb49-1"></a><span class="ex">docker</span> tag e23aaea5dff1 --tag ubuntu_wget:1.0</span></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb53-1"><a href="docker-recipes.html#cb53-1"></a><span class="ex">docker</span> tag e23aaea5dff1 --tag ubuntu_wget:1.0</span></code></pre></div>
 <center>
 <h4 style="background-color: #e6fadc; display: inline-block;">
 <strong>HANDS-ON</strong>
@@ -424,10 +502,10 @@ RUN apt-get install -y wget
 
 ENTRYPOINT [&quot;/usr/bin/wget&quot;]
 CMD [&quot;https://cdn-images-1.medium.com/max/1600/1*_NQN6_YnxS29m8vFzWYlEg.png&quot;]</code></pre>
-<div class="sourceCode" id="cb51"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb51-1"><a href="docker-recipes.html#cb51-1"></a><span class="ex">docker</span> build -t mytestimage2 .</span></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb55-1"><a href="docker-recipes.html#cb55-1"></a><span class="ex">docker</span> build -t mytestimage2 .</span></code></pre></div>
 <p>It will start from the last line.
 This is OK most of the times and very convenient for testing and trying new steps, but it may lead to errors when versions are updated (either FROM image or included packages). For that it is benefitial to start from scratch with <code>--no-cache</code> tag.</p>
-<div class="sourceCode" id="cb52"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb52-1"><a href="docker-recipes.html#cb52-1"></a><span class="ex">docker</span> build --no-cache -t mytestimage2 .</span></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb56-1"><a href="docker-recipes.html#cb56-1"></a><span class="ex">docker</span> build --no-cache -t mytestimage2 .</span></code></pre></div>
 </div>
 <div id="more-advanced-image-building" class="section level3">
 <h3><span class="header-section-number">3.3.5</span> More advanced image building</h3>

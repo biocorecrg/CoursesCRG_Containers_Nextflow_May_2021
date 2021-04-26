@@ -271,34 +271,34 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="processes" class="section level2">
 <h2><span class="header-section-number">5.8</span> Processes</h2>
 <p>Let’s add now a process to our previous script test.nf:</p>
-<div class="sourceCode" id="cb90"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb90-1"><a href="processes.html#cb90-1"></a>#!/usr/bin/env nextflow</span>
-<span id="cb90-2"><a href="processes.html#cb90-2"></a></span>
-<span id="cb90-3"><a href="processes.html#cb90-3"></a>nextflow.<span class="fu">enable</span>.<span class="fu">dsl</span>=<span class="dv">2</span></span>
-<span id="cb90-4"><a href="processes.html#cb90-4"></a></span>
-<span id="cb90-5"><a href="processes.html#cb90-5"></a>str = <span class="bu">Channel</span>.<span class="fu">from</span>(&#39;hello&#39;, &#39;hola&#39;, &#39;bonjour&#39;)</span>
-<span id="cb90-6"><a href="processes.html#cb90-6"></a></span>
-<span id="cb90-7"><a href="processes.html#cb90-7"></a><span class="co">/*</span></span>
-<span id="cb90-8"><a href="processes.html#cb90-8"></a><span class="co"> * Creates a process which receive an input channel containing values</span></span>
-<span id="cb90-9"><a href="processes.html#cb90-9"></a><span class="co"> * Each value emitted by the channel triggers the execution</span></span>
-<span id="cb90-10"><a href="processes.html#cb90-10"></a><span class="co"> * of the process. The process stdout is caputured and send over</span></span>
-<span id="cb90-11"><a href="processes.html#cb90-11"></a><span class="co"> * the another channel.</span></span>
-<span id="cb90-12"><a href="processes.html#cb90-12"></a><span class="co"> */</span></span>
-<span id="cb90-13"><a href="processes.html#cb90-13"></a></span>
-<span id="cb90-14"><a href="processes.html#cb90-14"></a>process printHello {</span>
-<span id="cb90-15"><a href="processes.html#cb90-15"></a></span>
-<span id="cb90-16"><a href="processes.html#cb90-16"></a>   tag { str_in } <span class="co">// this is for displaying the content of `str_in` in the log file</span></span>
-<span id="cb90-17"><a href="processes.html#cb90-17"></a></span>
-<span id="cb90-18"><a href="processes.html#cb90-18"></a>   input:        </span>
-<span id="cb90-19"><a href="processes.html#cb90-19"></a>   val str_in</span>
-<span id="cb90-20"><a href="processes.html#cb90-20"></a></span>
-<span id="cb90-21"><a href="processes.html#cb90-21"></a>   output:        </span>
-<span id="cb90-22"><a href="processes.html#cb90-22"></a>   stdout</span>
-<span id="cb90-23"><a href="processes.html#cb90-23"></a></span>
-<span id="cb90-24"><a href="processes.html#cb90-24"></a>   script:        </span>
-<span id="cb90-25"><a href="processes.html#cb90-25"></a>   <span class="st">&quot;&quot;&quot;</span></span>
-<span id="cb90-26"><a href="processes.html#cb90-26"></a>   echo ${str_in} in Italian is ciao</span>
-<span id="cb90-27"><a href="processes.html#cb90-27"></a>   <span class="st">&quot;&quot;&quot;</span></span>
-<span id="cb90-28"><a href="processes.html#cb90-28"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb94"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb94-1"><a href="processes.html#cb94-1"></a>#!/usr/bin/env nextflow</span>
+<span id="cb94-2"><a href="processes.html#cb94-2"></a></span>
+<span id="cb94-3"><a href="processes.html#cb94-3"></a>nextflow.<span class="fu">enable</span>.<span class="fu">dsl</span>=<span class="dv">2</span></span>
+<span id="cb94-4"><a href="processes.html#cb94-4"></a></span>
+<span id="cb94-5"><a href="processes.html#cb94-5"></a>str = <span class="bu">Channel</span>.<span class="fu">from</span>(&#39;hello&#39;, &#39;hola&#39;, &#39;bonjour&#39;)</span>
+<span id="cb94-6"><a href="processes.html#cb94-6"></a></span>
+<span id="cb94-7"><a href="processes.html#cb94-7"></a><span class="co">/*</span></span>
+<span id="cb94-8"><a href="processes.html#cb94-8"></a><span class="co"> * Creates a process which receive an input channel containing values</span></span>
+<span id="cb94-9"><a href="processes.html#cb94-9"></a><span class="co"> * Each value emitted by the channel triggers the execution</span></span>
+<span id="cb94-10"><a href="processes.html#cb94-10"></a><span class="co"> * of the process. The process stdout is caputured and send over</span></span>
+<span id="cb94-11"><a href="processes.html#cb94-11"></a><span class="co"> * the another channel.</span></span>
+<span id="cb94-12"><a href="processes.html#cb94-12"></a><span class="co"> */</span></span>
+<span id="cb94-13"><a href="processes.html#cb94-13"></a></span>
+<span id="cb94-14"><a href="processes.html#cb94-14"></a>process printHello {</span>
+<span id="cb94-15"><a href="processes.html#cb94-15"></a></span>
+<span id="cb94-16"><a href="processes.html#cb94-16"></a>   tag { str_in } <span class="co">// this is for displaying the content of `str_in` in the log file</span></span>
+<span id="cb94-17"><a href="processes.html#cb94-17"></a></span>
+<span id="cb94-18"><a href="processes.html#cb94-18"></a>   input:        </span>
+<span id="cb94-19"><a href="processes.html#cb94-19"></a>   val str_in</span>
+<span id="cb94-20"><a href="processes.html#cb94-20"></a></span>
+<span id="cb94-21"><a href="processes.html#cb94-21"></a>   output:        </span>
+<span id="cb94-22"><a href="processes.html#cb94-22"></a>   stdout</span>
+<span id="cb94-23"><a href="processes.html#cb94-23"></a></span>
+<span id="cb94-24"><a href="processes.html#cb94-24"></a>   script:        </span>
+<span id="cb94-25"><a href="processes.html#cb94-25"></a>   <span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb94-26"><a href="processes.html#cb94-26"></a>   echo ${str_in} in Italian is ciao</span>
+<span id="cb94-27"><a href="processes.html#cb94-27"></a>   <span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb94-28"><a href="processes.html#cb94-28"></a>}</span></code></pre></div>
 <p>The process can be seen as a function and is composed by:
 - An <strong>input</strong> part where the input channels are defined
 - An <strong>output</strong> part where we indicates what to store as a result that will be sent to other processes or published as final result
