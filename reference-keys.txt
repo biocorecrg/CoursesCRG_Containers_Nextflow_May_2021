@@ -64,7 +64,7 @@ sandboxing
 singularity-recipes
 docker-bootstrap
 debian-bootstrap
-remote-building-optional
+remote-building
 run-and-execution-process
 singularity-shell
 singularity-run
