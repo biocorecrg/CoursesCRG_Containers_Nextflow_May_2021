@@ -277,7 +277,7 @@ More information:
 
 ### Fakeroot
 
-Singularity permissions are an evolving field. If you don't have access to ```sudo```, it might be worth considering using **--fakeroot/-f** parameter.
+Singularity permissions are an evolving field. If you don't have access to ```sudo```, it might be worth considering using ``--fakeroot/-f`` parameter.
 
 * More details at [https://sylabs.io/guides/3.7/user-guide/fakeroot.html](https://sylabs.io/guides/3.7/user-guide/fakeroot.html)
 
