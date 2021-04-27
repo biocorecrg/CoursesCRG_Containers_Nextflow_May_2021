@@ -220,25 +220,27 @@ Interactive shell.
 
     singularity shell fastqc-multi-bowtie.sif
 
-### Singularity run
-
-Execute runscript from recipe definition. Not so common for HPC uses. More for instances (servers).
-
-    singularity run fastqc-multi-bowtie.sif
-
 ### Singularity exec
 
 Execute commands. Common approach in HPC uses.
 
     singularity exec fastqc-multi-bowtie.sif fastqc
 
+### Singularity run
+
+Execute runscript from recipe definition. Not so common for HPC uses. More for instances (servers).
+
+    singularity run fastqc-multi-bowtie.sif
+
+
 ### Environment control
 
     singularity shell -e fastqc-multi-bowtie.sif
 
+    singularity exec -e fastqc-multi-bowtie.sif fastqc
+
     singularity run -e fastqc-multi-bowtie.sif
 
-    singularity exec -e fastqc-multi-bowtie.sif fastqc
 
 Compare ```env``` command with and without -e modifier.
 
@@ -254,7 +256,7 @@ Compare ```env``` command with and without -e modifier.
     singularity exec --writable ./sandbox bash -c 'apt-get update && apt-get install python'
     # We needed to add writable parameter
 
-### Run straight from registry
+### Execute straight from a registry
 
     singularity exec docker://ncbi/blast:2.10.1 blastp -version
 
