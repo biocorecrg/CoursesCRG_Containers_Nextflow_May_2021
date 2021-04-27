@@ -211,7 +211,8 @@ As we have seen before, you can `docker images` in the terminal, to see a list o
 <center><h4 style="background-color: #e6fadc; display: inline-block;">**HANDS-ON**</h4></center>
 
 * Run `docker images`. How many images do you get?
-* What is the size of the `ubuntu` image you just pulled?
+* Pull the latest [`biocontainers/blast`](https://hub.docker.com/r/biocontainers/blast/) image
+  * What is the size of the `blast` image you just pulled?
 * How many images do you get if you run `docker images --all`? What are those? Perhaps the [documentation](https://docs.docker.com/engine/reference/commandline/images/) can help.
 
 <details>
@@ -219,45 +220,13 @@ As we have seen before, you can `docker images` in the terminal, to see a list o
 <h5 style="background-color: #e6fadc; display: inline-block;">*Answer*</h5>
 </summary>
 
-`docker images --all`: intermediate images.
+```
+# Pull the blast image
+docker pull biocontainers/blast
 
-</details>
-
-
-### BioContainers
-
-[BioContainers](https://biocontainers.pro/) is a community-driven project that provides the infrastructure and basic guidelines to create, manage and distribute bioinformatics packages and **containers**.
-<br>
-Images are normally created from [Bioconda](https://bioconda.github.io)
-<br><br>
-**How to search for images?**
-
-* Ready-to use images on the [dedicated website](https://biocontainers.pro/registry)
-* Entries are also stored in [Docker hub](https://hub.docker.com/u/biocontainers) and/or [Quay.io](https://quay.io) (RedHat registry)
-* *Dockerfile recipes* (next topic!) on the [github page](https://github.com/BioContainers/containers).
-
-**How to pull images from BioContainers?**
-<br>
-Example: [**FastQC** software](https://biocontainers.pro/#/tools/fastqc)
-
-<img src="docs/images/biocontainers_fastqc.png" width="650/">
-
-Load version / tag **v0.11.9_cv7** as:
-
-    docker pull biocontainers/fastqc:v0.11.9_cv7
-
-
-<center><h4 style="background-color: #e6fadc; display: inline-block;">**HANDS-ON**</h4></center>
-
-* [Search](https://biocontainers.pro/registry) for the tool **blast**.
-* Pull the Docker image with version **2.2.31** (check the instructions).
-
-<details>
-<summary>
-<h5 style="background-color: #e6fadc; display: inline-block;">*Answer*</h5>
-</summary>
-
-    docker pull biocontainers/blast:2.2.31
+# Run `docker images --all`
+docker images --all # intermediate images.
+```
 
 </details>
 
@@ -304,7 +273,7 @@ If you want to leave and stop the container, type `exit` and ENTER.
 
 * Run the **hello-world** image:
   * What is happening?
-* Now run the **blast** image from BioContainers we previously pulled (version 2.2.31):
+* Now run the **blast** image we previously pulled:
   * Is something happening?
 * Start again a container from the same **blast** image (not interactively), and run **the blastp command**. What happens?
 * Start a container **interactively** from the same **blast** image:
@@ -322,22 +291,20 @@ If you want to leave and stop the container, type `exit` and ENTER.
 docker run hello-world
 
 # Run the blast image
-docker run biocontainers/blast:2.2.31
+docker run biocontainers/blast:latest
 
 #  Start again a container from the same blast image, and run the path to the blastp command:
-docker run biocontainers/blast:2.2.31 blastp
+docker run biocontainers/blast:latest blastp
 
 # Start a container interactively from the same blast image:
-docker run -ti biocontainers/blast:2.2.31
+docker run -ti biocontainers/blast:latest
 
-# What is the default working directory? 
-pwd; ls
-
-# Where is the `blastp` program located in the image? 
-which blastp
-
-# Exit the container.
-exit
+  # What is the default working directory? 
+  pwd; ls
+  # Where is the `blastp` program located in the image? 
+  which blastp
+  # Exit the container.
+  exit
 ```
 
 </details>
@@ -370,8 +337,6 @@ docker ps -a
 ```
 
 Each container has a **unique ID**.
-
-
 
 
 ### docker exec: execute process in running container
@@ -505,28 +470,30 @@ docker rmi hello-world
 
 #### Major clean
 
-*docker system failing for me (Sarah) on a qlogin node: why? (I see from the documentation that it still exists) Version issue perhaps?*
+Check used space:
 
-Check used space
 ```{bash}
 docker system df
 ```
 
 Remove unused containers (and others) - **DO WITH CARE**
+
 ```{bash}
 docker system prune
 ```
 
 Remove ALL non-running containers, images, etc. - **DO WITH MUCH MORE CARE!!!**
+
 ```{bash}
 docker system prune -a
 ```
 
-* Reference: https://www.digitalocean.com/community/tutorials/how-to-remove-docker-images-containers-and-volumes
+* [Reference](https://www.digitalocean.com/community/tutorials/how-to-remove-docker-images-containers-and-volumes)
 
 
 ### Exercise
 
+*Should we keep this?? not sure..*
 
 * **Search** and **pull** the `alpine` image (tag **3.12**) - it is an **official build**.
 * Can you run a container from this image and make it print a “hello world” message?
@@ -578,7 +545,7 @@ docker rm CONTAINER_ID # check all containers with `docker ps -a`
 
 ## Linux packages
 
-In the next step, we will create Docker images.
+In the next topic, we will **create Docker images**.
 <br>
 For this to go smoothly, you should know your **base system**, and how to interact with it (update, upgrade and install packages for example).
 <br>
@@ -652,6 +619,23 @@ A **Docker recipe** contains a set of instructions and commands that will be use
 ### Building recipes
 
 All commands should be saved in a text file, named by default **Dockerfile**.
+
+| Instruction | What it does |
+| :-----: | :-----: |
+| FROM | Sets the base image. |
+| RUN | Commands to run. |
+| MAINTAINER |  Docker image maintainer. |
+| WORKDIR | Sets the working directory for the container's building instructions. |
+| SHELL | Changes the default shell |
+| ADD / COPY | Copy files from source to destination. | 
+| ARG | Sets variables that can be used as the image is built. |
+| ENV | Sets environment variables. Persists when container is run. |
+| ENTRYPOINT | Helps configure the container as an executable. |
+| CMD | Can provide a default executable or arguments to the ENTRYPOINT executable. |
+| VOLUME | Creates a mount point for an external volume. |
+| EXPOSE | Exposes network ports on the container. |
+
+[Reference](https://books.google.es/books?id=TshsDwAAQBAJ&pg=PA96&lpg=PA96&dq=docker+recipe+basic+instructions&source=bl&ots=ZfPBPRMTG9&sig=ACfU3U2ZOrPu6krVOTQ_gEBrx6TBXY1Jaw&hl=en&sa=X&ved=2ahUKEwjl-deB1p7wAhVLXBoKHdclCuYQ6AEwEXoECAYQAw#v=onepage&q=docker%20recipe%20basic%20instructions&f=false)
 
 #### Basic instructions
 
@@ -873,7 +857,8 @@ docker run f9f41698e2f8 https://cdn-images-1.medium.com/max/1600/1*_NQN6_YnxS29m
 * update and upgrade Ubuntu packages.
 * install [**figlet**](https://zoomadmin.com/HowToInstall/UbuntuPackage/figlet)
 * change "echo" to "figlet" in the **ENTRYPOINT**
-5. Build and run the new image, with the default parameter, then with **"Docker course"** as an argument.
+5. Build the image. 
+6. Run the new image, with the default parameters, then with **"Docker course"** as an argument.
 
 <details>
 <summary>
@@ -919,12 +904,15 @@ ENTRYPOINT ["figlet"]
 CMD ["I love containers"]
 ```
 
-5. Build and run the new image, with the default parameter, then with **"Docker course"** as an argument.
+5. Build the image.
 
 ```
-# Build
 docker build --file Dockerfile_test -t mytest .
+```
 
+6. Run the new image, with the default parameter, then with **"Docker course"** as an argument.
+
+```
 # run with no argument
 docker run mytest
 
@@ -978,15 +966,6 @@ Use `docker tag` in order to **tag a local image** that has - for example - ID "
 docker tag e23aaea5dff1 --tag ubuntu_wget:1.0
 ```
 
-<center><h4 style="background-color: #e6fadc; display: inline-block;">**HANDS-ON**</h4></center>
-
-<details>
-<summary>
-<h5 style="background-color: #e6fadc; display: inline-block;">*Answer*</h5>
-</summary>
-here
-</details>
-
 
 ### Build cache
 
@@ -1023,6 +1002,8 @@ docker build --no-cache -t mytestimage2 .
 ```
 
 ### Exercise: writing more complex recipes
+
+*NOT FINISHED: breakout room afternoon day 1? Perhaps it should be a different tool to install.*
 
 Build an image based on **CentOS** (use base layer [centos:7](https://hub.docker.com/_/centos?tab=tags&page=1&ordering=last_updated)):
 
@@ -1157,5 +1138,6 @@ docker exec webserver curl localhost:8080
 docker rm -f webserver
 ```
 
+## "Pushing" an image to Docker hub
 
 
