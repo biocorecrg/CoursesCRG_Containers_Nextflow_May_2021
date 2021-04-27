@@ -255,12 +255,73 @@ Enjoy!
 We recommend to use Singularity instead of docker in HPC environments. This can be done by just using the Nextflow parameter **-with-singularity** and  without touching the code. Nextflow will take care of pulling, converting and storing the image for you. This will be done just once and then nextflow will use the stored image for further executions.
 Within the AWS main node both Docker and singularity are available. Within the AWS batch we only have docker.
 
-```{java, eval=FALSE, echo=TRUE}
-nextflow run test2.nf -with-singularity
-...
+```{bash, eval=FALSE, echo=TRUE}
+nextflow run test2.nf -with-singularity -bg > log
 
+tail -f log 
+N E X T F L O W  ~  version 20.10.0
+Launching `test2.nf` [soggy_miescher] - revision: 5a0a513d38
+
+BIOCORE@CRG - N F TESTPIPE  ~  version 1.0
+=============================================
+reads                           : /home/ec2-user/git/CoursesCRG_Containers_Nextflow_May_2021/nextflow/test2/../../testdata/*.fastq.gz
+
+Pulling Singularity image docker://biocorecrg/c4lwg-2018:latest [cache /home/ec2-user/git/CoursesCRG_Containers_Nextflow_May_2021/nextflow/test2/singularity/biocorecrg-c4lwg-2018-latest.img]
+[da/eb7564] Submitted process > fastQC (B7_H3K4me1_s_chr19.fastq.gz)
+[f6/32dc41] Submitted process > fastQC (B7_input_s_chr19.fastq.gz)
+...
+```
+
+We can then inspect the presence of the singularity image inside the folder singularity.
+
+```{bash, eval=FALSE, echo=TRUE}
 ls singularity/
 biocorecrg-c4lwg-2018-latest.img
+```
+
+We can then reuse this image if we want to execute the code exactly in the same way as in the pipeline but outside the pipeline. Sometimes we can be interested in launching just one job, because it failed or for just making a test. We can go to the corresponding temporary folder, as an example let's go to one of the fastQC temporary folder:
+
+```{bash, eval=FALSE, echo=TRUE}
+cd work/da/eb7564*/
+```
+
+Inspecting the .command.run file shows us this piece of code:
+
+```{bash, eval=FALSE, echo=TRUE}
+...
+
+nxf_launch() {
+    set +u; env - PATH="$PATH" SINGULARITYENV_TMP="$TMP" SINGULARITYENV_TMPDIR="$TMPDIR" singularity exec /home/ec2-user/git/CoursesCRG_Containers_Nextflow_May_2021/nextflow/test2/singularity/biocorecrg-c4lwg-2018-latest.img /bin/bash -c "cd $PWD; /bin/bash -ue /home/ec2-user/git/CoursesCRG_Containers_Nextflow_May_2021/nextflow/test2/work/da/eb756433aa0881d25b20afb5b1366e/.command.sh"
+}
+...
+```
+
+This means that Nextflow is running the code by using the **singularity exec** command. 
+
+Then we can launch the following command:
+
+```{bash, eval=FALSE, echo=TRUE}
+bash .command.run 
+Started analysis of B7_H3K4me1_s_chr19.fastq.gz
+Approx 5% complete for B7_H3K4me1_s_chr19.fastq.gz
+Approx 10% complete for B7_H3K4me1_s_chr19.fastq.gz
+Approx 15% complete for B7_H3K4me1_s_chr19.fastq.gz
+Approx 20% complete for B7_H3K4me1_s_chr19.fastq.gz
+Approx 25% complete for B7_H3K4me1_s_chr19.fastq.gz
+Approx 30% complete for B7_H3K4me1_s_chr19.fastq.gz
+Approx 35% complete for B7_H3K4me1_s_chr19.fastq.gz
+Approx 40% complete for B7_H3K4me1_s_chr19.fastq.gz
+Approx 45% complete for B7_H3K4me1_s_chr19.fastq.gz
+Approx 50% complete for B7_H3K4me1_s_chr19.fastq.gz
+Approx 55% complete for B7_H3K4me1_s_chr19.fastq.gz
+Approx 60% complete for B7_H3K4me1_s_chr19.fastq.gz
+...
+```
+
+In this way you are doing the same execution done by nextflow using the local machine. In case you are submitting a job to a HPC you need to use the corresponding program, for instance **qsub**.
+
+```{bash, eval=FALSE, echo=TRUE}
+qsub .command.run 
 ```
 
 ## Adding more steps
