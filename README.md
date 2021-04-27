@@ -68,26 +68,27 @@ Applicants are not expected to have used neither Linux containers nor Nextflow w
 * Docker hub: find existing containers.
 * Fetch (and build) an image from public registries (Docker Hub, Quay.io, etc.)
  * Discovery of different relevant base images
-  * Rocker, continuumio, biocontainers.pro.
 * Run Docker container based on an existing image (also run it interactively).
-* Work with volumes and ports.
 * Build an image from an existing recipe:
   * Explain sections and keywords.
   * Build options (e.g. cache or build variables).
 * Write a Docker recipe and build an image from it.
-* Upload image to registries.
 
-#### Day 2: Singularity
+#### Day 2: Docker + Singularity
 
-* Singularity versus Docker.
- * Differences, pros and cons for each system. 
-* Fetch (and build) Singularity images.
- * Build from existing public registries.
- * Build from local Docker instances.
-* Run Singularity container (interactively).
-* Understanding and working with volumes.
-* Singularity build recipes.
-* Advanced features: services, etc.
+* Docker: 
+  * Work with volumes and ports.
+  * Upload image to registries.
+* Singularity:
+  * Singularity versus Docker.
+    * Differences, pros and cons for each system. 
+  * Fetch (and build) Singularity images.
+    * Build from existing public registries.
+    * Build from local Docker instances.
+  * Run Singularity container (interactively).
+  * Understanding and working with volumes.
+  * Singularity build recipes.
+  * Advanced features: services, etc.
 
 ### Day 3 & 4: Nextflow
 
