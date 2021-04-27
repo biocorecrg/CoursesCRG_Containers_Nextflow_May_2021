@@ -1003,14 +1003,22 @@ docker build --no-cache -t mytestimage2 .
 
 ### Exercise: writing more complex recipes
 
-*NOT FINISHED: breakout room afternoon day 1? Perhaps it should be a different tool to install.*
+*Breakout rooms afternoon day 1?*
+
+*NOT FINISHED, NOT EASILY WORKING; NEED TO CHANGE IT!!*
 
 Build an image based on **CentOS** (use base layer [centos:7](https://hub.docker.com/_/centos?tab=tags&page=1&ordering=last_updated)):
 
-* Install [**bowtie2**](https://centos.pkgs.org/7/epel-x86_64/bowtie2-2.4.1-1.el7.x86_64.rpm.html) and **show the help page by default**.
-  * you will need to download and install the **.rpm** package inside the image !
-* Change the name (and version) of the image to **bowtie2image:1.0**. Check that the change was taken into account with `docker images`.
+* Install [**bowtie2**](https://sourceforge.net/projects/bowtie-bio/files/bowtie2/2.4.2/bowtie2-2.4.2-source.zip). Follow the next steps:
+  * Install `wget`, `unzip`, `make`, `perl`, `which`, `gcc` (Linux packages)
+  * Download and unzip the [**bowtie2 ".zip" file**](https://sourceforge.net/projects/bowtie-bio/files/bowtie2/2.4.2/bowtie2-2.4.2-source.zip)
+  * Add location of the bowtie2 folder to [system *PATH*](http://bowtie-bio.sourceforge.net/bowtie2/manual.shtml#adding-to-path)
+  * When you start a container from this image, it should **show the help page by default**.
+* Tag the successfully built image as **bowtie2_2.4.2:1.0**
 
+Create a new recipe based on the previous one, that allows one to **choose the version of bowtie2 upon building the image**.
+  * We were working with version 2.4.2 of bowtie2, you can now try and play with installing versions [2.4.1](https://sourceforge.net/projects/bowtie-bio/files/bowtie2/2.4.1/bowtie2-2.4.1-source.zip) or [2.3.4](https://sourceforge.net/projects/bowtie-bio/files/bowtie2/2.4.1/bowtie2-2.4.1-source.zip).
+  
 <details>
 <summary>
 <h5 style="background-color: #e6fadc; display: inline-block;">*Answer*</h5>
@@ -1038,7 +1046,7 @@ docker build -t imagebowtie2 -f Dockerfile_bowtie2 .
 Change name / tag:
 
 ```
-docker tag imagebowtie2 bowtie2image:1.0
+docker tag imagebowtie2 bowtie2_2.4.2:1.0
 ```
 
 
