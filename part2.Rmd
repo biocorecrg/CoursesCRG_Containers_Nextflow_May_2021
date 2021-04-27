@@ -763,28 +763,6 @@ Launching `test.nf` [insane_plateau] - revision: d33befe154
 [93/c7b1c6] Submitted process > flow2:reverseSequence (seq_3)
 ```
 
-## EXERCISE 3
-Write the first workflow using pipes. Nextflow DLS2 allows you to use pipes for connecting channels via input / output.
-See documentation here:
-
-[https://www.nextflow.io/docs/latest/dsl2.html#pipes](https://www.nextflow.io/docs/latest/dsl2.html#pipes)
-
-
-<details>
-<summary>
-<h5>*Answer*</h5>
-</summary>
-	
-```{nextflow, eval=FALSE, echo=TRUE}
-workflow flow1 {
-    take: sequences
-    main:
-    splitSequences(sequences) | reverseSequence | view()
-}
-```
-	
-</details>
-
 ## Resuming your pipeline
 
 You can resume the execution after the code modification using the parameter **-resume**. Nextflow is smart enough to cache the execution since input and output were not changed.
@@ -835,6 +813,27 @@ cache = 'lenient' // (Best in HPC and shared file systems) Cache keys are create
 **IMPORTANT On some shared file systems you might have inconsistent files timestamps. So cache lenient prevent you from unwanted restarting of cached processes.**
 
 
+## EXERCISE 3
+Write the first workflow using pipes. Nextflow DLS2 allows you to use pipes for connecting channels via input / output.
+See documentation here:
+
+[https://www.nextflow.io/docs/latest/dsl2.html#pipes](https://www.nextflow.io/docs/latest/dsl2.html#pipes)
+
+
+<details>
+<summary>
+<h5>*Answer*</h5>
+</summary>
+	
+```{nextflow, eval=FALSE, echo=TRUE}
+workflow flow1 {
+    take: sequences
+    main:
+    splitSequences(sequences) | reverseSequence | view()
+}
+```
+	
+</details>
 
 # Nextflow day 2
 During this day we will make more complex pipelines and separate the main code from the configuration. Then we will focus on the reuse of the code and on how to share your code.
