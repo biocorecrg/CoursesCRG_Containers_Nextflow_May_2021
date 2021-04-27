@@ -92,8 +92,8 @@ workflow
 nextflow-log
 exercise-2
 more-complex-scripts
-exercise-3
 resuming-your-pipeline
+exercise-3
 nextflow-day-2
 decoupling-resources-parameters-and-nextflow-script
 publishing-final-results
