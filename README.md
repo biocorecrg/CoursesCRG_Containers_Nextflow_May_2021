@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Courses@CRG_Containers_Nextflow_May_2021
 
 ## Title
@@ -121,3 +122,7 @@ Applicants are not expected to have used neither Linux containers nor Nextflow w
 
 
 
+=======
+# test_course
+just a test
+>>>>>>> 31e29f2f3bb31df9e48322bf23d63f9366e060ab
