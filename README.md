@@ -8,7 +8,7 @@ Course page: https://biocorecrg.github.io/CoursesCRG_Containers_Nextflow_May_202
 
 ## About the course
 
-This slow-paced hands-on course is designed for absolute beginners who want to start using containers and Nextflow pipelines to achieve reproducibility of data analysis. Linux containers allow the storage of code and applications in an host-independent lightweight environment. They became a fast and popular way to share and deploy applications in different environments. Nextflow is a powerful polyglot workflow language that, coupled with Docker and Singularity containers, provides a robust, scalable and reproducible way to run computational pipelines.
+This slow-paced hands-on course is designed for absolute beginners who want to start using containers and Nextflow pipelines to achieve reproducibility of data analysis. Linux containers allow the storage of code and applications in an host-independent lightweight environment. They became a fast and popular way to share and deploy applications in different environments. [Nextflow](https://www.nextflow.io) is a powerful polyglot workflow language that, coupled with [Docker](https://www.docker.com/) and [Singularity](https://sylabs.io/singularity/) containers, provides a robust, scalable and reproducible way to run computational pipelines.
 
 
 ### Outline
@@ -17,9 +17,9 @@ The 4-day Containers and Nextflow course will train participants to use and buil
 
 It is designed to provide trainees with short and frequent hands-on sessions, while keeping theoretical sessions to a minimum.
 
-The course will be fully virtual via the Zoom platform.
+The course will be fully virtual via the [Zoom](https://zoom.us/) platform.
 
-Trainees will work in a dedicated AWS environment.
+Trainees will work in a dedicated [AWS environment](https://en.wikipedia.org/wiki/AWS).
 
 
 ### Learning objectives
@@ -44,6 +44,13 @@ About Nextflow:
 
 Being comfortable working with the CLI (command-line interface) in a Linux-based environment.
 Applicants are not expected to have used neither Linux containers nor Nextflow workflows before.
+
+Practitioners will need to connect during the course to a remove server via the "ssh" protocotoñ. You can learn about it here: https://www.hostinger.com/tutorials/ssh-tutorial-how-does-ssh-work
+
+Those who follow the coursw should be able to use a command-line/screen-oriented text editor (such as nano or vi/vim, which are already available in the server) or to be able to use an editor able to connect remotely. For sake of information, below the basics of "nano":
+https://wiki.gentoo.org/wiki/Nano/Basics_Guide
+
+For some parts of the course, having a [GitHub account](https://github.com/join), a [Docker Hub](https://hub.docker.com/signup) and a [Sylabs Cloud](https://cloud.sylabs.io) account are recommended.
 
 ## Dates, time, location
 
