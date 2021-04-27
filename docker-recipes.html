@@ -598,15 +598,21 @@ It is beneficial to start from scratch with <code>--no-cache</code> option when 
 </div>
 <div id="exercise-writing-more-complex-recipes" class="section level3">
 <h3><span class="header-section-number">3.4.5</span> Exercise: writing more complex recipes</h3>
-<p><em>NOT FINISHED: breakout room afternoon day 1? Perhaps it should be a different tool to install.</em></p>
+<p><em>Breakout rooms afternoon day 1?</em></p>
+<p><em>NOT FINISHED, NOT EASILY WORKING; NEED TO CHANGE IT!!</em></p>
 <p>Build an image based on <strong>CentOS</strong> (use base layer <a href="https://hub.docker.com/_/centos?tab=tags&amp;page=1&amp;ordering=last_updated">centos:7</a>):</p>
 <ul>
-<li>Install <a href="https://centos.pkgs.org/7/epel-x86_64/bowtie2-2.4.1-1.el7.x86_64.rpm.html"><strong>bowtie2</strong></a> and <strong>show the help page by default</strong>.
+<li>Install <a href="https://sourceforge.net/projects/bowtie-bio/files/bowtie2/2.4.2/bowtie2-2.4.2-source.zip"><strong>bowtie2</strong></a>. Follow the next steps:
 <ul>
-<li>you will need to download and install the <strong>.rpm</strong> package inside the image !</li>
+<li>Install <code>wget</code>, <code>unzip</code>, <code>make</code>, <code>perl</code>, <code>which</code>, <code>gcc</code> (Linux packages)</li>
+<li>Download and unzip the <a href="https://sourceforge.net/projects/bowtie-bio/files/bowtie2/2.4.2/bowtie2-2.4.2-source.zip"><strong>bowtie2 “.zip” file</strong></a></li>
+<li>Add location of the bowtie2 folder to <a href="http://bowtie-bio.sourceforge.net/bowtie2/manual.shtml#adding-to-path">system <em>PATH</em></a></li>
+<li>When you start a container from this image, it should <strong>show the help page by default</strong>.</li>
 </ul></li>
-<li>Change the name (and version) of the image to <strong>bowtie2image:1.0</strong>. Check that the change was taken into account with <code>docker images</code>.</li>
+<li>Tag the successfully built image as <strong>bowtie2_2.4.2:1.0</strong></li>
 </ul>
+<p>Create a new recipe based on the previous one, that allows one to <strong>choose the version of bowtie2 upon building the image</strong>.
+* We were working with version 2.4.2 of bowtie2, you can now try and play with installing versions <a href="https://sourceforge.net/projects/bowtie-bio/files/bowtie2/2.4.1/bowtie2-2.4.1-source.zip">2.4.1</a> or <a href="https://sourceforge.net/projects/bowtie-bio/files/bowtie2/2.4.1/bowtie2-2.4.1-source.zip">2.3.4</a>.</p>
 <details>
 <summary>
 <h5 style="background-color: #e6fadc; display: inline-block;">
@@ -625,7 +631,7 @@ CMD [&quot;--help&quot;]</code></pre>
 <p>Build:</p>
 <pre><code>docker build -t imagebowtie2 -f Dockerfile_bowtie2 .</code></pre>
 <p>Change name / tag:</p>
-<pre><code>docker tag imagebowtie2 bowtie2image:1.0</code></pre>
+<pre><code>docker tag imagebowtie2 bowtie2_2.4.2:1.0</code></pre>
 </details>
 </div>
 <div id="additional-commands" class="section level3">
