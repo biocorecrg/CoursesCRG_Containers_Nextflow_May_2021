@@ -158,17 +158,27 @@ Version 0.1.0
 
 ## Remote building
 
-Actually possible with Singularity account. More details at [https://sylabs.io/guides/3.7/user-guide/cloud_library.html](https://sylabs.io/guides/3.7/user-guide/cloud_library.html)
+This allows us to build a Singularity image without using our own computer. This is convenient if your machine has not many resources.
+
+* We need to create a [https://cloud.sylabs.io/](Sylabs Cloud) account first.
 
     singularity remote login
 
-Create account and tokenfile at [https://cloud.sylabs.io/](Sylabs Cloud)
+* We generate a token at https://cloud.sylabs.io/auth/tokens and we use in the command-line below:
 
     singularity remote login --tokenfile mytokenfile
+
+```{block2, type='rmdtip'}
+For safety reasons, remove this token once you use it after the course
+```
 
 Build an image
 
     singularity build --remote focal.sif docker://ubuntu:focal
+
+```{block2, type='rmdnote'}
+More details at [https://sylabs.io/guides/3.7/user-guide/cloud_library.html](https://sylabs.io/guides/3.7/user-guide/cloud_library.html)
+```
 
 ## Run and execution process
 
