@@ -286,20 +286,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <em>Answer</em>
 </h5>
 <p></summary></p>
-<div class="sourceCode" id="cb109"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb109-1"><a href="exercise-1.html#cb109-1"></a>#!/usr/bin/env nextflow</span>
-<span id="cb109-2"><a href="exercise-1.html#cb109-2"></a></span>
-<span id="cb109-3"><a href="exercise-1.html#cb109-3"></a>nextflow.<span class="fu">enable</span>.<span class="fu">dsl</span>=<span class="dv">2</span></span>
-<span id="cb109-4"><a href="exercise-1.html#cb109-4"></a></span>
-<span id="cb109-5"><a href="exercise-1.html#cb109-5"></a><span class="co">/*</span></span>
-<span id="cb109-6"><a href="exercise-1.html#cb109-6"></a><span class="co">* Let&#39;s create the channel `my_files`</span></span>
-<span id="cb109-7"><a href="exercise-1.html#cb109-7"></a><span class="co">* using the method fromPath </span></span>
-<span id="cb109-8"><a href="exercise-1.html#cb109-8"></a><span class="co">*/</span></span>
-<span id="cb109-9"><a href="exercise-1.html#cb109-9"></a></span>
-<span id="cb109-10"><a href="exercise-1.html#cb109-10"></a><span class="bu">Channel</span></span>
-<span id="cb109-11"><a href="exercise-1.html#cb109-11"></a>    .<span class="fu">fromFilePairs</span>( <span class="st">&quot;file_{1,2}.txt&quot;</span> )</span>
-<span id="cb109-12"><a href="exercise-1.html#cb109-12"></a>    .<span class="fu">set</span> {my_fyles}</span>
-<span id="cb109-13"><a href="exercise-1.html#cb109-13"></a></span>
-<span id="cb109-14"><a href="exercise-1.html#cb109-14"></a>my_fyles.<span class="fu">view</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb110"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb110-1"><a href="exercise-1.html#cb110-1"></a>#!/usr/bin/env nextflow</span>
+<span id="cb110-2"><a href="exercise-1.html#cb110-2"></a></span>
+<span id="cb110-3"><a href="exercise-1.html#cb110-3"></a>nextflow.<span class="fu">enable</span>.<span class="fu">dsl</span>=<span class="dv">2</span></span>
+<span id="cb110-4"><a href="exercise-1.html#cb110-4"></a></span>
+<span id="cb110-5"><a href="exercise-1.html#cb110-5"></a><span class="co">/*</span></span>
+<span id="cb110-6"><a href="exercise-1.html#cb110-6"></a><span class="co">* Let&#39;s create the channel `my_files`</span></span>
+<span id="cb110-7"><a href="exercise-1.html#cb110-7"></a><span class="co">* using the method fromPath </span></span>
+<span id="cb110-8"><a href="exercise-1.html#cb110-8"></a><span class="co">*/</span></span>
+<span id="cb110-9"><a href="exercise-1.html#cb110-9"></a></span>
+<span id="cb110-10"><a href="exercise-1.html#cb110-10"></a><span class="bu">Channel</span></span>
+<span id="cb110-11"><a href="exercise-1.html#cb110-11"></a>    .<span class="fu">fromFilePairs</span>( <span class="st">&quot;file_{1,2}.txt&quot;</span> )</span>
+<span id="cb110-12"><a href="exercise-1.html#cb110-12"></a>    .<span class="fu">set</span> {my_fyles}</span>
+<span id="cb110-13"><a href="exercise-1.html#cb110-13"></a></span>
+<span id="cb110-14"><a href="exercise-1.html#cb110-14"></a>my_fyles.<span class="fu">view</span>()</span></code></pre></div>
 </details>
 </div>
             </section>
