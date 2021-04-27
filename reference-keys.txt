@@ -94,3 +94,15 @@ exercise-2
 more-complex-scripts
 resuming-your-pipeline
 exercise-3
+nextflow-day-2
+decoupling-resources-parameters-and-nextflow-script
+publishing-final-results
+adding-a-help-section-for-the-whole-pipeline
+using-singularity
+adding-more-steps
+profiles
+deployment-in-the-aws-cloud
+modules-and-re-usage-of-the-code
+exercise-4
+reporting-and-graphical-interface
+share-nextflow-pipelines-and-good-practices

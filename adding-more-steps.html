@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>4.1 Introduction to Singularity | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines</title>
-  <meta name="description" content="4.1 Introduction to Singularity | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
+  <title>6.4 Adding more steps | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines</title>
+  <meta name="description" content="6.4 Adding more steps | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="4.1 Introduction to Singularity | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
+  <meta property="og:title" content="6.4 Adding more steps | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="4.1 Introduction to Singularity | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
+  <meta name="twitter:title" content="6.4 Adding more steps | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="singularity.html"/>
-<link rel="next" href="build-process.html"/>
+<link rel="prev" href="using-singularity.html"/>
+<link rel="next" href="profiles.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -274,90 +274,86 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="introduction-to-singularity" class="section level2">
-<h2><span class="header-section-number">4.1</span> Introduction to Singularity</h2>
-<ul>
-<li>Focus:
-<ul>
-<li>Reproducibility to scientific computing and the high-performance computing (HPC) world.</li>
-</ul></li>
-<li>Origin: Lawrence Berkeley National Laboratory. Later spin-off: Sylabs</li>
-<li>Version 1.0 -&gt; 2016</li>
-<li>More information: <a href="https://en.wikipedia.org/wiki/Singularity_(software)">https://en.wikipedia.org/wiki/Singularity_(software)</a></li>
-</ul>
-<div id="singularity-architecture" class="section level3">
-<h3><span class="header-section-number">4.1.1</span> Singularity architecture</h3>
-<p><img src="docs/images/singularity_architecture.png" width="800"></p>
-<table>
-<colgroup>
-<col width="50%" />
-<col width="50%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Strengths</th>
-<th>Weaknesses</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>No dependency of a daemon</td>
-<td>At the time of writing only good support in Linux<br>Mac experimental. Desktop edition. Only running</td>
-</tr>
-<tr class="even">
-<td>Can be run as a simple user<br>Avoids permission headaches and hacks</td>
-<td>For some features you need root account (or sudo)</td>
-</tr>
-<tr class="odd">
-<td>Image/container is a file (or directory)</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>More easily portable</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>Two types of images:<br>Read-only (production)<br>Writable (development, via sandbox)</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div id="strengths" class="section level3">
-<h3><span class="header-section-number">4.1.2</span> Strengths</h3>
-<ul>
-<li>No dependency of a daemon</li>
-<li>Can be run as a simple user
-<ul>
-<li>Avoid permission headaches and hacks</li>
-</ul></li>
-<li>Image/container is a file (or directory)</li>
-<li>More easily portable</li>
-<li>Two type of images
-<ul>
-<li>Read-only (production)</li>
-<li>Writable (development, via sandbox)</li>
-</ul></li>
-</ul>
-</div>
-<div id="weaknesses" class="section level3">
-<h3><span class="header-section-number">4.1.3</span> Weaknesses</h3>
-<ul>
-<li>At the time of writing only good support in Linux
-<ul>
-<li>Mac experimental. Desktop edition. Only running</li>
-</ul></li>
-<li>For some features you need root account (or sudo)</li>
-</ul>
-</div>
+<div id="adding-more-steps" class="section level2">
+<h2><span class="header-section-number">6.4</span> Adding more steps</h2>
+<p>We can make pipelines incrementally by adding more and more processes. Nextflow will take care of the dependencies between the input / output and of the parallelization. Within the test3 folder we have two more steps: the reference indexing and the read alignments with <strong>bowtie</strong> (<a href="http://bowtie-bio.sourceforge.net/index.shtml" class="uri">http://bowtie-bio.sourceforge.net/index.shtml</a>).</p>
+<p>So we add a new input for the reference sequence:</p>
+<pre class="nextflow"><code>log.info &quot;&quot;&quot;
+BIOCORE@CRG - N F TESTPIPE  ~  version ${version}
+=============================================
+reads                           : ${params.reads}
+reference                       : ${params.reference}
+&quot;&quot;&quot;
+
+reference = file(params.reference)</code></pre>
+<p>We generate in this way a <strong>singleton channel</strong> called <strong>reference</strong> which content is never consumed and can be indefinitely used.</p>
+<p>We add two more processes. The first one is for the indexing of the reference:</p>
+<div class="sourceCode" id="cb148"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb148-1"><a href="adding-more-steps.html#cb148-1"></a><span class="co">/*</span></span>
+<span id="cb148-2"><a href="adding-more-steps.html#cb148-2"></a><span class="co"> * Process 2. Bowtie index</span></span>
+<span id="cb148-3"><a href="adding-more-steps.html#cb148-3"></a><span class="co"> */</span></span>
+<span id="cb148-4"><a href="adding-more-steps.html#cb148-4"></a>process bowtieIdx {</span>
+<span id="cb148-5"><a href="adding-more-steps.html#cb148-5"></a>    tag { ref }                             </span>
+<span id="cb148-6"><a href="adding-more-steps.html#cb148-6"></a></span>
+<span id="cb148-7"><a href="adding-more-steps.html#cb148-7"></a>    input:</span>
+<span id="cb148-8"><a href="adding-more-steps.html#cb148-8"></a>    path ref                            </span>
+<span id="cb148-9"><a href="adding-more-steps.html#cb148-9"></a></span>
+<span id="cb148-10"><a href="adding-more-steps.html#cb148-10"></a>    output:                                 </span>
+<span id="cb148-11"><a href="adding-more-steps.html#cb148-11"></a>    tuple <span class="fu">val</span>(<span class="st">&quot;${ref}&quot;</span>), <span class="fu">path</span> (<span class="st">&quot;${ref}*.ebwt&quot;</span>)</span>
+<span id="cb148-12"><a href="adding-more-steps.html#cb148-12"></a></span>
+<span id="cb148-13"><a href="adding-more-steps.html#cb148-13"></a>    script:                                 </span>
+<span id="cb148-14"><a href="adding-more-steps.html#cb148-14"></a>    <span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb148-15"><a href="adding-more-steps.html#cb148-15"></a>        gunzip -c ${ref} &gt; reference.<span class="fu">fa</span></span>
+<span id="cb148-16"><a href="adding-more-steps.html#cb148-16"></a>        bowtie-build reference.<span class="fu">fa</span> ${ref}</span>
+<span id="cb148-17"><a href="adding-more-steps.html#cb148-17"></a>        rm reference.<span class="fu">fa</span></span>
+<span id="cb148-18"><a href="adding-more-steps.html#cb148-18"></a>    <span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb148-19"><a href="adding-more-steps.html#cb148-19"></a>}</span></code></pre></div>
+<p>Since bowtie indexing requires unzipped reference we unzip it then we build the reference and remove the unzipped file afterwards. The output channel generated is organized as a <strong>tuple</strong>, i.e. a list of elements. The first element of the list is the name of the index as a value, the second is a list of files constituting the index. The former is needed for building the command line of the alignment step, the latter are the files needed for the alignment.</p>
+<p>The second process is the alignment step:</p>
+<div class="sourceCode" id="cb149"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb149-1"><a href="adding-more-steps.html#cb149-1"></a><span class="co">/*</span></span>
+<span id="cb149-2"><a href="adding-more-steps.html#cb149-2"></a><span class="co"> * Process 3. Bowtie alignment</span></span>
+<span id="cb149-3"><a href="adding-more-steps.html#cb149-3"></a><span class="co"> */</span></span>
+<span id="cb149-4"><a href="adding-more-steps.html#cb149-4"></a>process bowtieAln {</span>
+<span id="cb149-5"><a href="adding-more-steps.html#cb149-5"></a>    publishDir alnOutputFolder, pattern: &#39;*.<span class="fu">sam</span>&#39;</span>
+<span id="cb149-6"><a href="adding-more-steps.html#cb149-6"></a></span>
+<span id="cb149-7"><a href="adding-more-steps.html#cb149-7"></a>    tag { reads }                           </span>
+<span id="cb149-8"><a href="adding-more-steps.html#cb149-8"></a>    label &#39;twocpus&#39;</span>
+<span id="cb149-9"><a href="adding-more-steps.html#cb149-9"></a></span>
+<span id="cb149-10"><a href="adding-more-steps.html#cb149-10"></a>    input:</span>
+<span id="cb149-11"><a href="adding-more-steps.html#cb149-11"></a>    tuple <span class="fu">val</span>(refname), <span class="fu">path</span> (ref_files)</span>
+<span id="cb149-12"><a href="adding-more-steps.html#cb149-12"></a>    path reads                              </span>
+<span id="cb149-13"><a href="adding-more-steps.html#cb149-13"></a></span>
+<span id="cb149-14"><a href="adding-more-steps.html#cb149-14"></a>    output:                                 </span>
+<span id="cb149-15"><a href="adding-more-steps.html#cb149-15"></a>    path <span class="st">&quot;${reads}.sam&quot;</span>, emit: samples_sam</span>
+<span id="cb149-16"><a href="adding-more-steps.html#cb149-16"></a>    path <span class="st">&quot;${reads}.log&quot;</span>, emit: samples_log</span>
+<span id="cb149-17"><a href="adding-more-steps.html#cb149-17"></a></span>
+<span id="cb149-18"><a href="adding-more-steps.html#cb149-18"></a>    script:                                 </span>
+<span id="cb149-19"><a href="adding-more-steps.html#cb149-19"></a>    <span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb149-20"><a href="adding-more-steps.html#cb149-20"></a>    bowtie -p ${task.<span class="fu">cpus</span>} ${refname} -q ${reads} -S &gt; ${reads}.<span class="fu">sam</span> <span class="dv">2</span>&gt; ${reads}.<span class="fu">log</span></span>
+<span id="cb149-21"><a href="adding-more-steps.html#cb149-21"></a>    <span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb149-22"><a href="adding-more-steps.html#cb149-22"></a>}</span></code></pre></div>
+<p>As you see there are two different input channels: the index one and the reads. The index name specified by <strong>refname</strong> is used for building the command line while the index files, indicated by <strong>ref_files</strong>, are just linked in the current directory by using the <strong>path</strong> qualifier.</p>
+<p>We also produced two kind of outputs: the alignments and the logs. The first one is the one we want to keep as a final result. So we specify this using the <strong>publishDir</strong> <strong>pattern</strong> parameter.</p>
+<div class="sourceCode" id="cb150"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb150-1"><a href="adding-more-steps.html#cb150-1"></a>    publishDir alnOutputFolder, pattern: &#39;*.<span class="fu">sam</span>&#39;</span></code></pre></div>
+<p>The second one will be just passed to the next process for being used by the multiQC process. To distinghuish among them we can assign them different names.</p>
+<div class="sourceCode" id="cb151"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb151-1"><a href="adding-more-steps.html#cb151-1"></a> output:                                    </span>
+<span id="cb151-2"><a href="adding-more-steps.html#cb151-2"></a>    path <span class="st">&quot;${reads}.sam&quot;</span>, emit: samples_sam</span>
+<span id="cb151-3"><a href="adding-more-steps.html#cb151-3"></a>    path <span class="st">&quot;${reads}.log&quot;</span>, emit: samples_log</span></code></pre></div>
+<p>This section will allow us to connect these outputs directly with other processes when we call them in the workflow section:</p>
+<div class="sourceCode" id="cb152"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb152-1"><a href="adding-more-steps.html#cb152-1"></a>workflow {</span>
+<span id="cb152-2"><a href="adding-more-steps.html#cb152-2"></a>    fastqc_out = <span class="fu">fastQC</span>(reads)</span>
+<span id="cb152-3"><a href="adding-more-steps.html#cb152-3"></a>    bowtie_index = <span class="fu">bowtieIdx</span>(reference)</span>
+<span id="cb152-4"><a href="adding-more-steps.html#cb152-4"></a>    <span class="fu">bowtieAln</span>(bowtie_index, reads)</span>
+<span id="cb152-5"><a href="adding-more-steps.html#cb152-5"></a>    <span class="fu">multiQC</span>(fastqc_out.<span class="fu">mix</span>(bowtieAln.<span class="fu">out</span>.<span class="fu">samples_log</span>).<span class="fu">collect</span>())</span>
+<span id="cb152-6"><a href="adding-more-steps.html#cb152-6"></a>}</span></code></pre></div>
+<p>So we passed the <strong>samples_log</strong> output to the multiqc process after mixing it with the output channel from the fastqc process.</p>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="singularity.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="build-process.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="using-singularity.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="profiles.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

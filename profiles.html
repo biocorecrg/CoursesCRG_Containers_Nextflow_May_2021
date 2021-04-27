@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>4.1 Introduction to Singularity | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines</title>
-  <meta name="description" content="4.1 Introduction to Singularity | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
+  <title>6.5 Profiles | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines</title>
+  <meta name="description" content="6.5 Profiles | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="4.1 Introduction to Singularity | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
+  <meta property="og:title" content="6.5 Profiles | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="4.1 Introduction to Singularity | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
+  <meta name="twitter:title" content="6.5 Profiles | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="singularity.html"/>
-<link rel="next" href="build-process.html"/>
+<link rel="prev" href="adding-more-steps.html"/>
+<link rel="next" href="deployment-in-the-aws-cloud.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -274,90 +274,64 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="introduction-to-singularity" class="section level2">
-<h2><span class="header-section-number">4.1</span> Introduction to Singularity</h2>
+<div id="profiles" class="section level2">
+<h2><span class="header-section-number">6.5</span> Profiles</h2>
+<p>For deploying a pipeline on a cluster environment or a cloud we need to indicate some information on the <strong>nextflow.config</strong> file.</p>
+<p>In particular we need to indicate the kind of <a href="https://www.nextflow.io/docs/latest/process.html#executor">executor</a> to be used. In the Nextflow framework architecture, the executor indicates which is the batch-queuing system to use to submit jobs to the HPC or to the cloud.
+The executor is completely abstracted, so you can switch from SGE to SLURM just by changing this parameter in the configuration file.</p>
+<p>You can group different class of configuration or <strong>profiles</strong> within a single <strong>nextflow.config</strong> file. In this way that you can indicate at run time which executor and resources to use for a pipeline execution.</p>
+<p>Let’s inspect the <strong>nextflow.config</strong> file in <strong>test3</strong> folder. We can look at three different profiles:</p>
 <ul>
-<li>Focus:
-<ul>
-<li>Reproducibility to scientific computing and the high-performance computing (HPC) world.</li>
-</ul></li>
-<li>Origin: Lawrence Berkeley National Laboratory. Later spin-off: Sylabs</li>
-<li>Version 1.0 -&gt; 2016</li>
-<li>More information: <a href="https://en.wikipedia.org/wiki/Singularity_(software)">https://en.wikipedia.org/wiki/Singularity_(software)</a></li>
+<li>standard</li>
+<li>cluster</li>
+<li>cloud</li>
 </ul>
-<div id="singularity-architecture" class="section level3">
-<h3><span class="header-section-number">4.1.1</span> Singularity architecture</h3>
-<p><img src="docs/images/singularity_architecture.png" width="800"></p>
-<table>
-<colgroup>
-<col width="50%" />
-<col width="50%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Strengths</th>
-<th>Weaknesses</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>No dependency of a daemon</td>
-<td>At the time of writing only good support in Linux<br>Mac experimental. Desktop edition. Only running</td>
-</tr>
-<tr class="even">
-<td>Can be run as a simple user<br>Avoids permission headaches and hacks</td>
-<td>For some features you need root account (or sudo)</td>
-</tr>
-<tr class="odd">
-<td>Image/container is a file (or directory)</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>More easily portable</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>Two types of images:<br>Read-only (production)<br>Writable (development, via sandbox)</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div id="strengths" class="section level3">
-<h3><span class="header-section-number">4.1.2</span> Strengths</h3>
-<ul>
-<li>No dependency of a daemon</li>
-<li>Can be run as a simple user
-<ul>
-<li>Avoid permission headaches and hacks</li>
-</ul></li>
-<li>Image/container is a file (or directory)</li>
-<li>More easily portable</li>
-<li>Two type of images
-<ul>
-<li>Read-only (production)</li>
-<li>Writable (development, via sandbox)</li>
-</ul></li>
-</ul>
-</div>
-<div id="weaknesses" class="section level3">
-<h3><span class="header-section-number">4.1.3</span> Weaknesses</h3>
-<ul>
-<li>At the time of writing only good support in Linux
-<ul>
-<li>Mac experimental. Desktop edition. Only running</li>
-</ul></li>
-<li>For some features you need root account (or sudo)</li>
-</ul>
-</div>
+<p>The first one indicates the resources needed for running the pipeline locally. They are quite small since we have little power and CPUs on the test node.</p>
+<div class="sourceCode" id="cb153"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb153-1"><a href="profiles.html#cb153-1"></a></span>
+<span id="cb153-2"><a href="profiles.html#cb153-2"></a>profiles {</span>
+<span id="cb153-3"><a href="profiles.html#cb153-3"></a>  standard {</span>
+<span id="cb153-4"><a href="profiles.html#cb153-4"></a>     process {</span>
+<span id="cb153-5"><a href="profiles.html#cb153-5"></a>        containerOptions = { workflow.<span class="fu">containerEngine</span> == <span class="st">&quot;docker&quot;</span> ? &#39;-u $(id -u):$(id -g)&#39;: <span class="kw">null</span>}</span>
+<span id="cb153-6"><a href="profiles.html#cb153-6"></a>        executor=<span class="st">&quot;local&quot;</span></span>
+<span id="cb153-7"><a href="profiles.html#cb153-7"></a>        memory=&#39;<span class="fl">0.</span>6G&#39;</span>
+<span id="cb153-8"><a href="profiles.html#cb153-8"></a>        cpus=<span class="ch">&#39;1&#39;</span></span>
+<span id="cb153-9"><a href="profiles.html#cb153-9"></a>        time=&#39;6h&#39;</span>
+<span id="cb153-10"><a href="profiles.html#cb153-10"></a></span>
+<span id="cb153-11"><a href="profiles.html#cb153-11"></a>        withLabel: &#39;twocpus&#39; {</span>
+<span id="cb153-12"><a href="profiles.html#cb153-12"></a>            memory=&#39;<span class="fl">0.</span>6G&#39;</span>
+<span id="cb153-13"><a href="profiles.html#cb153-13"></a>            cpus=<span class="ch">&#39;1&#39;</span></span>
+<span id="cb153-14"><a href="profiles.html#cb153-14"></a>        }</span>
+<span id="cb153-15"><a href="profiles.html#cb153-15"></a>      }</span>
+<span id="cb153-16"><a href="profiles.html#cb153-16"></a>   }</span></code></pre></div>
+<p>As you can see we indicate explicitly the <strong>local</strong> executor. So this will be the default when running the pipeline indicating no profiles.</p>
+<p>The second one is <strong>cluster</strong></p>
+<div class="sourceCode" id="cb154"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb154-1"><a href="profiles.html#cb154-1"></a></span>
+<span id="cb154-2"><a href="profiles.html#cb154-2"></a>   cluster {</span>
+<span id="cb154-3"><a href="profiles.html#cb154-3"></a>     process {</span>
+<span id="cb154-4"><a href="profiles.html#cb154-4"></a>        containerOptions = { workflow.<span class="fu">containerEngine</span> == <span class="st">&quot;docker&quot;</span> ? &#39;-u $(id -u):$(id -g)&#39;: <span class="kw">null</span>}</span>
+<span id="cb154-5"><a href="profiles.html#cb154-5"></a>        executor=<span class="st">&quot;SGE&quot;</span></span>
+<span id="cb154-6"><a href="profiles.html#cb154-6"></a>        queue=<span class="st">&quot;smallcpus&quot;</span></span>
+<span id="cb154-7"><a href="profiles.html#cb154-7"></a></span>
+<span id="cb154-8"><a href="profiles.html#cb154-8"></a>        memory=&#39;1G&#39;</span>
+<span id="cb154-9"><a href="profiles.html#cb154-9"></a>        cpus=<span class="ch">&#39;1&#39;</span></span>
+<span id="cb154-10"><a href="profiles.html#cb154-10"></a>        time=&#39;6h&#39;</span>
+<span id="cb154-11"><a href="profiles.html#cb154-11"></a></span>
+<span id="cb154-12"><a href="profiles.html#cb154-12"></a>        withLabel: &#39;twocpus&#39; {</span>
+<span id="cb154-13"><a href="profiles.html#cb154-13"></a>            queue=<span class="st">&quot;bigcpus&quot;</span></span>
+<span id="cb154-14"><a href="profiles.html#cb154-14"></a>            memory=&#39;4G&#39;</span>
+<span id="cb154-15"><a href="profiles.html#cb154-15"></a>            cpus=<span class="ch">&#39;2&#39;</span></span>
+<span id="cb154-16"><a href="profiles.html#cb154-16"></a>        }</span>
+<span id="cb154-17"><a href="profiles.html#cb154-17"></a>      }</span>
+<span id="cb154-18"><a href="profiles.html#cb154-18"></a>   }</span></code></pre></div>
+<p>This indicates that the system uses Sun Grid Engine as job scheduler and that we have different queues for small jobs and more intensive ones.</p>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="singularity.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="build-process.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="adding-more-steps.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="deployment-in-the-aws-cloud.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

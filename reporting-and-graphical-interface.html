@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>4.1 Introduction to Singularity | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines</title>
-  <meta name="description" content="4.1 Introduction to Singularity | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
+  <title>6.9 Reporting and graphical interface | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines</title>
+  <meta name="description" content="6.9 Reporting and graphical interface | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="4.1 Introduction to Singularity | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
+  <meta property="og:title" content="6.9 Reporting and graphical interface | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="4.1 Introduction to Singularity | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
+  <meta name="twitter:title" content="6.9 Reporting and graphical interface | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="singularity.html"/>
-<link rel="next" href="build-process.html"/>
+<link rel="prev" href="exercise-4.html"/>
+<link rel="next" href="share-nextflow-pipelines-and-good-practices.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -274,90 +274,48 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="introduction-to-singularity" class="section level2">
-<h2><span class="header-section-number">4.1</span> Introduction to Singularity</h2>
-<ul>
-<li>Focus:
-<ul>
-<li>Reproducibility to scientific computing and the high-performance computing (HPC) world.</li>
-</ul></li>
-<li>Origin: Lawrence Berkeley National Laboratory. Later spin-off: Sylabs</li>
-<li>Version 1.0 -&gt; 2016</li>
-<li>More information: <a href="https://en.wikipedia.org/wiki/Singularity_(software)">https://en.wikipedia.org/wiki/Singularity_(software)</a></li>
-</ul>
-<div id="singularity-architecture" class="section level3">
-<h3><span class="header-section-number">4.1.1</span> Singularity architecture</h3>
-<p><img src="docs/images/singularity_architecture.png" width="800"></p>
-<table>
-<colgroup>
-<col width="50%" />
-<col width="50%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Strengths</th>
-<th>Weaknesses</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>No dependency of a daemon</td>
-<td>At the time of writing only good support in Linux<br>Mac experimental. Desktop edition. Only running</td>
-</tr>
-<tr class="even">
-<td>Can be run as a simple user<br>Avoids permission headaches and hacks</td>
-<td>For some features you need root account (or sudo)</td>
-</tr>
-<tr class="odd">
-<td>Image/container is a file (or directory)</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>More easily portable</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>Two types of images:<br>Read-only (production)<br>Writable (development, via sandbox)</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div id="strengths" class="section level3">
-<h3><span class="header-section-number">4.1.2</span> Strengths</h3>
-<ul>
-<li>No dependency of a daemon</li>
-<li>Can be run as a simple user
-<ul>
-<li>Avoid permission headaches and hacks</li>
-</ul></li>
-<li>Image/container is a file (or directory)</li>
-<li>More easily portable</li>
-<li>Two type of images
-<ul>
-<li>Read-only (production)</li>
-<li>Writable (development, via sandbox)</li>
-</ul></li>
-</ul>
-</div>
-<div id="weaknesses" class="section level3">
-<h3><span class="header-section-number">4.1.3</span> Weaknesses</h3>
-<ul>
-<li>At the time of writing only good support in Linux
-<ul>
-<li>Mac experimental. Desktop edition. Only running</li>
-</ul></li>
-<li>For some features you need root account (or sudo)</li>
-</ul>
-</div>
+<div id="reporting-and-graphical-interface" class="section level2">
+<h2><span class="header-section-number">6.9</span> Reporting and graphical interface</h2>
+<p>Nextflow has an embedded function for reporting a number of informations about the resources needed by each job and the timing. Just adding a parameter will give you a nice html report.</p>
+<div class="sourceCode" id="cb166"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb166-1"><a href="reporting-and-graphical-interface.html#cb166-1"></a>nextflow run test5.<span class="fu">nf</span> -with-docker -bg -with-report &gt; log</span></code></pre></div>
+<p><img src="docs/images/report.png" width="800px" /></p>
+<p>Nextflow Tower is an open source monitoring and managing platform for Nextflow workflows. There are two versions:
+- Open source for monitoring of single pipelines
+- Commercial one for workflow management, monitoring and resource optimisation.</p>
+<p>We will show the open source one.</p>
+<p>First of all you need to access the tower.nf website and doing the login using one of the methods.</p>
+<p><a href="https://tower.nf/" target="_blank"><img src="docs/images/tower.png" width="800px" /></a></p>
+<p>We select the email for receiving the instructions and the token to be used for the pipeline.</p>
+<p><img src="docs/images/tower0.png" width="800px" /></p>
+<p>So we check the email:</p>
+<p><img src="docs/images/tower1.png" width="800px" /></p>
+<p>We then follow the instructions exporting two environmental variables:</p>
+<p><img src="docs/images/tower2.png" width="800px" /></p>
+<div class="sourceCode" id="cb167"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb167-1"><a href="reporting-and-graphical-interface.html#cb167-1"></a><span class="bu">export</span> <span class="va">TOWER_ACCESS_TOKEN=</span>*******<span class="va">YOUR</span>***<span class="va">TOKEN</span>*****<span class="va">HERE</span>*******</span>
+<span id="cb167-2"><a href="reporting-and-graphical-interface.html#cb167-2"></a><span class="bu">export</span> <span class="va">NXF_VER=</span>20.09.1-edge </span></code></pre></div>
+<p>we then launch the pipeline:</p>
+<div class="sourceCode" id="cb168"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb168-1"><a href="reporting-and-graphical-interface.html#cb168-1"></a><span class="ex">nextflow</span> run test5.nf -with-singularity -with-tower -bg <span class="op">&gt;</span> log</span>
+<span id="cb168-2"><a href="reporting-and-graphical-interface.html#cb168-2"></a></span>
+<span id="cb168-3"><a href="reporting-and-graphical-interface.html#cb168-3"></a></span>
+<span id="cb168-4"><a href="reporting-and-graphical-interface.html#cb168-4"></a><span class="ex">CAPSULE</span>: Downloading dependency io.nextflow:nf-tower:jar:20.09.1-edge</span>
+<span id="cb168-5"><a href="reporting-and-graphical-interface.html#cb168-5"></a><span class="ex">CAPSULE</span>: Downloading dependency org.codehaus.groovy:groovy-nio:jar:3.0.5</span>
+<span id="cb168-6"><a href="reporting-and-graphical-interface.html#cb168-6"></a><span class="ex">CAPSULE</span>: Downloading dependency io.nextflow:nextflow:jar:20.09.1-edge</span>
+<span id="cb168-7"><a href="reporting-and-graphical-interface.html#cb168-7"></a><span class="ex">CAPSULE</span>: Downloading dependency io.nextflow:nf-httpfs:jar:20.09.1-edge</span>
+<span id="cb168-8"><a href="reporting-and-graphical-interface.html#cb168-8"></a><span class="ex">CAPSULE</span>: Downloading dependency org.codehaus.groovy:groovy-json:jar:3.0.5</span>
+<span id="cb168-9"><a href="reporting-and-graphical-interface.html#cb168-9"></a><span class="ex">CAPSULE</span>: Downloading dependency org.codehaus.groovy:groovy:jar:3.0.5</span>
+<span id="cb168-10"><a href="reporting-and-graphical-interface.html#cb168-10"></a><span class="ex">CAPSULE</span>: Downloading dependency io.nextflow:nf-amazon:jar:20.09.1-edge</span>
+<span id="cb168-11"><a href="reporting-and-graphical-interface.html#cb168-11"></a><span class="ex">CAPSULE</span>: Downloading dependency org.codehaus.groovy:groovy-templates:jar:3.0.5</span>
+<span id="cb168-12"><a href="reporting-and-graphical-interface.html#cb168-12"></a><span class="ex">CAPSULE</span>: Downloading dependency org.codehaus.groovy:groovy-xml:jar:3.0.5</span></code></pre></div>
+<p>We finally go to the tower website again:</p>
+<p><img src="docs/images/tower3.png" width="800px" /></p>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="singularity.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="build-process.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="exercise-4.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="share-nextflow-pipelines-and-good-practices.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

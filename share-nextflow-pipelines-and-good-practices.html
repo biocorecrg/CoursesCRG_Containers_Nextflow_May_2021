@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>4.1 Introduction to Singularity | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines</title>
-  <meta name="description" content="4.1 Introduction to Singularity | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
+  <title>6.10 Share Nextflow pipelines and good practices | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines</title>
+  <meta name="description" content="6.10 Share Nextflow pipelines and good practices | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="4.1 Introduction to Singularity | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
+  <meta property="og:title" content="6.10 Share Nextflow pipelines and good practices | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="4.1 Introduction to Singularity | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
+  <meta name="twitter:title" content="6.10 Share Nextflow pipelines and good practices | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="singularity.html"/>
-<link rel="next" href="build-process.html"/>
+<link rel="prev" href="reporting-and-graphical-interface.html"/>
+
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -274,90 +274,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="introduction-to-singularity" class="section level2">
-<h2><span class="header-section-number">4.1</span> Introduction to Singularity</h2>
-<ul>
-<li>Focus:
-<ul>
-<li>Reproducibility to scientific computing and the high-performance computing (HPC) world.</li>
-</ul></li>
-<li>Origin: Lawrence Berkeley National Laboratory. Later spin-off: Sylabs</li>
-<li>Version 1.0 -&gt; 2016</li>
-<li>More information: <a href="https://en.wikipedia.org/wiki/Singularity_(software)">https://en.wikipedia.org/wiki/Singularity_(software)</a></li>
-</ul>
-<div id="singularity-architecture" class="section level3">
-<h3><span class="header-section-number">4.1.1</span> Singularity architecture</h3>
-<p><img src="docs/images/singularity_architecture.png" width="800"></p>
-<table>
-<colgroup>
-<col width="50%" />
-<col width="50%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Strengths</th>
-<th>Weaknesses</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>No dependency of a daemon</td>
-<td>At the time of writing only good support in Linux<br>Mac experimental. Desktop edition. Only running</td>
-</tr>
-<tr class="even">
-<td>Can be run as a simple user<br>Avoids permission headaches and hacks</td>
-<td>For some features you need root account (or sudo)</td>
-</tr>
-<tr class="odd">
-<td>Image/container is a file (or directory)</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>More easily portable</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>Two types of images:<br>Read-only (production)<br>Writable (development, via sandbox)</td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<div id="share-nextflow-pipelines-and-good-practices" class="section level2">
+<h2><span class="header-section-number">6.10</span> Share Nextflow pipelines and good practices</h2>
+<p>Nextflow supports a number of sharing platforms: BitBucket, GitHub, and GitLab. This feature allows people to run pipelines by just pointing to an online repository. The default repository is GitHub, so we will use this as an example.</p>
+
 </div>
-<div id="strengths" class="section level3">
-<h3><span class="header-section-number">4.1.2</span> Strengths</h3>
-<ul>
-<li>No dependency of a daemon</li>
-<li>Can be run as a simple user
-<ul>
-<li>Avoid permission headaches and hacks</li>
-</ul></li>
-<li>Image/container is a file (or directory)</li>
-<li>More easily portable</li>
-<li>Two type of images
-<ul>
-<li>Read-only (production)</li>
-<li>Writable (development, via sandbox)</li>
-</ul></li>
-</ul>
-</div>
-<div id="weaknesses" class="section level3">
-<h3><span class="header-section-number">4.1.3</span> Weaknesses</h3>
-<ul>
-<li>At the time of writing only good support in Linux
-<ul>
-<li>Mac experimental. Desktop edition. Only running</li>
-</ul></li>
-<li>For some features you need root account (or sudo)</li>
-</ul>
-</div>
-</div>
+<!-- </div> -->
+
+
+
+
+
+
+
+
+
             </section>
 
           </div>
         </div>
       </div>
-<a href="singularity.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="build-process.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="reporting-and-graphical-interface.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
