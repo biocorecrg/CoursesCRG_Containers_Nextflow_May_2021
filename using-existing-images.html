@@ -192,7 +192,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="3.5" data-path="volumes.html"><a href="volumes.html"><i class="fa fa-check"></i><b>3.5</b> Volumes</a></li>
 <li class="chapter" data-level="3.6" data-path="ports.html"><a href="ports.html"><i class="fa fa-check"></i><b>3.6</b> Ports</a></li>
-<li class="chapter" data-level="3.7" data-path="pushing-an-image-to-docker-hub.html"><a href="pushing-an-image-to-docker-hub.html"><i class="fa fa-check"></i><b>3.7</b> “Pushing” an image to Docker hub</a></li>
+<li class="chapter" data-level="3.7" data-path="sharing-images.html"><a href="sharing-images.html"><i class="fa fa-check"></i><b>3.7</b> Sharing images</a><ul>
+<li class="chapter" data-level="3.7.1" data-path="sharing-images.html"><a href="sharing-images.html#pushing-an-image"><i class="fa fa-check"></i><b>3.7.1</b> Pushing an image</a></li>
+<li class="chapter" data-level="3.7.2" data-path="sharing-images.html"><a href="sharing-images.html#automatic-builds"><i class="fa fa-check"></i><b>3.7.2</b> Automatic builds</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="singularity.html"><a href="singularity.html"><i class="fa fa-check"></i><b>4</b> Singularity</a><ul>
 <li class="chapter" data-level="4.1" data-path="introduction-to-singularity.html"><a href="introduction-to-singularity.html"><i class="fa fa-check"></i><b>4.1</b> Introduction to Singularity</a><ul>
@@ -454,9 +457,9 @@ We can start a container from the <strong>ubuntu tag 18.04 image</strong>, execu
 <span id="cb14-10"><a href="using-existing-images.html#cb14-10"></a><span class="co"># Start a container interactively from the same blast image:</span></span>
 <span id="cb14-11"><a href="using-existing-images.html#cb14-11"></a><span class="ex">docker</span> run -ti biocontainers/blast:latest</span>
 <span id="cb14-12"><a href="using-existing-images.html#cb14-12"></a></span>
-<span id="cb14-13"><a href="using-existing-images.html#cb14-13"></a>  <span class="co"># What is the default working directory? </span></span>
+<span id="cb14-13"><a href="using-existing-images.html#cb14-13"></a>  <span class="co"># What is the default working directory?</span></span>
 <span id="cb14-14"><a href="using-existing-images.html#cb14-14"></a>  <span class="bu">pwd</span><span class="kw">;</span> <span class="fu">ls</span></span>
-<span id="cb14-15"><a href="using-existing-images.html#cb14-15"></a>  <span class="co"># Where is the `blastp` program located in the image? </span></span>
+<span id="cb14-15"><a href="using-existing-images.html#cb14-15"></a>  <span class="co"># Where is the `blastp` program located in the image?</span></span>
 <span id="cb14-16"><a href="using-existing-images.html#cb14-16"></a>  <span class="fu">which</span> blastp</span>
 <span id="cb14-17"><a href="using-existing-images.html#cb14-17"></a>  <span class="co"># Exit the container.</span></span>
 <span id="cb14-18"><a href="using-existing-images.html#cb14-18"></a>  <span class="bu">exit</span></span></code></pre></div>
@@ -540,7 +543,7 @@ In the example below we start a <strong>detached container named “myubuntu2”
 <span id="cb26-2"><a href="using-existing-images.html#cb26-2"></a><span class="ex">docker</span> run --detach --name helloworld1 hello-world</span>
 <span id="cb26-3"><a href="using-existing-images.html#cb26-3"></a></span>
 <span id="cb26-4"><a href="using-existing-images.html#cb26-4"></a><span class="co"># start a &quot;detached&quot; container with the &quot;--restart=always&quot; option</span></span>
-<span id="cb26-5"><a href="using-existing-images.html#cb26-5"></a><span class="ex">docker</span> run --detach --restart=always --name helloworld2 hello-world </span></code></pre></div>
+<span id="cb26-5"><a href="using-existing-images.html#cb26-5"></a><span class="ex">docker</span> run --detach --restart=always --name helloworld2 hello-world</span></code></pre></div>
 </details>
 </div>
 <div id="docker-rm-docker-rmi-clean-up" class="section level3">
@@ -566,7 +569,7 @@ In the example below we start a <strong>detached container named “myubuntu2”
 </h5>
 <p></summary></p>
 <div class="sourceCode" id="cb29"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb29-1"><a href="using-existing-images.html#cb29-1"></a><span class="co"># check all containers</span></span>
-<span id="cb29-2"><a href="using-existing-images.html#cb29-2"></a><span class="ex">docker</span> ps -a </span>
+<span id="cb29-2"><a href="using-existing-images.html#cb29-2"></a><span class="ex">docker</span> ps -a</span>
 <span id="cb29-3"><a href="using-existing-images.html#cb29-3"></a></span>
 <span id="cb29-4"><a href="using-existing-images.html#cb29-4"></a><span class="co"># remove by their ID:</span></span>
 <span id="cb29-5"><a href="using-existing-images.html#cb29-5"></a><span class="ex">docker</span> rm -f CONTAINER1_ID CONTAINER2_ID ...</span>
@@ -619,10 +622,10 @@ In the example below we start a <strong>detached container named “myubuntu2”
 <span id="cb33-5"><a href="using-existing-images.html#cb33-5"></a><span class="co"># Can you run a container from this image and make it print a “hello world” message?</span></span>
 <span id="cb33-6"><a href="using-existing-images.html#cb33-6"></a><span class="ex">docker</span> run alpine:3.12 echo <span class="st">&quot;hello world&quot;</span></span>
 <span id="cb33-7"><a href="using-existing-images.html#cb33-7"></a></span>
-<span id="cb33-8"><a href="using-existing-images.html#cb33-8"></a><span class="co"># Now run a container **interactively** from the same image. </span></span>
+<span id="cb33-8"><a href="using-existing-images.html#cb33-8"></a><span class="co"># Now run a container **interactively** from the same image.</span></span>
 <span id="cb33-9"><a href="using-existing-images.html#cb33-9"></a><span class="ex">docker</span> run -ti alpine:3.12</span>
 <span id="cb33-10"><a href="using-existing-images.html#cb33-10"></a>  <span class="co"># Run `uname -a`</span></span>
-<span id="cb33-11"><a href="using-existing-images.html#cb33-11"></a>  <span class="fu">uname</span> -a </span>
+<span id="cb33-11"><a href="using-existing-images.html#cb33-11"></a>  <span class="fu">uname</span> -a</span>
 <span id="cb33-12"><a href="using-existing-images.html#cb33-12"></a>  <span class="co"># Exit the container.</span></span>
 <span id="cb33-13"><a href="using-existing-images.html#cb33-13"></a>  <span class="bu">exit</span></span>
 <span id="cb33-14"><a href="using-existing-images.html#cb33-14"></a></span>

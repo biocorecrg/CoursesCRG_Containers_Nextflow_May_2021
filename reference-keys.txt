@@ -51,7 +51,9 @@ exercise-writing-more-complex-recipes
 additional-commands
 volumes
 ports
-pushing-an-image-to-docker-hub
+sharing-images
+pushing-an-image
+automatic-builds
 singularity
 introduction-to-singularity
 singularity-architecture

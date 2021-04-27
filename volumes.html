@@ -192,7 +192,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="3.5" data-path="volumes.html"><a href="volumes.html"><i class="fa fa-check"></i><b>3.5</b> Volumes</a></li>
 <li class="chapter" data-level="3.6" data-path="ports.html"><a href="ports.html"><i class="fa fa-check"></i><b>3.6</b> Ports</a></li>
-<li class="chapter" data-level="3.7" data-path="pushing-an-image-to-docker-hub.html"><a href="pushing-an-image-to-docker-hub.html"><i class="fa fa-check"></i><b>3.7</b> “Pushing” an image to Docker hub</a></li>
+<li class="chapter" data-level="3.7" data-path="sharing-images.html"><a href="sharing-images.html"><i class="fa fa-check"></i><b>3.7</b> Sharing images</a><ul>
+<li class="chapter" data-level="3.7.1" data-path="sharing-images.html"><a href="sharing-images.html#pushing-an-image"><i class="fa fa-check"></i><b>3.7.1</b> Pushing an image</a></li>
+<li class="chapter" data-level="3.7.2" data-path="sharing-images.html"><a href="sharing-images.html#automatic-builds"><i class="fa fa-check"></i><b>3.7.2</b> Automatic builds</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="singularity.html"><a href="singularity.html"><i class="fa fa-check"></i><b>4</b> Singularity</a><ul>
 <li class="chapter" data-level="4.1" data-path="introduction-to-singularity.html"><a href="introduction-to-singularity.html"><i class="fa fa-check"></i><b>4.1</b> Introduction to Singularity</a><ul>
@@ -276,7 +279,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="volumes" class="section level2">
 <h2><span class="header-section-number">3.5</span> Volumes</h2>
 <p>Docker containers are fully isolated. It is necessary to mount volumes in order to handle input/output files.</p>
-<p>Syntax: <strong>–volume/-v</strong> <em>host:container</em></p>
+<p>Syntax: <code>--volume/-v host:container</code></p>
 <div class="sourceCode" id="cb72"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb72-1"><a href="volumes.html#cb72-1"></a><span class="fu">mkdir</span> datatest</span>
 <span id="cb72-2"><a href="volumes.html#cb72-2"></a><span class="fu">touch</span> datatest/test</span>
 <span id="cb72-3"><a href="volumes.html#cb72-3"></a><span class="ex">docker</span> run --detach --volume <span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span>/datatest:/scratch --name fastqc_container biocontainers/fastqc:v0.11.9_cv7 tail -f /dev/null</span>
