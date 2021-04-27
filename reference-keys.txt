@@ -67,11 +67,11 @@ debian-bootstrap
 remote-building
 run-and-execution-process
 singularity-shell
-singularity-run
 singularity-exec
+singularity-run
 environment-control
 execute-from-sandboxed-images-directories
-run-straight-from-registry
+execute-straight-from-a-registry
 bind-paths-aka-volumes
 exercises
 instances

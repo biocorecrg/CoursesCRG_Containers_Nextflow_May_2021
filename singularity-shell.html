@@ -208,11 +208,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.3" data-path="remote-building.html"><a href="remote-building.html"><i class="fa fa-check"></i><b>4.3</b> Remote building</a></li>
 <li class="chapter" data-level="4.4" data-path="run-and-execution-process.html"><a href="run-and-execution-process.html"><i class="fa fa-check"></i><b>4.4</b> Run and execution process</a></li>
 <li class="chapter" data-level="4.5" data-path="singularity-shell.html"><a href="singularity-shell.html"><i class="fa fa-check"></i><b>4.5</b> Singularity shell</a><ul>
-<li class="chapter" data-level="4.5.1" data-path="singularity-shell.html"><a href="singularity-shell.html#singularity-run"><i class="fa fa-check"></i><b>4.5.1</b> Singularity run</a></li>
-<li class="chapter" data-level="4.5.2" data-path="singularity-shell.html"><a href="singularity-shell.html#singularity-exec"><i class="fa fa-check"></i><b>4.5.2</b> Singularity exec</a></li>
+<li class="chapter" data-level="4.5.1" data-path="singularity-shell.html"><a href="singularity-shell.html#singularity-exec"><i class="fa fa-check"></i><b>4.5.1</b> Singularity exec</a></li>
+<li class="chapter" data-level="4.5.2" data-path="singularity-shell.html"><a href="singularity-shell.html#singularity-run"><i class="fa fa-check"></i><b>4.5.2</b> Singularity run</a></li>
 <li class="chapter" data-level="4.5.3" data-path="singularity-shell.html"><a href="singularity-shell.html#environment-control"><i class="fa fa-check"></i><b>4.5.3</b> Environment control</a></li>
 <li class="chapter" data-level="4.5.4" data-path="singularity-shell.html"><a href="singularity-shell.html#execute-from-sandboxed-images-directories"><i class="fa fa-check"></i><b>4.5.4</b> Execute from sandboxed images / directories</a></li>
-<li class="chapter" data-level="4.5.5" data-path="singularity-shell.html"><a href="singularity-shell.html#run-straight-from-registry"><i class="fa fa-check"></i><b>4.5.5</b> Run straight from registry</a></li>
+<li class="chapter" data-level="4.5.5" data-path="singularity-shell.html"><a href="singularity-shell.html#execute-straight-from-a-registry"><i class="fa fa-check"></i><b>4.5.5</b> Execute straight from a registry</a></li>
 </ul></li>
 <li class="chapter" data-level="4.6" data-path="bind-paths-aka-volumes.html"><a href="bind-paths-aka-volumes.html"><i class="fa fa-check"></i><b>4.6</b> Bind paths (aka volumes)</a></li>
 <li class="chapter" data-level="4.7" data-path="exercises.html"><a href="exercises.html"><i class="fa fa-check"></i><b>4.7</b> Exercises:</a></li>
@@ -277,23 +277,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">4.5</span> Singularity shell</h2>
 <p>Interactive shell.</p>
 <pre><code>singularity shell fastqc-multi-bowtie.sif</code></pre>
-<div id="singularity-run" class="section level3">
-<h3><span class="header-section-number">4.5.1</span> Singularity run</h3>
-<p>Execute runscript from recipe definition. Not so common for HPC uses. More for instances (servers).</p>
-<pre><code>singularity run fastqc-multi-bowtie.sif</code></pre>
-</div>
 <div id="singularity-exec" class="section level3">
-<h3><span class="header-section-number">4.5.2</span> Singularity exec</h3>
+<h3><span class="header-section-number">4.5.1</span> Singularity exec</h3>
 <p>Execute commands. Common approach in HPC uses.</p>
 <pre><code>singularity exec fastqc-multi-bowtie.sif fastqc</code></pre>
+</div>
+<div id="singularity-run" class="section level3">
+<h3><span class="header-section-number">4.5.2</span> Singularity run</h3>
+<p>Execute runscript from recipe definition. Not so common for HPC uses. More for instances (servers).</p>
+<pre><code>singularity run fastqc-multi-bowtie.sif</code></pre>
 </div>
 <div id="environment-control" class="section level3">
 <h3><span class="header-section-number">4.5.3</span> Environment control</h3>
 <pre><code>singularity shell -e fastqc-multi-bowtie.sif
 
-singularity run -e fastqc-multi-bowtie.sif
+singularity exec -e fastqc-multi-bowtie.sif fastqc
 
-singularity exec -e fastqc-multi-bowtie.sif fastqc</code></pre>
+singularity run -e fastqc-multi-bowtie.sif</code></pre>
 <p>Compare <code>env</code> command with and without -e modifier.</p>
 <pre><code>singularity exec fastqc-multi-bowtie.sif env
 singularity exec -e fastqc-multi-bowtie.sif env</code></pre>
@@ -307,8 +307,8 @@ singularity exec ./sandbox bash -c &#39;apt-get update &amp;&amp; apt-get instal
 singularity exec --writable ./sandbox bash -c &#39;apt-get update &amp;&amp; apt-get install python&#39;
 # We needed to add writable parameter</code></pre>
 </div>
-<div id="run-straight-from-registry" class="section level3">
-<h3><span class="header-section-number">4.5.5</span> Run straight from registry</h3>
+<div id="execute-straight-from-a-registry" class="section level3">
+<h3><span class="header-section-number">4.5.5</span> Execute straight from a registry</h3>
 <pre><code>singularity exec docker://ncbi/blast:2.10.1 blastp -version</code></pre>
 </div>
 </div>
