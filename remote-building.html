@@ -276,12 +276,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="remote-building" class="section level2">
 <h2><span class="header-section-number">4.3</span> Remote building</h2>
-<p>Actually possible with Singularity account. More details at <a href="https://sylabs.io/guides/3.7/user-guide/cloud_library.html">https://sylabs.io/guides/3.7/user-guide/cloud_library.html</a></p>
-<pre><code>singularity remote login</code></pre>
-<p>Create account and tokenfile at <a href="Sylabs%20Cloud">https://cloud.sylabs.io/</a></p>
-<pre><code>singularity remote login --tokenfile mytokenfile</code></pre>
+<p>This allows us to build a Singularity image without using our own computer. This is convenient if your machine has not many resources.</p>
+<ul>
+<li><p>We need to create a <a href="Sylabs%20Cloud">https://cloud.sylabs.io/</a> account first.</p>
+<p>singularity remote login</p></li>
+<li><p>We generate a token at <a href="https://cloud.sylabs.io/auth/tokens" class="uri">https://cloud.sylabs.io/auth/tokens</a> and we use in the command-line below:</p>
+<p>singularity remote login –tokenfile mytokenfile</p></li>
+</ul>
+
+<div class="rmdtip">
+For safety reasons, remove this token once you use it after the course
+</div>
+
 <p>Build an image</p>
 <pre><code>singularity build --remote focal.sif docker://ubuntu:focal</code></pre>
+
+<div class="rmdnote">
+More details at <a href="https://sylabs.io/guides/3.7/user-guide/cloud_library.html">https://sylabs.io/guides/3.7/user-guide/cloud_library.html</a>
+</div>
+
 </div>
             </section>
 

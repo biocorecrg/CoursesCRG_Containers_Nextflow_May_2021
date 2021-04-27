@@ -277,34 +277,34 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="processes" class="section level2">
 <h2><span class="header-section-number">5.8</span> Processes</h2>
 <p>Let’s add now a process to our previous script test.nf:</p>
-<div class="sourceCode" id="cb109"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb109-1"><a href="processes.html#cb109-1"></a>#!/usr/bin/env nextflow</span>
-<span id="cb109-2"><a href="processes.html#cb109-2"></a></span>
-<span id="cb109-3"><a href="processes.html#cb109-3"></a>nextflow.<span class="fu">enable</span>.<span class="fu">dsl</span>=<span class="dv">2</span></span>
-<span id="cb109-4"><a href="processes.html#cb109-4"></a></span>
-<span id="cb109-5"><a href="processes.html#cb109-5"></a>str = <span class="bu">Channel</span>.<span class="fu">from</span>(&#39;hello&#39;, &#39;hola&#39;, &#39;bonjour&#39;)</span>
-<span id="cb109-6"><a href="processes.html#cb109-6"></a></span>
-<span id="cb109-7"><a href="processes.html#cb109-7"></a><span class="co">/*</span></span>
-<span id="cb109-8"><a href="processes.html#cb109-8"></a><span class="co"> * Creates a process which receive an input channel containing values</span></span>
-<span id="cb109-9"><a href="processes.html#cb109-9"></a><span class="co"> * Each value emitted by the channel triggers the execution</span></span>
-<span id="cb109-10"><a href="processes.html#cb109-10"></a><span class="co"> * of the process. The process stdout is caputured and send over</span></span>
-<span id="cb109-11"><a href="processes.html#cb109-11"></a><span class="co"> * the another channel.</span></span>
-<span id="cb109-12"><a href="processes.html#cb109-12"></a><span class="co"> */</span></span>
-<span id="cb109-13"><a href="processes.html#cb109-13"></a></span>
-<span id="cb109-14"><a href="processes.html#cb109-14"></a>process printHello {</span>
-<span id="cb109-15"><a href="processes.html#cb109-15"></a></span>
-<span id="cb109-16"><a href="processes.html#cb109-16"></a>   tag { str_in } <span class="co">// this is for displaying the content of `str_in` in the log file</span></span>
-<span id="cb109-17"><a href="processes.html#cb109-17"></a></span>
-<span id="cb109-18"><a href="processes.html#cb109-18"></a>   input:        </span>
-<span id="cb109-19"><a href="processes.html#cb109-19"></a>   val str_in</span>
-<span id="cb109-20"><a href="processes.html#cb109-20"></a></span>
-<span id="cb109-21"><a href="processes.html#cb109-21"></a>   output:        </span>
-<span id="cb109-22"><a href="processes.html#cb109-22"></a>   stdout</span>
-<span id="cb109-23"><a href="processes.html#cb109-23"></a></span>
-<span id="cb109-24"><a href="processes.html#cb109-24"></a>   script:        </span>
-<span id="cb109-25"><a href="processes.html#cb109-25"></a>   <span class="st">&quot;&quot;&quot;</span></span>
-<span id="cb109-26"><a href="processes.html#cb109-26"></a>   echo ${str_in} in Italian is ciao</span>
-<span id="cb109-27"><a href="processes.html#cb109-27"></a>   <span class="st">&quot;&quot;&quot;</span></span>
-<span id="cb109-28"><a href="processes.html#cb109-28"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb107"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb107-1"><a href="processes.html#cb107-1"></a>#!/usr/bin/env nextflow</span>
+<span id="cb107-2"><a href="processes.html#cb107-2"></a></span>
+<span id="cb107-3"><a href="processes.html#cb107-3"></a>nextflow.<span class="fu">enable</span>.<span class="fu">dsl</span>=<span class="dv">2</span></span>
+<span id="cb107-4"><a href="processes.html#cb107-4"></a></span>
+<span id="cb107-5"><a href="processes.html#cb107-5"></a>str = <span class="bu">Channel</span>.<span class="fu">from</span>(&#39;hello&#39;, &#39;hola&#39;, &#39;bonjour&#39;)</span>
+<span id="cb107-6"><a href="processes.html#cb107-6"></a></span>
+<span id="cb107-7"><a href="processes.html#cb107-7"></a><span class="co">/*</span></span>
+<span id="cb107-8"><a href="processes.html#cb107-8"></a><span class="co"> * Creates a process which receive an input channel containing values</span></span>
+<span id="cb107-9"><a href="processes.html#cb107-9"></a><span class="co"> * Each value emitted by the channel triggers the execution</span></span>
+<span id="cb107-10"><a href="processes.html#cb107-10"></a><span class="co"> * of the process. The process stdout is caputured and send over</span></span>
+<span id="cb107-11"><a href="processes.html#cb107-11"></a><span class="co"> * the another channel.</span></span>
+<span id="cb107-12"><a href="processes.html#cb107-12"></a><span class="co"> */</span></span>
+<span id="cb107-13"><a href="processes.html#cb107-13"></a></span>
+<span id="cb107-14"><a href="processes.html#cb107-14"></a>process printHello {</span>
+<span id="cb107-15"><a href="processes.html#cb107-15"></a></span>
+<span id="cb107-16"><a href="processes.html#cb107-16"></a>   tag { str_in } <span class="co">// this is for displaying the content of `str_in` in the log file</span></span>
+<span id="cb107-17"><a href="processes.html#cb107-17"></a></span>
+<span id="cb107-18"><a href="processes.html#cb107-18"></a>   input:        </span>
+<span id="cb107-19"><a href="processes.html#cb107-19"></a>   val str_in</span>
+<span id="cb107-20"><a href="processes.html#cb107-20"></a></span>
+<span id="cb107-21"><a href="processes.html#cb107-21"></a>   output:        </span>
+<span id="cb107-22"><a href="processes.html#cb107-22"></a>   stdout</span>
+<span id="cb107-23"><a href="processes.html#cb107-23"></a></span>
+<span id="cb107-24"><a href="processes.html#cb107-24"></a>   script:        </span>
+<span id="cb107-25"><a href="processes.html#cb107-25"></a>   <span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb107-26"><a href="processes.html#cb107-26"></a>   echo ${str_in} in Italian is ciao</span>
+<span id="cb107-27"><a href="processes.html#cb107-27"></a>   <span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb107-28"><a href="processes.html#cb107-28"></a>}</span></code></pre></div>
 <p>The process can be seen as a function and is composed by:
 - An <strong>input</strong> part where the input channels are defined
 - An <strong>output</strong> part where we indicates what to store as a result that will be sent to other processes or published as final result

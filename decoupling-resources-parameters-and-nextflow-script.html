@@ -284,29 +284,29 @@ You can achieve this by two additional files:</p>
 </ul>
 <p>The <strong>nextflow.config</strong> file allows to indicate the resources needed for each class of processes.
 You can label your processes to make a link with the definitions in the nextflow.config file. This is an example of a nextflow.config file:</p>
-<div class="sourceCode" id="cb133"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb133-1"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb133-1"></a><span class="ex">includeConfig</span> <span class="st">&quot;</span><span class="va">$baseDir</span><span class="st">/params.config&quot;</span></span>
-<span id="cb133-2"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb133-2"></a></span>
-<span id="cb133-3"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb133-3"></a><span class="ex">process</span> {</span>
-<span id="cb133-4"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb133-4"></a>     <span class="va">memory=</span><span class="st">&#39;0.6G&#39;</span></span>
-<span id="cb133-5"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb133-5"></a>     <span class="va">cpus=</span><span class="st">&#39;1&#39;</span></span>
-<span id="cb133-6"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb133-6"></a>     <span class="va">time=</span><span class="st">&#39;6h&#39;</span></span>
-<span id="cb133-7"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb133-7"></a></span>
-<span id="cb133-8"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb133-8"></a>     <span class="ex">withLabel</span>: <span class="st">&#39;onecpu&#39;</span></span>
-<span id="cb133-9"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb133-9"></a>    <span class="kw">{</span></span>
-<span id="cb133-10"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb133-10"></a>        <span class="va">memory=</span><span class="st">&#39;0.6G&#39;</span></span>
-<span id="cb133-11"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb133-11"></a>        <span class="va">cpus=</span><span class="st">&#39;1&#39;</span></span>
-<span id="cb133-12"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb133-12"></a>    <span class="kw">}</span>   </span>
-<span id="cb133-13"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb133-13"></a></span>
-<span id="cb133-14"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb133-14"></a>}</span>
-<span id="cb133-15"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb133-15"></a></span>
-<span id="cb133-16"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb133-16"></a><span class="ex">process.container</span> = <span class="st">&#39;biocorecrg/c4lwg-2018:latest&#39;</span></span>
-<span id="cb133-17"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb133-17"></a><span class="ex">singularity.cacheDir</span> = <span class="st">&quot;</span><span class="va">$baseDir</span><span class="st">/singularity&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb131"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb131-1"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb131-1"></a><span class="ex">includeConfig</span> <span class="st">&quot;</span><span class="va">$baseDir</span><span class="st">/params.config&quot;</span></span>
+<span id="cb131-2"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb131-2"></a></span>
+<span id="cb131-3"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb131-3"></a><span class="ex">process</span> {</span>
+<span id="cb131-4"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb131-4"></a>     <span class="va">memory=</span><span class="st">&#39;0.6G&#39;</span></span>
+<span id="cb131-5"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb131-5"></a>     <span class="va">cpus=</span><span class="st">&#39;1&#39;</span></span>
+<span id="cb131-6"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb131-6"></a>     <span class="va">time=</span><span class="st">&#39;6h&#39;</span></span>
+<span id="cb131-7"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb131-7"></a></span>
+<span id="cb131-8"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb131-8"></a>     <span class="ex">withLabel</span>: <span class="st">&#39;onecpu&#39;</span></span>
+<span id="cb131-9"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb131-9"></a>    <span class="kw">{</span></span>
+<span id="cb131-10"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb131-10"></a>        <span class="va">memory=</span><span class="st">&#39;0.6G&#39;</span></span>
+<span id="cb131-11"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb131-11"></a>        <span class="va">cpus=</span><span class="st">&#39;1&#39;</span></span>
+<span id="cb131-12"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb131-12"></a>    <span class="kw">}</span>   </span>
+<span id="cb131-13"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb131-13"></a></span>
+<span id="cb131-14"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb131-14"></a>}</span>
+<span id="cb131-15"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb131-15"></a></span>
+<span id="cb131-16"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb131-16"></a><span class="ex">process.container</span> = <span class="st">&#39;biocorecrg/c4lwg-2018:latest&#39;</span></span>
+<span id="cb131-17"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb131-17"></a><span class="ex">singularity.cacheDir</span> = <span class="st">&quot;</span><span class="va">$baseDir</span><span class="st">/singularity&quot;</span></span></code></pre></div>
 <p>The first row indicates to use the information stored in the <strong>params.config</strong> file (described later). Then we have the definition of the default resources for a process:</p>
-<div class="sourceCode" id="cb134"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb134-1"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb134-1"></a><span class="ex">process</span> {</span>
-<span id="cb134-2"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb134-2"></a>     <span class="va">memory=</span><span class="st">&#39;0.6G&#39;</span></span>
-<span id="cb134-3"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb134-3"></a>     <span class="va">cpus=</span><span class="st">&#39;1&#39;</span></span>
-<span id="cb134-4"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb134-4"></a>     <span class="va">time=</span><span class="st">&#39;6h&#39;</span></span>
-<span id="cb134-5"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb134-5"></a><span class="ex">...</span></span></code></pre></div>
+<div class="sourceCode" id="cb132"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb132-1"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb132-1"></a><span class="ex">process</span> {</span>
+<span id="cb132-2"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb132-2"></a>     <span class="va">memory=</span><span class="st">&#39;0.6G&#39;</span></span>
+<span id="cb132-3"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb132-3"></a>     <span class="va">cpus=</span><span class="st">&#39;1&#39;</span></span>
+<span id="cb132-4"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb132-4"></a>     <span class="va">time=</span><span class="st">&#39;6h&#39;</span></span>
+<span id="cb132-5"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb132-5"></a><span class="ex">...</span></span></code></pre></div>
 <p>Then we have the resources needed for a class of processes in particular labeled with <strong>bigmem</strong></p>
 <pre><code>     withLabel: &#39;bigmem&#39;
     {
@@ -314,128 +314,128 @@ You can label your processes to make a link with the definitions in the nextflow
         cpus=&#39;1&#39;
     }   </code></pre>
 <p>If we have a look at the process <strong>fastQC</strong> within the test2.nf file, we can see the use of the label.</p>
-<div class="sourceCode" id="cb136"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb136-1"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb136-1"></a><span class="co">/*</span></span>
-<span id="cb136-2"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb136-2"></a><span class="co"> * Process 1. Run FastQC on raw data.</span></span>
-<span id="cb136-3"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb136-3"></a><span class="co"> */</span></span>
-<span id="cb136-4"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb136-4"></a>process fastQC {</span>
-<span id="cb136-5"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb136-5"></a>    publishDir fastqcOutputFolder       </span>
-<span id="cb136-6"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb136-6"></a>    tag { reads }                   </span>
-<span id="cb136-7"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb136-7"></a>    label &#39;bigmem&#39;</span>
-<span id="cb136-8"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb136-8"></a></span>
-<span id="cb136-9"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb136-9"></a>    input:</span>
-<span id="cb136-10"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb136-10"></a>    path reads                              </span>
-<span id="cb136-11"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb136-11"></a>...</span></code></pre></div>
+<div class="sourceCode" id="cb134"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb134-1"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb134-1"></a><span class="co">/*</span></span>
+<span id="cb134-2"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb134-2"></a><span class="co"> * Process 1. Run FastQC on raw data.</span></span>
+<span id="cb134-3"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb134-3"></a><span class="co"> */</span></span>
+<span id="cb134-4"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb134-4"></a>process fastQC {</span>
+<span id="cb134-5"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb134-5"></a>    publishDir fastqcOutputFolder       </span>
+<span id="cb134-6"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb134-6"></a>    tag { reads }                   </span>
+<span id="cb134-7"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb134-7"></a>    label &#39;bigmem&#39;</span>
+<span id="cb134-8"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb134-8"></a></span>
+<span id="cb134-9"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb134-9"></a>    input:</span>
+<span id="cb134-10"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb134-10"></a>    path reads                              </span>
+<span id="cb134-11"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb134-11"></a>...</span></code></pre></div>
 <p>The latest two rows of the config file indicates which container needs to be used. In this case, it assumes has to be pulled from <a href="https://hub.docker.com/">DockerHub</a>. In case you want to use singularity you can indicate where to store the local image by using the <strong>singularity.cacheDir</strong> setting</p>
-<div class="sourceCode" id="cb137"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb137-1"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb137-1"></a>process.<span class="fu">container</span> = &#39;biocorecrg/c4lwg-<span class="dv">2018</span>:latest&#39;</span>
-<span id="cb137-2"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb137-2"></a>singularity.<span class="fu">cacheDir</span> = <span class="st">&quot;$baseDir/singularity&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb135"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb135-1"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb135-1"></a>process.<span class="fu">container</span> = &#39;biocorecrg/c4lwg-<span class="dv">2018</span>:latest&#39;</span>
+<span id="cb135-2"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb135-2"></a>singularity.<span class="fu">cacheDir</span> = <span class="st">&quot;$baseDir/singularity&quot;</span></span></code></pre></div>
 <p>Let’s now launch the script test2.nf</p>
-<div class="sourceCode" id="cb138"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb138-1"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb138-1"></a>cd test2;</span>
-<span id="cb138-2"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb138-2"></a>nextflow run test2.<span class="fu">nf</span></span>
-<span id="cb138-3"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb138-3"></a></span>
-<span id="cb138-4"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb138-4"></a>N E X T F L O W  ~  version <span class="fl">20.07.</span><span class="dv">1</span></span>
-<span id="cb138-5"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb138-5"></a>Launching `test2.<span class="fu">nf</span>` [distracted_edison] - revision: e3a80b15a2</span>
-<span id="cb138-6"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb138-6"></a>BIOCORE<span class="at">@CRG</span> - N F TESTPIPE  ~  version <span class="fl">1.</span><span class="dv">0</span></span>
-<span id="cb138-7"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb138-7"></a>=============================================</span>
-<span id="cb138-8"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb138-8"></a>reads                           : /home/ec2-user/git/CoursesCRG_Containers_Nextflow_May_<span class="dv">2021</span>/nextflow/nextflow/test2/../testdata<span class="co">/*.fastq.gz</span></span>
-<span id="cb138-9"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb138-9"></a><span class="co">executor &gt;  local (2)</span></span>
-<span id="cb138-10"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb138-10"></a><span class="co">[df/2c45f2] process &gt; fastQC (B7_input_s_chr19.fastq.gz) [  0%] 0 of 2</span></span>
-<span id="cb138-11"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb138-11"></a><span class="co">[-        ] process &gt; multiQC                            -</span></span>
-<span id="cb138-12"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb138-12"></a><span class="co">Error executing process &gt; &#39;fastQC (B7_H3K4me1_s_chr19.fastq.gz)&#39;</span></span>
-<span id="cb138-13"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb138-13"></a></span>
-<span id="cb138-14"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb138-14"></a><span class="co">Caused by:</span></span>
-<span id="cb138-15"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb138-15"></a><span class="co">  Process `fastQC (B7_H3K4me1_s_chr19.fastq.gz)` terminated with an error exit status (127)</span></span>
-<span id="cb138-16"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb138-16"></a></span>
-<span id="cb138-17"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb138-17"></a><span class="co">Command executed:</span></span>
-<span id="cb138-18"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb138-18"></a></span>
-<span id="cb138-19"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb138-19"></a><span class="co">  fastqc B7_H3K4me1_s_chr19.fastq.gz</span></span>
-<span id="cb138-20"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb138-20"></a></span>
-<span id="cb138-21"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb138-21"></a><span class="co">Command exit status:</span></span>
-<span id="cb138-22"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb138-22"></a><span class="co">  127</span></span>
-<span id="cb138-23"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb138-23"></a></span>
-<span id="cb138-24"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb138-24"></a><span class="co">executor &gt;  local (2)</span></span>
-<span id="cb138-25"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb138-25"></a><span class="co">[df/2c45f2] process &gt; fastQC (B7_input_s_chr19.fastq.gz) [100%] 2 of 2, failed: 2 ✘</span></span>
-<span id="cb138-26"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb138-26"></a><span class="co">[-        ] process &gt; multiQC                            -</span></span>
-<span id="cb138-27"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb138-27"></a><span class="co">Error executing process &gt; &#39;fastQC (B7_H3K4me1_s_chr19.fastq.gz)&#39;</span></span>
-<span id="cb138-28"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb138-28"></a></span>
-<span id="cb138-29"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb138-29"></a><span class="co">Caused by:</span></span>
-<span id="cb138-30"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb138-30"></a><span class="co">  Process `fastQC (B7_H3K4me1_s_chr19.fastq.gz)` terminated with an error exit status (127)</span></span>
-<span id="cb138-31"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb138-31"></a></span>
-<span id="cb138-32"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb138-32"></a><span class="co">Command executed:</span></span>
-<span id="cb138-33"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb138-33"></a></span>
-<span id="cb138-34"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb138-34"></a><span class="co">  fastqc B7_H3K4me1_s_chr19.fastq.gz</span></span>
-<span id="cb138-35"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb138-35"></a></span>
-<span id="cb138-36"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb138-36"></a><span class="co">Command exit status:</span></span>
-<span id="cb138-37"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb138-37"></a><span class="co">  127</span></span>
-<span id="cb138-38"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb138-38"></a></span>
-<span id="cb138-39"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb138-39"></a><span class="co">Command output:</span></span>
-<span id="cb138-40"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb138-40"></a><span class="co">  (empty)</span></span>
-<span id="cb138-41"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb138-41"></a></span>
-<span id="cb138-42"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb138-42"></a><span class="co">Command error:</span></span>
-<span id="cb138-43"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb138-43"></a><span class="co">  .command.sh: line 2: fastqc: command not found</span></span>
-<span id="cb138-44"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb138-44"></a></span>
-<span id="cb138-45"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb138-45"></a><span class="co">Work dir:</span></span>
-<span id="cb138-46"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb138-46"></a><span class="co">  /home/ec2-user/git/CoursesCRG_Containers_Nextflow_May_2021/nextflow/nextflow/test2/work/c5/18e76b2e6ffd64aac2b52e69bedef3</span></span>
-<span id="cb138-47"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb138-47"></a></span>
-<span id="cb138-48"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb138-48"></a><span class="co">Tip: when you have fixed the problem you can continue the execution adding the option `-resume` to the run command line</span></span></code></pre></div>
+<div class="sourceCode" id="cb136"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb136-1"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb136-1"></a>cd test2;</span>
+<span id="cb136-2"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb136-2"></a>nextflow run test2.<span class="fu">nf</span></span>
+<span id="cb136-3"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb136-3"></a></span>
+<span id="cb136-4"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb136-4"></a>N E X T F L O W  ~  version <span class="fl">20.07.</span><span class="dv">1</span></span>
+<span id="cb136-5"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb136-5"></a>Launching `test2.<span class="fu">nf</span>` [distracted_edison] - revision: e3a80b15a2</span>
+<span id="cb136-6"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb136-6"></a>BIOCORE<span class="at">@CRG</span> - N F TESTPIPE  ~  version <span class="fl">1.</span><span class="dv">0</span></span>
+<span id="cb136-7"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb136-7"></a>=============================================</span>
+<span id="cb136-8"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb136-8"></a>reads                           : /home/ec2-user/git/CoursesCRG_Containers_Nextflow_May_<span class="dv">2021</span>/nextflow/nextflow/test2/../testdata<span class="co">/*.fastq.gz</span></span>
+<span id="cb136-9"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb136-9"></a><span class="co">executor &gt;  local (2)</span></span>
+<span id="cb136-10"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb136-10"></a><span class="co">[df/2c45f2] process &gt; fastQC (B7_input_s_chr19.fastq.gz) [  0%] 0 of 2</span></span>
+<span id="cb136-11"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb136-11"></a><span class="co">[-        ] process &gt; multiQC                            -</span></span>
+<span id="cb136-12"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb136-12"></a><span class="co">Error executing process &gt; &#39;fastQC (B7_H3K4me1_s_chr19.fastq.gz)&#39;</span></span>
+<span id="cb136-13"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb136-13"></a></span>
+<span id="cb136-14"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb136-14"></a><span class="co">Caused by:</span></span>
+<span id="cb136-15"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb136-15"></a><span class="co">  Process `fastQC (B7_H3K4me1_s_chr19.fastq.gz)` terminated with an error exit status (127)</span></span>
+<span id="cb136-16"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb136-16"></a></span>
+<span id="cb136-17"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb136-17"></a><span class="co">Command executed:</span></span>
+<span id="cb136-18"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb136-18"></a></span>
+<span id="cb136-19"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb136-19"></a><span class="co">  fastqc B7_H3K4me1_s_chr19.fastq.gz</span></span>
+<span id="cb136-20"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb136-20"></a></span>
+<span id="cb136-21"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb136-21"></a><span class="co">Command exit status:</span></span>
+<span id="cb136-22"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb136-22"></a><span class="co">  127</span></span>
+<span id="cb136-23"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb136-23"></a></span>
+<span id="cb136-24"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb136-24"></a><span class="co">executor &gt;  local (2)</span></span>
+<span id="cb136-25"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb136-25"></a><span class="co">[df/2c45f2] process &gt; fastQC (B7_input_s_chr19.fastq.gz) [100%] 2 of 2, failed: 2 ✘</span></span>
+<span id="cb136-26"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb136-26"></a><span class="co">[-        ] process &gt; multiQC                            -</span></span>
+<span id="cb136-27"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb136-27"></a><span class="co">Error executing process &gt; &#39;fastQC (B7_H3K4me1_s_chr19.fastq.gz)&#39;</span></span>
+<span id="cb136-28"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb136-28"></a></span>
+<span id="cb136-29"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb136-29"></a><span class="co">Caused by:</span></span>
+<span id="cb136-30"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb136-30"></a><span class="co">  Process `fastQC (B7_H3K4me1_s_chr19.fastq.gz)` terminated with an error exit status (127)</span></span>
+<span id="cb136-31"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb136-31"></a></span>
+<span id="cb136-32"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb136-32"></a><span class="co">Command executed:</span></span>
+<span id="cb136-33"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb136-33"></a></span>
+<span id="cb136-34"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb136-34"></a><span class="co">  fastqc B7_H3K4me1_s_chr19.fastq.gz</span></span>
+<span id="cb136-35"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb136-35"></a></span>
+<span id="cb136-36"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb136-36"></a><span class="co">Command exit status:</span></span>
+<span id="cb136-37"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb136-37"></a><span class="co">  127</span></span>
+<span id="cb136-38"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb136-38"></a></span>
+<span id="cb136-39"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb136-39"></a><span class="co">Command output:</span></span>
+<span id="cb136-40"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb136-40"></a><span class="co">  (empty)</span></span>
+<span id="cb136-41"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb136-41"></a></span>
+<span id="cb136-42"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb136-42"></a><span class="co">Command error:</span></span>
+<span id="cb136-43"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb136-43"></a><span class="co">  .command.sh: line 2: fastqc: command not found</span></span>
+<span id="cb136-44"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb136-44"></a></span>
+<span id="cb136-45"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb136-45"></a><span class="co">Work dir:</span></span>
+<span id="cb136-46"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb136-46"></a><span class="co">  /home/ec2-user/git/CoursesCRG_Containers_Nextflow_May_2021/nextflow/nextflow/test2/work/c5/18e76b2e6ffd64aac2b52e69bedef3</span></span>
+<span id="cb136-47"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb136-47"></a></span>
+<span id="cb136-48"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb136-48"></a><span class="co">Tip: when you have fixed the problem you can continue the execution adding the option `-resume` to the run command line</span></span></code></pre></div>
 <p>We will get a number of errors since no executable is found in our environment / path. This because they are stored in our docker image! So we can launch it this time with the -with-docker parameter.</p>
-<div class="sourceCode" id="cb139"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb139-1"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb139-1"></a>nextflow run test2.<span class="fu">nf</span> -with-docker</span>
-<span id="cb139-2"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb139-2"></a></span>
-<span id="cb139-3"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb139-3"></a>nextflow run test2.<span class="fu">nf</span> -with-docker</span>
-<span id="cb139-4"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb139-4"></a>N E X T F L O W  ~  version <span class="fl">20.07.</span><span class="dv">1</span></span>
-<span id="cb139-5"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb139-5"></a>Launching `test2.<span class="fu">nf</span>` [boring_hamilton] - revision: e3a80b15a2</span>
-<span id="cb139-6"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb139-6"></a>BIOCORE<span class="at">@CRG</span> - N F TESTPIPE  ~  version <span class="fl">1.</span><span class="dv">0</span></span>
-<span id="cb139-7"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb139-7"></a>=============================================</span>
-<span id="cb139-8"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb139-8"></a>reads                           : /home/ec2-user/git/CoursesCRG_Containers_Nextflow_May_<span class="dv">2021</span>/nextflow/nextflow/test2/../testdata<span class="co">/*.fastq.gz</span></span>
-<span id="cb139-9"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb139-9"></a><span class="co">executor &gt;  local (3)</span></span>
-<span id="cb139-10"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb139-10"></a><span class="co">[22/b437be] process &gt; fastQC (B7_H3K4me1_s_chr19.fastq.gz) [100%] 2 of 2 ✔</span></span>
-<span id="cb139-11"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb139-11"></a><span class="co">[1a/cfe63b] process &gt; multiQC                              [  0%] 0 of 1</span></span>
-<span id="cb139-12"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb139-12"></a><span class="co">executor &gt;  local (3)</span></span>
-<span id="cb139-13"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb139-13"></a><span class="co">[22/b437be] process &gt; fastQC (B7_H3K4me1_s_chr19.fastq.gz) [100%] 2 of 2 ✔</span></span>
-<span id="cb139-14"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb139-14"></a><span class="co">[1a/cfe63b] process &gt; multiQC                              [100%] 1 of 1 ✔</span></span></code></pre></div>
+<div class="sourceCode" id="cb137"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb137-1"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb137-1"></a>nextflow run test2.<span class="fu">nf</span> -with-docker</span>
+<span id="cb137-2"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb137-2"></a></span>
+<span id="cb137-3"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb137-3"></a>nextflow run test2.<span class="fu">nf</span> -with-docker</span>
+<span id="cb137-4"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb137-4"></a>N E X T F L O W  ~  version <span class="fl">20.07.</span><span class="dv">1</span></span>
+<span id="cb137-5"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb137-5"></a>Launching `test2.<span class="fu">nf</span>` [boring_hamilton] - revision: e3a80b15a2</span>
+<span id="cb137-6"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb137-6"></a>BIOCORE<span class="at">@CRG</span> - N F TESTPIPE  ~  version <span class="fl">1.</span><span class="dv">0</span></span>
+<span id="cb137-7"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb137-7"></a>=============================================</span>
+<span id="cb137-8"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb137-8"></a>reads                           : /home/ec2-user/git/CoursesCRG_Containers_Nextflow_May_<span class="dv">2021</span>/nextflow/nextflow/test2/../testdata<span class="co">/*.fastq.gz</span></span>
+<span id="cb137-9"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb137-9"></a><span class="co">executor &gt;  local (3)</span></span>
+<span id="cb137-10"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb137-10"></a><span class="co">[22/b437be] process &gt; fastQC (B7_H3K4me1_s_chr19.fastq.gz) [100%] 2 of 2 ✔</span></span>
+<span id="cb137-11"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb137-11"></a><span class="co">[1a/cfe63b] process &gt; multiQC                              [  0%] 0 of 1</span></span>
+<span id="cb137-12"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb137-12"></a><span class="co">executor &gt;  local (3)</span></span>
+<span id="cb137-13"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb137-13"></a><span class="co">[22/b437be] process &gt; fastQC (B7_H3K4me1_s_chr19.fastq.gz) [100%] 2 of 2 ✔</span></span>
+<span id="cb137-14"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb137-14"></a><span class="co">[1a/cfe63b] process &gt; multiQC                              [100%] 1 of 1 ✔</span></span></code></pre></div>
 <p>This time it worked beautifully since Nextflow used the image indicated within the nextflow.config file that contains our executables.</p>
 <p>Now we can have a look at the <strong>params.config</strong> file</p>
-<div class="sourceCode" id="cb140"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb140-1"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb140-1"></a>params {</span>
-<span id="cb140-2"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb140-2"></a>    reads       = <span class="st">&quot;$baseDir/../testdata/*.fastq.gz&quot;</span></span>
-<span id="cb140-3"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb140-3"></a>    email       = <span class="st">&quot;myemail@google.com&quot;</span></span>
-<span id="cb140-4"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb140-4"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb138"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb138-1"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb138-1"></a>params {</span>
+<span id="cb138-2"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb138-2"></a>    reads       = <span class="st">&quot;$baseDir/../testdata/*.fastq.gz&quot;</span></span>
+<span id="cb138-3"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb138-3"></a>    email       = <span class="st">&quot;myemail@google.com&quot;</span></span>
+<span id="cb138-4"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb138-4"></a>}</span></code></pre></div>
 <p>As you can see we indicates the pipeline parameters that can be overridden by using <strong>–reads</strong> and <strong>–email</strong>. This is not mandatory but I found quite useful to modify this file instead of using very long command lines with tons of <strong>–something</strong>.</p>
 <p>Now, let’s have a look at the folders generated by the pipeline.</p>
-<div class="sourceCode" id="cb141"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb141-1"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb141-1"></a><span class="fu">ls</span>  work/2a/22e3df887b1b5ac8af4f9cd0d88ac5/</span>
-<span id="cb141-2"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb141-2"></a></span>
-<span id="cb141-3"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb141-3"></a><span class="ex">total</span> 0</span>
-<span id="cb141-4"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb141-4"></a><span class="ex">drwxrwxr-x</span> 3 ec2-user ec2-user  26 Apr 23 13:52 .</span>
-<span id="cb141-5"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb141-5"></a><span class="ex">drwxr-xr-x</span> 2 root     root     136 Apr 23 13:51 multiqc_data</span>
-<span id="cb141-6"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb141-6"></a><span class="ex">drwxrwxr-x</span> 3 ec2-user ec2-user  44 Apr 23 13:51 ..</span></code></pre></div>
+<div class="sourceCode" id="cb139"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb139-1"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb139-1"></a><span class="fu">ls</span>  work/2a/22e3df887b1b5ac8af4f9cd0d88ac5/</span>
+<span id="cb139-2"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb139-2"></a></span>
+<span id="cb139-3"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb139-3"></a><span class="ex">total</span> 0</span>
+<span id="cb139-4"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb139-4"></a><span class="ex">drwxrwxr-x</span> 3 ec2-user ec2-user  26 Apr 23 13:52 .</span>
+<span id="cb139-5"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb139-5"></a><span class="ex">drwxr-xr-x</span> 2 root     root     136 Apr 23 13:51 multiqc_data</span>
+<span id="cb139-6"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb139-6"></a><span class="ex">drwxrwxr-x</span> 3 ec2-user ec2-user  44 Apr 23 13:51 ..</span></code></pre></div>
 <p>We observe that Docker runs as “root”. This can be problematic and generates security issues. To avoid this we can add this line of code within the process section of the config file:</p>
-<div class="sourceCode" id="cb142"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb142-1"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb142-1"></a>  <span class="ex">containerOptions</span> = { workflow.containerEngine == <span class="st">&quot;docker&quot;</span> ? <span class="st">&#39;-u $(id -u):$(id -g)&#39;</span>: null}</span></code></pre></div>
+<div class="sourceCode" id="cb140"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb140-1"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb140-1"></a>  <span class="ex">containerOptions</span> = { workflow.containerEngine == <span class="st">&quot;docker&quot;</span> ? <span class="st">&#39;-u $(id -u):$(id -g)&#39;</span>: null}</span></code></pre></div>
 <p>This will tell to Nextflow that if is running with docker, this has to produce files that belong to your user and not to root.</p>
 <div id="publishing-final-results" class="section level3">
 <h3><span class="header-section-number">6.1.1</span> Publishing final results</h3>
 <p>After running the script you see two new folders named <strong>ouptut_fastqc</strong> and <strong>ouptut_fastqc</strong> that contain the result of the pipeline.
 We can indicate which process and which output can be considered the final output of the pipeline by using the <strong>publishDir</strong> directive that has to be specified at the beginning of a process.</p>
 <p>In our pipeline we define these folders here:</p>
-<div class="sourceCode" id="cb143"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb143-1"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb143-1"></a><span class="co">/*</span></span>
-<span id="cb143-2"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb143-2"></a><span class="co"> * Defining the output folders.</span></span>
-<span id="cb143-3"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb143-3"></a><span class="co"> */</span></span>
-<span id="cb143-4"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb143-4"></a>fastqcOutputFolder    = <span class="st">&quot;ouptut_fastqc&quot;</span></span>
-<span id="cb143-5"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb143-5"></a>multiqcOutputFolder   = <span class="st">&quot;ouptut_multiQC&quot;</span></span>
-<span id="cb143-6"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb143-6"></a></span>
-<span id="cb143-7"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb143-7"></a></span>
-<span id="cb143-8"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb143-8"></a>[...]</span>
-<span id="cb143-9"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb143-9"></a></span>
-<span id="cb143-10"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb143-10"></a><span class="co">/*</span></span>
-<span id="cb143-11"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb143-11"></a><span class="co"> * Process 1. Run FastQC on raw data. A process is the element for executing scripts / programs etc.</span></span>
-<span id="cb143-12"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb143-12"></a><span class="co"> */</span></span>
-<span id="cb143-13"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb143-13"></a>process fastQC {</span>
-<span id="cb143-14"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb143-14"></a>    publishDir fastqcOutputFolder           <span class="co">// where (and whether) to publish the results</span></span>
-<span id="cb143-15"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb143-15"></a></span>
-<span id="cb143-16"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb143-16"></a>[...]</span>
-<span id="cb143-17"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb143-17"></a></span>
-<span id="cb143-18"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb143-18"></a><span class="co">/*</span></span>
-<span id="cb143-19"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb143-19"></a><span class="co"> * Process 2. Run multiQC on fastQC results</span></span>
-<span id="cb143-20"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb143-20"></a><span class="co"> */</span></span>
-<span id="cb143-21"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb143-21"></a>process multiQC {</span>
-<span id="cb143-22"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb143-22"></a>    publishDir multiqcOutputFolder, mode: &#39;copy&#39;    <span class="co">// this time do not link but copy the output file</span></span></code></pre></div>
+<div class="sourceCode" id="cb141"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb141-1"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb141-1"></a><span class="co">/*</span></span>
+<span id="cb141-2"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb141-2"></a><span class="co"> * Defining the output folders.</span></span>
+<span id="cb141-3"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb141-3"></a><span class="co"> */</span></span>
+<span id="cb141-4"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb141-4"></a>fastqcOutputFolder    = <span class="st">&quot;ouptut_fastqc&quot;</span></span>
+<span id="cb141-5"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb141-5"></a>multiqcOutputFolder   = <span class="st">&quot;ouptut_multiQC&quot;</span></span>
+<span id="cb141-6"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb141-6"></a></span>
+<span id="cb141-7"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb141-7"></a></span>
+<span id="cb141-8"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb141-8"></a>[...]</span>
+<span id="cb141-9"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb141-9"></a></span>
+<span id="cb141-10"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb141-10"></a><span class="co">/*</span></span>
+<span id="cb141-11"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb141-11"></a><span class="co"> * Process 1. Run FastQC on raw data. A process is the element for executing scripts / programs etc.</span></span>
+<span id="cb141-12"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb141-12"></a><span class="co"> */</span></span>
+<span id="cb141-13"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb141-13"></a>process fastQC {</span>
+<span id="cb141-14"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb141-14"></a>    publishDir fastqcOutputFolder           <span class="co">// where (and whether) to publish the results</span></span>
+<span id="cb141-15"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb141-15"></a></span>
+<span id="cb141-16"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb141-16"></a>[...]</span>
+<span id="cb141-17"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb141-17"></a></span>
+<span id="cb141-18"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb141-18"></a><span class="co">/*</span></span>
+<span id="cb141-19"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb141-19"></a><span class="co"> * Process 2. Run multiQC on fastQC results</span></span>
+<span id="cb141-20"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb141-20"></a><span class="co"> */</span></span>
+<span id="cb141-21"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb141-21"></a>process multiQC {</span>
+<span id="cb141-22"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb141-22"></a>    publishDir multiqcOutputFolder, mode: &#39;copy&#39;    <span class="co">// this time do not link but copy the output file</span></span></code></pre></div>
 <p>You can see that the default mode to publish the results in Nextflow is soft linking. You can change this behaviour by specifying the mode as indicated in the <strong>multiQC</strong> process.</p>
 <p><strong>IMPORTANT: You can also “move” the results but this is not suggested for files that will be needed for other processes. This will likely disrupt your pipeline.</strong></p>
 </div>
