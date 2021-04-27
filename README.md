@@ -77,18 +77,18 @@ Applicants are not expected to have used neither Linux containers nor Nextflow w
 #### Day 2: Docker + Singularity
 
 * Docker: 
- * Work with volumes and ports.
- * Upload image to registries.
+  * Work with volumes and ports.
+  * Upload image to registries.
 * Singularity:
- * Singularity versus Docker.
-  * Differences, pros and cons for each system. 
- * Fetch (and build) Singularity images.
-  * Build from existing public registries.
-  * Build from local Docker instances.
- * Run Singularity container (interactively).
- * Understanding and working with volumes.
- * Singularity build recipes.
- * Advanced features: services, etc.
+  * Singularity versus Docker.
+    * Differences, pros and cons for each system. 
+  * Fetch (and build) Singularity images.
+    * Build from existing public registries.
+    * Build from local Docker instances.
+  * Run Singularity container (interactively).
+  * Understanding and working with volumes.
+  * Singularity build recipes.
+  * Advanced features: services, etc.
 
 ### Day 3 & 4: Nextflow
 
