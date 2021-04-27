@@ -809,7 +809,7 @@ Let's create a new repository with a unique name:
 knitr::include_graphics('docs/images/git_1.png')
 ```
 
-```{r, out.width="300px", echo=FALSE, eval = TRUE }
+```{r, out.width="800px", echo=FALSE, eval = TRUE }
 knitr::include_graphics('docs/images/git_2.png')
 ```
 
