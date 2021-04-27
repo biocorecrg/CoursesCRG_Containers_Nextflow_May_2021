@@ -1,9 +1,8 @@
-<<<<<<< HEAD
 # Courses@CRG_Containers_Nextflow_May_2021
 
 ## Title
 
-Reproducible research and data analysis with Linux containers and Nextflow pipelines 
+Reproducible research and data analysis with Linux containers and Nextflow pipelines
 <br>
 Course page: https://biocorecrg.github.io/CoursesCRG_Containers_Nextflow_May_2021/
 
@@ -43,18 +42,18 @@ About Nextflow:
 
 ### Prerequisite
 
-Being comfortable working with the CLI (command-line interface) in a Linux-based environment. 
+Being comfortable working with the CLI (command-line interface) in a Linux-based environment.
 Applicants are not expected to have used neither Linux containers nor Nextflow workflows before.
 
 ## Dates, time, location
 
-* Dates: May 2021: 
+* Dates: May 2021:
  * Containers: Monday 3rd, Tuesday 4th
  * Nextflow: Monday 10th, Tuesday 11th
 
 * Time: 9:30-17:30:
   * Morning coffee break: 11:00-11:30am
-  * Lunch break: 1pm-2pm 
+  * Lunch break: 1pm-2pm
   * Afternoon coffee break: 3:30-4:00pm
 
 * Location: virtual, via Zoom.
@@ -77,12 +76,12 @@ Applicants are not expected to have used neither Linux containers nor Nextflow w
 
 #### Day 2: Docker + Singularity
 
-* Docker: 
+* Docker:
   * Work with volumes and ports.
   * Upload image to registries.
 * Singularity:
   * Singularity versus Docker.
-    * Differences, pros and cons for each system. 
+    * Differences, pros and cons for each system.
   * Fetch (and build) Singularity images.
     * Build from existing public registries.
     * Build from local Docker instances.
@@ -112,17 +111,10 @@ Applicants are not expected to have used neither Linux containers nor Nextflow w
 * Run Nextflow in a computing cluster (e.g. HPC).
   * Definition of computing requirements and queues.
   * Profiles.
-* Share Nextflow pipelines and good practices. 
+* Share Nextflow pipelines and good practices.
 
 
 ## Acknowledgements
 
 * Bookdown
 * ELIXIR Workshop hackathon
-
-
-
-=======
-# test_course
-just a test
->>>>>>> 31e29f2f3bb31df9e48322bf23d63f9366e060ab
