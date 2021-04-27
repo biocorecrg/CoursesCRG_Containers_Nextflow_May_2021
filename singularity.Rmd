@@ -48,11 +48,12 @@ knitr::opts_chunk$set(echo = TRUE, eval = FALSE, warning = FALSE)
 
 ## Build process
 
+<!-- New image needs to be created based on this -->
 <img src="docs/images/singularity_build_input_output.svg" width="600">
 
 ### Examples
 
-### Registries
+#### Through registries
 
 * Docker Hub
 
@@ -83,12 +84,13 @@ knitr::opts_chunk$set(echo = TRUE, eval = FALSE, warning = FALSE)
 
 ### Sandboxing
 
-*What does it mean?*
 
+
+```
      singularity build --sandbox ./sandbox docker://ubuntu:18.04
      touch sandbox/etc/myetc.conf
      singularity build sandbox.sif ./sandbox
-
+```
 
 ### Singularity recipes
 

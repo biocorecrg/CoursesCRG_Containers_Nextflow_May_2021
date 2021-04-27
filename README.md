@@ -114,6 +114,10 @@ Applicants are not expected to have used neither Linux containers nor Nextflow w
 * Share Nextflow pipelines and good practices. 
 
 
+## Acknowledgements
+
+* Bookdown
+* ELIXIR Workshop hackathon
 
 
 
