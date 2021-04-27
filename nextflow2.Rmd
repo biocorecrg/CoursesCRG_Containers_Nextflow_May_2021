@@ -1,6 +1,10 @@
 # Nextflow day 2
 During this day we will make more complex pipelines and separate the main code from the configuration. Then we will focus on the reuse of the code and on how to share your code.
 
+```{r, out.width="30%", echo=FALSE, eval = TRUE, fig.link='https://www.nextflow.io'}
+knitr::include_graphics('docs/images/nextflow_logo_deep.png')
+```
+
 ## Decoupling resources, parameters and nextflow script
 When you make a complex pipelines you might want to keep separated the definition of resources needed, the default parameters and the main script.
 You can achieve this by two additional files:
