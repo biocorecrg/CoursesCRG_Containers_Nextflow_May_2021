@@ -48,11 +48,12 @@ knitr::opts_chunk$set(echo = TRUE, eval = FALSE, warning = FALSE)
 
 ## Build process
 
+<!-- New image needs to be created based on this -->
 <img src="docs/images/singularity_build_input_output.svg" width="600">
 
 ### Examples
 
-### Registries
+#### Through registries
 
 * Docker Hub
 
@@ -80,16 +81,16 @@ knitr::opts_chunk$set(echo = TRUE, eval = FALSE, warning = FALSE)
 
 * Also Singularity registries (not so popular so far)
   * [https://cloud.sylabs.io/library](https://cloud.sylabs.io/library)
-  * [https://singularity-hub.org/](https://singularity-hub.org/)
 
 ### Sandboxing
 
-*What does it mean?*
 
+
+```
      singularity build --sandbox ./sandbox docker://ubuntu:18.04
      touch sandbox/etc/myetc.conf
      singularity build sandbox.sif ./sandbox
-
+```
 
 ### Singularity recipes
 
@@ -156,20 +157,60 @@ Version 0.1.0
 
     sudo singularity build fastqc-multi-bowtie.sif debootstrap.singularity
 
+```{block2, type='rmdnote'}
+It's possible to sign cryptographically your images, so third parties can verify they are coming from their actual authors. This implies some matters beyond the scope of this course, but you have some details if interested at: https://sylabs.io/guides/3.7/user-guide/signNverify.html
+```
 
-## Remote building (optional)
+## Remote building
 
-Actually possible with Singularity account. More details at [https://sylabs.io/guides/3.6/user-guide/cloud_library.html](https://sylabs.io/guides/3.6/user-guide/cloud_library.html)
+This allows us to build a Singularity image without using our own computer. This is convenient if your machine has not many resources.
 
+* We need to create a [https://cloud.sylabs.io/](Sylabs Cloud) account first.
+
+```{bash, eval=FALSE, echo=TRUE}
     singularity remote login
+```
 
-Create account and tokenfile at [https://cloud.sylabs.io/](Sylabs Cloud)
+* In order to use it our username and passwords we generate a token at https://cloud.sylabs.io/auth/tokens and copy its contents to a file (e.g., ``singularity.token``). Then we use in the command-line below:
 
-    singularity remote login --tokenfile mytokenfile
+```{bash, eval=FALSE, echo=TRUE}
+    singularity remote login --tokenfile singularity.token
+```
 
-Build an image
+<details>
+<summary>
+<h5>*Output*</h5>
+</summary>
+    (base) [ec2-user@ip-172-31-47-200 ~]$ singularity remote login --tokenfile singularity.token
+    INFO:    Access Token Verified!
+    INFO:    Token stored in /home/ec2-user/.singularity/remote.yaml
+</details>
 
+```{block2, type='rmdtip'}
+For safety reasons, remove the token from Cloud Sylabs interface after the course. Follow the same philosophy for similar circumstances. Keep an only token for a specific environment or action.
+```
+
+* Once we are authenticated with our access token, we can **build an image**:
+
+```{bash, eval=FALSE, echo=TRUE}
     singularity build --remote focal.sif docker://ubuntu:focal
+```
+
+* Since we are already authenticated, we can take advantage to push a Singularity image in our account, similarly to what we did with Docker. We use ```-U``` so we do not sign the image.
+
+```{bash, eval=FALSE, echo=TRUE}
+    singularity push -U focal.sif library://toniher/test/focal.sif:latest
+```
+
+```{block2, type='rmdtip'}
+IMPORTANT: Unless it is not defined in advance as private from Cloud Sylabs interface, pushed image will be public and there does not seem an easy way to turn it private.
+As an interesting feature, you can actually sign your images after you pushed them from Cloud Sylabs web interface by using a key associated to your account (which can also be created there).
+```
+
+```{block2, type='rmdnote'}
+More details at [https://sylabs.io/guides/3.7/user-guide/cloud_library.html](https://sylabs.io/guides/3.7/user-guide/cloud_library.html)
+```
+
 
 ## Run and execution process
 
@@ -179,27 +220,29 @@ Interactive shell.
 
     singularity shell fastqc-multi-bowtie.sif
 
-### Singularity run
-
-Execute runscript from recipe definition. Not so common for HPC uses. More for instances (servers).
-
-    singularity run fastqc-multi-bowtie.sif
-
 ### Singularity exec
 
 Execute commands. Common approach in HPC uses.
 
     singularity exec fastqc-multi-bowtie.sif fastqc
 
+### Singularity run
+
+Execute runscript from recipe definition. Not so common for HPC uses. More for instances (servers).
+
+    singularity run fastqc-multi-bowtie.sif
+
+
 ### Environment control
 
     singularity shell -e fastqc-multi-bowtie.sif
 
-    singularity run -e fastqc-multi-bowtie.sif
-
     singularity exec -e fastqc-multi-bowtie.sif fastqc
 
-Compare ```env``` command with and without -e modifier.  
+    singularity run -e fastqc-multi-bowtie.sif
+
+
+Compare ```env``` command with and without -e modifier.
 
     singularity exec fastqc-multi-bowtie.sif env
     singularity exec -e fastqc-multi-bowtie.sif env
@@ -213,7 +256,7 @@ Compare ```env``` command with and without -e modifier.
     singularity exec --writable ./sandbox bash -c 'apt-get update && apt-get install python'
     # We needed to add writable parameter
 
-### Run straight from registry
+### Execute straight from a registry
 
     singularity exec docker://ncbi/blast:2.10.1 blastp -version
 
@@ -221,7 +264,7 @@ Compare ```env``` command with and without -e modifier.
 
 Paths of host system mounted in the container
 
-* Default ones, no need to mount them explicitly (for 3.6.x): ```$HOME``` , ```/sys:/sys``` , ```/proc:/proc```, ```/tmp:/tmp```, ```/var/tmp:/var/tmp```, ```/etc/resolv.conf:/etc/resolv.conf```, ```/etc/passwd:/etc/passwd```, and ```$PWD``` [https://sylabs.io/guides/3.6/user-guide/bind_paths_and_mounts.html](https://sylabs.io/guides/3.6/user-guide/bind_paths_and_mounts.html)
+* Default ones, no need to mount them explicitly (for 3.7.x): ```$HOME``` , ```/sys:/sys``` , ```/proc:/proc```, ```/tmp:/tmp```, ```/var/tmp:/var/tmp```, ```/etc/resolv.conf:/etc/resolv.conf```, ```/etc/passwd:/etc/passwd```, and ```$PWD``` [https://sylabs.io/guides/3.7/user-guide/bind_paths_and_mounts.html](https://sylabs.io/guides/3.7/user-guide/bind_paths_and_mounts.html)
 
 For others, need to be done explicitly (syntax: host:container)
 
@@ -269,8 +312,10 @@ From: library/mariadb:10.3
 
 
 More information:
-* [https://sylabs.io/guides/3.6/user-guide/running_services.html](https://sylabs.io/guides/3.6/user-guide/running_services.html)
-* [https://sylabs.io/guides/3.6/user-guide/networking.html](https://sylabs.io/guides/3.6/user-guide/networking.html)
+
+* [https://sylabs.io/guides/3.7/user-guide/running_services.html](https://sylabs.io/guides/3.7/user-guide/running_services.html)
+
+* [https://sylabs.io/guides/3.7/user-guide/networking.html](https://sylabs.io/guides/3.7/user-guide/networking.html)
 
 ## Troubleshooting
 
@@ -278,9 +323,9 @@ More information:
 
 ### Fakeroot
 
-Singularity permissions are an evolving field. If you don't have access to ```sudo```, it might be worth considering using **--fakeroot/-f** parameter.
+Singularity permissions are an evolving field. If you don't have access to ```sudo```, it might be worth considering using ``--fakeroot/-f`` parameter.
 
-* More details at [https://sylabs.io/guides/3.6/user-guide/fakeroot.html](https://sylabs.io/guides/3.6/user-guide/fakeroot.html)
+* More details at [https://sylabs.io/guides/3.7/user-guide/fakeroot.html](https://sylabs.io/guides/3.7/user-guide/fakeroot.html)
 
 ### Singularity cache directory
 
@@ -291,8 +336,7 @@ Singularity permissions are an evolving field. If you don't have access to ```su
 
 ### Global singularity configuration
 
-Normally at ```/etc/singularity/singularity.conf``` or similar (e.g preceded by ```/usr/local/```)
+Normally at ```/etc/singularity/singularity.conf``` or similar (e.g preceded by ```/usr/local/``` is Singularity is installed manually)
 
 * It can only be modified by users with administration permissions
-* Worth noting ```bind path``` lines, which point default mounted directories in containers
-
+* Worth noting ```bind path``` lines, which point default mounted directories in containers as commented in [bind paths section][Bind paths (aka volumes)]
