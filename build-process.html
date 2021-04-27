@@ -120,7 +120,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </style>
 
 
-<link rel="stylesheet" href="style.css" type="text/css" />
+<link rel="stylesheet" href="css/style.css" type="text/css" />
 </head>
 
 <body>
@@ -202,9 +202,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="4.2" data-path="build-process.html"><a href="build-process.html"><i class="fa fa-check"></i><b>4.2</b> Build process</a><ul>
 <li class="chapter" data-level="4.2.1" data-path="build-process.html"><a href="build-process.html#examples"><i class="fa fa-check"></i><b>4.2.1</b> Examples</a></li>
-<li class="chapter" data-level="4.2.2" data-path="build-process.html"><a href="build-process.html#registries"><i class="fa fa-check"></i><b>4.2.2</b> Registries</a></li>
-<li class="chapter" data-level="4.2.3" data-path="build-process.html"><a href="build-process.html#sandboxing"><i class="fa fa-check"></i><b>4.2.3</b> Sandboxing</a></li>
-<li class="chapter" data-level="4.2.4" data-path="build-process.html"><a href="build-process.html#singularity-recipes"><i class="fa fa-check"></i><b>4.2.4</b> Singularity recipes</a></li>
+<li class="chapter" data-level="4.2.2" data-path="build-process.html"><a href="build-process.html#sandboxing"><i class="fa fa-check"></i><b>4.2.2</b> Sandboxing</a></li>
+<li class="chapter" data-level="4.2.3" data-path="build-process.html"><a href="build-process.html#singularity-recipes"><i class="fa fa-check"></i><b>4.2.3</b> Singularity recipes</a></li>
 </ul></li>
 <li class="chapter" data-level="4.3" data-path="remote-building.html"><a href="remote-building.html"><i class="fa fa-check"></i><b>4.3</b> Remote building</a></li>
 <li class="chapter" data-level="4.4" data-path="run-and-execution-process.html"><a href="run-and-execution-process.html"><i class="fa fa-check"></i><b>4.4</b> Run and execution process</a></li>
@@ -276,12 +275,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="build-process" class="section level2">
 <h2><span class="header-section-number">4.2</span> Build process</h2>
+<!-- New image needs to be created based on this -->
 <p><img src="docs/images/singularity_build_input_output.svg" width="600"></p>
 <div id="examples" class="section level3">
 <h3><span class="header-section-number">4.2.1</span> Examples</h3>
-</div>
-<div id="registries" class="section level3">
-<h3><span class="header-section-number">4.2.2</span> Registries</h3>
+<div id="through-registries" class="section level4">
+<h4><span class="header-section-number">4.2.1.1</span> Through registries</h4>
 <ul>
 <li>Docker Hub</li>
 </ul>
@@ -304,18 +303,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul>
 </div>
+</div>
 <div id="sandboxing" class="section level3">
-<h3><span class="header-section-number">4.2.3</span> Sandboxing</h3>
-<p><em>What does it mean?</em></p>
-<pre><code> singularity build --sandbox ./sandbox docker://ubuntu:18.04
- touch sandbox/etc/myetc.conf
- singularity build sandbox.sif ./sandbox</code></pre>
+<h3><span class="header-section-number">4.2.2</span> Sandboxing</h3>
+<pre><code>     singularity build --sandbox ./sandbox docker://ubuntu:18.04
+     touch sandbox/etc/myetc.conf
+     singularity build sandbox.sif ./sandbox</code></pre>
 </div>
 <div id="singularity-recipes" class="section level3">
-<h3><span class="header-section-number">4.2.4</span> Singularity recipes</h3>
+<h3><span class="header-section-number">4.2.3</span> Singularity recipes</h3>
 <p>Saved in a <em>.sif</em> file?</p>
 <div id="docker-bootstrap" class="section level4">
-<h4><span class="header-section-number">4.2.4.1</span> Docker bootstrap</h4>
+<h4><span class="header-section-number">4.2.3.1</span> Docker bootstrap</h4>
 <p><em>What does itmean (bootstrap)?</em></p>
 <pre><code>BootStrap: docker
 From: biocontainers/fastqc:v0.11.9_cv7
@@ -329,7 +328,7 @@ From: biocontainers/fastqc:v0.11.9_cv7
 <pre><code>sudo singularity build fastqc.sif docker.singularity</code></pre>
 </div>
 <div id="debian-bootstrap" class="section level4">
-<h4><span class="header-section-number">4.2.4.2</span> Debian bootstrap</h4>
+<h4><span class="header-section-number">4.2.3.2</span> Debian bootstrap</h4>
 <pre><code>BootStrap: debootstrap
 OSVersion: bionic
 MirrorURL:  http://fr.archive.ubuntu.com/ubuntu/

@@ -59,7 +59,7 @@ strengths
 weaknesses
 build-process
 examples
-registries
+through-registries
 sandboxing
 singularity-recipes
 docker-bootstrap
