@@ -767,7 +767,7 @@ RUN apt install python${PyVersion}
 
 We will see in the next topic how to change the arguments in **ARG** in the command-line as we create/**build** the image.
 
-*SHOULD WE PUT MORE ABOUT ENV TOO??*
+*SHOULD WE PUT MORE ABOUT sENV TOO??*
 
 <br>
 
