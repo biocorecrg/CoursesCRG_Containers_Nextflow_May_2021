@@ -56,7 +56,7 @@ Nextflow supports Docker and Singularity containers technology. Their use will m
 
 Nextflow can be executed on multiple platforms without modifiying the code. It supports several schedulers such as SGE, LSF, SLURM, PBS and HTCondor and  cloud platforms like Kubernetes, Amazon AWS and Google Cloud.
 
-```{r, out.width="600px", echo=FALSE}
+```{r, out.width="600px", echo=FALSE, eval = TRUE }
 knitr::include_graphics('docs/images/executors.png')
 ```
 
@@ -73,7 +73,7 @@ The workflows can be repesented as graphs where the nodes are the **processes** 
 The **processes** are block of code that can be executed such as scripts or programs, while the **channels** are asynchronous queue able to connect processess among them via input / output.
 
 
-```{r, out.width="800px", echo=FALSE}
+```{r, out.width="600px", echo=FALSE, eval = TRUE }
 knitr::include_graphics('docs/images/wf_example.png')
 ```
 
@@ -837,6 +837,7 @@ cache = 'lenient' // (Best in HPC and shared file systems) Cache keys are create
 
 
 # Nextflow day 2
+During this day we will make more complex pipelines and separate the main code from the configuration. Then we will focus on the reuse of the code and on how to share your code.
 
 ## Decoupling resources, parameters and nextflow script
 When you make a complex pipelines you might want to keep separated the definition of resources needed, the default parameters and the main script.
@@ -1509,7 +1510,7 @@ Nextflow has an embedded function for reporting a number of informations about t
 nextflow run test5.nf -with-docker -bg -with-report > log
 ```
 
-```{r, out.width="800px", echo=FALSE}
+```{r, out.width="800px", echo=FALSE, eval = TRUE }
 knitr::include_graphics('docs/images/report.png')
 ```
 
@@ -1572,3 +1573,10 @@ knitr::include_graphics('docs/images/tower3.png')
 ```
 
 ## Share Nextflow pipelines and good practices
+
+Nextflow supports a number of sharing platforms: BitBucket, GitHub, and GitLab. This feature allows people to run pipelines by just pointing to an online repository. The default repository is GitHub, so we will use this as an example. 
+
+
+
+
+
