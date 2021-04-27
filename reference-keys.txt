@@ -30,7 +30,6 @@ using-existing-images
 getting-started
 explore-docker-hub
 docker-pull-import-an-image
-biocontainers
 docker-run-run-image-i.e.-start-a-container
 docker-ps-check-containers-status
 docker-exec-execute-process-in-running-container
@@ -52,6 +51,7 @@ exercise-writing-more-complex-recipes
 additional-commands
 volumes
 ports
+pushing-an-image-to-docker-hub
 singularity
 introduction-to-singularity
 singularity-architecture
