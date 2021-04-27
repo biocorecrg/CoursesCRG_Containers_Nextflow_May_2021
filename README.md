@@ -19,7 +19,7 @@ It is designed to provide trainees with short and frequent hands-on sessions, wh
 
 The course will be fully virtual via the Zoom platform.
 
-Trainees will work in a dedicated AWS Cloud9 environment.
+Trainees will work in a dedicated AWS environment.
 
 
 ### Learning objectives
