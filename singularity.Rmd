@@ -80,7 +80,6 @@ knitr::opts_chunk$set(echo = TRUE, eval = FALSE, warning = FALSE)
 
 * Also Singularity registries (not so popular so far)
   * [https://cloud.sylabs.io/library](https://cloud.sylabs.io/library)
-  * [https://singularity-hub.org/](https://singularity-hub.org/)
 
 ### Sandboxing
 
@@ -199,7 +198,7 @@ Execute commands. Common approach in HPC uses.
 
     singularity exec -e fastqc-multi-bowtie.sif fastqc
 
-Compare ```env``` command with and without -e modifier.  
+Compare ```env``` command with and without -e modifier.
 
     singularity exec fastqc-multi-bowtie.sif env
     singularity exec -e fastqc-multi-bowtie.sif env
@@ -295,4 +294,3 @@ Normally at ```/etc/singularity/singularity.conf``` or similar (e.g preceded by 
 
 * It can only be modified by users with administration permissions
 * Worth noting ```bind path``` lines, which point default mounted directories in containers
-
