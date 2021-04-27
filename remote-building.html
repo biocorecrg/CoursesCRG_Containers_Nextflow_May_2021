@@ -280,12 +280,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li><p>We need to create a <a href="Sylabs%20Cloud">https://cloud.sylabs.io/</a> account first.</p>
 <p>singularity remote login</p></li>
-<li><p>We generate a token at <a href="https://cloud.sylabs.io/auth/tokens" class="uri">https://cloud.sylabs.io/auth/tokens</a> and we use in the command-line below:</p>
-<p>singularity remote login –tokenfile mytokenfile</p></li>
+<li><p>In order to use it our username and passwords we generate a token at <a href="https://cloud.sylabs.io/auth/tokens" class="uri">https://cloud.sylabs.io/auth/tokens</a> and copy its contents to a file (e.g., <code>singularity.token</code>). Then we use in the command-line below:</p>
+<p>singularity remote login –tokenfile singularity.token</p></li>
 </ul>
+<details>
+<summary>
+<h5>
+<em>Output</em>
+</h5>
+</summary>
+(base) [<a href="mailto:ec2-user@ip-172-31-47-200" class="email">ec2-user@ip-172-31-47-200</a> ~]$ singularity remote login –tokenfile singularity.token
+INFO: Access Token Verified!
+INFO: Token stored in /home/ec2-user/.singularity/remote.yaml
+</details>
 
 <div class="rmdtip">
-For safety reasons, remove this token once you use it after the course
+For safety reasons, remove the token from Cloud Sylabs interface after the course. Follow the same philosophy for similar circumstances. Keep an only token for a specific environment or action.
 </div>
 
 <p>Build an image</p>
