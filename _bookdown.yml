@@ -10,7 +10,8 @@ rmd_files: ["index.Rmd",
           "containers_intro.Rmd",
           "docker.Rmd",
           "singularity.Rmd",
-          "part2.Rmd"]
+          "nextflow1.Rmd",
+          "nextflow2.Rmd"]
 output:
   bookdown::gitbook:
     theme: cosmo
