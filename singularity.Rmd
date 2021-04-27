@@ -164,12 +164,21 @@ This allows us to build a Singularity image without using our own computer. This
 
     singularity remote login
 
-* We generate a token at https://cloud.sylabs.io/auth/tokens and we use in the command-line below:
+* In order to use it our username and passwords we generate a token at https://cloud.sylabs.io/auth/tokens and copy its contents to a file (e.g., ``singularity.token``). Then we use in the command-line below:
 
-    singularity remote login --tokenfile mytokenfile
+    singularity remote login --tokenfile singularity.token
+
+<details>
+<summary>
+<h5>*Output*</h5>
+</summary>
+    (base) [ec2-user@ip-172-31-47-200 ~]$ singularity remote login --tokenfile singularity.token
+    INFO:    Access Token Verified!
+    INFO:    Token stored in /home/ec2-user/.singularity/remote.yaml
+</details>
 
 ```{block2, type='rmdtip'}
-For safety reasons, remove this token once you use it after the course
+For safety reasons, remove the token from Cloud Sylabs interface after the course. Follow the same philosophy for similar circumstances. Keep an only token for a specific environment or action.
 ```
 
 Build an image
