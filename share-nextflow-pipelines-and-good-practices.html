@@ -275,7 +275,134 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="share-nextflow-pipelines-and-good-practices" class="section level2">
 <h2><span class="header-section-number">6.10</span> Share Nextflow pipelines and good practices</h2>
-<p>Nextflow supports a number of sharing platforms: BitBucket, GitHub, and GitLab. This feature allows people to run pipelines by just pointing to an online repository. The default repository is GitHub, so we will use this as an example.</p>
+<p>Nextflow supports a number of code sharing platforms: BitBucket, GitHub, and GitLab. This feature allows you to run pipelines by just pointing to an online repository without caring about downloading etc. The default platform is GitHub, so we will use this repository as an example.</p>
+<p>Let’s create a new repository with a unique name:</p>
+<p><img src="docs/images/git_1.png" width="300px" /></p>
+<p><img src="docs/images/git_2.png" width="300px" /></p>
+<p>And then let’s clone it in one of our test folder. Let’s choose the 5. We can get the url path by clicking like on the figure:</p>
+<p><img src="docs/images/git_3.png" width="800px" /></p>
+<div class="sourceCode" id="cb175"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb175-1"><a href="share-nextflow-pipelines-and-good-practices.html#cb175-1"></a><span class="fu">git</span> clone https://github.com/lucacozzuto/test_course.git</span>
+<span id="cb175-2"><a href="share-nextflow-pipelines-and-good-practices.html#cb175-2"></a><span class="ex">Cloning</span> into <span class="st">&#39;test_course&#39;</span>...</span>
+<span id="cb175-3"><a href="share-nextflow-pipelines-and-good-practices.html#cb175-3"></a><span class="ex">remote</span>: Enumerating objects: 3, done.</span>
+<span id="cb175-4"><a href="share-nextflow-pipelines-and-good-practices.html#cb175-4"></a><span class="ex">remote</span>: Counting objects: 100% (3/3), <span class="kw">done</span><span class="ex">.</span></span>
+<span id="cb175-5"><a href="share-nextflow-pipelines-and-good-practices.html#cb175-5"></a><span class="ex">remote</span>: Total 3 (delta 0), <span class="ex">reused</span> 0 (delta 0), <span class="ex">pack-reused</span> 0</span>
+<span id="cb175-6"><a href="share-nextflow-pipelines-and-good-practices.html#cb175-6"></a><span class="ex">Unpacking</span> objects: 100% (3/3), <span class="kw">done</span><span class="ex">.</span></span></code></pre></div>
+<p>So now we have an almost empty folder named <strong>test_course</strong>. We can just move or copy our files there:</p>
+<div class="sourceCode" id="cb176"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb176-1"><a href="share-nextflow-pipelines-and-good-practices.html#cb176-1"></a><span class="fu">cp</span> *.* lib -r test_course/ </span>
+<span id="cb176-2"><a href="share-nextflow-pipelines-and-good-practices.html#cb176-2"></a><span class="bu">cd</span> test_course</span>
+<span id="cb176-3"><a href="share-nextflow-pipelines-and-good-practices.html#cb176-3"></a></span>
+<span id="cb176-4"><a href="share-nextflow-pipelines-and-good-practices.html#cb176-4"></a><span class="fu">git</span> status</span>
+<span id="cb176-5"><a href="share-nextflow-pipelines-and-good-practices.html#cb176-5"></a></span>
+<span id="cb176-6"><a href="share-nextflow-pipelines-and-good-practices.html#cb176-6"></a><span class="co"># On branch main</span></span>
+<span id="cb176-7"><a href="share-nextflow-pipelines-and-good-practices.html#cb176-7"></a><span class="co"># Untracked files:</span></span>
+<span id="cb176-8"><a href="share-nextflow-pipelines-and-good-practices.html#cb176-8"></a><span class="co">#   (use &quot;git add &lt;file&gt;...&quot; to include in what will be committed)</span></span>
+<span id="cb176-9"><a href="share-nextflow-pipelines-and-good-practices.html#cb176-9"></a><span class="co">#</span></span>
+<span id="cb176-10"><a href="share-nextflow-pipelines-and-good-practices.html#cb176-10"></a><span class="co">#   lib/</span></span>
+<span id="cb176-11"><a href="share-nextflow-pipelines-and-good-practices.html#cb176-11"></a><span class="co">#   nextflow.config</span></span>
+<span id="cb176-12"><a href="share-nextflow-pipelines-and-good-practices.html#cb176-12"></a><span class="co">#   params.config</span></span>
+<span id="cb176-13"><a href="share-nextflow-pipelines-and-good-practices.html#cb176-13"></a><span class="co">#   test5.nf</span></span>
+<span id="cb176-14"><a href="share-nextflow-pipelines-and-good-practices.html#cb176-14"></a><span class="ex">nothing</span> added to commit but untracked files present (use <span class="st">&quot;git add&quot;</span> to track)</span></code></pre></div>
+<p>Now we are ready for committing and pushing everything to the online repository.</p>
+<div class="sourceCode" id="cb177"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb177-1"><a href="share-nextflow-pipelines-and-good-practices.html#cb177-1"></a></span>
+<span id="cb177-2"><a href="share-nextflow-pipelines-and-good-practices.html#cb177-2"></a><span class="fu">git</span> add *</span>
+<span id="cb177-3"><a href="share-nextflow-pipelines-and-good-practices.html#cb177-3"></a></span>
+<span id="cb177-4"><a href="share-nextflow-pipelines-and-good-practices.html#cb177-4"></a><span class="fu">git</span> status</span>
+<span id="cb177-5"><a href="share-nextflow-pipelines-and-good-practices.html#cb177-5"></a><span class="co"># On branch main</span></span>
+<span id="cb177-6"><a href="share-nextflow-pipelines-and-good-practices.html#cb177-6"></a><span class="co"># Changes to be committed:</span></span>
+<span id="cb177-7"><a href="share-nextflow-pipelines-and-good-practices.html#cb177-7"></a><span class="co">#   (use &quot;git reset HEAD &lt;file&gt;...&quot; to unstage)</span></span>
+<span id="cb177-8"><a href="share-nextflow-pipelines-and-good-practices.html#cb177-8"></a><span class="co">#</span></span>
+<span id="cb177-9"><a href="share-nextflow-pipelines-and-good-practices.html#cb177-9"></a><span class="co">#   new file:   lib/bowtie.nf</span></span>
+<span id="cb177-10"><a href="share-nextflow-pipelines-and-good-practices.html#cb177-10"></a><span class="co">#   new file:   lib/fastqc.nf</span></span>
+<span id="cb177-11"><a href="share-nextflow-pipelines-and-good-practices.html#cb177-11"></a><span class="co">#   new file:   lib/multiqc.nf</span></span>
+<span id="cb177-12"><a href="share-nextflow-pipelines-and-good-practices.html#cb177-12"></a><span class="co">#   new file:   nextflow.config</span></span>
+<span id="cb177-13"><a href="share-nextflow-pipelines-and-good-practices.html#cb177-13"></a><span class="co">#   new file:   params.config</span></span>
+<span id="cb177-14"><a href="share-nextflow-pipelines-and-good-practices.html#cb177-14"></a><span class="co">#   new file:   test5.nf</span></span>
+<span id="cb177-15"><a href="share-nextflow-pipelines-and-good-practices.html#cb177-15"></a><span class="co">#</span></span>
+<span id="cb177-16"><a href="share-nextflow-pipelines-and-good-practices.html#cb177-16"></a></span>
+<span id="cb177-17"><a href="share-nextflow-pipelines-and-good-practices.html#cb177-17"></a></span>
+<span id="cb177-18"><a href="share-nextflow-pipelines-and-good-practices.html#cb177-18"></a><span class="fu">git</span> commit -m <span class="st">&quot;first commit&quot;</span></span>
+<span id="cb177-19"><a href="share-nextflow-pipelines-and-good-practices.html#cb177-19"></a></span>
+<span id="cb177-20"><a href="share-nextflow-pipelines-and-good-practices.html#cb177-20"></a>[<span class="ex">main</span> 7681f85] first commit</span>
+<span id="cb177-21"><a href="share-nextflow-pipelines-and-good-practices.html#cb177-21"></a> <span class="ex">6</span> files changed, 186 insertions(+)</span>
+<span id="cb177-22"><a href="share-nextflow-pipelines-and-good-practices.html#cb177-22"></a> <span class="ex">create</span> mode 100644 lib/bowtie.nf</span>
+<span id="cb177-23"><a href="share-nextflow-pipelines-and-good-practices.html#cb177-23"></a> <span class="ex">create</span> mode 120000 lib/fastqc.nf</span>
+<span id="cb177-24"><a href="share-nextflow-pipelines-and-good-practices.html#cb177-24"></a> <span class="ex">create</span> mode 120000 lib/multiqc.nf</span>
+<span id="cb177-25"><a href="share-nextflow-pipelines-and-good-practices.html#cb177-25"></a> <span class="ex">create</span> mode 100644 nextflow.config</span>
+<span id="cb177-26"><a href="share-nextflow-pipelines-and-good-practices.html#cb177-26"></a> <span class="ex">create</span> mode 100644 params.config</span>
+<span id="cb177-27"><a href="share-nextflow-pipelines-and-good-practices.html#cb177-27"></a> <span class="ex">create</span> mode 100755 test5.nf</span>
+<span id="cb177-28"><a href="share-nextflow-pipelines-and-good-practices.html#cb177-28"></a>[<span class="ex">lcozzuto@nextflow</span> test_course]$ git push</span>
+<span id="cb177-29"><a href="share-nextflow-pipelines-and-good-practices.html#cb177-29"></a><span class="ex">Username</span> for <span class="st">&#39;https://github.com&#39;</span>: <span class="co">######</span></span>
+<span id="cb177-30"><a href="share-nextflow-pipelines-and-good-practices.html#cb177-30"></a><span class="ex">Password</span> for <span class="st">&#39;https://######@github.com&#39;</span>: </span>
+<span id="cb177-31"><a href="share-nextflow-pipelines-and-good-practices.html#cb177-31"></a><span class="ex">Counting</span> objects: 10, done.</span>
+<span id="cb177-32"><a href="share-nextflow-pipelines-and-good-practices.html#cb177-32"></a><span class="ex">Delta</span> compression using up to 8 threads.</span>
+<span id="cb177-33"><a href="share-nextflow-pipelines-and-good-practices.html#cb177-33"></a><span class="ex">Compressing</span> objects: 100% (7/7), <span class="kw">done</span><span class="ex">.</span></span>
+<span id="cb177-34"><a href="share-nextflow-pipelines-and-good-practices.html#cb177-34"></a><span class="ex">Writing</span> objects: 100% (9/9), <span class="ex">2.62</span> KiB <span class="kw">|</span> <span class="ex">0</span> bytes/s, done.</span>
+<span id="cb177-35"><a href="share-nextflow-pipelines-and-good-practices.html#cb177-35"></a><span class="ex">Total</span> 9 (delta 0), <span class="ex">reused</span> 0 (delta 0)</span>
+<span id="cb177-36"><a href="share-nextflow-pipelines-and-good-practices.html#cb177-36"></a><span class="ex">To</span> https://github.com/lucacozzuto/test_course.git</span>
+<span id="cb177-37"><a href="share-nextflow-pipelines-and-good-practices.html#cb177-37"></a>   <span class="ex">bbd6a44..7681f85</span>  main -<span class="op">&gt;</span> main</span></code></pre></div>
+<p>So if we go again on the GitHub website we can see that eveything has been uploaded.</p>
+<p><img src="docs/images/git_2.png" width="800px" /></p>
+<p>We need to change the name of the <strong>test5.nf</strong> file to <strong>main.nf</strong>, since it is automatically searched by nextflow when launched the pipeline.</p>
+<p>Now we can remove that folder and go in the home folder.</p>
+<div class="sourceCode" id="cb178"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb178-1"><a href="share-nextflow-pipelines-and-good-practices.html#cb178-1"></a><span class="fu">rm</span> -fr test_course</span>
+<span id="cb178-2"><a href="share-nextflow-pipelines-and-good-practices.html#cb178-2"></a><span class="bu">cd</span> <span class="va">$HOME</span></span></code></pre></div>
+<p>And we can launch directly this pipeline by typing</p>
+<div class="sourceCode" id="cb179"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb179-1"><a href="share-nextflow-pipelines-and-good-practices.html#cb179-1"></a><span class="ex">nextflow</span> run lucacozzuto/test_course -with-docker -r main \</span>
+<span id="cb179-2"><a href="share-nextflow-pipelines-and-good-practices.html#cb179-2"></a>--reads <span class="st">&quot;/home/ec2-user/git/CoursesCRG_Containers_Nextflow_May_2021/nextflow/nextflow/testdata/*.fastq.gz&quot;</span> \</span>
+<span id="cb179-3"><a href="share-nextflow-pipelines-and-good-practices.html#cb179-3"></a>--reference <span class="st">&quot;/home/ec2-user/git/CoursesCRG_Containers_Nextflow_May_2021/nextflow/nextflow/testdata/chr19.fasta.gz&quot;</span></span></code></pre></div>
+<p>As you can see we just use the repository name and indicate to use Docker and to use the input files from the real paths. Moreover we indicates to use the <strong>main</strong> branch.</p>
+<div class="sourceCode" id="cb180"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb180-1"><a href="share-nextflow-pipelines-and-good-practices.html#cb180-1"></a></span>
+<span id="cb180-2"><a href="share-nextflow-pipelines-and-good-practices.html#cb180-2"></a><span class="ex">N</span> E X T F L O W  ~  version 20.10.0</span>
+<span id="cb180-3"><a href="share-nextflow-pipelines-and-good-practices.html#cb180-3"></a><span class="ex">Pulling</span> lucacozzuto/test_course ...</span>
+<span id="cb180-4"><a href="share-nextflow-pipelines-and-good-practices.html#cb180-4"></a><span class="ex">downloaded</span> from https://github.com/lucacozzuto/test_course.git</span>
+<span id="cb180-5"><a href="share-nextflow-pipelines-and-good-practices.html#cb180-5"></a><span class="ex">Launching</span> <span class="kw">`</span><span class="ex">lucacozzuto/test_course</span><span class="kw">`</span> [voluminous_feynman] - revision: 95d1028adf [main]</span>
+<span id="cb180-6"><a href="share-nextflow-pipelines-and-good-practices.html#cb180-6"></a><span class="ex">BIOCORE@CRG</span> - N F TESTPIPE  ~  version 1.0</span>
+<span id="cb180-7"><a href="share-nextflow-pipelines-and-good-practices.html#cb180-7"></a>=============================================</span>
+<span id="cb180-8"><a href="share-nextflow-pipelines-and-good-practices.html#cb180-8"></a><span class="ex">reads</span>                           : /home/ec2-user/git/CoursesCRG_Containers_Nextflow_May_2021/nextflow/nextflow/testdata/*.fastq.gz</span>
+<span id="cb180-9"><a href="share-nextflow-pipelines-and-good-practices.html#cb180-9"></a><span class="ex">reference</span>                       : /home/ec2-user/git/CoursesCRG_Containers_Nextflow_May_2021/nextflow/nextflow/testdata/chr19.fasta.gz</span>
+<span id="cb180-10"><a href="share-nextflow-pipelines-and-good-practices.html#cb180-10"></a><span class="ex">executor</span> <span class="op">&gt;</span>  local (5)</span>
+<span id="cb180-11"><a href="share-nextflow-pipelines-and-good-practices.html#cb180-11"></a>[<span class="ex">5b</span>/<span class="ex">4a36e8</span>] process <span class="op">&gt;</span> fastqc (B7_input_s_chr19.fastq.gz)             [<span class="ex">100%</span>] 2 of 2 ✔</span>
+<span id="cb180-12"><a href="share-nextflow-pipelines-and-good-practices.html#cb180-12"></a>[<span class="ex">5c</span>/<span class="ex">644577</span>] process <span class="op">&gt;</span> BOWTIE:bowtieIdx (chr19.fasta.gz)              [<span class="ex">100%</span>] 1 of 1 ✔</span>
+<span id="cb180-13"><a href="share-nextflow-pipelines-and-good-practices.html#cb180-13"></a><span class="ex">executor</span> <span class="op">&gt;</span>  local (5)</span>
+<span id="cb180-14"><a href="share-nextflow-pipelines-and-good-practices.html#cb180-14"></a>[<span class="ex">5b</span>/<span class="ex">4a36e8</span>] process <span class="op">&gt;</span> fastqc (B7_input_s_chr19.fastq.gz)           [<span class="ex">100%</span>] 2 of 2 ✔</span>
+<span id="cb180-15"><a href="share-nextflow-pipelines-and-good-practices.html#cb180-15"></a>[<span class="ex">5c</span>/<span class="ex">644577</span>] process <span class="op">&gt;</span> BOWTIE:bowtieIdx (chr19.fasta.gz)            [<span class="ex">100%</span>] 1 of 1 ✔</span>
+<span id="cb180-16"><a href="share-nextflow-pipelines-and-good-practices.html#cb180-16"></a>[<span class="ex">4b</span>/<span class="ex">dad392</span>] process <span class="op">&gt;</span> BOWTIE:bowtieAln (B7_input_s_chr19.fastq.gz) [<span class="ex">100%</span>] 2 of 2 ✔</span>
+<span id="cb180-17"><a href="share-nextflow-pipelines-and-good-practices.html#cb180-17"></a><span class="ex">/home/ec2-user/work/d1/11fe0bff99f424571033347bf4b042/B7_H3K4me1_s_chr19.fastq.gz.sam</span></span>
+<span id="cb180-18"><a href="share-nextflow-pipelines-and-good-practices.html#cb180-18"></a><span class="ex">/home/ec2-user/work/4b/dad392b12d2f78f976d2a890ebcaea/B7_input_s_chr19.fastq.gz.sam</span></span>
+<span id="cb180-19"><a href="share-nextflow-pipelines-and-good-practices.html#cb180-19"></a><span class="ex">Completed</span> at: 27-Apr-2021 20:27:14</span>
+<span id="cb180-20"><a href="share-nextflow-pipelines-and-good-practices.html#cb180-20"></a><span class="ex">Duration</span>    : 1m 26s</span>
+<span id="cb180-21"><a href="share-nextflow-pipelines-and-good-practices.html#cb180-21"></a><span class="ex">CPU</span> hours   : (a few seconds)</span>
+<span id="cb180-22"><a href="share-nextflow-pipelines-and-good-practices.html#cb180-22"></a><span class="ex">Succeeded</span>   : 5</span></code></pre></div>
+<p>As you can see as the first step, Nextflow pulls down the required version of the pipeline and it stores it at:</p>
+<div class="sourceCode" id="cb181"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb181-1"><a href="share-nextflow-pipelines-and-good-practices.html#cb181-1"></a><span class="ex">/home/ec2-user/.nextflow/assets/lucacozzuto/test_course/</span></span></code></pre></div>
+<p>You can use the Nextflow’s command <strong>list</strong> that show you the number of pipelines installed in your environment and the command <strong>info</strong> for fetching some useful information.</p>
+<div class="sourceCode" id="cb182"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb182-1"><a href="share-nextflow-pipelines-and-good-practices.html#cb182-1"></a><span class="ex">nextflow</span> list</span>
+<span id="cb182-2"><a href="share-nextflow-pipelines-and-good-practices.html#cb182-2"></a><span class="ex">lucacozzuto/test_course</span></span>
+<span id="cb182-3"><a href="share-nextflow-pipelines-and-good-practices.html#cb182-3"></a><span class="ex">...</span></span></code></pre></div>
+<div class="sourceCode" id="cb183"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb183-1"><a href="share-nextflow-pipelines-and-good-practices.html#cb183-1"></a><span class="ex">nextflow</span> info lucacozzuto/test_course</span>
+<span id="cb183-2"><a href="share-nextflow-pipelines-and-good-practices.html#cb183-2"></a> <span class="ex">project</span> name: lucacozzuto/test_course</span>
+<span id="cb183-3"><a href="share-nextflow-pipelines-and-good-practices.html#cb183-3"></a> <span class="ex">repository</span>  : https://github.com/lucacozzuto/test_course</span>
+<span id="cb183-4"><a href="share-nextflow-pipelines-and-good-practices.html#cb183-4"></a> <span class="bu">local</span> <span class="va">path</span>  : /home/ec2-user/.nextflow/assets/lucacozzuto/test_course</span>
+<span id="cb183-5"><a href="share-nextflow-pipelines-and-good-practices.html#cb183-5"></a> <span class="ex">main</span> script : main.nf</span>
+<span id="cb183-6"><a href="share-nextflow-pipelines-and-good-practices.html#cb183-6"></a> <span class="ex">revision</span>    : * main</span></code></pre></div>
+<p>Finally you can update, view or delete a project by using the Nextflow commands <strong>pull</strong>, <strong>view</strong> and <strong>drop</strong>.</p>
+<div class="sourceCode" id="cb184"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb184-1"><a href="share-nextflow-pipelines-and-good-practices.html#cb184-1"></a><span class="ex">nextflow</span> view lucacozzuto/test_course</span>
+<span id="cb184-2"><a href="share-nextflow-pipelines-and-good-practices.html#cb184-2"></a></span>
+<span id="cb184-3"><a href="share-nextflow-pipelines-and-good-practices.html#cb184-3"></a>== <span class="ex">content</span> of file: /users/bi/lcozzuto/.nextflow/assets/lucacozzuto/test_course/main.nf</span>
+<span id="cb184-4"><a href="share-nextflow-pipelines-and-good-practices.html#cb184-4"></a><span class="co">#!/usr/bin/env nextflow</span></span>
+<span id="cb184-5"><a href="share-nextflow-pipelines-and-good-practices.html#cb184-5"></a></span>
+<span id="cb184-6"><a href="share-nextflow-pipelines-and-good-practices.html#cb184-6"></a><span class="ex">/*</span></span>
+<span id="cb184-7"><a href="share-nextflow-pipelines-and-good-practices.html#cb184-7"></a> <span class="ex">*</span> Copyright (c) <span class="ex">2013-2020</span>, Centre for Genomic Regulation (CRG)<span class="ex">.</span></span>
+<span id="cb184-8"><a href="share-nextflow-pipelines-and-good-practices.html#cb184-8"></a> <span class="ex">*</span></span>
+<span id="cb184-9"><a href="share-nextflow-pipelines-and-good-practices.html#cb184-9"></a> <span class="ex">*</span>   This file is part of <span class="st">&#39;CRG_Containers_NextFlow&#39;</span>.</span>
+<span id="cb184-10"><a href="share-nextflow-pipelines-and-good-practices.html#cb184-10"></a> <span class="ex">*</span></span>
+<span id="cb184-11"><a href="share-nextflow-pipelines-and-good-practices.html#cb184-11"></a> <span class="ex">*</span>   CRG_Containers_NextFlow is free software: you can redistribute it and/or modify</span>
+<span id="cb184-12"><a href="share-nextflow-pipelines-and-good-practices.html#cb184-12"></a> <span class="ex">*</span>   it under the terms of the GNU General Public License as published by</span>
+<span id="cb184-13"><a href="share-nextflow-pipelines-and-good-practices.html#cb184-13"></a> <span class="ex">*</span>   the Free Software Foundation, either version 3 of the License, or</span>
+<span id="cb184-14"><a href="share-nextflow-pipelines-and-good-practices.html#cb184-14"></a> <span class="ex">*</span>   (at your option) <span class="ex">any</span> later version.</span>
+<span id="cb184-15"><a href="share-nextflow-pipelines-and-good-practices.html#cb184-15"></a> <span class="ex">*</span></span>
+<span id="cb184-16"><a href="share-nextflow-pipelines-and-good-practices.html#cb184-16"></a> <span class="ex">*</span>   CRG_Containers_NextFlow is distributed in the hope that it will be useful,</span>
+<span id="cb184-17"><a href="share-nextflow-pipelines-and-good-practices.html#cb184-17"></a>[<span class="ex">...</span>]</span></code></pre></div>
 
 </div>
 <!-- </div> -->
