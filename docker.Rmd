@@ -715,6 +715,14 @@ MAINTAINER Toni Hermoso Pulido <toni.hermoso@crg.eu>
 WORKDIR ~
 ```
 
+**SHELL**: allows the default shell used for the shell form of commands to be overridden. 
+<br>
+Use `bash` as the default shell:
+
+```
+SHELL ["/bin/bash", "-c"]
+```
+
 **ADD, COPY**: add files to the image filesystem
 
 Difference between ADD and COPY explained [here](https://stackoverflow.com/questions/24958140/what-is-the-difference-between-the-copy-and-add-commands-in-a-dockerfile) and [here](https://nickjanetakis.com/blog/docker-tip-2-the-difference-between-copy-and-add-in-a-dockerile)
@@ -733,11 +741,20 @@ COPY ~/.bashrc .
 
 Difference between ARG and ENV explained [here](https://vsupalov.com/docker-arg-vs-env/).
 
+<a href="https://d33wubrfki0l68.cloudfront.net/ed9cab66953fd3a80af63675cf3fefade4572c01/00a3b/images/docker-env-vars/docker_environment_build_args_overview.png"><img src="https://d33wubrfki0l68.cloudfront.net/ed9cab66953fd3a80af63675cf3fefade4572c01/00a3b/images/docker-env-vars/docker_environment_build_args_overview.png" width="800/"></a>
 
 * **ARG** values: available only *while the image is built.*
 * **ENV** values: available *for the future running containers.*
 
-An example of **ARG**: you can use it to build a specific version of a software inside the image:
+You can use **ARG**, for example, to specify the version of the base layer:
+
+```
+ARG UbuntuVersion=18.04
+
+FROM ubuntu:${UbuntuVersion}
+```
+
+or to build a specific software version in the image:
 
 ```
 FROM ubuntu:18.04
@@ -747,6 +764,12 @@ ARG PyVersion=2.7
 RUN apt update && apt upgrade -y
 RUN apt install python${PyVersion}
 ```
+
+We will see in the next topic how to change the arguments in **ARG** in the command-line as we create/**build** the image.
+
+*SHOULD WE PUT MORE ABOUT ENV TOO??*
+
+<br>
 
 **CMD, ENTRYPOINT**: command to execute when generated container starts
 
@@ -761,6 +784,7 @@ If it is run with the argument **nice** it will execute `echo "nice"`.
 
 ```docker
 FROM ubuntu:18.04
+
 ENTRYPOINT ["/bin/echo"]
 CMD ["hello world"]
 ```
@@ -771,6 +795,8 @@ A more complex recipe (save it in a text file named **Dockerfile**!):
 FROM ubuntu:18.04
 
 MAINTAINER Toni Hermoso Pulido <toni.hermoso@crg.eu>
+
+SHELL ["/bin/bash", "-c"]
 
 WORKDIR ~
 
@@ -784,7 +810,10 @@ CMD ["https://cdn.wp.nginx.com/wp-content/uploads/2016/07/docker-swarm-hero2.png
 
 ### docker build
 
-Implicitely looks for a **Dockerfile** file in the current directory:
+`docker build` will create/build a Docker image from a Docker recipe.
+<br>
+
+It implicitely looks for a **Dockerfile** file in the current directory:
 
 ```{bash}
 docker build .
@@ -855,6 +884,7 @@ docker run f9f41698e2f8 https://cdn-images-1.medium.com/max/1600/1*_NQN6_YnxS29m
 
 ```
 FROM ubuntu:18.04
+
 ENTRYPOINT ["echo"]
 CMD ["I love containers"]
 ```
@@ -998,7 +1028,7 @@ Build an image based on **CentOS** (use base layer [centos:7](https://hub.docker
 
 * Install [**bowtie2**](https://centos.pkgs.org/7/epel-x86_64/bowtie2-2.4.1-1.el7.x86_64.rpm.html) and **show the help page by default**.
   * you will need to download and install the **.rpm** package inside the image !
-* Change the name (and version) of the image to **bowtie2image:1.0**. Check that the change was taken into account with `docker images`
+* Change the name (and version) of the image to **bowtie2image:1.0**. Check that the change was taken into account with `docker images`.
 
 <details>
 <summary>
