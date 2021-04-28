@@ -1148,11 +1148,17 @@ docker rm -f webserver
 
 ## Integrative example
 
-### BLAST Web Application
+### FASTQC Web Application
+
+Step by step following the
 
 ### Shiny Application
 
 Simply introduction...
+
+```{block2, type='rmdtip'}
+Approaches to have the code or mounting.
+```
 
 ## Publish images
 
@@ -1195,5 +1201,5 @@ https://docs.docker.com/engine/reference/commandline/login/#credentials-store
 
 ## Breakout exercises with Docker - 3
 
-* Simple FASTQC web application. Including mount/volume and port. Description below
+* Simple BLAST web application. Including mount/volume and port. Description below
 * If time push resulting image to Docker Hub
