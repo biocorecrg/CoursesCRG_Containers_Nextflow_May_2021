@@ -1,5 +1,5 @@
 /*
-*  bowtie module
+*  bowtie modules and workflows
 */
 
 params.CONTAINER = "quay.io/biocontainers/bowtie:1.2.3--py37hc9558a2_0"
@@ -59,7 +59,7 @@ workflow BOWTIE {
 		bowtieAln(bow_index, input)
     emit:
     	sam = bowtieAln.out.samples_sam
-    	//log = bowtieAln.out.samples_log
+    	logs = bowtieAln.out.samples_log
 }
 
 

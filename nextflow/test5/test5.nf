@@ -83,7 +83,8 @@ workflow {
 	fastqc_out = fastqc(reads)
 	map_res = BOWTIE(reference, reads)
 	map_res.sam.view()
-	//multiqc(fastqc_out.mix(map_res.log).collect())
+	map_res.logs.view()
+	multiqc(fastqc_out.mix(map_res.logs).collect())
 }
 
 
