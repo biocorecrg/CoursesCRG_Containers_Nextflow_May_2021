@@ -1165,8 +1165,8 @@ Approaches to have the code or mounting.
 ### Push an image
 
 <!-- Pull/push image from Commons here -->
-```{r, out.width="60%", echo=FALSE, eval = TRUE}
-knitr::include_graphics('docs/images/push_door.jpg', fig.cap="PUSH. Steve Snodgrass. CC-BY, Source: https://www.flickr.com/photos/stevensnodgrass/6117660537/")
+```{r, out.width="60%", echo=FALSE, eval = TRUE, fig.cap='PUSH. Steve Snodgrass. CC-BY, Source: https://www.flickr.com/photos/stevensnodgrass/6117660537/'}
+knitr::include_graphics('docs/images/push_door.jpg')
 ```
 
 
