@@ -81,6 +81,7 @@ troubleshooting
 fakeroot
 singularity-cache-directory
 global-singularity-configuration
+breakout-exercise
 nextflow-day-1
 what-is-nextflow
 what-is-nextflow-for
