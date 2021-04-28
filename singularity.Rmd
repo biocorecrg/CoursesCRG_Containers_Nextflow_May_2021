@@ -316,7 +316,7 @@ When exposing ports below 1024 in a LINUX machine, administrator (sudo) privileg
 ```
 
 ```{block2, type='rmdtip'}
-Specially with instances (**but not only**), if you encounter some permission problems you may need to enable write permissions in the image. If you do not want changes to persist in the image, you may want to use the **--writable-tmpfs option**. Changes are stored in an in-memory temporary filesystem which is discarded as soon as the service stops.
+Specially with instances (**but not only**), if you encounter some permission problems you may need to enable write permissions in the image. If you do not want changes to persist in the image, you may want to use the **--writable-tmpfs option**. Changes are stored in an in-memory temporary filesystem which is discarded as soon as the service stops. More details about special storage options with Singularity: https://sylabs.io/guides/3.7/user-guide/persistent_overlays.html
 ```
 
 More information:
