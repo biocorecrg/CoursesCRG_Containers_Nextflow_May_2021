@@ -289,11 +289,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">3.7.1</span> FASTQC Web Application</h3>
 <p>We work in a dummy FASTQC Web service</p>
 <p>We place <code>B7_input_s_chr19.fastq.gz</code> file from available datasets in <code>$HOME/myscratch</code></p>
-<pre><code>cd containers/docker/fastqc_www
+<pre><code>mdkir -p $HOME/myscratch
+
+cp testdata/* $HOME/myscratch
+
+cd containers/docker/fastqc_www
 
 docker build -t fastqcwww -f Dockerfile ../../scripts/fastqc
-
-mdkir -p $HOME/myscratch
 
 docker run -d -v $HOME/myscratch:/scratch -p 8083:3838 --name myfastqc fastqcwww</code></pre>
 <p>Example query from the browser:</p>
