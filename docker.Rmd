@@ -1152,7 +1152,7 @@ docker rm -f webserver
 
 ### Shiny Application
 
-Simply introduction... (to be used in breakout room)
+Simply introduction...
 
 ## Publish images
 
@@ -1195,5 +1195,5 @@ https://docs.docker.com/engine/reference/commandline/login/#credentials-store
 
 ## Breakout exercises with Docker - 3
 
-* Simple Shiny application. Including mount/volume and port. Description below
+* Simple FASTQC web application. Including mount/volume and port. Description below
 * If time push resulting image to Docker Hub
