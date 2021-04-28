@@ -1,11 +1,15 @@
-#Dummy FASTQC Web service
+# Dummy FASTQC Web service
 
 Place B7_input_s_chr19.fastq.gz file from available datasets in ```$HOME/myscratch```
 
 ```bash
-docker build -t fastqcwww -f Dockerfile ../../scripts/fastqc
-
 mdkir -p $HOME/myscratch
+
+cp testdata/* $HOME/myscratch
+
+cd containers/docker/fastqc_www
+
+docker build -t fastqcwww -f Dockerfile ../../scripts/fastqc
 
 docker run -d -v $HOME/myscratch:/scratch -p 3838:8083 --name myfastqc fastqcwww
 ```
