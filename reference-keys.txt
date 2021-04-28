@@ -51,9 +51,13 @@ exercise-writing-more-complex-recipes
 additional-commands
 volumes
 ports
+integrative-example
+blast-web-application
+shiny-application
 publish-images
 push-an-image
 automatic-builds
+breakout-exercises-with-docker---3
 singularity
 introduction-to-singularity
 singularity-architecture
@@ -81,7 +85,7 @@ troubleshooting
 fakeroot
 singularity-cache-directory
 global-singularity-configuration
-breakout-exercise
+breakout-exercises-with-singularity
 nextflow-day-1
 what-is-nextflow
 what-is-nextflow-for
