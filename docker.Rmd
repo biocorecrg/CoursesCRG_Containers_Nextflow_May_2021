@@ -1146,6 +1146,14 @@ docker exec webserver curl localhost:8080
 docker rm -f webserver
 ```
 
+## Integrative example
+
+### BLAST Web Application
+
+### Shiny Application
+
+Simply introduction... (to be used in breakout room)
+
 ## Publish images
 
 ### Push an image
@@ -1183,3 +1191,9 @@ https://docs.docker.com/engine/reference/commandline/login/#credentials-store
 * Addition of a Dockerfile
 
 * Configuration of an automated build from Docker Hub
+
+
+## Breakout exercises with Docker - 3
+
+* Simple Shiny application. Including mount/volume and port. Description below
+* If time push resulting image to Docker Hub
