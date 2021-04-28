@@ -114,7 +114,11 @@ Hola world!
 
 This command download from the a github repository and it runs the test script hello.
 
-## Channels
+## Channels and Operators
+- A queue channel is a non-blocking unidirectional [FIFO](https://en.wikipedia.org/wiki/FIFO_(computing_and_electronics)) (First In, First Out) queue which connects two processes or operators. 
+- A value channel a.k.a. singleton channel is bound to a single value and it can be read unlimited times without consuming its content.
+
+An operator is a method that reshape or connect different channels applying some rules.
 
 We can make a very simple Nextflow script by writing this code in a file (test.nf):
 
