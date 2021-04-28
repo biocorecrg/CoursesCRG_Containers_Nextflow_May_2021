@@ -311,6 +311,10 @@ From: library/mariadb:10.3
     singularity instance stop mydb
 
 
+```{block2, type='rmdnote'}
+NOTE ABOUT IPs. sudo
+```
+
 More information:
 
 * [https://sylabs.io/guides/3.7/user-guide/running_services.html](https://sylabs.io/guides/3.7/user-guide/running_services.html)
@@ -340,3 +344,8 @@ Normally at ```/etc/singularity/singularity.conf``` or similar (e.g preceded by 
 
 * It can only be modified by users with administration permissions
 * Worth noting ```bind path``` lines, which point default mounted directories in containers as commented in [bind paths section][Bind paths (aka volumes)]
+
+### Breakout exercise
+
+* Example running blast commands in different ways
+* Example running nginx as a service (NGINX its actually the custom example in Singularity page)
