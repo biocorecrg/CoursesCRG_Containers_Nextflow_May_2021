@@ -59,7 +59,7 @@ workflow BOWTIE {
 		bowtieAln(bow_index, input)
     emit:
     	sam = bowtieAln.out.samples_sam
-    	//log = bowtieAln.out.samples_log
+    	logs = bowtieAln.out.samples_log
 }
 
 
