@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Part 5 Nextflow day 1 | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines</title>
-  <meta name="description" content="Part 5 Nextflow day 1 | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
+  <title>3.6 Exercise 2 - Docker recipes and build images | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines</title>
+  <meta name="description" content="3.6 Exercise 2 - Docker recipes and build images | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Part 5 Nextflow day 1 | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
+  <meta property="og:title" content="3.6 Exercise 2 - Docker recipes and build images | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Part 5 Nextflow day 1 | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
+  <meta name="twitter:title" content="3.6 Exercise 2 - Docker recipes and build images | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="troubleshooting.html"/>
-<link rel="next" href="what-is-nextflow.html"/>
+<link rel="prev" href="docker-recipes.html"/>
+<link rel="next" href="volumes.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -283,18 +283,152 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="nextflow-day-1" class="section level1">
-<h1><span class="header-section-number">Part 5</span> Nextflow day 1</h1>
-<p>A DSL for data-driven computational pipelines. <a href="https://www.nextflow.io">www.nextflow.io</a></p>
-<p><a href="https://www.nextflow.io" target="_blank"><img src="docs/images/nextflow_logo_deep.png" width="30%" /></a></p>
+<div id="exercise-2---docker-recipes-and-build-images" class="section level2">
+<h2><span class="header-section-number">3.6</span> Exercise 2 - Docker recipes and build images</h2>
+<ol style="list-style-type: decimal">
+<li><u><code>figlet</code> recipe.</u></li>
+<li>Write a docker recipe in a file <strong>Dockerfile_test</strong> that:
+* is based on <strong>ubuntu:18.04</strong>
+* <strong>echoes “I love containers”</strong> by default or any other word/sentence, if given as the argument.</li>
+<li>Build the image (give the image the name of your choice)</li>
+<li>Run the image:
+* with no argument.
+* with <strong>“Docker course”</strong> as an argument.</li>
+<li>Modify the <strong>Dockerfile_test</strong>:
+* add the MAINTAINER field
+* update and upgrade Ubuntu packages.
+* install <a href="https://zoomadmin.com/HowToInstall/UbuntuPackage/figlet"><strong>figlet</strong></a>
+* change “echo” to “figlet” in the <strong>ENTRYPOINT</strong></li>
+<li>Build the image.</li>
+<li>Run the new image, with the default parameters, then with <strong>“Docker course”</strong> as an argument.</li>
+</ol>
+<details>
+<summary>
+<h5 style="background-color: #e6fadc; display: inline-block;">
+<em>Answer</em>
+</h5>
+<p></summary></p>
+<ol style="list-style-type: decimal">
+<li>Recipe saved in <strong>Dockerfile_test</strong>:</li>
+</ol>
+<pre><code>FROM ubuntu:18.04
+
+ENTRYPOINT [&quot;echo&quot;]
+CMD [&quot;I love containers&quot;]</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>Build:</li>
+</ol>
+<pre><code>docker build --file Dockerfile_test -t mytest .</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li>Run the image:</li>
+</ol>
+<pre><code># with no argument
+docker run mytest
+
+# with argument &quot;Docker course&quot;
+docker run mytest &quot;Docker course&quot;</code></pre>
+<ol start="4" style="list-style-type: decimal">
+<li>Recipe:</li>
+</ol>
+<pre><code>FROM ubuntu:18.04
+
+MAINTAINER Name Surname &lt;name.surname@mail.com&gt;
+
+RUN apt-get update &amp;&amp; apt-get upgrade -y
+RUN apt-get install -y figlet
+
+ENTRYPOINT [&quot;figlet&quot;]
+CMD [&quot;I love containers&quot;]</code></pre>
+<ol start="5" style="list-style-type: decimal">
+<li>Build the image.</li>
+</ol>
+<pre><code>docker build --file Dockerfile_test -t mytest .</code></pre>
+<ol start="6" style="list-style-type: decimal">
+<li>Run the new image, with the default parameter, then with <strong>“Docker course”</strong> as an argument.</li>
+</ol>
+<pre><code># run with no argument
+docker run mytest
+
+# run with argument &quot;Docker course&quot;
+docker run mytest &quot;Docker course&quot;</code></pre>
+</details>
+<ol start="2" style="list-style-type: decimal">
+<li><u>random numbers</u></li>
+<li>Copy the following short <code>bash</code> script in a file called <code>random_numbers.bash</code>.</li>
+</ol>
+<div class="sourceCode" id="cb68"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb68-1"><a href="exercise-2-docker-recipes-and-build-images.html#cb68-1"></a><span class="co">#!/usr/bin/bash</span></span>
+<span id="cb68-2"><a href="exercise-2-docker-recipes-and-build-images.html#cb68-2"></a><span class="fu">seq</span> 1 1000 <span class="kw">|</span> <span class="ex">shuf</span> <span class="kw">|</span> <span class="fu">head</span> -<span class="va">$1</span></span></code></pre></div>
+<p>This script outputs <strong>random intergers from 1 to 1000</strong>: the number of integers selected is given as the <strong>first argument</strong>.
+2. Write a recipe for an image:
+* Based on <strong>centos:7</strong>
+* That will execute this script (with <code>bash</code>) when it is run, giving it <strong>2</strong> as a default argument (i.e. 2 random integers): the default can be changed as the image is run.
+* Build the image
+* Start a container with the default argument, then try it with some other numbers.</p>
+<details>
+<summary>
+<h5 style="background-color: #e6fadc; display: inline-block;">
+<em>Answer</em>
+</h5>
+<p></summary></p>
+<p>Recipe (in <strong>Dockerfile_RN</strong>):</p>
+<pre><code>FROM centos:7
+
+MAINTAINER Name Surname &lt;name.surname@mail.com&gt;
+
+# Copy script from host to image
+COPY random_numbers.bash .
+
+# Make script executable
+RUN chmod +x random_numbers.bash
+
+# As the container starts, &quot;random_numbers.bash&quot; is run
+ENTRYPOINT [&quot;/usr/bin/bash&quot;, &quot;random_numbers.bash&quot;]
+
+# default argument (that can be changed on the command line)
+CMD [&quot;2&quot;]</code></pre>
+<p>Build and run:</p>
+<pre><code>docker build -f Dockerfile_RN -t random_numbers .
+docker run random_numbers
+docker run random_numbers 10</code></pre>
+</details>
+<div id="additional-commands" class="section level3">
+<h3><span class="header-section-number">3.6.1</span> Additional commands</h3>
+<ul>
+<li><p><strong>docker inspect</strong>: Get details from containers (both running and stopped). Things such as IPs, volumes, etc.</p></li>
+<li><p><strong>docker logs</strong>: Get <em>console</em> messages from running containers. Useful when using with web services.</p></li>
+<li><p><strong>docker commit</strong>: Turn a container into an image. It make senses to use when modifying container interactively. However this is bad for reproducibility if no steps are saved.</p></li>
+</ul>
+<p>Good for long-term reproducibility and for critical production environments:</p>
+<ul>
+<li><p><strong>docker save</strong>: Save an image into a tar archive.</p></li>
+<li><p><strong>docker export</strong>: Save a container into a tar archive.</p></li>
+<li><p><strong>docker import</strong>: Import a tar archive into an image.</p></li>
+</ul>
+<center>
+<h4 style="background-color: #e6fadc; display: inline-block;">
+<strong>HANDS-ON</strong>
+</h4>
+</center>
+<ul>
+<li>Save a previously created image into a <strong>tar archive</strong> (Look at the command’s options for help)</li>
+</ul>
+<details>
+<summary>
+<h5 style="background-color: #e6fadc; display: inline-block;">
+<em>Answer</em>
+</h5>
+<p></summary></p>
+<pre><code>docker save -o bowtie2image1.0.tar bowtie2image:1.0</code></pre>
+</details>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="troubleshooting.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="what-is-nextflow.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="docker-recipes.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="volumes.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

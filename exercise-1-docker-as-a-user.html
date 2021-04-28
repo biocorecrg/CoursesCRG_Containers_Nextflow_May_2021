@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Part 5 Nextflow day 1 | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines</title>
-  <meta name="description" content="Part 5 Nextflow day 1 | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
+  <title>3.3 Exercise 1 - Docker as a user | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines</title>
+  <meta name="description" content="3.3 Exercise 1 - Docker as a user | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Part 5 Nextflow day 1 | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
+  <meta property="og:title" content="3.3 Exercise 1 - Docker as a user | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Part 5 Nextflow day 1 | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
+  <meta name="twitter:title" content="3.3 Exercise 1 - Docker as a user | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="troubleshooting.html"/>
-<link rel="next" href="what-is-nextflow.html"/>
+<link rel="prev" href="using-existing-images.html"/>
+<link rel="next" href="linux-packages.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -283,18 +283,85 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="nextflow-day-1" class="section level1">
-<h1><span class="header-section-number">Part 5</span> Nextflow day 1</h1>
-<p>A DSL for data-driven computational pipelines. <a href="https://www.nextflow.io">www.nextflow.io</a></p>
-<p><a href="https://www.nextflow.io" target="_blank"><img src="docs/images/nextflow_logo_deep.png" width="30%" /></a></p>
+<div id="exercise-1---docker-as-a-user" class="section level2">
+<h2><span class="header-section-number">3.3</span> Exercise 1 - Docker as a user</h2>
+<ol style="list-style-type: decimal">
+<li><u><code>alpine</code> image.</u></li>
+<li><strong>Search</strong> and <strong>pull</strong> the <code>alpine</code> image (tag <strong>3.12</strong>) - it is an <strong>official build</strong>.</li>
+<li>Can you run a container from this image and make it print a “hello world” message?</li>
+<li>Now run a container <strong>interactively</strong> from the same image.
+* Run <code>whoami</code> in the container.
+* Exit the container and run <code>whoami</code> on the host machine: do you get the same output?</li>
+<li>Restart the container you just exited:
+* Is it now running?
+* Make the container execute the command <code>ls</code>.
+* Stop the container.</li>
+<li>Remove the alpine image and all its containers (running or stopped)</li>
+</ol>
+<details>
+<summary>
+<h5 style="background-color: #e6fadc; display: inline-block;">
+<em>Answer</em>
+</h5>
+<p></summary></p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb33-1"><a href="exercise-1-docker-as-a-user.html#cb33-1"></a><span class="co"># Search and pull the alpine image (tag 3.12) - it is an official build.</span></span>
+<span id="cb33-2"><a href="exercise-1-docker-as-a-user.html#cb33-2"></a><span class="ex">docker</span> search alpine --filter is-official=true</span>
+<span id="cb33-3"><a href="exercise-1-docker-as-a-user.html#cb33-3"></a><span class="ex">docker</span> pull  alpine:3.12</span>
+<span id="cb33-4"><a href="exercise-1-docker-as-a-user.html#cb33-4"></a></span>
+<span id="cb33-5"><a href="exercise-1-docker-as-a-user.html#cb33-5"></a><span class="co"># Can you run a container from this image and make it print a “hello world” message?</span></span>
+<span id="cb33-6"><a href="exercise-1-docker-as-a-user.html#cb33-6"></a><span class="ex">docker</span> run alpine:3.12 echo <span class="st">&quot;hello world&quot;</span></span>
+<span id="cb33-7"><a href="exercise-1-docker-as-a-user.html#cb33-7"></a></span>
+<span id="cb33-8"><a href="exercise-1-docker-as-a-user.html#cb33-8"></a><span class="co"># Now run a container **interactively** from the same image.</span></span>
+<span id="cb33-9"><a href="exercise-1-docker-as-a-user.html#cb33-9"></a><span class="ex">docker</span> run -ti alpine:3.12</span>
+<span id="cb33-10"><a href="exercise-1-docker-as-a-user.html#cb33-10"></a>  <span class="co"># Run `uname -a`</span></span>
+<span id="cb33-11"><a href="exercise-1-docker-as-a-user.html#cb33-11"></a>  <span class="fu">uname</span> -a</span>
+<span id="cb33-12"><a href="exercise-1-docker-as-a-user.html#cb33-12"></a>  <span class="co"># Exit the container.</span></span>
+<span id="cb33-13"><a href="exercise-1-docker-as-a-user.html#cb33-13"></a>  <span class="bu">exit</span></span>
+<span id="cb33-14"><a href="exercise-1-docker-as-a-user.html#cb33-14"></a></span>
+<span id="cb33-15"><a href="exercise-1-docker-as-a-user.html#cb33-15"></a><span class="co"># Restart the container you just exited: is it now running?</span></span>
+<span id="cb33-16"><a href="exercise-1-docker-as-a-user.html#cb33-16"></a><span class="ex">docker</span> restart CONTAINER_ID <span class="co"># find it with `docker ps -a`</span></span>
+<span id="cb33-17"><a href="exercise-1-docker-as-a-user.html#cb33-17"></a></span>
+<span id="cb33-18"><a href="exercise-1-docker-as-a-user.html#cb33-18"></a><span class="co"># Make the container execute the command `ls`</span></span>
+<span id="cb33-19"><a href="exercise-1-docker-as-a-user.html#cb33-19"></a><span class="ex">docker</span> exec CONTAINER_ID ls</span>
+<span id="cb33-20"><a href="exercise-1-docker-as-a-user.html#cb33-20"></a></span>
+<span id="cb33-21"><a href="exercise-1-docker-as-a-user.html#cb33-21"></a><span class="co"># Stop the container</span></span>
+<span id="cb33-22"><a href="exercise-1-docker-as-a-user.html#cb33-22"></a><span class="ex">docker</span> stop CONTAINER_ID</span>
+<span id="cb33-23"><a href="exercise-1-docker-as-a-user.html#cb33-23"></a></span>
+<span id="cb33-24"><a href="exercise-1-docker-as-a-user.html#cb33-24"></a><span class="co"># Remove the alpine image and all its containers (running or stopped)</span></span>
+<span id="cb33-25"><a href="exercise-1-docker-as-a-user.html#cb33-25"></a><span class="ex">docker</span> rmi alpine:3.12</span>
+<span id="cb33-26"><a href="exercise-1-docker-as-a-user.html#cb33-26"></a><span class="ex">docker</span> rm CONTAINER_ID <span class="co"># check all containers with `docker ps -a`</span></span></code></pre></div>
+<ol start="2" style="list-style-type: decimal">
+<li><u><code>blast</code></u> with volumes (ONGOING)</li>
+<li>Pull the <code>biocontainers/blast</code>, if you didn’t do it earlier today.</li>
+<li>Get the 2 following <strong>fasta files</strong> from uniprot (protein sequences) and save them in the newly created <strong>blastp_test</strong> folder:</li>
+</ol>
+<ul>
+<li><a href="https://www.uniprot.org/uniprot/O75976.fasta" class="uri">https://www.uniprot.org/uniprot/O75976.fasta</a></li>
+<li><a href="https://www.uniprot.org/uniprot/Q90240.fasta" class="uri">https://www.uniprot.org/uniprot/Q90240.fasta</a></li>
+</ul>
+<ol start="3" style="list-style-type: decimal">
+<li>Align those 2 sequences with <code>blastp</code>, with a <code>biocontainers/blast</code> container.</li>
+</ol>
+<details>
+<summary>
+<h5 style="background-color: #e6fadc; display: inline-block;">
+<em>Answer</em>
+</h5>
+<p></summary></p>
+<pre><code># Pull the blast image
+docker pull biocontainers/blast
+
+# Run the image with volumes
+docker run -v /users/bi/sbonnin/test_docker/blastp_test:/blastdb biocontainers/blast:latest blastp -query /blastdb/O75976.fasta -subject /blastdb/Q90240.fasta</code></pre>
+</details>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="troubleshooting.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="what-is-nextflow.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="using-existing-images.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="linux-packages.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
