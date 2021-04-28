@@ -848,9 +848,10 @@ git status
 nothing added to commit but untracked files present (use "git add" to track)
 ```
 
-Now we are ready for committing and pushing everything to the online repository.
+Now we are ready for committing and pushing everything to the online repository. But before we need to rename **test5.nf** to **main.nf**.
 
 ```{bash, eval=FALSE, echo=TRUE}
+mv test5.nf main.nf
 
 git add *
 
@@ -864,7 +865,7 @@ git status
 #	new file:   lib/multiqc.nf
 #	new file:   nextflow.config
 #	new file:   params.config
-#	new file:   test5.nf
+#	new file:   main.nf
 #
 
 
@@ -873,11 +874,11 @@ git commit -m "first commit"
 [main 7681f85] first commit
  6 files changed, 186 insertions(+)
  create mode 100644 lib/bowtie.nf
- create mode 120000 lib/fastqc.nf
- create mode 120000 lib/multiqc.nf
+ create mode 100644 lib/fastqc.nf
+ create mode 100644 lib/multiqc.nf
  create mode 100644 nextflow.config
  create mode 100644 params.config
- create mode 100755 test5.nf
+ create mode 100755 main.nf
 [lcozzuto@nextflow test_course]$ git push
 Username for 'https://github.com': ######
 Password for 'https://######@github.com': 
@@ -897,8 +898,6 @@ So if we go again on the GitHub website we can see that eveything has been uploa
 knitr::include_graphics('docs/images/git_2.png')
 ```
 
-We need to change the name of the **test5.nf** file to **main.nf**, since it is automatically searched by nextflow when launched the pipeline.
-
 Now we can remove that folder and go in the home folder.
 
 ```{bash, eval=FALSE, echo=TRUE}
@@ -915,7 +914,12 @@ nextflow run lucacozzuto/test_course -with-docker -r main \
 
 ```
 
-As you can see we just use the repository name and indicate to use Docker and to use the input files from the real paths. Moreover we indicates to use the **main** branch.  
+As you can see we just use the repository name and two nextflow parameters:
+- -with-docker, for using Docker
+- -r, for using a specific branch. In this case the **main** branch.
+Then we pass to the pipelines the path of our input files:
+- --reads
+- --reference
 
 ```{bash, eval=FALSE, echo=TRUE}
 
@@ -942,11 +946,13 @@ CPU hours   : (a few seconds)
 Succeeded   : 5
 ```
 
-As you can see as the first step, Nextflow pulls down the required version of the pipeline and it stores it at:
+As you can see as first step, Nextflow pulls down the required version of the pipeline and it stores it at:
 
 ```{bash, eval=FALSE, echo=TRUE}
 /home/ec2-user/.nextflow/assets/lucacozzuto/test_course/
 ```
+
+then it pulls the docker image and run the pipeline.
 
 You can use the Nextflow's command **list** that show you the number of pipelines installed in your environment and the command **info** for fetching some useful information.
 
