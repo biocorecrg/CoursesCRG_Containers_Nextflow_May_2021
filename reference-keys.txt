@@ -52,7 +52,7 @@ additional-commands
 volumes
 ports
 integrative-example
-blast-web-application
+fastqc-web-application
 shiny-application
 publish-images
 push-an-image
