@@ -287,7 +287,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">3.7</span> Integrative example</h2>
 <div id="fastqc-web-application" class="section level3">
 <h3><span class="header-section-number">3.7.1</span> FASTQC Web Application</h3>
-<p>Step by step following the</p>
+<p>We work in a dummy FASTQC Web service</p>
+<p>We place <code>B7_input_s_chr19.fastq.gz</code> file from available datasets in <code>$HOME/myscratch</code></p>
+<pre><code>cd containers/docker/fastqc_www
+
+docker build -t fastqcwww -f Dockerfile ../../scripts/fastqc
+
+mdkir -p $HOME/myscratch
+
+docker run -d -v $HOME/myscratch:/scratch -p 8083:3838 --name myfastqc fastqcwww</code></pre>
+<p>Example query from the browser:</p>
+<p><a href="http://mymachine-address-here:3838/?file=B7_input_s_chr19.fastq" class="uri">http://mymachine-address-here:3838/?file=B7_input_s_chr19.fastq</a></p>
+
+<div class="rmdnote">
+NOTE about context here … to see if this has been explained before
+</div>
+
+
+<div class="rmdnote">
+Replace your mymachine-address-here for machine provided address or 127.0.0.1/localhost in case you were trying it from your own machine.
+</div>
+
 </div>
 <div id="shiny-application" class="section level3">
 <h3><span class="header-section-number">3.7.2</span> Shiny Application</h3>
