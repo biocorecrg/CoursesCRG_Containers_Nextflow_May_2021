@@ -1155,11 +1155,13 @@ We work in a dummy FASTQC Web service
 We place ```B7_input_s_chr19.fastq.gz``` file from available datasets in ```$HOME/myscratch```
 
 ```
+mdkir -p $HOME/myscratch
+
+cp testdata/* $HOME/myscratch
+
 cd containers/docker/fastqc_www
 
 docker build -t fastqcwww -f Dockerfile ../../scripts/fastqc
-
-mdkir -p $HOME/myscratch
 
 docker run -d -v $HOME/myscratch:/scratch -p 8083:3838 --name myfastqc fastqcwww
 ```
