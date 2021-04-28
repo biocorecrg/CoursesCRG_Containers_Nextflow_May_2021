@@ -1,5 +1,5 @@
 /*
-*  bowtie module
+*  bowtie modules and workflows
 */
 
 params.CONTAINER = "quay.io/biocontainers/bowtie:1.2.3--py37hc9558a2_0"
