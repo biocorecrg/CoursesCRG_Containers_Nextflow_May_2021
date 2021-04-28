@@ -1151,14 +1151,14 @@ docker rm -f webserver
 ### Push an image
 
 <!-- Pull/push image from Commons here -->
-```{r, out.width="30%", echo=FALSE, eval = TRUE}
+```{r, out.width="60%", echo=FALSE, eval = TRUE}
 knitr::include_graphics('docs/images/push_door.jpg')
 ```
 https://www.flickr.com/photos/stevensnodgrass/6117660537/
 
 * Generation of an access key in Docker Hub
 
-```{r, out.width="30%", echo=FALSE, eval = TRUE}
+```{r, out.width="60%", echo=FALSE, eval = TRUE}
 knitr::include_graphics('docs/images/access-token-docker.png')
 ```
 
