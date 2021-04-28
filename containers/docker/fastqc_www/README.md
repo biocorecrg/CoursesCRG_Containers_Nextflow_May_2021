@@ -7,9 +7,9 @@ docker build -t fastqcwww -f Dockerfile ../../scripts/fastqc
 
 mdkir -p $HOME/myscratch
 
-docker run -d -v $HOME/myscratch:/scratch -p 8083:8083 --name myfastqc fastqcwww
+docker run -d -v $HOME/myscratch:/scratch -p 3838:8083 --name myfastqc fastqcwww
 ```
 
 Example query from the browser:
 
-http://127.0.0.1:8083/?file=B7_input_s_chr19.fastq
+http://127.0.0.1:3838/?file=B7_input_s_chr19.fastq
