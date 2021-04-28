@@ -309,7 +309,12 @@ singularity exec instance://mydb mysql -uroot
 singularity instance stop mydb</code></pre>
 
 <div class="rmdnote">
-NOTE ABOUT IPs. sudo
+When exposing ports below 1024 in a LINUX machine, administrator (sudo) privileges are needed. Historical reference: <a href="https://www.w3.org/Daemon/User/Installation/PrivilegedPorts.html" class="uri">https://www.w3.org/Daemon/User/Installation/PrivilegedPorts.html</a>
+</div>
+
+
+<div class="rmdtip">
+Specially with instances (<strong>but not only</strong>), if you encounter some permission problems you may need to enable write permissions in the image. If you do not want changes to persist in the image, you may want to use the <strong>–writable-tmpfs option</strong>. Changes are stored in an in-memory temporary filesystem which is discarded as soon as the service stops.
 </div>
 
 <p>More information:</p>
