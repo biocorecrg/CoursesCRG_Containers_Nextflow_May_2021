@@ -1152,7 +1152,7 @@ docker rm -f webserver
 
 <!-- Pull/push image from Commons here -->
 ```{r, out.width="30%", echo=FALSE, eval = TRUE}
-knitr::include_graphics('docs/images/push_door.png')
+knitr::include_graphics('docs/images/push_door.jpg')
 ```
 https://www.flickr.com/photos/stevensnodgrass/6117660537/
 
