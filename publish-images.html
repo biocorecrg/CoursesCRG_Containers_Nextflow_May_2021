@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>3.7 Sharing images | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines</title>
-  <meta name="description" content="3.7 Sharing images | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
+  <title>3.7 Publish images | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines</title>
+  <meta name="description" content="3.7 Publish images | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="3.7 Sharing images | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
+  <meta property="og:title" content="3.7 Publish images | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="3.7 Sharing images | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
+  <meta name="twitter:title" content="3.7 Publish images | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
   
   
   
@@ -192,9 +192,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="3.5" data-path="volumes.html"><a href="volumes.html"><i class="fa fa-check"></i><b>3.5</b> Volumes</a></li>
 <li class="chapter" data-level="3.6" data-path="ports.html"><a href="ports.html"><i class="fa fa-check"></i><b>3.6</b> Ports</a></li>
-<li class="chapter" data-level="3.7" data-path="sharing-images.html"><a href="sharing-images.html"><i class="fa fa-check"></i><b>3.7</b> Sharing images</a><ul>
-<li class="chapter" data-level="3.7.1" data-path="sharing-images.html"><a href="sharing-images.html#pushing-an-image"><i class="fa fa-check"></i><b>3.7.1</b> Pushing an image</a></li>
-<li class="chapter" data-level="3.7.2" data-path="sharing-images.html"><a href="sharing-images.html#automatic-builds"><i class="fa fa-check"></i><b>3.7.2</b> Automatic builds</a></li>
+<li class="chapter" data-level="3.7" data-path="publish-images.html"><a href="publish-images.html"><i class="fa fa-check"></i><b>3.7</b> Publish images</a><ul>
+<li class="chapter" data-level="3.7.1" data-path="publish-images.html"><a href="publish-images.html#push-an-image"><i class="fa fa-check"></i><b>3.7.1</b> Push an image</a></li>
+<li class="chapter" data-level="3.7.2" data-path="publish-images.html"><a href="publish-images.html#automatic-builds"><i class="fa fa-check"></i><b>3.7.2</b> Automatic builds</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="singularity.html"><a href="singularity.html"><i class="fa fa-check"></i><b>4</b> Singularity</a><ul>
@@ -276,14 +276,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="sharing-images" class="section level2">
-<h2><span class="header-section-number">3.7</span> Sharing images</h2>
-<div id="pushing-an-image" class="section level3">
-<h3><span class="header-section-number">3.7.1</span> Pushing an image</h3>
+<div id="publish-images" class="section level2">
+<h2><span class="header-section-number">3.7</span> Publish images</h2>
+<div id="push-an-image" class="section level3">
+<h3><span class="header-section-number">3.7.1</span> Push an image</h3>
 <!-- Pull/push image from Commons here -->
+<p><img src="docs/images/push_door.jpg" width="30%" />
+<a href="https://www.flickr.com/photos/stevensnodgrass/6117660537/" class="uri">https://www.flickr.com/photos/stevensnodgrass/6117660537/</a></p>
 <ul>
-<li><p>Generation of an access key in Docker Hub</p></li>
-<li><p>docker login</p></li>
+<li>Generation of an access key in Docker Hub</li>
+</ul>
+<p><img src="docs/images/access-token-docker.png" width="30%" /></p>
+<ul>
+<li>docker login</li>
 </ul>
 <pre><code>(base) [ec2-user@ip-172-31-47-200 ~]$ docker login
 Login with your Docker ID to push and pull images from Docker Hub. If you don&#39;t have a Docker ID, head over to https://hub.docker.com to create one.

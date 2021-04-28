@@ -51,8 +51,8 @@ exercise-writing-more-complex-recipes
 additional-commands
 volumes
 ports
-sharing-images
-pushing-an-image
+publish-images
+push-an-image
 automatic-builds
 singularity
 introduction-to-singularity
