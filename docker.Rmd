@@ -1150,7 +1150,31 @@ docker rm -f webserver
 
 ### FASTQC Web Application
 
-Step by step following the
+We work in a dummy FASTQC Web service
+
+We place ```B7_input_s_chr19.fastq.gz``` file from available datasets in ```$HOME/myscratch```
+
+```
+cd containers/docker/fastqc_www
+
+docker build -t fastqcwww -f Dockerfile ../../scripts/fastqc
+
+mdkir -p $HOME/myscratch
+
+docker run -d -v $HOME/myscratch:/scratch -p 8083:3838 --name myfastqc fastqcwww
+```
+
+Example query from the browser:
+
+http://mymachine-address-here:3838/?file=B7_input_s_chr19.fastq
+
+```{block2, type='rmdnote'}
+NOTE about context here ... to see if this has been explained before
+```
+
+```{block2, type='rmdnote'}
+Replace your mymachine-address-here for machine provided address or 127.0.0.1/localhost in case you were trying it from your own machine.
+```
 
 ### Shiny Application
 
