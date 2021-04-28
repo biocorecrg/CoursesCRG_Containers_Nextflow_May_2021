@@ -93,7 +93,7 @@ what-is-nextflow-for
 main-advantages
 workflow-structure
 installation
-channels
+channels-and-operators
 exercise-1
 processes
 workflow
