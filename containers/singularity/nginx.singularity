@@ -1,0 +1,8 @@
+# Example recipe from: https://sylabs.io/guides/3.7/user-guide/running_services.html
+
+Bootstrap: docker
+From: nginx:1.20
+Includecmd: no
+
+%startscript
+   nginx
