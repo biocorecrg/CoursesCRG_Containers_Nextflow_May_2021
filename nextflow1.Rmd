@@ -192,14 +192,38 @@ Once executed we can see that a folder named **work** is generated. In that fold
 
 ## EXERCISE 1
 
+- Try to reshape the input channel by generating:
+  - A single emission
+  - A channel with each possible file combination
+  - A tuple with a custom id, i.e. something like ["id", ["aa.txt", "bb.txt", "cc.txt"]]
+
+See here [Operators](https://www.nextflow.io/docs/latest/operator.html#).
+
+<details>
+<summary>
+<h5>*Answer*</h5>
+</summary>
+
+```{java, eval=FALSE, echo=TRUE}
+#!/usr/bin/env nextflow
+nextflow.enable.dsl=2
+
+Channel
+    .fromPath( "*.txt").set {my_fyles}
+
+my_fyles.collect().view()
+my_fyles.collect().map{
+	["id", it]
+}.view()
+my_fyles.combine(my_fyles).view()
+my_fyles.view()
+```
+</details>
+
+
 - Let's create couple of files (like paired end reads) and let's try to read it as they were a tuple.
 
-
-
-
-- Let's create couple of files (like paired end reads) and let's try to read it as they were a tuple.
-
-See here [https://www.nextflow.io/docs/latest/channel.html#fromfilepairs](https://www.nextflow.io/docs/latest/channel.html#fromfilepairs).
+See here [fromFilePairs](https://www.nextflow.io/docs/latest/channel.html#fromfilepairs).
 
 
 <details>
@@ -474,14 +498,9 @@ hola in Italian is ciao
 
 ## EXERCISE 2
 Change the pipeline for producing files instead of standard output. You need to specify within the workflow what to output using **emit** keyword.
-	
-```{java, eval=FALSE, echo=TRUE}
 
-workflow pipeline {
-    ...
-    emit: output
-}
-```
+See here [**emit**](https://www.nextflow.io/docs/latest/dsl2.html?#workflow-outputs)
+
 
 <details>
 <summary>
