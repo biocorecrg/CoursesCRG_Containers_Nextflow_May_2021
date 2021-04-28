@@ -312,7 +312,11 @@ From: library/mariadb:10.3
 
 
 ```{block2, type='rmdnote'}
-NOTE ABOUT IPs. sudo
+When exposing ports below 1024 in a LINUX machine, administrator (sudo) privileges are needed. Historical reference: https://www.w3.org/Daemon/User/Installation/PrivilegedPorts.html
+```
+
+```{block2, type='rmdtip'}
+Specially with instances (**but not only**), if you encounter some permission problems you may need to enable write permissions in the image. If you do not want changes to persist in the image, you may want to use the **--writable-tmpfs option**. Changes are stored in an in-memory temporary filesystem which is discarded as soon as the service stops.
 ```
 
 More information:
@@ -347,5 +351,11 @@ Normally at ```/etc/singularity/singularity.conf``` or similar (e.g preceded by 
 
 ### Breakout exercises with Singularity
 
-* Example running blast commands in different ways
+* Example running BLAST commands in different ways
 * Example running nginx as a service (NGINX its actually the custom example in Singularity page)
+  * Retrieve NGINX version from the instance
+  * Share a simply HTML page
+
+```{block2, type='rmdtip'}
+NGINX is serving web pages by default at the following location: /usr/share/nginx/html
+```
