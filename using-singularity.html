@@ -245,8 +245,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.10" data-path="nextflow-log.html"><a href="nextflow-log.html"><i class="fa fa-check"></i><b>5.10</b> Nextflow log</a></li>
 <li class="chapter" data-level="5.11" data-path="exercise-2.html"><a href="exercise-2.html"><i class="fa fa-check"></i><b>5.11</b> EXERCISE 2</a></li>
 <li class="chapter" data-level="5.12" data-path="more-complex-scripts.html"><a href="more-complex-scripts.html"><i class="fa fa-check"></i><b>5.12</b> More complex scripts</a></li>
-<li class="chapter" data-level="5.13" data-path="resuming-your-pipeline.html"><a href="resuming-your-pipeline.html"><i class="fa fa-check"></i><b>5.13</b> Resuming your pipeline</a></li>
-<li class="chapter" data-level="5.14" data-path="exercise-3.html"><a href="exercise-3.html"><i class="fa fa-check"></i><b>5.14</b> EXERCISE 3</a></li>
+<li class="chapter" data-level="5.13" data-path="directives.html"><a href="directives.html"><i class="fa fa-check"></i><b>5.13</b> Directives</a></li>
+<li class="chapter" data-level="5.14" data-path="resuming-your-pipeline.html"><a href="resuming-your-pipeline.html"><i class="fa fa-check"></i><b>5.14</b> Resuming your pipeline</a></li>
+<li class="chapter" data-level="5.15" data-path="exercise-3.html"><a href="exercise-3.html"><i class="fa fa-check"></i><b>5.15</b> EXERCISE 3</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="nextflow-day-2.html"><a href="nextflow-day-2.html"><i class="fa fa-check"></i><b>6</b> Nextflow day 2</a><ul>
 <li class="chapter" data-level="6.1" data-path="decoupling-resources-parameters-and-nextflow-script.html"><a href="decoupling-resources-parameters-and-nextflow-script.html"><i class="fa fa-check"></i><b>6.1</b> Decoupling resources, parameters and nextflow script</a><ul>
@@ -286,51 +287,51 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">6.3</span> Using Singularity</h2>
 <p>We recommend to use Singularity instead of docker in HPC environments. This can be done by just using the Nextflow parameter <strong>-with-singularity</strong> and without touching the code. Nextflow will take care of pulling, converting and storing the image for you. This will be done just once and then nextflow will use the stored image for further executions.
 Within the AWS main node both Docker and singularity are available. Within the AWS batch we only have docker.</p>
-<div class="sourceCode" id="cb149"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb149-1"><a href="using-singularity.html#cb149-1"></a><span class="ex">nextflow</span> run test2.nf -with-singularity -bg <span class="op">&gt;</span> log</span>
-<span id="cb149-2"><a href="using-singularity.html#cb149-2"></a></span>
-<span id="cb149-3"><a href="using-singularity.html#cb149-3"></a><span class="fu">tail</span> -f log </span>
-<span id="cb149-4"><a href="using-singularity.html#cb149-4"></a><span class="ex">N</span> E X T F L O W  ~  version 20.10.0</span>
-<span id="cb149-5"><a href="using-singularity.html#cb149-5"></a><span class="ex">Launching</span> <span class="kw">`</span><span class="ex">test2.nf</span><span class="kw">`</span> [soggy_miescher] - revision: 5a0a513d38</span>
-<span id="cb149-6"><a href="using-singularity.html#cb149-6"></a></span>
-<span id="cb149-7"><a href="using-singularity.html#cb149-7"></a><span class="ex">BIOCORE@CRG</span> - N F TESTPIPE  ~  version 1.0</span>
-<span id="cb149-8"><a href="using-singularity.html#cb149-8"></a>=============================================</span>
-<span id="cb149-9"><a href="using-singularity.html#cb149-9"></a><span class="ex">reads</span>                           : /home/ec2-user/git/CoursesCRG_Containers_Nextflow_May_2021/nextflow/test2/../../testdata/*.fastq.gz</span>
-<span id="cb149-10"><a href="using-singularity.html#cb149-10"></a></span>
-<span id="cb149-11"><a href="using-singularity.html#cb149-11"></a><span class="ex">Pulling</span> Singularity image docker://biocorecrg/c4lwg-2018:latest [cache /home/ec2-user/git/CoursesCRG_Containers_Nextflow_May_2021/nextflow/test2/singularity/biocorecrg-c4lwg-2018-latest.img]</span>
-<span id="cb149-12"><a href="using-singularity.html#cb149-12"></a>[<span class="ex">da</span>/<span class="ex">eb7564</span>] Submitted process <span class="op">&gt;</span> fastQC (B7_H3K4me1_s_chr19.fastq.gz)</span>
-<span id="cb149-13"><a href="using-singularity.html#cb149-13"></a>[<span class="ex">f6</span>/<span class="ex">32dc41</span>] Submitted process <span class="op">&gt;</span> fastQC (B7_input_s_chr19.fastq.gz)</span>
-<span id="cb149-14"><a href="using-singularity.html#cb149-14"></a><span class="ex">...</span></span></code></pre></div>
+<div class="sourceCode" id="cb153"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb153-1"><a href="using-singularity.html#cb153-1"></a><span class="ex">nextflow</span> run test2.nf -with-singularity -bg <span class="op">&gt;</span> log</span>
+<span id="cb153-2"><a href="using-singularity.html#cb153-2"></a></span>
+<span id="cb153-3"><a href="using-singularity.html#cb153-3"></a><span class="fu">tail</span> -f log </span>
+<span id="cb153-4"><a href="using-singularity.html#cb153-4"></a><span class="ex">N</span> E X T F L O W  ~  version 20.10.0</span>
+<span id="cb153-5"><a href="using-singularity.html#cb153-5"></a><span class="ex">Launching</span> <span class="kw">`</span><span class="ex">test2.nf</span><span class="kw">`</span> [soggy_miescher] - revision: 5a0a513d38</span>
+<span id="cb153-6"><a href="using-singularity.html#cb153-6"></a></span>
+<span id="cb153-7"><a href="using-singularity.html#cb153-7"></a><span class="ex">BIOCORE@CRG</span> - N F TESTPIPE  ~  version 1.0</span>
+<span id="cb153-8"><a href="using-singularity.html#cb153-8"></a>=============================================</span>
+<span id="cb153-9"><a href="using-singularity.html#cb153-9"></a><span class="ex">reads</span>                           : /home/ec2-user/git/CoursesCRG_Containers_Nextflow_May_2021/nextflow/test2/../../testdata/*.fastq.gz</span>
+<span id="cb153-10"><a href="using-singularity.html#cb153-10"></a></span>
+<span id="cb153-11"><a href="using-singularity.html#cb153-11"></a><span class="ex">Pulling</span> Singularity image docker://biocorecrg/c4lwg-2018:latest [cache /home/ec2-user/git/CoursesCRG_Containers_Nextflow_May_2021/nextflow/test2/singularity/biocorecrg-c4lwg-2018-latest.img]</span>
+<span id="cb153-12"><a href="using-singularity.html#cb153-12"></a>[<span class="ex">da</span>/<span class="ex">eb7564</span>] Submitted process <span class="op">&gt;</span> fastQC (B7_H3K4me1_s_chr19.fastq.gz)</span>
+<span id="cb153-13"><a href="using-singularity.html#cb153-13"></a>[<span class="ex">f6</span>/<span class="ex">32dc41</span>] Submitted process <span class="op">&gt;</span> fastQC (B7_input_s_chr19.fastq.gz)</span>
+<span id="cb153-14"><a href="using-singularity.html#cb153-14"></a><span class="ex">...</span></span></code></pre></div>
 <p>We can then inspect the presence of the singularity image inside the folder singularity.</p>
-<div class="sourceCode" id="cb150"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb150-1"><a href="using-singularity.html#cb150-1"></a><span class="fu">ls</span> singularity/</span>
-<span id="cb150-2"><a href="using-singularity.html#cb150-2"></a><span class="ex">biocorecrg-c4lwg-2018-latest.img</span></span></code></pre></div>
+<div class="sourceCode" id="cb154"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb154-1"><a href="using-singularity.html#cb154-1"></a><span class="fu">ls</span> singularity/</span>
+<span id="cb154-2"><a href="using-singularity.html#cb154-2"></a><span class="ex">biocorecrg-c4lwg-2018-latest.img</span></span></code></pre></div>
 <p>We can then reuse this image if we want to execute the code exactly in the same way as in the pipeline but outside the pipeline. Sometimes we can be interested in launching just one job, because it failed or for just making a test. We can go to the corresponding temporary folder, as an example let’s go to one of the fastQC temporary folder:</p>
-<div class="sourceCode" id="cb151"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb151-1"><a href="using-singularity.html#cb151-1"></a><span class="bu">cd</span> work/da/eb7564*/</span></code></pre></div>
+<div class="sourceCode" id="cb155"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb155-1"><a href="using-singularity.html#cb155-1"></a><span class="bu">cd</span> work/da/eb7564*/</span></code></pre></div>
 <p>Inspecting the .command.run file shows us this piece of code:</p>
-<div class="sourceCode" id="cb152"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb152-1"><a href="using-singularity.html#cb152-1"></a><span class="ex">...</span></span>
-<span id="cb152-2"><a href="using-singularity.html#cb152-2"></a></span>
-<span id="cb152-3"><a href="using-singularity.html#cb152-3"></a><span class="fu">nxf_launch()</span> <span class="kw">{</span></span>
-<span id="cb152-4"><a href="using-singularity.html#cb152-4"></a>    <span class="kw">set</span> <span class="ex">+u</span><span class="kw">;</span> <span class="fu">env</span> - PATH=<span class="st">&quot;</span><span class="va">$PATH</span><span class="st">&quot;</span> SINGULARITYENV_TMP=<span class="st">&quot;</span><span class="va">$TMP</span><span class="st">&quot;</span> SINGULARITYENV_TMPDIR=<span class="st">&quot;</span><span class="va">$TMPDIR</span><span class="st">&quot;</span> singularity exec /home/ec2-user/git/CoursesCRG_Containers_Nextflow_May_2021/nextflow/test2/singularity/biocorecrg-c4lwg-2018-latest.img /bin/bash -c <span class="st">&quot;cd </span><span class="va">$PWD</span><span class="st">; /bin/bash -ue /home/ec2-user/git/CoursesCRG_Containers_Nextflow_May_2021/nextflow/test2/work/da/eb756433aa0881d25b20afb5b1366e/.command.sh&quot;</span></span>
-<span id="cb152-5"><a href="using-singularity.html#cb152-5"></a><span class="kw">}</span></span>
-<span id="cb152-6"><a href="using-singularity.html#cb152-6"></a><span class="ex">...</span></span></code></pre></div>
+<div class="sourceCode" id="cb156"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb156-1"><a href="using-singularity.html#cb156-1"></a><span class="ex">...</span></span>
+<span id="cb156-2"><a href="using-singularity.html#cb156-2"></a></span>
+<span id="cb156-3"><a href="using-singularity.html#cb156-3"></a><span class="fu">nxf_launch()</span> <span class="kw">{</span></span>
+<span id="cb156-4"><a href="using-singularity.html#cb156-4"></a>    <span class="kw">set</span> <span class="ex">+u</span><span class="kw">;</span> <span class="fu">env</span> - PATH=<span class="st">&quot;</span><span class="va">$PATH</span><span class="st">&quot;</span> SINGULARITYENV_TMP=<span class="st">&quot;</span><span class="va">$TMP</span><span class="st">&quot;</span> SINGULARITYENV_TMPDIR=<span class="st">&quot;</span><span class="va">$TMPDIR</span><span class="st">&quot;</span> singularity exec /home/ec2-user/git/CoursesCRG_Containers_Nextflow_May_2021/nextflow/test2/singularity/biocorecrg-c4lwg-2018-latest.img /bin/bash -c <span class="st">&quot;cd </span><span class="va">$PWD</span><span class="st">; /bin/bash -ue /home/ec2-user/git/CoursesCRG_Containers_Nextflow_May_2021/nextflow/test2/work/da/eb756433aa0881d25b20afb5b1366e/.command.sh&quot;</span></span>
+<span id="cb156-5"><a href="using-singularity.html#cb156-5"></a><span class="kw">}</span></span>
+<span id="cb156-6"><a href="using-singularity.html#cb156-6"></a><span class="ex">...</span></span></code></pre></div>
 <p>This means that Nextflow is running the code by using the <strong>singularity exec</strong> command.</p>
 <p>Then we can launch the following command:</p>
-<div class="sourceCode" id="cb153"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb153-1"><a href="using-singularity.html#cb153-1"></a><span class="fu">bash</span> .command.run </span>
-<span id="cb153-2"><a href="using-singularity.html#cb153-2"></a><span class="ex">Started</span> analysis of B7_H3K4me1_s_chr19.fastq.gz</span>
-<span id="cb153-3"><a href="using-singularity.html#cb153-3"></a><span class="ex">Approx</span> 5% complete for B7_H3K4me1_s_chr19.fastq.gz</span>
-<span id="cb153-4"><a href="using-singularity.html#cb153-4"></a><span class="ex">Approx</span> 10% complete for B7_H3K4me1_s_chr19.fastq.gz</span>
-<span id="cb153-5"><a href="using-singularity.html#cb153-5"></a><span class="ex">Approx</span> 15% complete for B7_H3K4me1_s_chr19.fastq.gz</span>
-<span id="cb153-6"><a href="using-singularity.html#cb153-6"></a><span class="ex">Approx</span> 20% complete for B7_H3K4me1_s_chr19.fastq.gz</span>
-<span id="cb153-7"><a href="using-singularity.html#cb153-7"></a><span class="ex">Approx</span> 25% complete for B7_H3K4me1_s_chr19.fastq.gz</span>
-<span id="cb153-8"><a href="using-singularity.html#cb153-8"></a><span class="ex">Approx</span> 30% complete for B7_H3K4me1_s_chr19.fastq.gz</span>
-<span id="cb153-9"><a href="using-singularity.html#cb153-9"></a><span class="ex">Approx</span> 35% complete for B7_H3K4me1_s_chr19.fastq.gz</span>
-<span id="cb153-10"><a href="using-singularity.html#cb153-10"></a><span class="ex">Approx</span> 40% complete for B7_H3K4me1_s_chr19.fastq.gz</span>
-<span id="cb153-11"><a href="using-singularity.html#cb153-11"></a><span class="ex">Approx</span> 45% complete for B7_H3K4me1_s_chr19.fastq.gz</span>
-<span id="cb153-12"><a href="using-singularity.html#cb153-12"></a><span class="ex">Approx</span> 50% complete for B7_H3K4me1_s_chr19.fastq.gz</span>
-<span id="cb153-13"><a href="using-singularity.html#cb153-13"></a><span class="ex">Approx</span> 55% complete for B7_H3K4me1_s_chr19.fastq.gz</span>
-<span id="cb153-14"><a href="using-singularity.html#cb153-14"></a><span class="ex">Approx</span> 60% complete for B7_H3K4me1_s_chr19.fastq.gz</span>
-<span id="cb153-15"><a href="using-singularity.html#cb153-15"></a><span class="ex">...</span></span></code></pre></div>
+<div class="sourceCode" id="cb157"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb157-1"><a href="using-singularity.html#cb157-1"></a><span class="fu">bash</span> .command.run </span>
+<span id="cb157-2"><a href="using-singularity.html#cb157-2"></a><span class="ex">Started</span> analysis of B7_H3K4me1_s_chr19.fastq.gz</span>
+<span id="cb157-3"><a href="using-singularity.html#cb157-3"></a><span class="ex">Approx</span> 5% complete for B7_H3K4me1_s_chr19.fastq.gz</span>
+<span id="cb157-4"><a href="using-singularity.html#cb157-4"></a><span class="ex">Approx</span> 10% complete for B7_H3K4me1_s_chr19.fastq.gz</span>
+<span id="cb157-5"><a href="using-singularity.html#cb157-5"></a><span class="ex">Approx</span> 15% complete for B7_H3K4me1_s_chr19.fastq.gz</span>
+<span id="cb157-6"><a href="using-singularity.html#cb157-6"></a><span class="ex">Approx</span> 20% complete for B7_H3K4me1_s_chr19.fastq.gz</span>
+<span id="cb157-7"><a href="using-singularity.html#cb157-7"></a><span class="ex">Approx</span> 25% complete for B7_H3K4me1_s_chr19.fastq.gz</span>
+<span id="cb157-8"><a href="using-singularity.html#cb157-8"></a><span class="ex">Approx</span> 30% complete for B7_H3K4me1_s_chr19.fastq.gz</span>
+<span id="cb157-9"><a href="using-singularity.html#cb157-9"></a><span class="ex">Approx</span> 35% complete for B7_H3K4me1_s_chr19.fastq.gz</span>
+<span id="cb157-10"><a href="using-singularity.html#cb157-10"></a><span class="ex">Approx</span> 40% complete for B7_H3K4me1_s_chr19.fastq.gz</span>
+<span id="cb157-11"><a href="using-singularity.html#cb157-11"></a><span class="ex">Approx</span> 45% complete for B7_H3K4me1_s_chr19.fastq.gz</span>
+<span id="cb157-12"><a href="using-singularity.html#cb157-12"></a><span class="ex">Approx</span> 50% complete for B7_H3K4me1_s_chr19.fastq.gz</span>
+<span id="cb157-13"><a href="using-singularity.html#cb157-13"></a><span class="ex">Approx</span> 55% complete for B7_H3K4me1_s_chr19.fastq.gz</span>
+<span id="cb157-14"><a href="using-singularity.html#cb157-14"></a><span class="ex">Approx</span> 60% complete for B7_H3K4me1_s_chr19.fastq.gz</span>
+<span id="cb157-15"><a href="using-singularity.html#cb157-15"></a><span class="ex">...</span></span></code></pre></div>
 <p>In this way you are doing the same execution done by nextflow using the local machine. In case you are submitting a job to a HPC you need to use the corresponding program, for instance <strong>qsub</strong>.</p>
-<div class="sourceCode" id="cb154"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb154-1"><a href="using-singularity.html#cb154-1"></a><span class="ex">qsub</span> .command.run </span></code></pre></div>
+<div class="sourceCode" id="cb158"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb158-1"><a href="using-singularity.html#cb158-1"></a><span class="ex">qsub</span> .command.run </span></code></pre></div>
 </div>
             </section>
 

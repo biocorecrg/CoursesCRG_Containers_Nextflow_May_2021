@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>5.14 EXERCISE 3 | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines</title>
-  <meta name="description" content="5.14 EXERCISE 3 | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
+  <title>5.15 EXERCISE 3 | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines</title>
+  <meta name="description" content="5.15 EXERCISE 3 | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="5.14 EXERCISE 3 | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
+  <meta property="og:title" content="5.15 EXERCISE 3 | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="5.14 EXERCISE 3 | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
+  <meta name="twitter:title" content="5.15 EXERCISE 3 | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
   
   
   
@@ -245,8 +245,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.10" data-path="nextflow-log.html"><a href="nextflow-log.html"><i class="fa fa-check"></i><b>5.10</b> Nextflow log</a></li>
 <li class="chapter" data-level="5.11" data-path="exercise-2.html"><a href="exercise-2.html"><i class="fa fa-check"></i><b>5.11</b> EXERCISE 2</a></li>
 <li class="chapter" data-level="5.12" data-path="more-complex-scripts.html"><a href="more-complex-scripts.html"><i class="fa fa-check"></i><b>5.12</b> More complex scripts</a></li>
-<li class="chapter" data-level="5.13" data-path="resuming-your-pipeline.html"><a href="resuming-your-pipeline.html"><i class="fa fa-check"></i><b>5.13</b> Resuming your pipeline</a></li>
-<li class="chapter" data-level="5.14" data-path="exercise-3.html"><a href="exercise-3.html"><i class="fa fa-check"></i><b>5.14</b> EXERCISE 3</a></li>
+<li class="chapter" data-level="5.13" data-path="directives.html"><a href="directives.html"><i class="fa fa-check"></i><b>5.13</b> Directives</a></li>
+<li class="chapter" data-level="5.14" data-path="resuming-your-pipeline.html"><a href="resuming-your-pipeline.html"><i class="fa fa-check"></i><b>5.14</b> Resuming your pipeline</a></li>
+<li class="chapter" data-level="5.15" data-path="exercise-3.html"><a href="exercise-3.html"><i class="fa fa-check"></i><b>5.15</b> EXERCISE 3</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="nextflow-day-2.html"><a href="nextflow-day-2.html"><i class="fa fa-check"></i><b>6</b> Nextflow day 2</a><ul>
 <li class="chapter" data-level="6.1" data-path="decoupling-resources-parameters-and-nextflow-script.html"><a href="decoupling-resources-parameters-and-nextflow-script.html"><i class="fa fa-check"></i><b>6.1</b> Decoupling resources, parameters and nextflow script</a><ul>
@@ -283,7 +284,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="exercise-3" class="section level2">
-<h2><span class="header-section-number">5.14</span> EXERCISE 3</h2>
+<h2><span class="header-section-number">5.15</span> EXERCISE 3</h2>
+<p>Try to make the previous pipeline resilient to the failing of a process and store the results in order to skip the process execution when launched again.</p>
+<details>
+<summary>
+<h5>
+<em>Answer</em>
+</h5>
+<p></summary></p>
+<pre class="nextflow"><code>workflow flow1 {
+    take: sequences
+    main:
+    splitSequences(sequences) | reverseSequence | view()
+}</code></pre>
+</details>
 <p>Write the first workflow using pipes. Nextflow DLS2 allows you to use pipes for connecting channels via input / output.
 See documentation here:</p>
 <p><a href="https://www.nextflow.io/docs/latest/dsl2.html#pipes">https://www.nextflow.io/docs/latest/dsl2.html#pipes</a></p>

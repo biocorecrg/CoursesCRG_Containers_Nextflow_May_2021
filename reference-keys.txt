@@ -99,6 +99,7 @@ workflow
 nextflow-log
 exercise-2
 more-complex-scripts
+directives
 resuming-your-pipeline
 exercise-3
 nextflow-day-2
