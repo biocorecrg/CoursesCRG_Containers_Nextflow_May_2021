@@ -7,10 +7,12 @@ learning-objectives
 prerequisite-technical-requirements
 prerequisite
 technical-requirements
+provided-infrastructure
 dates-time-location
 program
 may-3-4-containers
 day-1-docker
+day-2-singularity
 day-2-docker-singularity
 may-10-11-nextflow
 day-3-understand-the-code-run-modify
