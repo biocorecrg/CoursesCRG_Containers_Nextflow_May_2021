@@ -291,27 +291,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p>An operator is a method that reshape or connect different channels applying some rules.</p>
 <p>We can make a very simple Nextflow script by writing this code in a file (test.nf):</p>
-<div class="sourceCode" id="cb114"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb114-1"><a href="channels-and-operators.html#cb114-1"></a>#!/usr/bin/env nextflow</span>
-<span id="cb114-2"><a href="channels-and-operators.html#cb114-2"></a></span>
-<span id="cb114-3"><a href="channels-and-operators.html#cb114-3"></a><span class="co">// This is a comment</span></span>
-<span id="cb114-4"><a href="channels-and-operators.html#cb114-4"></a></span>
-<span id="cb114-5"><a href="channels-and-operators.html#cb114-5"></a><span class="co">/*</span></span>
-<span id="cb114-6"><a href="channels-and-operators.html#cb114-6"></a><span class="co"> * This is a block of comments</span></span>
-<span id="cb114-7"><a href="channels-and-operators.html#cb114-7"></a><span class="co"> */</span></span>
-<span id="cb114-8"><a href="channels-and-operators.html#cb114-8"></a></span>
-<span id="cb114-9"><a href="channels-and-operators.html#cb114-9"></a><span class="co">// This is needed for activating the new DLS2</span></span>
-<span id="cb114-10"><a href="channels-and-operators.html#cb114-10"></a>nextflow.<span class="fu">enable</span>.<span class="fu">dsl</span>=<span class="dv">2</span></span>
-<span id="cb114-11"><a href="channels-and-operators.html#cb114-11"></a></span>
-<span id="cb114-12"><a href="channels-and-operators.html#cb114-12"></a></span>
-<span id="cb114-13"><a href="channels-and-operators.html#cb114-13"></a><span class="co">//Let&#39;s create a channel from string values</span></span>
-<span id="cb114-14"><a href="channels-and-operators.html#cb114-14"></a></span>
-<span id="cb114-15"><a href="channels-and-operators.html#cb114-15"></a>str = <span class="bu">Channel</span>.<span class="fu">from</span>(&#39;hello&#39;, &#39;hola&#39;, &#39;bonjour&#39;)</span>
-<span id="cb114-16"><a href="channels-and-operators.html#cb114-16"></a></span>
-<span id="cb114-17"><a href="channels-and-operators.html#cb114-17"></a><span class="co">/*</span></span>
-<span id="cb114-18"><a href="channels-and-operators.html#cb114-18"></a><span class="co">* Let&#39;s print that channel using the operator view()</span></span>
-<span id="cb114-19"><a href="channels-and-operators.html#cb114-19"></a><span class="co">* https://www.nextflow.io/docs/latest/operator.html#view</span></span>
-<span id="cb114-20"><a href="channels-and-operators.html#cb114-20"></a><span class="co">*/</span></span>
-<span id="cb114-21"><a href="channels-and-operators.html#cb114-21"></a>str.<span class="fu">view</span>()</span></code></pre></div>
+<pre class="nextflow"><code>#!/usr/bin/env nextflow
+
+// This is a comment
+
+/*
+ * This is a block of comments
+ */
+
+// This is needed for activating the new DLS2
+nextflow.enable.dsl=2
+
+
+//Let&#39;s create a channel from string values
+
+str = Channel.from(&#39;hello&#39;, &#39;hola&#39;, &#39;bonjour&#39;)
+
+/*
+* Let&#39;s print that channel using the operator view()
+* https://www.nextflow.io/docs/latest/operator.html#view
+*/
+str.view()</code></pre>
 <p>Then to execute it you can just run:</p>
 <div class="sourceCode" id="cb115"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb115-1"><a href="channels-and-operators.html#cb115-1"></a></span>
 <span id="cb115-2"><a href="channels-and-operators.html#cb115-2"></a><span class="va">$nextflow</span> <span class="ex">run</span> test.nf</span>
