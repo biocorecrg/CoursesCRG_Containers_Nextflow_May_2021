@@ -1,9 +1,9 @@
---- 
+---
 title: "Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines"
 
 author:
   - Sarah Bonnin^[CRG, sarah.bonnin@crg.eu], Luca Cozzuto^[CRG, luca.cozzuto@crg.eu], Toni Hermoso^[CRG, toni.hermoso@crg.eu], Julia Ponomarenko^[CRG, julia.ponomarenko@crg.eu]
- 
+
 site: bookdown::Containers_Nextflow_course
 output: bookdown::gitbook
 documentclass: book
@@ -82,7 +82,7 @@ About Nextflow:
 
 #### Prerequisite
 
-* Being comfortable working with the CLI (command-line interface) in a Linux-based environment. 
+* Being comfortable working with the CLI (command-line interface) in a Linux-based environment.
 * Applicants are not expected to have used neither Linux containers nor Nextflow workflows before.
 
 #### Technical requirements
@@ -99,16 +99,24 @@ If you are not familiar with the **ssh** protocol, you can learn about it <a hre
 <br>
 * We also encourage you to create a [**Github account**](https://github.com/join) and an associated [**Docker hub account**](https://hub.docker.com/signup).
 
+#### Provided infrastructure
 
+Participants will access by SSH to an [Amazon EC2](https://en.wikipedia.org/wiki/Amazon_Elastic_Compute_Cloud) instance dedicated only for themselves. That instance runs [Amazon Linux 2](https://aws.amazon.com/amazon-linux-2/) with all the necessary software used for the course.
+
+Every instance has a S3 bucket storage mounted at /mnt. If you need to save any file after the end of the 2nd day and at the end of the course, copy files there and you can retrieve them using a web browser.
+
+https://bucketname.s3.eu-central-1.amazonaws.com/copiedfile.txt
+
+where bucketname is the name of the directory in /mnt.
 
 ### Dates, time, location
 
-- Dates: May 2021: 
+- Dates: May 2021:
  - Containers: Monday 3rd, Tuesday 4th
  - Nextflow: Monday 10th, Tuesday 11th
 - Time: 9:30-17:30:
   - Morning coffee break: 11:00-11:30am
-  - Lunch break: 1pm-2pm 
+  - Lunch break: 1pm-2pm
   - Afternoon coffee break: 3:30-4:00pm
 - Location: virtual, via Zoom.
 
@@ -136,7 +144,7 @@ You can find all information in the dedicated course page of the [Moodle platfor
 #### Day 2: Singularity
 
 - Singularity versus Docker.
- - Differences, pros and cons for each system. 
+ - Differences, pros and cons for each system.
 - Fetch (and build) Singularity images.
  - Build from existing public registries.
  - Build from local Docker instances.
@@ -165,6 +173,4 @@ You can find all information in the dedicated course page of the [Moodle platfor
   - Definition of computing requirements and queues
   - Profiles
 - Modules, subworkflows and reuse of the code
-- Share Nextflow pipelines and good practices 
-
-
+- Share Nextflow pipelines and good practices
