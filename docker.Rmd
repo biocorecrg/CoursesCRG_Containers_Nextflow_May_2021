@@ -862,7 +862,7 @@ You can also use **ARG** to build a specific software version in the image. Let'
 
 <center><h4 style="background-color: #e6fadc; display: inline-block;">**HANDS-ON**</h4></center>
 
-Modify the following recipe so you can decide in the command line **which version of Python to install**. 
+Modify the following recipe so you can decide in the command line **which version of Python to install**.
 <br>
 Default version should be 2.7, and try to pass the argument so that version 3.8 is installed.
 <br> Build and run first with the default version, and then with version 3.8.
@@ -1365,7 +1365,7 @@ https://docs.docker.com/engine/reference/commandline/login/#credentials-store
 * Configuration of an automated build from Docker Hub
 
 
-## Breakout exercises with Docker - 3
+## Exercise 3 - Docker volumes and ports
 
 * Simple BLAST web application. Including mount/volume and port. Description below
 * If time push resulting image to Docker Hub
