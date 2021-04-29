@@ -17,7 +17,9 @@ link-citations: yes
 
 This slow-paced hands-on course is designed for absolute beginners who want to start using containers and Nextflow pipelines to achieve reproducibility of data analysis. <br>
 Linux containers allow the storage of code and applications in an host-independent lightweight environment. They became a fast and popular way to share and deploy applications in different environments. <br>
-Nextflow is a powerful polyglot workflow language that, coupled with Docker and Singularity containers, provides a robust, scalable and reproducible way to run computational pipelines.
+[Nextflow](https://www.nextflow.io) is a powerful polyglot workflow language that, coupled with [Docker](https://www.docker.com/) and [Singularity](https://sylabs.io/singularity/) containers, provides a robust, scalable and reproducible way to run computational pipelines.
+
+
 
 ## Meet the organizers and instructors
 
@@ -42,8 +44,10 @@ Nextflow is a powerful polyglot workflow language that, coupled with Docker and 
 
 The 4-day Containers and Nextflow course will train participants to use and build Docker and Singularity containers and Nextflow pipelines.
 It is designed to provide trainees with short and frequent hands-on sessions, while keeping theoretical sessions to a minimum.
-The course will be fully virtual via the Zoom platform.
-Trainees will work in a dedicated AWS Cloud9 environment.
+
+The course will be fully virtual via the [Zoom](https://zoom.us/) platform.
+
+Trainees will work in a dedicated [AWS environment](https://en.wikipedia.org/wiki/AWS).
 
 
 ### Learning objectives
