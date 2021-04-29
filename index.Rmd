@@ -1,9 +1,10 @@
 --- 
 title: "Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines"
 
-author:
-  - Sarah Bonnin^[CRG, sarah.bonnin@crg.eu], Luca Cozzuto^[CRG, luca.cozzuto@crg.eu], Toni Hermoso^[CRG, toni.hermoso@crg.eu], Julia Ponomarenko^[CRG, julia.ponomarenko@crg.eu]
- 
+author
+	- Luca Cozzuto^[CRG, luca.cozzuto@crg.eu], Toni Hermoso^[CRG, toni.hermoso@crg.eu], Sarah Bonnin^[CRG, sarah.bonnin@crg.eu], Julia Ponomarenko^[CRG, julia.ponomarenko@crg.eu]
+
+
 site: bookdown::Containers_Nextflow_course
 output: bookdown::gitbook
 documentclass: book
@@ -23,20 +24,7 @@ Linux containers allow the storage of code and applications in an host-independe
 
 ## Meet the organizers and instructors
 
-[Damjana Kastelic]()
-[Anna Solé]()
-
-[Toni Hermoso]()
-[Luca Cozzuto]()
-[Sarah Bonnin]()
-[Julia Ponomarenko]()
-[Emilio Palumbo]()
-[Alessio Vignoli]()
-[José Espinosa]()
-[Leila Mansouri]()
-[Athanasios Baltzis]()
-
-
+https://padlet.com/annasolea/nvp3rlxa0r37gud0
 
 ## About the course
 
@@ -70,10 +58,25 @@ About Nextflow:
 - Develop a Nextflow pipeline from scratch.
 - Run pipeline in diverse computational environments (local, HPC, cloud )
 
-### Prerequisite, Dates, time, location
+### Prerequisites and technical requirements
+
+#### Prerequisites
 
 Being comfortable working with the CLI (command-line interface) in a Linux-based environment. 
 Applicants are not expected to have used neither Linux containers nor Nextflow workflows before.
+
+#### Technical requirements
+
+You will need to connect during the course to a remote server via the "ssh" protocol: you should be familiar with it. You can learn about it [here](https://www.hostinger.com/tutorials/ssh-tutorial-how-does-ssh-work).
+
+You should also be able to use a command-line/screen-oriented text editor (such as nano or vi/vim) or to be able to use an editor able to connect remotely like Visual studio, emacs or bbedit. If you are not sure what text editor to use, we recommend that you [learn the basics of "nano"](https://wiki.gentoo.org/wiki/Nano/Basics_Guide).
+
+During the course, we will use the Slack platform for discussion and troubleshooting. You can either install the Slack app before the course, or you will be able to access Slack from a web browser.
+
+We also encourage you to create a [Github account](https://github.com/join) and an associated [Docker hub account](https://hub.docker.com/signup).
+
+
+### Dates, time, location
 
 - Dates: May 2021: 
  - Containers: Monday 3rd, Tuesday 4th
@@ -96,15 +99,17 @@ Applicants are not expected to have used neither Linux containers nor Nextflow w
  - Discovery of different relevant base images
   - Rocker, continuumio, biocontainers.pro.
 - Run Docker container based on an existing image (also run it interactively).
-- Work with volumes and ports.
 - Build an image from an existing recipe:
   - Explain sections and keywords.
   - Build options (e.g. cache or build variables).
 - Write a Docker recipe and build an image from it.
 - Upload image to registries.
 
-#### Day 2: Singularity
+#### Day 2: Docker, Singularity
 
+- Docker:
+  - Working with volumes and ports
+  - Sharing an image
 - Singularity versus Docker.
  - Differences, pros and cons for each system. 
 - Fetch (and build) Singularity images.
