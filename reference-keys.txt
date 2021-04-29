@@ -4,7 +4,10 @@ meet-the-organizers-and-instructors
 about-the-course
 outline
 learning-objectives
-prerequisite-dates-time-location
+prerequisite-technical-requirements
+prerequisite
+technical-requirements
+dates-time-location
 program
 may-3-4-containers
 day-1-docker
