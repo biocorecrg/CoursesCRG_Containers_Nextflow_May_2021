@@ -211,8 +211,8 @@ As we have seen before, you can `docker images` in the terminal, to see a list o
 <center><h4 style="background-color: #e6fadc; display: inline-block;">**HANDS-ON**</h4></center>
 
 * Run `docker images`. How many images do you get?
-* Pull the latest [`biocontainers/blast`](https://hub.docker.com/r/biocontainers/blast/) image
-  * What is the size of the `blast` image you just pulled?
+* Pull the version 2.2.31 of the [`biocontainers/blast`](https://hub.docker.com/r/biocontainers/blast/) image
+    * What is the size of the `blast` image you just pulled?
 * How many images do you get if you run `docker images --all`? What are those? Perhaps the [documentation](https://docs.docker.com/engine/reference/commandline/images/) can help.
 
 <details>
@@ -222,7 +222,7 @@ As we have seen before, you can `docker images` in the terminal, to see a list o
 
 ```
 # Pull the blast image
-docker pull biocontainers/blast
+docker pull biocontainers/blast:2.2.31
 
 # Run `docker images --all`
 docker images --all # intermediate images.
@@ -291,13 +291,13 @@ If you want to leave and stop the container, type `exit` and ENTER.
 docker run hello-world
 
 # Run the blast image
-docker run biocontainers/blast:latest
+docker run biocontainers/blast:2.2.31
 
 #  Start again a container from the same blast image, and run the path to the blastp command:
-docker run biocontainers/blast:latest blastp
+docker run biocontainers/blast:2.2.31 blastp
 
 # Start a container interactively from the same blast image:
-docker run -ti biocontainers/blast:latest
+docker run -ti biocontainers/blast:2.2.31
 
   # What is the default working directory?
   pwd; ls
@@ -493,17 +493,19 @@ docker system prune -a
 
 ## Exercise 1 - Docker as a user
 
+In breakout rooms, do the following exercise:
+
 1. <u>`alpine` image.</u>
-  1. **Search** and **pull** the `alpine` image (tag **3.12**) - it is an **official build**.
-  2. Can you run a container from this image and make it print a “hello world” message?
-  3. Now run a container **interactively** from the same image.
-    * Run `whoami` in the container.
-    * Exit the container and run `whoami` on the host machine: do you get the same output?
-  4. Restart the container you just exited:
-    * Is it now running?
-    * Make the container execute the command `ls`.
-    * Stop the container.
-  5. Remove the alpine image and all its containers (running or stopped)
+    * **Search** and **pull** the `alpine` image (tag **3.12**) - it is an **official build**.
+    * Can you run a container from this image and make it print a “hello world” message?
+    * Now run a container **interactively** from the same image.
+        * Run `whoami` in the container.
+        * Exit the container and run `whoami` on the host machine: do you get the same output?
+    * Restart the container you just exited:
+        * Is it now running?
+        * Make the container execute the command `ls`.
+        * Stop the container.
+    * Remove the alpine image and all its containers (running or stopped)
 
 <details>
 <summary>
@@ -520,8 +522,8 @@ docker run alpine:3.12 echo "hello world"
 
 # Now run a container **interactively** from the same image.
 docker run -ti alpine:3.12
-  # Run `uname -a`
-  uname -a
+  # Run `whoami`
+  whoami
   # Exit the container.
   exit
 
@@ -539,24 +541,39 @@ docker rmi alpine:3.12
 docker rm CONTAINER_ID # check all containers with `docker ps -a`
 ```
 
-2. <u>`blast`</u> with volumes (ONGOING)
-  1. Pull the `biocontainers/blast`, if you didn't do it earlier today.
-2. Get the 2 following **fasta files** from uniprot (protein sequences) and save them in the newly created **blastp_test** folder:
-  * https://www.uniprot.org/uniprot/O75976.fasta
-* https://www.uniprot.org/uniprot/Q90240.fasta
-3. Align those 2 sequences with `blastp`, with a `biocontainers/blast` container.
+</details>
+
+2. <u>`imagemagick`</u>
+    * Pull the `ìmagemagick` image that is **official** and that has the **highest number of stars**
+    * Check the version of the `convert` command.
+    * Start a container interactively.
+    * Inside the container: download [this png image](https://pbs.twimg.com/profile_images/1273307847103635465/lfVWBmiW_400x400.png)
+    * Convert it to **.jpg** using the `convert` command of imagemagick (format; `convert image.png image.jpg`)
+    * Exit the container
+    * Copy the jpg image back from the stopped container! Explore `docker cp`.
 
 <details>
-  <summary>
-  <h5 style="background-color: #e6fadc; display: inline-block;">*Answer*</h5>
-  </summary>
-  
-  ```
-# Pull the blast image
-docker pull biocontainers/blast
+<summary>
+<h5 style="background-color: #e6fadc; display: inline-block;">*Answer*</h5>
+</summary>
 
-# Run the image with volumes
-docker run -v /users/bi/sbonnin/test_docker/blastp_test:/blastdb biocontainers/blast:latest blastp -query /blastdb/O75976.fasta -subject /blastdb/Q90240.fasta
+```{bash}
+# Pull image
+docker pull acleancoder/imagemagick-full
+
+# Check version of `convert`
+docker run acleancoder/imagemagick-full convert --version
+
+# Start interactive container
+docker run -it acleancoder/imagemagick-full
+  # fetch png image
+  > wget https://pbs.twimg.com/profile_images/1273307847103635465/lfVWBmiW_400x400.png
+  # convert to jpg
+  > convert lfVWBmiW_400x400.png myimage.jpg
+  # exit container
+  
+# fetch container ID with `ps -a` and use `docker cp` to copy jpg file from the stopped container to the host
+docker cp *CONTAINER_ID*:/myimage.jpg .
 ```
 
 </details>
@@ -666,20 +683,6 @@ Each row in the recipe corresponds to a **layer** of the final image.
 FROM ubuntu:18.04
 ```
 
-**MAINTAINER**
-
-Who is maintaining the container?
-
-```docker
-MAINTAINER Toni Hermoso Pulido <toni.hermoso@crg.eu>
-```
-
-**WORKDIR**: all subsequent actions will be executed in that working directory
-
-```docker
-WORKDIR ~
-```
-
 **RUN**: the command to execute inside the image filesystem.
 <br>
 Think about it this way: every **RUN** line is essentially what you would run to install programs on a freshly installed Ubuntu OS.
@@ -721,7 +724,19 @@ Tool `blast` is installed using **conda**.
 `docker build` will create/build a Docker image from a Docker recipe.
 <br>
 
-It implicitely looks for a **Dockerfile** file in the current directory:
+Save the following commands:
+
+```docker
+FROM ubuntu:18.04
+
+RUN apt update && apt -y upgrade
+RUN apt install -y wget
+```
+
+in a file named **Dockerfile**
+<br>
+
+`docker build` implicitely looks for a file named **Dockerfile** in the current directory:
 
 ```{bash}
 docker build .
@@ -741,10 +756,13 @@ Syntax: **`--file` / `-f`**
 
 You can define a specific name for the image during the build process.
 
-Syntax: **-t** *imagename:tag*. If not defined `:tag` default is latest.
+Syntax: **`-t`** *imagename:tag*. If not defined `:tag` default is **latest**.
 
 ```{bash}
 docker build -t mytestimage .
+
+# same as:
+docker build -t mytestimage:latest .
 ```
 
 The last line of installation should be **Successfully built ...**: then you are good to go.
@@ -755,26 +773,36 @@ Check with `docker images` that you see the newly built image in the list...
 Then let's check the ID of the image and run it!
   
   ```{bash}
+# Get the ID with docker images
 docker images
 
+# Run/start a container using the ID or name
 docker run f9f41698e2f8
 docker run mytestimage
-```
-
-Try to run it with an argument:
-  
-  ```{bash}
-docker run f9f41698e2f8 https://cdn-images-1.medium.com/max/1600/1*_NQN6_YnxS29m8vFzWYlEg.png
 ```
 
 
 #### More instructions
 
+**MAINTAINER**
+
+Who is maintaining the container?
+
+```docker
+MAINTAINER Toni Hermoso Pulido <toni.hermoso@crg.eu>
+```
+
+**WORKDIR**: all subsequent actions will be executed in that working directory
+
+```docker
+WORKDIR ~
+```
+
 **SHELL**: allows the default shell used for the shell form of commands to be overridden.
 <br>
   Use `bash` as the default shell:
   
-  ```
+```
 SHELL ["/bin/bash", "-c"]
 ```
 
@@ -800,45 +828,62 @@ Difference between ARG and ENV explained [here](https://vsupalov.com/docker-arg-
   * **ARG** values: available only *while the image is built.*
   * **ENV** values: available *for the future running containers.*
   
-  You can use **ARG**, for example, to specify the version of the base layer:
+  You can use **ARG**, for example, to specify the version of the base layer you want to use:
   
-  ```
+  * With a default value
+  
+```
 ARG UbuntuVersion=18.04
 
 FROM ubuntu:${UbuntuVersion}
 ```
-
-or to build a specific software version in the image:
   
-  ```
+  * Without a default value (i.e. the user is expected to provide it upon building)
+
+```
+ARG UbuntuVersion
+
+FROM ubuntu:${UbuntuVersion}
+```  
+
+Provide a value for *UbuntuVersion* as you build the image with **`--build-arg`**:
+
+```
+docker build --build-arg UbuntuVersion=20.04 .
+```
+
+
+You can also use **ARG** to build a specific software version in the image:
+  
+```
 FROM ubuntu:18.04
 
 ARG PyVersion=2.7
 
 RUN apt update && apt upgrade -y
-RUN apt install python${PyVersion}
+RUN apt install -y python${PyVersion}
 ```
 
 We can save this recipe in a file called **Dockerfile_ARG**.
 <br>
   
-  Build the image to get the default version of Python (version 2.7, as given by ARG in the recipe):
+Build the image to get the default version of Python (version 2.7, as given by ARG in the recipe):
   
-  ```
-docker build -t Py2.7 -f Dockerfile_ARG .
+```
+docker build -t py27 -f Dockerfile_ARG .
 ```
 
 Install version 3.8 of Python instead (give the argument via the `--build-arg` option):
   
-  ```
-docker build --build-arg PyVersion=3.8 -t Py3.8 -f Dockerfile_ARG .
+```
+docker build --build-arg PyVersion=3.8 -t py38 -f Dockerfile_ARG .
 ```
 
-Now check the python version in each image:
+Now run the image and check if the python of the correct version is installed:
   
-  ```
-docker run Py2.7 which python2.7
-docker run Py3.8 which python3.8
+```
+docker run py27 python2.7 --help
+docker run py38 python3.8 --help
 ```
 
 <br>
@@ -852,7 +897,7 @@ The ENTRYPOINT specifies a command that will always be executed when the contain
 <br>
   
   In the example below, when the container is run without an argument, it will execute `echo "hello world"` (default).<br>
-  If it is run with the argument **nice** it will execute `echo "nice"`.
+  If it is run with the argument **nice** it will execute `echo "nice"`. The argument given in **CMD** will be overridden.
 
 ```docker
 FROM ubuntu:18.04
@@ -861,9 +906,10 @@ ENTRYPOINT ["/bin/echo"]
 CMD ["hello world"]
 ```
 
-A more complex recipe (save it in a text file named **Dockerfile**!):
+
+A more complex recipe (save it in a text file named **Dockerfile_ubuntu**!):
   
-  ```docker
+```docker
 FROM ubuntu:18.04
 
 MAINTAINER Toni Hermoso Pulido <toni.hermoso@crg.eu>
@@ -879,22 +925,39 @@ ENTRYPOINT ["/usr/bin/wget"]
 CMD ["https://cdn.wp.nginx.com/wp-content/uploads/2016/07/docker-swarm-hero2.png"]
 ```
 
+Build the image:
+
+```
+docker build -f Dockerfile_ubuntu .
+```
+
+Try to run it without and with an argument:
+  
+```{bash}
+# Remember to check the image ID with `docker images`
+docker run f9f41698e2f8
+
+# with an argument
+docker run f9f41698e2f8 https://cdn-images-1.medium.com/max/1600/1*_NQN6_YnxS29m8vFzWYlEg.png
+```
 
 
 ### docker tag
 
-Use `docker tag` in order to **tag a local image** that has - for example - ID "e23aaea5dff1" into the "ubuntu_wget" image name repository with version/tag "1.0":
+Use `docker tag` in order to **tag a local image** that has - for example - ID "f9f41698e2f8" into the "ubuntu_wget" image name repository with version/tag "1.0":
 
 ```{bash}
-docker tag e23aaea5dff1 --tag ubuntu_wget:1.0
+docker tag f9f41698e2f8 --tag ubuntu_wget:1.0
 ```
+
+If the version/tag is not specified, it defaults to **latest**.
 
 
 ### Build cache
 
-Every line of a Dockerfile is actually an image/layer by itself.
-
-Modify for instance the last bit of the previous image (let's change the image URL) and rebuild it (even with a different name/tag):
+Every line of a Dockerfile is actually an image/layer by itself (you can see all images with `docker images --all`.
+<br>
+Modify for instance the last bit of the previous image recipe (**Dockerfile_ubuntu**) (let's change the image URL) and rebuild it (even with a different name/tag):
 
 ```docker
 FROM ubuntu:18.04
@@ -911,43 +974,45 @@ CMD ["https://cdn-images-1.medium.com/max/1600/1*_NQN6_YnxS29m8vFzWYlEg.png"]
 ```
 
 ```{bash}
-docker build -t mytestimage2 .
+docker build -t mytestimage2 -f Dockerfile_ubuntu .
 ```
 
-It will start from the last line, and not re-run commands before the modification that were successfully built.
+It will **start from the last line**, and not re-run commands before the modification that were successfully built.
 <br>
 This is OK most of the times and very convenient for testing and trying new steps, but it may lead to errors when versions are updated (either FROM image or included packages).
 <br>
-It is beneficial to start from scratch with ```--no-cache``` option when building the image.
+It is beneficial to start from scratch with `--no-cache` option when building the image.
 
 ```{bash}
-docker build --no-cache -t mytestimage2 .
+docker build --no-cache -t mytestimage2 -f Dockerfile_ubuntu .
 ```
 
 ## Exercise 2 - Docker recipes and build images
 
+In breakout rooms, do the following exercise:
+
 1. <u>`figlet` recipe.</u>
-  1. Write a docker recipe in a file **Dockerfile_test** that:
-    * is based on **ubuntu:18.04**
-    * **echoes "I love containers"** by default or any other word/sentence, if given as the argument.
-  2. Build the image (give the image the name of your choice)
-  3. Run the image:
-    * with no argument.
-    * with **"Docker course"** as an argument.
-  4. Modify the **Dockerfile_test**:
-    * add the MAINTAINER field
-    * update and upgrade Ubuntu packages.
-    * install [**figlet**](https://zoomadmin.com/HowToInstall/UbuntuPackage/figlet)
-    * change "echo" to "figlet" in the **ENTRYPOINT**
-  5. Build the image.
-  6. Run the new image, with the default parameters, then with **"Docker course"** as an argument.
+    * Write a docker recipe in a file **Dockerfile_figlet** that:
+        * is based on **ubuntu:18.04**
+        * **echoes "I love containers"** by default or any other word/sentence, if given as the argument.
+    * Build the image (give the image the name of your choice)
+    * Run the image:
+        * with no argument.
+        * with **"Docker course"** as an argument.
+    * Modify the **Dockerfile_figlet**:
+        * add the MAINTAINER field
+        * update and upgrade Ubuntu packages.
+        * install the [**figlet**](https://zoomadmin.com/HowToInstall/UbuntuPackage/figlet) program
+        * change "echo" to "figlet" in the **ENTRYPOINT**
+    * Build the image.
+    * Run the new image, with the default parameters, then with **"Docker course"** as an argument.
 
 <details>
 <summary>
 <h5 style="background-color: #e6fadc; display: inline-block;">*Answer*</h5>
 </summary>
 
-1. Recipe saved in **Dockerfile_test**:
+Recipe saved in **Dockerfile_figlet**:
 
 ```
 FROM ubuntu:18.04
@@ -956,13 +1021,13 @@ ENTRYPOINT ["echo"]
 CMD ["I love containers"]
 ```
 
-2. Build:
+Build:
 
 ```
-docker build --file Dockerfile_test -t mytest .
+docker build --file Dockerfile_figlet -t mytest .
 ```
 
-3. Run the image:
+Run the image:
 
 ```
 # with no argument
@@ -972,7 +1037,7 @@ docker run mytest
 docker run mytest "Docker course"
 ```
 
-4. Recipe:
+Recipe:
 
 ```
 FROM ubuntu:18.04
@@ -986,36 +1051,37 @@ ENTRYPOINT ["figlet"]
 CMD ["I love containers"]
 ```
 
-5. Build the image.
+Build the image.
 
 ```
-docker build --file Dockerfile_test -t mytest .
+docker build --no-cache --file Dockerfile_figlet -t mytestfiglet .
 ```
 
-6. Run the new image, with the default parameter, then with **"Docker course"** as an argument.
+Run the new image, with the default parameter, then with **"Docker course"** as an argument.
 
 ```
 # run with no argument
-docker run mytest
+docker run mytestfiglet
 
 # run with argument "Docker course"
-docker run mytest "Docker course"
+docker run mytestfiglet "Docker course"
 ```
 
 </details>
 
-2. <u>random numbers</u>
-  1. Copy the following short `bash` script in a file called `random_numbers.bash`.
+
+2. <u>Random numbers</u>
+    * Copy the following short `bash` script in a file called `random_numbers.bash`.
 ```{bash}
 #!/usr/bin/bash
 seq 1 1000 | shuf | head -$1
 ```
-This script outputs **random intergers from 1 to 1000**: the number of integers selected is given as the **first argument**.
-  2. Write a recipe for an image:
-    * Based on **centos:7**
-    * That will execute this script (with `bash`) when it is run, giving it **2** as a default argument (i.e. 2 random integers): the default can be changed as the image is run.
-    * Build the image
-    * Start a container with the default argument, then try it with some other numbers.
+    This script outputs **random intergers from 1 to 1000**: the number of integers selected is given as the **first argument**.
+    * Write a recipe for an image:
+        * Based on **centos:7**
+        * That will execute this script (with `bash`) when it is run, giving it **2** as a default argument (i.e. **outputs 2 random integers**): the default can be changed as the image is run.
+        * Build the image.
+        * Start a container with the default argument, then try it with another argument.
 
 <details>
 <summary>
@@ -1080,7 +1146,7 @@ Good for long-term reproducibility and for critical production environments:
 </summary>
 
 ```
-docker save -o bowtie2image1.0.tar bowtie2image:1.0
+docker save -o random_numbers.tar random_numbers
 ```
 
 </details>
@@ -1090,29 +1156,64 @@ docker save -o bowtie2image1.0.tar bowtie2image:1.0
 
 Docker containers are fully isolated. It is necessary to mount volumes in order to handle input/output files.
 
-Syntax: ``--volume/-v host:container``
+Syntax: `--volume/-v host:container`
+
+<br> We can pull the following image to illustrate: 
+
+```
+docker pull biocontainers/fastqc:v0.11.9_cv7
+```
+
+[FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) is a tool that runs a quality control on **.fastq** files (a file format that stores nucleotide sequences and their corresponding quality scores).
+
+<br>
 
 ```{bash}
+# Create directory and empty file
 mkdir datatest
 touch datatest/test
+
+# Run a container in the background (--detach) and mount the local volume "datatest" (we map it to directory /scratch inside the container)
 docker run --detach --volume $(pwd)/datatest:/scratch --name fastqc_container biocontainers/fastqc:v0.11.9_cv7 tail -f /dev/null
+
+# Execute the container interactively
 docker exec -ti fastqc_container /bin/bash
 > ls -l /scratch
 > exit
 ```
 
-* Exercises:
-1. Copy the 2 fastq files from available datasets in Github repository and place them in mounted directory
-2. Run fastqc interactively (inside container): ```fastqc  /scratch/*.gz```
-3. Run fastqc outside the container
-
 <center><h4 style="background-color: #e6fadc; display: inline-block;">**HANDS-ON**</h4></center>
+
+1. Copy the 2 fastq files from the [Github repository](https://github.com/biocorecrg/CoursesCRG_Containers_Nextflow_May_2021/tree/main/testdata) and place them in mounted directory.
+2. Run fastqc interactively (inside container): `fastqc /scratch/*.gz`
+3. Run fastqc outside the container
 
 <details>
 <summary>
 <h5 style="background-color: #e6fadc; display: inline-block;">*Answer*</h5>
 </summary>
-here
+
+```
+# Download test fastq files (manually or using the following commands) and place them in "datatest":
+wget -O - https://github.com/biocorecrg/CoursesCRG_Containers_Nextflow_May_2021/blob/main/testdata/B7_H3K4me1_s_chr19.fastq.gz?raw=true > datatest/B7_H3K4me1_s_chr19.fastq.gz
+wget -O - https://github.com/biocorecrg/CoursesCRG_Containers_Nextflow_May_2021/blob/main/testdata/B7_input_s_chr19.fastq.gz?raw=true > datatest/B7_input_s_chr19.fastq.gz
+
+# Mount volumes and start a detached container
+docker run --detach -ti --volume $(pwd)/datatest:/scratch --name fastqc_container_test biocontainers/fastqc:v0.11.9_cv7
+
+# Execute container interactively and run fastqc
+docker exec -ti fastqc_container_test /bin/bash
+> fastqc /scratch/*.gz
+
+# Run fastqc outside the container
+  # One by one
+  docker exec fastqc_container_test fastqc /scratch/B7_H3K4me1_s_chr19.fastq.gz
+  docker exec fastqc_container_test fastqc /scratch/B7_input_s_chr19.fastq.gz
+  # All (using wildcard *)
+  docker exec fastqc_container_test bash -c 'ls /scratch/*gz'
+
+```
+
 </details>
 
 
