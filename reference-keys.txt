@@ -62,7 +62,7 @@ shiny-application
 publish-images
 push-an-image
 automatic-builds
-breakout-exercises-with-docker---3
+exercise-3---docker-volumes-and-ports
 singularity
 introduction-to-singularity
 singularity-architecture
