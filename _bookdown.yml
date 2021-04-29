@@ -6,10 +6,11 @@ language:
   ui:
     chapter_name: "Part "
 delete_merged_file: true
-rmd_files: ["index.Rmd", 
+rmd_files: ["index.Rmd",
           "containers_intro.Rmd",
           "docker.Rmd",
           "singularity.Rmd",
+          "s3files.Rmd",
           "nextflow1.Rmd",
           "nextflow2.Rmd"]
 output:
@@ -17,5 +18,3 @@ output:
     theme: cosmo
     highlight: tango
 output_format: html
-
-
