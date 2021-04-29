@@ -83,11 +83,11 @@ About Nextflow:
 #### Prerequisite
 
 * Being comfortable working with the CLI (command-line interface) in a Linux-based environment. 
-* Applicants are not expected to have used neither Linux containers nor Nextflow workflows before.
+* Applicants are not expected to have used Linux containers or Nextflow before.
 
 #### Technical requirements
 
-* You should have access to a terminal on your machine to access the cloud via ssh:
+* You should be able to work in a terminal on your machine to access the cloud via ssh:
     * on Linux and Mac operating systems it is there by default.
     * on Windows, you could install a [Windows terminal](https://www.microsoft.com/en-us/p/windows-terminal/9n0dx20hk701?activetab=pivot:overviewtab) or an application like [putty](https://www.putty.org/).
 <br>
