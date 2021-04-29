@@ -468,22 +468,42 @@ FROM ubuntu:${UbuntuVersion}</code></pre>
 FROM ubuntu:${UbuntuVersion}</code></pre>
 <p>Provide a value for <em>UbuntuVersion</em> as you build the image with <strong><code>--build-arg</code></strong>:</p>
 <pre><code>docker build --build-arg UbuntuVersion=20.04 .</code></pre>
-<p>You can also use <strong>ARG</strong> to build a specific software version in the image:</p>
+<p>You can also use <strong>ARG</strong> to build a specific software version in the image. Let’s try it!</p>
+<center>
+<h4 style="background-color: #e6fadc; display: inline-block;">
+<strong>HANDS-ON</strong>
+</h4>
+</center>
+<p>Modify the following recipe so you can decide in the command line <strong>which version of Python to install</strong>.
+<br>
+Default version should be 2.7, and try to pass the argument so that version 3.8 is installed.
+<br> Build and run first with the default version, and then with version 3.8.</p>
 <pre><code>FROM ubuntu:18.04
 
+RUN apt update &amp;&amp; apt upgrade -y
+RUN apt install -y python2.7</code></pre>
+<details>
+<summary>
+<h5 style="background-color: #e6fadc; display: inline-block;">
+<em>Answer</em>
+</h5>
+<p></summary></p>
+<p>Recipe saved in <strong>Dockerfile_ARG</strong></p>
+<pre><code>FROM ubuntu:18.04
+
+# Argument PyVersion with default value 2.7
 ARG PyVersion=2.7
 
 RUN apt update &amp;&amp; apt upgrade -y
 RUN apt install -y python${PyVersion}</code></pre>
-<p>We can save this recipe in a file called <strong>Dockerfile_ARG</strong>.
-<br></p>
-<p>Build the image to get the default version of Python (version 2.7, as given by ARG in the recipe):</p>
+<p>Build the image to get the default version of Python:</p>
 <pre><code>docker build -t py27 -f Dockerfile_ARG .</code></pre>
-<p>Install version 3.8 of Python instead (give the argument via the <code>--build-arg</code> option):</p>
+<p>Build the image install version 3.8 of Python instead (via the <code>--build-arg</code> option):</p>
 <pre><code>docker build --build-arg PyVersion=3.8 -t py38 -f Dockerfile_ARG .</code></pre>
-<p>Now run the image and check if the python of the correct version is installed:</p>
+<p>Run the image and check if the python of the correct version is installed:</p>
 <pre><code>docker run py27 python2.7 --help
 docker run py38 python3.8 --help</code></pre>
+</details>
 <p><br></p>
 <p><strong>CMD, ENTRYPOINT</strong>: command to execute when generated container starts</p>
 <p>The ENTRYPOINT specifies a command that will always be executed when the container starts.
@@ -513,17 +533,17 @@ CMD [&quot;https://cdn.wp.nginx.com/wp-content/uploads/2016/07/docker-swarm-hero
 <p>Build the image:</p>
 <pre><code>docker build -f Dockerfile_ubuntu .</code></pre>
 <p>Try to run it without and with an argument:</p>
-<div class="sourceCode" id="cb61"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb61-1"><a href="docker-recipes.html#cb61-1"></a><span class="co"># Remember to check the image ID with `docker images`</span></span>
-<span id="cb61-2"><a href="docker-recipes.html#cb61-2"></a><span class="ex">docker</span> run f9f41698e2f8</span>
-<span id="cb61-3"><a href="docker-recipes.html#cb61-3"></a></span>
-<span id="cb61-4"><a href="docker-recipes.html#cb61-4"></a><span class="co"># with an argument</span></span>
-<span id="cb61-5"><a href="docker-recipes.html#cb61-5"></a><span class="ex">docker</span> run f9f41698e2f8 https://cdn-images-1.medium.com/max/1600/1*_NQN6_YnxS29m8vFzWYlEg.png</span></code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb62-1"><a href="docker-recipes.html#cb62-1"></a><span class="co"># Remember to check the image ID with `docker images`</span></span>
+<span id="cb62-2"><a href="docker-recipes.html#cb62-2"></a><span class="ex">docker</span> run f9f41698e2f8</span>
+<span id="cb62-3"><a href="docker-recipes.html#cb62-3"></a></span>
+<span id="cb62-4"><a href="docker-recipes.html#cb62-4"></a><span class="co"># with an argument</span></span>
+<span id="cb62-5"><a href="docker-recipes.html#cb62-5"></a><span class="ex">docker</span> run f9f41698e2f8 https://cdn-images-1.medium.com/max/1600/1*_NQN6_YnxS29m8vFzWYlEg.png</span></code></pre></div>
 </div>
 </div>
 <div id="docker-tag" class="section level3">
 <h3><span class="header-section-number">3.5.2</span> docker tag</h3>
 <p>Use <code>docker tag</code> in order to <strong>tag a local image</strong> that has - for example - ID “f9f41698e2f8” into the “ubuntu_wget” image name repository with version/tag “1.0”:</p>
-<div class="sourceCode" id="cb62"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb62-1"><a href="docker-recipes.html#cb62-1"></a><span class="ex">docker</span> tag f9f41698e2f8 --tag ubuntu_wget:1.0</span></code></pre></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb63-1"><a href="docker-recipes.html#cb63-1"></a><span class="ex">docker</span> tag f9f41698e2f8 --tag ubuntu_wget:1.0</span></code></pre></div>
 <p>If the version/tag is not specified, it defaults to <strong>latest</strong>.</p>
 </div>
 <div id="build-cache" class="section level3">
@@ -542,13 +562,13 @@ RUN apt-get install -y wget
 
 ENTRYPOINT [&quot;/usr/bin/wget&quot;]
 CMD [&quot;https://cdn-images-1.medium.com/max/1600/1*_NQN6_YnxS29m8vFzWYlEg.png&quot;]</code></pre>
-<div class="sourceCode" id="cb64"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb64-1"><a href="docker-recipes.html#cb64-1"></a><span class="ex">docker</span> build -t mytestimage2 -f Dockerfile_ubuntu .</span></code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb65-1"><a href="docker-recipes.html#cb65-1"></a><span class="ex">docker</span> build -t mytestimage2 -f Dockerfile_ubuntu .</span></code></pre></div>
 <p>It will <strong>start from the last line</strong>, and not re-run commands before the modification that were successfully built.
 <br>
 This is OK most of the times and very convenient for testing and trying new steps, but it may lead to errors when versions are updated (either FROM image or included packages).
 <br>
 It is beneficial to start from scratch with <code>--no-cache</code> option when building the image.</p>
-<div class="sourceCode" id="cb65"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb65-1"><a href="docker-recipes.html#cb65-1"></a><span class="ex">docker</span> build --no-cache -t mytestimage2 -f Dockerfile_ubuntu .</span></code></pre></div>
+<div class="sourceCode" id="cb66"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb66-1"><a href="docker-recipes.html#cb66-1"></a><span class="ex">docker</span> build --no-cache -t mytestimage2 -f Dockerfile_ubuntu .</span></code></pre></div>
 </div>
 </div>
             </section>
