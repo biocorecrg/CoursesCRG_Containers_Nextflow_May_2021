@@ -349,7 +349,7 @@ Normally at ```/etc/singularity/singularity.conf``` or similar (e.g preceded by 
 * It can only be modified by users with administration permissions
 * Worth noting ```bind path``` lines, which point default mounted directories in containers as commented in [bind paths section][Bind paths (aka volumes)]
 
-### Breakout exercises with Singularity
+## Exercise 4 - Singularity running and building
 
 * Example running BLAST commands in different ways
 * Example running nginx as a service (NGINX its actually the custom example in Singularity page)

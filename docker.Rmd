@@ -755,7 +755,7 @@ Syntax: **`--file` / `-f`**
 **IMPORTANT**: Avoid contexts (directories) overpopulated with files (even if not actually used in the recipe).
 
 ```{block2, type='rdmtip'}
-In order to avoid that some directories or files are inspected or included (e.g, with **CP** command in Dockerfile), you can use .dockerignore file to specify which paths should be avoided. More information at: https://codefresh.io/docker-tutorial/not-ignore-dockerignore-2/ 
+In order to avoid that some directories or files are inspected or included (e.g, with **CP** command in Dockerfile), you can use .dockerignore file to specify which paths should be avoided. More information at: https://codefresh.io/docker-tutorial/not-ignore-dockerignore-2/
 ```
 
 You can define a specific name for the image during the build process.
@@ -1252,7 +1252,7 @@ docker exec webserver curl localhost:8080
 docker rm -f webserver
 ```
 
-## Integrative example
+## Integrative examples
 
 ### FASTQC Web Application
 
@@ -1310,7 +1310,6 @@ In the CMD execution you see the host *0.0.0.0*, this a normal approach to indic
 ```{r, out.width="60%", echo=FALSE, eval = TRUE, fig.cap='PUSH. Steve Snodgrass. CC-BY, Source: https://www.flickr.com/photos/stevensnodgrass/6117660537/'}
 knitr::include_graphics('docs/images/push_door.jpg')
 ```
-
 
 * Generation of an access key in Docker Hub
 
