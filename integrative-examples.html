@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>5.3 Main advantages | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines</title>
-  <meta name="description" content="5.3 Main advantages | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
+  <title>3.9 Integrative examples | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines</title>
+  <meta name="description" content="3.9 Integrative examples | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="5.3 Main advantages | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
+  <meta property="og:title" content="3.9 Integrative examples | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="5.3 Main advantages | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
+  <meta name="twitter:title" content="3.9 Integrative examples | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="what-is-nextflow-for.html"/>
-<link rel="next" href="workflow-structure.html"/>
+<link rel="prev" href="ports.html"/>
+<link rel="next" href="publish-images.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -284,36 +284,57 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="main-advantages" class="section level2">
-<h2><span class="header-section-number">5.3</span> Main advantages</h2>
-<ul>
-<li>Fast prototyping</li>
-</ul>
-<p>You can quickly write a small pipeline that can be expanded incrementally. Each task is independent and can be easily added to other ones.
-You can reuse your scripts and tools without rewriting / adapting them.
-- Reproducibility</p>
-<p>Nextflow supports Docker and Singularity containers technology. Their use will make the pipelines reproducible in any unix environment. Nextflow is integrated with GitHub code sharing platform so you can call directly a specific version of pipeline from a repository, download it and use it on the fly.</p>
-<ul>
-<li>Portable</li>
-</ul>
-<p>Nextflow can be executed on multiple platforms without modifiying the code. It supports several schedulers such as SGE, LSF, SLURM, PBS and HTCondor and cloud platforms like Kubernetes, Amazon AWS and Google Cloud.</p>
-<p><img src="docs/images/executors.png" width="600px" /></p>
-<ul>
-<li>Scalability</li>
-</ul>
-<p>Nextflow is based on the dataflow programming model which simplifies writing complex pipelines. The tool takes care of parallelizing the processes without additional written code. The resulting applications are inherently parallel and can scale-up or scale-out, transparently, without having to adapt to a specific platform architecture.</p>
-<ul>
-<li>Resumable, thanks to continuous checkpoints</li>
-</ul>
-<p>All the intermediate results produced during the pipeline execution are automatically tracked. For each process a temporary folder is created and is cached (or not) once resuming an execution.</p>
+<div id="integrative-examples" class="section level2">
+<h2><span class="header-section-number">3.9</span> Integrative examples</h2>
+<div id="fastqc-web-application" class="section level3">
+<h3><span class="header-section-number">3.9.1</span> FASTQC Web Application</h3>
+<p>We work in a dummy FASTQC Web service</p>
+<p>We place <code>B7_input_s_chr19.fastq.gz</code> file from available datasets in <code>$HOME/myscratch</code></p>
+<pre><code>mdkir -p $HOME/myscratch
+
+cp testdata/* $HOME/myscratch
+
+cd containers/docker/fastqc_www
+
+docker build -t fastqcwww -f Dockerfile ../../scripts/fastqc
+
+docker run -d -v $HOME/myscratch:/scratch -p 8083:3838 --name myfastqc fastqcwww</code></pre>
+<p>Example query from the browser:</p>
+<p><a href="http://mymachine-address-here:3838/?file=B7_input_s_chr19.fastq" class="uri">http://mymachine-address-here:3838/?file=B7_input_s_chr19.fastq</a></p>
+
+<div class="rmdnote">
+As commented in previous sections, the context is the place from where Docker will start the build process. Keep it in mind when defining the paths when using commands such as <strong>CP</strong> in the recipe.
+</div>
+
+
+<div class="rmdnote">
+Replace your mymachine-address-here for machine provided address or 127.0.0.1/localhost in case you were trying it from your own machine.
+</div>
+
+</div>
+<div id="shiny-application" class="section level3">
+<h3><span class="header-section-number">3.9.2</span> Shiny Application</h3>
+<div class="sourceCode" id="cb85"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb85-1"><a href="integrative-examples.html#cb85-1"></a><span class="bu">cd</span> containers/docker/shiny</span>
+<span id="cb85-2"><a href="integrative-examples.html#cb85-2"></a></span>
+<span id="cb85-3"><a href="integrative-examples.html#cb85-3"></a><span class="ex">docker</span> build -t shinyapp -f Dockerfile ../../scripts</span>
+<span id="cb85-4"><a href="integrative-examples.html#cb85-4"></a></span>
+<span id="cb85-5"><a href="integrative-examples.html#cb85-5"></a><span class="ex">docker</span> run -d -v <span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span>/../../scripts/shiny:/srv/shiny-server/myserver -p 3838:3838 --name myserver shinyapp</span></code></pre></div>
+<p>Check the result from the browser
+<a href="http://mymachine-address-here:3838" class="uri">http://mymachine-address-here:3838</a></p>
+
+<div class="rmdnote">
+In the CMD execution you see the host <em>0.0.0.0</em>, this a normal approach to indicate association to any IP address from the machine you launch the program. In a very machine you can have many routings and networks associated (e.g., more than one Ethernet plug)
+</div>
+
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="what-is-nextflow-for.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="workflow-structure.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="ports.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="publish-images.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

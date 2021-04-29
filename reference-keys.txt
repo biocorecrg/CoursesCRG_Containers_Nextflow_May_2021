@@ -55,7 +55,7 @@ exercise-2---docker-recipes-and-build-images
 additional-commands
 volumes
 ports
-integrative-example
+integrative-examples
 fastqc-web-application
 shiny-application
 publish-images
@@ -89,7 +89,7 @@ troubleshooting
 fakeroot
 singularity-cache-directory
 global-singularity-configuration
-breakout-exercises-with-singularity
+exercise-4---singularity-running-and-building
 nextflow-day-1
 what-is-nextflow
 what-is-nextflow-for
