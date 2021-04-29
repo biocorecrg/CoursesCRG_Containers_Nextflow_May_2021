@@ -2,8 +2,9 @@
 title: "Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines"
 
 author
-  - Toni Hermoso^[CRG, toni.hermoso@crg.eu], Luca Cozzuto^[CRG, luca.cozzuto@crg.eu], Sarah Bonnin^[CRG, sarah.bonnin@crg.eu], Julia Ponomarenko^[CRG, julia.ponomarenko@crg.eu]
- 
+  - Sarah Bonnin^[CRG, sarah.bonnin@crg.eu], Luca Cozzuto^[CRG, luca.cozzuto@crg.eu], Toni Hermoso^[CRG, toni.hermoso@crg.eu], Julia Ponomarenko^[CRG, julia.ponomarenko@crg.eu]
+
+
 site: bookdown::Containers_Nextflow_course
 output: bookdown::gitbook
 documentclass: book
