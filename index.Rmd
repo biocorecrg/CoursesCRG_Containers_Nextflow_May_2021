@@ -82,13 +82,8 @@ About Nextflow:
 
 #### Prerequisite
 
-<<<<<<< HEAD
 * Being comfortable working with the CLI (command-line interface) in a Linux-based environment.
-* Applicants are not expected to have used neither Linux containers nor Nextflow workflows before.
-=======
-* Being comfortable working with the CLI (command-line interface) in a Linux-based environment. 
 * Applicants are not expected to have used Linux containers or Nextflow before.
->>>>>>> d3f6e90decd74a8ad6d6da09e50952c64e6e2e95
 
 #### Technical requirements
 
@@ -133,32 +128,6 @@ You can find all information in the dedicated course page of the [Moodle platfor
 
 #### Day 1: Docker
 
-<<<<<<< HEAD
-- Containers: introduction and history.
-- Docker hub: find existing containers.
-- Fetch (and build) an image from public registries (Docker Hub, Quay.io, etc.)
- - Discovery of different relevant base images
-  - Rocker, continuumio, biocontainers.pro.
-- Run Docker container based on an existing image (also run it interactively).
-- Work with volumes and ports.
-- Build an image from an existing recipe:
-  - Explain sections and keywords.
-  - Build options (e.g. cache or build variables).
-- Write a Docker recipe and build an image from it.
-- Upload image to registries.
-
-#### Day 2: Singularity
-
-- Singularity versus Docker.
- - Differences, pros and cons for each system.
-- Fetch (and build) Singularity images.
- - Build from existing public registries.
- - Build from local Docker instances.
-- Run Singularity container (interactively).
-- Understanding and working with volumes.
-- Singularity build recipes.
-- Advanced features: services, etc.
-=======
 * Containers: introduction and history.
 * Docker hub: find existing containers.
 * Fetch (and build) an image from public registries (Docker Hub, Quay.io, etc.)
@@ -184,7 +153,6 @@ You can find all information in the dedicated course page of the [Moodle platfor
   * Understanding and working with volumes.
   * Singularity build recipes.
   * Advanced features: services, etc.
->>>>>>> d3f6e90decd74a8ad6d6da09e50952c64e6e2e95
 
 ### May 10-11: Nextflow
 
