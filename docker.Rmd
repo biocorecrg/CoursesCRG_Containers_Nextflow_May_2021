@@ -571,7 +571,7 @@ docker run -it acleancoder/imagemagick-full
   # convert to jpg
   > convert lfVWBmiW_400x400.png myimage.jpg
   # exit container
-  
+
 # fetch container ID with `ps -a` and use `docker cp` to copy jpg file from the stopped container to the host
 docker cp *CONTAINER_ID*:/myimage.jpg .
 ```
@@ -771,7 +771,7 @@ Check with `docker images` that you see the newly built image in the list...
 
 
 Then let's check the ID of the image and run it!
-  
+
   ```{bash}
 # Get the ID with docker images
 docker images
@@ -801,7 +801,7 @@ WORKDIR ~
 **SHELL**: allows the default shell used for the shell form of commands to be overridden.
 <br>
   Use `bash` as the default shell:
-  
+
 ```
 SHELL ["/bin/bash", "-c"]
 ```
@@ -824,27 +824,27 @@ COPY ~/.bashrc .
 Difference between ARG and ENV explained [here](https://vsupalov.com/docker-arg-vs-env/).
 
 <a href="https://d33wubrfki0l68.cloudfront.net/ed9cab66953fd3a80af63675cf3fefade4572c01/00a3b/images/docker-env-vars/docker_environment_build_args_overview.png"><img src="https://d33wubrfki0l68.cloudfront.net/ed9cab66953fd3a80af63675cf3fefade4572c01/00a3b/images/docker-env-vars/docker_environment_build_args_overview.png" width="800/"></a>
-  
+
   * **ARG** values: available only *while the image is built.*
   * **ENV** values: available *for the future running containers.*
-  
+
   You can use **ARG**, for example, to specify the version of the base layer you want to use:
-  
+
   * With a default value
-  
+
 ```
 ARG UbuntuVersion=18.04
 
 FROM ubuntu:${UbuntuVersion}
 ```
-  
+
   * Without a default value (i.e. the user is expected to provide it upon building)
 
 ```
 ARG UbuntuVersion
 
 FROM ubuntu:${UbuntuVersion}
-```  
+```
 
 Provide a value for *UbuntuVersion* as you build the image with **`--build-arg`**:
 
@@ -854,7 +854,7 @@ docker build --build-arg UbuntuVersion=20.04 .
 
 
 You can also use **ARG** to build a specific software version in the image:
-  
+
 ```
 FROM ubuntu:18.04
 
@@ -866,28 +866,28 @@ RUN apt install -y python${PyVersion}
 
 We can save this recipe in a file called **Dockerfile_ARG**.
 <br>
-  
+
 Build the image to get the default version of Python (version 2.7, as given by ARG in the recipe):
-  
+
 ```
 docker build -t py27 -f Dockerfile_ARG .
 ```
 
 Install version 3.8 of Python instead (give the argument via the `--build-arg` option):
-  
+
 ```
 docker build --build-arg PyVersion=3.8 -t py38 -f Dockerfile_ARG .
 ```
 
 Now run the image and check if the python of the correct version is installed:
-  
+
 ```
 docker run py27 python2.7 --help
 docker run py38 python3.8 --help
 ```
 
 <br>
-  
+
   **CMD, ENTRYPOINT**: command to execute when generated container starts
 
 The ENTRYPOINT specifies a command that will always be executed when the container starts.
@@ -895,7 +895,7 @@ The ENTRYPOINT specifies a command that will always be executed when the contain
   The CMD specifies arguments that will be fed to the ENTRYPOINT.
 
 <br>
-  
+
   In the example below, when the container is run without an argument, it will execute `echo "hello world"` (default).<br>
   If it is run with the argument **nice** it will execute `echo "nice"`. The argument given in **CMD** will be overridden.
 
@@ -908,16 +908,16 @@ CMD ["hello world"]
 
 
 A more complex recipe (save it in a text file named **Dockerfile_ubuntu**!):
-  
+
 ```docker
 FROM ubuntu:18.04
 
 MAINTAINER Toni Hermoso Pulido <toni.hermoso@crg.eu>
-  
+
 SHELL ["/bin/bash", "-c"]
 
 WORKDIR ~
-  
+
 RUN apt-get update && apt-get -y upgrade
 RUN apt-get install -y wget
 
@@ -932,7 +932,7 @@ docker build -f Dockerfile_ubuntu .
 ```
 
 Try to run it without and with an argument:
-  
+
 ```{bash}
 # Remember to check the image ID with `docker images`
 docker run f9f41698e2f8
@@ -1158,7 +1158,7 @@ Docker containers are fully isolated. It is necessary to mount volumes in order 
 
 Syntax: `--volume/-v host:container`
 
-<br> We can pull the following image to illustrate: 
+<br> We can pull the following image to illustrate:
 
 ```
 docker pull biocontainers/fastqc:v0.11.9_cv7
@@ -1282,10 +1282,20 @@ Replace your mymachine-address-here for machine provided address or 127.0.0.1/lo
 
 ### Shiny Application
 
-Simply introduction...
+```{bash}
+cd containers/docker/shiny
 
-```{block2, type='rmdtip'}
-Approaches to have the code or mounting.
+docker build -t shinyapp -f Dockerfile ../../scripts
+
+docker run -d -v $(pwd)/../../scripts/shiny:/srv/shiny-server/myserver -p 3838:3838 --name myserver shinyapp
+```
+
+Check the result from the browser
+http://mymachine-address-here:3838
+
+
+```{block2, type='rmdnote'}
+In the CMD execution you see the host *0.0.0.0*, this a normal approach to indicate association to any IP address from the machine you launch the program. In a very machine you can have many routings and networks associated (e.g., more than one Ethernet plug)
 ```
 
 ## Publish images
