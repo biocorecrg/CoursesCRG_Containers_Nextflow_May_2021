@@ -23,19 +23,27 @@ Linux containers allow the storage of code and applications in an host-independe
 
 ## Meet the organizers and instructors
 
-[Damjana Kastelic]()
-[Anna Solé]()
+Check the [padlet](https://padlet.com/annasolea/nvp3rlxa0r37gud0)!
 
-[Toni Hermoso]()
-[Luca Cozzuto]()
-[Sarah Bonnin]()
-[Julia Ponomarenko]()
-[Emilio Palumbo]()
-[Alessio Vignoli]()
-[José Espinosa]()
-[Leila Mansouri]()
-[Athanasios Baltzis]()
+Contacts below:
 
+* CRG Training unit:
+    * [Damjana](mailto:damjana.kastelic@crg.eu)
+    * [Anna](mailto:anna.sole@crg.eu)
+
+* Main speakers:
+    * [Toni](mailto:toni.hermoso@crg.eu) (Containers)
+    * [Luca](mailto:luca.cozzuto@crg.eu) (Nextflow)
+
+* Instructors/helper:
+    * [Emilio](mailto:emilio.palumbo@crg.eu)
+    * [Jose](mailto:joseantonio.espinosa@crg.eu)
+    * [Alessio](mailto:alessio.vignoli@crg.eu)
+    * [Athanasios](mailto:athanasios.baltzis@crg.eu)
+    * [Leila](mailto:leila.mansouri@crg.eu)
+    * [Edgar](mailto:edgar.garriga@crg.eu)
+    * [Julia](mailto:julia.ponomarenko@crg.eu)
+    * [Sarah](mailto:sarah.bonnin@crg.eu)
 
 
 ## About the course
@@ -70,10 +78,30 @@ About Nextflow:
 - Develop a Nextflow pipeline from scratch.
 - Run pipeline in diverse computational environments (local, HPC, cloud )
 
-### Prerequisite, Dates, time, location
+### Prerequisite / technical requirements
 
-Being comfortable working with the CLI (command-line interface) in a Linux-based environment. 
-Applicants are not expected to have used neither Linux containers nor Nextflow workflows before.
+#### Prerequisite
+
+* Being comfortable working with the CLI (command-line interface) in a Linux-based environment. 
+* Applicants are not expected to have used neither Linux containers nor Nextflow workflows before.
+
+#### Technical requirements
+
+* You should have access to a terminal on your machine to access the cloud via ssh:
+    * on Linux and Mac operating systems it is there by default.
+    * on Windows, you could install a [Windows terminal](https://www.microsoft.com/en-us/p/windows-terminal/9n0dx20hk701?activetab=pivot:overviewtab) or an application like [putty](https://www.putty.org/).
+<br>
+If you are not familiar with the **ssh** protocol, you can learn about it <a href="https://www.hostinger.com/tutorials/ssh-tutorial-how-does-ssh-work" target="_blank">here</a>.
+<br>
+* You should also be able to use a **command-line/screen-oriented text editor** (such as nano or vi/vim) or to be able to use an editor able to connect remotely like Visual studio, emacs or bbedit. If you are not sure what text editor to use, we recommend that you <a href="https://wiki.gentoo.org/wiki/Nano/Basics_Guide" target="_blank">learn the basics of "nano"</a>.
+<br>
+* During the course, we will use the [**Slack**](https://slack.com) platform for discussion and troubleshooting. You can either [install the Slack app](https://slack.com/intl/en-es/help/categories/360000049043#download-slack) before the course, or you will be able to access Slack from a web browser.
+<br>
+* We also encourage you to create a [**Github account**](https://github.com/join) and an associated [**Docker hub account**](https://hub.docker.com/signup).
+
+
+
+### Dates, time, location
 
 - Dates: May 2021: 
  - Containers: Monday 3rd, Tuesday 4th
@@ -83,6 +111,8 @@ Applicants are not expected to have used neither Linux containers nor Nextflow w
   - Lunch break: 1pm-2pm 
   - Afternoon coffee break: 3:30-4:00pm
 - Location: virtual, via Zoom.
+
+You can find all information in the dedicated course page of the [Moodle platform](https://moodle.crg.eu).
 
 ## Program
 

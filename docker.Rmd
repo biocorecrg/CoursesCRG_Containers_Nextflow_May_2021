@@ -857,38 +857,63 @@ docker build --build-arg UbuntuVersion=20.04 .
 ```
 
 
-You can also use **ARG** to build a specific software version in the image:
+You can also use **ARG** to build a specific software version in the image. Let's try it!
+
+
+<center><h4 style="background-color: #e6fadc; display: inline-block;">**HANDS-ON**</h4></center>
+
+Modify the following recipe so you can decide in the command line **which version of Python to install**. 
+<br>
+Default version should be 2.7, and try to pass the argument so that version 3.8 is installed.
+<br> Build and run first with the default version, and then with version 3.8.
 
 ```
 FROM ubuntu:18.04
 
+RUN apt update && apt upgrade -y
+RUN apt install -y python2.7
+```
+
+<details>
+<summary>
+<h5 style="background-color: #e6fadc; display: inline-block;">*Answer*</h5>
+</summary>
+
+Recipe saved in **Dockerfile_ARG**
+
+```
+FROM ubuntu:18.04
+
+# Argument PyVersion with default value 2.7
 ARG PyVersion=2.7
 
 RUN apt update && apt upgrade -y
 RUN apt install -y python${PyVersion}
 ```
 
-We can save this recipe in a file called **Dockerfile_ARG**.
-<br>
-
-Build the image to get the default version of Python (version 2.7, as given by ARG in the recipe):
+Build the image to get the default version of Python:
 
 ```
 docker build -t py27 -f Dockerfile_ARG .
 ```
 
-Install version 3.8 of Python instead (give the argument via the `--build-arg` option):
+Build the image install version 3.8 of Python instead (via the `--build-arg` option):
 
 ```
 docker build --build-arg PyVersion=3.8 -t py38 -f Dockerfile_ARG .
 ```
 
-Now run the image and check if the python of the correct version is installed:
+Run the image and check if the python of the correct version is installed:
 
 ```
 docker run py27 python2.7 --help
 docker run py38 python3.8 --help
 ```
+
+</details>
+
+
+
 
 <br>
 
