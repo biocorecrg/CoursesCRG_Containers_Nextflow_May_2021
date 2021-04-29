@@ -907,16 +907,33 @@ cache = 'lenient' // (Best in HPC and shared file systems) Cache keys are create
 ## EXERCISE 3
 Try to make the previous pipeline resilient to the failing of a process and store the results in order to skip the process execution when launched again.
 
+First make the process reverseSequence failing by creating a mistake in the command line, then add the directive to the process.
+
 <details>
 <summary>
 <h5>*Answer*</h5>
 </summary>
 	
-```{nextflow, eval=FALSE, echo=TRUE}
-workflow flow1 {
-    take: sequences
-    main:
-    splitSequences(sequences) | reverseSequence | view()
+```{java, eval=FALSE, echo=TRUE}
+/*
+ * Broken process
+ */
+ 
+process reverseSequence {
+    tag "$seq"  				
+    publishDir "output"
+    errorStrategy 'ignore'
+
+    input:
+    path seq 
+
+    output:
+    path "all.rev" 
+ 
+	script:
+    """
+    cat ${seq} | AAAAAAA '{if (\$1~">") {print \$0} else system("echo " \$0 " |rev")}' > all.rev
+    """
 }
 ```
 	
@@ -933,7 +950,7 @@ See documentation here:
 <h5>*Answer*</h5>
 </summary>
 	
-```{nextflow, eval=FALSE, echo=TRUE}
+```{java, eval=FALSE, echo=TRUE}
 workflow flow1 {
     take: sequences
     main:
