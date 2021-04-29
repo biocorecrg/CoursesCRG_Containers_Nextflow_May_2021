@@ -87,8 +87,11 @@ About Nextflow:
 
 #### Technical requirements
 
-* You will need to connect during the course to a remote server via the **ssh** protocol: you should be familiar
-with it. You can learn about it <a href="https://www.hostinger.com/tutorials/ssh-tutorial-how-does-ssh-work" target="_blank">here</a>.
+* You should have access to a terminal on your machine to access the cloud via ssh:
+    * on Linux and Mac operating systems it is there by default.
+    * on Windows, you could install a [Windows terminal](https://www.microsoft.com/en-us/p/windows-terminal/9n0dx20hk701?activetab=pivot:overviewtab) or an application like [putty](https://www.putty.org/).
+<br>
+If you are not familiar with the **ssh** protocol, you can learn about it <a href="https://www.hostinger.com/tutorials/ssh-tutorial-how-does-ssh-work" target="_blank">here</a>.
 <br>
 * You should also be able to use a **command-line/screen-oriented text editor** (such as nano or vi/vim) or to be able to use an editor able to connect remotely like Visual studio, emacs or bbedit. If you are not sure what text editor to use, we recommend that you <a href="https://wiki.gentoo.org/wiki/Nano/Basics_Guide" target="_blank">learn the basics of "nano"</a>.
 <br>
