@@ -7,7 +7,7 @@ In this case, we place executables in a mounted volume.
 
 cd containers/docker/shiny
 
-docker build -t shinyapp -f Dockerfile ../../scripts/shiny
+docker build -t shinyapp -f Dockerfile ../../scripts
 
 docker run -d -v $(pwd)/../../scripts/shiny:/srv/shiny-server/myserver -p 3838:3838 --name myserver shinyapp
 ```
