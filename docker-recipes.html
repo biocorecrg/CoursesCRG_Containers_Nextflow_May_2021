@@ -494,11 +494,11 @@ CMD [&quot;hello world&quot;]</code></pre>
 <pre class="docker"><code>FROM ubuntu:18.04
 
 MAINTAINER Toni Hermoso Pulido &lt;toni.hermoso@crg.eu&gt;
-  
+
 SHELL [&quot;/bin/bash&quot;, &quot;-c&quot;]
 
 WORKDIR ~
-  
+
 RUN apt-get update &amp;&amp; apt-get -y upgrade
 RUN apt-get install -y wget
 
