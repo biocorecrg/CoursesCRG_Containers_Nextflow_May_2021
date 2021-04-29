@@ -90,6 +90,7 @@ fakeroot
 singularity-cache-directory
 global-singularity-configuration
 exercise-4---singularity-running-and-building
+saving-and-retrieving-from-s3-buckets
 nextflow-day-1
 what-is-nextflow
 what-is-nextflow-for

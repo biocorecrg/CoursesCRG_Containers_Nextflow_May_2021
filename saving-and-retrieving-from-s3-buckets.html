@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>6.8 Processes | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines</title>
-  <meta name="description" content="6.8 Processes | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
+  <title>Part 5 Saving and retrieving from S3 buckets | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines</title>
+  <meta name="description" content="Part 5 Saving and retrieving from S3 buckets | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="6.8 Processes | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
+  <meta property="og:title" content="Part 5 Saving and retrieving from S3 buckets | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="6.8 Processes | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
+  <meta name="twitter:title" content="Part 5 Saving and retrieving from S3 buckets | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="exercise-1.html"/>
-<link rel="next" href="workflow.html"/>
+<link rel="prev" href="exercise-4-singularity-running-and-building.html"/>
+<link rel="next" href="nextflow-day-1.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -285,50 +285,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="processes" class="section level2">
-<h2><span class="header-section-number">6.8</span> Processes</h2>
-<p>Let’s add now a process to our previous script test.nf:</p>
-<div class="sourceCode" id="cb123"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb123-1"><a href="processes.html#cb123-1"></a>#!/usr/bin/env nextflow</span>
-<span id="cb123-2"><a href="processes.html#cb123-2"></a></span>
-<span id="cb123-3"><a href="processes.html#cb123-3"></a>nextflow.<span class="fu">enable</span>.<span class="fu">dsl</span>=<span class="dv">2</span></span>
-<span id="cb123-4"><a href="processes.html#cb123-4"></a></span>
-<span id="cb123-5"><a href="processes.html#cb123-5"></a>str = <span class="bu">Channel</span>.<span class="fu">from</span>(&#39;hello&#39;, &#39;hola&#39;, &#39;bonjour&#39;)</span>
-<span id="cb123-6"><a href="processes.html#cb123-6"></a></span>
-<span id="cb123-7"><a href="processes.html#cb123-7"></a><span class="co">/*</span></span>
-<span id="cb123-8"><a href="processes.html#cb123-8"></a><span class="co"> * Creates a process which receive an input channel containing values</span></span>
-<span id="cb123-9"><a href="processes.html#cb123-9"></a><span class="co"> * Each value emitted by the channel triggers the execution</span></span>
-<span id="cb123-10"><a href="processes.html#cb123-10"></a><span class="co"> * of the process. The process stdout is caputured and send over</span></span>
-<span id="cb123-11"><a href="processes.html#cb123-11"></a><span class="co"> * the another channel.</span></span>
-<span id="cb123-12"><a href="processes.html#cb123-12"></a><span class="co"> */</span></span>
-<span id="cb123-13"><a href="processes.html#cb123-13"></a></span>
-<span id="cb123-14"><a href="processes.html#cb123-14"></a>process printHello {</span>
-<span id="cb123-15"><a href="processes.html#cb123-15"></a></span>
-<span id="cb123-16"><a href="processes.html#cb123-16"></a>   tag { str_in } <span class="co">// this is for displaying the content of `str_in` in the log file</span></span>
-<span id="cb123-17"><a href="processes.html#cb123-17"></a></span>
-<span id="cb123-18"><a href="processes.html#cb123-18"></a>   input:        </span>
-<span id="cb123-19"><a href="processes.html#cb123-19"></a>   val str_in</span>
-<span id="cb123-20"><a href="processes.html#cb123-20"></a></span>
-<span id="cb123-21"><a href="processes.html#cb123-21"></a>   output:        </span>
-<span id="cb123-22"><a href="processes.html#cb123-22"></a>   stdout</span>
-<span id="cb123-23"><a href="processes.html#cb123-23"></a></span>
-<span id="cb123-24"><a href="processes.html#cb123-24"></a>   script:        </span>
-<span id="cb123-25"><a href="processes.html#cb123-25"></a>   <span class="st">&quot;&quot;&quot;</span></span>
-<span id="cb123-26"><a href="processes.html#cb123-26"></a>   echo ${str_in} in Italian is ciao</span>
-<span id="cb123-27"><a href="processes.html#cb123-27"></a>   <span class="st">&quot;&quot;&quot;</span></span>
-<span id="cb123-28"><a href="processes.html#cb123-28"></a>}</span></code></pre></div>
-<p>The process can be seen as a function and is composed by:
-- An <strong>input</strong> part where the input channels are defined
-- An <strong>output</strong> part where we indicates what to store as a result that will be sent to other processes or published as final result
-- A <strong>script</strong> part where we have the block of code to be executed with the data from the input channel and will produce the output for the ouput channel. You can run any kind of code / command line there, it is language agnostic. You can have some trouble with escaping some characters, in that case is better to wrap your code in a file and call it as a program.</p>
-<p>Before the input you can indicate a <strong>tag</strong> that will be reported in the log. This is quite useful for logging / debugging.</p>
+<div id="saving-and-retrieving-from-s3-buckets" class="section level1">
+<h1><span class="header-section-number">Part 5</span> Saving and retrieving from S3 buckets</h1>
+
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="exercise-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="workflow.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="exercise-4-singularity-running-and-building.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="nextflow-day-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
