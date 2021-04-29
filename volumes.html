@@ -287,32 +287,55 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">3.7</span> Volumes</h2>
 <p>Docker containers are fully isolated. It is necessary to mount volumes in order to handle input/output files.</p>
 <p>Syntax: <code>--volume/-v host:container</code></p>
-<div class="sourceCode" id="cb72"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb72-1"><a href="volumes.html#cb72-1"></a><span class="fu">mkdir</span> datatest</span>
-<span id="cb72-2"><a href="volumes.html#cb72-2"></a><span class="fu">touch</span> datatest/test</span>
-<span id="cb72-3"><a href="volumes.html#cb72-3"></a><span class="ex">docker</span> run --detach --volume <span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span>/datatest:/scratch --name fastqc_container biocontainers/fastqc:v0.11.9_cv7 tail -f /dev/null</span>
-<span id="cb72-4"><a href="volumes.html#cb72-4"></a><span class="ex">docker</span> exec -ti fastqc_container /bin/bash</span>
-<span id="cb72-5"><a href="volumes.html#cb72-5"></a><span class="op">&gt;</span> <span class="fu">ls</span> -l /scratch</span>
-<span id="cb72-6"><a href="volumes.html#cb72-6"></a><span class="op">&gt;</span> <span class="bu">exit</span></span></code></pre></div>
-<ul>
-<li>Exercises:</li>
-</ul>
-<ol style="list-style-type: decimal">
-<li>Copy the 2 fastq files from available datasets in Github repository and place them in mounted directory</li>
-<li>Run fastqc interactively (inside container): <code>fastqc  /scratch/*.gz</code></li>
-<li>Run fastqc outside the container</li>
-</ol>
+<p><br> We can pull the following image to illustrate:</p>
+<pre><code>docker pull biocontainers/fastqc:v0.11.9_cv7</code></pre>
+<p><a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC</a> is a tool that runs a quality control on <strong>.fastq</strong> files (a file format that stores nucleotide sequences and their corresponding quality scores).</p>
+<p><br></p>
+<div class="sourceCode" id="cb78"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb78-1"><a href="volumes.html#cb78-1"></a><span class="co"># Create directory and empty file</span></span>
+<span id="cb78-2"><a href="volumes.html#cb78-2"></a><span class="fu">mkdir</span> datatest</span>
+<span id="cb78-3"><a href="volumes.html#cb78-3"></a><span class="fu">touch</span> datatest/test</span>
+<span id="cb78-4"><a href="volumes.html#cb78-4"></a></span>
+<span id="cb78-5"><a href="volumes.html#cb78-5"></a><span class="co"># Run a container in the background (--detach) and mount the local volume &quot;datatest&quot; (we map it to directory /scratch inside the container)</span></span>
+<span id="cb78-6"><a href="volumes.html#cb78-6"></a><span class="ex">docker</span> run --detach --volume <span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span>/datatest:/scratch --name fastqc_container biocontainers/fastqc:v0.11.9_cv7 tail -f /dev/null</span>
+<span id="cb78-7"><a href="volumes.html#cb78-7"></a></span>
+<span id="cb78-8"><a href="volumes.html#cb78-8"></a><span class="co"># Execute the container interactively</span></span>
+<span id="cb78-9"><a href="volumes.html#cb78-9"></a><span class="ex">docker</span> exec -ti fastqc_container /bin/bash</span>
+<span id="cb78-10"><a href="volumes.html#cb78-10"></a><span class="op">&gt;</span> <span class="fu">ls</span> -l /scratch</span>
+<span id="cb78-11"><a href="volumes.html#cb78-11"></a><span class="op">&gt;</span> <span class="bu">exit</span></span></code></pre></div>
 <center>
 <h4 style="background-color: #e6fadc; display: inline-block;">
 <strong>HANDS-ON</strong>
 </h4>
 </center>
+<ol style="list-style-type: decimal">
+<li>Copy the 2 fastq files from the <a href="https://github.com/biocorecrg/CoursesCRG_Containers_Nextflow_May_2021/tree/main/testdata">Github repository</a> and place them in mounted directory.</li>
+<li>Run fastqc interactively (inside container): <code>fastqc /scratch/*.gz</code></li>
+<li>Run fastqc outside the container</li>
+</ol>
 <details>
 <summary>
 <h5 style="background-color: #e6fadc; display: inline-block;">
 <em>Answer</em>
 </h5>
-</summary>
-here
+<p></summary></p>
+<pre><code># Download test fastq files (manually or using the following commands) and place them in &quot;datatest&quot;:
+wget -O - https://github.com/biocorecrg/CoursesCRG_Containers_Nextflow_May_2021/blob/main/testdata/B7_H3K4me1_s_chr19.fastq.gz?raw=true &gt; datatest/B7_H3K4me1_s_chr19.fastq.gz
+wget -O - https://github.com/biocorecrg/CoursesCRG_Containers_Nextflow_May_2021/blob/main/testdata/B7_input_s_chr19.fastq.gz?raw=true &gt; datatest/B7_input_s_chr19.fastq.gz
+
+# Mount volumes and start a detached container
+docker run --detach -ti --volume $(pwd)/datatest:/scratch --name fastqc_container_test biocontainers/fastqc:v0.11.9_cv7
+
+# Execute container interactively and run fastqc
+docker exec -ti fastqc_container_test /bin/bash
+&gt; fastqc /scratch/*.gz
+
+# Run fastqc outside the container
+  # One by one
+  docker exec fastqc_container_test fastqc /scratch/B7_H3K4me1_s_chr19.fastq.gz
+  docker exec fastqc_container_test fastqc /scratch/B7_input_s_chr19.fastq.gz
+  # All (using wildcard *)
+  docker exec fastqc_container_test bash -c &#39;ls /scratch/*gz&#39;
+</code></pre>
 </details>
 </div>
             </section>

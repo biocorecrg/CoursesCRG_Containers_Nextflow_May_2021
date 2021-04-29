@@ -285,18 +285,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="exercise-1---docker-as-a-user" class="section level2">
 <h2><span class="header-section-number">3.3</span> Exercise 1 - Docker as a user</h2>
+<p>In breakout rooms, do the following exercise:</p>
 <ol style="list-style-type: decimal">
-<li><u><code>alpine</code> image.</u></li>
+<li><u><code>alpine</code> image.</u>
+<ul>
 <li><strong>Search</strong> and <strong>pull</strong> the <code>alpine</code> image (tag <strong>3.12</strong>) - it is an <strong>official build</strong>.</li>
 <li>Can you run a container from this image and make it print a “hello world” message?</li>
 <li>Now run a container <strong>interactively</strong> from the same image.
-* Run <code>whoami</code> in the container.
-* Exit the container and run <code>whoami</code> on the host machine: do you get the same output?</li>
+<ul>
+<li>Run <code>whoami</code> in the container.</li>
+<li>Exit the container and run <code>whoami</code> on the host machine: do you get the same output?</li>
+</ul></li>
 <li>Restart the container you just exited:
-* Is it now running?
-* Make the container execute the command <code>ls</code>.
-* Stop the container.</li>
+<ul>
+<li>Is it now running?</li>
+<li>Make the container execute the command <code>ls</code>.</li>
+<li>Stop the container.</li>
+</ul></li>
 <li>Remove the alpine image and all its containers (running or stopped)</li>
+</ul></li>
 </ol>
 <details>
 <summary>
@@ -313,8 +320,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb33-7"><a href="exercise-1-docker-as-a-user.html#cb33-7"></a></span>
 <span id="cb33-8"><a href="exercise-1-docker-as-a-user.html#cb33-8"></a><span class="co"># Now run a container **interactively** from the same image.</span></span>
 <span id="cb33-9"><a href="exercise-1-docker-as-a-user.html#cb33-9"></a><span class="ex">docker</span> run -ti alpine:3.12</span>
-<span id="cb33-10"><a href="exercise-1-docker-as-a-user.html#cb33-10"></a>  <span class="co"># Run `uname -a`</span></span>
-<span id="cb33-11"><a href="exercise-1-docker-as-a-user.html#cb33-11"></a>  <span class="fu">uname</span> -a</span>
+<span id="cb33-10"><a href="exercise-1-docker-as-a-user.html#cb33-10"></a>  <span class="co"># Run `whoami`</span></span>
+<span id="cb33-11"><a href="exercise-1-docker-as-a-user.html#cb33-11"></a>  <span class="fu">whoami</span></span>
 <span id="cb33-12"><a href="exercise-1-docker-as-a-user.html#cb33-12"></a>  <span class="co"># Exit the container.</span></span>
 <span id="cb33-13"><a href="exercise-1-docker-as-a-user.html#cb33-13"></a>  <span class="bu">exit</span></span>
 <span id="cb33-14"><a href="exercise-1-docker-as-a-user.html#cb33-14"></a></span>
@@ -330,17 +337,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb33-24"><a href="exercise-1-docker-as-a-user.html#cb33-24"></a><span class="co"># Remove the alpine image and all its containers (running or stopped)</span></span>
 <span id="cb33-25"><a href="exercise-1-docker-as-a-user.html#cb33-25"></a><span class="ex">docker</span> rmi alpine:3.12</span>
 <span id="cb33-26"><a href="exercise-1-docker-as-a-user.html#cb33-26"></a><span class="ex">docker</span> rm CONTAINER_ID <span class="co"># check all containers with `docker ps -a`</span></span></code></pre></div>
+</details>
 <ol start="2" style="list-style-type: decimal">
-<li><u><code>blast</code></u> with volumes (ONGOING)</li>
-<li>Pull the <code>biocontainers/blast</code>, if you didn’t do it earlier today.</li>
-<li>Get the 2 following <strong>fasta files</strong> from uniprot (protein sequences) and save them in the newly created <strong>blastp_test</strong> folder:</li>
-</ol>
+<li><u><code>imagemagick</code></u>
 <ul>
-<li><a href="https://www.uniprot.org/uniprot/O75976.fasta" class="uri">https://www.uniprot.org/uniprot/O75976.fasta</a></li>
-<li><a href="https://www.uniprot.org/uniprot/Q90240.fasta" class="uri">https://www.uniprot.org/uniprot/Q90240.fasta</a></li>
-</ul>
-<ol start="3" style="list-style-type: decimal">
-<li>Align those 2 sequences with <code>blastp</code>, with a <code>biocontainers/blast</code> container.</li>
+<li>Pull the <code>ìmagemagick</code> image that is <strong>official</strong> and that has the <strong>highest number of stars</strong></li>
+<li>Check the version of the <code>convert</code> command.</li>
+<li>Start a container interactively.</li>
+<li>Inside the container: download <a href="https://pbs.twimg.com/profile_images/1273307847103635465/lfVWBmiW_400x400.png">this png image</a></li>
+<li>Convert it to <strong>.jpg</strong> using the <code>convert</code> command of imagemagick (format; <code>convert image.png image.jpg</code>)</li>
+<li>Exit the container</li>
+<li>Copy the jpg image back from the stopped container! Explore <code>docker cp</code>.</li>
+</ul></li>
 </ol>
 <details>
 <summary>
@@ -348,11 +356,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <em>Answer</em>
 </h5>
 <p></summary></p>
-<pre><code># Pull the blast image
-docker pull biocontainers/blast
-
-# Run the image with volumes
-docker run -v /users/bi/sbonnin/test_docker/blastp_test:/blastdb biocontainers/blast:latest blastp -query /blastdb/O75976.fasta -subject /blastdb/Q90240.fasta</code></pre>
+<div class="sourceCode" id="cb34"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb34-1"><a href="exercise-1-docker-as-a-user.html#cb34-1"></a><span class="co"># Pull image</span></span>
+<span id="cb34-2"><a href="exercise-1-docker-as-a-user.html#cb34-2"></a><span class="ex">docker</span> pull acleancoder/imagemagick-full</span>
+<span id="cb34-3"><a href="exercise-1-docker-as-a-user.html#cb34-3"></a></span>
+<span id="cb34-4"><a href="exercise-1-docker-as-a-user.html#cb34-4"></a><span class="co"># Check version of `convert`</span></span>
+<span id="cb34-5"><a href="exercise-1-docker-as-a-user.html#cb34-5"></a><span class="ex">docker</span> run acleancoder/imagemagick-full convert --version</span>
+<span id="cb34-6"><a href="exercise-1-docker-as-a-user.html#cb34-6"></a></span>
+<span id="cb34-7"><a href="exercise-1-docker-as-a-user.html#cb34-7"></a><span class="co"># Start interactive container</span></span>
+<span id="cb34-8"><a href="exercise-1-docker-as-a-user.html#cb34-8"></a><span class="ex">docker</span> run -it acleancoder/imagemagick-full</span>
+<span id="cb34-9"><a href="exercise-1-docker-as-a-user.html#cb34-9"></a>  <span class="co"># fetch png image</span></span>
+<span id="cb34-10"><a href="exercise-1-docker-as-a-user.html#cb34-10"></a>  <span class="op">&gt;</span> <span class="fu">wget</span> https://pbs.twimg.com/profile_images/1273307847103635465/lfVWBmiW_400x400.png</span>
+<span id="cb34-11"><a href="exercise-1-docker-as-a-user.html#cb34-11"></a>  <span class="co"># convert to jpg</span></span>
+<span id="cb34-12"><a href="exercise-1-docker-as-a-user.html#cb34-12"></a>  <span class="op">&gt;</span> <span class="ex">convert</span> lfVWBmiW_400x400.png myimage.jpg</span>
+<span id="cb34-13"><a href="exercise-1-docker-as-a-user.html#cb34-13"></a>  <span class="co"># exit container</span></span>
+<span id="cb34-14"><a href="exercise-1-docker-as-a-user.html#cb34-14"></a>  </span>
+<span id="cb34-15"><a href="exercise-1-docker-as-a-user.html#cb34-15"></a><span class="co"># fetch container ID with `ps -a` and use `docker cp` to copy jpg file from the stopped container to the host</span></span>
+<span id="cb34-16"><a href="exercise-1-docker-as-a-user.html#cb34-16"></a><span class="ex">docker</span> cp *CONTAINER_ID*:/myimage.jpg .</span></code></pre></div>
 </details>
 </div>
             </section>

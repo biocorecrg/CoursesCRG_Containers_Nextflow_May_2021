@@ -386,7 +386,7 @@ As we have seen before, you can <code>docker images</code> in the terminal, to s
 </center>
 <ul>
 <li>Run <code>docker images</code>. How many images do you get?</li>
-<li>Pull the latest <a href="https://hub.docker.com/r/biocontainers/blast/"><code>biocontainers/blast</code></a> image
+<li>Pull the version 2.2.31 of the <a href="https://hub.docker.com/r/biocontainers/blast/"><code>biocontainers/blast</code></a> image
 <ul>
 <li>What is the size of the <code>blast</code> image you just pulled?</li>
 </ul></li>
@@ -399,7 +399,7 @@ As we have seen before, you can <code>docker images</code> in the terminal, to s
 </h5>
 <p></summary></p>
 <pre><code># Pull the blast image
-docker pull biocontainers/blast
+docker pull biocontainers/blast:2.2.31
 
 # Run `docker images --all`
 docker images --all # intermediate images.</code></pre>
@@ -456,13 +456,13 @@ We can start a container from the <strong>ubuntu tag 18.04 image</strong>, execu
 <span id="cb14-2"><a href="using-existing-images.html#cb14-2"></a><span class="ex">docker</span> run hello-world</span>
 <span id="cb14-3"><a href="using-existing-images.html#cb14-3"></a></span>
 <span id="cb14-4"><a href="using-existing-images.html#cb14-4"></a><span class="co"># Run the blast image</span></span>
-<span id="cb14-5"><a href="using-existing-images.html#cb14-5"></a><span class="ex">docker</span> run biocontainers/blast:latest</span>
+<span id="cb14-5"><a href="using-existing-images.html#cb14-5"></a><span class="ex">docker</span> run biocontainers/blast:2.2.31</span>
 <span id="cb14-6"><a href="using-existing-images.html#cb14-6"></a></span>
 <span id="cb14-7"><a href="using-existing-images.html#cb14-7"></a><span class="co">#  Start again a container from the same blast image, and run the path to the blastp command:</span></span>
-<span id="cb14-8"><a href="using-existing-images.html#cb14-8"></a><span class="ex">docker</span> run biocontainers/blast:latest blastp</span>
+<span id="cb14-8"><a href="using-existing-images.html#cb14-8"></a><span class="ex">docker</span> run biocontainers/blast:2.2.31 blastp</span>
 <span id="cb14-9"><a href="using-existing-images.html#cb14-9"></a></span>
 <span id="cb14-10"><a href="using-existing-images.html#cb14-10"></a><span class="co"># Start a container interactively from the same blast image:</span></span>
-<span id="cb14-11"><a href="using-existing-images.html#cb14-11"></a><span class="ex">docker</span> run -ti biocontainers/blast:latest</span>
+<span id="cb14-11"><a href="using-existing-images.html#cb14-11"></a><span class="ex">docker</span> run -ti biocontainers/blast:2.2.31</span>
 <span id="cb14-12"><a href="using-existing-images.html#cb14-12"></a></span>
 <span id="cb14-13"><a href="using-existing-images.html#cb14-13"></a>  <span class="co"># What is the default working directory?</span></span>
 <span id="cb14-14"><a href="using-existing-images.html#cb14-14"></a>  <span class="bu">pwd</span><span class="kw">;</span> <span class="fu">ls</span></span>

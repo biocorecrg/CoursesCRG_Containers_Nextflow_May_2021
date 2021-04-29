@@ -285,22 +285,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="exercise-2---docker-recipes-and-build-images" class="section level2">
 <h2><span class="header-section-number">3.6</span> Exercise 2 - Docker recipes and build images</h2>
+<p>In breakout rooms, do the following exercise:</p>
 <ol style="list-style-type: decimal">
-<li><u><code>figlet</code> recipe.</u></li>
-<li>Write a docker recipe in a file <strong>Dockerfile_test</strong> that:
-* is based on <strong>ubuntu:18.04</strong>
-* <strong>echoes “I love containers”</strong> by default or any other word/sentence, if given as the argument.</li>
+<li><u><code>figlet</code> recipe.</u>
+<ul>
+<li>Write a docker recipe in a file <strong>Dockerfile_figlet</strong> that:
+<ul>
+<li>is based on <strong>ubuntu:18.04</strong></li>
+<li><strong>echoes “I love containers”</strong> by default or any other word/sentence, if given as the argument.</li>
+</ul></li>
 <li>Build the image (give the image the name of your choice)</li>
 <li>Run the image:
-* with no argument.
-* with <strong>“Docker course”</strong> as an argument.</li>
-<li>Modify the <strong>Dockerfile_test</strong>:
-* add the MAINTAINER field
-* update and upgrade Ubuntu packages.
-* install <a href="https://zoomadmin.com/HowToInstall/UbuntuPackage/figlet"><strong>figlet</strong></a>
-* change “echo” to “figlet” in the <strong>ENTRYPOINT</strong></li>
+<ul>
+<li>with no argument.</li>
+<li>with <strong>“Docker course”</strong> as an argument.</li>
+</ul></li>
+<li>Modify the <strong>Dockerfile_figlet</strong>:
+<ul>
+<li>add the MAINTAINER field</li>
+<li>update and upgrade Ubuntu packages.</li>
+<li>install the <a href="https://zoomadmin.com/HowToInstall/UbuntuPackage/figlet"><strong>figlet</strong></a> program</li>
+<li>change “echo” to “figlet” in the <strong>ENTRYPOINT</strong></li>
+</ul></li>
 <li>Build the image.</li>
 <li>Run the new image, with the default parameters, then with <strong>“Docker course”</strong> as an argument.</li>
+</ul></li>
 </ol>
 <details>
 <summary>
@@ -308,28 +317,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <em>Answer</em>
 </h5>
 <p></summary></p>
-<ol style="list-style-type: decimal">
-<li>Recipe saved in <strong>Dockerfile_test</strong>:</li>
-</ol>
+<p>Recipe saved in <strong>Dockerfile_figlet</strong>:</p>
 <pre><code>FROM ubuntu:18.04
 
 ENTRYPOINT [&quot;echo&quot;]
 CMD [&quot;I love containers&quot;]</code></pre>
-<ol start="2" style="list-style-type: decimal">
-<li>Build:</li>
-</ol>
-<pre><code>docker build --file Dockerfile_test -t mytest .</code></pre>
-<ol start="3" style="list-style-type: decimal">
-<li>Run the image:</li>
-</ol>
+<p>Build:</p>
+<pre><code>docker build --file Dockerfile_figlet -t mytest .</code></pre>
+<p>Run the image:</p>
 <pre><code># with no argument
 docker run mytest
 
 # with argument &quot;Docker course&quot;
 docker run mytest &quot;Docker course&quot;</code></pre>
-<ol start="4" style="list-style-type: decimal">
-<li>Recipe:</li>
-</ol>
+<p>Recipe:</p>
 <pre><code>FROM ubuntu:18.04
 
 MAINTAINER Name Surname &lt;name.surname@mail.com&gt;
@@ -339,31 +340,29 @@ RUN apt-get install -y figlet
 
 ENTRYPOINT [&quot;figlet&quot;]
 CMD [&quot;I love containers&quot;]</code></pre>
-<ol start="5" style="list-style-type: decimal">
-<li>Build the image.</li>
-</ol>
-<pre><code>docker build --file Dockerfile_test -t mytest .</code></pre>
-<ol start="6" style="list-style-type: decimal">
-<li>Run the new image, with the default parameter, then with <strong>“Docker course”</strong> as an argument.</li>
-</ol>
+<p>Build the image.</p>
+<pre><code>docker build --no-cache --file Dockerfile_figlet -t mytestfiglet .</code></pre>
+<p>Run the new image, with the default parameter, then with <strong>“Docker course”</strong> as an argument.</p>
 <pre><code># run with no argument
-docker run mytest
+docker run mytestfiglet
 
 # run with argument &quot;Docker course&quot;
-docker run mytest &quot;Docker course&quot;</code></pre>
+docker run mytestfiglet &quot;Docker course&quot;</code></pre>
 </details>
 <ol start="2" style="list-style-type: decimal">
-<li><u>random numbers</u></li>
+<li><u>Random numbers</u>
+<ul>
 <li>Copy the following short <code>bash</code> script in a file called <code>random_numbers.bash</code>.</li>
+</ul></li>
 </ol>
-<div class="sourceCode" id="cb68"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb68-1"><a href="exercise-2-docker-recipes-and-build-images.html#cb68-1"></a><span class="co">#!/usr/bin/bash</span></span>
-<span id="cb68-2"><a href="exercise-2-docker-recipes-and-build-images.html#cb68-2"></a><span class="fu">seq</span> 1 1000 <span class="kw">|</span> <span class="ex">shuf</span> <span class="kw">|</span> <span class="fu">head</span> -<span class="va">$1</span></span></code></pre></div>
-<p>This script outputs <strong>random intergers from 1 to 1000</strong>: the number of integers selected is given as the <strong>first argument</strong>.
-2. Write a recipe for an image:
-* Based on <strong>centos:7</strong>
-* That will execute this script (with <code>bash</code>) when it is run, giving it <strong>2</strong> as a default argument (i.e. 2 random integers): the default can be changed as the image is run.
-* Build the image
-* Start a container with the default argument, then try it with some other numbers.</p>
+<div class="sourceCode" id="cb72"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb72-1"><a href="exercise-2-docker-recipes-and-build-images.html#cb72-1"></a><span class="co">#!/usr/bin/bash</span></span>
+<span id="cb72-2"><a href="exercise-2-docker-recipes-and-build-images.html#cb72-2"></a><span class="fu">seq</span> 1 1000 <span class="kw">|</span> <span class="ex">shuf</span> <span class="kw">|</span> <span class="fu">head</span> -<span class="va">$1</span></span></code></pre></div>
+<pre><code>This script outputs **random intergers from 1 to 1000**: the number of integers selected is given as the **first argument**.
+* Write a recipe for an image:
+    * Based on **centos:7**
+    * That will execute this script (with `bash`) when it is run, giving it **2** as a default argument (i.e. **outputs 2 random integers**): the default can be changed as the image is run.
+    * Build the image.
+    * Start a container with the default argument, then try it with another argument.</code></pre>
 <details>
 <summary>
 <h5 style="background-color: #e6fadc; display: inline-block;">
@@ -418,7 +417,7 @@ docker run random_numbers 10</code></pre>
 <em>Answer</em>
 </h5>
 <p></summary></p>
-<pre><code>docker save -o bowtie2image1.0.tar bowtie2image:1.0</code></pre>
+<pre><code>docker save -o random_numbers.tar random_numbers</code></pre>
 </details>
 </div>
 </div>
