@@ -406,6 +406,11 @@ RUN apt install -y wget</code></pre>
 <p><strong>.</strong> stands for the context (in this case, current directory) of the build process. This makes sense if copying files from filesystem, for instance.
 <br>
 <strong>IMPORTANT</strong>: Avoid contexts (directories) overpopulated with files (even if not actually used in the recipe).</p>
+
+<div class="rdmtip">
+In order to avoid that some directories or files are inspected or included (e.g, with <strong>CP</strong> command in Dockerfile), you can use .dockerignore file to specify which paths should be avoided. More information at: <a href="https://codefresh.io/docker-tutorial/not-ignore-dockerignore-2/" class="uri">https://codefresh.io/docker-tutorial/not-ignore-dockerignore-2/</a>
+</div>
+
 <p>You can define a specific name for the image during the build process.</p>
 <p>Syntax: <strong><code>-t</code></strong> <em>imagename:tag</em>. If not defined <code>:tag</code> default is <strong>latest</strong>.</p>
 <div class="sourceCode" id="cb45"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb45-1"><a href="docker-recipes.html#cb45-1"></a><span class="ex">docker</span> build -t mytestimage .</span>
