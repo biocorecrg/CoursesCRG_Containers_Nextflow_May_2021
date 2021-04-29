@@ -372,7 +372,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb128-38"><a href="nextflow-log.html#cb128-38"></a>workflow second_pipeline {</span>
 <span id="cb128-39"><a href="nextflow-log.html#cb128-39"></a>    take: str_input</span>
 <span id="cb128-40"><a href="nextflow-log.html#cb128-40"></a>    main:</span>
-<span id="cb128-41"><a href="nextflow-log.html#cb128-41"></a>    <span class="fu">printHello</span>(str_input).<span class="fu">collect</span>().<span class="fu">view</span>()</span>
+<span id="cb128-41"><a href="nextflow-log.html#cb128-41"></a>    <span class="fu">printHello</span>(str_input.<span class="fu">collect</span>()).<span class="fu">view</span>()</span>
 <span id="cb128-42"><a href="nextflow-log.html#cb128-42"></a>}</span>
 <span id="cb128-43"><a href="nextflow-log.html#cb128-43"></a></span>
 <span id="cb128-44"><a href="nextflow-log.html#cb128-44"></a><span class="co">/*</span></span>

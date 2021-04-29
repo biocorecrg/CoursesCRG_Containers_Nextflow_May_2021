@@ -287,6 +287,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">5.11</span> EXERCISE 2</h2>
 <p>Change the pipeline for producing files instead of standard output. You need to specify within the workflow what to output using <strong>emit</strong> keyword.</p>
 <p>See here <a href="https://www.nextflow.io/docs/latest/dsl2.html?#workflow-outputs"><strong>emit</strong></a></p>
+<p>Tip: you can chose the elements from a list using the positional keys (i.e. list[0], list[1], etc…)</p>
 <details>
 <summary>
 <h5>
@@ -308,11 +309,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb130-13"><a href="exercise-2.html#cb130-13"></a>   val str_in</span>
 <span id="cb130-14"><a href="exercise-2.html#cb130-14"></a></span>
 <span id="cb130-15"><a href="exercise-2.html#cb130-15"></a>   output:        </span>
-<span id="cb130-16"><a href="exercise-2.html#cb130-16"></a>   <span class="fu">path</span>(<span class="st">&quot;${str_in}.txt&quot;</span>)</span>
+<span id="cb130-16"><a href="exercise-2.html#cb130-16"></a>   <span class="fu">path</span>(<span class="st">&quot;${str_in[0]}.txt&quot;</span>)</span>
 <span id="cb130-17"><a href="exercise-2.html#cb130-17"></a></span>
 <span id="cb130-18"><a href="exercise-2.html#cb130-18"></a>   script:        </span>
 <span id="cb130-19"><a href="exercise-2.html#cb130-19"></a>   <span class="st">&quot;&quot;&quot;</span></span>
-<span id="cb130-20"><a href="exercise-2.html#cb130-20"></a>   echo ${str_in} in Italian is ciao &gt; ${str_in}.<span class="fu">txt</span></span>
+<span id="cb130-20"><a href="exercise-2.html#cb130-20"></a>   echo ${str_in} in Italian is ciao &gt; ${str_in[<span class="dv">0</span>]}.<span class="fu">txt</span></span>
 <span id="cb130-21"><a href="exercise-2.html#cb130-21"></a>   <span class="st">&quot;&quot;&quot;</span></span>
 <span id="cb130-22"><a href="exercise-2.html#cb130-22"></a>}</span>
 <span id="cb130-23"><a href="exercise-2.html#cb130-23"></a></span>
@@ -349,6 +350,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb130-54"><a href="exercise-2.html#cb130-54"></a>    out2 = <span class="fu">second_pipeline</span>(str)</span>
 <span id="cb130-55"><a href="exercise-2.html#cb130-55"></a>}</span></code></pre></div>
 </details>
+<p>Change the pipeline for producing files instead of standard output. You need to specify within the workflow what to output using <strong>emit</strong> keyword.</p>
+<p>See here <a href="https://www.nextflow.io/docs/latest/dsl2.html?#workflow-outputs"><strong>emit</strong></a></p>
 </div>
             </section>
 
