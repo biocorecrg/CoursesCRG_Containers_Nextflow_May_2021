@@ -255,6 +255,94 @@ This is the Biocore's NF test pipeline
 Enjoy!
 ```
 
+## Exercise 4 
+- Look at [Exercise 3](https://biocorecrg.github.io/CoursesCRG_Containers_Nextflow_May_2021/exercise-3.html). Can you make a configuration for that script with a new label for handling failing processes by retrying 5 times? 
+
+<details>
+<summary>
+<h5>*Answer*</h5>
+</summary>
+
+The process should become:
+
+```{java, eval=FALSE, echo=TRUE}
+
+process reverseSequence {
+    tag "$seq"                  
+    publishDir "output"
+	label 'keep_trying'
+	
+    input:
+    path seq
+
+    output:
+    path "all.rev"
+
+    script:
+    """
+    cat ${seq} | AAAAA '{if (\$1~">") {print \$0} else system("echo " \$0 " |rev")}' > all.rev
+    """
+}
+```
+
+while the nextflow.config file 
+
+```{java, eval=FALSE, echo=TRUE}
+
+process {
+     withLabel: 'keep_trying'
+    {
+		errorStrategy 'retry' 
+    	maxRetries 5
+     }   
+}
+```
+
+</details>
+
+- 
+
+<details>
+<summary>
+<h5>*Answer*</h5>
+</summary>
+
+The process should become:
+
+```{java, eval=FALSE, echo=TRUE}
+
+process reverseSequence {
+    tag "$seq"                  
+    publishDir "output"
+	label 'keep_trying'
+	
+    input:
+    path seq
+
+    output:
+    path "all.rev"
+
+    script:
+    """
+    cat ${seq} | AAAAA '{if (\$1~">") {print \$0} else system("echo " \$0 " |rev")}' > all.rev
+    """
+}
+```
+
+while the nextflow.config file 
+
+```{java, eval=FALSE, echo=TRUE}
+
+process {
+     withLabel: 'keep_trying'
+    {
+		errorStrategy 'retry' 
+    	maxRetries 5
+     }   
+}
+```
+
+
 ## Using Singularity
 We recommend to use Singularity instead of docker in HPC environments. This can be done by just using the Nextflow parameter **-with-singularity** and  without touching the code. Nextflow will take care of pulling, converting and storing the image for you. This will be done just once and then nextflow will use the stored image for further executions.
 Within the AWS main node both Docker and singularity are available. Within the AWS batch we only have docker.
@@ -535,6 +623,18 @@ export NXF_OPTS="-Xms50m -Xmx500m"
 
 ```
 
+## Exercise 5 
+Try to make a module wrapper of the bowtie tool and change the script accordingly as the test3.
+
+<details>
+<summary>
+<h5>*Answer*</h5>
+</summary>
+Solution in the folder test5
+</details>
+
+
+
 ## Modules and re-usage of the code
 A great advance of the new DLS2 is to allow the modularization of the code. In particular you can move a named workflow within a module and keep it apart for being accessed from different pipelines. Looking at the test4 folder will give you an idea of what is the code using modules.
 
@@ -719,7 +819,7 @@ singularity.cacheDir = "$baseDir/singularity"
 
 **IMPORTANT: you will need to specify a default image when you want to run nextflow -with-docker or -with-singularity and you have containers defined inside the modules**
 
-## EXERCISE 4 
+## EXERCISE 6 
 Try to make a module wrapper of the bowtie tool and change the script accordingly as the test3.
 
 <details>
