@@ -256,7 +256,7 @@ Enjoy!
 ```
 
 ## Exercise 4 
-- Look at [Exercise 3](https://biocorecrg.github.io/CoursesCRG_Containers_Nextflow_May_2021/exercise-3.html). Can you make a configuration for that script with a new label for handling failing processes by retrying 5 times? 
+- Look at [Exercise 3](https://biocorecrg.github.io/CoursesCRG_Containers_Nextflow_May_2021/exercise-3.html). Can you make a configuration for that script with a new label for handling failing processes? 
 
 <details>
 <summary>
@@ -270,7 +270,7 @@ The process should become:
 process reverseSequence {
     tag "$seq"                  
     publishDir "output"
-	label 'keep_trying'
+	label 'ignorefail'
 	
     input:
     path seq
@@ -290,17 +290,16 @@ while the nextflow.config file
 ```{java, eval=FALSE, echo=TRUE}
 
 process {
-     withLabel: 'keep_trying'
+     withLabel: 'ignorefail'
     {
-		errorStrategy 'retry' 
-    	maxRetries 5
+		errorStrategy = 'ignore' 
      }   
 }
 ```
 
 </details>
 
-- 
+- Look at test2. Can you make a configuration for that script with a new label for handling failing processes by retrying 3 times and incrementing the time? You can give very low time (10 / 15 seconds) for the fastqc process so it would fail at beginning. 
 
 <details>
 <summary>
@@ -311,20 +310,20 @@ The process should become:
 
 ```{java, eval=FALSE, echo=TRUE}
 
-process reverseSequence {
-    tag "$seq"                  
-    publishDir "output"
-	label 'keep_trying'
-	
+process fastQC {
+    publishDir fastqcOutputFolder  			// where (and whether) to publish the results
+    tag { reads }  							// during the execution prints the indicated variable for follow-up
+    label 'keep_trying' 
+
     input:
-    path seq
+    path reads   							// it defines the input of the process. It sets values from a channel
 
-    output:
-    path "all.rev"
+    output:									// It defines the output of the process (i.e. files) and send to a new channel
+   	path "*_fastqc.*"
 
-    script:
+    script:									// here you have the execution of the script / program. Basically is the command line
     """
-    cat ${seq} | AAAAA '{if (\$1~">") {print \$0} else system("echo " \$0 " |rev")}' > all.rev
+        fastqc ${reads} 
     """
 }
 ```
@@ -332,15 +331,29 @@ process reverseSequence {
 while the nextflow.config file 
 
 ```{java, eval=FALSE, echo=TRUE}
+includeConfig "$baseDir/params.config"
 
+ 
 process {
-     withLabel: 'keep_trying'
-    {
-		errorStrategy 'retry' 
-    	maxRetries 5
-     }   
+     //containerOptions = { workflow.containerEngine == "docker" ? '-u $(id -u):$(id -g)': null}
+     memory='0.6G'
+     cpus='1'
+     time='6h'
+
+     withLabel: 'keep_trying'	
+   	{ 
+ 		time = { 10.second * task.attempt }
+     	errorStrategy = 'retry' 
+    	maxRetries = 3	
+    } 	
+
 }
+
+process.container = 'biocorecrg/c4lwg-2018:latest'
+singularity.cacheDir = "$baseDir/singularity"
+
 ```
+</details>
 
 
 ## Using Singularity
