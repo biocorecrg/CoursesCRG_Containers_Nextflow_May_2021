@@ -288,7 +288,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="docker-recipes" class="section level2">
 <h2><span class="header-section-number">3.5</span> Docker recipes</h2>
-<p>A <strong>Docker recipe</strong> contains a set of instructions and commands that will be used to <strong>create/build a Docker image</strong>.</p>
+<p>The <strong>Docker recipe</strong> contains a set of instructions and commands that will be used to <strong>create/build a Docker image</strong>.</p>
 <div id="writing-recipes-and-building-images" class="section level3">
 <h3><span class="header-section-number">3.5.1</span> Writing recipes and building images</h3>
 <p>All commands should be saved in a text file, named by default <strong>Dockerfile</strong>.</p>
@@ -322,7 +322,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tr>
 <tr class="odd">
 <td align="center">SHELL</td>
-<td align="center">Changes the default shell</td>
+<td align="center">Changes the default shell.</td>
 </tr>
 <tr class="even">
 <td align="center">ADD / COPY</td>
@@ -357,14 +357,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><a href="https://books.google.es/books?id=TshsDwAAQBAJ&amp;pg=PA96&amp;lpg=PA96&amp;dq=docker+recipe+basic+instructions&amp;source=bl&amp;ots=ZfPBPRMTG9&amp;sig=ACfU3U2ZOrPu6krVOTQ_gEBrx6TBXY1Jaw&amp;hl=en&amp;sa=X&amp;ved=2ahUKEwjl-deB1p7wAhVLXBoKHdclCuYQ6AEwEXoECAYQAw#v=onepage&amp;q=docker%20recipe%20basic%20instructions&amp;f=false">Reference</a></p>
 <div id="basic-instructions" class="section level4">
 <h4><span class="header-section-number">3.5.1.1</span> Basic instructions</h4>
-<p>Each row in the recipe corresponds to a <strong>layer</strong> of the final image.</p>
+<p>Each row in the recipe corresponds to a <strong>layer</strong> in the final image.</p>
 <p><strong>FROM</strong>: parent image. Typically, an operating system. This is the <strong>base layer</strong>.</p>
 <pre class="docker"><code>FROM ubuntu:18.04</code></pre>
 <p><strong>RUN</strong>: the command to execute inside the image filesystem.
 <br>
 Think about it this way: every <strong>RUN</strong> line is essentially what you would run to install programs on a freshly installed Ubuntu OS.</p>
 <pre class="docker"><code>RUN apt install wget</code></pre>
-<p>A basic recipe that is taking the <strong>ubuntu:18.04</strong> image as a base layer, that updates and upgrades Linux packages, and that installs <code>wget</code>:</p>
+<p>This is a basic recipe that takes the <strong>ubuntu:18.04</strong> image as a base layer, updates and upgrades Linux packages, and installs <code>wget</code>:</p>
 <pre class="docker"><code>FROM ubuntu:18.04
 
 RUN apt update &amp;&amp; apt -y upgrade
@@ -407,8 +407,8 @@ RUN apt install -y wget</code></pre>
 <div class="sourceCode" id="cb44"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb44-1"><a href="docker-recipes.html#cb44-1"></a><span class="ex">docker</span> build --file Dockerfile .</span></code></pre></div>
 <p>Syntax: <strong><code>--file</code> / <code>-f</code></strong></p>
 <p><strong>.</strong> stands for the context (in this case, current directory) of the build process. This makes sense if copying files from filesystem, for instance.
-<br>
-<strong>IMPORTANT</strong>: Avoid contexts (directories) overpopulated with files (even if not actually used in the recipe).</p>
+<br></p>
+<p><strong>IMPORTANT</strong>: Avoid contexts (directories) over-populated with files (even if not actually used in the recipe).</p>
 
 <div class="rdmtip">
 In order to avoid that some directories or files are inspected or included (e.g, with <strong>CP</strong> command in Dockerfile), you can use .dockerignore file to specify which paths should be avoided. More information at: <a href="https://codefresh.io/docker-tutorial/not-ignore-dockerignore-2/" class="uri">https://codefresh.io/docker-tutorial/not-ignore-dockerignore-2/</a>
@@ -478,8 +478,8 @@ FROM ubuntu:${UbuntuVersion}</code></pre>
 </center>
 <p>Modify the following recipe so you can decide in the command line <strong>which version of Python to install</strong>.
 <br>
-Default version should be 2.7, and try to pass the argument so that version 3.8 is installed.
-<br> Build and run first with the default version, and then with version 3.8.</p>
+The default version should be 2.7. Pass the argument to install the version 3.8.
+<br> Build and run first with the default version, and then with the version 3.8.</p>
 <pre><code>FROM ubuntu:18.04
 
 RUN apt update &amp;&amp; apt upgrade -y
@@ -490,7 +490,7 @@ RUN apt install -y python2.7</code></pre>
 <em>Answer</em>
 </h5>
 <p></summary></p>
-<p>Recipe saved in <strong>Dockerfile_ARG</strong></p>
+<p>Recipe is saved in <strong>Dockerfile_ARG</strong></p>
 <pre><code>FROM ubuntu:18.04
 
 # Argument PyVersion with default value 2.7
@@ -500,9 +500,9 @@ RUN apt update &amp;&amp; apt upgrade -y
 RUN apt install -y python${PyVersion}</code></pre>
 <p>Build the image to get the default version of Python:</p>
 <pre><code>docker build -t py27 -f Dockerfile_ARG .</code></pre>
-<p>Build the image install version 3.8 of Python instead (via the <code>--build-arg</code> option):</p>
+<p>Build the image to install the version 3.8 of Python instead (via the <code>--build-arg</code> option):</p>
 <pre><code>docker build --build-arg PyVersion=3.8 -t py38 -f Dockerfile_ARG .</code></pre>
-<p>Run the image and check if the python of the correct version is installed:</p>
+<p>Run the image and check if Python of the correct version is installed:</p>
 <pre><code>docker run py27 python2.7 --help
 docker run py38 python3.8 --help</code></pre>
 </details>
