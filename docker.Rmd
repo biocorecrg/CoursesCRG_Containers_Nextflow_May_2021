@@ -939,6 +939,27 @@ ENTRYPOINT ["/bin/echo"]
 CMD ["hello world"]
 ```
 
+Save the above recipe in **Dockerfile_hello**.
+<br>
+Build:
+
+```
+docker build -f Dockerfile_hello -t helloimage .
+```
+
+Run without an argument:
+
+```
+docker run helloimage
+```
+
+Now run with an argument:
+
+```
+docker run helloimage "nice"
+```
+
+<br>
 
 Here is a more complex recipe (save it in a text file named **Dockerfile_ubuntu**):
 
