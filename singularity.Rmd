@@ -400,9 +400,14 @@ Normally at ```/etc/singularity/singularity.conf``` or similar (e.g preceded by 
   * Share a simply HTML page
 
 
-  # Example recipe from: https://sylabs.io/guides/3.7/user-guide/running_services.html
+<details>
+<summary>
+<h5 style="background-color: #e6fadc; display: inline-block;">*Answer*</h5>
+</summary>
 
 ```
+# Example recipe from: https://sylabs.io/guides/3.7/user-guide/running_services.html
+
 Bootstrap: docker
 From: nginx:1.20
 Includecmd: no
@@ -410,6 +415,88 @@ Includecmd: no
 %startscript
    nginx
 ```
+
+If you try as normal user:
+
+```
+(base) [ec2-user@ip-172-31-32-16 singularity]$ singularity instance start test.sif webserver
+2021/04/30 12:23:12 [warn] 15#15: the "user" directive makes sense only if the master process runs with super-user privileges, ignored in /etc/nginx/nginx.conf:2
+nginx: [warn] the "user" directive makes sense only if the master process runs with super-user privileges, ignored in /etc/nginx/nginx.conf:2
+2021/04/30 12:23:12 [emerg] 15#15: mkdir() "/var/cache/nginx/client_temp" failed (30: Read-only file system)
+nginx: [emerg] mkdir() "/var/cache/nginx/client_temp" failed (30: Read-only file system)
+
+INFO:    instance started successfully
+
+(base) [ec2-user@ip-172-31-32-16 singularity]$ singularity instance list
+INSTANCE NAME    PID      IP    IMAGE
+webserver        24350          /home/ec2-user/git/CoursesCRG_Containers_Nextflow_May_2021/containers/singularity/test.sif
+```
+
+If you try with sudo permissions:
+
+```
+(base) [ec2-user@ip-172-31-32-16 singularity]$ sudo singularity instance start test.sif webserver
+2021/04/30 12:24:47 [emerg] 15#15: mkdir() "/var/cache/nginx/client_temp" failed (30: Read-only file system)
+nginx: [emerg] mkdir() "/var/cache/nginx/client_temp" failed (30: Read-only file system)
+
+INFO:    instance started successfully
+
+(base) [ec2-user@ip-172-31-32-16 singularity]$ singularity instance list
+INSTANCE NAME    PID    IP    IMAGE
+
+(base) [ec2-user@ip-172-31-32-16 singularity]$ sudo singularity instance list
+INSTANCE NAME    PID      IP    IMAGE
+webserver        24409          /home/ec2-user/git/CoursesCRG_Containers_Nextflow_May_2021/containers/singularity/test.sif
+```
+
+For this case, it's necessary to allow writing in the image:
+
+```
+(base) [ec2-user@ip-172-31-32-16 singularity]$ sudo singularity instance start --writable-tmpfs test.sif webserver
+2021/04/30 12:26:53 [notice] 16#16: using the "epoll" event method
+2021/04/30 12:26:53 [notice] 16#16: nginx/1.20.0
+2021/04/30 12:26:53 [notice] 16#16: built by gcc 8.3.0 (Debian 8.3.0-6)
+2021/04/30 12:26:53 [notice] 16#16: OS: Linux 4.14.225-169.362.amzn2.x86_64
+2021/04/30 12:26:53 [notice] 16#16: getrlimit(RLIMIT_NOFILE): 65535:65535
+2021/04/30 12:26:53 [notice] 17#17: start worker processes
+2021/04/30 12:26:53 [notice] 17#17: start worker process 18
+
+INFO:    instance started successfully
+```
+
+You can check from the web browser if it worked pointing your machine.
+
+For a custom HTML file:
+```
+mkdir -p $HOME/www
+
+cd $HOME/www
+```
+
+And we place a simply **index.html** file there:
+```
+<html>
+        <body>
+                Hello world!
+        </body>
+</html>
+```
+
+We execute now the command mounting where HTMLs are stored.
+
+```
+(base) [ec2-user@ip-172-31-32-16 singularity]$ sudo singularity instance start -B /home/ec2-user/www:/usr/share/nginx/html --writable-tmpfs test.sif webserver
+2021/04/30 12:31:20 [notice] 15#15: using the "epoll" event method
+2021/04/30 12:31:20 [notice] 15#15: nginx/1.20.0
+2021/04/30 12:31:20 [notice] 15#15: built by gcc 8.3.0 (Debian 8.3.0-6)
+2021/04/30 12:31:20 [notice] 15#15: OS: Linux 4.14.225-169.362.amzn2.x86_64
+2021/04/30 12:31:20 [notice] 15#15: getrlimit(RLIMIT_NOFILE): 65535:65535
+2021/04/30 12:31:20 [notice] 16#16: start worker processes
+2021/04/30 12:31:20 [notice] 16#16: start worker process 17
+
+INFO:    instance started successfully
+```
+</details>
 
 ```{block2, type='rmdtip'}
 NGINX is serving web pages by default at the following location: /usr/share/nginx/html
