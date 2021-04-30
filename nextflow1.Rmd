@@ -552,7 +552,7 @@ workflow first_pipeline {
 workflow second_pipeline {
     take: str_input
     main:
-    out = printHello(str_input).collect()
+    out = printHello(str_input.collect())
     emit: out
 }
 
