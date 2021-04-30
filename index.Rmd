@@ -16,8 +16,8 @@ link-citations: yes
 # Welcome and about the course
 
 This slow-paced hands-on course is designed for absolute beginners who want to start using containers and Nextflow pipelines to achieve reproducibility of data analysis. <br>
-Linux containers allow the storage of code and applications in an host-independent lightweight environment. They became a fast and popular way to share and deploy applications in different environments. <br>
-[Nextflow](https://www.nextflow.io) is a powerful polyglot workflow language that, coupled with [Docker](https://www.docker.com/) and [Singularity](https://sylabs.io/singularity/) containers, provides a robust, scalable and reproducible way to run computational pipelines.
+Linux containers allow the storage of code and applications in a host-independent lightweight environment. They became a fast and popular way to share and deploy applications in different environments. <br>
+[Nextflow](https://www.nextflow.io) is a powerful polyglot workflow language that coupled with [Docker](https://www.docker.com/) and [Singularity](https://sylabs.io/singularity/) containers provides a robust, scalable and reproducible way to run computational pipelines.
 
 
 
@@ -53,7 +53,7 @@ Contacts below:
 The 4-day Containers and Nextflow course will train participants to use and build Docker and Singularity containers and Nextflow pipelines.
 It is designed to provide trainees with short and frequent hands-on sessions, while keeping theoretical sessions to a minimum.
 
-The course will be fully virtual via the [Zoom](https://zoom.us/) platform.
+The course is delivered online via the [Zoom](https://zoom.us/) platform.
 
 Trainees will work in a dedicated [AWS environment](https://en.wikipedia.org/wiki/AWS).
 
@@ -64,9 +64,9 @@ About Linux containers:
 
 - Locate and fetch Docker/Singularity images from dedicated repositories.
 - Execute/Run a Docker/Singularity container from the command line.
-- Build Docker container from an existing recipe.
+- Build a Docker container from an existing recipe.
 - Design/Write a Docker recipe.
-- Convert Docker to Singularity image.
+- Convert Docker to a Singularity image.
 
 About Nextflow:
 
@@ -101,9 +101,9 @@ If you are not familiar with the **ssh** protocol, you can learn about it <a hre
 
 #### Provided infrastructure
 
-Participants will access by SSH to an [Amazon EC2](https://en.wikipedia.org/wiki/Amazon_Elastic_Compute_Cloud) instance dedicated only for themselves. That instance runs [Amazon Linux 2](https://aws.amazon.com/amazon-linux-2/) with all the necessary software used for the course.
+Each participant will access using SSH a dedicated [Amazon EC2](https://en.wikipedia.org/wiki/Amazon_Elastic_Compute_Cloud) instance. That instance runs [Amazon Linux 2](https://aws.amazon.com/amazon-linux-2/) with all the necessary software for the course.
 
-Every instance has a S3 bucket storage mounted at /mnt. If you need to save any file after the end of the 2nd day and at the end of the course, copy files there and you can retrieve them using a web browser.
+Every instance has a S3 bucket storage mounted at /mnt. If you need to save any file after the end of the 2nd day and in the end of the course, copy files there and then you can retrieve them using a web browser.
 
 https://bucketname.s3.eu-central-1.amazonaws.com/copiedfile.txt
 
