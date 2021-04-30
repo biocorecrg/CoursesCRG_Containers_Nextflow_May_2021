@@ -940,7 +940,7 @@ CMD ["hello world"]
 ```
 
 
-A more complex recipe (save it in a text file named **Dockerfile_ubuntu**!):
+Here is a more complex recipe (save it in a text file named **Dockerfile_ubuntu**):
 
 ```docker
 FROM ubuntu:18.04
@@ -977,20 +977,21 @@ docker run f9f41698e2f8 https://cdn-images-1.medium.com/max/1600/1*_NQN6_YnxS29m
 
 ### docker tag
 
-Use `docker tag` in order to **tag a local image** that has - for example - ID "f9f41698e2f8" into the "ubuntu_wget" image name repository with version/tag "1.0":
+Use `docker tag` to **tag a local image** that has, for example, ID "f9f41698e2f8" in the "ubuntu_wget" image name repository with version/tag "1.0":
 
 ```{bash}
 docker tag f9f41698e2f8 --tag ubuntu_wget:1.0
 ```
 
-If the version/tag is not specified, it defaults to **latest**.
+If the version/tag is not specified, the default is **latest**.
 
 
 ### Build cache
 
-Every line of a Dockerfile is actually an image/layer by itself (you can see all images with `docker images --all`.
+Every line in a Dockerfile is an image/layer by itself (you can see all images with `docker images --all`).
 <br>
-Modify for instance the last bit of the previous image recipe (**Dockerfile_ubuntu**) (let's change the image URL) and rebuild it (even with a different name/tag):
+
+Let's modify the last line in the previous image recipe (**Dockerfile_ubuntu**) (let's change the image URL) and rebuild it (even with a different name/tag):
 
 ```docker
 FROM ubuntu:18.04
@@ -1010,11 +1011,12 @@ CMD ["https://cdn-images-1.medium.com/max/1600/1*_NQN6_YnxS29m8vFzWYlEg.png"]
 docker build -t mytestimage2 -f Dockerfile_ubuntu .
 ```
 
-It will **start from the last line**, and not re-run commands before the modification that were successfully built.
+It will **start from the last line**, and will not re-run commands before the modified line as they were already successfully built.
 <br>
-This is OK most of the times and very convenient for testing and trying new steps, but it may lead to errors when versions are updated (either FROM image or included packages).
+
+It is very convenient for testing and trying new steps, but it may lead to errors when versions are updated (either FROM image or included packages).
 <br>
-It is beneficial to start from scratch with `--no-cache` option when building the image.
+It is therefore recommended to start from scratch with `--no-cache` option, when building the image.
 
 ```{bash}
 docker build --no-cache -t mytestimage2 -f Dockerfile_ubuntu .
@@ -1026,16 +1028,16 @@ In breakout rooms, do the following exercise:
 
 1. <u>`figlet` recipe.</u>
     * Write a docker recipe in a file **Dockerfile_figlet** that:
-        * is based on **ubuntu:18.04**
+        * is based on **ubuntu:18.04**.
         * **echoes "I love containers"** by default or any other word/sentence, if given as the argument.
-    * Build the image (give the image the name of your choice)
+    * Build the image (give the image the name of your choice).
     * Run the image:
         * with no argument.
         * with **"Docker course"** as an argument.
     * Modify the **Dockerfile_figlet**:
-        * add the MAINTAINER field
+        * add the MAINTAINER field.
         * update and upgrade Ubuntu packages.
-        * install the [**figlet**](https://zoomadmin.com/HowToInstall/UbuntuPackage/figlet) program
+        * install the [**figlet**](https://zoomadmin.com/HowToInstall/UbuntuPackage/figlet) program.
         * change "echo" to "figlet" in the **ENTRYPOINT**
     * Build the image.
     * Run the new image, with the default parameters, then with **"Docker course"** as an argument.
