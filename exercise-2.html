@@ -337,7 +337,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb132-40"><a href="exercise-2.html#cb132-40"></a>workflow second_pipeline {</span>
 <span id="cb132-41"><a href="exercise-2.html#cb132-41"></a>    take: str_input</span>
 <span id="cb132-42"><a href="exercise-2.html#cb132-42"></a>    main:</span>
-<span id="cb132-43"><a href="exercise-2.html#cb132-43"></a>    out = <span class="fu">printHello</span>(str_input).<span class="fu">collect</span>()</span>
+<span id="cb132-43"><a href="exercise-2.html#cb132-43"></a>    out = <span class="fu">printHello</span>(str_input.<span class="fu">collect</span>())</span>
 <span id="cb132-44"><a href="exercise-2.html#cb132-44"></a>    emit: out</span>
 <span id="cb132-45"><a href="exercise-2.html#cb132-45"></a>}</span>
 <span id="cb132-46"><a href="exercise-2.html#cb132-46"></a></span>
