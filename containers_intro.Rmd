@@ -69,4 +69,5 @@ Source: https://sysopsio.wordpress.com/2016/09/09/jails-in-linux/
 	* one set of kernel resources restrict to one set of processes
 
 <img src="docs/images/linux-vs-docker-comparison-architecture-docker-lxc.png" width="600" />
+
 Source: https://sysopsio.wordpress.com/2016/09/09/jails-in-linux/
