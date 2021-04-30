@@ -170,7 +170,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="3.2" data-path="using-existing-images.html"><a href="using-existing-images.html"><i class="fa fa-check"></i><b>3.2</b> Using existing images</a><ul>
 <li class="chapter" data-level="3.2.1" data-path="using-existing-images.html"><a href="using-existing-images.html#getting-started"><i class="fa fa-check"></i><b>3.2.1</b> Getting started</a></li>
-<li class="chapter" data-level="3.2.2" data-path="using-existing-images.html"><a href="using-existing-images.html#explore-docker-hub"><i class="fa fa-check"></i><b>3.2.2</b> Explore Docker hub</a></li>
+<li class="chapter" data-level="3.2.2" data-path="using-existing-images.html"><a href="using-existing-images.html#explore-docker-hub"><i class="fa fa-check"></i><b>3.2.2</b> Explore Docker Hub</a></li>
 <li class="chapter" data-level="3.2.3" data-path="using-existing-images.html"><a href="using-existing-images.html#docker-pull-import-an-image"><i class="fa fa-check"></i><b>3.2.3</b> docker pull: import an image</a></li>
 <li class="chapter" data-level="3.2.4" data-path="using-existing-images.html"><a href="using-existing-images.html#docker-run-run-image-i.e.-start-a-container"><i class="fa fa-check"></i><b>3.2.4</b> docker run: run image, i.e. start a container</a></li>
 <li class="chapter" data-level="3.2.5" data-path="using-existing-images.html"><a href="using-existing-images.html#docker-ps-check-containers-status"><i class="fa fa-check"></i><b>3.2.5</b> docker ps: check containers status</a></li>
@@ -298,12 +298,12 @@ Now run the following:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="using-existing-images.html#cb4-1"></a><span class="ex">docker</span> pull hello-world</span></code></pre></div>
 <p>Run <code>docker images</code> again: now you see the “hello-world” image listed!
 <br>
-<code>docker pull</code> imports an image from - by default - <strong>Docker hub</strong>.</p>
+<code>docker pull</code> imports by default an image from <strong>Docker Hub</strong>.</p>
 <p><br>
 We will see in more details the <code>docker images</code> and <code>docker run</code> commands, but let’s first explore the <strong>Docker images repositories</strong>.</p>
 </div>
 <div id="explore-docker-hub" class="section level3">
-<h3><span class="header-section-number">3.2.2</span> Explore Docker hub</h3>
+<h3><span class="header-section-number">3.2.2</span> Explore Docker Hub</h3>
 <p>Images can be stored locally or shared in a registry.
 <br>
 <a href="https://hub.docker.com/">Docker hub</a> is the main public registry for Docker images.
@@ -355,14 +355,14 @@ Example: let’s look for images that have the keyword <strong>blast</strong> in
 </div>
 <div id="docker-pull-import-an-image" class="section level3">
 <h3><span class="header-section-number">3.2.3</span> docker pull: import an image</h3>
-<p>Say we are now interested in the <code>ubuntu</code> image from Docker hub. We can retrieve it with <code>docker pull</code>.</p>
+<p>Say we are now interested in the <code>ubuntu</code> image from Docker Hub. We can retrieve it with <code>docker pull</code>.</p>
 <ul>
 <li>By default, we get the latest image / latest release.</li>
 </ul>
 <div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="using-existing-images.html#cb8-1"></a><span class="ex">docker</span> pull ubuntu</span></code></pre></div>
 <p><img src="docs/images/docker_pull.png" width="650/"></p>
 <ul>
-<li>You can choose the version of Ubuntu you are fetching: check the different tags on the website (<em>latest</em> is also a tag):</li>
+<li>You can choose the version of Ubuntu you are fetching; for that, check different tags on the website (<em>latest</em> is also a tag):</li>
 </ul>
 <p><img src="docs/images/dockerhub_ubuntu_tags.png" width="850/"></p>
 <blockquote>
@@ -373,13 +373,13 @@ Example: let’s look for images that have the keyword <strong>blast</strong> in
 <div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="using-existing-images.html#cb9-1"></a><span class="ex">docker</span> pull ubuntu:18.04</span></code></pre></div>
 <p><strong>Where is the image now?</strong>
 <br>
-As we have seen before, you can <code>docker images</code> in the terminal, to see a list of the most recently created images. <code>docker images</code> gives you information such as:</p>
+As we have seen before, you can run <code>docker images</code> in the terminal to see a list of the most recently created images. The command <code>docker images</code> gives you information about:</p>
 <ul>
-<li>Repository</li>
-<li>Tag</li>
-<li>Unique image ID</li>
-<li>Creation date</li>
-<li>Image size</li>
+<li>Repository.</li>
+<li>Tag.</li>
+<li>Unique image ID.</li>
+<li>Creation date.</li>
+<li>Image size.</li>
 </ul>
 <p><img src="docs/images/docker_images_list.png" width="650/"></p>
 <center>
@@ -388,12 +388,12 @@ As we have seen before, you can <code>docker images</code> in the terminal, to s
 </h4>
 </center>
 <ul>
-<li>Run <code>docker images</code>. How many images do you get?</li>
+<li>Run command <code>docker images</code>. How many images do you get?</li>
 <li>Pull the version 2.2.31 of the <a href="https://hub.docker.com/r/biocontainers/blast/"><code>biocontainers/blast</code></a> image
 <ul>
 <li>What is the size of the <code>blast</code> image you just pulled?</li>
 </ul></li>
-<li>How many images do you get if you run <code>docker images --all</code>? What are those? Perhaps the <a href="https://docs.docker.com/engine/reference/commandline/images/">documentation</a> can help.</li>
+<li>How many images do you get if you run <code>docker images --all</code>? What are these images? Check <a href="https://docs.docker.com/engine/reference/commandline/images/">documentation</a> for help.</li>
 </ul>
 <details>
 <summary>
@@ -412,7 +412,7 @@ docker images --all # intermediate images.</code></pre>
 <h3><span class="header-section-number">3.2.4</span> docker run: run image, i.e. start a container</h3>
 <p>Now we want to use what is <strong>inside</strong> the image.
 <br>
-<code>docker run</code> creates a fresh container (active instance of the image) from a <strong>Docker (static) image</strong>, and runs it.</p>
+Command <code>docker run</code> creates a fresh container (active instance of the image) from a <strong>Docker (static) image</strong>, and runs it.</p>
 <p><br>
 The format is:<br></p>
 <p>docker run image:tag <strong>command</strong> (command being a command called <em>inside the image</em>)</p>
@@ -424,7 +424,7 @@ We can start a container from the <strong>ubuntu tag 18.04 image</strong>, execu
 <p>You can execute any program/command that is stored inside the image:</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="using-existing-images.html#cb12-1"></a><span class="ex">docker</span> run ubuntu:18.04 /bin/whoami</span>
 <span id="cb12-2"><a href="using-existing-images.html#cb12-2"></a><span class="ex">docker</span> run ubuntu:18.04 cat /etc/issue</span></code></pre></div>
-<p>You can either execute programs in the image from the command line (see above) or <strong>execute a container interactively</strong>, i.e. <strong>“enter”</strong> the container, with <code>docker run -it</code>.</p>
+<p>You can either execute programs in the image from the command line (see above) or <strong>execute a container interactively</strong>; that is, <strong>“enter”</strong> the container, using command <code>docker run -it</code>.</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="using-existing-images.html#cb13-1"></a><span class="ex">docker</span> run -it ubuntu:18.04 /bin/bash</span></code></pre></div>
 <p>If you want to leave and stop the container, type <code>exit</code> and ENTER.</p>
 <center>
@@ -441,10 +441,10 @@ We can start a container from the <strong>ubuntu tag 18.04 image</strong>, execu
 <ul>
 <li>Is something happening?</li>
 </ul></li>
-<li>Start again a container from the same <strong>blast</strong> image (not interactively), and run <strong>the blastp command</strong>. What happens?</li>
+<li>Start again a container from the same <strong>blast</strong> image (not interactively), and run <strong>blastp</strong>. What happens?</li>
 <li>Start a container <strong>interactively</strong> from the same <strong>blast</strong> image:
 <ul>
-<li>What is the default working directory? What is inside the directory?</li>
+<li>What is the default working directory? What is inside this directory?</li>
 <li>Where is the <code>blastp</code> program located in the image?</li>
 <li>Exit the container.</li>
 </ul></li>
