@@ -518,7 +518,7 @@ If it is run with the argument <strong>nice</strong> it will execute <code>echo 
 
 ENTRYPOINT [&quot;/bin/echo&quot;]
 CMD [&quot;hello world&quot;]</code></pre>
-<p>A more complex recipe (save it in a text file named <strong>Dockerfile_ubuntu</strong>!):</p>
+<p>Here is a more complex recipe (save it in a text file named <strong>Dockerfile_ubuntu</strong>):</p>
 <pre class="docker"><code>FROM ubuntu:18.04
 
 MAINTAINER Toni Hermoso Pulido &lt;toni.hermoso@crg.eu&gt;
@@ -544,15 +544,15 @@ CMD [&quot;https://cdn.wp.nginx.com/wp-content/uploads/2016/07/docker-swarm-hero
 </div>
 <div id="docker-tag" class="section level3">
 <h3><span class="header-section-number">3.5.2</span> docker tag</h3>
-<p>Use <code>docker tag</code> in order to <strong>tag a local image</strong> that has - for example - ID “f9f41698e2f8” into the “ubuntu_wget” image name repository with version/tag “1.0”:</p>
+<p>Use <code>docker tag</code> to <strong>tag a local image</strong> that has, for example, ID “f9f41698e2f8” in the “ubuntu_wget” image name repository with version/tag “1.0”:</p>
 <div class="sourceCode" id="cb63"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb63-1"><a href="docker-recipes.html#cb63-1"></a><span class="ex">docker</span> tag f9f41698e2f8 --tag ubuntu_wget:1.0</span></code></pre></div>
-<p>If the version/tag is not specified, it defaults to <strong>latest</strong>.</p>
+<p>If the version/tag is not specified, the default is <strong>latest</strong>.</p>
 </div>
 <div id="build-cache" class="section level3">
 <h3><span class="header-section-number">3.5.3</span> Build cache</h3>
-<p>Every line of a Dockerfile is actually an image/layer by itself (you can see all images with <code>docker images --all</code>.
-<br>
-Modify for instance the last bit of the previous image recipe (<strong>Dockerfile_ubuntu</strong>) (let’s change the image URL) and rebuild it (even with a different name/tag):</p>
+<p>Every line in a Dockerfile is an image/layer by itself (you can see all images with <code>docker images --all</code>).
+<br></p>
+<p>Let’s modify the last line in the previous image recipe (<strong>Dockerfile_ubuntu</strong>) (let’s change the image URL) and rebuild it (even with a different name/tag):</p>
 <pre class="docker"><code>FROM ubuntu:18.04
 
 MAINTAINER Toni Hermoso Pulido &lt;toni.hermoso@crg.eu&gt;
@@ -565,11 +565,11 @@ RUN apt-get install -y wget
 ENTRYPOINT [&quot;/usr/bin/wget&quot;]
 CMD [&quot;https://cdn-images-1.medium.com/max/1600/1*_NQN6_YnxS29m8vFzWYlEg.png&quot;]</code></pre>
 <div class="sourceCode" id="cb65"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb65-1"><a href="docker-recipes.html#cb65-1"></a><span class="ex">docker</span> build -t mytestimage2 -f Dockerfile_ubuntu .</span></code></pre></div>
-<p>It will <strong>start from the last line</strong>, and not re-run commands before the modification that were successfully built.
+<p>It will <strong>start from the last line</strong>, and will not re-run commands before the modified line as they were already successfully built.
+<br></p>
+<p>It is very convenient for testing and trying new steps, but it may lead to errors when versions are updated (either FROM image or included packages).
 <br>
-This is OK most of the times and very convenient for testing and trying new steps, but it may lead to errors when versions are updated (either FROM image or included packages).
-<br>
-It is beneficial to start from scratch with <code>--no-cache</code> option when building the image.</p>
+It is therefore recommended to start from scratch with <code>--no-cache</code> option, when building the image.</p>
 <div class="sourceCode" id="cb66"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb66-1"><a href="docker-recipes.html#cb66-1"></a><span class="ex">docker</span> build --no-cache -t mytestimage2 -f Dockerfile_ubuntu .</span></code></pre></div>
 </div>
 </div>
