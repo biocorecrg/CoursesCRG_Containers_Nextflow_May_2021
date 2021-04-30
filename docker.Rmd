@@ -1352,7 +1352,7 @@ knitr::include_graphics('docs/images/access-token-docker.png')
 ```
 (base) [ec2-user@ip-172-31-47-200 ~]$ docker login
 Login with your Docker ID to push and pull images from Docker Hub. If you don't have a Docker ID, head over to https://hub.docker.com to create one.
-Username: toniher
+Username: myuser
 Password:
 WARNING! Your password will be stored unencrypted in /home/ec2-user/.docker/config.json.
 Configure a credential helper to remove this warning. See
