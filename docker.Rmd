@@ -254,7 +254,7 @@ docker run ubuntu:18.04 /bin/ls
 
 <img src="docs/images/docker_run_ls.png" width="200/">
 
-Now execute **ls** in your current working directory: is the result the same?
+Now execute `ls` in your current working directory: is the result the same?
 
 
 You can execute any program/command that is stored inside the image:
@@ -342,12 +342,12 @@ docker ps -a
 Each container has a **unique ID**.
 
 
-### docker exec: execute process in running container
+### docker exec: execute process in a running container
 
 Difference between `docker run` and `docker exec`:
 
 * `docker run` creates a temporary container, runs the command and stops the container.
-* `docker exec` needs an already running container to query the command (i.e. a *detached* container).
+* `docker exec` needs an already running container to query the command (that is, a *detached* container).
 
 ```{bash}
 docker exec myubuntu uname -a
@@ -391,9 +391,9 @@ docker restart myubuntu
 docker ps -a
 ```
 
-Run with restart enabled (by default, Docker does not automatically restart the container when it exits).
+Run with restart is enabled (by default, when exits, Docker does not automatically restart the container).
 <br>
-In the example below we start a **detached container named "myubuntu2"** with the **unless-stopped** restart policy: *restart the container unless it is explicitly stopped or Docker itself is stopped or restarted.*
+In the example below, we start a **detached container named "myubuntu2"** with the **unless-stopped** restart policy: *restart the container unless it is explicitly stopped or Docker itself is stopped or restarted.*
 
 ```{bash}
 docker run --restart=unless-stopped --detach --name myubuntu2 ubuntu:18.04 tail -f /dev/null
@@ -508,7 +508,7 @@ In breakout rooms, do the following exercise:
         * Is it now running?
         * Make the container execute the command `ls`.
         * Stop the container.
-    * Remove the alpine image and all its containers (running or stopped)
+    * Remove the alpine image and all its containers (running or stopped).
 
 <details>
 <summary>
@@ -551,8 +551,8 @@ docker rm CONTAINER_ID # check all containers with `docker ps -a`
     * Check the version of the `convert` command.
     * Start a container interactively.
     * Inside the container: download [this png image](https://pbs.twimg.com/profile_images/1273307847103635465/lfVWBmiW_400x400.png)
-    * Convert it to **.jpg** using the `convert` command of imagemagick (format; `convert image.png image.jpg`)
-    * Exit the container
+    * Convert it to **.jpg** using the `convert` command of imagemagick (format; `convert image.png image.jpg`).
+    * Exit the container.
     * Copy the jpg image back from the stopped container! Explore `docker cp`.
 
 <details>
