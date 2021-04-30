@@ -316,11 +316,11 @@ Replace your mymachine-address-here for machine provided address or 127.0.0.1/lo
 </div>
 <div id="shiny-application" class="section level3">
 <h3><span class="header-section-number">3.9.2</span> Shiny Application</h3>
-<div class="sourceCode" id="cb85"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb85-1"><a href="integrative-examples.html#cb85-1"></a><span class="bu">cd</span> containers/docker/shiny</span>
-<span id="cb85-2"><a href="integrative-examples.html#cb85-2"></a></span>
-<span id="cb85-3"><a href="integrative-examples.html#cb85-3"></a><span class="ex">docker</span> build -t shinyapp -f Dockerfile ../../scripts</span>
-<span id="cb85-4"><a href="integrative-examples.html#cb85-4"></a></span>
-<span id="cb85-5"><a href="integrative-examples.html#cb85-5"></a><span class="ex">docker</span> run -d -v <span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span>/../../scripts/shiny:/srv/shiny-server/myserver -p 3838:3838 --name myserver shinyapp</span></code></pre></div>
+<div class="sourceCode" id="cb88"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb88-1"><a href="integrative-examples.html#cb88-1"></a><span class="bu">cd</span> containers/docker/shiny</span>
+<span id="cb88-2"><a href="integrative-examples.html#cb88-2"></a></span>
+<span id="cb88-3"><a href="integrative-examples.html#cb88-3"></a><span class="ex">docker</span> build -t shinyapp -f Dockerfile ../../scripts</span>
+<span id="cb88-4"><a href="integrative-examples.html#cb88-4"></a></span>
+<span id="cb88-5"><a href="integrative-examples.html#cb88-5"></a><span class="ex">docker</span> run -d -v <span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span>/../../scripts/shiny:/srv/shiny-server/myserver -p 3838:3838 --name myserver shinyapp</span></code></pre></div>
 <p>Check the result from the browser
 <a href="http://mymachine-address-here:3838" class="uri">http://mymachine-address-here:3838</a></p>
 

@@ -290,36 +290,36 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">5.13</span> Directives</h2>
 <p>The <strong>directives</strong> are declarations blocks that can provide optional settings to a process. For instance they can affect the way a process stage in and out the input and ouptut files (<a href="https://www.nextflow.io/docs/latest/process.html#stageinmode"><strong>stageInMode</strong></a> and <a href="https://www.nextflow.io/docs/latest/process.html#stageoutmode"><strong>stageOutMode</strong></a> or they can indicate which files has to be considered a final result and to be published in which folder (<a href="https://www.nextflow.io/docs/latest/process.html#publishdir"><strong>publishDir</strong></a>).</p>
 <p>We can add the directive publishDir to our previous example:</p>
-<div class="sourceCode" id="cb153"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb153-1"><a href="directives.html#cb153-1"></a><span class="co">/*</span></span>
-<span id="cb153-2"><a href="directives.html#cb153-2"></a><span class="co"> * Simple reverse the sequences</span></span>
-<span id="cb153-3"><a href="directives.html#cb153-3"></a><span class="co"> */</span></span>
-<span id="cb153-4"><a href="directives.html#cb153-4"></a> </span>
-<span id="cb153-5"><a href="directives.html#cb153-5"></a>process reverseSequence {</span>
-<span id="cb153-6"><a href="directives.html#cb153-6"></a>    tag <span class="st">&quot;$seq&quot;</span>                                          <span class="co">// during the execution prints the indicated variable for follow-up</span></span>
-<span id="cb153-7"><a href="directives.html#cb153-7"></a>    publishDir <span class="st">&quot;output&quot;</span></span>
-<span id="cb153-8"><a href="directives.html#cb153-8"></a></span>
-<span id="cb153-9"><a href="directives.html#cb153-9"></a>    input:</span>
-<span id="cb153-10"><a href="directives.html#cb153-10"></a>    path seq </span>
-<span id="cb153-11"><a href="directives.html#cb153-11"></a></span>
-<span id="cb153-12"><a href="directives.html#cb153-12"></a>    output:</span>
-<span id="cb153-13"><a href="directives.html#cb153-13"></a>    path <span class="st">&quot;all.rev&quot;</span> </span>
-<span id="cb153-14"><a href="directives.html#cb153-14"></a> </span>
-<span id="cb153-15"><a href="directives.html#cb153-15"></a>        script:</span>
-<span id="cb153-16"><a href="directives.html#cb153-16"></a>    <span class="st">&quot;&quot;&quot;</span></span>
-<span id="cb153-17"><a href="directives.html#cb153-17"></a>    cat ${seq} | awk &#39;{<span class="kw">if</span> (\$<span class="dv">1</span>~<span class="st">&quot;&gt;&quot;</span>) {print \$<span class="dv">0</span>} <span class="kw">else</span> <span class="fu">system</span>(<span class="st">&quot;echo &quot;</span> \$<span class="dv">0</span> <span class="st">&quot; |rev&quot;</span>)}&#39; &gt; all.<span class="fu">rev</span></span>
-<span id="cb153-18"><a href="directives.html#cb153-18"></a>    <span class="st">&quot;&quot;&quot;</span></span>
-<span id="cb153-19"><a href="directives.html#cb153-19"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb156"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb156-1"><a href="directives.html#cb156-1"></a><span class="co">/*</span></span>
+<span id="cb156-2"><a href="directives.html#cb156-2"></a><span class="co"> * Simple reverse the sequences</span></span>
+<span id="cb156-3"><a href="directives.html#cb156-3"></a><span class="co"> */</span></span>
+<span id="cb156-4"><a href="directives.html#cb156-4"></a> </span>
+<span id="cb156-5"><a href="directives.html#cb156-5"></a>process reverseSequence {</span>
+<span id="cb156-6"><a href="directives.html#cb156-6"></a>    tag <span class="st">&quot;$seq&quot;</span>                                          <span class="co">// during the execution prints the indicated variable for follow-up</span></span>
+<span id="cb156-7"><a href="directives.html#cb156-7"></a>    publishDir <span class="st">&quot;output&quot;</span></span>
+<span id="cb156-8"><a href="directives.html#cb156-8"></a></span>
+<span id="cb156-9"><a href="directives.html#cb156-9"></a>    input:</span>
+<span id="cb156-10"><a href="directives.html#cb156-10"></a>    path seq </span>
+<span id="cb156-11"><a href="directives.html#cb156-11"></a></span>
+<span id="cb156-12"><a href="directives.html#cb156-12"></a>    output:</span>
+<span id="cb156-13"><a href="directives.html#cb156-13"></a>    path <span class="st">&quot;all.rev&quot;</span> </span>
+<span id="cb156-14"><a href="directives.html#cb156-14"></a> </span>
+<span id="cb156-15"><a href="directives.html#cb156-15"></a>        script:</span>
+<span id="cb156-16"><a href="directives.html#cb156-16"></a>    <span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb156-17"><a href="directives.html#cb156-17"></a>    cat ${seq} | awk &#39;{<span class="kw">if</span> (\$<span class="dv">1</span>~<span class="st">&quot;&gt;&quot;</span>) {print \$<span class="dv">0</span>} <span class="kw">else</span> <span class="fu">system</span>(<span class="st">&quot;echo &quot;</span> \$<span class="dv">0</span> <span class="st">&quot; |rev&quot;</span>)}&#39; &gt; all.<span class="fu">rev</span></span>
+<span id="cb156-18"><a href="directives.html#cb156-18"></a>    <span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb156-19"><a href="directives.html#cb156-19"></a>}</span></code></pre></div>
 <p>We can also use <strong>storeDir</strong> in case we want to have a permanent cache. Basically the process is executed only if the output files do not exist in the folder specified by <strong>storeDir</strong>.
 When the output files exist the process execution is skipped and these files are used as the actual process result.
 As an example this can be useful in case we don’t want to generate indexes each time and we prefer to reuse them.</p>
 <p>We can also indicate what to do in case a process fail. The default is to stop the pipeline and to raise an error. But we can also skip the process using this directive:</p>
-<div class="sourceCode" id="cb154"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb154-1"><a href="directives.html#cb154-1"></a>errorStrategy &#39;ignore&#39;</span></code></pre></div>
+<div class="sourceCode" id="cb157"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb157-1"><a href="directives.html#cb157-1"></a>errorStrategy &#39;ignore&#39;</span></code></pre></div>
 <p>or retry a number of times changing something like the memory available or the maximum execution time. This time we need a number of directives:</p>
-<div class="sourceCode" id="cb155"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb155-1"><a href="directives.html#cb155-1"></a>    memory { <span class="fl">1.</span>GB * task.<span class="fu">attempt</span> }</span>
-<span id="cb155-2"><a href="directives.html#cb155-2"></a>    time { <span class="fl">1.</span>hour * task.<span class="fu">attempt</span> }</span>
-<span id="cb155-3"><a href="directives.html#cb155-3"></a></span>
-<span id="cb155-4"><a href="directives.html#cb155-4"></a>    errorStrategy &#39;retry&#39; </span>
-<span id="cb155-5"><a href="directives.html#cb155-5"></a>    maxRetries <span class="dv">3</span></span></code></pre></div>
+<div class="sourceCode" id="cb158"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb158-1"><a href="directives.html#cb158-1"></a>    memory { <span class="fl">1.</span>GB * task.<span class="fu">attempt</span> }</span>
+<span id="cb158-2"><a href="directives.html#cb158-2"></a>    time { <span class="fl">1.</span>hour * task.<span class="fu">attempt</span> }</span>
+<span id="cb158-3"><a href="directives.html#cb158-3"></a></span>
+<span id="cb158-4"><a href="directives.html#cb158-4"></a>    errorStrategy &#39;retry&#39; </span>
+<span id="cb158-5"><a href="directives.html#cb158-5"></a>    maxRetries <span class="dv">3</span></span></code></pre></div>
 </div>
             </section>
 

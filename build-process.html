@@ -425,11 +425,11 @@ It’s possible to sign cryptographically your images, so third parties can veri
 <ul>
 <li>We need to create a <a href="Sylabs%20Cloud">https://cloud.sylabs.io/</a> account first.</li>
 </ul>
-<div class="sourceCode" id="cb98"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb98-1"><a href="build-process.html#cb98-1"></a>    <span class="ex">singularity</span> remote login</span></code></pre></div>
+<div class="sourceCode" id="cb101"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb101-1"><a href="build-process.html#cb101-1"></a>    <span class="ex">singularity</span> remote login</span></code></pre></div>
 <ul>
 <li>In order to use it our username and passwords we generate a token at <a href="https://cloud.sylabs.io/auth/tokens" class="uri">https://cloud.sylabs.io/auth/tokens</a> and copy its contents to a file (e.g., <code>singularity.token</code>). Then we use in the command-line below:</li>
 </ul>
-<div class="sourceCode" id="cb99"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb99-1"><a href="build-process.html#cb99-1"></a>    <span class="ex">singularity</span> remote login --tokenfile singularity.token</span></code></pre></div>
+<div class="sourceCode" id="cb102"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb102-1"><a href="build-process.html#cb102-1"></a>    <span class="ex">singularity</span> remote login --tokenfile singularity.token</span></code></pre></div>
 <details>
 <summary>
 <h5>
@@ -448,11 +448,11 @@ For safety reasons, remove the token from Cloud Sylabs interface after the cours
 <ul>
 <li>Once we are authenticated with our access token, we can <strong>build an image</strong>:</li>
 </ul>
-<div class="sourceCode" id="cb100"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb100-1"><a href="build-process.html#cb100-1"></a>    <span class="ex">singularity</span> build --remote focal.sif docker://ubuntu:focal</span></code></pre></div>
+<div class="sourceCode" id="cb103"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb103-1"><a href="build-process.html#cb103-1"></a>    <span class="ex">singularity</span> build --remote focal.sif docker://ubuntu:focal</span></code></pre></div>
 <ul>
 <li>Since we are already authenticated, we can take advantage to push a Singularity image in our account, similarly to what we did with Docker. We use <code>-U</code> so we do not sign the image.</li>
 </ul>
-<div class="sourceCode" id="cb101"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb101-1"><a href="build-process.html#cb101-1"></a>    <span class="ex">singularity</span> push -U focal.sif library://toniher/test/focal.sif:latest</span></code></pre></div>
+<div class="sourceCode" id="cb104"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb104-1"><a href="build-process.html#cb104-1"></a>    <span class="ex">singularity</span> push -U focal.sif library://toniher/test/focal.sif:latest</span></code></pre></div>
 
 <div class="rmdtip">
 IMPORTANT: Unless it is not defined in advance as private from Cloud Sylabs interface, pushed image will be public and there does not seem an easy way to turn it private.

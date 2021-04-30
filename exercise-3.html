@@ -296,26 +296,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <em>Answer</em>
 </h5>
 <p></summary></p>
-<div class="sourceCode" id="cb160"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb160-1"><a href="exercise-3.html#cb160-1"></a><span class="co">/*</span></span>
-<span id="cb160-2"><a href="exercise-3.html#cb160-2"></a><span class="co"> * Broken process</span></span>
-<span id="cb160-3"><a href="exercise-3.html#cb160-3"></a><span class="co"> */</span></span>
-<span id="cb160-4"><a href="exercise-3.html#cb160-4"></a> </span>
-<span id="cb160-5"><a href="exercise-3.html#cb160-5"></a>process reverseSequence {</span>
-<span id="cb160-6"><a href="exercise-3.html#cb160-6"></a>    tag <span class="st">&quot;$seq&quot;</span>                  </span>
-<span id="cb160-7"><a href="exercise-3.html#cb160-7"></a>    publishDir <span class="st">&quot;output&quot;</span></span>
-<span id="cb160-8"><a href="exercise-3.html#cb160-8"></a>    errorStrategy &#39;ignore&#39;</span>
-<span id="cb160-9"><a href="exercise-3.html#cb160-9"></a></span>
-<span id="cb160-10"><a href="exercise-3.html#cb160-10"></a>    input:</span>
-<span id="cb160-11"><a href="exercise-3.html#cb160-11"></a>    path seq </span>
-<span id="cb160-12"><a href="exercise-3.html#cb160-12"></a></span>
-<span id="cb160-13"><a href="exercise-3.html#cb160-13"></a>    output:</span>
-<span id="cb160-14"><a href="exercise-3.html#cb160-14"></a>    path <span class="st">&quot;all.rev&quot;</span> </span>
-<span id="cb160-15"><a href="exercise-3.html#cb160-15"></a> </span>
-<span id="cb160-16"><a href="exercise-3.html#cb160-16"></a>    script:</span>
-<span id="cb160-17"><a href="exercise-3.html#cb160-17"></a>    <span class="st">&quot;&quot;&quot;</span></span>
-<span id="cb160-18"><a href="exercise-3.html#cb160-18"></a>    cat ${seq} | AAAAAAA &#39;{<span class="kw">if</span> (\$<span class="dv">1</span>~<span class="st">&quot;&gt;&quot;</span>) {print \$<span class="dv">0</span>} <span class="kw">else</span> <span class="fu">system</span>(<span class="st">&quot;echo &quot;</span> \$<span class="dv">0</span> <span class="st">&quot; |rev&quot;</span>)}&#39; &gt; all.<span class="fu">rev</span></span>
-<span id="cb160-19"><a href="exercise-3.html#cb160-19"></a>    <span class="st">&quot;&quot;&quot;</span></span>
-<span id="cb160-20"><a href="exercise-3.html#cb160-20"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb163"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb163-1"><a href="exercise-3.html#cb163-1"></a><span class="co">/*</span></span>
+<span id="cb163-2"><a href="exercise-3.html#cb163-2"></a><span class="co"> * Broken process</span></span>
+<span id="cb163-3"><a href="exercise-3.html#cb163-3"></a><span class="co"> */</span></span>
+<span id="cb163-4"><a href="exercise-3.html#cb163-4"></a> </span>
+<span id="cb163-5"><a href="exercise-3.html#cb163-5"></a>process reverseSequence {</span>
+<span id="cb163-6"><a href="exercise-3.html#cb163-6"></a>    tag <span class="st">&quot;$seq&quot;</span>                  </span>
+<span id="cb163-7"><a href="exercise-3.html#cb163-7"></a>    publishDir <span class="st">&quot;output&quot;</span></span>
+<span id="cb163-8"><a href="exercise-3.html#cb163-8"></a>    errorStrategy &#39;ignore&#39;</span>
+<span id="cb163-9"><a href="exercise-3.html#cb163-9"></a></span>
+<span id="cb163-10"><a href="exercise-3.html#cb163-10"></a>    input:</span>
+<span id="cb163-11"><a href="exercise-3.html#cb163-11"></a>    path seq </span>
+<span id="cb163-12"><a href="exercise-3.html#cb163-12"></a></span>
+<span id="cb163-13"><a href="exercise-3.html#cb163-13"></a>    output:</span>
+<span id="cb163-14"><a href="exercise-3.html#cb163-14"></a>    path <span class="st">&quot;all.rev&quot;</span> </span>
+<span id="cb163-15"><a href="exercise-3.html#cb163-15"></a> </span>
+<span id="cb163-16"><a href="exercise-3.html#cb163-16"></a>    script:</span>
+<span id="cb163-17"><a href="exercise-3.html#cb163-17"></a>    <span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb163-18"><a href="exercise-3.html#cb163-18"></a>    cat ${seq} | AAAAAAA &#39;{<span class="kw">if</span> (\$<span class="dv">1</span>~<span class="st">&quot;&gt;&quot;</span>) {print \$<span class="dv">0</span>} <span class="kw">else</span> <span class="fu">system</span>(<span class="st">&quot;echo &quot;</span> \$<span class="dv">0</span> <span class="st">&quot; |rev&quot;</span>)}&#39; &gt; all.<span class="fu">rev</span></span>
+<span id="cb163-19"><a href="exercise-3.html#cb163-19"></a>    <span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb163-20"><a href="exercise-3.html#cb163-20"></a>}</span></code></pre></div>
 </details>
 <p>Write the first workflow using pipes. Nextflow DLS2 allows you to use pipes for connecting channels via input / output.
 See documentation here:</p>
@@ -326,11 +326,11 @@ See documentation here:</p>
 <em>Answer</em>
 </h5>
 <p></summary></p>
-<div class="sourceCode" id="cb161"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb161-1"><a href="exercise-3.html#cb161-1"></a>workflow flow1 {</span>
-<span id="cb161-2"><a href="exercise-3.html#cb161-2"></a>    take: sequences</span>
-<span id="cb161-3"><a href="exercise-3.html#cb161-3"></a>    main:</span>
-<span id="cb161-4"><a href="exercise-3.html#cb161-4"></a>    <span class="fu">splitSequences</span>(sequences) | reverseSequence | <span class="fu">view</span>()</span>
-<span id="cb161-5"><a href="exercise-3.html#cb161-5"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb164"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb164-1"><a href="exercise-3.html#cb164-1"></a>workflow flow1 {</span>
+<span id="cb164-2"><a href="exercise-3.html#cb164-2"></a>    take: sequences</span>
+<span id="cb164-3"><a href="exercise-3.html#cb164-3"></a>    main:</span>
+<span id="cb164-4"><a href="exercise-3.html#cb164-4"></a>    <span class="fu">splitSequences</span>(sequences) | reverseSequence | <span class="fu">view</span>()</span>
+<span id="cb164-5"><a href="exercise-3.html#cb164-5"></a>}</span></code></pre></div>
 </details>
 
 </div>

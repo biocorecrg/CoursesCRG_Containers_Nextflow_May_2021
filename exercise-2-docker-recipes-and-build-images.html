@@ -358,8 +358,8 @@ docker run mytestfiglet &quot;Docker course&quot;</code></pre>
 <li>Copy the following short <code>bash</code> script in a file called <code>random_numbers.bash</code>.</li>
 </ul></li>
 </ol>
-<div class="sourceCode" id="cb73"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb73-1"><a href="exercise-2-docker-recipes-and-build-images.html#cb73-1"></a><span class="co">#!/usr/bin/bash</span></span>
-<span id="cb73-2"><a href="exercise-2-docker-recipes-and-build-images.html#cb73-2"></a><span class="fu">seq</span> 1 1000 <span class="kw">|</span> <span class="ex">shuf</span> <span class="kw">|</span> <span class="fu">head</span> -<span class="va">$1</span></span></code></pre></div>
+<div class="sourceCode" id="cb76"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb76-1"><a href="exercise-2-docker-recipes-and-build-images.html#cb76-1"></a><span class="co">#!/usr/bin/bash</span></span>
+<span id="cb76-2"><a href="exercise-2-docker-recipes-and-build-images.html#cb76-2"></a><span class="fu">seq</span> 1 1000 <span class="kw">|</span> <span class="ex">shuf</span> <span class="kw">|</span> <span class="fu">head</span> -<span class="va">$1</span></span></code></pre></div>
 <pre><code>This script outputs **random intergers from 1 to 1000**: the number of integers selected is given as the **first argument**.
 * Write a recipe for an image:
     * Based on **centos:7**
