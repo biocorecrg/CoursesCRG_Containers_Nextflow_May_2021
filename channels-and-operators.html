@@ -292,27 +292,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p>An operator is a method that reshape or connect different channels applying some rules.</p>
 <p>We can make a very simple Nextflow script by writing this code in a file (test.nf):</p>
-<pre class="nextflow"><code>#!/usr/bin/env nextflow
-
-// This is a comment
-
-/*
- * This is a block of comments
- */
-
-// This is needed for activating the new DLS2
-nextflow.enable.dsl=2
-
-
-//Let&#39;s create a channel from string values
-
-str = Channel.from(&#39;hello&#39;, &#39;hola&#39;, &#39;bonjour&#39;)
-
-/*
-* Let&#39;s print that channel using the operator view()
-* https://www.nextflow.io/docs/latest/operator.html#view
-*/
-str.view()</code></pre>
+<div class="sourceCode" id="cb116"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb116-1"><a href="channels-and-operators.html#cb116-1"></a>#!/usr/bin/env nextflow</span>
+<span id="cb116-2"><a href="channels-and-operators.html#cb116-2"></a></span>
+<span id="cb116-3"><a href="channels-and-operators.html#cb116-3"></a><span class="co">// This is a comment</span></span>
+<span id="cb116-4"><a href="channels-and-operators.html#cb116-4"></a></span>
+<span id="cb116-5"><a href="channels-and-operators.html#cb116-5"></a><span class="co">/*</span></span>
+<span id="cb116-6"><a href="channels-and-operators.html#cb116-6"></a><span class="co"> * This is a block of comments</span></span>
+<span id="cb116-7"><a href="channels-and-operators.html#cb116-7"></a><span class="co"> */</span></span>
+<span id="cb116-8"><a href="channels-and-operators.html#cb116-8"></a></span>
+<span id="cb116-9"><a href="channels-and-operators.html#cb116-9"></a><span class="co">// This is needed for activating the new DLS2</span></span>
+<span id="cb116-10"><a href="channels-and-operators.html#cb116-10"></a>nextflow.<span class="fu">enable</span>.<span class="fu">dsl</span>=<span class="dv">2</span></span>
+<span id="cb116-11"><a href="channels-and-operators.html#cb116-11"></a></span>
+<span id="cb116-12"><a href="channels-and-operators.html#cb116-12"></a></span>
+<span id="cb116-13"><a href="channels-and-operators.html#cb116-13"></a><span class="co">//Let&#39;s create a channel from string values</span></span>
+<span id="cb116-14"><a href="channels-and-operators.html#cb116-14"></a></span>
+<span id="cb116-15"><a href="channels-and-operators.html#cb116-15"></a>str = <span class="bu">Channel</span>.<span class="fu">from</span>(&#39;hello&#39;, &#39;hola&#39;, &#39;bonjour&#39;)</span>
+<span id="cb116-16"><a href="channels-and-operators.html#cb116-16"></a></span>
+<span id="cb116-17"><a href="channels-and-operators.html#cb116-17"></a><span class="co">/*</span></span>
+<span id="cb116-18"><a href="channels-and-operators.html#cb116-18"></a><span class="co">* Let&#39;s print that channel using the operator view()</span></span>
+<span id="cb116-19"><a href="channels-and-operators.html#cb116-19"></a><span class="co">* https://www.nextflow.io/docs/latest/operator.html#view</span></span>
+<span id="cb116-20"><a href="channels-and-operators.html#cb116-20"></a><span class="co">*/</span></span>
+<span id="cb116-21"><a href="channels-and-operators.html#cb116-21"></a>str.<span class="fu">view</span>()</span></code></pre></div>
 <p>Then to execute it you can just run:</p>
 <div class="sourceCode" id="cb117"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb117-1"><a href="channels-and-operators.html#cb117-1"></a></span>
 <span id="cb117-2"><a href="channels-and-operators.html#cb117-2"></a><span class="va">$nextflow</span> <span class="ex">run</span> test.nf</span>
