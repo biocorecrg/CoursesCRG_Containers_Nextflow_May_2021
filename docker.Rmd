@@ -1277,6 +1277,11 @@ docker exec webserver curl localhost:8080
 docker rm -f webserver
 ```
 
+```{block2, type='rdmtip'}
+You can check the website also from your web browser at: http://mymachine-address-here/ (port 80 by default). Replace your mymachine-address-here for machine provided address or 127.0.0.1/localhost in case you were trying it from your own machine.
+```
+
+
 ## Integrative examples
 
 ### FASTQC Web Application
@@ -1294,7 +1299,7 @@ cd containers/docker/fastqc_www
 
 docker build -t fastqcwww -f Dockerfile ../../scripts/fastqc
 
-docker run -d -v $HOME/myscratch:/scratch -p 8083:3838 --name myfastqc fastqcwww
+docker run -d -v $HOME/myscratch:/scratch -p 3838:8083 --name myfastqc fastqcwww
 ```
 
 Example query from the browser:
