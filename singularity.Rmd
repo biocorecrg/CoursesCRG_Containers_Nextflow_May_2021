@@ -53,37 +53,48 @@ knitr::opts_chunk$set(echo = TRUE, eval = FALSE, warning = FALSE)
 
 ### Examples
 
+There are different ways to generate Singularity image files. The most common way is so far thanks to existing Docker images already present in public registries.
+
 #### Through registries
 
-* Docker Hub
+##### Docker Hub
 
 [https://hub.docker.com/r/biocontainers/fastqc](https://hub.docker.com/r/biocontainers/fastqc)
 
     singularity build fastqc-0.11.9_cv7.sif docker://biocontainers/fastqc:v0.11.9_cv7
 
 
-* Biocontainers
+##### Biocontainers
 
-**Via quay.io**
+###### Via quay.io
 
 [https://quay.io/repository/biocontainers/fastqc](https://quay.io/repository/biocontainers/fastqc)
 
     singularity build fastqc-0.11.9.sif docker://quay.io/biocontainers/fastqc:0.11.9--0
 
-**Via Galaxy project prebuilt images**
+###### Via Galaxy project prebuilt images
 
     singularity pull --name fastqc-0.11.9.sif https://depot.galaxyproject.org/singularity/fastqc:0.11.9--0
 
-* Docker Daemon (local Docker image)
+```{block2, type='rmdnote'}
+Galaxy project provides all Bioinformatics software from Biocontainers initiative as Singularity prebuilt images. If download and conversion time of images is an issue for you, this is likely the best option if working in the biomedical field.
+```
+
+##### Sylabs registry
+
+Not as popular so far, but it provides fast download of images.
+
+* [https://cloud.sylabs.io/library](https://cloud.sylabs.io/library)
 
 
-      singularity build fastqc-web-0.11.9.sif docker-daemon://fastqcwww
+#### Docker Daemon
 
-* Also Singularity registries (not so popular so far)
-  * [https://cloud.sylabs.io/library](https://cloud.sylabs.io/library)
+If you create your own images (as we did during the course) and you don't want to share them publicly (and you have not access to any private image registry, either), you can convert your locally built Docker images into Singularity image files.
+
+
+        singularity build fastqc-web-0.11.9.sif docker-daemon://fastqcwww
 
 ### Sandboxing
-
 
 
 ```
@@ -94,11 +105,14 @@ knitr::opts_chunk$set(echo = TRUE, eval = FALSE, warning = FALSE)
 
 ### Singularity recipes
 
-Saved in a *.sif* file?
+Singularity provides its own build system and recipe syntax. Despite it is actually possible to generate images from scratch (known as ***bootstraping***) thanks to these recipes, this is at time of writing far slower than converting from Docker ones. Docker has the advantage of saving every action line as a cached image. That is not happening with Singularity.
+
+In any case, it can still be useful to boostrap an image derived from a previously existing one. Below we provide two common approaches:
+
 
 #### Docker bootstrap
 
-*What does itmean (bootstrap)?*
+Instead of converting a Docker image into a Singularity one, it's possible to use one as a base one and modify it by using Singularity recipe syntax.
 
 ````
 BootStrap: docker
@@ -115,6 +129,8 @@ From: biocontainers/fastqc:v0.11.9_cv7
     sudo singularity build fastqc.sif docker.singularity
 
 #### Debian bootstrap
+
+Alternatively, we can build the whole image from Debian/Ubuntu distribution. This will normally take a while.
 
 ```
 BootStrap: debootstrap
@@ -156,6 +172,11 @@ Version 0.1.0
 ```
 
     sudo singularity build fastqc-multi-bowtie.sif debootstrap.singularity
+
+
+```{block2, type='rmdtip'}
+The available deboostrap recipes depend on the version you have installed in the system. Check at: ```/usr/share/debootstrap/scripts/``` for more details. For Debian, instead of Ubuntu, you can replace mirrorURL with https://ftp.debian.org/debian/ More details at: https://sylabs.io/guides/3.7/user-guide/appendix.html#build-debootstrap
+```
 
 ```{block2, type='rmdnote'}
 It's possible to sign cryptographically your images, so third parties can verify they are coming from their actual authors. This implies some matters beyond the scope of this course, but you have some details if interested at: https://sylabs.io/guides/3.7/user-guide/signNverify.html
