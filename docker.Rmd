@@ -590,7 +590,7 @@ For this to go smoothly, you should know your **base system**, and how to intera
 <br>
 In Linux-based environment, software is usually distributed in the form of **packages**, kept in repositories.
 <br>
-With different operating systems come different tools to fetch and install packages:
+Different operating systems have different tools to fetch and install packages:
 
 | Operating System | Format | Tool(s) |
 | :-----: | :-----: | :-----: |
@@ -638,8 +638,8 @@ yum search libxml2
 yum install -y libxml2-devel.x86_64
 ```
 
-Note the **-y** option that we set for updating and for installing.<br>
-It is an important option in the context of Docker: it means that you *answer yes for all questions*, regarding whether you want to confirm the installation, for example.
+>Note the **-y** option that we set for updating and for installing.<br>
+It is an important option in the context of Docker: it means that you *answer yes to all questions* regarding installation.
 
 <br>
 
