@@ -47,7 +47,7 @@ Containers allow us to use **exactly the same versions of the tools**.
 || Virtualisation | Containerisation |
 | :------ | :------------: | :--------------: |
 | PROS | Very similar to a full OS <br> With current solutions, high OS diversity| No need of full OS installation (less space) <br> Faster than virtual machines <br> Easier automation <br> Current solutions allow easier distribution of recipes. <br> Better portability.|
-| CONS | Need of more space and resources <br> Slower than containers <br> Not that good automation | Some cases might not be exactly the same as a full OS <br> Still less OS diversity, even with current solutions |
+| CONS | Need more space and resources <br> Slower than containers <br> Not that good automation | Some cases might not be exactly the same as a full OS <br> Still less OS diversity, even with current solutions |
 
 ## History of containers
 
