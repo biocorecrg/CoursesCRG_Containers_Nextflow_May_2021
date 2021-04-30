@@ -255,8 +255,8 @@ This is the Biocore's NF test pipeline
 Enjoy!
 ```
 
-## Exercise 4 
-- Look at [Exercise 3](https://biocorecrg.github.io/CoursesCRG_Containers_Nextflow_May_2021/exercise-3.html). Can you make a configuration for that script with a new label for handling failing processes? 
+## EXERCISE 4 
+- Look at [EXERCISE 3](https://biocorecrg.github.io/CoursesCRG_Containers_Nextflow_May_2021/exercise-3.html). Can you make a configuration for that script with a new label for handling failing processes? 
 
 <details>
 <summary>
@@ -636,7 +636,7 @@ export NXF_OPTS="-Xms50m -Xmx500m"
 
 ```
 
-## Exercise 5 
+## EXERCISE 5 
 Try to make a module wrapper of the bowtie tool and change the script accordingly as the test3.
 
 <details>
