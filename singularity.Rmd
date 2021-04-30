@@ -96,6 +96,7 @@ If you create your own images (as we did during the course) and you don't want t
 
 ### Sandboxing
 
+Instead of generating an image file, it is actually possible to use a whole directory with its contents. This is handy when specific changes may be needed.
 
 ```
      singularity build --sandbox ./sandbox docker://ubuntu:18.04
@@ -103,9 +104,15 @@ If you create your own images (as we did during the course) and you don't want t
      singularity build sandbox.sif ./sandbox
 ```
 
+```{block2, type='rmdnote'}
+Apart from testing or debugging, as we commented with Docker, we don't recommend this approach because it makes reproducibility more difficult.
+```
+
 ### Singularity recipes
 
 Singularity provides its own build system and recipe syntax. Despite it is actually possible to generate images from scratch (known as ***bootstraping***) thanks to these recipes, this is at time of writing far slower than converting from Docker ones. Docker has the advantage of saving every action line as a cached image. That is not happening with Singularity.
+
+When using recipes, it's mandatory to have administrator permissions (e.g., as beeing root or via **sudo**).
 
 In any case, it can still be useful to boostrap an image derived from a previously existing one. Below we provide two common approaches:
 
@@ -127,6 +134,11 @@ From: biocontainers/fastqc:v0.11.9_cv7
 ````
 
     sudo singularity build fastqc.sif docker.singularity
+
+
+```{block2, type='rmdtip'}
+The command %runscript would be equivalent to ENTRYPOINT/CMD in Docker. It is only triggered when using ```singularity run```. This is useful if you want to hide from the user the complexity of a command-line path or an included custom script.
+```
 
 #### Debian bootstrap
 
@@ -182,9 +194,9 @@ The available deboostrap recipes depend on the version you have installed in the
 It's possible to sign cryptographically your images, so third parties can verify they are coming from their actual authors. This implies some matters beyond the scope of this course, but you have some details if interested at: https://sylabs.io/guides/3.7/user-guide/signNverify.html
 ```
 
-## Remote building
+### Remote building
 
-This allows us to build a Singularity image without using our own computer. This is convenient if your machine has not many resources.
+This allows us to build a Singularity image without using our own computer. This is convenient if your machine has not many resources or if you don't have administrator privileges.
 
 * We need to create a [https://cloud.sylabs.io/](Sylabs Cloud) account first.
 
@@ -232,29 +244,36 @@ As an interesting feature, you can actually sign your images after you pushed th
 More details at [https://sylabs.io/guides/3.7/user-guide/cloud_library.html](https://sylabs.io/guides/3.7/user-guide/cloud_library.html)
 ```
 
-
 ## Run and execution process
 
-## Singularity shell
+Once we have some image files (or directories) ready, we can run or favourite processes.
 
-Interactive shell.
+### Singularity shell
+
+The straight-forward exploratory approach, equivalent to ```docker run -ti myimage /bin/shell```. But with a more handy syntax.
 
     singularity shell fastqc-multi-bowtie.sif
 
+```{block2, type='rmdnote'}
+Move around the directories and notice the different isolation approach compared to Docker. You can access most of the host filesystem.
+```
+
 ### Singularity exec
 
-Execute commands. Common approach in HPC uses.
+That is the most common way to execute Singularity (equivalent to ```docker exec```). That would be the normal approach in HPC environments.
 
     singularity exec fastqc-multi-bowtie.sif fastqc
 
 ### Singularity run
 
-Execute runscript from recipe definition. Not so common for HPC uses. More for instances (servers).
+This executes runscript from recipe definition (equivalent to ```docker run```). Not so common for HPC uses. More for instances (servers).
 
     singularity run fastqc-multi-bowtie.sif
 
 
 ### Environment control
+
+By default Singularity inherits our profile environment (e.g., PATH environment variable). This may be convenient for some circumstances, but it can also lead to unexpected problems if you are not aware, when your own environment clashes with the default one from the image.
 
     singularity shell -e fastqc-multi-bowtie.sif
 
@@ -278,6 +297,8 @@ Compare ```env``` command with and without -e modifier.
     # We needed to add writable parameter
 
 ### Execute straight from a registry
+
+Image is actually downloaded (and if a Docker one, converted) and stored in Singularity cache directory.
 
     singularity exec docker://ncbi/blast:2.10.1 blastp -version
 
@@ -303,7 +324,7 @@ For others, need to be done explicitly (syntax: host:container)
 
 ## Instances
 
-Also know as **services**. Despite Docker it is still more convenient for these tasks, it allows enabling thing such as webservices (e.g., via APIs) in HPC workflows.
+Also know as **services**. Despite Docker it is still more convenient for these tasks, it allows enabling thing such as webservices (e.g., via APIs) in HPC workflows. Instead of defining a **%runscript** block, we define a **%startscript** one. So, it would be possible to have both if needed.
 
 Simple example:
 
@@ -373,9 +394,22 @@ Normally at ```/etc/singularity/singularity.conf``` or similar (e.g preceded by 
 ## Exercise 4 - Singularity running and building
 
 * Example running BLAST commands in different ways
+
 * Example running nginx as a service (NGINX its actually the custom example in Singularity page)
   * Retrieve NGINX version from the instance
   * Share a simply HTML page
+
+
+  # Example recipe from: https://sylabs.io/guides/3.7/user-guide/running_services.html
+
+```
+Bootstrap: docker
+From: nginx:1.20
+Includecmd: no
+
+%startscript
+   nginx
+```
 
 ```{block2, type='rmdtip'}
 NGINX is serving web pages by default at the following location: /usr/share/nginx/html
