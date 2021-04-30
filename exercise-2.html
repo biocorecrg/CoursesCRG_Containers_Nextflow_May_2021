@@ -298,77 +298,77 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <em>Answer</em>
 </h5>
 <p></summary></p>
-<div class="sourceCode" id="cb139"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb139-1"><a href="exercise-2.html#cb139-1"></a></span>
-<span id="cb139-2"><a href="exercise-2.html#cb139-2"></a>#!/usr/bin/env nextflow</span>
-<span id="cb139-3"><a href="exercise-2.html#cb139-3"></a></span>
-<span id="cb139-4"><a href="exercise-2.html#cb139-4"></a>nextflow.<span class="fu">enable</span>.<span class="fu">dsl</span>=<span class="dv">2</span></span>
-<span id="cb139-5"><a href="exercise-2.html#cb139-5"></a></span>
-<span id="cb139-6"><a href="exercise-2.html#cb139-6"></a>str = <span class="bu">Channel</span>.<span class="fu">from</span>(&#39;hello&#39;, &#39;hola&#39;, &#39;bonjour&#39;)</span>
-<span id="cb139-7"><a href="exercise-2.html#cb139-7"></a></span>
-<span id="cb139-8"><a href="exercise-2.html#cb139-8"></a>process printHello {</span>
-<span id="cb139-9"><a href="exercise-2.html#cb139-9"></a></span>
-<span id="cb139-10"><a href="exercise-2.html#cb139-10"></a>   tag { str_in }</span>
-<span id="cb139-11"><a href="exercise-2.html#cb139-11"></a></span>
-<span id="cb139-12"><a href="exercise-2.html#cb139-12"></a>   input:        </span>
-<span id="cb139-13"><a href="exercise-2.html#cb139-13"></a>   val str_in</span>
-<span id="cb139-14"><a href="exercise-2.html#cb139-14"></a></span>
-<span id="cb139-15"><a href="exercise-2.html#cb139-15"></a>   output:        </span>
-<span id="cb139-16"><a href="exercise-2.html#cb139-16"></a>   <span class="fu">path</span>(<span class="st">&quot;${str_in}.txt&quot;</span>)</span>
-<span id="cb139-17"><a href="exercise-2.html#cb139-17"></a></span>
-<span id="cb139-18"><a href="exercise-2.html#cb139-18"></a>   script:        </span>
-<span id="cb139-19"><a href="exercise-2.html#cb139-19"></a>   <span class="st">&quot;&quot;&quot;</span></span>
-<span id="cb139-20"><a href="exercise-2.html#cb139-20"></a>   echo ${str_in} in Italian is ciao &gt; ${str_in}.<span class="fu">txt</span></span>
-<span id="cb139-21"><a href="exercise-2.html#cb139-21"></a>   <span class="st">&quot;&quot;&quot;</span></span>
-<span id="cb139-22"><a href="exercise-2.html#cb139-22"></a>}</span>
-<span id="cb139-23"><a href="exercise-2.html#cb139-23"></a></span>
-<span id="cb139-24"><a href="exercise-2.html#cb139-24"></a>process printHello2 {</span>
-<span id="cb139-25"><a href="exercise-2.html#cb139-25"></a></span>
-<span id="cb139-26"><a href="exercise-2.html#cb139-26"></a>   tag { str_in }</span>
-<span id="cb139-27"><a href="exercise-2.html#cb139-27"></a></span>
-<span id="cb139-28"><a href="exercise-2.html#cb139-28"></a>   input:        </span>
-<span id="cb139-29"><a href="exercise-2.html#cb139-29"></a>   val str_in</span>
-<span id="cb139-30"><a href="exercise-2.html#cb139-30"></a></span>
-<span id="cb139-31"><a href="exercise-2.html#cb139-31"></a>   output:        </span>
-<span id="cb139-32"><a href="exercise-2.html#cb139-32"></a>   <span class="fu">path</span>(<span class="st">&quot;cheers.txt&quot;</span>)</span>
-<span id="cb139-33"><a href="exercise-2.html#cb139-33"></a></span>
-<span id="cb139-34"><a href="exercise-2.html#cb139-34"></a>   script:</span>
-<span id="cb139-35"><a href="exercise-2.html#cb139-35"></a>   <span class="st">&quot;&quot;&quot;</span></span>
-<span id="cb139-36"><a href="exercise-2.html#cb139-36"></a>   echo ${str_in.<span class="fu">join</span>(&#39;, &#39;)} in Italian are ciao &gt; cheers.<span class="fu">txt</span></span>
-<span id="cb139-37"><a href="exercise-2.html#cb139-37"></a>   <span class="st">&quot;&quot;&quot;</span></span>
-<span id="cb139-38"><a href="exercise-2.html#cb139-38"></a>}</span>
-<span id="cb139-39"><a href="exercise-2.html#cb139-39"></a></span>
-<span id="cb139-40"><a href="exercise-2.html#cb139-40"></a><span class="co">/*</span></span>
-<span id="cb139-41"><a href="exercise-2.html#cb139-41"></a><span class="co"> * A workflow can be named as a function and receive an input using the take keyword</span></span>
-<span id="cb139-42"><a href="exercise-2.html#cb139-42"></a><span class="co"> */</span></span>
-<span id="cb139-43"><a href="exercise-2.html#cb139-43"></a></span>
-<span id="cb139-44"><a href="exercise-2.html#cb139-44"></a>workflow first_pipeline {</span>
-<span id="cb139-45"><a href="exercise-2.html#cb139-45"></a>    take: str_input</span>
-<span id="cb139-46"><a href="exercise-2.html#cb139-46"></a>    main:</span>
-<span id="cb139-47"><a href="exercise-2.html#cb139-47"></a>    out = <span class="fu">printHello</span>(str_input)</span>
-<span id="cb139-48"><a href="exercise-2.html#cb139-48"></a>    emit: out</span>
-<span id="cb139-49"><a href="exercise-2.html#cb139-49"></a>}</span>
-<span id="cb139-50"><a href="exercise-2.html#cb139-50"></a></span>
-<span id="cb139-51"><a href="exercise-2.html#cb139-51"></a></span>
-<span id="cb139-52"><a href="exercise-2.html#cb139-52"></a><span class="co">/*</span></span>
-<span id="cb139-53"><a href="exercise-2.html#cb139-53"></a><span class="co"> * You can re-use the previous processes an combine as you prefer</span></span>
-<span id="cb139-54"><a href="exercise-2.html#cb139-54"></a><span class="co"> */</span></span>
-<span id="cb139-55"><a href="exercise-2.html#cb139-55"></a></span>
-<span id="cb139-56"><a href="exercise-2.html#cb139-56"></a>workflow second_pipeline {</span>
-<span id="cb139-57"><a href="exercise-2.html#cb139-57"></a>    take: str_input</span>
-<span id="cb139-58"><a href="exercise-2.html#cb139-58"></a>    main:</span>
-<span id="cb139-59"><a href="exercise-2.html#cb139-59"></a>    out = <span class="fu">printHello2</span>(str_input.<span class="fu">collect</span>())</span>
-<span id="cb139-60"><a href="exercise-2.html#cb139-60"></a>    emit: out</span>
-<span id="cb139-61"><a href="exercise-2.html#cb139-61"></a>}</span>
-<span id="cb139-62"><a href="exercise-2.html#cb139-62"></a></span>
-<span id="cb139-63"><a href="exercise-2.html#cb139-63"></a><span class="co">/*</span></span>
-<span id="cb139-64"><a href="exercise-2.html#cb139-64"></a><span class="co"> * You can then invoke the different named workflows in this way</span></span>
-<span id="cb139-65"><a href="exercise-2.html#cb139-65"></a><span class="co"> * passing the same input channel `str` to both  </span></span>
-<span id="cb139-66"><a href="exercise-2.html#cb139-66"></a><span class="co"> */</span></span>
-<span id="cb139-67"><a href="exercise-2.html#cb139-67"></a></span>
-<span id="cb139-68"><a href="exercise-2.html#cb139-68"></a>workflow {</span>
-<span id="cb139-69"><a href="exercise-2.html#cb139-69"></a>    out1 = <span class="fu">first_pipeline</span>(str)</span>
-<span id="cb139-70"><a href="exercise-2.html#cb139-70"></a>    out2 = <span class="fu">second_pipeline</span>(str)</span>
-<span id="cb139-71"><a href="exercise-2.html#cb139-71"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb141"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb141-1"><a href="exercise-2.html#cb141-1"></a></span>
+<span id="cb141-2"><a href="exercise-2.html#cb141-2"></a>#!/usr/bin/env nextflow</span>
+<span id="cb141-3"><a href="exercise-2.html#cb141-3"></a></span>
+<span id="cb141-4"><a href="exercise-2.html#cb141-4"></a>nextflow.<span class="fu">enable</span>.<span class="fu">dsl</span>=<span class="dv">2</span></span>
+<span id="cb141-5"><a href="exercise-2.html#cb141-5"></a></span>
+<span id="cb141-6"><a href="exercise-2.html#cb141-6"></a>str = <span class="bu">Channel</span>.<span class="fu">from</span>(&#39;hello&#39;, &#39;hola&#39;, &#39;bonjour&#39;)</span>
+<span id="cb141-7"><a href="exercise-2.html#cb141-7"></a></span>
+<span id="cb141-8"><a href="exercise-2.html#cb141-8"></a>process printHello {</span>
+<span id="cb141-9"><a href="exercise-2.html#cb141-9"></a></span>
+<span id="cb141-10"><a href="exercise-2.html#cb141-10"></a>   tag { str_in }</span>
+<span id="cb141-11"><a href="exercise-2.html#cb141-11"></a></span>
+<span id="cb141-12"><a href="exercise-2.html#cb141-12"></a>   input:        </span>
+<span id="cb141-13"><a href="exercise-2.html#cb141-13"></a>   val str_in</span>
+<span id="cb141-14"><a href="exercise-2.html#cb141-14"></a></span>
+<span id="cb141-15"><a href="exercise-2.html#cb141-15"></a>   output:        </span>
+<span id="cb141-16"><a href="exercise-2.html#cb141-16"></a>   <span class="fu">path</span>(<span class="st">&quot;${str_in}.txt&quot;</span>)</span>
+<span id="cb141-17"><a href="exercise-2.html#cb141-17"></a></span>
+<span id="cb141-18"><a href="exercise-2.html#cb141-18"></a>   script:        </span>
+<span id="cb141-19"><a href="exercise-2.html#cb141-19"></a>   <span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb141-20"><a href="exercise-2.html#cb141-20"></a>   echo ${str_in} in Italian is ciao &gt; ${str_in}.<span class="fu">txt</span></span>
+<span id="cb141-21"><a href="exercise-2.html#cb141-21"></a>   <span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb141-22"><a href="exercise-2.html#cb141-22"></a>}</span>
+<span id="cb141-23"><a href="exercise-2.html#cb141-23"></a></span>
+<span id="cb141-24"><a href="exercise-2.html#cb141-24"></a>process printHello2 {</span>
+<span id="cb141-25"><a href="exercise-2.html#cb141-25"></a></span>
+<span id="cb141-26"><a href="exercise-2.html#cb141-26"></a>   tag { str_in }</span>
+<span id="cb141-27"><a href="exercise-2.html#cb141-27"></a></span>
+<span id="cb141-28"><a href="exercise-2.html#cb141-28"></a>   input:        </span>
+<span id="cb141-29"><a href="exercise-2.html#cb141-29"></a>   val str_in</span>
+<span id="cb141-30"><a href="exercise-2.html#cb141-30"></a></span>
+<span id="cb141-31"><a href="exercise-2.html#cb141-31"></a>   output:        </span>
+<span id="cb141-32"><a href="exercise-2.html#cb141-32"></a>   <span class="fu">path</span>(<span class="st">&quot;cheers.txt&quot;</span>)</span>
+<span id="cb141-33"><a href="exercise-2.html#cb141-33"></a></span>
+<span id="cb141-34"><a href="exercise-2.html#cb141-34"></a>   script:</span>
+<span id="cb141-35"><a href="exercise-2.html#cb141-35"></a>   <span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb141-36"><a href="exercise-2.html#cb141-36"></a>   echo ${str_in.<span class="fu">join</span>(&#39;, &#39;)} in Italian are ciao &gt; cheers.<span class="fu">txt</span></span>
+<span id="cb141-37"><a href="exercise-2.html#cb141-37"></a>   <span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb141-38"><a href="exercise-2.html#cb141-38"></a>}</span>
+<span id="cb141-39"><a href="exercise-2.html#cb141-39"></a></span>
+<span id="cb141-40"><a href="exercise-2.html#cb141-40"></a><span class="co">/*</span></span>
+<span id="cb141-41"><a href="exercise-2.html#cb141-41"></a><span class="co"> * A workflow can be named as a function and receive an input using the take keyword</span></span>
+<span id="cb141-42"><a href="exercise-2.html#cb141-42"></a><span class="co"> */</span></span>
+<span id="cb141-43"><a href="exercise-2.html#cb141-43"></a></span>
+<span id="cb141-44"><a href="exercise-2.html#cb141-44"></a>workflow first_pipeline {</span>
+<span id="cb141-45"><a href="exercise-2.html#cb141-45"></a>    take: str_input</span>
+<span id="cb141-46"><a href="exercise-2.html#cb141-46"></a>    main:</span>
+<span id="cb141-47"><a href="exercise-2.html#cb141-47"></a>    out = <span class="fu">printHello</span>(str_input)</span>
+<span id="cb141-48"><a href="exercise-2.html#cb141-48"></a>    emit: out</span>
+<span id="cb141-49"><a href="exercise-2.html#cb141-49"></a>}</span>
+<span id="cb141-50"><a href="exercise-2.html#cb141-50"></a></span>
+<span id="cb141-51"><a href="exercise-2.html#cb141-51"></a></span>
+<span id="cb141-52"><a href="exercise-2.html#cb141-52"></a><span class="co">/*</span></span>
+<span id="cb141-53"><a href="exercise-2.html#cb141-53"></a><span class="co"> * You can re-use the previous processes an combine as you prefer</span></span>
+<span id="cb141-54"><a href="exercise-2.html#cb141-54"></a><span class="co"> */</span></span>
+<span id="cb141-55"><a href="exercise-2.html#cb141-55"></a></span>
+<span id="cb141-56"><a href="exercise-2.html#cb141-56"></a>workflow second_pipeline {</span>
+<span id="cb141-57"><a href="exercise-2.html#cb141-57"></a>    take: str_input</span>
+<span id="cb141-58"><a href="exercise-2.html#cb141-58"></a>    main:</span>
+<span id="cb141-59"><a href="exercise-2.html#cb141-59"></a>    out = <span class="fu">printHello2</span>(str_input.<span class="fu">collect</span>())</span>
+<span id="cb141-60"><a href="exercise-2.html#cb141-60"></a>    emit: out</span>
+<span id="cb141-61"><a href="exercise-2.html#cb141-61"></a>}</span>
+<span id="cb141-62"><a href="exercise-2.html#cb141-62"></a></span>
+<span id="cb141-63"><a href="exercise-2.html#cb141-63"></a><span class="co">/*</span></span>
+<span id="cb141-64"><a href="exercise-2.html#cb141-64"></a><span class="co"> * You can then invoke the different named workflows in this way</span></span>
+<span id="cb141-65"><a href="exercise-2.html#cb141-65"></a><span class="co"> * passing the same input channel `str` to both  </span></span>
+<span id="cb141-66"><a href="exercise-2.html#cb141-66"></a><span class="co"> */</span></span>
+<span id="cb141-67"><a href="exercise-2.html#cb141-67"></a></span>
+<span id="cb141-68"><a href="exercise-2.html#cb141-68"></a>workflow {</span>
+<span id="cb141-69"><a href="exercise-2.html#cb141-69"></a>    out1 = <span class="fu">first_pipeline</span>(str)</span>
+<span id="cb141-70"><a href="exercise-2.html#cb141-70"></a>    out2 = <span class="fu">second_pipeline</span>(str)</span>
+<span id="cb141-71"><a href="exercise-2.html#cb141-71"></a>}</span></code></pre></div>
 </details>
 <ul>
 <li>Change the pipeline to use only one process to handle both the cases (one element or a list), you can chose the elements from a list using the positional keys (i.e. list[0], list[1], etc…)</li>
@@ -379,61 +379,61 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <em>Answer</em>
 </h5>
 <p></summary></p>
-<div class="sourceCode" id="cb140"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb140-1"><a href="exercise-2.html#cb140-1"></a></span>
-<span id="cb140-2"><a href="exercise-2.html#cb140-2"></a>#!/usr/bin/env nextflow</span>
-<span id="cb140-3"><a href="exercise-2.html#cb140-3"></a></span>
-<span id="cb140-4"><a href="exercise-2.html#cb140-4"></a>nextflow.<span class="fu">enable</span>.<span class="fu">dsl</span>=<span class="dv">2</span></span>
-<span id="cb140-5"><a href="exercise-2.html#cb140-5"></a></span>
-<span id="cb140-6"><a href="exercise-2.html#cb140-6"></a>str = <span class="bu">Channel</span>.<span class="fu">from</span>(&#39;hello&#39;, &#39;hola&#39;, &#39;bonjour&#39;)</span>
-<span id="cb140-7"><a href="exercise-2.html#cb140-7"></a></span>
-<span id="cb140-8"><a href="exercise-2.html#cb140-8"></a>process printHello {</span>
-<span id="cb140-9"><a href="exercise-2.html#cb140-9"></a></span>
-<span id="cb140-10"><a href="exercise-2.html#cb140-10"></a>   tag { str_in }</span>
-<span id="cb140-11"><a href="exercise-2.html#cb140-11"></a></span>
-<span id="cb140-12"><a href="exercise-2.html#cb140-12"></a>   input:        </span>
-<span id="cb140-13"><a href="exercise-2.html#cb140-13"></a>   val str_in</span>
-<span id="cb140-14"><a href="exercise-2.html#cb140-14"></a></span>
-<span id="cb140-15"><a href="exercise-2.html#cb140-15"></a>   output:        </span>
-<span id="cb140-16"><a href="exercise-2.html#cb140-16"></a>   <span class="fu">path</span>(<span class="st">&quot;${str_in[0]}.txt&quot;</span>)</span>
-<span id="cb140-17"><a href="exercise-2.html#cb140-17"></a></span>
-<span id="cb140-18"><a href="exercise-2.html#cb140-18"></a>   script:        </span>
-<span id="cb140-19"><a href="exercise-2.html#cb140-19"></a>   <span class="st">&quot;&quot;&quot;</span></span>
-<span id="cb140-20"><a href="exercise-2.html#cb140-20"></a>   echo ${str_in} in Italian is ciao &gt; ${str_in[<span class="dv">0</span>]}.<span class="fu">txt</span></span>
-<span id="cb140-21"><a href="exercise-2.html#cb140-21"></a>   <span class="st">&quot;&quot;&quot;</span></span>
-<span id="cb140-22"><a href="exercise-2.html#cb140-22"></a>}</span>
-<span id="cb140-23"><a href="exercise-2.html#cb140-23"></a></span>
-<span id="cb140-24"><a href="exercise-2.html#cb140-24"></a><span class="co">/*</span></span>
-<span id="cb140-25"><a href="exercise-2.html#cb140-25"></a><span class="co"> * A workflow can be named as a function and receive an input using the take keyword</span></span>
-<span id="cb140-26"><a href="exercise-2.html#cb140-26"></a><span class="co"> */</span></span>
-<span id="cb140-27"><a href="exercise-2.html#cb140-27"></a></span>
-<span id="cb140-28"><a href="exercise-2.html#cb140-28"></a>workflow first_pipeline {</span>
-<span id="cb140-29"><a href="exercise-2.html#cb140-29"></a>    take: str_input</span>
-<span id="cb140-30"><a href="exercise-2.html#cb140-30"></a>    main:</span>
-<span id="cb140-31"><a href="exercise-2.html#cb140-31"></a>    out = <span class="fu">printHello</span>(str_input)</span>
-<span id="cb140-32"><a href="exercise-2.html#cb140-32"></a>    emit: out</span>
-<span id="cb140-33"><a href="exercise-2.html#cb140-33"></a>}</span>
-<span id="cb140-34"><a href="exercise-2.html#cb140-34"></a></span>
-<span id="cb140-35"><a href="exercise-2.html#cb140-35"></a></span>
-<span id="cb140-36"><a href="exercise-2.html#cb140-36"></a><span class="co">/*</span></span>
-<span id="cb140-37"><a href="exercise-2.html#cb140-37"></a><span class="co"> * You can re-use the previous processes an combine as you prefer</span></span>
-<span id="cb140-38"><a href="exercise-2.html#cb140-38"></a><span class="co"> */</span></span>
-<span id="cb140-39"><a href="exercise-2.html#cb140-39"></a></span>
-<span id="cb140-40"><a href="exercise-2.html#cb140-40"></a>workflow second_pipeline {</span>
-<span id="cb140-41"><a href="exercise-2.html#cb140-41"></a>    take: str_input</span>
-<span id="cb140-42"><a href="exercise-2.html#cb140-42"></a>    main:</span>
-<span id="cb140-43"><a href="exercise-2.html#cb140-43"></a>    out = <span class="fu">printHello</span>(str_input.<span class="fu">collect</span>())</span>
-<span id="cb140-44"><a href="exercise-2.html#cb140-44"></a>    emit: out</span>
-<span id="cb140-45"><a href="exercise-2.html#cb140-45"></a>}</span>
-<span id="cb140-46"><a href="exercise-2.html#cb140-46"></a></span>
-<span id="cb140-47"><a href="exercise-2.html#cb140-47"></a><span class="co">/*</span></span>
-<span id="cb140-48"><a href="exercise-2.html#cb140-48"></a><span class="co"> * You can then invoke the different named workflows in this way</span></span>
-<span id="cb140-49"><a href="exercise-2.html#cb140-49"></a><span class="co"> * passing the same input channel `str` to both  </span></span>
-<span id="cb140-50"><a href="exercise-2.html#cb140-50"></a><span class="co"> */</span></span>
-<span id="cb140-51"><a href="exercise-2.html#cb140-51"></a></span>
-<span id="cb140-52"><a href="exercise-2.html#cb140-52"></a>workflow {</span>
-<span id="cb140-53"><a href="exercise-2.html#cb140-53"></a>    out1 = <span class="fu">first_pipeline</span>(str)</span>
-<span id="cb140-54"><a href="exercise-2.html#cb140-54"></a>    out2 = <span class="fu">second_pipeline</span>(str)</span>
-<span id="cb140-55"><a href="exercise-2.html#cb140-55"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb142"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb142-1"><a href="exercise-2.html#cb142-1"></a></span>
+<span id="cb142-2"><a href="exercise-2.html#cb142-2"></a>#!/usr/bin/env nextflow</span>
+<span id="cb142-3"><a href="exercise-2.html#cb142-3"></a></span>
+<span id="cb142-4"><a href="exercise-2.html#cb142-4"></a>nextflow.<span class="fu">enable</span>.<span class="fu">dsl</span>=<span class="dv">2</span></span>
+<span id="cb142-5"><a href="exercise-2.html#cb142-5"></a></span>
+<span id="cb142-6"><a href="exercise-2.html#cb142-6"></a>str = <span class="bu">Channel</span>.<span class="fu">from</span>(&#39;hello&#39;, &#39;hola&#39;, &#39;bonjour&#39;)</span>
+<span id="cb142-7"><a href="exercise-2.html#cb142-7"></a></span>
+<span id="cb142-8"><a href="exercise-2.html#cb142-8"></a>process printHello {</span>
+<span id="cb142-9"><a href="exercise-2.html#cb142-9"></a></span>
+<span id="cb142-10"><a href="exercise-2.html#cb142-10"></a>   tag { str_in }</span>
+<span id="cb142-11"><a href="exercise-2.html#cb142-11"></a></span>
+<span id="cb142-12"><a href="exercise-2.html#cb142-12"></a>   input:        </span>
+<span id="cb142-13"><a href="exercise-2.html#cb142-13"></a>   val str_in</span>
+<span id="cb142-14"><a href="exercise-2.html#cb142-14"></a></span>
+<span id="cb142-15"><a href="exercise-2.html#cb142-15"></a>   output:        </span>
+<span id="cb142-16"><a href="exercise-2.html#cb142-16"></a>   <span class="fu">path</span>(<span class="st">&quot;${str_in[0]}.txt&quot;</span>)</span>
+<span id="cb142-17"><a href="exercise-2.html#cb142-17"></a></span>
+<span id="cb142-18"><a href="exercise-2.html#cb142-18"></a>   script:        </span>
+<span id="cb142-19"><a href="exercise-2.html#cb142-19"></a>   <span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb142-20"><a href="exercise-2.html#cb142-20"></a>   echo ${str_in} in Italian is ciao &gt; ${str_in[<span class="dv">0</span>]}.<span class="fu">txt</span></span>
+<span id="cb142-21"><a href="exercise-2.html#cb142-21"></a>   <span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb142-22"><a href="exercise-2.html#cb142-22"></a>}</span>
+<span id="cb142-23"><a href="exercise-2.html#cb142-23"></a></span>
+<span id="cb142-24"><a href="exercise-2.html#cb142-24"></a><span class="co">/*</span></span>
+<span id="cb142-25"><a href="exercise-2.html#cb142-25"></a><span class="co"> * A workflow can be named as a function and receive an input using the take keyword</span></span>
+<span id="cb142-26"><a href="exercise-2.html#cb142-26"></a><span class="co"> */</span></span>
+<span id="cb142-27"><a href="exercise-2.html#cb142-27"></a></span>
+<span id="cb142-28"><a href="exercise-2.html#cb142-28"></a>workflow first_pipeline {</span>
+<span id="cb142-29"><a href="exercise-2.html#cb142-29"></a>    take: str_input</span>
+<span id="cb142-30"><a href="exercise-2.html#cb142-30"></a>    main:</span>
+<span id="cb142-31"><a href="exercise-2.html#cb142-31"></a>    out = <span class="fu">printHello</span>(str_input)</span>
+<span id="cb142-32"><a href="exercise-2.html#cb142-32"></a>    emit: out</span>
+<span id="cb142-33"><a href="exercise-2.html#cb142-33"></a>}</span>
+<span id="cb142-34"><a href="exercise-2.html#cb142-34"></a></span>
+<span id="cb142-35"><a href="exercise-2.html#cb142-35"></a></span>
+<span id="cb142-36"><a href="exercise-2.html#cb142-36"></a><span class="co">/*</span></span>
+<span id="cb142-37"><a href="exercise-2.html#cb142-37"></a><span class="co"> * You can re-use the previous processes an combine as you prefer</span></span>
+<span id="cb142-38"><a href="exercise-2.html#cb142-38"></a><span class="co"> */</span></span>
+<span id="cb142-39"><a href="exercise-2.html#cb142-39"></a></span>
+<span id="cb142-40"><a href="exercise-2.html#cb142-40"></a>workflow second_pipeline {</span>
+<span id="cb142-41"><a href="exercise-2.html#cb142-41"></a>    take: str_input</span>
+<span id="cb142-42"><a href="exercise-2.html#cb142-42"></a>    main:</span>
+<span id="cb142-43"><a href="exercise-2.html#cb142-43"></a>    out = <span class="fu">printHello</span>(str_input.<span class="fu">collect</span>())</span>
+<span id="cb142-44"><a href="exercise-2.html#cb142-44"></a>    emit: out</span>
+<span id="cb142-45"><a href="exercise-2.html#cb142-45"></a>}</span>
+<span id="cb142-46"><a href="exercise-2.html#cb142-46"></a></span>
+<span id="cb142-47"><a href="exercise-2.html#cb142-47"></a><span class="co">/*</span></span>
+<span id="cb142-48"><a href="exercise-2.html#cb142-48"></a><span class="co"> * You can then invoke the different named workflows in this way</span></span>
+<span id="cb142-49"><a href="exercise-2.html#cb142-49"></a><span class="co"> * passing the same input channel `str` to both  </span></span>
+<span id="cb142-50"><a href="exercise-2.html#cb142-50"></a><span class="co"> */</span></span>
+<span id="cb142-51"><a href="exercise-2.html#cb142-51"></a></span>
+<span id="cb142-52"><a href="exercise-2.html#cb142-52"></a>workflow {</span>
+<span id="cb142-53"><a href="exercise-2.html#cb142-53"></a>    out1 = <span class="fu">first_pipeline</span>(str)</span>
+<span id="cb142-54"><a href="exercise-2.html#cb142-54"></a>    out2 = <span class="fu">second_pipeline</span>(str)</span>
+<span id="cb142-55"><a href="exercise-2.html#cb142-55"></a>}</span></code></pre></div>
 </details>
 </div>
             </section>

@@ -289,147 +289,147 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="modules-and-re-usage-of-the-code" class="section level2">
 <h2><span class="header-section-number">6.9</span> Modules and re-usage of the code</h2>
 <p>A great advance of the new DLS2 is to allow the modularization of the code. In particular you can move a named workflow within a module and keep it apart for being accessed from different pipelines. Looking at the test4 folder will give you an idea of what is the code using modules.</p>
-<div class="sourceCode" id="cb192"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb192-1"><a href="modules-and-re-usage-of-the-code.html#cb192-1"></a>#!/usr/bin/env nextflow</span>
-<span id="cb192-2"><a href="modules-and-re-usage-of-the-code.html#cb192-2"></a></span>
-<span id="cb192-3"><a href="modules-and-re-usage-of-the-code.html#cb192-3"></a>nextflow.<span class="fu">enable</span>.<span class="fu">dsl</span>=<span class="dv">2</span></span>
-<span id="cb192-4"><a href="modules-and-re-usage-of-the-code.html#cb192-4"></a></span>
-<span id="cb192-5"><a href="modules-and-re-usage-of-the-code.html#cb192-5"></a><span class="co">/*</span></span>
-<span id="cb192-6"><a href="modules-and-re-usage-of-the-code.html#cb192-6"></a><span class="co"> * Input parameters: read pairs</span></span>
-<span id="cb192-7"><a href="modules-and-re-usage-of-the-code.html#cb192-7"></a><span class="co"> * Params are stored in the params.config file</span></span>
-<span id="cb192-8"><a href="modules-and-re-usage-of-the-code.html#cb192-8"></a><span class="co"> */</span></span>
-<span id="cb192-9"><a href="modules-and-re-usage-of-the-code.html#cb192-9"></a></span>
-<span id="cb192-10"><a href="modules-and-re-usage-of-the-code.html#cb192-10"></a>version                 = <span class="st">&quot;1.0&quot;</span></span>
-<span id="cb192-11"><a href="modules-and-re-usage-of-the-code.html#cb192-11"></a>params.<span class="fu">help</span>             = <span class="kw">false</span></span>
-<span id="cb192-12"><a href="modules-and-re-usage-of-the-code.html#cb192-12"></a></span>
-<span id="cb192-13"><a href="modules-and-re-usage-of-the-code.html#cb192-13"></a><span class="co">// this prints the input parameters</span></span>
-<span id="cb192-14"><a href="modules-and-re-usage-of-the-code.html#cb192-14"></a>log.<span class="fu">info</span> <span class="st">&quot;&quot;&quot;</span></span>
-<span id="cb192-15"><a href="modules-and-re-usage-of-the-code.html#cb192-15"></a>BIOCORE<span class="at">@CRG</span> - N F TESTPIPE  ~  version ${version}</span>
-<span id="cb192-16"><a href="modules-and-re-usage-of-the-code.html#cb192-16"></a>=============================================</span>
-<span id="cb192-17"><a href="modules-and-re-usage-of-the-code.html#cb192-17"></a>reads                           : ${params.<span class="fu">reads</span>}</span>
-<span id="cb192-18"><a href="modules-and-re-usage-of-the-code.html#cb192-18"></a><span class="st">&quot;&quot;&quot;</span></span>
-<span id="cb192-19"><a href="modules-and-re-usage-of-the-code.html#cb192-19"></a></span>
-<span id="cb192-20"><a href="modules-and-re-usage-of-the-code.html#cb192-20"></a><span class="kw">if</span> (params.<span class="fu">help</span>) {</span>
-<span id="cb192-21"><a href="modules-and-re-usage-of-the-code.html#cb192-21"></a>    log.<span class="fu">info</span> &#39;This is the Biocore\&#39;s NF test pipeline&#39;</span>
-<span id="cb192-22"><a href="modules-and-re-usage-of-the-code.html#cb192-22"></a>    log.<span class="fu">info</span> &#39;Enjoy!&#39;</span>
-<span id="cb192-23"><a href="modules-and-re-usage-of-the-code.html#cb192-23"></a>    log.<span class="fu">info</span> <span class="ch">&#39;\n&#39;</span></span>
-<span id="cb192-24"><a href="modules-and-re-usage-of-the-code.html#cb192-24"></a>    exit <span class="dv">1</span></span>
-<span id="cb192-25"><a href="modules-and-re-usage-of-the-code.html#cb192-25"></a>}</span>
-<span id="cb192-26"><a href="modules-and-re-usage-of-the-code.html#cb192-26"></a></span>
-<span id="cb192-27"><a href="modules-and-re-usage-of-the-code.html#cb192-27"></a><span class="co">/*</span></span>
-<span id="cb192-28"><a href="modules-and-re-usage-of-the-code.html#cb192-28"></a><span class="co"> * Defining the output folders.</span></span>
-<span id="cb192-29"><a href="modules-and-re-usage-of-the-code.html#cb192-29"></a><span class="co"> */</span></span>
-<span id="cb192-30"><a href="modules-and-re-usage-of-the-code.html#cb192-30"></a>fastqcOutputFolder    = <span class="st">&quot;ouptut_fastqc&quot;</span></span>
-<span id="cb192-31"><a href="modules-and-re-usage-of-the-code.html#cb192-31"></a>multiqcOutputFolder   = <span class="st">&quot;ouptut_multiQC&quot;</span></span>
-<span id="cb192-32"><a href="modules-and-re-usage-of-the-code.html#cb192-32"></a></span>
-<span id="cb192-33"><a href="modules-and-re-usage-of-the-code.html#cb192-33"></a></span>
-<span id="cb192-34"><a href="modules-and-re-usage-of-the-code.html#cb192-34"></a><span class="bu">Channel</span></span>
-<span id="cb192-35"><a href="modules-and-re-usage-of-the-code.html#cb192-35"></a>    .<span class="fu">fromPath</span>( params.<span class="fu">reads</span> )                                                                       </span>
-<span id="cb192-36"><a href="modules-and-re-usage-of-the-code.html#cb192-36"></a>    .<span class="fu">ifEmpty</span> { error <span class="st">&quot;Cannot find any reads matching: ${params.reads}&quot;</span> }</span>
-<span id="cb192-37"><a href="modules-and-re-usage-of-the-code.html#cb192-37"></a>    .<span class="fu">set</span> {reads_for_fastqc}                                             </span>
-<span id="cb192-38"><a href="modules-and-re-usage-of-the-code.html#cb192-38"></a></span>
-<span id="cb192-39"><a href="modules-and-re-usage-of-the-code.html#cb192-39"></a></span>
-<span id="cb192-40"><a href="modules-and-re-usage-of-the-code.html#cb192-40"></a><span class="co">/*</span></span>
-<span id="cb192-41"><a href="modules-and-re-usage-of-the-code.html#cb192-41"></a><span class="co"> * Here we include two modules from two files. We also add the parameter OUTPUT to pass them the folders where to publish the results</span></span>
-<span id="cb192-42"><a href="modules-and-re-usage-of-the-code.html#cb192-42"></a><span class="co"> */</span></span>
-<span id="cb192-43"><a href="modules-and-re-usage-of-the-code.html#cb192-43"></a>include { fastqc } from <span class="st">&quot;${baseDir}/lib/fastqc&quot;</span> <span class="fu">addParams</span>(OUTPUT: fastqcOutputFolder)</span>
-<span id="cb192-44"><a href="modules-and-re-usage-of-the-code.html#cb192-44"></a>include { multiqc } from <span class="st">&quot;${baseDir}/lib/multiqc&quot;</span> <span class="fu">addParams</span>(OUTPUT: multiqcOutputFolder)</span>
-<span id="cb192-45"><a href="modules-and-re-usage-of-the-code.html#cb192-45"></a></span>
-<span id="cb192-46"><a href="modules-and-re-usage-of-the-code.html#cb192-46"></a><span class="co">// The main worflow can directly call the named workflows from the modules</span></span>
-<span id="cb192-47"><a href="modules-and-re-usage-of-the-code.html#cb192-47"></a>workflow {</span>
-<span id="cb192-48"><a href="modules-and-re-usage-of-the-code.html#cb192-48"></a>    fastqc_out = <span class="fu">fastqc</span>(reads_for_fastqc)</span>
-<span id="cb192-49"><a href="modules-and-re-usage-of-the-code.html#cb192-49"></a>    <span class="fu">multiqc</span>(fastqc_out.<span class="fu">collect</span>())</span>
-<span id="cb192-50"><a href="modules-and-re-usage-of-the-code.html#cb192-50"></a>}</span>
-<span id="cb192-51"><a href="modules-and-re-usage-of-the-code.html#cb192-51"></a></span>
-<span id="cb192-52"><a href="modules-and-re-usage-of-the-code.html#cb192-52"></a></span>
-<span id="cb192-53"><a href="modules-and-re-usage-of-the-code.html#cb192-53"></a>workflow.<span class="fu">onComplete</span> {</span>
-<span id="cb192-54"><a href="modules-and-re-usage-of-the-code.html#cb192-54"></a>    <span class="fu">println</span> ( workflow.<span class="fu">success</span> ? <span class="st">&quot;</span><span class="sc">\n</span><span class="st">Done! Open the following report in your browser --&gt; ${multiqcOutputFolder}/multiqc_report.html</span><span class="sc">\n</span><span class="st">&quot;</span> : <span class="st">&quot;Oops .. something went wrong&quot;</span> )</span>
-<span id="cb192-55"><a href="modules-and-re-usage-of-the-code.html#cb192-55"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb194"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb194-1"><a href="modules-and-re-usage-of-the-code.html#cb194-1"></a>#!/usr/bin/env nextflow</span>
+<span id="cb194-2"><a href="modules-and-re-usage-of-the-code.html#cb194-2"></a></span>
+<span id="cb194-3"><a href="modules-and-re-usage-of-the-code.html#cb194-3"></a>nextflow.<span class="fu">enable</span>.<span class="fu">dsl</span>=<span class="dv">2</span></span>
+<span id="cb194-4"><a href="modules-and-re-usage-of-the-code.html#cb194-4"></a></span>
+<span id="cb194-5"><a href="modules-and-re-usage-of-the-code.html#cb194-5"></a><span class="co">/*</span></span>
+<span id="cb194-6"><a href="modules-and-re-usage-of-the-code.html#cb194-6"></a><span class="co"> * Input parameters: read pairs</span></span>
+<span id="cb194-7"><a href="modules-and-re-usage-of-the-code.html#cb194-7"></a><span class="co"> * Params are stored in the params.config file</span></span>
+<span id="cb194-8"><a href="modules-and-re-usage-of-the-code.html#cb194-8"></a><span class="co"> */</span></span>
+<span id="cb194-9"><a href="modules-and-re-usage-of-the-code.html#cb194-9"></a></span>
+<span id="cb194-10"><a href="modules-and-re-usage-of-the-code.html#cb194-10"></a>version                 = <span class="st">&quot;1.0&quot;</span></span>
+<span id="cb194-11"><a href="modules-and-re-usage-of-the-code.html#cb194-11"></a>params.<span class="fu">help</span>             = <span class="kw">false</span></span>
+<span id="cb194-12"><a href="modules-and-re-usage-of-the-code.html#cb194-12"></a></span>
+<span id="cb194-13"><a href="modules-and-re-usage-of-the-code.html#cb194-13"></a><span class="co">// this prints the input parameters</span></span>
+<span id="cb194-14"><a href="modules-and-re-usage-of-the-code.html#cb194-14"></a>log.<span class="fu">info</span> <span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb194-15"><a href="modules-and-re-usage-of-the-code.html#cb194-15"></a>BIOCORE<span class="at">@CRG</span> - N F TESTPIPE  ~  version ${version}</span>
+<span id="cb194-16"><a href="modules-and-re-usage-of-the-code.html#cb194-16"></a>=============================================</span>
+<span id="cb194-17"><a href="modules-and-re-usage-of-the-code.html#cb194-17"></a>reads                           : ${params.<span class="fu">reads</span>}</span>
+<span id="cb194-18"><a href="modules-and-re-usage-of-the-code.html#cb194-18"></a><span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb194-19"><a href="modules-and-re-usage-of-the-code.html#cb194-19"></a></span>
+<span id="cb194-20"><a href="modules-and-re-usage-of-the-code.html#cb194-20"></a><span class="kw">if</span> (params.<span class="fu">help</span>) {</span>
+<span id="cb194-21"><a href="modules-and-re-usage-of-the-code.html#cb194-21"></a>    log.<span class="fu">info</span> &#39;This is the Biocore\&#39;s NF test pipeline&#39;</span>
+<span id="cb194-22"><a href="modules-and-re-usage-of-the-code.html#cb194-22"></a>    log.<span class="fu">info</span> &#39;Enjoy!&#39;</span>
+<span id="cb194-23"><a href="modules-and-re-usage-of-the-code.html#cb194-23"></a>    log.<span class="fu">info</span> <span class="ch">&#39;\n&#39;</span></span>
+<span id="cb194-24"><a href="modules-and-re-usage-of-the-code.html#cb194-24"></a>    exit <span class="dv">1</span></span>
+<span id="cb194-25"><a href="modules-and-re-usage-of-the-code.html#cb194-25"></a>}</span>
+<span id="cb194-26"><a href="modules-and-re-usage-of-the-code.html#cb194-26"></a></span>
+<span id="cb194-27"><a href="modules-and-re-usage-of-the-code.html#cb194-27"></a><span class="co">/*</span></span>
+<span id="cb194-28"><a href="modules-and-re-usage-of-the-code.html#cb194-28"></a><span class="co"> * Defining the output folders.</span></span>
+<span id="cb194-29"><a href="modules-and-re-usage-of-the-code.html#cb194-29"></a><span class="co"> */</span></span>
+<span id="cb194-30"><a href="modules-and-re-usage-of-the-code.html#cb194-30"></a>fastqcOutputFolder    = <span class="st">&quot;ouptut_fastqc&quot;</span></span>
+<span id="cb194-31"><a href="modules-and-re-usage-of-the-code.html#cb194-31"></a>multiqcOutputFolder   = <span class="st">&quot;ouptut_multiQC&quot;</span></span>
+<span id="cb194-32"><a href="modules-and-re-usage-of-the-code.html#cb194-32"></a></span>
+<span id="cb194-33"><a href="modules-and-re-usage-of-the-code.html#cb194-33"></a></span>
+<span id="cb194-34"><a href="modules-and-re-usage-of-the-code.html#cb194-34"></a><span class="bu">Channel</span></span>
+<span id="cb194-35"><a href="modules-and-re-usage-of-the-code.html#cb194-35"></a>    .<span class="fu">fromPath</span>( params.<span class="fu">reads</span> )                                                                       </span>
+<span id="cb194-36"><a href="modules-and-re-usage-of-the-code.html#cb194-36"></a>    .<span class="fu">ifEmpty</span> { error <span class="st">&quot;Cannot find any reads matching: ${params.reads}&quot;</span> }</span>
+<span id="cb194-37"><a href="modules-and-re-usage-of-the-code.html#cb194-37"></a>    .<span class="fu">set</span> {reads_for_fastqc}                                             </span>
+<span id="cb194-38"><a href="modules-and-re-usage-of-the-code.html#cb194-38"></a></span>
+<span id="cb194-39"><a href="modules-and-re-usage-of-the-code.html#cb194-39"></a></span>
+<span id="cb194-40"><a href="modules-and-re-usage-of-the-code.html#cb194-40"></a><span class="co">/*</span></span>
+<span id="cb194-41"><a href="modules-and-re-usage-of-the-code.html#cb194-41"></a><span class="co"> * Here we include two modules from two files. We also add the parameter OUTPUT to pass them the folders where to publish the results</span></span>
+<span id="cb194-42"><a href="modules-and-re-usage-of-the-code.html#cb194-42"></a><span class="co"> */</span></span>
+<span id="cb194-43"><a href="modules-and-re-usage-of-the-code.html#cb194-43"></a>include { fastqc } from <span class="st">&quot;${baseDir}/lib/fastqc&quot;</span> <span class="fu">addParams</span>(OUTPUT: fastqcOutputFolder)</span>
+<span id="cb194-44"><a href="modules-and-re-usage-of-the-code.html#cb194-44"></a>include { multiqc } from <span class="st">&quot;${baseDir}/lib/multiqc&quot;</span> <span class="fu">addParams</span>(OUTPUT: multiqcOutputFolder)</span>
+<span id="cb194-45"><a href="modules-and-re-usage-of-the-code.html#cb194-45"></a></span>
+<span id="cb194-46"><a href="modules-and-re-usage-of-the-code.html#cb194-46"></a><span class="co">// The main worflow can directly call the named workflows from the modules</span></span>
+<span id="cb194-47"><a href="modules-and-re-usage-of-the-code.html#cb194-47"></a>workflow {</span>
+<span id="cb194-48"><a href="modules-and-re-usage-of-the-code.html#cb194-48"></a>    fastqc_out = <span class="fu">fastqc</span>(reads_for_fastqc)</span>
+<span id="cb194-49"><a href="modules-and-re-usage-of-the-code.html#cb194-49"></a>    <span class="fu">multiqc</span>(fastqc_out.<span class="fu">collect</span>())</span>
+<span id="cb194-50"><a href="modules-and-re-usage-of-the-code.html#cb194-50"></a>}</span>
+<span id="cb194-51"><a href="modules-and-re-usage-of-the-code.html#cb194-51"></a></span>
+<span id="cb194-52"><a href="modules-and-re-usage-of-the-code.html#cb194-52"></a></span>
+<span id="cb194-53"><a href="modules-and-re-usage-of-the-code.html#cb194-53"></a>workflow.<span class="fu">onComplete</span> {</span>
+<span id="cb194-54"><a href="modules-and-re-usage-of-the-code.html#cb194-54"></a>    <span class="fu">println</span> ( workflow.<span class="fu">success</span> ? <span class="st">&quot;</span><span class="sc">\n</span><span class="st">Done! Open the following report in your browser --&gt; ${multiqcOutputFolder}/multiqc_report.html</span><span class="sc">\n</span><span class="st">&quot;</span> : <span class="st">&quot;Oops .. something went wrong&quot;</span> )</span>
+<span id="cb194-55"><a href="modules-and-re-usage-of-the-code.html#cb194-55"></a>}</span></code></pre></div>
 <p>We now include two modules named <strong>fastqc</strong> and <strong>multiqc</strong> from <code>${baseDir}/lib/fastqc.nf</code> and <code>${baseDir}/lib/multiqc.nf</code>.
 Let’s inspect the <strong>fastqc</strong> module:</p>
-<div class="sourceCode" id="cb193"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb193-1"><a href="modules-and-re-usage-of-the-code.html#cb193-1"></a><span class="co">/*</span></span>
-<span id="cb193-2"><a href="modules-and-re-usage-of-the-code.html#cb193-2"></a><span class="co">*  fastqc module</span></span>
-<span id="cb193-3"><a href="modules-and-re-usage-of-the-code.html#cb193-3"></a><span class="co">*/</span></span>
-<span id="cb193-4"><a href="modules-and-re-usage-of-the-code.html#cb193-4"></a></span>
-<span id="cb193-5"><a href="modules-and-re-usage-of-the-code.html#cb193-5"></a>params.<span class="fu">CONTAINER</span> = <span class="st">&quot;quay.io/biocontainers/fastqc:0.11.9--0&quot;</span></span>
-<span id="cb193-6"><a href="modules-and-re-usage-of-the-code.html#cb193-6"></a>params.<span class="fu">OUTPUT</span> = <span class="st">&quot;fastqc_output&quot;</span></span>
-<span id="cb193-7"><a href="modules-and-re-usage-of-the-code.html#cb193-7"></a></span>
-<span id="cb193-8"><a href="modules-and-re-usage-of-the-code.html#cb193-8"></a>process qc {</span>
-<span id="cb193-9"><a href="modules-and-re-usage-of-the-code.html#cb193-9"></a>    <span class="fu">publishDir</span>(params.<span class="fu">OUTPUT</span>, mode: &#39;copy&#39;)</span>
-<span id="cb193-10"><a href="modules-and-re-usage-of-the-code.html#cb193-10"></a>    tag { reads }</span>
-<span id="cb193-11"><a href="modules-and-re-usage-of-the-code.html#cb193-11"></a>    container params.<span class="fu">CONTAINER</span></span>
-<span id="cb193-12"><a href="modules-and-re-usage-of-the-code.html#cb193-12"></a></span>
-<span id="cb193-13"><a href="modules-and-re-usage-of-the-code.html#cb193-13"></a>    input:</span>
-<span id="cb193-14"><a href="modules-and-re-usage-of-the-code.html#cb193-14"></a>    <span class="fu">path</span>(reads)</span>
-<span id="cb193-15"><a href="modules-and-re-usage-of-the-code.html#cb193-15"></a></span>
-<span id="cb193-16"><a href="modules-and-re-usage-of-the-code.html#cb193-16"></a>    output:</span>
-<span id="cb193-17"><a href="modules-and-re-usage-of-the-code.html#cb193-17"></a>    <span class="fu">path</span>(<span class="st">&quot;*_fastqc*&quot;</span>)</span>
-<span id="cb193-18"><a href="modules-and-re-usage-of-the-code.html#cb193-18"></a></span>
-<span id="cb193-19"><a href="modules-and-re-usage-of-the-code.html#cb193-19"></a>    script:</span>
-<span id="cb193-20"><a href="modules-and-re-usage-of-the-code.html#cb193-20"></a>    <span class="st">&quot;&quot;&quot;</span></span>
-<span id="cb193-21"><a href="modules-and-re-usage-of-the-code.html#cb193-21"></a>    fastqc ${reads}</span>
-<span id="cb193-22"><a href="modules-and-re-usage-of-the-code.html#cb193-22"></a>    <span class="st">&quot;&quot;&quot;</span></span>
-<span id="cb193-23"><a href="modules-and-re-usage-of-the-code.html#cb193-23"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb195"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb195-1"><a href="modules-and-re-usage-of-the-code.html#cb195-1"></a><span class="co">/*</span></span>
+<span id="cb195-2"><a href="modules-and-re-usage-of-the-code.html#cb195-2"></a><span class="co">*  fastqc module</span></span>
+<span id="cb195-3"><a href="modules-and-re-usage-of-the-code.html#cb195-3"></a><span class="co">*/</span></span>
+<span id="cb195-4"><a href="modules-and-re-usage-of-the-code.html#cb195-4"></a></span>
+<span id="cb195-5"><a href="modules-and-re-usage-of-the-code.html#cb195-5"></a>params.<span class="fu">CONTAINER</span> = <span class="st">&quot;quay.io/biocontainers/fastqc:0.11.9--0&quot;</span></span>
+<span id="cb195-6"><a href="modules-and-re-usage-of-the-code.html#cb195-6"></a>params.<span class="fu">OUTPUT</span> = <span class="st">&quot;fastqc_output&quot;</span></span>
+<span id="cb195-7"><a href="modules-and-re-usage-of-the-code.html#cb195-7"></a></span>
+<span id="cb195-8"><a href="modules-and-re-usage-of-the-code.html#cb195-8"></a>process qc {</span>
+<span id="cb195-9"><a href="modules-and-re-usage-of-the-code.html#cb195-9"></a>    <span class="fu">publishDir</span>(params.<span class="fu">OUTPUT</span>, mode: &#39;copy&#39;)</span>
+<span id="cb195-10"><a href="modules-and-re-usage-of-the-code.html#cb195-10"></a>    tag { reads }</span>
+<span id="cb195-11"><a href="modules-and-re-usage-of-the-code.html#cb195-11"></a>    container params.<span class="fu">CONTAINER</span></span>
+<span id="cb195-12"><a href="modules-and-re-usage-of-the-code.html#cb195-12"></a></span>
+<span id="cb195-13"><a href="modules-and-re-usage-of-the-code.html#cb195-13"></a>    input:</span>
+<span id="cb195-14"><a href="modules-and-re-usage-of-the-code.html#cb195-14"></a>    <span class="fu">path</span>(reads)</span>
+<span id="cb195-15"><a href="modules-and-re-usage-of-the-code.html#cb195-15"></a></span>
+<span id="cb195-16"><a href="modules-and-re-usage-of-the-code.html#cb195-16"></a>    output:</span>
+<span id="cb195-17"><a href="modules-and-re-usage-of-the-code.html#cb195-17"></a>    <span class="fu">path</span>(<span class="st">&quot;*_fastqc*&quot;</span>)</span>
+<span id="cb195-18"><a href="modules-and-re-usage-of-the-code.html#cb195-18"></a></span>
+<span id="cb195-19"><a href="modules-and-re-usage-of-the-code.html#cb195-19"></a>    script:</span>
+<span id="cb195-20"><a href="modules-and-re-usage-of-the-code.html#cb195-20"></a>    <span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb195-21"><a href="modules-and-re-usage-of-the-code.html#cb195-21"></a>    fastqc ${reads}</span>
+<span id="cb195-22"><a href="modules-and-re-usage-of-the-code.html#cb195-22"></a>    <span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb195-23"><a href="modules-and-re-usage-of-the-code.html#cb195-23"></a>}</span></code></pre></div>
 <p>So we have the modules <strong>fastqc</strong> that take as <strong>input</strong> a channel with reads and produces as <strong>output</strong> the files generated by the fastq program.</p>
 <p>The module is quite simple: it contains the directive publishDir, the tag, the container to be used and has similar input, output and script session we saw previously.</p>
 <p>A module can contain its own parameters that can be used for connecting the main script to some variables inside the module.
 in this example we have the declaration of two <strong>parameters</strong> that are defined at the beginning:</p>
-<div class="sourceCode" id="cb194"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb194-1"><a href="modules-and-re-usage-of-the-code.html#cb194-1"></a>params.<span class="fu">CONTAINER</span> = <span class="st">&quot;quay.io/biocontainers/fastqc:0.11.9--0&quot;</span></span>
-<span id="cb194-2"><a href="modules-and-re-usage-of-the-code.html#cb194-2"></a>params.<span class="fu">OUTPUT</span> = <span class="st">&quot;fastqc_output&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb196"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb196-1"><a href="modules-and-re-usage-of-the-code.html#cb196-1"></a>params.<span class="fu">CONTAINER</span> = <span class="st">&quot;quay.io/biocontainers/fastqc:0.11.9--0&quot;</span></span>
+<span id="cb196-2"><a href="modules-and-re-usage-of-the-code.html#cb196-2"></a>params.<span class="fu">OUTPUT</span> = <span class="st">&quot;fastqc_output&quot;</span></span></code></pre></div>
 <p>They can be overridden from the main script that is calling the module.
 - The parameter <strong>params.OUTPUT</strong> can be used for connecting the definition of the output of this module with the one in the main script.<br />
 - The parameter <strong>params.CONTAINER</strong> instead for deciding which image has to be used for this particular module.</p>
 <p>In this example in our main script we pass only the OUTPUT parameters by writing in this way:</p>
-<div class="sourceCode" id="cb195"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb195-1"><a href="modules-and-re-usage-of-the-code.html#cb195-1"></a>include { fastqc } from <span class="st">&quot;${baseDir}/lib/fastqc&quot;</span> <span class="fu">addParams</span>(OUTPUT: fastqcOutputFolder)</span>
-<span id="cb195-2"><a href="modules-and-re-usage-of-the-code.html#cb195-2"></a>include { multiqc } from <span class="st">&quot;${baseDir}/lib/multiqc&quot;</span> <span class="fu">addParams</span>(OUTPUT: multiqcOutputFolder)</span></code></pre></div>
+<div class="sourceCode" id="cb197"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb197-1"><a href="modules-and-re-usage-of-the-code.html#cb197-1"></a>include { fastqc } from <span class="st">&quot;${baseDir}/lib/fastqc&quot;</span> <span class="fu">addParams</span>(OUTPUT: fastqcOutputFolder)</span>
+<span id="cb197-2"><a href="modules-and-re-usage-of-the-code.html#cb197-2"></a>include { multiqc } from <span class="st">&quot;${baseDir}/lib/multiqc&quot;</span> <span class="fu">addParams</span>(OUTPUT: multiqcOutputFolder)</span></code></pre></div>
 <p>While we keep the information of the container inside the module for better reproducibility:</p>
-<div class="sourceCode" id="cb196"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb196-1"><a href="modules-and-re-usage-of-the-code.html#cb196-1"></a>params.<span class="fu">CONTAINER</span> = = <span class="st">&quot;quay.io/biocontainers/fastqc:0.11.9--0&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb198"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb198-1"><a href="modules-and-re-usage-of-the-code.html#cb198-1"></a>params.<span class="fu">CONTAINER</span> = = <span class="st">&quot;quay.io/biocontainers/fastqc:0.11.9--0&quot;</span></span></code></pre></div>
 <p>Here you see that we are not using own our image but using directly one provided by biocontainers. Here you can find a list of fastqc images developed and stored by the biocontainers community <a href="https://biocontainers.pro/#/tools/fastqc">https://biocontainers.pro/#/tools/fastqc</a>.</p>
 <p>Let’s have a look now at the <strong>multiqc.nf</strong> module:</p>
-<div class="sourceCode" id="cb197"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb197-1"><a href="modules-and-re-usage-of-the-code.html#cb197-1"></a><span class="co">/*</span></span>
-<span id="cb197-2"><a href="modules-and-re-usage-of-the-code.html#cb197-2"></a><span class="co">*  multiqc module</span></span>
-<span id="cb197-3"><a href="modules-and-re-usage-of-the-code.html#cb197-3"></a><span class="co">*/</span></span>
-<span id="cb197-4"><a href="modules-and-re-usage-of-the-code.html#cb197-4"></a></span>
-<span id="cb197-5"><a href="modules-and-re-usage-of-the-code.html#cb197-5"></a>params.<span class="fu">CONTAINER</span> = <span class="st">&quot;quay.io/biocontainers/multiqc:1.9--pyh9f0ad1d_0&quot;</span></span>
-<span id="cb197-6"><a href="modules-and-re-usage-of-the-code.html#cb197-6"></a>params.<span class="fu">OUTPUT</span> = <span class="st">&quot;multiqc_output&quot;</span></span>
-<span id="cb197-7"><a href="modules-and-re-usage-of-the-code.html#cb197-7"></a>params.<span class="fu">LABEL</span> = <span class="st">&quot;&quot;</span></span>
-<span id="cb197-8"><a href="modules-and-re-usage-of-the-code.html#cb197-8"></a></span>
-<span id="cb197-9"><a href="modules-and-re-usage-of-the-code.html#cb197-9"></a>process multiqc {</span>
-<span id="cb197-10"><a href="modules-and-re-usage-of-the-code.html#cb197-10"></a>    <span class="fu">publishDir</span>(params.<span class="fu">OUTPUT</span>, mode: &#39;copy&#39;)</span>
-<span id="cb197-11"><a href="modules-and-re-usage-of-the-code.html#cb197-11"></a>    container params.<span class="fu">CONTAINER</span></span>
-<span id="cb197-12"><a href="modules-and-re-usage-of-the-code.html#cb197-12"></a>    <span class="fu">label</span> (params.<span class="fu">LABEL</span>)</span>
-<span id="cb197-13"><a href="modules-and-re-usage-of-the-code.html#cb197-13"></a></span>
-<span id="cb197-14"><a href="modules-and-re-usage-of-the-code.html#cb197-14"></a>    input:</span>
-<span id="cb197-15"><a href="modules-and-re-usage-of-the-code.html#cb197-15"></a>    <span class="fu">path</span> (inputfiles)</span>
-<span id="cb197-16"><a href="modules-and-re-usage-of-the-code.html#cb197-16"></a></span>
-<span id="cb197-17"><a href="modules-and-re-usage-of-the-code.html#cb197-17"></a>    output:</span>
-<span id="cb197-18"><a href="modules-and-re-usage-of-the-code.html#cb197-18"></a>    path <span class="st">&quot;multiqc_report.html&quot;</span>                  </span>
-<span id="cb197-19"><a href="modules-and-re-usage-of-the-code.html#cb197-19"></a></span>
-<span id="cb197-20"><a href="modules-and-re-usage-of-the-code.html#cb197-20"></a>    script:</span>
-<span id="cb197-21"><a href="modules-and-re-usage-of-the-code.html#cb197-21"></a>    <span class="st">&quot;&quot;&quot;</span></span>
-<span id="cb197-22"><a href="modules-and-re-usage-of-the-code.html#cb197-22"></a>    multiqc .</span>
-<span id="cb197-23"><a href="modules-and-re-usage-of-the-code.html#cb197-23"></a>    <span class="st">&quot;&quot;&quot;</span></span>
-<span id="cb197-24"><a href="modules-and-re-usage-of-the-code.html#cb197-24"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb199"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb199-1"><a href="modules-and-re-usage-of-the-code.html#cb199-1"></a><span class="co">/*</span></span>
+<span id="cb199-2"><a href="modules-and-re-usage-of-the-code.html#cb199-2"></a><span class="co">*  multiqc module</span></span>
+<span id="cb199-3"><a href="modules-and-re-usage-of-the-code.html#cb199-3"></a><span class="co">*/</span></span>
+<span id="cb199-4"><a href="modules-and-re-usage-of-the-code.html#cb199-4"></a></span>
+<span id="cb199-5"><a href="modules-and-re-usage-of-the-code.html#cb199-5"></a>params.<span class="fu">CONTAINER</span> = <span class="st">&quot;quay.io/biocontainers/multiqc:1.9--pyh9f0ad1d_0&quot;</span></span>
+<span id="cb199-6"><a href="modules-and-re-usage-of-the-code.html#cb199-6"></a>params.<span class="fu">OUTPUT</span> = <span class="st">&quot;multiqc_output&quot;</span></span>
+<span id="cb199-7"><a href="modules-and-re-usage-of-the-code.html#cb199-7"></a>params.<span class="fu">LABEL</span> = <span class="st">&quot;&quot;</span></span>
+<span id="cb199-8"><a href="modules-and-re-usage-of-the-code.html#cb199-8"></a></span>
+<span id="cb199-9"><a href="modules-and-re-usage-of-the-code.html#cb199-9"></a>process multiqc {</span>
+<span id="cb199-10"><a href="modules-and-re-usage-of-the-code.html#cb199-10"></a>    <span class="fu">publishDir</span>(params.<span class="fu">OUTPUT</span>, mode: &#39;copy&#39;)</span>
+<span id="cb199-11"><a href="modules-and-re-usage-of-the-code.html#cb199-11"></a>    container params.<span class="fu">CONTAINER</span></span>
+<span id="cb199-12"><a href="modules-and-re-usage-of-the-code.html#cb199-12"></a>    <span class="fu">label</span> (params.<span class="fu">LABEL</span>)</span>
+<span id="cb199-13"><a href="modules-and-re-usage-of-the-code.html#cb199-13"></a></span>
+<span id="cb199-14"><a href="modules-and-re-usage-of-the-code.html#cb199-14"></a>    input:</span>
+<span id="cb199-15"><a href="modules-and-re-usage-of-the-code.html#cb199-15"></a>    <span class="fu">path</span> (inputfiles)</span>
+<span id="cb199-16"><a href="modules-and-re-usage-of-the-code.html#cb199-16"></a></span>
+<span id="cb199-17"><a href="modules-and-re-usage-of-the-code.html#cb199-17"></a>    output:</span>
+<span id="cb199-18"><a href="modules-and-re-usage-of-the-code.html#cb199-18"></a>    path <span class="st">&quot;multiqc_report.html&quot;</span>                  </span>
+<span id="cb199-19"><a href="modules-and-re-usage-of-the-code.html#cb199-19"></a></span>
+<span id="cb199-20"><a href="modules-and-re-usage-of-the-code.html#cb199-20"></a>    script:</span>
+<span id="cb199-21"><a href="modules-and-re-usage-of-the-code.html#cb199-21"></a>    <span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb199-22"><a href="modules-and-re-usage-of-the-code.html#cb199-22"></a>    multiqc .</span>
+<span id="cb199-23"><a href="modules-and-re-usage-of-the-code.html#cb199-23"></a>    <span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb199-24"><a href="modules-and-re-usage-of-the-code.html#cb199-24"></a>}</span></code></pre></div>
 <p>So it is very similar to the fastqc one, we just add an extra parameter for connecting the resources defined in the nextflow.config file and the label indicated in the process.</p>
 <p>In case we want to use it we would need to change the main code in this way:</p>
-<div class="sourceCode" id="cb198"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb198-1"><a href="modules-and-re-usage-of-the-code.html#cb198-1"></a>include { multiqc } from <span class="st">&quot;${baseDir}/lib/multiqc&quot;</span> <span class="fu">addParams</span>(OUTPUT: multiqcOutputFolder, LABEL=<span class="st">&quot;onecpu&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb200"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb200-1"><a href="modules-and-re-usage-of-the-code.html#cb200-1"></a>include { multiqc } from <span class="st">&quot;${baseDir}/lib/multiqc&quot;</span> <span class="fu">addParams</span>(OUTPUT: multiqcOutputFolder, LABEL=<span class="st">&quot;onecpu&quot;</span>)</span></code></pre></div>
 <p>This because we specified the label <strong>onecpu</strong> in out <strong>nextflow.config</strong> file:</p>
-<div class="sourceCode" id="cb199"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb199-1"><a href="modules-and-re-usage-of-the-code.html#cb199-1"></a>includeConfig <span class="st">&quot;$baseDir/params.config&quot;</span></span>
-<span id="cb199-2"><a href="modules-and-re-usage-of-the-code.html#cb199-2"></a></span>
-<span id="cb199-3"><a href="modules-and-re-usage-of-the-code.html#cb199-3"></a>process {</span>
-<span id="cb199-4"><a href="modules-and-re-usage-of-the-code.html#cb199-4"></a>     container = &#39;biocorecrg/debian-perlbrew-pyenv3-java&#39;</span>
-<span id="cb199-5"><a href="modules-and-re-usage-of-the-code.html#cb199-5"></a>     memory=&#39;<span class="fl">0.</span>6G&#39;</span>
-<span id="cb199-6"><a href="modules-and-re-usage-of-the-code.html#cb199-6"></a>     cpus=<span class="ch">&#39;1&#39;</span></span>
-<span id="cb199-7"><a href="modules-and-re-usage-of-the-code.html#cb199-7"></a>     time=&#39;6h&#39;</span>
-<span id="cb199-8"><a href="modules-and-re-usage-of-the-code.html#cb199-8"></a></span>
-<span id="cb199-9"><a href="modules-and-re-usage-of-the-code.html#cb199-9"></a>     withLabel: &#39;onecpu&#39;</span>
-<span id="cb199-10"><a href="modules-and-re-usage-of-the-code.html#cb199-10"></a>    {</span>
-<span id="cb199-11"><a href="modules-and-re-usage-of-the-code.html#cb199-11"></a>        memory=&#39;<span class="fl">0.</span>6G&#39;</span>
-<span id="cb199-12"><a href="modules-and-re-usage-of-the-code.html#cb199-12"></a>        cpus=<span class="ch">&#39;1&#39;</span></span>
-<span id="cb199-13"><a href="modules-and-re-usage-of-the-code.html#cb199-13"></a>    }   </span>
-<span id="cb199-14"><a href="modules-and-re-usage-of-the-code.html#cb199-14"></a></span>
-<span id="cb199-15"><a href="modules-and-re-usage-of-the-code.html#cb199-15"></a>}</span>
-<span id="cb199-16"><a href="modules-and-re-usage-of-the-code.html#cb199-16"></a></span>
-<span id="cb199-17"><a href="modules-and-re-usage-of-the-code.html#cb199-17"></a>singularity.<span class="fu">cacheDir</span> = <span class="st">&quot;$baseDir/singularity&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb201"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb201-1"><a href="modules-and-re-usage-of-the-code.html#cb201-1"></a>includeConfig <span class="st">&quot;$baseDir/params.config&quot;</span></span>
+<span id="cb201-2"><a href="modules-and-re-usage-of-the-code.html#cb201-2"></a></span>
+<span id="cb201-3"><a href="modules-and-re-usage-of-the-code.html#cb201-3"></a>process {</span>
+<span id="cb201-4"><a href="modules-and-re-usage-of-the-code.html#cb201-4"></a>     container = &#39;biocorecrg/debian-perlbrew-pyenv3-java&#39;</span>
+<span id="cb201-5"><a href="modules-and-re-usage-of-the-code.html#cb201-5"></a>     memory=&#39;<span class="fl">0.</span>6G&#39;</span>
+<span id="cb201-6"><a href="modules-and-re-usage-of-the-code.html#cb201-6"></a>     cpus=<span class="ch">&#39;1&#39;</span></span>
+<span id="cb201-7"><a href="modules-and-re-usage-of-the-code.html#cb201-7"></a>     time=&#39;6h&#39;</span>
+<span id="cb201-8"><a href="modules-and-re-usage-of-the-code.html#cb201-8"></a></span>
+<span id="cb201-9"><a href="modules-and-re-usage-of-the-code.html#cb201-9"></a>     withLabel: &#39;onecpu&#39;</span>
+<span id="cb201-10"><a href="modules-and-re-usage-of-the-code.html#cb201-10"></a>    {</span>
+<span id="cb201-11"><a href="modules-and-re-usage-of-the-code.html#cb201-11"></a>        memory=&#39;<span class="fl">0.</span>6G&#39;</span>
+<span id="cb201-12"><a href="modules-and-re-usage-of-the-code.html#cb201-12"></a>        cpus=<span class="ch">&#39;1&#39;</span></span>
+<span id="cb201-13"><a href="modules-and-re-usage-of-the-code.html#cb201-13"></a>    }   </span>
+<span id="cb201-14"><a href="modules-and-re-usage-of-the-code.html#cb201-14"></a></span>
+<span id="cb201-15"><a href="modules-and-re-usage-of-the-code.html#cb201-15"></a>}</span>
+<span id="cb201-16"><a href="modules-and-re-usage-of-the-code.html#cb201-16"></a></span>
+<span id="cb201-17"><a href="modules-and-re-usage-of-the-code.html#cb201-17"></a>singularity.<span class="fu">cacheDir</span> = <span class="st">&quot;$baseDir/singularity&quot;</span></span></code></pre></div>
 <p><strong>IMPORTANT: you will need to specify a default image when you want to run nextflow -with-docker or -with-singularity and you have containers defined inside the modules</strong></p>
 </div>
             </section>

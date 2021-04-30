@@ -298,43 +298,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </h5>
 <p></summary></p>
 <p>The process should become:</p>
-<div class="sourceCode" id="cb171"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb171-1"><a href="exercise-4.html#cb171-1"></a></span>
-<span id="cb171-2"><a href="exercise-4.html#cb171-2"></a>process reverseSequence {</span>
-<span id="cb171-3"><a href="exercise-4.html#cb171-3"></a>    tag <span class="st">&quot;$seq&quot;</span>                  </span>
-<span id="cb171-4"><a href="exercise-4.html#cb171-4"></a>    publishDir <span class="st">&quot;output&quot;</span></span>
-<span id="cb171-5"><a href="exercise-4.html#cb171-5"></a>    label &#39;keep_trying&#39;</span>
-<span id="cb171-6"><a href="exercise-4.html#cb171-6"></a>    </span>
-<span id="cb171-7"><a href="exercise-4.html#cb171-7"></a>    input:</span>
-<span id="cb171-8"><a href="exercise-4.html#cb171-8"></a>    path seq</span>
-<span id="cb171-9"><a href="exercise-4.html#cb171-9"></a></span>
-<span id="cb171-10"><a href="exercise-4.html#cb171-10"></a>    output:</span>
-<span id="cb171-11"><a href="exercise-4.html#cb171-11"></a>    path <span class="st">&quot;all.rev&quot;</span></span>
-<span id="cb171-12"><a href="exercise-4.html#cb171-12"></a></span>
-<span id="cb171-13"><a href="exercise-4.html#cb171-13"></a>    script:</span>
-<span id="cb171-14"><a href="exercise-4.html#cb171-14"></a>    <span class="st">&quot;&quot;&quot;</span></span>
-<span id="cb171-15"><a href="exercise-4.html#cb171-15"></a>    cat ${seq} | AAAAA &#39;{<span class="kw">if</span> (\$<span class="dv">1</span>~<span class="st">&quot;&gt;&quot;</span>) {print \$<span class="dv">0</span>} <span class="kw">else</span> <span class="fu">system</span>(<span class="st">&quot;echo &quot;</span> \$<span class="dv">0</span> <span class="st">&quot; |rev&quot;</span>)}&#39; &gt; all.<span class="fu">rev</span></span>
-<span id="cb171-16"><a href="exercise-4.html#cb171-16"></a>    <span class="st">&quot;&quot;&quot;</span></span>
-<span id="cb171-17"><a href="exercise-4.html#cb171-17"></a>}</span></code></pre></div>
-<p>while the nextflow.config file</p>
-<div class="sourceCode" id="cb172"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb172-1"><a href="exercise-4.html#cb172-1"></a></span>
-<span id="cb172-2"><a href="exercise-4.html#cb172-2"></a>process {</span>
-<span id="cb172-3"><a href="exercise-4.html#cb172-3"></a>     withLabel: &#39;keep_trying&#39;</span>
-<span id="cb172-4"><a href="exercise-4.html#cb172-4"></a>    {</span>
-<span id="cb172-5"><a href="exercise-4.html#cb172-5"></a>        errorStrategy &#39;retry&#39; </span>
-<span id="cb172-6"><a href="exercise-4.html#cb172-6"></a>        maxRetries <span class="dv">5</span></span>
-<span id="cb172-7"><a href="exercise-4.html#cb172-7"></a>     }   </span>
-<span id="cb172-8"><a href="exercise-4.html#cb172-8"></a>}</span></code></pre></div>
-</details>
-<ul>
-<li></li>
-</ul>
-<details>
-<summary>
-<h5>
-<em>Answer</em>
-</h5>
-<p></summary></p>
-<p>The process should become:</p>
 <div class="sourceCode" id="cb173"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb173-1"><a href="exercise-4.html#cb173-1"></a></span>
 <span id="cb173-2"><a href="exercise-4.html#cb173-2"></a>process reverseSequence {</span>
 <span id="cb173-3"><a href="exercise-4.html#cb173-3"></a>    tag <span class="st">&quot;$seq&quot;</span>                  </span>
@@ -361,6 +324,43 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb174-6"><a href="exercise-4.html#cb174-6"></a>        maxRetries <span class="dv">5</span></span>
 <span id="cb174-7"><a href="exercise-4.html#cb174-7"></a>     }   </span>
 <span id="cb174-8"><a href="exercise-4.html#cb174-8"></a>}</span></code></pre></div>
+</details>
+<ul>
+<li></li>
+</ul>
+<details>
+<summary>
+<h5>
+<em>Answer</em>
+</h5>
+<p></summary></p>
+<p>The process should become:</p>
+<div class="sourceCode" id="cb175"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb175-1"><a href="exercise-4.html#cb175-1"></a></span>
+<span id="cb175-2"><a href="exercise-4.html#cb175-2"></a>process reverseSequence {</span>
+<span id="cb175-3"><a href="exercise-4.html#cb175-3"></a>    tag <span class="st">&quot;$seq&quot;</span>                  </span>
+<span id="cb175-4"><a href="exercise-4.html#cb175-4"></a>    publishDir <span class="st">&quot;output&quot;</span></span>
+<span id="cb175-5"><a href="exercise-4.html#cb175-5"></a>    label &#39;keep_trying&#39;</span>
+<span id="cb175-6"><a href="exercise-4.html#cb175-6"></a>    </span>
+<span id="cb175-7"><a href="exercise-4.html#cb175-7"></a>    input:</span>
+<span id="cb175-8"><a href="exercise-4.html#cb175-8"></a>    path seq</span>
+<span id="cb175-9"><a href="exercise-4.html#cb175-9"></a></span>
+<span id="cb175-10"><a href="exercise-4.html#cb175-10"></a>    output:</span>
+<span id="cb175-11"><a href="exercise-4.html#cb175-11"></a>    path <span class="st">&quot;all.rev&quot;</span></span>
+<span id="cb175-12"><a href="exercise-4.html#cb175-12"></a></span>
+<span id="cb175-13"><a href="exercise-4.html#cb175-13"></a>    script:</span>
+<span id="cb175-14"><a href="exercise-4.html#cb175-14"></a>    <span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb175-15"><a href="exercise-4.html#cb175-15"></a>    cat ${seq} | AAAAA &#39;{<span class="kw">if</span> (\$<span class="dv">1</span>~<span class="st">&quot;&gt;&quot;</span>) {print \$<span class="dv">0</span>} <span class="kw">else</span> <span class="fu">system</span>(<span class="st">&quot;echo &quot;</span> \$<span class="dv">0</span> <span class="st">&quot; |rev&quot;</span>)}&#39; &gt; all.<span class="fu">rev</span></span>
+<span id="cb175-16"><a href="exercise-4.html#cb175-16"></a>    <span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb175-17"><a href="exercise-4.html#cb175-17"></a>}</span></code></pre></div>
+<p>while the nextflow.config file</p>
+<div class="sourceCode" id="cb176"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb176-1"><a href="exercise-4.html#cb176-1"></a></span>
+<span id="cb176-2"><a href="exercise-4.html#cb176-2"></a>process {</span>
+<span id="cb176-3"><a href="exercise-4.html#cb176-3"></a>     withLabel: &#39;keep_trying&#39;</span>
+<span id="cb176-4"><a href="exercise-4.html#cb176-4"></a>    {</span>
+<span id="cb176-5"><a href="exercise-4.html#cb176-5"></a>        errorStrategy &#39;retry&#39; </span>
+<span id="cb176-6"><a href="exercise-4.html#cb176-6"></a>        maxRetries <span class="dv">5</span></span>
+<span id="cb176-7"><a href="exercise-4.html#cb176-7"></a>     }   </span>
+<span id="cb176-8"><a href="exercise-4.html#cb176-8"></a>}</span></code></pre></div>
 </div>
             </section>
 

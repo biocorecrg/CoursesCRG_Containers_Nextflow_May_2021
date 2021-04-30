@@ -292,6 +292,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>Example running BLAST commands in different ways</p></li>
 <li><p>Example running nginx as a service (NGINX its actually the custom example in Singularity page)</p>
 <ul>
+<li>Build a NGINX image and run as an instance</li>
 <li>Retrieve NGINX version from the instance</li>
 <li>Share a simply HTML page</li>
 </ul></li>
@@ -310,8 +311,10 @@ Includecmd: no
 
 %startscript
    nginx</code></pre>
-<p>If you try as normal user:</p>
-<pre><code>(base) [ec2-user@ip-172-31-32-16 singularity]$ singularity instance start test.sif webserver
+<p>We generate the image:</p>
+<pre><code>sudo singularity build nginx.sif nginx.singularity</code></pre>
+<p>Then, for using the instance. If you try as normal user:</p>
+<pre><code>(base) [ec2-user@ip-172-31-32-16 singularity]$ singularity instance start nginx.sif webserver
 2021/04/30 12:23:12 [warn] 15#15: the &quot;user&quot; directive makes sense only if the master process runs with super-user privileges, ignored in /etc/nginx/nginx.conf:2
 nginx: [warn] the &quot;user&quot; directive makes sense only if the master process runs with super-user privileges, ignored in /etc/nginx/nginx.conf:2
 2021/04/30 12:23:12 [emerg] 15#15: mkdir() &quot;/var/cache/nginx/client_temp&quot; failed (30: Read-only file system)
@@ -321,9 +324,9 @@ INFO:    instance started successfully
 
 (base) [ec2-user@ip-172-31-32-16 singularity]$ singularity instance list
 INSTANCE NAME    PID      IP    IMAGE
-webserver        24350          /home/ec2-user/git/CoursesCRG_Containers_Nextflow_May_2021/containers/singularity/test.sif</code></pre>
+webserver        24350          /home/ec2-user/git/CoursesCRG_Containers_Nextflow_May_2021/containers/singularity/nginx.sif</code></pre>
 <p>If you try with sudo permissions:</p>
-<pre><code>(base) [ec2-user@ip-172-31-32-16 singularity]$ sudo singularity instance start test.sif webserver
+<pre><code>(base) [ec2-user@ip-172-31-32-16 singularity]$ sudo singularity instance start nginx.sif webserver
 2021/04/30 12:24:47 [emerg] 15#15: mkdir() &quot;/var/cache/nginx/client_temp&quot; failed (30: Read-only file system)
 nginx: [emerg] mkdir() &quot;/var/cache/nginx/client_temp&quot; failed (30: Read-only file system)
 
@@ -334,9 +337,9 @@ INSTANCE NAME    PID    IP    IMAGE
 
 (base) [ec2-user@ip-172-31-32-16 singularity]$ sudo singularity instance list
 INSTANCE NAME    PID      IP    IMAGE
-webserver        24409          /home/ec2-user/git/CoursesCRG_Containers_Nextflow_May_2021/containers/singularity/test.sif</code></pre>
+webserver        24409          /home/ec2-user/git/CoursesCRG_Containers_Nextflow_May_2021/containers/singularity/nginx.sif</code></pre>
 <p>For this case, it’s necessary to allow writing in the image:</p>
-<pre><code>(base) [ec2-user@ip-172-31-32-16 singularity]$ sudo singularity instance start --writable-tmpfs test.sif webserver
+<pre><code>(base) [ec2-user@ip-172-31-32-16 singularity]$ sudo singularity instance start --writable-tmpfs nginx.sif webserver
 2021/04/30 12:26:53 [notice] 16#16: using the &quot;epoll&quot; event method
 2021/04/30 12:26:53 [notice] 16#16: nginx/1.20.0
 2021/04/30 12:26:53 [notice] 16#16: built by gcc 8.3.0 (Debian 8.3.0-6)
@@ -347,6 +350,8 @@ webserver        24409          /home/ec2-user/git/CoursesCRG_Containers_Nextflo
 
 INFO:    instance started successfully</code></pre>
 <p>You can check from the web browser if it worked pointing your machine.</p>
+<p>We can get the specific NGINX version this way:</p>
+<pre><code>sudo singularity exec instance://webserver nginx -version</code></pre>
 <p>For a custom HTML file:</p>
 <pre><code>mkdir -p $HOME/www
 
@@ -358,7 +363,7 @@ cd $HOME/www</code></pre>
         &lt;/body&gt;
 &lt;/html&gt;</code></pre>
 <p>We execute now the command mounting where HTMLs are stored.</p>
-<pre><code>(base) [ec2-user@ip-172-31-32-16 singularity]$ sudo singularity instance start -B /home/ec2-user/www:/usr/share/nginx/html --writable-tmpfs test.sif webserver
+<pre><code>(base) [ec2-user@ip-172-31-32-16 singularity]$ sudo singularity instance start -B /home/ec2-user/www:/usr/share/nginx/html --writable-tmpfs nginx.sif webserver
 2021/04/30 12:31:20 [notice] 15#15: using the &quot;epoll&quot; event method
 2021/04/30 12:31:20 [notice] 15#15: nginx/1.20.0
 2021/04/30 12:31:20 [notice] 15#15: built by gcc 8.3.0 (Debian 8.3.0-6)
