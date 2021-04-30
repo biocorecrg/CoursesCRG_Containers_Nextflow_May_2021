@@ -643,7 +643,7 @@ It is an important option in the context of Docker: it means that you *answer ye
 
 <br>
 
-Note that Conda is a nice and easy way to install software:
+[Conda](https://docs.conda.io/en/latest/) is an open source package management system and environment management system that runs on Windows, macOS and Linux. Conda allows to quickly find, install, run and update packages and their dependencies.  
 
 * [Anaconda](https://anaconda.org/anaconda/repo)
 * [Conda-forge](https://conda-forge.org/feedstocks/)
