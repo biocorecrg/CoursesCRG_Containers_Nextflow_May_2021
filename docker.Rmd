@@ -10,38 +10,38 @@ knitr::opts_chunk$set(echo = TRUE, eval = FALSE, warning = FALSE)
 
 ### What is Docker?
 
-* Platform for developing, shipping and running applications
-* Infrastructure as application / code
-* First version: 2013
-* Company. Original dotCloud (2010), later named Docker
-* Established [Open Container Initiative](https://www.opencontainers.org/)
+* Platform for developing, shipping and running applications.
+* Infrastructure as application / code.
+* First version: 2013.
+* Company: originally dotCloud (2010), later named Docker.
+* Established [Open Container Initiative](https://www.opencontainers.org/).
 
 As a software:
 
-* [Docker Community Edition](https://www.docker.com/products/container-runtime)
-* Docker Enterprise Edition
+* [Docker Community Edition](https://www.docker.com/products/container-runtime).
+* Docker Enterprise Edition.
 
 
 ### Docker components
 
 <a href="http://apachebooster.com/kb/wp-content/uploads/2017/09/docker-architecture.png"><img src="http://apachebooster.com/kb/wp-content/uploads/2017/09/docker-architecture.png" width="700/"></a>
 
-* Read-only templates
-* Containers are run from them
-* Images are not run
-* Images have several layers
+* Read-only templates.
+* Containers are run from them.
+* Images are not run.
+* Images have several layers.
 
 <a href="https://i.stack.imgur.com/vGuay.png"><img src="https://i.stack.imgur.com/vGuay.png" width="700/"></a>
 
 
 ### Images versus containers
 
-* **Image**: set of layers. read-only templates. Inert.
+* **Image**: A set of layers, read-only templates, inert.
 * An instance of an image is called a **container**.
 
 When you start an image, you have a running container of this image. You can have many running containers of the same image.
 
-The image is the recipe, the container is the cake.
+*"The image is the recipe, the container is the cake; you can make as many cakes as you like with a given recipe."*
 
 https://stackoverflow.com/questions/23735149/what-is-the-difference-between-a-docker-image-and-a-container
 
