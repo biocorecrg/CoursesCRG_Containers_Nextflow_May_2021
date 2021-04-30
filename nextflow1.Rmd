@@ -122,7 +122,7 @@ An operator is a method that reshape or connect different channels applying some
 
 We can make a very simple Nextflow script by writing this code in a file (test.nf):
 
-```{nextflow, eval=FALSE, echo=TRUE}
+```{java, eval=FALSE, echo=TRUE}
 #!/usr/bin/env nextflow
 
 // This is a comment
