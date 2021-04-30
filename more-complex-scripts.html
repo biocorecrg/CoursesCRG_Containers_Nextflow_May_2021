@@ -329,34 +329,33 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb141-38"><a href="more-complex-scripts.html#cb141-38"></a></span>
 <span id="cb141-39"><a href="more-complex-scripts.html#cb141-39"></a>process reverseSequence {</span>
 <span id="cb141-40"><a href="more-complex-scripts.html#cb141-40"></a>    tag <span class="st">&quot;$seq&quot;</span>                  </span>
-<span id="cb141-41"><a href="more-complex-scripts.html#cb141-41"></a>    publishDir <span class="st">&quot;output&quot;</span></span>
-<span id="cb141-42"><a href="more-complex-scripts.html#cb141-42"></a></span>
-<span id="cb141-43"><a href="more-complex-scripts.html#cb141-43"></a>    input:</span>
-<span id="cb141-44"><a href="more-complex-scripts.html#cb141-44"></a>    path seq</span>
-<span id="cb141-45"><a href="more-complex-scripts.html#cb141-45"></a></span>
-<span id="cb141-46"><a href="more-complex-scripts.html#cb141-46"></a>    output:</span>
-<span id="cb141-47"><a href="more-complex-scripts.html#cb141-47"></a>    path <span class="st">&quot;all.rev&quot;</span></span>
-<span id="cb141-48"><a href="more-complex-scripts.html#cb141-48"></a></span>
-<span id="cb141-49"><a href="more-complex-scripts.html#cb141-49"></a>    script:</span>
-<span id="cb141-50"><a href="more-complex-scripts.html#cb141-50"></a>    <span class="st">&quot;&quot;&quot;</span></span>
-<span id="cb141-51"><a href="more-complex-scripts.html#cb141-51"></a>    cat ${seq} | awk &#39;{<span class="kw">if</span> (\$<span class="dv">1</span>~<span class="st">&quot;&gt;&quot;</span>) {print \$<span class="dv">0</span>} <span class="kw">else</span> <span class="fu">system</span>(<span class="st">&quot;echo &quot;</span> \$<span class="dv">0</span> <span class="st">&quot; |rev&quot;</span>)}&#39; &gt; all.<span class="fu">rev</span></span>
-<span id="cb141-52"><a href="more-complex-scripts.html#cb141-52"></a>    <span class="st">&quot;&quot;&quot;</span></span>
-<span id="cb141-53"><a href="more-complex-scripts.html#cb141-53"></a>}</span>
-<span id="cb141-54"><a href="more-complex-scripts.html#cb141-54"></a></span>
-<span id="cb141-55"><a href="more-complex-scripts.html#cb141-55"></a>workflow {</span>
-<span id="cb141-56"><a href="more-complex-scripts.html#cb141-56"></a>    splitted_seq    = <span class="fu">splitSequences</span>(sequences_file)</span>
-<span id="cb141-57"><a href="more-complex-scripts.html#cb141-57"></a></span>
-<span id="cb141-58"><a href="more-complex-scripts.html#cb141-58"></a>    <span class="co">// Here you have the output channel as a collection</span></span>
-<span id="cb141-59"><a href="more-complex-scripts.html#cb141-59"></a>    splitted_seq.<span class="fu">view</span>()</span>
-<span id="cb141-60"><a href="more-complex-scripts.html#cb141-60"></a></span>
-<span id="cb141-61"><a href="more-complex-scripts.html#cb141-61"></a>    <span class="co">// Here you have the same channel reshaped to send separately each value</span></span>
-<span id="cb141-62"><a href="more-complex-scripts.html#cb141-62"></a>    splitted_seq.<span class="fu">flatten</span>().<span class="fu">view</span>()</span>
-<span id="cb141-63"><a href="more-complex-scripts.html#cb141-63"></a></span>
-<span id="cb141-64"><a href="more-complex-scripts.html#cb141-64"></a>    <span class="co">// DLS2 allows you to reuse the channels! In past you had to create many identical</span></span>
-<span id="cb141-65"><a href="more-complex-scripts.html#cb141-65"></a>    <span class="co">// channels for sending the same kind of data to different processes</span></span>
-<span id="cb141-66"><a href="more-complex-scripts.html#cb141-66"></a></span>
-<span id="cb141-67"><a href="more-complex-scripts.html#cb141-67"></a>    rev_single_seq  = <span class="fu">reverseSequence</span>(splitted_seq)</span>
-<span id="cb141-68"><a href="more-complex-scripts.html#cb141-68"></a>}</span></code></pre></div>
+<span id="cb141-41"><a href="more-complex-scripts.html#cb141-41"></a></span>
+<span id="cb141-42"><a href="more-complex-scripts.html#cb141-42"></a>    input:</span>
+<span id="cb141-43"><a href="more-complex-scripts.html#cb141-43"></a>    path seq</span>
+<span id="cb141-44"><a href="more-complex-scripts.html#cb141-44"></a></span>
+<span id="cb141-45"><a href="more-complex-scripts.html#cb141-45"></a>    output:</span>
+<span id="cb141-46"><a href="more-complex-scripts.html#cb141-46"></a>    path <span class="st">&quot;all.rev&quot;</span></span>
+<span id="cb141-47"><a href="more-complex-scripts.html#cb141-47"></a></span>
+<span id="cb141-48"><a href="more-complex-scripts.html#cb141-48"></a>    script:</span>
+<span id="cb141-49"><a href="more-complex-scripts.html#cb141-49"></a>    <span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb141-50"><a href="more-complex-scripts.html#cb141-50"></a>    cat ${seq} | awk &#39;{<span class="kw">if</span> (\$<span class="dv">1</span>~<span class="st">&quot;&gt;&quot;</span>) {print \$<span class="dv">0</span>} <span class="kw">else</span> <span class="fu">system</span>(<span class="st">&quot;echo &quot;</span> \$<span class="dv">0</span> <span class="st">&quot; |rev&quot;</span>)}&#39; &gt; all.<span class="fu">rev</span></span>
+<span id="cb141-51"><a href="more-complex-scripts.html#cb141-51"></a>    <span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb141-52"><a href="more-complex-scripts.html#cb141-52"></a>}</span>
+<span id="cb141-53"><a href="more-complex-scripts.html#cb141-53"></a></span>
+<span id="cb141-54"><a href="more-complex-scripts.html#cb141-54"></a>workflow {</span>
+<span id="cb141-55"><a href="more-complex-scripts.html#cb141-55"></a>    splitted_seq    = <span class="fu">splitSequences</span>(sequences_file)</span>
+<span id="cb141-56"><a href="more-complex-scripts.html#cb141-56"></a></span>
+<span id="cb141-57"><a href="more-complex-scripts.html#cb141-57"></a>    <span class="co">// Here you have the output channel as a collection</span></span>
+<span id="cb141-58"><a href="more-complex-scripts.html#cb141-58"></a>    splitted_seq.<span class="fu">view</span>()</span>
+<span id="cb141-59"><a href="more-complex-scripts.html#cb141-59"></a></span>
+<span id="cb141-60"><a href="more-complex-scripts.html#cb141-60"></a>    <span class="co">// Here you have the same channel reshaped to send separately each value</span></span>
+<span id="cb141-61"><a href="more-complex-scripts.html#cb141-61"></a>    splitted_seq.<span class="fu">flatten</span>().<span class="fu">view</span>()</span>
+<span id="cb141-62"><a href="more-complex-scripts.html#cb141-62"></a></span>
+<span id="cb141-63"><a href="more-complex-scripts.html#cb141-63"></a>    <span class="co">// DLS2 allows you to reuse the channels! In past you had to create many identical</span></span>
+<span id="cb141-64"><a href="more-complex-scripts.html#cb141-64"></a>    <span class="co">// channels for sending the same kind of data to different processes</span></span>
+<span id="cb141-65"><a href="more-complex-scripts.html#cb141-65"></a></span>
+<span id="cb141-66"><a href="more-complex-scripts.html#cb141-66"></a>    rev_single_seq  = <span class="fu">reverseSequence</span>(splitted_seq)</span>
+<span id="cb141-67"><a href="more-complex-scripts.html#cb141-67"></a>}</span></code></pre></div>
 <p>Here we have two simple processes:</p>
 <ul>
 <li>the former splits the input fasta file in single sequences</li>
