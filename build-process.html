@@ -290,29 +290,43 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="docs/images/singularity_build_input_output.svg" width="600"></p>
 <div id="examples" class="section level3">
 <h3><span class="header-section-number">4.2.1</span> Examples</h3>
+<p>There are different ways to generate Singularity image files. The most common way is so far thanks to existing Docker images already present in public registries.</p>
 <div id="through-registries" class="section level4">
 <h4><span class="header-section-number">4.2.1.1</span> Through registries</h4>
-<ul>
-<li>Docker Hub</li>
-</ul>
+<div id="docker-hub" class="section level5">
+<h5><span class="header-section-number">4.2.1.1.1</span> Docker Hub</h5>
 <p><a href="https://hub.docker.com/r/biocontainers/fastqc">https://hub.docker.com/r/biocontainers/fastqc</a></p>
 <pre><code>singularity build fastqc-0.11.9_cv7.sif docker://biocontainers/fastqc:v0.11.9_cv7</code></pre>
-<ul>
-<li>Biocontainers</li>
-</ul>
-<p><strong>Via quay.io</strong></p>
+</div>
+<div id="biocontainers" class="section level5">
+<h5><span class="header-section-number">4.2.1.1.2</span> Biocontainers</h5>
+<div id="via-quay.io" class="section level6">
+<h6><span class="header-section-number">4.2.1.1.2.1</span> Via quay.io</h6>
 <p><a href="https://quay.io/repository/biocontainers/fastqc">https://quay.io/repository/biocontainers/fastqc</a></p>
 <pre><code>singularity build fastqc-0.11.9.sif docker://quay.io/biocontainers/fastqc:0.11.9--0</code></pre>
-<p><strong>Via Galaxy project prebuilt images</strong></p>
+</div>
+<div id="via-galaxy-project-prebuilt-images" class="section level6">
+<h6><span class="header-section-number">4.2.1.1.2.2</span> Via Galaxy project prebuilt images</h6>
 <pre><code>singularity pull --name fastqc-0.11.9.sif https://depot.galaxyproject.org/singularity/fastqc:0.11.9--0</code></pre>
-<ul>
-<li><p>Docker Daemon (local Docker image)</p>
-<pre><code>singularity build fastqc-web-0.11.9.sif docker-daemon://fastqcwww</code></pre></li>
-<li><p>Also Singularity registries (not so popular so far)</p>
+
+<div class="rmdnote">
+Galaxy project provides all Bioinformatics software from Biocontainers initiative as Singularity prebuilt images. If download and conversion time of images is an issue for you, this is likely the best option if working in the biomedical field.
+</div>
+
+</div>
+</div>
+<div id="sylabs-registry" class="section level5">
+<h5><span class="header-section-number">4.2.1.1.3</span> Sylabs registry</h5>
+<p>Not as popular so far, but it provides fast download of images.</p>
 <ul>
 <li><a href="https://cloud.sylabs.io/library">https://cloud.sylabs.io/library</a></li>
-</ul></li>
 </ul>
+</div>
+</div>
+<div id="docker-daemon" class="section level4">
+<h4><span class="header-section-number">4.2.1.2</span> Docker Daemon</h4>
+<p>If you create your own images (as we did during the course) and you don’t want to share them publicly (and you have not access to any private image registry, either), you can convert your locally built Docker images into Singularity image files.</p>
+<pre><code>    singularity build fastqc-web-0.11.9.sif docker-daemon://fastqcwww</code></pre>
 </div>
 </div>
 <div id="sandboxing" class="section level3">
@@ -323,10 +337,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="singularity-recipes" class="section level3">
 <h3><span class="header-section-number">4.2.3</span> Singularity recipes</h3>
-<p>Saved in a <em>.sif</em> file?</p>
+<p>Singularity provides its own build system and recipe syntax. Despite it is actually possible to generate images from scratch (known as <strong><em>bootstraping</em></strong>) thanks to these recipes, this is at time of writing far slower than converting from Docker ones. Docker has the advantage of saving every action line as a cached image. That is not happening with Singularity.</p>
+<p>In any case, it can still be useful to boostrap an image derived from a previously existing one. Below we provide two common approaches:</p>
 <div id="docker-bootstrap" class="section level4">
 <h4><span class="header-section-number">4.2.3.1</span> Docker bootstrap</h4>
-<p><em>What does itmean (bootstrap)?</em></p>
+<p>Instead of converting a Docker image into a Singularity one, it’s possible to use one as a base one and modify it by using Singularity recipe syntax.</p>
 <pre><code>BootStrap: docker
 From: biocontainers/fastqc:v0.11.9_cv7
 
@@ -340,6 +355,7 @@ From: biocontainers/fastqc:v0.11.9_cv7
 </div>
 <div id="debian-bootstrap" class="section level4">
 <h4><span class="header-section-number">4.2.3.2</span> Debian bootstrap</h4>
+<p>Alternatively, we can build the whole image from Debian/Ubuntu distribution. This will normally take a while.</p>
 <pre><code>BootStrap: debootstrap
 OSVersion: bionic
 MirrorURL:  http://fr.archive.ubuntu.com/ubuntu/
@@ -377,6 +393,11 @@ Include: build-essential curl python python-dev openjdk-11-jdk bzip2 zip unzip
     Maintainer Biocorecrg
 Version 0.1.0</code></pre>
 <pre><code>sudo singularity build fastqc-multi-bowtie.sif debootstrap.singularity</code></pre>
+
+<div class="rmdtip">
+The available deboostrap recipes depend on the version you have installed in the system. Check at: <code>/usr/share/debootstrap/scripts/</code> for more details. For Debian, instead of Ubuntu, you can replace mirrorURL with <a href="https://ftp.debian.org/debian/" class="uri">https://ftp.debian.org/debian/</a> More details at: <a href="https://sylabs.io/guides/3.7/user-guide/appendix.html#build-debootstrap" class="uri">https://sylabs.io/guides/3.7/user-guide/appendix.html#build-debootstrap</a>
+</div>
+
 
 <div class="rmdnote">
 It’s possible to sign cryptographically your images, so third parties can verify they are coming from their actual authors. This implies some matters beyond the scope of this course, but you have some details if interested at: <a href="https://sylabs.io/guides/3.7/user-guide/signNverify.html" class="uri">https://sylabs.io/guides/3.7/user-guide/signNverify.html</a>

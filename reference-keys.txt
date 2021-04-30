@@ -71,6 +71,12 @@ weaknesses
 build-process
 examples
 through-registries
+docker-hub
+biocontainers
+via-quay.io
+via-galaxy-project-prebuilt-images
+sylabs-registry
+docker-daemon
 sandboxing
 singularity-recipes
 docker-bootstrap
