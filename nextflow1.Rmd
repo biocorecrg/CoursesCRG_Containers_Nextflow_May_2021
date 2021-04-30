@@ -497,11 +497,94 @@ hola in Italian is ciao
 ```
 
 ## EXERCISE 2
-Change the pipeline for producing files instead of standard output. You need to specify within the workflow what to output using **emit** keyword.
+ - Change the pipeline for producing files instead of standard output. You can write another process to handle the fact that you have a list in the workflow2. You need also to specify within the workflow what to output using **emit** keyword.
 
 See here [**emit**](https://www.nextflow.io/docs/latest/dsl2.html?#workflow-outputs)
 
-Tip: you can chose the elements from a list using the positional keys (i.e. list[0], list[1], etc...)
+<details>
+<summary>
+<h5>*Answer*</h5>
+</summary>
+
+
+```{java, eval=FALSE, echo=TRUE}
+
+#!/usr/bin/env nextflow
+
+nextflow.enable.dsl=2
+
+str = Channel.from('hello', 'hola', 'bonjour')
+
+process printHello {
+
+   tag { str_in }
+
+   input:        
+   val str_in
+
+   output:        
+   path("${str_in}.txt")
+
+   script:        
+   """
+   echo ${str_in} in Italian is ciao > ${str_in}.txt
+   """
+}
+
+process printHello2 {
+
+   tag { str_in }
+
+   input:        
+   val str_in
+
+   output:        
+   path("cheers.txt")
+
+   script:
+   """
+   echo ${str_in.join(', ')} in Italian are ciao > cheers.txt
+   """
+}
+
+/*
+ * A workflow can be named as a function and receive an input using the take keyword
+ */
+
+workflow first_pipeline {
+    take: str_input
+    main:
+    out = printHello(str_input)
+    emit: out
+}
+
+
+/*
+ * You can re-use the previous processes an combine as you prefer
+ */
+
+workflow second_pipeline {
+    take: str_input
+    main:
+    out = printHello2(str_input.collect())
+    emit: out
+}
+
+/*
+ * You can then invoke the different named workflows in this way
+ * passing the same input channel `str` to both  
+ */
+
+workflow {
+    out1 = first_pipeline(str)
+    out2 = second_pipeline(str)
+}
+```
+
+</details>
+
+
+- Change the pipeline to use only one process to handle both the cases (one element or a list), you can chose the elements from a list using the positional keys (i.e. list[0], list[1], etc...)
 
 <details>
 <summary>
@@ -568,10 +651,6 @@ workflow {
 ```
 
 </details>
-
-Change the pipeline for producing files instead of standard output. You need to specify within the workflow what to output using **emit** keyword.
-
-See here [**emit**](https://www.nextflow.io/docs/latest/dsl2.html?#workflow-outputs)
 
 
 
