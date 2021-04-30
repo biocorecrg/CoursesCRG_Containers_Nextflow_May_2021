@@ -653,7 +653,7 @@ Note that Conda is a nice and easy way to install software:
 
 ## Docker recipes
 
-A **Docker recipe** contains a set of instructions and commands that will be used to **create/build a Docker image**.
+The **Docker recipe** contains a set of instructions and commands that will be used to **create/build a Docker image**.
 
 ### Writing recipes and building images
 
@@ -665,7 +665,7 @@ All commands should be saved in a text file, named by default **Dockerfile**.
   | RUN | Commands to run. |
   | MAINTAINER |  Docker image maintainer. |
   | WORKDIR | Sets the working directory for the container's building instructions. |
-| SHELL | Changes the default shell |
+| SHELL | Changes the default shell. |
 | ADD / COPY | Copy files from source to destination. |
 | ARG | Sets variables that can be used as the image is built. |
 | ENV | Sets environment variables. Persists when container is run. |
@@ -678,7 +678,7 @@ All commands should be saved in a text file, named by default **Dockerfile**.
 
 #### Basic instructions
 
-Each row in the recipe corresponds to a **layer** of the final image.
+Each row in the recipe corresponds to a **layer** in the final image.
 
 **FROM**: parent image. Typically, an operating system. This is the **base layer**.
 
@@ -694,7 +694,7 @@ Think about it this way: every **RUN** line is essentially what you would run to
 RUN apt install wget
 ```
 
-A basic recipe that is taking the **ubuntu:18.04** image as a base layer, that updates and upgrades Linux packages, and that installs `wget`:
+This is a basic recipe that takes the **ubuntu:18.04** image as a base layer, updates and upgrades Linux packages, and installs `wget`:
 
 ```docker
 FROM ubuntu:18.04
@@ -755,7 +755,8 @@ Syntax: **`--file` / `-f`**
 
 **.** stands for the context (in this case, current directory) of the build process. This makes sense if copying files from filesystem, for instance.
 <br>
-**IMPORTANT**: Avoid contexts (directories) overpopulated with files (even if not actually used in the recipe).
+
+**IMPORTANT**: Avoid contexts (directories) over-populated with files (even if not actually used in the recipe).
 
 ```{block2, type='rdmtip'}
 In order to avoid that some directories or files are inspected or included (e.g, with **CP** command in Dockerfile), you can use .dockerignore file to specify which paths should be avoided. More information at: https://codefresh.io/docker-tutorial/not-ignore-dockerignore-2/
@@ -867,8 +868,8 @@ You can also use **ARG** to build a specific software version in the image. Let'
 
 Modify the following recipe so you can decide in the command line **which version of Python to install**.
 <br>
-Default version should be 2.7, and try to pass the argument so that version 3.8 is installed.
-<br> Build and run first with the default version, and then with version 3.8.
+The default version should be 2.7. Pass the argument to install the version 3.8.
+<br> Build and run first with the default version, and then with the version 3.8.
 
 ```
 FROM ubuntu:18.04
@@ -882,7 +883,7 @@ RUN apt install -y python2.7
 <h5 style="background-color: #e6fadc; display: inline-block;">*Answer*</h5>
 </summary>
 
-Recipe saved in **Dockerfile_ARG**
+Recipe is saved in **Dockerfile_ARG**
 
 ```
 FROM ubuntu:18.04
@@ -900,13 +901,13 @@ Build the image to get the default version of Python:
 docker build -t py27 -f Dockerfile_ARG .
 ```
 
-Build the image install version 3.8 of Python instead (via the `--build-arg` option):
+Build the image to install the version 3.8 of Python instead (via the `--build-arg` option):
 
 ```
 docker build --build-arg PyVersion=3.8 -t py38 -f Dockerfile_ARG .
 ```
 
-Run the image and check if the python of the correct version is installed:
+Run the image and check if Python of the correct version is installed:
 
 ```
 docker run py27 python2.7 --help
