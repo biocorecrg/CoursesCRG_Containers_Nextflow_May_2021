@@ -100,13 +100,13 @@ docker pull hello-world
 
 Run `docker images` again: now you see the "hello-world" image listed!
 <br>
-`docker pull` imports an image from - by default - **Docker hub**.
+`docker pull` imports by default an image from **Docker Hub**.
 
 <br>
 We will see in more details the `docker images` and `docker run` commands, but let's first explore the **Docker images repositories**.
 
 
-### Explore Docker hub
+### Explore Docker Hub
 
 Images can be stored locally or shared in a registry.
 <br>
@@ -170,7 +170,7 @@ docker search ubuntu --filter is-official=true --filter stars=3
 
 ### docker pull: import an image
 
-Say we are now interested in the `ubuntu` image from Docker hub. We can retrieve it with `docker pull`.
+Say we are now interested in the `ubuntu` image from Docker Hub. We can retrieve it with `docker pull`.
 
 * By default, we get the latest image / latest release.
 
@@ -180,11 +180,13 @@ docker pull ubuntu
 
 <img src="docs/images/docker_pull.png" width="650/">
 
-* You can choose the version of Ubuntu you are fetching: check the different tags on the website (*latest* is also a tag):
+* You can choose the version of Ubuntu you are fetching; for that, check different tags on the website (*latest* is also a tag):
 
 <img src="docs/images/dockerhub_ubuntu_tags.png" width="850/">
 
+
 > Note: `docker search` doesn't allow to search for tags.
+
 
 Let's get the Ubuntu image with tag **18.04** (version 18.04 of Ubuntu = bionic):
 
@@ -197,23 +199,24 @@ docker pull ubuntu:18.04
 
 **Where is the image now?**
 <br>
-As we have seen before, you can `docker images` in the terminal, to see a list of the most recently created images. `docker images` gives you information such as:
+As we have seen before, you can run `docker images` in the terminal to see a list of the most recently created images. The command `docker images` gives you information about:
 
-* Repository
-* Tag
-* Unique image ID
-* Creation date
-* Image size
+* Repository.
+* Tag.
+* Unique image ID.
+* Creation date.
+* Image size.
+
 
 <img src="docs/images/docker_images_list.png" width="650/">
 
 
 <center><h4 style="background-color: #e6fadc; display: inline-block;">**HANDS-ON**</h4></center>
 
-* Run `docker images`. How many images do you get?
+* Run command `docker images`. How many images do you get?
 * Pull the version 2.2.31 of the [`biocontainers/blast`](https://hub.docker.com/r/biocontainers/blast/) image
     * What is the size of the `blast` image you just pulled?
-* How many images do you get if you run `docker images --all`? What are those? Perhaps the [documentation](https://docs.docker.com/engine/reference/commandline/images/) can help.
+* How many images do you get if you run `docker images --all`? What are these images? Check [documentation](https://docs.docker.com/engine/reference/commandline/images/) for help.
 
 <details>
 <summary>
@@ -235,7 +238,7 @@ docker images --all # intermediate images.
 
 Now we want to use what is **inside** the image.
 <br>
-`docker run` creates a fresh container (active instance of the image) from a **Docker (static) image**, and runs it.
+Command `docker run` creates a fresh container (active instance of the image) from a **Docker (static) image**, and runs it.
 
 <br>
 The format is:<br>
@@ -261,7 +264,7 @@ docker run ubuntu:18.04 /bin/whoami
 docker run ubuntu:18.04 cat /etc/issue
 ```
 
-You can either execute programs in the image from the command line (see above) or **execute a container interactively**, i.e. **"enter"** the container, with `docker run -it`.
+You can either execute programs in the image from the command line (see above) or **execute a container interactively**; that is, **"enter"** the container, using command `docker run -it`.
 
 ```{bash}
 docker run -it ubuntu:18.04 /bin/bash
@@ -275,9 +278,9 @@ If you want to leave and stop the container, type `exit` and ENTER.
   * What is happening?
 * Now run the **blast** image we previously pulled:
   * Is something happening?
-* Start again a container from the same **blast** image (not interactively), and run **the blastp command**. What happens?
+* Start again a container from the same **blast** image (not interactively), and run **blastp**. What happens?
 * Start a container **interactively** from the same **blast** image:
-  * What is the default working directory? What is inside the directory?
+  * What is the default working directory? What is inside this directory?
   * Where is the `blastp` program located in the image?
   * Exit the container.
 
