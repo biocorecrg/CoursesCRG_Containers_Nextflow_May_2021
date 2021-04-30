@@ -255,14 +255,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.1.1" data-path="decoupling-resources-parameters-and-nextflow-script.html"><a href="decoupling-resources-parameters-and-nextflow-script.html#publishing-final-results"><i class="fa fa-check"></i><b>6.1.1</b> Publishing final results</a></li>
 </ul></li>
 <li class="chapter" data-level="6.2" data-path="adding-a-help-section-for-the-whole-pipeline.html"><a href="adding-a-help-section-for-the-whole-pipeline.html"><i class="fa fa-check"></i><b>6.2</b> Adding a help section for the whole pipeline</a></li>
-<li class="chapter" data-level="6.3" data-path="using-singularity.html"><a href="using-singularity.html"><i class="fa fa-check"></i><b>6.3</b> Using Singularity</a></li>
-<li class="chapter" data-level="6.4" data-path="adding-more-steps.html"><a href="adding-more-steps.html"><i class="fa fa-check"></i><b>6.4</b> Adding more steps</a></li>
-<li class="chapter" data-level="6.5" data-path="profiles.html"><a href="profiles.html"><i class="fa fa-check"></i><b>6.5</b> Profiles</a></li>
-<li class="chapter" data-level="6.6" data-path="deployment-in-the-aws-cloud.html"><a href="deployment-in-the-aws-cloud.html"><i class="fa fa-check"></i><b>6.6</b> Deployment in the AWS cloud</a></li>
-<li class="chapter" data-level="6.7" data-path="modules-and-re-usage-of-the-code.html"><a href="modules-and-re-usage-of-the-code.html"><i class="fa fa-check"></i><b>6.7</b> Modules and re-usage of the code</a></li>
-<li class="chapter" data-level="6.8" data-path="exercise-4.html"><a href="exercise-4.html"><i class="fa fa-check"></i><b>6.8</b> EXERCISE 4</a></li>
-<li class="chapter" data-level="6.9" data-path="reporting-and-graphical-interface.html"><a href="reporting-and-graphical-interface.html"><i class="fa fa-check"></i><b>6.9</b> Reporting and graphical interface</a></li>
-<li class="chapter" data-level="6.10" data-path="share-nextflow-pipelines-and-good-practices.html"><a href="share-nextflow-pipelines-and-good-practices.html"><i class="fa fa-check"></i><b>6.10</b> Share Nextflow pipelines and good practices</a></li>
+<li class="chapter" data-level="6.3" data-path="exercise-4.html"><a href="exercise-4.html"><i class="fa fa-check"></i><b>6.3</b> Exercise 4</a></li>
+<li class="chapter" data-level="6.4" data-path="using-singularity.html"><a href="using-singularity.html"><i class="fa fa-check"></i><b>6.4</b> Using Singularity</a></li>
+<li class="chapter" data-level="6.5" data-path="adding-more-steps.html"><a href="adding-more-steps.html"><i class="fa fa-check"></i><b>6.5</b> Adding more steps</a></li>
+<li class="chapter" data-level="6.6" data-path="profiles.html"><a href="profiles.html"><i class="fa fa-check"></i><b>6.6</b> Profiles</a></li>
+<li class="chapter" data-level="6.7" data-path="deployment-in-the-aws-cloud.html"><a href="deployment-in-the-aws-cloud.html"><i class="fa fa-check"></i><b>6.7</b> Deployment in the AWS cloud</a></li>
+<li class="chapter" data-level="6.8" data-path="exercise-5.html"><a href="exercise-5.html"><i class="fa fa-check"></i><b>6.8</b> Exercise 5</a></li>
+<li class="chapter" data-level="6.9" data-path="modules-and-re-usage-of-the-code.html"><a href="modules-and-re-usage-of-the-code.html"><i class="fa fa-check"></i><b>6.9</b> Modules and re-usage of the code</a></li>
+<li class="chapter" data-level="6.10" data-path="exercise-6.html"><a href="exercise-6.html"><i class="fa fa-check"></i><b>6.10</b> EXERCISE 6</a></li>
+<li class="chapter" data-level="6.11" data-path="reporting-and-graphical-interface.html"><a href="reporting-and-graphical-interface.html"><i class="fa fa-check"></i><b>6.11</b> Reporting and graphical interface</a></li>
+<li class="chapter" data-level="6.12" data-path="share-nextflow-pipelines-and-good-practices.html"><a href="share-nextflow-pipelines-and-good-practices.html"><i class="fa fa-check"></i><b>6.12</b> Share Nextflow pipelines and good practices</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://biocore.crg.eu/wiki/Main_Page" target="blank">BIOINFORMATICS CORE @ CRG</a></li>
@@ -298,7 +300,7 @@ cd containers/docker/fastqc_www
 
 docker build -t fastqcwww -f Dockerfile ../../scripts/fastqc
 
-docker run -d -v $HOME/myscratch:/scratch -p 8083:3838 --name myfastqc fastqcwww</code></pre>
+docker run -d -v $HOME/myscratch:/scratch -p 3838:8083 --name myfastqc fastqcwww</code></pre>
 <p>Example query from the browser:</p>
 <p><a href="http://mymachine-address-here:3838/?file=B7_input_s_chr19.fastq" class="uri">http://mymachine-address-here:3838/?file=B7_input_s_chr19.fastq</a></p>
 

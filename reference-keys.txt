@@ -1,4 +1,4 @@
-fig:unnamed-chunk-53
+fig:unnamed-chunk-54
 welcome-and-about-the-course
 meet-the-organizers-and-instructors
 about-the-course
@@ -117,11 +117,13 @@ nextflow-day-2
 decoupling-resources-parameters-and-nextflow-script
 publishing-final-results
 adding-a-help-section-for-the-whole-pipeline
+exercise-4
 using-singularity
 adding-more-steps
 profiles
 deployment-in-the-aws-cloud
+exercise-5
 modules-and-re-usage-of-the-code
-exercise-4
+exercise-6
 reporting-and-graphical-interface
 share-nextflow-pipelines-and-good-practices
