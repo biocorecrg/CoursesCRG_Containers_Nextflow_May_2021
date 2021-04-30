@@ -174,7 +174,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.2.3" data-path="using-existing-images.html"><a href="using-existing-images.html#docker-pull-import-an-image"><i class="fa fa-check"></i><b>3.2.3</b> docker pull: import an image</a></li>
 <li class="chapter" data-level="3.2.4" data-path="using-existing-images.html"><a href="using-existing-images.html#docker-run-run-image-i.e.-start-a-container"><i class="fa fa-check"></i><b>3.2.4</b> docker run: run image, i.e. start a container</a></li>
 <li class="chapter" data-level="3.2.5" data-path="using-existing-images.html"><a href="using-existing-images.html#docker-ps-check-containers-status"><i class="fa fa-check"></i><b>3.2.5</b> docker ps: check containers status</a></li>
-<li class="chapter" data-level="3.2.6" data-path="using-existing-images.html"><a href="using-existing-images.html#docker-exec-execute-process-in-running-container"><i class="fa fa-check"></i><b>3.2.6</b> docker exec: execute process in running container</a></li>
+<li class="chapter" data-level="3.2.6" data-path="using-existing-images.html"><a href="using-existing-images.html#docker-exec-execute-process-in-a-running-container"><i class="fa fa-check"></i><b>3.2.6</b> docker exec: execute process in a running container</a></li>
 <li class="chapter" data-level="3.2.7" data-path="using-existing-images.html"><a href="using-existing-images.html#docker-stop-start-restart-actions-on-container"><i class="fa fa-check"></i><b>3.2.7</b> docker stop, start, restart: actions on container</a></li>
 <li class="chapter" data-level="3.2.8" data-path="using-existing-images.html"><a href="using-existing-images.html#docker-rm-docker-rmi-clean-up"><i class="fa fa-check"></i><b>3.2.8</b> docker rm, docker rmi: clean up!</a></li>
 </ul></li>
@@ -305,7 +305,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Make the container execute the command <code>ls</code>.</li>
 <li>Stop the container.</li>
 </ul></li>
-<li>Remove the alpine image and all its containers (running or stopped)</li>
+<li>Remove the alpine image and all its containers (running or stopped).</li>
 </ul></li>
 </ol>
 <details>
@@ -348,8 +348,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Check the version of the <code>convert</code> command.</li>
 <li>Start a container interactively.</li>
 <li>Inside the container: download <a href="https://pbs.twimg.com/profile_images/1273307847103635465/lfVWBmiW_400x400.png">this png image</a></li>
-<li>Convert it to <strong>.jpg</strong> using the <code>convert</code> command of imagemagick (format; <code>convert image.png image.jpg</code>)</li>
-<li>Exit the container</li>
+<li>Convert it to <strong>.jpg</strong> using the <code>convert</code> command of imagemagick (format; <code>convert image.png image.jpg</code>).</li>
+<li>Exit the container.</li>
 <li>Copy the jpg image back from the stopped container! Explore <code>docker cp</code>.</li>
 </ul></li>
 </ol>

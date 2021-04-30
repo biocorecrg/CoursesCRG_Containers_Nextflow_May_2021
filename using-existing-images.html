@@ -174,7 +174,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.2.3" data-path="using-existing-images.html"><a href="using-existing-images.html#docker-pull-import-an-image"><i class="fa fa-check"></i><b>3.2.3</b> docker pull: import an image</a></li>
 <li class="chapter" data-level="3.2.4" data-path="using-existing-images.html"><a href="using-existing-images.html#docker-run-run-image-i.e.-start-a-container"><i class="fa fa-check"></i><b>3.2.4</b> docker run: run image, i.e. start a container</a></li>
 <li class="chapter" data-level="3.2.5" data-path="using-existing-images.html"><a href="using-existing-images.html#docker-ps-check-containers-status"><i class="fa fa-check"></i><b>3.2.5</b> docker ps: check containers status</a></li>
-<li class="chapter" data-level="3.2.6" data-path="using-existing-images.html"><a href="using-existing-images.html#docker-exec-execute-process-in-running-container"><i class="fa fa-check"></i><b>3.2.6</b> docker exec: execute process in running container</a></li>
+<li class="chapter" data-level="3.2.6" data-path="using-existing-images.html"><a href="using-existing-images.html#docker-exec-execute-process-in-a-running-container"><i class="fa fa-check"></i><b>3.2.6</b> docker exec: execute process in a running container</a></li>
 <li class="chapter" data-level="3.2.7" data-path="using-existing-images.html"><a href="using-existing-images.html#docker-stop-start-restart-actions-on-container"><i class="fa fa-check"></i><b>3.2.7</b> docker stop, start, restart: actions on container</a></li>
 <li class="chapter" data-level="3.2.8" data-path="using-existing-images.html"><a href="using-existing-images.html#docker-rm-docker-rmi-clean-up"><i class="fa fa-check"></i><b>3.2.8</b> docker rm, docker rmi: clean up!</a></li>
 </ul></li>
@@ -420,7 +420,7 @@ The format is:<br></p>
 We can start a container from the <strong>ubuntu tag 18.04 image</strong>, executing the command <code>ls</code> (stored in /bin in the container).</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="using-existing-images.html#cb11-1"></a><span class="ex">docker</span> run ubuntu:18.04 /bin/ls</span></code></pre></div>
 <p><img src="docs/images/docker_run_ls.png" width="200/"></p>
-<p>Now execute <strong>ls</strong> in your current working directory: is the result the same?</p>
+<p>Now execute <code>ls</code> in your current working directory: is the result the same?</p>
 <p>You can execute any program/command that is stored inside the image:</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="using-existing-images.html#cb12-1"></a><span class="ex">docker</span> run ubuntu:18.04 /bin/whoami</span>
 <span id="cb12-2"><a href="using-existing-images.html#cb12-2"></a><span class="ex">docker</span> run ubuntu:18.04 cat /etc/issue</span></code></pre></div>
@@ -487,12 +487,12 @@ We can start a container from the <strong>ubuntu tag 18.04 image</strong>, execu
 <div class="sourceCode" id="cb18"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb18-1"><a href="using-existing-images.html#cb18-1"></a><span class="ex">docker</span> ps -a</span></code></pre></div>
 <p>Each container has a <strong>unique ID</strong>.</p>
 </div>
-<div id="docker-exec-execute-process-in-running-container" class="section level3">
-<h3><span class="header-section-number">3.2.6</span> docker exec: execute process in running container</h3>
+<div id="docker-exec-execute-process-in-a-running-container" class="section level3">
+<h3><span class="header-section-number">3.2.6</span> docker exec: execute process in a running container</h3>
 <p>Difference between <code>docker run</code> and <code>docker exec</code>:</p>
 <ul>
 <li><code>docker run</code> creates a temporary container, runs the command and stops the container.</li>
-<li><code>docker exec</code> needs an already running container to query the command (i.e. a <em>detached</em> container).</li>
+<li><code>docker exec</code> needs an already running container to query the command (that is, a <em>detached</em> container).</li>
 </ul>
 <div class="sourceCode" id="cb19"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb19-1"><a href="using-existing-images.html#cb19-1"></a><span class="ex">docker</span> exec myubuntu uname -a</span></code></pre></div>
 <ul>
@@ -519,9 +519,9 @@ We can start a container from the <strong>ubuntu tag 18.04 image</strong>, execu
 <div class="sourceCode" id="cb23"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb23-1"><a href="using-existing-images.html#cb23-1"></a><span class="ex">docker</span> restart myubuntu</span>
 <span id="cb23-2"><a href="using-existing-images.html#cb23-2"></a></span>
 <span id="cb23-3"><a href="using-existing-images.html#cb23-3"></a><span class="ex">docker</span> ps -a</span></code></pre></div>
-<p>Run with restart enabled (by default, Docker does not automatically restart the container when it exits).
+<p>Run with restart is enabled (by default, when exits, Docker does not automatically restart the container).
 <br>
-In the example below we start a <strong>detached container named “myubuntu2”</strong> with the <strong>unless-stopped</strong> restart policy: <em>restart the container unless it is explicitly stopped or Docker itself is stopped or restarted.</em></p>
+In the example below, we start a <strong>detached container named “myubuntu2”</strong> with the <strong>unless-stopped</strong> restart policy: <em>restart the container unless it is explicitly stopped or Docker itself is stopped or restarted.</em></p>
 <div class="sourceCode" id="cb24"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb24-1"><a href="using-existing-images.html#cb24-1"></a><span class="ex">docker</span> run --restart=unless-stopped --detach --name myubuntu2 ubuntu:18.04 tail -f /dev/null</span></code></pre></div>
 <ul>
 <li><a href="https://docs.docker.com/engine/reference/commandline/run/#restart-policies---restart">Restart policies</a>: no (default), always, on-failure, unless-stopped</li>
