@@ -101,13 +101,9 @@ If you are not familiar with the **ssh** protocol, you can learn about it <a hre
 
 #### Provided infrastructure
 
-Each participant will access using SSH a dedicated [Amazon EC2](https://en.wikipedia.org/wiki/Amazon_Elastic_Compute_Cloud) instance. That instance runs [Amazon Linux 2](https://aws.amazon.com/amazon-linux-2/) with all the necessary software for the course.
+Each participant will access a dedicated [Amazon EC2](https://en.wikipedia.org/wiki/Amazon_Elastic_Compute_Cloud) instance, using SSH. That instance runs [Amazon Linux 2](https://aws.amazon.com/amazon-linux-2/) with all the necessary software for the course.
 
-Every instance has a S3 bucket storage mounted at /mnt. If you need to save any file after the end of the 2nd day and in the end of the course, copy files there and then you can retrieve them using a web browser.
-
-https://bucketname.s3.eu-central-1.amazonaws.com/copiedfile.txt
-
-where bucketname is the name of the directory in /mnt.
+Every instance has a S3 bucket storage mounted at /mnt. If you need to save any file after the end of the 2nd day and in the end of the course, copy files there and then you can retrieve them via a web browser, using the URL *https://bucketname.s3.eu-central-1.amazonaws.com/copiedfile.txt*, where *bucketname* is the name of the directory in /mnt and *copiedfile.txt* is the name of the file to download.
 
 ### Dates, time, location
 
@@ -131,10 +127,10 @@ You can find all information in the dedicated course page of the [Moodle platfor
 * Containers: introduction and history.
 * Docker hub: find existing containers.
 * Fetch (and build) an image from public registries (Docker Hub, Quay.io, etc.)
- * Discovery of different relevant base images
+ * Discover relevant base images
 * Run Docker container based on an existing image (also run it interactively).
 * Build an image from an existing recipe:
-  * Explain sections and keywords.
+  * Sections and keywords.
   * Build options (e.g. cache or build variables).
 * Write a Docker recipe and build an image from it.
 
@@ -146,10 +142,10 @@ You can find all information in the dedicated course page of the [Moodle platfor
 * Singularity:
   * Singularity versus Docker.
     * Differences, pros and cons for each system.
-  * Fetch (and build) Singularity images.
+  * Fetch (and build) a Singularity images.
     * Build from existing public registries.
     * Build from local Docker instances.
-  * Run Singularity container (interactively).
+  * Run a Singularity container (interactively).
   * Understanding and working with volumes.
   * Singularity build recipes.
   * Advanced features: services, etc.
@@ -158,20 +154,20 @@ You can find all information in the dedicated course page of the [Moodle platfor
 
 #### Day 3: Understand the code, run, modify
 
-- Introduction to Nextflow
-- Scripting
+- Introduction to Nextflow.
+- Scripting.
 - Basic concepts:
-  - Channels, processes and workflows
-- The work folder and its structure
-- The log file
-- Resuming pipelines
+  - Channels, processes and workflows.
+- The work folder and its structure.
+- The log file.
+- Resuming pipelines.
 
 #### Day 4: Write and share
 
-- Decoupling configuration and main script
-- Run Nextflow with containers
-- Run Nextflow in a computing cluster (e.g. HPC)
-  - Definition of computing requirements and queues
-  - Profiles
-- Modules, subworkflows and reuse of the code
-- Share Nextflow pipelines and good practices
+- Decoupling configuration and main script.
+- Run Nextflow with containers.
+- Run Nextflow on a computing cluster (e.g. HPC):
+  - Definition of computing requirements and queues.
+  - Profiles.
+- Modules, subworkflows, and how to reuse the code.
+- Share Nextflow pipelines.
