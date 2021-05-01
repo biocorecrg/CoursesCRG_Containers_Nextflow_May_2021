@@ -1262,11 +1262,11 @@ docker exec -ti fastqc_container_test /bin/bash
 > fastqc /scratch/*.gz
 
 # Run fastqc outside the container
-  # One by one
-  docker exec fastqc_container_test fastqc /scratch/B7_H3K4me1_s_chr19.fastq.gz
-  docker exec fastqc_container_test fastqc /scratch/B7_input_s_chr19.fastq.gz
-  # All (using wildcard *)
-  docker exec fastqc_container_test bash -c 'ls /scratch/*gz'
+# One by one
+docker exec fastqc_container_test fastqc /scratch/B7_H3K4me1_s_chr19.fastq.gz
+docker exec fastqc_container_test fastqc /scratch/B7_input_s_chr19.fastq.gz
+# All (using wildcard *)
+docker exec fastqc_container_test bash -c 'ls /scratch/*gz'
 
 ```
 
@@ -1394,10 +1394,35 @@ Configure a credential helper to remove this warning. See
 https://docs.docker.com/engine/reference/commandline/login/#credentials-store
 ```
 
-* Let's choose
+* Let's create a repository in Docker Hub
 
+```{r, out.width="60%", echo=FALSE, eval = TRUE}
+knitr::include_graphics('docs/images/dockerhub-create.png')
+```
 
-* More details ...
+We use one image we have in our system and we add a tag that matches our repository name.
+
+```
+docker pull biocontainers/fastqc:v0.11.9_cv7
+
+Status: Downloaded newer image for biocontainers/fastqc:v0.11.9_cv7
+docker.io/biocontainers/fastqc:v0.11.9_cv7
+
+(base) [ec2-user@ip-172-31-45-86 ~]$ docker images
+REPOSITORY             TAG                 IMAGE ID            CREATED             SIZE
+biocontainers/fastqc   v0.11.9_cv7         e5e3008d2bd1        6 months ago        834MB
+(base) [ec2-user@ip-172-31-45-86 ~]$ docker tag biocontainers/fastqc:v0.11.9_cv7 toniher/fastqc-example:latest
+(base) [ec2-user@ip-172-31-45-86 ~]$ docker images
+REPOSITORY               TAG                 IMAGE ID            CREATED             SIZE
+biocontainers/fastqc     v0.11.9_cv7         e5e3008d2bd1        6 months ago        834MB
+toniher/fastqc-example   latest              e5e3008d2bd1        6 months ago        834MB
+```
+
+Then we push that new added tag and in shortly you will see in Docker Hub page.
+
+```
+docker push toniher/fastqc-example:latest
+```
 
 ### Automatic builds
 
