@@ -643,7 +643,7 @@ It is an important option in the context of Docker: it means that you *answer ye
 
 <br>
 
-[Conda](https://docs.conda.io/en/latest/) is an open source package management system and environment management system that runs on Windows, macOS and Linux. Conda allows to quickly find, install, run and update packages and their dependencies.  
+[Conda](https://docs.conda.io/en/latest/) is an open source package management system and environment management system that runs on Windows, macOS and Linux. Conda allows to quickly find, install, run and update packages and their dependencies.
 
 * [Anaconda](https://anaconda.org/anaconda/repo)
 * [Conda-forge](https://conda-forge.org/feedstocks/)
@@ -1390,12 +1390,23 @@ https://docs.docker.com/engine/reference/commandline/login/#credentials-store
 
 ### Automatic builds
 
-* Creation of Github repository
+* Create a Github repository
 
-* Addition of a Dockerfile
+* Add a Dockerfile (any of the ones used in the course). Keep in mind that if the recipe requires files (e.g., processed with **CP**) you will need to upload them and place them in a way compatible with the context you choose.
 
-* Configuration of an automated build from Docker Hub
+* Configure an automated build from Docker Hub
 
+```{r, out.width="60%", echo=FALSE, eval = TRUE}
+knitr::include_graphics('docs/images/dockerhub-automated-build.png')
+```
+
+```{r, out.width="60%", echo=FALSE, eval = TRUE}
+knitr::include_graphics('docs/images/dockerhub-automated-build-details.png')
+```
+
+```{block2, type='rdmnote'}
+If you cannot trigger the automatic build, it may be because Docker Hub refers by default to **master** branch of Github repositories. Since late 2020, default Branch is **main**, so you might need to explictly put that name there. Some context: https://www.infoq.com/news/2020/10/github-main-branch/ 
+```
 
 ## Exercise 3 - Docker volumes and ports
 
@@ -1448,8 +1459,6 @@ docker run -d -v $HOME/db:/blastdb -p 80:8081 --name myblast blastwww
 Example query from the browser:
 
 http://mymachine-address-here/?id=O75976
-
 </details>
 
-
-* If time push resulting image to Docker Hub
+* Push resulting image to Docker Hub
