@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>4.5 Exercises: | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines</title>
-  <meta name="description" content="4.5 Exercises: | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
+  <title>4.5 Example execution: | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines</title>
+  <meta name="description" content="4.5 Example execution: | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="4.5 Exercises: | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
+  <meta property="og:title" content="4.5 Example execution: | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="4.5 Exercises: | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
+  <meta name="twitter:title" content="4.5 Example execution: | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
   
   
   
@@ -224,7 +224,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.3.6" data-path="run-and-execution-process.html"><a href="run-and-execution-process.html#execute-straight-from-a-registry"><i class="fa fa-check"></i><b>4.3.6</b> Execute straight from a registry</a></li>
 </ul></li>
 <li class="chapter" data-level="4.4" data-path="bind-paths-aka-volumes.html"><a href="bind-paths-aka-volumes.html"><i class="fa fa-check"></i><b>4.4</b> Bind paths (aka volumes)</a></li>
-<li class="chapter" data-level="4.5" data-path="exercises.html"><a href="exercises.html"><i class="fa fa-check"></i><b>4.5</b> Exercises:</a></li>
+<li class="chapter" data-level="4.5" data-path="example-execution.html"><a href="example-execution.html"><i class="fa fa-check"></i><b>4.5</b> Example execution:</a></li>
 <li class="chapter" data-level="4.6" data-path="instances.html"><a href="instances.html"><i class="fa fa-check"></i><b>4.6</b> Instances</a></li>
 <li class="chapter" data-level="4.7" data-path="troubleshooting.html"><a href="troubleshooting.html"><i class="fa fa-check"></i><b>4.7</b> Troubleshooting</a><ul>
 <li class="chapter" data-level="4.7.1" data-path="troubleshooting.html"><a href="troubleshooting.html#fakeroot"><i class="fa fa-check"></i><b>4.7.1</b> Fakeroot</a></li>
@@ -289,9 +289,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="exercises" class="section level2">
-<h2><span class="header-section-number">4.5</span> Exercises:</h2>
+<div id="example-execution" class="section level2">
+<h2><span class="header-section-number">4.5</span> Example execution:</h2>
 <p>Using the 2 fastqc available files, process them outside and inside the mounted directory.</p>
+<p>Let’s use our <code>fastqc.sif</code> image file and we place it in $HOME</p>
+<pre><code># Let&#39;s create a dummy directory
+mkdir $HOME/scratch
+
+# Let&#39;s copy contents of testdata in scratch
+
+singularity exec fastqc.sif fastqc scratch/*fastq.gz
+
+# Check you have some HTMLs there. Remove them
+rm scratch/*html
+
+# Let&#39;s use shell
+singularity shell fastqc.sif
+&gt; cd scratch
+&gt; fastqc *fastq.gz
+&gt; exit
+
+# Check you have some HTMLs there. Remove them
+singularity exec -B ./scratch:/fastqcdir fastqc.sif fastqc /fastqcdir/*fastq.gz
+
+# What happens here!
+singularity exec -B ./scratch:/fastqcdir fastqc.sif bash -c &#39;fastqc /fastqcdir/*fastq.gz&#39;
+</code></pre>
 </div>
             </section>
 

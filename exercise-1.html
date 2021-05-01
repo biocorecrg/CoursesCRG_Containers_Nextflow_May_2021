@@ -224,7 +224,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.3.6" data-path="run-and-execution-process.html"><a href="run-and-execution-process.html#execute-straight-from-a-registry"><i class="fa fa-check"></i><b>4.3.6</b> Execute straight from a registry</a></li>
 </ul></li>
 <li class="chapter" data-level="4.4" data-path="bind-paths-aka-volumes.html"><a href="bind-paths-aka-volumes.html"><i class="fa fa-check"></i><b>4.4</b> Bind paths (aka volumes)</a></li>
-<li class="chapter" data-level="4.5" data-path="exercises.html"><a href="exercises.html"><i class="fa fa-check"></i><b>4.5</b> Exercises:</a></li>
+<li class="chapter" data-level="4.5" data-path="example-execution.html"><a href="example-execution.html"><i class="fa fa-check"></i><b>4.5</b> Example execution:</a></li>
 <li class="chapter" data-level="4.6" data-path="instances.html"><a href="instances.html"><i class="fa fa-check"></i><b>4.6</b> Instances</a></li>
 <li class="chapter" data-level="4.7" data-path="troubleshooting.html"><a href="troubleshooting.html"><i class="fa fa-check"></i><b>4.7</b> Troubleshooting</a><ul>
 <li class="chapter" data-level="4.7.1" data-path="troubleshooting.html"><a href="troubleshooting.html#fakeroot"><i class="fa fa-check"></i><b>4.7.1</b> Fakeroot</a></li>
@@ -295,7 +295,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Let’s create couple of files (like paired end reads) and let’s try to read it as they were a tuple.</li>
 </ul>
 <p>First create a couple of files:</p>
-<div class="sourceCode" id="cb138"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb138-1"><a href="exercise-1.html#cb138-1"></a><span class="fu">touch</span> aaa_1.txt aaa_2.txt</span></code></pre></div>
+<div class="sourceCode" id="cb139"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb139-1"><a href="exercise-1.html#cb139-1"></a><span class="fu">touch</span> aaa_1.txt aaa_2.txt</span></code></pre></div>
 <p>See here <a href="https://www.nextflow.io/docs/latest/channel.html#fromfilepairs">fromFilePairs</a>.</p>
 <details>
 <summary>
@@ -303,20 +303,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <em>Answer</em>
 </h5>
 <p></summary></p>
-<div class="sourceCode" id="cb139"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb139-1"><a href="exercise-1.html#cb139-1"></a>#!/usr/bin/env nextflow</span>
-<span id="cb139-2"><a href="exercise-1.html#cb139-2"></a></span>
-<span id="cb139-3"><a href="exercise-1.html#cb139-3"></a>nextflow.<span class="fu">enable</span>.<span class="fu">dsl</span>=<span class="dv">2</span></span>
-<span id="cb139-4"><a href="exercise-1.html#cb139-4"></a></span>
-<span id="cb139-5"><a href="exercise-1.html#cb139-5"></a><span class="co">/*</span></span>
-<span id="cb139-6"><a href="exercise-1.html#cb139-6"></a><span class="co">* Let&#39;s create the channel `my_files`</span></span>
-<span id="cb139-7"><a href="exercise-1.html#cb139-7"></a><span class="co">* using the method fromFilePairs </span></span>
-<span id="cb139-8"><a href="exercise-1.html#cb139-8"></a><span class="co">*/</span></span>
-<span id="cb139-9"><a href="exercise-1.html#cb139-9"></a></span>
-<span id="cb139-10"><a href="exercise-1.html#cb139-10"></a><span class="bu">Channel</span></span>
-<span id="cb139-11"><a href="exercise-1.html#cb139-11"></a>    .<span class="fu">fromFilePairs</span>( <span class="st">&quot;aaa_{1,2}.txt&quot;</span> )</span>
-<span id="cb139-12"><a href="exercise-1.html#cb139-12"></a>    .<span class="fu">set</span> {my_fyles}</span>
-<span id="cb139-13"><a href="exercise-1.html#cb139-13"></a></span>
-<span id="cb139-14"><a href="exercise-1.html#cb139-14"></a>my_fyles.<span class="fu">view</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb140"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb140-1"><a href="exercise-1.html#cb140-1"></a>#!/usr/bin/env nextflow</span>
+<span id="cb140-2"><a href="exercise-1.html#cb140-2"></a></span>
+<span id="cb140-3"><a href="exercise-1.html#cb140-3"></a>nextflow.<span class="fu">enable</span>.<span class="fu">dsl</span>=<span class="dv">2</span></span>
+<span id="cb140-4"><a href="exercise-1.html#cb140-4"></a></span>
+<span id="cb140-5"><a href="exercise-1.html#cb140-5"></a><span class="co">/*</span></span>
+<span id="cb140-6"><a href="exercise-1.html#cb140-6"></a><span class="co">* Let&#39;s create the channel `my_files`</span></span>
+<span id="cb140-7"><a href="exercise-1.html#cb140-7"></a><span class="co">* using the method fromFilePairs </span></span>
+<span id="cb140-8"><a href="exercise-1.html#cb140-8"></a><span class="co">*/</span></span>
+<span id="cb140-9"><a href="exercise-1.html#cb140-9"></a></span>
+<span id="cb140-10"><a href="exercise-1.html#cb140-10"></a><span class="bu">Channel</span></span>
+<span id="cb140-11"><a href="exercise-1.html#cb140-11"></a>    .<span class="fu">fromFilePairs</span>( <span class="st">&quot;aaa_{1,2}.txt&quot;</span> )</span>
+<span id="cb140-12"><a href="exercise-1.html#cb140-12"></a>    .<span class="fu">set</span> {my_fyles}</span>
+<span id="cb140-13"><a href="exercise-1.html#cb140-13"></a></span>
+<span id="cb140-14"><a href="exercise-1.html#cb140-14"></a>my_fyles.<span class="fu">view</span>()</span></code></pre></div>
 </details>
 <ul>
 <li>Try to reshape the input channel using different operatoes by generating:
@@ -333,18 +333,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <em>Answer</em>
 </h5>
 <p></summary></p>
-<div class="sourceCode" id="cb140"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb140-1"><a href="exercise-1.html#cb140-1"></a>#!/usr/bin/env nextflow</span>
-<span id="cb140-2"><a href="exercise-1.html#cb140-2"></a>nextflow.<span class="fu">enable</span>.<span class="fu">dsl</span>=<span class="dv">2</span></span>
-<span id="cb140-3"><a href="exercise-1.html#cb140-3"></a></span>
-<span id="cb140-4"><a href="exercise-1.html#cb140-4"></a><span class="bu">Channel</span></span>
-<span id="cb140-5"><a href="exercise-1.html#cb140-5"></a>    .<span class="fu">fromPath</span>( <span class="st">&quot;*.txt&quot;</span>).<span class="fu">set</span> {my_fyles}</span>
-<span id="cb140-6"><a href="exercise-1.html#cb140-6"></a></span>
-<span id="cb140-7"><a href="exercise-1.html#cb140-7"></a>my_fyles.<span class="fu">collect</span>().<span class="fu">view</span>()</span>
-<span id="cb140-8"><a href="exercise-1.html#cb140-8"></a>my_fyles.<span class="fu">combine</span>(my_fyles).<span class="fu">view</span>()</span>
-<span id="cb140-9"><a href="exercise-1.html#cb140-9"></a>my_fyles.<span class="fu">collect</span>().<span class="fu">map</span>{</span>
-<span id="cb140-10"><a href="exercise-1.html#cb140-10"></a>    [<span class="st">&quot;id&quot;</span>, it]</span>
-<span id="cb140-11"><a href="exercise-1.html#cb140-11"></a>}.<span class="fu">view</span>()</span>
-<span id="cb140-12"><a href="exercise-1.html#cb140-12"></a>my_fyles.<span class="fu">view</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb141"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb141-1"><a href="exercise-1.html#cb141-1"></a>#!/usr/bin/env nextflow</span>
+<span id="cb141-2"><a href="exercise-1.html#cb141-2"></a>nextflow.<span class="fu">enable</span>.<span class="fu">dsl</span>=<span class="dv">2</span></span>
+<span id="cb141-3"><a href="exercise-1.html#cb141-3"></a></span>
+<span id="cb141-4"><a href="exercise-1.html#cb141-4"></a><span class="bu">Channel</span></span>
+<span id="cb141-5"><a href="exercise-1.html#cb141-5"></a>    .<span class="fu">fromPath</span>( <span class="st">&quot;*.txt&quot;</span>).<span class="fu">set</span> {my_fyles}</span>
+<span id="cb141-6"><a href="exercise-1.html#cb141-6"></a></span>
+<span id="cb141-7"><a href="exercise-1.html#cb141-7"></a>my_fyles.<span class="fu">collect</span>().<span class="fu">view</span>()</span>
+<span id="cb141-8"><a href="exercise-1.html#cb141-8"></a>my_fyles.<span class="fu">combine</span>(my_fyles).<span class="fu">view</span>()</span>
+<span id="cb141-9"><a href="exercise-1.html#cb141-9"></a>my_fyles.<span class="fu">collect</span>().<span class="fu">map</span>{</span>
+<span id="cb141-10"><a href="exercise-1.html#cb141-10"></a>    [<span class="st">&quot;id&quot;</span>, it]</span>
+<span id="cb141-11"><a href="exercise-1.html#cb141-11"></a>}.<span class="fu">view</span>()</span>
+<span id="cb141-12"><a href="exercise-1.html#cb141-12"></a>my_fyles.<span class="fu">view</span>()</span></code></pre></div>
 </details>
 </div>
             </section>

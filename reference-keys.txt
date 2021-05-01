@@ -90,7 +90,7 @@ environment-control
 execute-from-sandboxed-images-directories
 execute-straight-from-a-registry
 bind-paths-aka-volumes
-exercises
+example-execution
 instances
 troubleshooting
 fakeroot
