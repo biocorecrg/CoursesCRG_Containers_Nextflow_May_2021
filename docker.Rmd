@@ -1272,7 +1272,9 @@ docker exec fastqc_container_test bash -c 'ls /scratch/*gz'
 
 </details>
 
-
+```{block2, type='rmdtip'}
+***bash -c*** stands for executing from the provided string.
+```
 
 ## Ports
 
@@ -1422,6 +1424,11 @@ Then we push that new added tag and in shortly you will see in Docker Hub page.
 
 ```
 docker push toniher/fastqc-example:latest
+```
+
+
+```{block2, type='rdmnote'}
+As already noted, default registry is Docker Hub. If using another one, it is necessary to prepend it as when pulling.
 ```
 
 ### Automatic builds
