@@ -1368,11 +1368,19 @@ In the CMD execution you see the host *0.0.0.0*, this a normal approach to indic
 knitr::include_graphics('docs/images/push_door.jpg')
 ```
 
-* Generation of an access key in Docker Hub
+If you didn't do it yet, you can create an account in Docker Hub.
+
+* Generate of an access key in Docker Hub
 
 ```{r, out.width="60%", echo=FALSE, eval = TRUE}
-knitr::include_graphics('docs/images/access-token-docker.png')
+knitr::include_graphics('docs/images/access-token-docker-start.png')
 ```
+
+```{r, out.width="60%", echo=FALSE, eval = TRUE}
+knitr::include_graphics('docs/images/access-token-docker-start.png')
+```
+
+Let's go back to our terminal and we use that access token. **Username** is your Docker Hub username.
 
 * docker login
 
@@ -1386,6 +1394,9 @@ Configure a credential helper to remove this warning. See
 https://docs.docker.com/engine/reference/commandline/login/#credentials-store
 ```
 
+* Let's choose
+
+
 * More details ...
 
 ### Automatic builds
@@ -1396,6 +1407,8 @@ https://docs.docker.com/engine/reference/commandline/login/#credentials-store
 
 * Configure an automated build from Docker Hub
 
+First you may need to grant permission to Github from your Docker Hub account. More information at: https://docs.docker.com/docker-hub/builds/link-source/
+
 ```{r, out.width="60%", echo=FALSE, eval = TRUE}
 knitr::include_graphics('docs/images/dockerhub-automated-build.png')
 ```
@@ -1405,7 +1418,7 @@ knitr::include_graphics('docs/images/dockerhub-automated-build-details.png')
 ```
 
 ```{block2, type='rdmnote'}
-If you cannot trigger the automatic build, it may be because Docker Hub refers by default to **master** branch of Github repositories. Since late 2020, default Branch is **main**, so you might need to explictly put that name there. Some context: https://www.infoq.com/news/2020/10/github-main-branch/ 
+If you cannot trigger the automatic build, it may be because Docker Hub refers by default to **master** branch of Github repositories. Since late 2020, default Branch is **main**, so you might need to explictly put that name there. Some context: https://www.infoq.com/news/2020/10/github-main-branch/
 ```
 
 ## Exercise 3 - Docker volumes and ports
