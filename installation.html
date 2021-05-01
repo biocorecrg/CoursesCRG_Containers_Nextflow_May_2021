@@ -231,7 +231,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.7.2" data-path="troubleshooting.html"><a href="troubleshooting.html#singularity-cache-directory"><i class="fa fa-check"></i><b>4.7.2</b> Singularity cache directory</a></li>
 <li class="chapter" data-level="4.7.3" data-path="troubleshooting.html"><a href="troubleshooting.html#global-singularity-configuration"><i class="fa fa-check"></i><b>4.7.3</b> Global singularity configuration</a></li>
 </ul></li>
-<li class="chapter" data-level="4.8" data-path="exercise-4-singularity-running-and-building.html"><a href="exercise-4-singularity-running-and-building.html"><i class="fa fa-check"></i><b>4.8</b> Exercise 4 - Singularity running and building</a></li>
+<li class="chapter" data-level="4.8" data-path="exercise-4-singularity-running-and-building.html"><a href="exercise-4-singularity-running-and-building.html"><i class="fa fa-check"></i><b>4.8</b> Exercise 4 - Singularity running and building</a><ul>
+<li class="chapter" data-level="4.8.1" data-path="exercise-4-singularity-running-and-building.html"><a href="exercise-4-singularity-running-and-building.html#blast-command-line-1"><i class="fa fa-check"></i><b>4.8.1</b> Blast command-line (1)</a></li>
+<li class="chapter" data-level="4.8.2" data-path="exercise-4-singularity-running-and-building.html"><a href="exercise-4-singularity-running-and-building.html#blast-command-line-2"><i class="fa fa-check"></i><b>4.8.2</b> Blast command-line (2)</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="nextflow-day-1.html"><a href="nextflow-day-1.html"><i class="fa fa-check"></i><b>5</b> Nextflow day 1</a><ul>
 <li class="chapter" data-level="5.1" data-path="what-is-nextflow.html"><a href="what-is-nextflow.html"><i class="fa fa-check"></i><b>5.1</b> What is Nextflow?</a></li>
@@ -289,25 +292,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="installation" class="section level2">
 <h2><span class="header-section-number">5.5</span> Installation</h2>
 <p>We need at least Java version 8.</p>
-<div class="sourceCode" id="cb126"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb126-1"><a href="installation.html#cb126-1"></a><span class="ex">java</span> -version</span></code></pre></div>
+<div class="sourceCode" id="cb130"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb130-1"><a href="installation.html#cb130-1"></a><span class="ex">java</span> -version</span></code></pre></div>
 <p>Then we can install it by typing:</p>
-<div class="sourceCode" id="cb127"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb127-1"><a href="installation.html#cb127-1"></a><span class="ex">curl</span> -s https://get.nextflow.io <span class="kw">|</span> <span class="fu">bash</span></span></code></pre></div>
+<div class="sourceCode" id="cb131"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb131-1"><a href="installation.html#cb131-1"></a><span class="ex">curl</span> -s https://get.nextflow.io <span class="kw">|</span> <span class="fu">bash</span></span></code></pre></div>
 <p>This will create an executable called nextflow that can be moved to /usr/local/bin or where we prefer. We can finally test using:</p>
-<div class="sourceCode" id="cb128"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb128-1"><a href="installation.html#cb128-1"></a><span class="ex">./nextflow</span> run hello</span>
-<span id="cb128-2"><a href="installation.html#cb128-2"></a></span>
-<span id="cb128-3"><a href="installation.html#cb128-3"></a><span class="ex">N</span> E X T F L O W  ~  version 20.07.1</span>
-<span id="cb128-4"><a href="installation.html#cb128-4"></a><span class="ex">Pulling</span> nextflow-io/hello ...</span>
-<span id="cb128-5"><a href="installation.html#cb128-5"></a><span class="ex">downloaded</span> from https://github.com/nextflow-io/hello.git</span>
-<span id="cb128-6"><a href="installation.html#cb128-6"></a><span class="ex">Launching</span> <span class="kw">`</span><span class="ex">nextflow-io/hello</span><span class="kw">`</span> [peaceful_brahmagupta] - revision: 96eb04d6a4 [master]</span>
-<span id="cb128-7"><a href="installation.html#cb128-7"></a><span class="ex">executor</span> <span class="op">&gt;</span>  local (4)</span>
-<span id="cb128-8"><a href="installation.html#cb128-8"></a>[<span class="ex">d7</span>/<span class="ex">d053b5</span>] process <span class="op">&gt;</span> sayHello (4) [<span class="ex">100%</span>] 4 of 4 ✔</span>
-<span id="cb128-9"><a href="installation.html#cb128-9"></a><span class="ex">Ciao</span> world!</span>
-<span id="cb128-10"><a href="installation.html#cb128-10"></a></span>
-<span id="cb128-11"><a href="installation.html#cb128-11"></a><span class="ex">Bonjour</span> world!</span>
-<span id="cb128-12"><a href="installation.html#cb128-12"></a></span>
-<span id="cb128-13"><a href="installation.html#cb128-13"></a><span class="ex">Hello</span> world!</span>
-<span id="cb128-14"><a href="installation.html#cb128-14"></a></span>
-<span id="cb128-15"><a href="installation.html#cb128-15"></a><span class="ex">Hola</span> world!</span></code></pre></div>
+<div class="sourceCode" id="cb132"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb132-1"><a href="installation.html#cb132-1"></a><span class="ex">./nextflow</span> run hello</span>
+<span id="cb132-2"><a href="installation.html#cb132-2"></a></span>
+<span id="cb132-3"><a href="installation.html#cb132-3"></a><span class="ex">N</span> E X T F L O W  ~  version 20.07.1</span>
+<span id="cb132-4"><a href="installation.html#cb132-4"></a><span class="ex">Pulling</span> nextflow-io/hello ...</span>
+<span id="cb132-5"><a href="installation.html#cb132-5"></a><span class="ex">downloaded</span> from https://github.com/nextflow-io/hello.git</span>
+<span id="cb132-6"><a href="installation.html#cb132-6"></a><span class="ex">Launching</span> <span class="kw">`</span><span class="ex">nextflow-io/hello</span><span class="kw">`</span> [peaceful_brahmagupta] - revision: 96eb04d6a4 [master]</span>
+<span id="cb132-7"><a href="installation.html#cb132-7"></a><span class="ex">executor</span> <span class="op">&gt;</span>  local (4)</span>
+<span id="cb132-8"><a href="installation.html#cb132-8"></a>[<span class="ex">d7</span>/<span class="ex">d053b5</span>] process <span class="op">&gt;</span> sayHello (4) [<span class="ex">100%</span>] 4 of 4 ✔</span>
+<span id="cb132-9"><a href="installation.html#cb132-9"></a><span class="ex">Ciao</span> world!</span>
+<span id="cb132-10"><a href="installation.html#cb132-10"></a></span>
+<span id="cb132-11"><a href="installation.html#cb132-11"></a><span class="ex">Bonjour</span> world!</span>
+<span id="cb132-12"><a href="installation.html#cb132-12"></a></span>
+<span id="cb132-13"><a href="installation.html#cb132-13"></a><span class="ex">Hello</span> world!</span>
+<span id="cb132-14"><a href="installation.html#cb132-14"></a></span>
+<span id="cb132-15"><a href="installation.html#cb132-15"></a><span class="ex">Hola</span> world!</span></code></pre></div>
 <p>This command download from the a github repository and it runs the test script hello.</p>
 </div>
             </section>

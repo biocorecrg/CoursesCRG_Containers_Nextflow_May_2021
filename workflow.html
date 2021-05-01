@@ -231,7 +231,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.7.2" data-path="troubleshooting.html"><a href="troubleshooting.html#singularity-cache-directory"><i class="fa fa-check"></i><b>4.7.2</b> Singularity cache directory</a></li>
 <li class="chapter" data-level="4.7.3" data-path="troubleshooting.html"><a href="troubleshooting.html#global-singularity-configuration"><i class="fa fa-check"></i><b>4.7.3</b> Global singularity configuration</a></li>
 </ul></li>
-<li class="chapter" data-level="4.8" data-path="exercise-4-singularity-running-and-building.html"><a href="exercise-4-singularity-running-and-building.html"><i class="fa fa-check"></i><b>4.8</b> Exercise 4 - Singularity running and building</a></li>
+<li class="chapter" data-level="4.8" data-path="exercise-4-singularity-running-and-building.html"><a href="exercise-4-singularity-running-and-building.html"><i class="fa fa-check"></i><b>4.8</b> Exercise 4 - Singularity running and building</a><ul>
+<li class="chapter" data-level="4.8.1" data-path="exercise-4-singularity-running-and-building.html"><a href="exercise-4-singularity-running-and-building.html#blast-command-line-1"><i class="fa fa-check"></i><b>4.8.1</b> Blast command-line (1)</a></li>
+<li class="chapter" data-level="4.8.2" data-path="exercise-4-singularity-running-and-building.html"><a href="exercise-4-singularity-running-and-building.html#blast-command-line-2"><i class="fa fa-check"></i><b>4.8.2</b> Blast command-line (2)</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="nextflow-day-1.html"><a href="nextflow-day-1.html"><i class="fa fa-check"></i><b>5</b> Nextflow day 1</a><ul>
 <li class="chapter" data-level="5.1" data-path="what-is-nextflow.html"><a href="what-is-nextflow.html"><i class="fa fa-check"></i><b>5.1</b> What is Nextflow?</a></li>
@@ -290,40 +293,40 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">5.9</span> Workflow</h2>
 <p>The code as it is will not produce anything, because you need another part that actually call the process and connect it to the input channel.
 This part is called a <strong>workflow</strong>. So let’s change our code:</p>
-<div class="sourceCode" id="cb138"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb138-1"><a href="workflow.html#cb138-1"></a>#!/usr/bin/env nextflow</span>
-<span id="cb138-2"><a href="workflow.html#cb138-2"></a></span>
-<span id="cb138-3"><a href="workflow.html#cb138-3"></a>nextflow.<span class="fu">enable</span>.<span class="fu">dsl</span>=<span class="dv">2</span></span>
-<span id="cb138-4"><a href="workflow.html#cb138-4"></a></span>
-<span id="cb138-5"><a href="workflow.html#cb138-5"></a>str = <span class="bu">Channel</span>.<span class="fu">from</span>(&#39;hello&#39;, &#39;hola&#39;, &#39;bonjour&#39;)</span>
-<span id="cb138-6"><a href="workflow.html#cb138-6"></a></span>
-<span id="cb138-7"><a href="workflow.html#cb138-7"></a>process printHello {</span>
-<span id="cb138-8"><a href="workflow.html#cb138-8"></a></span>
-<span id="cb138-9"><a href="workflow.html#cb138-9"></a>   tag { str_in }</span>
-<span id="cb138-10"><a href="workflow.html#cb138-10"></a></span>
-<span id="cb138-11"><a href="workflow.html#cb138-11"></a>   input:        </span>
-<span id="cb138-12"><a href="workflow.html#cb138-12"></a>   val str_in</span>
-<span id="cb138-13"><a href="workflow.html#cb138-13"></a></span>
-<span id="cb138-14"><a href="workflow.html#cb138-14"></a>   output:        </span>
-<span id="cb138-15"><a href="workflow.html#cb138-15"></a>   stdout</span>
-<span id="cb138-16"><a href="workflow.html#cb138-16"></a></span>
-<span id="cb138-17"><a href="workflow.html#cb138-17"></a>   script:        </span>
-<span id="cb138-18"><a href="workflow.html#cb138-18"></a>   <span class="st">&quot;&quot;&quot;</span></span>
-<span id="cb138-19"><a href="workflow.html#cb138-19"></a>   echo ${str_in} in Italian is ciao</span>
-<span id="cb138-20"><a href="workflow.html#cb138-20"></a>   <span class="st">&quot;&quot;&quot;</span></span>
-<span id="cb138-21"><a href="workflow.html#cb138-21"></a>}</span>
-<span id="cb138-22"><a href="workflow.html#cb138-22"></a></span>
-<span id="cb138-23"><a href="workflow.html#cb138-23"></a><span class="co">/*</span></span>
-<span id="cb138-24"><a href="workflow.html#cb138-24"></a><span class="co"> * A workflow consist of a number of invocations of processes</span></span>
-<span id="cb138-25"><a href="workflow.html#cb138-25"></a><span class="co"> * where they are fed with the expected input channels</span></span>
-<span id="cb138-26"><a href="workflow.html#cb138-26"></a><span class="co"> * as they were cutom functions. You can only invoke a process once per workflow.</span></span>
-<span id="cb138-27"><a href="workflow.html#cb138-27"></a><span class="co"> */</span></span>
-<span id="cb138-28"><a href="workflow.html#cb138-28"></a></span>
-<span id="cb138-29"><a href="workflow.html#cb138-29"></a>workflow {</span>
-<span id="cb138-30"><a href="workflow.html#cb138-30"></a> result = <span class="fu">printHello</span>(str)</span>
-<span id="cb138-31"><a href="workflow.html#cb138-31"></a> result.<span class="fu">view</span>()</span>
-<span id="cb138-32"><a href="workflow.html#cb138-32"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb142"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb142-1"><a href="workflow.html#cb142-1"></a>#!/usr/bin/env nextflow</span>
+<span id="cb142-2"><a href="workflow.html#cb142-2"></a></span>
+<span id="cb142-3"><a href="workflow.html#cb142-3"></a>nextflow.<span class="fu">enable</span>.<span class="fu">dsl</span>=<span class="dv">2</span></span>
+<span id="cb142-4"><a href="workflow.html#cb142-4"></a></span>
+<span id="cb142-5"><a href="workflow.html#cb142-5"></a>str = <span class="bu">Channel</span>.<span class="fu">from</span>(&#39;hello&#39;, &#39;hola&#39;, &#39;bonjour&#39;)</span>
+<span id="cb142-6"><a href="workflow.html#cb142-6"></a></span>
+<span id="cb142-7"><a href="workflow.html#cb142-7"></a>process printHello {</span>
+<span id="cb142-8"><a href="workflow.html#cb142-8"></a></span>
+<span id="cb142-9"><a href="workflow.html#cb142-9"></a>   tag { str_in }</span>
+<span id="cb142-10"><a href="workflow.html#cb142-10"></a></span>
+<span id="cb142-11"><a href="workflow.html#cb142-11"></a>   input:        </span>
+<span id="cb142-12"><a href="workflow.html#cb142-12"></a>   val str_in</span>
+<span id="cb142-13"><a href="workflow.html#cb142-13"></a></span>
+<span id="cb142-14"><a href="workflow.html#cb142-14"></a>   output:        </span>
+<span id="cb142-15"><a href="workflow.html#cb142-15"></a>   stdout</span>
+<span id="cb142-16"><a href="workflow.html#cb142-16"></a></span>
+<span id="cb142-17"><a href="workflow.html#cb142-17"></a>   script:        </span>
+<span id="cb142-18"><a href="workflow.html#cb142-18"></a>   <span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb142-19"><a href="workflow.html#cb142-19"></a>   echo ${str_in} in Italian is ciao</span>
+<span id="cb142-20"><a href="workflow.html#cb142-20"></a>   <span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb142-21"><a href="workflow.html#cb142-21"></a>}</span>
+<span id="cb142-22"><a href="workflow.html#cb142-22"></a></span>
+<span id="cb142-23"><a href="workflow.html#cb142-23"></a><span class="co">/*</span></span>
+<span id="cb142-24"><a href="workflow.html#cb142-24"></a><span class="co"> * A workflow consist of a number of invocations of processes</span></span>
+<span id="cb142-25"><a href="workflow.html#cb142-25"></a><span class="co"> * where they are fed with the expected input channels</span></span>
+<span id="cb142-26"><a href="workflow.html#cb142-26"></a><span class="co"> * as they were cutom functions. You can only invoke a process once per workflow.</span></span>
+<span id="cb142-27"><a href="workflow.html#cb142-27"></a><span class="co"> */</span></span>
+<span id="cb142-28"><a href="workflow.html#cb142-28"></a></span>
+<span id="cb142-29"><a href="workflow.html#cb142-29"></a>workflow {</span>
+<span id="cb142-30"><a href="workflow.html#cb142-30"></a> result = <span class="fu">printHello</span>(str)</span>
+<span id="cb142-31"><a href="workflow.html#cb142-31"></a> result.<span class="fu">view</span>()</span>
+<span id="cb142-32"><a href="workflow.html#cb142-32"></a>}</span></code></pre></div>
 <p>We can run the script this time sending the execution in background and sending the log to a file.</p>
-<div class="sourceCode" id="cb139"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb139-1"><a href="workflow.html#cb139-1"></a><span class="ex">nextflow</span> run test.nf -bg <span class="op">&gt;</span> log.txt</span></code></pre></div>
+<div class="sourceCode" id="cb143"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb143-1"><a href="workflow.html#cb143-1"></a><span class="ex">nextflow</span> run test.nf -bg <span class="op">&gt;</span> log.txt</span></code></pre></div>
 </div>
             </section>
 

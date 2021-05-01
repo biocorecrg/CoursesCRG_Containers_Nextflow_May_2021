@@ -231,7 +231,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.7.2" data-path="troubleshooting.html"><a href="troubleshooting.html#singularity-cache-directory"><i class="fa fa-check"></i><b>4.7.2</b> Singularity cache directory</a></li>
 <li class="chapter" data-level="4.7.3" data-path="troubleshooting.html"><a href="troubleshooting.html#global-singularity-configuration"><i class="fa fa-check"></i><b>4.7.3</b> Global singularity configuration</a></li>
 </ul></li>
-<li class="chapter" data-level="4.8" data-path="exercise-4-singularity-running-and-building.html"><a href="exercise-4-singularity-running-and-building.html"><i class="fa fa-check"></i><b>4.8</b> Exercise 4 - Singularity running and building</a></li>
+<li class="chapter" data-level="4.8" data-path="exercise-4-singularity-running-and-building.html"><a href="exercise-4-singularity-running-and-building.html"><i class="fa fa-check"></i><b>4.8</b> Exercise 4 - Singularity running and building</a><ul>
+<li class="chapter" data-level="4.8.1" data-path="exercise-4-singularity-running-and-building.html"><a href="exercise-4-singularity-running-and-building.html#blast-command-line-1"><i class="fa fa-check"></i><b>4.8.1</b> Blast command-line (1)</a></li>
+<li class="chapter" data-level="4.8.2" data-path="exercise-4-singularity-running-and-building.html"><a href="exercise-4-singularity-running-and-building.html#blast-command-line-2"><i class="fa fa-check"></i><b>4.8.2</b> Blast command-line (2)</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="nextflow-day-1.html"><a href="nextflow-day-1.html"><i class="fa fa-check"></i><b>5</b> Nextflow day 1</a><ul>
 <li class="chapter" data-level="5.1" data-path="what-is-nextflow.html"><a href="what-is-nextflow.html"><i class="fa fa-check"></i><b>5.1</b> What is Nextflow?</a></li>
@@ -299,42 +302,42 @@ The executor is completely abstracted, so you can switch from SGE to SLURM just 
 <li>cloud</li>
 </ul>
 <p>The first one indicates the resources needed for running the pipeline locally. They are quite small since we have little power and CPUs on the test node.</p>
-<div class="sourceCode" id="cb194"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb194-1"><a href="profiles.html#cb194-1"></a></span>
-<span id="cb194-2"><a href="profiles.html#cb194-2"></a>profiles {</span>
-<span id="cb194-3"><a href="profiles.html#cb194-3"></a>  standard {</span>
-<span id="cb194-4"><a href="profiles.html#cb194-4"></a>     process {</span>
-<span id="cb194-5"><a href="profiles.html#cb194-5"></a>        containerOptions = { workflow.<span class="fu">containerEngine</span> == <span class="st">&quot;docker&quot;</span> ? &#39;-u $(id -u):$(id -g)&#39;: <span class="kw">null</span>}</span>
-<span id="cb194-6"><a href="profiles.html#cb194-6"></a>        executor=<span class="st">&quot;local&quot;</span></span>
-<span id="cb194-7"><a href="profiles.html#cb194-7"></a>        memory=&#39;<span class="fl">0.</span>6G&#39;</span>
-<span id="cb194-8"><a href="profiles.html#cb194-8"></a>        cpus=<span class="ch">&#39;1&#39;</span></span>
-<span id="cb194-9"><a href="profiles.html#cb194-9"></a>        time=&#39;6h&#39;</span>
-<span id="cb194-10"><a href="profiles.html#cb194-10"></a></span>
-<span id="cb194-11"><a href="profiles.html#cb194-11"></a>        withLabel: &#39;twocpus&#39; {</span>
-<span id="cb194-12"><a href="profiles.html#cb194-12"></a>            memory=&#39;<span class="fl">0.</span>6G&#39;</span>
-<span id="cb194-13"><a href="profiles.html#cb194-13"></a>            cpus=<span class="ch">&#39;1&#39;</span></span>
-<span id="cb194-14"><a href="profiles.html#cb194-14"></a>        }</span>
-<span id="cb194-15"><a href="profiles.html#cb194-15"></a>      }</span>
-<span id="cb194-16"><a href="profiles.html#cb194-16"></a>   }</span></code></pre></div>
+<div class="sourceCode" id="cb198"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb198-1"><a href="profiles.html#cb198-1"></a></span>
+<span id="cb198-2"><a href="profiles.html#cb198-2"></a>profiles {</span>
+<span id="cb198-3"><a href="profiles.html#cb198-3"></a>  standard {</span>
+<span id="cb198-4"><a href="profiles.html#cb198-4"></a>     process {</span>
+<span id="cb198-5"><a href="profiles.html#cb198-5"></a>        containerOptions = { workflow.<span class="fu">containerEngine</span> == <span class="st">&quot;docker&quot;</span> ? &#39;-u $(id -u):$(id -g)&#39;: <span class="kw">null</span>}</span>
+<span id="cb198-6"><a href="profiles.html#cb198-6"></a>        executor=<span class="st">&quot;local&quot;</span></span>
+<span id="cb198-7"><a href="profiles.html#cb198-7"></a>        memory=&#39;<span class="fl">0.</span>6G&#39;</span>
+<span id="cb198-8"><a href="profiles.html#cb198-8"></a>        cpus=<span class="ch">&#39;1&#39;</span></span>
+<span id="cb198-9"><a href="profiles.html#cb198-9"></a>        time=&#39;6h&#39;</span>
+<span id="cb198-10"><a href="profiles.html#cb198-10"></a></span>
+<span id="cb198-11"><a href="profiles.html#cb198-11"></a>        withLabel: &#39;twocpus&#39; {</span>
+<span id="cb198-12"><a href="profiles.html#cb198-12"></a>            memory=&#39;<span class="fl">0.</span>6G&#39;</span>
+<span id="cb198-13"><a href="profiles.html#cb198-13"></a>            cpus=<span class="ch">&#39;1&#39;</span></span>
+<span id="cb198-14"><a href="profiles.html#cb198-14"></a>        }</span>
+<span id="cb198-15"><a href="profiles.html#cb198-15"></a>      }</span>
+<span id="cb198-16"><a href="profiles.html#cb198-16"></a>   }</span></code></pre></div>
 <p>As you can see we indicate explicitly the <strong>local</strong> executor. So this will be the default when running the pipeline indicating no profiles.</p>
 <p>The second one is <strong>cluster</strong></p>
-<div class="sourceCode" id="cb195"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb195-1"><a href="profiles.html#cb195-1"></a></span>
-<span id="cb195-2"><a href="profiles.html#cb195-2"></a>   cluster {</span>
-<span id="cb195-3"><a href="profiles.html#cb195-3"></a>     process {</span>
-<span id="cb195-4"><a href="profiles.html#cb195-4"></a>        containerOptions = { workflow.<span class="fu">containerEngine</span> == <span class="st">&quot;docker&quot;</span> ? &#39;-u $(id -u):$(id -g)&#39;: <span class="kw">null</span>}</span>
-<span id="cb195-5"><a href="profiles.html#cb195-5"></a>        executor=<span class="st">&quot;SGE&quot;</span></span>
-<span id="cb195-6"><a href="profiles.html#cb195-6"></a>        queue=<span class="st">&quot;smallcpus&quot;</span></span>
-<span id="cb195-7"><a href="profiles.html#cb195-7"></a></span>
-<span id="cb195-8"><a href="profiles.html#cb195-8"></a>        memory=&#39;1G&#39;</span>
-<span id="cb195-9"><a href="profiles.html#cb195-9"></a>        cpus=<span class="ch">&#39;1&#39;</span></span>
-<span id="cb195-10"><a href="profiles.html#cb195-10"></a>        time=&#39;6h&#39;</span>
-<span id="cb195-11"><a href="profiles.html#cb195-11"></a></span>
-<span id="cb195-12"><a href="profiles.html#cb195-12"></a>        withLabel: &#39;twocpus&#39; {</span>
-<span id="cb195-13"><a href="profiles.html#cb195-13"></a>            queue=<span class="st">&quot;bigcpus&quot;</span></span>
-<span id="cb195-14"><a href="profiles.html#cb195-14"></a>            memory=&#39;4G&#39;</span>
-<span id="cb195-15"><a href="profiles.html#cb195-15"></a>            cpus=<span class="ch">&#39;2&#39;</span></span>
-<span id="cb195-16"><a href="profiles.html#cb195-16"></a>        }</span>
-<span id="cb195-17"><a href="profiles.html#cb195-17"></a>      }</span>
-<span id="cb195-18"><a href="profiles.html#cb195-18"></a>   }</span></code></pre></div>
+<div class="sourceCode" id="cb199"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb199-1"><a href="profiles.html#cb199-1"></a></span>
+<span id="cb199-2"><a href="profiles.html#cb199-2"></a>   cluster {</span>
+<span id="cb199-3"><a href="profiles.html#cb199-3"></a>     process {</span>
+<span id="cb199-4"><a href="profiles.html#cb199-4"></a>        containerOptions = { workflow.<span class="fu">containerEngine</span> == <span class="st">&quot;docker&quot;</span> ? &#39;-u $(id -u):$(id -g)&#39;: <span class="kw">null</span>}</span>
+<span id="cb199-5"><a href="profiles.html#cb199-5"></a>        executor=<span class="st">&quot;SGE&quot;</span></span>
+<span id="cb199-6"><a href="profiles.html#cb199-6"></a>        queue=<span class="st">&quot;smallcpus&quot;</span></span>
+<span id="cb199-7"><a href="profiles.html#cb199-7"></a></span>
+<span id="cb199-8"><a href="profiles.html#cb199-8"></a>        memory=&#39;1G&#39;</span>
+<span id="cb199-9"><a href="profiles.html#cb199-9"></a>        cpus=<span class="ch">&#39;1&#39;</span></span>
+<span id="cb199-10"><a href="profiles.html#cb199-10"></a>        time=&#39;6h&#39;</span>
+<span id="cb199-11"><a href="profiles.html#cb199-11"></a></span>
+<span id="cb199-12"><a href="profiles.html#cb199-12"></a>        withLabel: &#39;twocpus&#39; {</span>
+<span id="cb199-13"><a href="profiles.html#cb199-13"></a>            queue=<span class="st">&quot;bigcpus&quot;</span></span>
+<span id="cb199-14"><a href="profiles.html#cb199-14"></a>            memory=&#39;4G&#39;</span>
+<span id="cb199-15"><a href="profiles.html#cb199-15"></a>            cpus=<span class="ch">&#39;2&#39;</span></span>
+<span id="cb199-16"><a href="profiles.html#cb199-16"></a>        }</span>
+<span id="cb199-17"><a href="profiles.html#cb199-17"></a>      }</span>
+<span id="cb199-18"><a href="profiles.html#cb199-18"></a>   }</span></code></pre></div>
 <p>This indicates that the system uses Sun Grid Engine as job scheduler and that we have different queues for small jobs and more intensive ones.</p>
 </div>
             </section>
