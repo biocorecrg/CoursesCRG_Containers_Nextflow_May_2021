@@ -321,10 +321,17 @@ https://docs.docker.com/engine/reference/commandline/login/#credentials-store</c
 <div id="automatic-builds" class="section level3">
 <h3><span class="header-section-number">3.10.2</span> Automatic builds</h3>
 <ul>
-<li><p>Creation of Github repository</p></li>
-<li><p>Addition of a Dockerfile</p></li>
-<li><p>Configuration of an automated build from Docker Hub</p></li>
+<li><p>Create a Github repository</p></li>
+<li><p>Add a Dockerfile (any of the ones used in the course). Keep in mind that if the recipe requires files (e.g., processed with <strong>CP</strong>) you will need to upload them and place them in a way compatible with the context you choose.</p></li>
+<li><p>Configure an automated build from Docker Hub</p></li>
 </ul>
+<p><img src="docs/images/dockerhub-automated-build.png" width="60%" /></p>
+<p><img src="docs/images/dockerhub-automated-build-details.png" width="60%" /></p>
+
+<div class="rdmnote">
+If you cannot trigger the automatic build, it may be because Docker Hub refers by default to <strong>master</strong> branch of Github repositories. Since late 2020, default Branch is <strong>main</strong>, so you might need to explictly put that name there. Some context: <a href="https://www.infoq.com/news/2020/10/github-main-branch/" class="uri">https://www.infoq.com/news/2020/10/github-main-branch/</a>
+</div>
+
 </div>
 </div>
             </section>
