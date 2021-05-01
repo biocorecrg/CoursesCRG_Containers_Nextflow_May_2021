@@ -347,7 +347,9 @@ singularity exec -B ./scratch:/fastqcdir fastqc.sif fastqc /fastqcdir/*fastq.gz
 singularity exec -B ./scratch:/fastqcdir fastqc.sif bash -c 'fastqc /fastqcdir/*fastq.gz'
 
 ```
-
+```{block2, type='rmdtip'}
+***bash -c*** stands for executing from the provided string.
+```
 
 ## Instances
 
