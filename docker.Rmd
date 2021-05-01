@@ -1377,7 +1377,7 @@ knitr::include_graphics('docs/images/access-token-docker-start.png')
 ```
 
 ```{r, out.width="60%", echo=FALSE, eval = TRUE}
-knitr::include_graphics('docs/images/access-token-docker-start.png')
+knitr::include_graphics('docs/images/access-token-docker.png')
 ```
 
 Let's go back to our terminal and we use that access token. **Username** is your Docker Hub username.
