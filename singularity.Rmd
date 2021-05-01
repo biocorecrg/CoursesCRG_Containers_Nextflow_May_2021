@@ -317,9 +317,36 @@ For others, need to be done explicitly (syntax: host:container)
     > exit
     ls -l testdir
 
-## Exercises:
+## Example execution:
 
-  Using the 2 fastqc available files, process them outside and inside the mounted directory.
+Using the 2 fastqc available files, process them outside and inside the mounted directory.
+
+Let's use our ```fastqc.sif``` image file and we place it in $HOME
+
+```
+# Let's create a dummy directory
+mkdir $HOME/scratch
+
+# Let's copy contents of testdata in scratch
+
+singularity exec fastqc.sif fastqc scratch/*fastq.gz
+
+# Check you have some HTMLs there. Remove them
+rm scratch/*html
+
+# Let's use shell
+singularity shell fastqc.sif
+> cd scratch
+> fastqc *fastq.gz
+> exit
+
+# Check you have some HTMLs there. Remove them
+singularity exec -B ./scratch:/fastqcdir fastqc.sif fastqc /fastqcdir/*fastq.gz
+
+# What happens here!
+singularity exec -B ./scratch:/fastqcdir fastqc.sif bash -c 'fastqc /fastqcdir/*fastq.gz'
+
+```
 
 
 ## Instances

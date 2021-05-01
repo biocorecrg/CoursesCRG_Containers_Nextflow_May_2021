@@ -1,5 +1,36 @@
 List of Singularity recipes
 
+## Example with FASTQC
+
+Let's create a FASTQC Singularity image first.
+```
+singularity build fastqc.sif docker.singularity
+```
+
+```
+# Let's create a dummy directory
+mkdir $HOME/scratch
+
+# Let's copy contents of testdata in scratch
+
+singularity exec fastqc.sif fastqc scratch/*fastq.gz
+
+# Check you have some HTMLs there. Remove them
+rm scratch/*html
+
+# Let's use shell
+singularity shell fastqc.sif
+> cd scratch
+> fastqc *fastq.gz
+> exit
+
+# Check you have some HTMLs there. Remove them
+singularity exec -B ./scratch:/fastqcdir fastqc.sif fastqc /fastqcdir/*fastq.gz
+
+# What happens here!
+singularity exec -B ./scratch:/fastqcdir fastqc.sif bash -c 'fastqc /fastqcdir/*fastq.gz'
+```
+
 ## Example with Blast
 
 Compare with the previous Docker examples
