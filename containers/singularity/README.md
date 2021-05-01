@@ -1,49 +1,59 @@
 List of Singularity recipes
 
-## Blast processing
+## Example with Blast
 
-** TODO: Change this with Singularity
+Compare with the previous Docker examples
 
-```bash
-cd $HOME/db
+First of all, let's generate a ```blast.sif``` image. We have plenty of ways to do this. One example below:
 
-curl https://www.uniprot.org/uniprot/O75976.fasta -o O75976.fasta
-
-curl https://www.uniprot.org/uniprot/Q90240.fasta -o Q90240.fasta
-
-docker run -v /home/user/db:/blastdb blast-debian:custom blastp -query /blastdb/O75976.fasta -subject /blastdb/Q90240.fasta
-
-docker run -v /home/user/db:/blastdb blast-debian:custom blastp -query /blastdb/O75976.fasta -subject /blastdb/Q90240.fasta > out.blast
-
-docker run -v /home/user/db:/blastdb blast-debian:custom blastp -query /blastdb/O75976.fasta -subject /blastdb/Q90240.fasta -out /blastdb/output.blast
+```
+singularity build blast.sif docker://ncbi/blast:2.10.1
 ```
 
-## Retrieving a sequence from a formated FASTA file
-
-Let's download Swissprot
+### Blast command-line (1)
 
 ```bash
+# If not there create a DB dir
+mkdir $HOME/db
+
 cd $HOME/db
 
-curl http://ftp.ncbi.nlm.nih.gov/blast/db/FASTA/swissprot.gz -o swissprot.gz
+curl -L https://www.uniprot.org/uniprot/O75976.fasta -o O75976.fasta
+
+curl -L https://www.uniprot.org/uniprot/Q90240.fasta -o Q90240.fasta
+
+singularity exec blast.sif blastp -query O75976.fasta -subject Q90240.fasta
+
+# We can mount if we prefer (as we did with Docker), but it's not strictly necessary
+singularity exec -B /home/ec2-user/db:/blastdb blastp -query /blastdb/O75976.fasta -subject /blastdb/Q90240.fasta > out.blast
+
+singularity exec -B /home/ec2-user/db:/blastdb blast-debian:custom blastp -query /blastdb/O75976.fasta -subject /blastdb/Q90240.fasta -out /blastdb/output.blast
+```
+
+### Blast command-line (2)
+
+```bash
+# If not there create a DB dir
+mkdir $HOME/db
+
+cd $HOME/db
+
+# Let's download Swissprot DB
+curl -L https://ftp.ncbi.nlm.nih.gov/blast/db/FASTA/swissprot.gz -o swissprot.gz
 
 gunzip swissprot.gz
+
+# Let format the Swissprot DB
+singularity exec blast.sif makeblastdb -dbtype prot -parse_seqids -in swissprot
 ```
 
-Let's format the FASTA file
+We can retrieve a FASTA sequence by ID
 
 ```bash
-cd $HOME/db
-docker run -v /home/user/db:/blastdb  blast-debian:custom makeblastdb -dbtype prot -parse_seqids -in /blastdb/swissprot
+singularity exec blast.sif blastdbcmd -dbtype prot -db swissprot -entry O75976
 ```
 
-We can retrive a FASTA sequence by ID
-
-```bash
-docker run -v /home/user/db:/blastdb  blast-debian:custom blastdbcmd -dbtype prot -db swissprot -entry O75976
-```
-
-## Example with mariadb
+## Instance example with mariadb
 
 sudo singularity build mariadb.sif mariadb.singularity
 
@@ -60,6 +70,7 @@ singularity instance list
 singularity exec instance://mydb mysql -uroot
 
 singularity instance stop mydb
+
 
 ## Example with NGINX
 
