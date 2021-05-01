@@ -300,10 +300,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 Figure 3.1: PUSH. Steve Snodgrass. CC-BY, Source: <a href="https://www.flickr.com/photos/stevensnodgrass/6117660537/" class="uri">https://www.flickr.com/photos/stevensnodgrass/6117660537/</a>
 </p>
 </div>
+<p>If you didn’t do it yet, you can create an account in Docker Hub.</p>
 <ul>
-<li>Generation of an access key in Docker Hub</li>
+<li>Generate of an access key in Docker Hub</li>
 </ul>
-<p><img src="docs/images/access-token-docker.png" width="60%" /></p>
+<p><img src="docs/images/access-token-docker-start.png" width="60%" /></p>
+<p><img src="docs/images/access-token-docker-start.png" width="60%" /></p>
+<p>Let’s go back to our terminal and we use that access token. <strong>Username</strong> is your Docker Hub username.</p>
 <ul>
 <li>docker login</li>
 </ul>
@@ -315,7 +318,8 @@ WARNING! Your password will be stored unencrypted in /home/ec2-user/.docker/conf
 Configure a credential helper to remove this warning. See
 https://docs.docker.com/engine/reference/commandline/login/#credentials-store</code></pre>
 <ul>
-<li>More details …</li>
+<li><p>Let’s choose</p></li>
+<li><p>More details …</p></li>
 </ul>
 </div>
 <div id="automatic-builds" class="section level3">
@@ -325,6 +329,7 @@ https://docs.docker.com/engine/reference/commandline/login/#credentials-store</c
 <li><p>Add a Dockerfile (any of the ones used in the course). Keep in mind that if the recipe requires files (e.g., processed with <strong>CP</strong>) you will need to upload them and place them in a way compatible with the context you choose.</p></li>
 <li><p>Configure an automated build from Docker Hub</p></li>
 </ul>
+<p>First you may need to grant permission to Github from your Docker Hub account. More information at: <a href="https://docs.docker.com/docker-hub/builds/link-source/" class="uri">https://docs.docker.com/docker-hub/builds/link-source/</a></p>
 <p><img src="docs/images/dockerhub-automated-build.png" width="60%" /></p>
 <p><img src="docs/images/dockerhub-automated-build-details.png" width="60%" /></p>
 
