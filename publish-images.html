@@ -294,7 +294,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="push-an-image" class="section level3">
 <h3><span class="header-section-number">3.10.1</span> Push an image</h3>
 <!-- Pull/push image from Commons here -->
-<div class="figure"><span id="fig:unnamed-chunk-54"></span>
+<div class="figure"><span id="fig:unnamed-chunk-55"></span>
 <img src="docs/images/push_door.jpg" alt="PUSH. Steve Snodgrass. CC-BY, Source: https://www.flickr.com/photos/stevensnodgrass/6117660537/" width="60%" />
 <p class="caption">
 Figure 3.1: PUSH. Steve Snodgrass. CC-BY, Source: <a href="https://www.flickr.com/photos/stevensnodgrass/6117660537/" class="uri">https://www.flickr.com/photos/stevensnodgrass/6117660537/</a>
@@ -337,6 +337,11 @@ biocontainers/fastqc     v0.11.9_cv7         e5e3008d2bd1        6 months ago   
 toniher/fastqc-example   latest              e5e3008d2bd1        6 months ago        834MB</code></pre>
 <p>Then we push that new added tag and in shortly you will see in Docker Hub page.</p>
 <pre><code>docker push toniher/fastqc-example:latest</code></pre>
+
+<div class="rdmnote">
+As already noted, default registry is Docker Hub. If using another one, it is necessary to prepend it as when pulling.
+</div>
+
 </div>
 <div id="automatic-builds" class="section level3">
 <h3><span class="header-section-number">3.10.2</span> Automatic builds</h3>
