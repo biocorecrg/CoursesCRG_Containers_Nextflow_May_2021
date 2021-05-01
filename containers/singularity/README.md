@@ -16,6 +16,8 @@ singularity build blast.sif docker://ncbi/blast:2.10.1
 # If not there create a DB dir
 mkdir $HOME/db
 
+cp blast.sif $HOME/db
+
 cd $HOME/db
 
 curl -L https://www.uniprot.org/uniprot/O75976.fasta -o O75976.fasta
@@ -25,9 +27,9 @@ curl -L https://www.uniprot.org/uniprot/Q90240.fasta -o Q90240.fasta
 singularity exec blast.sif blastp -query O75976.fasta -subject Q90240.fasta
 
 # We can mount if we prefer (as we did with Docker), but it's not strictly necessary
-singularity exec -B /home/ec2-user/db:/blastdb blastp -query /blastdb/O75976.fasta -subject /blastdb/Q90240.fasta > out.blast
+singularity exec -B /home/ec2-user/db:/blastdb blast.sif blastp -query /blastdb/O75976.fasta -subject /blastdb/Q90240.fasta > out.blast
 
-singularity exec -B /home/ec2-user/db:/blastdb blast-debian:custom blastp -query /blastdb/O75976.fasta -subject /blastdb/Q90240.fasta -out /blastdb/output.blast
+singularity exec -B /home/ec2-user/db:/blastdb blast.sif blastp -query /blastdb/O75976.fasta -subject /blastdb/Q90240.fasta -out /blastdb/output.blast
 ```
 
 ### Blast command-line (2)
@@ -35,6 +37,8 @@ singularity exec -B /home/ec2-user/db:/blastdb blast-debian:custom blastp -query
 ```bash
 # If not there create a DB dir
 mkdir $HOME/db
+
+cp blast.sif $HOME/db
 
 cd $HOME/db
 
