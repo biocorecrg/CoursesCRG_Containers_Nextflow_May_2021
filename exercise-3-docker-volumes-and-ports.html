@@ -332,7 +332,7 @@ RUN set -x; rm -rf /var/lib/apt/lists/*
 
 EXPOSE 8081
 ENTRYPOINT [&quot;php&quot;, &quot;-S&quot;, &quot;0.0.0.0:8081&quot;]</code></pre>
-<pre><code>docker run -d -v $HOME/db:/blastdb -p 80:8081 --name myblast blastwww</code></pre>
+<div class="sourceCode" id="cb93"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb93-1"><a href="exercise-3-docker-volumes-and-ports.html#cb93-1"></a><span class="ex">docker</span> run -d -v <span class="va">$HOME</span>/db:/blastdb -p 80:8081 --name myblast blastwww</span></code></pre></div>
 <p>Example query from the browser:</p>
 <a href="http://mymachine-address-here/?id=O75976" class="uri">http://mymachine-address-here/?id=O75976</a>
 </details>

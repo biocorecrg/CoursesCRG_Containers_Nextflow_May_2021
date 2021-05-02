@@ -295,15 +295,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">3.9.1</span> FASTQC Web Application</h3>
 <p>We work in a dummy FASTQC Web service</p>
 <p>We place <code>B7_input_s_chr19.fastq.gz</code> file from available datasets in <code>$HOME/myscratch</code></p>
-<pre><code>mkdir -p $HOME/myscratch
-
-cp testdata/* $HOME/myscratch
-
-cd containers/docker/fastqc_www
-
-docker build -t fastqcwww -f Dockerfile ../../scripts/fastqc
-
-docker run -d -v $HOME/myscratch:/scratch -p 3838:8083 --name myfastqc fastqcwww</code></pre>
+<div class="sourceCode" id="cb87"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb87-1"><a href="integrative-examples.html#cb87-1"></a><span class="fu">mkdir</span> -p <span class="va">$HOME</span>/myscratch</span>
+<span id="cb87-2"><a href="integrative-examples.html#cb87-2"></a></span>
+<span id="cb87-3"><a href="integrative-examples.html#cb87-3"></a><span class="fu">cp</span> testdata/* <span class="va">$HOME</span>/myscratch</span>
+<span id="cb87-4"><a href="integrative-examples.html#cb87-4"></a></span>
+<span id="cb87-5"><a href="integrative-examples.html#cb87-5"></a><span class="bu">cd</span> containers/docker/fastqc_www</span>
+<span id="cb87-6"><a href="integrative-examples.html#cb87-6"></a></span>
+<span id="cb87-7"><a href="integrative-examples.html#cb87-7"></a><span class="ex">docker</span> build -t fastqcwww -f Dockerfile ../../scripts/fastqc</span>
+<span id="cb87-8"><a href="integrative-examples.html#cb87-8"></a></span>
+<span id="cb87-9"><a href="integrative-examples.html#cb87-9"></a><span class="ex">docker</span> run -d -v <span class="va">$HOME</span>/myscratch:/scratch -p 3838:8083 --name myfastqc fastqcwww</span></code></pre></div>
 <p>Example query from the browser:</p>
 <p><a href="http://mymachine-address-here:3838/?file=B7_input_s_chr19.fastq" class="uri">http://mymachine-address-here:3838/?file=B7_input_s_chr19.fastq</a></p>
 

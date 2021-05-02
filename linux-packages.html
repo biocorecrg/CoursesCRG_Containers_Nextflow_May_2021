@@ -345,22 +345,22 @@ During this course, we will build images based on <strong>Ubuntu</strong> and <s
 <ul>
 <li>In <strong>Ubuntu</strong>:</li>
 </ul>
-<pre><code>apt-get update &amp;&amp; apt-get upgrade -y</code></pre>
+<div class="sourceCode" id="cb35"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb35-1"><a href="linux-packages.html#cb35-1"></a><span class="ex">apt-get</span> update <span class="kw">&amp;&amp;</span> <span class="ex">apt-get</span> upgrade -y</span></code></pre></div>
 <p>In <strong>CentOS</strong>:</p>
-<pre><code>yum check-update &amp;&amp; yum update -y</code></pre>
+<div class="sourceCode" id="cb36"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb36-1"><a href="linux-packages.html#cb36-1"></a><span class="ex">yum</span> check-update <span class="kw">&amp;&amp;</span> <span class="ex">yum</span> update -y</span></code></pre></div>
 </div>
 <div id="search-and-install-packages" class="section level3">
 <h3><span class="header-section-number">3.4.2</span> Search and install packages:</h3>
 <ul>
 <li>In <strong>Ubuntu</strong>:</li>
 </ul>
-<pre><code>apt search libxml2
-apt install -y libxml2-dev</code></pre>
+<div class="sourceCode" id="cb37"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb37-1"><a href="linux-packages.html#cb37-1"></a><span class="ex">apt</span> search libxml2</span>
+<span id="cb37-2"><a href="linux-packages.html#cb37-2"></a><span class="ex">apt</span> install -y libxml2-dev</span></code></pre></div>
 <ul>
 <li>In <strong>CentOS</strong>:</li>
 </ul>
-<pre><code>yum search libxml2
-yum install -y libxml2-devel.x86_64</code></pre>
+<div class="sourceCode" id="cb38"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb38-1"><a href="linux-packages.html#cb38-1"></a><span class="ex">yum</span> search libxml2</span>
+<span id="cb38-2"><a href="linux-packages.html#cb38-2"></a><span class="ex">yum</span> install -y libxml2-devel.x86_64</span></code></pre></div>
 <blockquote>
 <p>Note the <strong>-y</strong> option that we set for updating and for installing.<br>
 It is an important option in the context of Docker: it means that you <em>answer yes to all questions</em> regarding installation.</p>

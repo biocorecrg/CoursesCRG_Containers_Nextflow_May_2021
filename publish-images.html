@@ -294,7 +294,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="push-an-image" class="section level3">
 <h3><span class="header-section-number">3.10.1</span> Push an image</h3>
 <!-- Pull/push image from Commons here -->
-<div class="figure"><span id="fig:unnamed-chunk-57"></span>
+<div class="figure"><span id="fig:unnamed-chunk-78"></span>
 <img src="docs/images/push_door.jpg" alt="PUSH. Steve Snodgrass. CC-BY, Source: https://www.flickr.com/photos/stevensnodgrass/6117660537/" width="60%" />
 <p class="caption">
 Figure 3.1: PUSH. Steve Snodgrass. CC-BY, Source: <a href="https://www.flickr.com/photos/stevensnodgrass/6117660537/" class="uri">https://www.flickr.com/photos/stevensnodgrass/6117660537/</a>
@@ -322,21 +322,21 @@ https://docs.docker.com/engine/reference/commandline/login/#credentials-store</c
 </ul>
 <p><img src="docs/images/dockerhub-create.png" width="60%" /></p>
 <p>We use one image we have in our system and we add a tag that matches our repository name.</p>
-<pre><code>docker pull biocontainers/fastqc:v0.11.9_cv7
-
-Status: Downloaded newer image for biocontainers/fastqc:v0.11.9_cv7
-docker.io/biocontainers/fastqc:v0.11.9_cv7
-
-(base) [ec2-user@ip-172-31-45-86 ~]$ docker images
-REPOSITORY             TAG                 IMAGE ID            CREATED             SIZE
-biocontainers/fastqc   v0.11.9_cv7         e5e3008d2bd1        6 months ago        834MB
-(base) [ec2-user@ip-172-31-45-86 ~]$ docker tag biocontainers/fastqc:v0.11.9_cv7 toniher/fastqc-example:latest
-(base) [ec2-user@ip-172-31-45-86 ~]$ docker images
-REPOSITORY               TAG                 IMAGE ID            CREATED             SIZE
-biocontainers/fastqc     v0.11.9_cv7         e5e3008d2bd1        6 months ago        834MB
-toniher/fastqc-example   latest              e5e3008d2bd1        6 months ago        834MB</code></pre>
+<div class="sourceCode" id="cb90"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb90-1"><a href="publish-images.html#cb90-1"></a><span class="ex">docker</span> pull biocontainers/fastqc:v0.11.9_cv7</span>
+<span id="cb90-2"><a href="publish-images.html#cb90-2"></a></span>
+<span id="cb90-3"><a href="publish-images.html#cb90-3"></a><span class="ex">Status</span>: Downloaded newer image for biocontainers/fastqc:v0.11.9_cv7</span>
+<span id="cb90-4"><a href="publish-images.html#cb90-4"></a><span class="ex">docker.io/biocontainers</span>/fastqc:<span class="ex">v0.11.9_cv7</span></span>
+<span id="cb90-5"><a href="publish-images.html#cb90-5"></a></span>
+<span id="cb90-6"><a href="publish-images.html#cb90-6"></a><span class="kw">(</span><span class="ex">base</span><span class="kw">)</span> [<span class="ex">ec2-user@ip-172-31-45-86</span> ~]$ docker images</span>
+<span id="cb90-7"><a href="publish-images.html#cb90-7"></a><span class="ex">REPOSITORY</span>             TAG                 IMAGE ID            CREATED             SIZE</span>
+<span id="cb90-8"><a href="publish-images.html#cb90-8"></a><span class="ex">biocontainers/fastqc</span>   v0.11.9_cv7         e5e3008d2bd1        6 months ago        834MB</span>
+<span id="cb90-9"><a href="publish-images.html#cb90-9"></a><span class="kw">(</span><span class="ex">base</span><span class="kw">)</span> [<span class="ex">ec2-user@ip-172-31-45-86</span> ~]$ docker tag biocontainers/fastqc:v0.11.9_cv7 toniher/fastqc-example:latest</span>
+<span id="cb90-10"><a href="publish-images.html#cb90-10"></a><span class="kw">(</span><span class="ex">base</span><span class="kw">)</span> [<span class="ex">ec2-user@ip-172-31-45-86</span> ~]$ docker images</span>
+<span id="cb90-11"><a href="publish-images.html#cb90-11"></a><span class="ex">REPOSITORY</span>               TAG                 IMAGE ID            CREATED             SIZE</span>
+<span id="cb90-12"><a href="publish-images.html#cb90-12"></a><span class="ex">biocontainers/fastqc</span>     v0.11.9_cv7         e5e3008d2bd1        6 months ago        834MB</span>
+<span id="cb90-13"><a href="publish-images.html#cb90-13"></a><span class="ex">toniher/fastqc-example</span>   latest              e5e3008d2bd1        6 months ago        834MB</span></code></pre></div>
 <p>Then we push that new added tag and in shortly you will see in Docker Hub page.</p>
-<pre><code>docker push toniher/fastqc-example:latest</code></pre>
+<div class="sourceCode" id="cb91"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb91-1"><a href="publish-images.html#cb91-1"></a><span class="ex">docker</span> push toniher/fastqc-example:latest</span></code></pre></div>
 
 <div class="rdmnote">
 As already noted, default registry is Docker Hub. If using another one, it is necessary to prepend it as when pulling.
@@ -347,7 +347,7 @@ As already noted, default registry is Docker Hub. If using another one, it is ne
 <h3><span class="header-section-number">3.10.2</span> Automatic builds</h3>
 <ul>
 <li><p>Create a Github repository</p></li>
-<li><p>Add a Dockerfile (any of the ones used in the course). Keep in mind that if the recipe requires files (e.g., processed with <strong>CP</strong>) you will need to upload them and place them in a way compatible with the context you choose.</p></li>
+<li><p>Add a Dockerfile (any of the ones used in the course). Keep in mind that if the recipe requires files (e.g., processed with <strong>COPY</strong>) you will need to upload them and place them in a way compatible with the context you choose.</p></li>
 <li><p>Configure an automated build from Docker Hub</p></li>
 </ul>
 <p>First you may need to grant permission to Github from your Docker Hub account. More information at: <a href="https://docs.docker.com/docker-hub/builds/link-source/" class="uri">https://docs.docker.com/docker-hub/builds/link-source/</a></p>
