@@ -322,21 +322,21 @@ https://docs.docker.com/engine/reference/commandline/login/#credentials-store</c
 </ul>
 <p><img src="docs/images/dockerhub-create.png" width="60%" /></p>
 <p>We use one image we have in our system and we add a tag that matches our repository name.</p>
-<div class="sourceCode" id="cb90"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb90-1"><a href="publish-images.html#cb90-1"></a><span class="ex">docker</span> pull biocontainers/fastqc:v0.11.9_cv7</span>
-<span id="cb90-2"><a href="publish-images.html#cb90-2"></a></span>
-<span id="cb90-3"><a href="publish-images.html#cb90-3"></a><span class="ex">Status</span>: Downloaded newer image for biocontainers/fastqc:v0.11.9_cv7</span>
-<span id="cb90-4"><a href="publish-images.html#cb90-4"></a><span class="ex">docker.io/biocontainers</span>/fastqc:<span class="ex">v0.11.9_cv7</span></span>
-<span id="cb90-5"><a href="publish-images.html#cb90-5"></a></span>
-<span id="cb90-6"><a href="publish-images.html#cb90-6"></a><span class="kw">(</span><span class="ex">base</span><span class="kw">)</span> [<span class="ex">ec2-user@ip-172-31-45-86</span> ~]$ docker images</span>
-<span id="cb90-7"><a href="publish-images.html#cb90-7"></a><span class="ex">REPOSITORY</span>             TAG                 IMAGE ID            CREATED             SIZE</span>
-<span id="cb90-8"><a href="publish-images.html#cb90-8"></a><span class="ex">biocontainers/fastqc</span>   v0.11.9_cv7         e5e3008d2bd1        6 months ago        834MB</span>
-<span id="cb90-9"><a href="publish-images.html#cb90-9"></a><span class="kw">(</span><span class="ex">base</span><span class="kw">)</span> [<span class="ex">ec2-user@ip-172-31-45-86</span> ~]$ docker tag biocontainers/fastqc:v0.11.9_cv7 toniher/fastqc-example:latest</span>
-<span id="cb90-10"><a href="publish-images.html#cb90-10"></a><span class="kw">(</span><span class="ex">base</span><span class="kw">)</span> [<span class="ex">ec2-user@ip-172-31-45-86</span> ~]$ docker images</span>
-<span id="cb90-11"><a href="publish-images.html#cb90-11"></a><span class="ex">REPOSITORY</span>               TAG                 IMAGE ID            CREATED             SIZE</span>
-<span id="cb90-12"><a href="publish-images.html#cb90-12"></a><span class="ex">biocontainers/fastqc</span>     v0.11.9_cv7         e5e3008d2bd1        6 months ago        834MB</span>
-<span id="cb90-13"><a href="publish-images.html#cb90-13"></a><span class="ex">toniher/fastqc-example</span>   latest              e5e3008d2bd1        6 months ago        834MB</span></code></pre></div>
+<div class="sourceCode" id="cb89"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb89-1"><a href="publish-images.html#cb89-1"></a><span class="ex">docker</span> pull biocontainers/fastqc:v0.11.9_cv7</span>
+<span id="cb89-2"><a href="publish-images.html#cb89-2"></a></span>
+<span id="cb89-3"><a href="publish-images.html#cb89-3"></a><span class="ex">Status</span>: Downloaded newer image for biocontainers/fastqc:v0.11.9_cv7</span>
+<span id="cb89-4"><a href="publish-images.html#cb89-4"></a><span class="ex">docker.io/biocontainers</span>/fastqc:<span class="ex">v0.11.9_cv7</span></span>
+<span id="cb89-5"><a href="publish-images.html#cb89-5"></a></span>
+<span id="cb89-6"><a href="publish-images.html#cb89-6"></a><span class="kw">(</span><span class="ex">base</span><span class="kw">)</span> [<span class="ex">ec2-user@ip-172-31-45-86</span> ~]$ docker images</span>
+<span id="cb89-7"><a href="publish-images.html#cb89-7"></a><span class="ex">REPOSITORY</span>             TAG                 IMAGE ID            CREATED             SIZE</span>
+<span id="cb89-8"><a href="publish-images.html#cb89-8"></a><span class="ex">biocontainers/fastqc</span>   v0.11.9_cv7         e5e3008d2bd1        6 months ago        834MB</span>
+<span id="cb89-9"><a href="publish-images.html#cb89-9"></a><span class="kw">(</span><span class="ex">base</span><span class="kw">)</span> [<span class="ex">ec2-user@ip-172-31-45-86</span> ~]$ docker tag biocontainers/fastqc:v0.11.9_cv7 toniher/fastqc-example:latest</span>
+<span id="cb89-10"><a href="publish-images.html#cb89-10"></a><span class="kw">(</span><span class="ex">base</span><span class="kw">)</span> [<span class="ex">ec2-user@ip-172-31-45-86</span> ~]$ docker images</span>
+<span id="cb89-11"><a href="publish-images.html#cb89-11"></a><span class="ex">REPOSITORY</span>               TAG                 IMAGE ID            CREATED             SIZE</span>
+<span id="cb89-12"><a href="publish-images.html#cb89-12"></a><span class="ex">biocontainers/fastqc</span>     v0.11.9_cv7         e5e3008d2bd1        6 months ago        834MB</span>
+<span id="cb89-13"><a href="publish-images.html#cb89-13"></a><span class="ex">toniher/fastqc-example</span>   latest              e5e3008d2bd1        6 months ago        834MB</span></code></pre></div>
 <p>Then we push that new added tag and in shortly you will see in Docker Hub page.</p>
-<div class="sourceCode" id="cb91"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb91-1"><a href="publish-images.html#cb91-1"></a><span class="ex">docker</span> push toniher/fastqc-example:latest</span></code></pre></div>
+<div class="sourceCode" id="cb90"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb90-1"><a href="publish-images.html#cb90-1"></a><span class="ex">docker</span> push toniher/fastqc-example:latest</span></code></pre></div>
 
 <div class="rdmnote">
 As already noted, default registry is Docker Hub. If using another one, it is necessary to prepend it as when pulling.

@@ -302,9 +302,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p></summary>
 Compare with the previous Docker examples</p>
 <p>First of all, let’s generate a <code>blast.sif</code> image. We have plenty of ways to do this. One example below:</p>
-<div class="sourceCode" id="cb120"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb120-1"><a href="exercise-4-singularity-running-and-building.html#cb120-1"></a><span class="ex">singularity</span> build blast.sif docker://ncbi/blast:2.10.1</span></code></pre></div>
+<div class="sourceCode" id="cb119"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb119-1"><a href="exercise-4-singularity-running-and-building.html#cb119-1"></a><span class="ex">singularity</span> build blast.sif docker://ncbi/blast:2.10.1</span></code></pre></div>
 <div id="blast-command-line-1" class="section level3">
 <h3><span class="header-section-number">4.8.1</span> Blast command-line (1)</h3>
+<div class="sourceCode" id="cb120"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb120-1"><a href="exercise-4-singularity-running-and-building.html#cb120-1"></a><span class="co"># If not there create a DB dir</span></span>
+<span id="cb120-2"><a href="exercise-4-singularity-running-and-building.html#cb120-2"></a><span class="fu">mkdir</span> <span class="va">$HOME</span>/db</span>
+<span id="cb120-3"><a href="exercise-4-singularity-running-and-building.html#cb120-3"></a></span>
+<span id="cb120-4"><a href="exercise-4-singularity-running-and-building.html#cb120-4"></a><span class="fu">cp</span> blast.sif <span class="va">$HOME</span>/db</span>
+<span id="cb120-5"><a href="exercise-4-singularity-running-and-building.html#cb120-5"></a></span>
+<span id="cb120-6"><a href="exercise-4-singularity-running-and-building.html#cb120-6"></a><span class="bu">cd</span> <span class="va">$HOME</span>/db</span>
+<span id="cb120-7"><a href="exercise-4-singularity-running-and-building.html#cb120-7"></a></span>
+<span id="cb120-8"><a href="exercise-4-singularity-running-and-building.html#cb120-8"></a><span class="ex">curl</span> -L https://www.uniprot.org/uniprot/O75976.fasta -o O75976.fasta</span>
+<span id="cb120-9"><a href="exercise-4-singularity-running-and-building.html#cb120-9"></a></span>
+<span id="cb120-10"><a href="exercise-4-singularity-running-and-building.html#cb120-10"></a><span class="ex">curl</span> -L https://www.uniprot.org/uniprot/Q90240.fasta -o Q90240.fasta</span>
+<span id="cb120-11"><a href="exercise-4-singularity-running-and-building.html#cb120-11"></a></span>
+<span id="cb120-12"><a href="exercise-4-singularity-running-and-building.html#cb120-12"></a><span class="ex">singularity</span> exec blast.sif blastp -query O75976.fasta -subject Q90240.fasta</span>
+<span id="cb120-13"><a href="exercise-4-singularity-running-and-building.html#cb120-13"></a></span>
+<span id="cb120-14"><a href="exercise-4-singularity-running-and-building.html#cb120-14"></a><span class="co"># We can mount if we prefer (as we did with Docker), but it&#39;s not strictly necessary</span></span>
+<span id="cb120-15"><a href="exercise-4-singularity-running-and-building.html#cb120-15"></a><span class="ex">singularity</span> exec -B /home/ec2-user/db:/blastdb blast.sif blastp -query /blastdb/O75976.fasta -subject /blastdb/Q90240.fasta <span class="op">&gt;</span> out.blast</span>
+<span id="cb120-16"><a href="exercise-4-singularity-running-and-building.html#cb120-16"></a></span>
+<span id="cb120-17"><a href="exercise-4-singularity-running-and-building.html#cb120-17"></a><span class="ex">singularity</span> exec -B /home/ec2-user/db:/blastdb blast.sif blastp -query /blastdb/O75976.fasta -subject /blastdb/Q90240.fasta -out /blastdb/output.blast</span></code></pre></div>
+</div>
+<div id="blast-command-line-2" class="section level3">
+<h3><span class="header-section-number">4.8.2</span> Blast command-line (2)</h3>
 <div class="sourceCode" id="cb121"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb121-1"><a href="exercise-4-singularity-running-and-building.html#cb121-1"></a><span class="co"># If not there create a DB dir</span></span>
 <span id="cb121-2"><a href="exercise-4-singularity-running-and-building.html#cb121-2"></a><span class="fu">mkdir</span> <span class="va">$HOME</span>/db</span>
 <span id="cb121-3"><a href="exercise-4-singularity-running-and-building.html#cb121-3"></a></span>
@@ -312,35 +332,15 @@ Compare with the previous Docker examples</p>
 <span id="cb121-5"><a href="exercise-4-singularity-running-and-building.html#cb121-5"></a></span>
 <span id="cb121-6"><a href="exercise-4-singularity-running-and-building.html#cb121-6"></a><span class="bu">cd</span> <span class="va">$HOME</span>/db</span>
 <span id="cb121-7"><a href="exercise-4-singularity-running-and-building.html#cb121-7"></a></span>
-<span id="cb121-8"><a href="exercise-4-singularity-running-and-building.html#cb121-8"></a><span class="ex">curl</span> -L https://www.uniprot.org/uniprot/O75976.fasta -o O75976.fasta</span>
-<span id="cb121-9"><a href="exercise-4-singularity-running-and-building.html#cb121-9"></a></span>
-<span id="cb121-10"><a href="exercise-4-singularity-running-and-building.html#cb121-10"></a><span class="ex">curl</span> -L https://www.uniprot.org/uniprot/Q90240.fasta -o Q90240.fasta</span>
-<span id="cb121-11"><a href="exercise-4-singularity-running-and-building.html#cb121-11"></a></span>
-<span id="cb121-12"><a href="exercise-4-singularity-running-and-building.html#cb121-12"></a><span class="ex">singularity</span> exec blast.sif blastp -query O75976.fasta -subject Q90240.fasta</span>
-<span id="cb121-13"><a href="exercise-4-singularity-running-and-building.html#cb121-13"></a></span>
-<span id="cb121-14"><a href="exercise-4-singularity-running-and-building.html#cb121-14"></a><span class="co"># We can mount if we prefer (as we did with Docker), but it&#39;s not strictly necessary</span></span>
-<span id="cb121-15"><a href="exercise-4-singularity-running-and-building.html#cb121-15"></a><span class="ex">singularity</span> exec -B /home/ec2-user/db:/blastdb blast.sif blastp -query /blastdb/O75976.fasta -subject /blastdb/Q90240.fasta <span class="op">&gt;</span> out.blast</span>
-<span id="cb121-16"><a href="exercise-4-singularity-running-and-building.html#cb121-16"></a></span>
-<span id="cb121-17"><a href="exercise-4-singularity-running-and-building.html#cb121-17"></a><span class="ex">singularity</span> exec -B /home/ec2-user/db:/blastdb blast.sif blastp -query /blastdb/O75976.fasta -subject /blastdb/Q90240.fasta -out /blastdb/output.blast</span></code></pre></div>
-</div>
-<div id="blast-command-line-2" class="section level3">
-<h3><span class="header-section-number">4.8.2</span> Blast command-line (2)</h3>
-<div class="sourceCode" id="cb122"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb122-1"><a href="exercise-4-singularity-running-and-building.html#cb122-1"></a><span class="co"># If not there create a DB dir</span></span>
-<span id="cb122-2"><a href="exercise-4-singularity-running-and-building.html#cb122-2"></a><span class="fu">mkdir</span> <span class="va">$HOME</span>/db</span>
-<span id="cb122-3"><a href="exercise-4-singularity-running-and-building.html#cb122-3"></a></span>
-<span id="cb122-4"><a href="exercise-4-singularity-running-and-building.html#cb122-4"></a><span class="fu">cp</span> blast.sif <span class="va">$HOME</span>/db</span>
-<span id="cb122-5"><a href="exercise-4-singularity-running-and-building.html#cb122-5"></a></span>
-<span id="cb122-6"><a href="exercise-4-singularity-running-and-building.html#cb122-6"></a><span class="bu">cd</span> <span class="va">$HOME</span>/db</span>
-<span id="cb122-7"><a href="exercise-4-singularity-running-and-building.html#cb122-7"></a></span>
-<span id="cb122-8"><a href="exercise-4-singularity-running-and-building.html#cb122-8"></a><span class="co"># Let&#39;s download Swissprot DB</span></span>
-<span id="cb122-9"><a href="exercise-4-singularity-running-and-building.html#cb122-9"></a><span class="ex">curl</span> -L https://ftp.ncbi.nlm.nih.gov/blast/db/FASTA/swissprot.gz -o swissprot.gz</span>
-<span id="cb122-10"><a href="exercise-4-singularity-running-and-building.html#cb122-10"></a></span>
-<span id="cb122-11"><a href="exercise-4-singularity-running-and-building.html#cb122-11"></a><span class="fu">gunzip</span> swissprot.gz</span>
-<span id="cb122-12"><a href="exercise-4-singularity-running-and-building.html#cb122-12"></a></span>
-<span id="cb122-13"><a href="exercise-4-singularity-running-and-building.html#cb122-13"></a><span class="co"># Let format the Swissprot DB</span></span>
-<span id="cb122-14"><a href="exercise-4-singularity-running-and-building.html#cb122-14"></a><span class="ex">singularity</span> exec blast.sif makeblastdb -dbtype prot -parse_seqids -in swissprot</span></code></pre></div>
+<span id="cb121-8"><a href="exercise-4-singularity-running-and-building.html#cb121-8"></a><span class="co"># Let&#39;s download Swissprot DB</span></span>
+<span id="cb121-9"><a href="exercise-4-singularity-running-and-building.html#cb121-9"></a><span class="ex">curl</span> -L https://ftp.ncbi.nlm.nih.gov/blast/db/FASTA/swissprot.gz -o swissprot.gz</span>
+<span id="cb121-10"><a href="exercise-4-singularity-running-and-building.html#cb121-10"></a></span>
+<span id="cb121-11"><a href="exercise-4-singularity-running-and-building.html#cb121-11"></a><span class="fu">gunzip</span> swissprot.gz</span>
+<span id="cb121-12"><a href="exercise-4-singularity-running-and-building.html#cb121-12"></a></span>
+<span id="cb121-13"><a href="exercise-4-singularity-running-and-building.html#cb121-13"></a><span class="co"># Let format the Swissprot DB</span></span>
+<span id="cb121-14"><a href="exercise-4-singularity-running-and-building.html#cb121-14"></a><span class="ex">singularity</span> exec blast.sif makeblastdb -dbtype prot -parse_seqids -in swissprot</span></code></pre></div>
 <p>We can retrieve a FASTA sequence by ID</p>
-<div class="sourceCode" id="cb123"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb123-1"><a href="exercise-4-singularity-running-and-building.html#cb123-1"></a><span class="ex">singularity</span> exec blast.sif blastdbcmd -dbtype prot -db swissprot -entry O75976</span></code></pre></div>
+<div class="sourceCode" id="cb122"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb122-1"><a href="exercise-4-singularity-running-and-building.html#cb122-1"></a><span class="ex">singularity</span> exec blast.sif blastdbcmd -dbtype prot -db swissprot -entry O75976</span></code></pre></div>
 </details>
 <ul>
 <li>Example running nginx as a service (NGINX its actually the custom example in Singularity page)
@@ -365,67 +365,67 @@ Includecmd: no
 %startscript
    nginx</code></pre>
 <p>We generate the image:</p>
-<div class="sourceCode" id="cb125"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb125-1"><a href="exercise-4-singularity-running-and-building.html#cb125-1"></a><span class="fu">sudo</span> singularity build nginx.sif nginx.singularity</span></code></pre></div>
+<div class="sourceCode" id="cb124"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb124-1"><a href="exercise-4-singularity-running-and-building.html#cb124-1"></a><span class="fu">sudo</span> singularity build nginx.sif nginx.singularity</span></code></pre></div>
 <p>Then, for using the instance. If you try as normal user:</p>
-<div class="sourceCode" id="cb126"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb126-1"><a href="exercise-4-singularity-running-and-building.html#cb126-1"></a><span class="kw">(</span><span class="ex">base</span><span class="kw">)</span> [<span class="ex">ec2-user@ip-172-31-32-16</span> singularity]$ singularity instance start nginx.sif webserver</span>
-<span id="cb126-2"><a href="exercise-4-singularity-running-and-building.html#cb126-2"></a><span class="ex">2021/04/30</span> 12:23:12 [warn] 15#15: the <span class="st">&quot;user&quot;</span> directive makes sense only if the master process runs with super-user privileges, ignored in /etc/nginx/nginx.conf:2</span>
-<span id="cb126-3"><a href="exercise-4-singularity-running-and-building.html#cb126-3"></a><span class="ex">nginx</span>: [warn] the <span class="st">&quot;user&quot;</span> directive makes sense only if the master process runs with super-user privileges, ignored in /etc/nginx/nginx.conf:2</span>
-<span id="cb126-4"><a href="exercise-4-singularity-running-and-building.html#cb126-4"></a><span class="ex">2021/04/30</span> 12:23:12 [emerg] 15#15: mkdir() <span class="st">&quot;/var/cache/nginx/client_temp&quot;</span> <span class="ex">failed</span> (30: Read-only file system)</span>
-<span id="cb126-5"><a href="exercise-4-singularity-running-and-building.html#cb126-5"></a><span class="ex">nginx</span>: [emerg] mkdir() <span class="st">&quot;/var/cache/nginx/client_temp&quot;</span> <span class="ex">failed</span> (30: Read-only file system)</span>
-<span id="cb126-6"><a href="exercise-4-singularity-running-and-building.html#cb126-6"></a></span>
-<span id="cb126-7"><a href="exercise-4-singularity-running-and-building.html#cb126-7"></a><span class="ex">INFO</span>:    instance started successfully</span>
-<span id="cb126-8"><a href="exercise-4-singularity-running-and-building.html#cb126-8"></a></span>
-<span id="cb126-9"><a href="exercise-4-singularity-running-and-building.html#cb126-9"></a><span class="kw">(</span><span class="ex">base</span><span class="kw">)</span> [<span class="ex">ec2-user@ip-172-31-32-16</span> singularity]$ singularity instance list</span>
-<span id="cb126-10"><a href="exercise-4-singularity-running-and-building.html#cb126-10"></a><span class="ex">INSTANCE</span> NAME    PID      IP    IMAGE</span>
-<span id="cb126-11"><a href="exercise-4-singularity-running-and-building.html#cb126-11"></a><span class="ex">webserver</span>        24350          /home/ec2-user/git/CoursesCRG_Containers_Nextflow_May_2021/containers/singularity/nginx.sif</span></code></pre></div>
+<div class="sourceCode" id="cb125"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb125-1"><a href="exercise-4-singularity-running-and-building.html#cb125-1"></a><span class="kw">(</span><span class="ex">base</span><span class="kw">)</span> [<span class="ex">ec2-user@ip-172-31-32-16</span> singularity]$ singularity instance start nginx.sif webserver</span>
+<span id="cb125-2"><a href="exercise-4-singularity-running-and-building.html#cb125-2"></a><span class="ex">2021/04/30</span> 12:23:12 [warn] 15#15: the <span class="st">&quot;user&quot;</span> directive makes sense only if the master process runs with super-user privileges, ignored in /etc/nginx/nginx.conf:2</span>
+<span id="cb125-3"><a href="exercise-4-singularity-running-and-building.html#cb125-3"></a><span class="ex">nginx</span>: [warn] the <span class="st">&quot;user&quot;</span> directive makes sense only if the master process runs with super-user privileges, ignored in /etc/nginx/nginx.conf:2</span>
+<span id="cb125-4"><a href="exercise-4-singularity-running-and-building.html#cb125-4"></a><span class="ex">2021/04/30</span> 12:23:12 [emerg] 15#15: mkdir() <span class="st">&quot;/var/cache/nginx/client_temp&quot;</span> <span class="ex">failed</span> (30: Read-only file system)</span>
+<span id="cb125-5"><a href="exercise-4-singularity-running-and-building.html#cb125-5"></a><span class="ex">nginx</span>: [emerg] mkdir() <span class="st">&quot;/var/cache/nginx/client_temp&quot;</span> <span class="ex">failed</span> (30: Read-only file system)</span>
+<span id="cb125-6"><a href="exercise-4-singularity-running-and-building.html#cb125-6"></a></span>
+<span id="cb125-7"><a href="exercise-4-singularity-running-and-building.html#cb125-7"></a><span class="ex">INFO</span>:    instance started successfully</span>
+<span id="cb125-8"><a href="exercise-4-singularity-running-and-building.html#cb125-8"></a></span>
+<span id="cb125-9"><a href="exercise-4-singularity-running-and-building.html#cb125-9"></a><span class="kw">(</span><span class="ex">base</span><span class="kw">)</span> [<span class="ex">ec2-user@ip-172-31-32-16</span> singularity]$ singularity instance list</span>
+<span id="cb125-10"><a href="exercise-4-singularity-running-and-building.html#cb125-10"></a><span class="ex">INSTANCE</span> NAME    PID      IP    IMAGE</span>
+<span id="cb125-11"><a href="exercise-4-singularity-running-and-building.html#cb125-11"></a><span class="ex">webserver</span>        24350          /home/ec2-user/git/CoursesCRG_Containers_Nextflow_May_2021/containers/singularity/nginx.sif</span></code></pre></div>
 <p>If you try with sudo permissions:</p>
-<div class="sourceCode" id="cb127"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb127-1"><a href="exercise-4-singularity-running-and-building.html#cb127-1"></a><span class="kw">(</span><span class="ex">base</span><span class="kw">)</span> [<span class="ex">ec2-user@ip-172-31-32-16</span> singularity]$ sudo singularity instance start nginx.sif webserver</span>
-<span id="cb127-2"><a href="exercise-4-singularity-running-and-building.html#cb127-2"></a><span class="ex">2021/04/30</span> 12:24:47 [emerg] 15#15: mkdir() <span class="st">&quot;/var/cache/nginx/client_temp&quot;</span> <span class="ex">failed</span> (30: Read-only file system)</span>
-<span id="cb127-3"><a href="exercise-4-singularity-running-and-building.html#cb127-3"></a><span class="ex">nginx</span>: [emerg] mkdir() <span class="st">&quot;/var/cache/nginx/client_temp&quot;</span> <span class="ex">failed</span> (30: Read-only file system)</span>
-<span id="cb127-4"><a href="exercise-4-singularity-running-and-building.html#cb127-4"></a></span>
-<span id="cb127-5"><a href="exercise-4-singularity-running-and-building.html#cb127-5"></a><span class="ex">INFO</span>:    instance started successfully</span>
-<span id="cb127-6"><a href="exercise-4-singularity-running-and-building.html#cb127-6"></a></span>
-<span id="cb127-7"><a href="exercise-4-singularity-running-and-building.html#cb127-7"></a><span class="kw">(</span><span class="ex">base</span><span class="kw">)</span> [<span class="ex">ec2-user@ip-172-31-32-16</span> singularity]$ singularity instance list</span>
-<span id="cb127-8"><a href="exercise-4-singularity-running-and-building.html#cb127-8"></a><span class="ex">INSTANCE</span> NAME    PID    IP    IMAGE</span>
-<span id="cb127-9"><a href="exercise-4-singularity-running-and-building.html#cb127-9"></a></span>
-<span id="cb127-10"><a href="exercise-4-singularity-running-and-building.html#cb127-10"></a><span class="kw">(</span><span class="ex">base</span><span class="kw">)</span> [<span class="ex">ec2-user@ip-172-31-32-16</span> singularity]$ sudo singularity instance list</span>
-<span id="cb127-11"><a href="exercise-4-singularity-running-and-building.html#cb127-11"></a><span class="ex">INSTANCE</span> NAME    PID      IP    IMAGE</span>
-<span id="cb127-12"><a href="exercise-4-singularity-running-and-building.html#cb127-12"></a><span class="ex">webserver</span>        24409          /home/ec2-user/git/CoursesCRG_Containers_Nextflow_May_2021/containers/singularity/nginx.sif</span></code></pre></div>
+<div class="sourceCode" id="cb126"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb126-1"><a href="exercise-4-singularity-running-and-building.html#cb126-1"></a><span class="kw">(</span><span class="ex">base</span><span class="kw">)</span> [<span class="ex">ec2-user@ip-172-31-32-16</span> singularity]$ sudo singularity instance start nginx.sif webserver</span>
+<span id="cb126-2"><a href="exercise-4-singularity-running-and-building.html#cb126-2"></a><span class="ex">2021/04/30</span> 12:24:47 [emerg] 15#15: mkdir() <span class="st">&quot;/var/cache/nginx/client_temp&quot;</span> <span class="ex">failed</span> (30: Read-only file system)</span>
+<span id="cb126-3"><a href="exercise-4-singularity-running-and-building.html#cb126-3"></a><span class="ex">nginx</span>: [emerg] mkdir() <span class="st">&quot;/var/cache/nginx/client_temp&quot;</span> <span class="ex">failed</span> (30: Read-only file system)</span>
+<span id="cb126-4"><a href="exercise-4-singularity-running-and-building.html#cb126-4"></a></span>
+<span id="cb126-5"><a href="exercise-4-singularity-running-and-building.html#cb126-5"></a><span class="ex">INFO</span>:    instance started successfully</span>
+<span id="cb126-6"><a href="exercise-4-singularity-running-and-building.html#cb126-6"></a></span>
+<span id="cb126-7"><a href="exercise-4-singularity-running-and-building.html#cb126-7"></a><span class="kw">(</span><span class="ex">base</span><span class="kw">)</span> [<span class="ex">ec2-user@ip-172-31-32-16</span> singularity]$ singularity instance list</span>
+<span id="cb126-8"><a href="exercise-4-singularity-running-and-building.html#cb126-8"></a><span class="ex">INSTANCE</span> NAME    PID    IP    IMAGE</span>
+<span id="cb126-9"><a href="exercise-4-singularity-running-and-building.html#cb126-9"></a></span>
+<span id="cb126-10"><a href="exercise-4-singularity-running-and-building.html#cb126-10"></a><span class="kw">(</span><span class="ex">base</span><span class="kw">)</span> [<span class="ex">ec2-user@ip-172-31-32-16</span> singularity]$ sudo singularity instance list</span>
+<span id="cb126-11"><a href="exercise-4-singularity-running-and-building.html#cb126-11"></a><span class="ex">INSTANCE</span> NAME    PID      IP    IMAGE</span>
+<span id="cb126-12"><a href="exercise-4-singularity-running-and-building.html#cb126-12"></a><span class="ex">webserver</span>        24409          /home/ec2-user/git/CoursesCRG_Containers_Nextflow_May_2021/containers/singularity/nginx.sif</span></code></pre></div>
 <p>For this case, it’s necessary to allow writing in the image:</p>
-<div class="sourceCode" id="cb128"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb128-1"><a href="exercise-4-singularity-running-and-building.html#cb128-1"></a><span class="kw">(</span><span class="ex">base</span><span class="kw">)</span> [<span class="ex">ec2-user@ip-172-31-32-16</span> singularity]$ sudo singularity instance start --writable-tmpfs nginx.sif webserver</span>
-<span id="cb128-2"><a href="exercise-4-singularity-running-and-building.html#cb128-2"></a><span class="ex">2021/04/30</span> 12:26:53 [notice] 16#16: using the <span class="st">&quot;epoll&quot;</span> event method</span>
-<span id="cb128-3"><a href="exercise-4-singularity-running-and-building.html#cb128-3"></a><span class="ex">2021/04/30</span> 12:26:53 [notice] 16#16: nginx/1.20.0</span>
-<span id="cb128-4"><a href="exercise-4-singularity-running-and-building.html#cb128-4"></a><span class="ex">2021/04/30</span> 12:26:53 [notice] 16#16: built by gcc 8.3.0 (Debian 8.3.0-6)</span>
-<span id="cb128-5"><a href="exercise-4-singularity-running-and-building.html#cb128-5"></a><span class="ex">2021/04/30</span> 12:26:53 [notice] 16#16: OS: Linux 4.14.225-169.362.amzn2.x86_64</span>
-<span id="cb128-6"><a href="exercise-4-singularity-running-and-building.html#cb128-6"></a><span class="ex">2021/04/30</span> 12:26:53 [notice] 16#16: getrlimit(RLIMIT_NOFILE)<span class="bu">:</span> 65535:65535</span>
-<span id="cb128-7"><a href="exercise-4-singularity-running-and-building.html#cb128-7"></a><span class="ex">2021/04/30</span> 12:26:53 [notice] 17#17: start worker processes</span>
-<span id="cb128-8"><a href="exercise-4-singularity-running-and-building.html#cb128-8"></a><span class="ex">2021/04/30</span> 12:26:53 [notice] 17#17: start worker process 18</span>
-<span id="cb128-9"><a href="exercise-4-singularity-running-and-building.html#cb128-9"></a></span>
-<span id="cb128-10"><a href="exercise-4-singularity-running-and-building.html#cb128-10"></a><span class="ex">INFO</span>:    instance started successfully</span></code></pre></div>
+<div class="sourceCode" id="cb127"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb127-1"><a href="exercise-4-singularity-running-and-building.html#cb127-1"></a><span class="kw">(</span><span class="ex">base</span><span class="kw">)</span> [<span class="ex">ec2-user@ip-172-31-32-16</span> singularity]$ sudo singularity instance start --writable-tmpfs nginx.sif webserver</span>
+<span id="cb127-2"><a href="exercise-4-singularity-running-and-building.html#cb127-2"></a><span class="ex">2021/04/30</span> 12:26:53 [notice] 16#16: using the <span class="st">&quot;epoll&quot;</span> event method</span>
+<span id="cb127-3"><a href="exercise-4-singularity-running-and-building.html#cb127-3"></a><span class="ex">2021/04/30</span> 12:26:53 [notice] 16#16: nginx/1.20.0</span>
+<span id="cb127-4"><a href="exercise-4-singularity-running-and-building.html#cb127-4"></a><span class="ex">2021/04/30</span> 12:26:53 [notice] 16#16: built by gcc 8.3.0 (Debian 8.3.0-6)</span>
+<span id="cb127-5"><a href="exercise-4-singularity-running-and-building.html#cb127-5"></a><span class="ex">2021/04/30</span> 12:26:53 [notice] 16#16: OS: Linux 4.14.225-169.362.amzn2.x86_64</span>
+<span id="cb127-6"><a href="exercise-4-singularity-running-and-building.html#cb127-6"></a><span class="ex">2021/04/30</span> 12:26:53 [notice] 16#16: getrlimit(RLIMIT_NOFILE)<span class="bu">:</span> 65535:65535</span>
+<span id="cb127-7"><a href="exercise-4-singularity-running-and-building.html#cb127-7"></a><span class="ex">2021/04/30</span> 12:26:53 [notice] 17#17: start worker processes</span>
+<span id="cb127-8"><a href="exercise-4-singularity-running-and-building.html#cb127-8"></a><span class="ex">2021/04/30</span> 12:26:53 [notice] 17#17: start worker process 18</span>
+<span id="cb127-9"><a href="exercise-4-singularity-running-and-building.html#cb127-9"></a></span>
+<span id="cb127-10"><a href="exercise-4-singularity-running-and-building.html#cb127-10"></a><span class="ex">INFO</span>:    instance started successfully</span></code></pre></div>
 <p>You can check from the web browser if it worked pointing your machine.</p>
 <p>We can get the specific NGINX version this way:</p>
-<div class="sourceCode" id="cb129"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb129-1"><a href="exercise-4-singularity-running-and-building.html#cb129-1"></a><span class="fu">sudo</span> singularity exec instance://webserver nginx -version</span></code></pre></div>
+<div class="sourceCode" id="cb128"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb128-1"><a href="exercise-4-singularity-running-and-building.html#cb128-1"></a><span class="fu">sudo</span> singularity exec instance://webserver nginx -version</span></code></pre></div>
 <p>For a custom HTML file:</p>
-<div class="sourceCode" id="cb130"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb130-1"><a href="exercise-4-singularity-running-and-building.html#cb130-1"></a><span class="fu">mkdir</span> -p <span class="va">$HOME</span>/www</span>
-<span id="cb130-2"><a href="exercise-4-singularity-running-and-building.html#cb130-2"></a></span>
-<span id="cb130-3"><a href="exercise-4-singularity-running-and-building.html#cb130-3"></a><span class="bu">cd</span> <span class="va">$HOME</span>/www</span></code></pre></div>
+<div class="sourceCode" id="cb129"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb129-1"><a href="exercise-4-singularity-running-and-building.html#cb129-1"></a><span class="fu">mkdir</span> -p <span class="va">$HOME</span>/www</span>
+<span id="cb129-2"><a href="exercise-4-singularity-running-and-building.html#cb129-2"></a></span>
+<span id="cb129-3"><a href="exercise-4-singularity-running-and-building.html#cb129-3"></a><span class="bu">cd</span> <span class="va">$HOME</span>/www</span></code></pre></div>
 <p>And we place a simply <strong>index.html</strong> file there:</p>
-<div class="sourceCode" id="cb131"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb131-1"><a href="exercise-4-singularity-running-and-building.html#cb131-1"></a><span class="kw">&lt;html&gt;</span></span>
-<span id="cb131-2"><a href="exercise-4-singularity-running-and-building.html#cb131-2"></a>        <span class="kw">&lt;body&gt;</span></span>
-<span id="cb131-3"><a href="exercise-4-singularity-running-and-building.html#cb131-3"></a>                Hello world!</span>
-<span id="cb131-4"><a href="exercise-4-singularity-running-and-building.html#cb131-4"></a>        <span class="kw">&lt;/body&gt;</span></span>
-<span id="cb131-5"><a href="exercise-4-singularity-running-and-building.html#cb131-5"></a><span class="kw">&lt;/html&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb130"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb130-1"><a href="exercise-4-singularity-running-and-building.html#cb130-1"></a><span class="kw">&lt;html&gt;</span></span>
+<span id="cb130-2"><a href="exercise-4-singularity-running-and-building.html#cb130-2"></a>        <span class="kw">&lt;body&gt;</span></span>
+<span id="cb130-3"><a href="exercise-4-singularity-running-and-building.html#cb130-3"></a>                Hello world!</span>
+<span id="cb130-4"><a href="exercise-4-singularity-running-and-building.html#cb130-4"></a>        <span class="kw">&lt;/body&gt;</span></span>
+<span id="cb130-5"><a href="exercise-4-singularity-running-and-building.html#cb130-5"></a><span class="kw">&lt;/html&gt;</span></span></code></pre></div>
 <p>We execute now the command mounting where HTMLs are stored.</p>
-<div class="sourceCode" id="cb132"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb132-1"><a href="exercise-4-singularity-running-and-building.html#cb132-1"></a><span class="kw">(</span><span class="ex">base</span><span class="kw">)</span> [<span class="ex">ec2-user@ip-172-31-32-16</span> singularity]$ sudo singularity instance start -B /home/ec2-user/www:/usr/share/nginx/html --writable-tmpfs nginx.sif webserver</span>
-<span id="cb132-2"><a href="exercise-4-singularity-running-and-building.html#cb132-2"></a><span class="ex">2021/04/30</span> 12:31:20 [notice] 15#15: using the <span class="st">&quot;epoll&quot;</span> event method</span>
-<span id="cb132-3"><a href="exercise-4-singularity-running-and-building.html#cb132-3"></a><span class="ex">2021/04/30</span> 12:31:20 [notice] 15#15: nginx/1.20.0</span>
-<span id="cb132-4"><a href="exercise-4-singularity-running-and-building.html#cb132-4"></a><span class="ex">2021/04/30</span> 12:31:20 [notice] 15#15: built by gcc 8.3.0 (Debian 8.3.0-6)</span>
-<span id="cb132-5"><a href="exercise-4-singularity-running-and-building.html#cb132-5"></a><span class="ex">2021/04/30</span> 12:31:20 [notice] 15#15: OS: Linux 4.14.225-169.362.amzn2.x86_64</span>
-<span id="cb132-6"><a href="exercise-4-singularity-running-and-building.html#cb132-6"></a><span class="ex">2021/04/30</span> 12:31:20 [notice] 15#15: getrlimit(RLIMIT_NOFILE)<span class="bu">:</span> 65535:65535</span>
-<span id="cb132-7"><a href="exercise-4-singularity-running-and-building.html#cb132-7"></a><span class="ex">2021/04/30</span> 12:31:20 [notice] 16#16: start worker processes</span>
-<span id="cb132-8"><a href="exercise-4-singularity-running-and-building.html#cb132-8"></a><span class="ex">2021/04/30</span> 12:31:20 [notice] 16#16: start worker process 17</span>
-<span id="cb132-9"><a href="exercise-4-singularity-running-and-building.html#cb132-9"></a></span>
-<span id="cb132-10"><a href="exercise-4-singularity-running-and-building.html#cb132-10"></a><span class="ex">INFO</span>:    instance started successfully</span></code></pre></div>
+<div class="sourceCode" id="cb131"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb131-1"><a href="exercise-4-singularity-running-and-building.html#cb131-1"></a><span class="kw">(</span><span class="ex">base</span><span class="kw">)</span> [<span class="ex">ec2-user@ip-172-31-32-16</span> singularity]$ sudo singularity instance start -B /home/ec2-user/www:/usr/share/nginx/html --writable-tmpfs nginx.sif webserver</span>
+<span id="cb131-2"><a href="exercise-4-singularity-running-and-building.html#cb131-2"></a><span class="ex">2021/04/30</span> 12:31:20 [notice] 15#15: using the <span class="st">&quot;epoll&quot;</span> event method</span>
+<span id="cb131-3"><a href="exercise-4-singularity-running-and-building.html#cb131-3"></a><span class="ex">2021/04/30</span> 12:31:20 [notice] 15#15: nginx/1.20.0</span>
+<span id="cb131-4"><a href="exercise-4-singularity-running-and-building.html#cb131-4"></a><span class="ex">2021/04/30</span> 12:31:20 [notice] 15#15: built by gcc 8.3.0 (Debian 8.3.0-6)</span>
+<span id="cb131-5"><a href="exercise-4-singularity-running-and-building.html#cb131-5"></a><span class="ex">2021/04/30</span> 12:31:20 [notice] 15#15: OS: Linux 4.14.225-169.362.amzn2.x86_64</span>
+<span id="cb131-6"><a href="exercise-4-singularity-running-and-building.html#cb131-6"></a><span class="ex">2021/04/30</span> 12:31:20 [notice] 15#15: getrlimit(RLIMIT_NOFILE)<span class="bu">:</span> 65535:65535</span>
+<span id="cb131-7"><a href="exercise-4-singularity-running-and-building.html#cb131-7"></a><span class="ex">2021/04/30</span> 12:31:20 [notice] 16#16: start worker processes</span>
+<span id="cb131-8"><a href="exercise-4-singularity-running-and-building.html#cb131-8"></a><span class="ex">2021/04/30</span> 12:31:20 [notice] 16#16: start worker process 17</span>
+<span id="cb131-9"><a href="exercise-4-singularity-running-and-building.html#cb131-9"></a></span>
+<span id="cb131-10"><a href="exercise-4-singularity-running-and-building.html#cb131-10"></a><span class="ex">INFO</span>:    instance started successfully</span></code></pre></div>
 </details>
 
 <div class="rmdtip">

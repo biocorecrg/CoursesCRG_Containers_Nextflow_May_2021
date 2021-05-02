@@ -295,15 +295,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">3.9.1</span> FASTQC Web Application</h3>
 <p>We work in a dummy FASTQC Web service</p>
 <p>We place <code>B7_input_s_chr19.fastq.gz</code> file from available datasets in <code>$HOME/myscratch</code></p>
-<div class="sourceCode" id="cb87"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb87-1"><a href="integrative-examples.html#cb87-1"></a><span class="fu">mkdir</span> -p <span class="va">$HOME</span>/myscratch</span>
-<span id="cb87-2"><a href="integrative-examples.html#cb87-2"></a></span>
-<span id="cb87-3"><a href="integrative-examples.html#cb87-3"></a><span class="fu">cp</span> testdata/* <span class="va">$HOME</span>/myscratch</span>
-<span id="cb87-4"><a href="integrative-examples.html#cb87-4"></a></span>
-<span id="cb87-5"><a href="integrative-examples.html#cb87-5"></a><span class="bu">cd</span> containers/docker/fastqc_www</span>
-<span id="cb87-6"><a href="integrative-examples.html#cb87-6"></a></span>
-<span id="cb87-7"><a href="integrative-examples.html#cb87-7"></a><span class="ex">docker</span> build -t fastqcwww -f Dockerfile ../../scripts/fastqc</span>
-<span id="cb87-8"><a href="integrative-examples.html#cb87-8"></a></span>
-<span id="cb87-9"><a href="integrative-examples.html#cb87-9"></a><span class="ex">docker</span> run -d -v <span class="va">$HOME</span>/myscratch:/scratch -p 3838:8083 --name myfastqc fastqcwww</span></code></pre></div>
+<div class="sourceCode" id="cb86"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb86-1"><a href="integrative-examples.html#cb86-1"></a><span class="fu">mkdir</span> -p <span class="va">$HOME</span>/myscratch</span>
+<span id="cb86-2"><a href="integrative-examples.html#cb86-2"></a></span>
+<span id="cb86-3"><a href="integrative-examples.html#cb86-3"></a><span class="fu">cp</span> testdata/* <span class="va">$HOME</span>/myscratch</span>
+<span id="cb86-4"><a href="integrative-examples.html#cb86-4"></a></span>
+<span id="cb86-5"><a href="integrative-examples.html#cb86-5"></a><span class="bu">cd</span> containers/docker/fastqc_www</span>
+<span id="cb86-6"><a href="integrative-examples.html#cb86-6"></a></span>
+<span id="cb86-7"><a href="integrative-examples.html#cb86-7"></a><span class="ex">docker</span> build -t fastqcwww -f Dockerfile ../../scripts/fastqc</span>
+<span id="cb86-8"><a href="integrative-examples.html#cb86-8"></a></span>
+<span id="cb86-9"><a href="integrative-examples.html#cb86-9"></a><span class="ex">docker</span> run -d -v <span class="va">$HOME</span>/myscratch:/scratch -p 3838:8083 --name myfastqc fastqcwww</span></code></pre></div>
 <p>Example query from the browser:</p>
 <p><a href="http://mymachine-address-here:3838/?file=B7_input_s_chr19.fastq" class="uri">http://mymachine-address-here:3838/?file=B7_input_s_chr19.fastq</a></p>
 
@@ -319,11 +319,11 @@ Replace your mymachine-address-here for machine provided address or 127.0.0.1/lo
 </div>
 <div id="shiny-application" class="section level3">
 <h3><span class="header-section-number">3.9.2</span> Shiny Application</h3>
-<div class="sourceCode" id="cb88"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb88-1"><a href="integrative-examples.html#cb88-1"></a><span class="bu">cd</span> containers/docker/shiny</span>
-<span id="cb88-2"><a href="integrative-examples.html#cb88-2"></a></span>
-<span id="cb88-3"><a href="integrative-examples.html#cb88-3"></a><span class="ex">docker</span> build -t shinyapp -f Dockerfile ../../scripts</span>
-<span id="cb88-4"><a href="integrative-examples.html#cb88-4"></a></span>
-<span id="cb88-5"><a href="integrative-examples.html#cb88-5"></a><span class="ex">docker</span> run -d -v <span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span>/../../scripts/shiny:/srv/shiny-server/myserver -p 3838:3838 --name myserver shinyapp</span></code></pre></div>
+<div class="sourceCode" id="cb87"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb87-1"><a href="integrative-examples.html#cb87-1"></a><span class="bu">cd</span> containers/docker/shiny</span>
+<span id="cb87-2"><a href="integrative-examples.html#cb87-2"></a></span>
+<span id="cb87-3"><a href="integrative-examples.html#cb87-3"></a><span class="ex">docker</span> build -t shinyapp -f Dockerfile ../../scripts</span>
+<span id="cb87-4"><a href="integrative-examples.html#cb87-4"></a></span>
+<span id="cb87-5"><a href="integrative-examples.html#cb87-5"></a><span class="ex">docker</span> run -d -v <span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span>/../../scripts/shiny:/srv/shiny-server/myserver -p 3838:3838 --name myserver shinyapp</span></code></pre></div>
 <p>Check the result from the browser
 <a href="http://mymachine-address-here:3838" class="uri">http://mymachine-address-here:3838</a></p>
 
