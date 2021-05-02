@@ -380,11 +380,16 @@ As we have seen before, you can run <code>docker images</code> in the terminal t
 <ul>
 <li>Repository.</li>
 <li>Tag.</li>
-<li>Unique image ID.</li>
+<li>Unique image ID (Digest).</li>
 <li>Creation date.</li>
 <li>Image size.</li>
 </ul>
 <p><img src="docs/images/docker_images_list.png" width="650/"></p>
+
+<div class="rmdnote">
+Notice that for some images, such as Ubuntu, the same version tag hosts several Unique Image IDs (Digest). Each ID corresponds to a build for a specific Operating System or Architecture. Docker clients automatically retrieves the suitable one when using <strong><em>docker pull</em></strong>. If the OS/Architecture from the client is not present, an error is raised.
+</div>
+
 <center>
 <h4 style="background-color: #e6fadc; display: inline-block;">
 <strong>HANDS-ON</strong>
