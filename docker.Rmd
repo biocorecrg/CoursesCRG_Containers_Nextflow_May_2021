@@ -115,8 +115,8 @@ docker search blast
 Too many results? You can apply some filters:
 
 * Minimum number of **stars**: `docker search blast --filter stars=5`
-* The image is an **official build**: `docker search blast --filter is-official=true`
-* The image is an **automated build**: `docker search blast --filter is-automated=true`
+* The image is an [**official build**](https://docs.docker.com/docker-hub/official_images/): `docker search blast --filter is-official=true`
+* The image is an [**automated build**](https://docs.docker.com/docker-hub/builds/): `docker search blast --filter is-automated=true`
 
 ```{bash}
 # Apply one filter
@@ -1121,11 +1121,13 @@ docker run mytestfiglet "Docker course"
 
 2. <u>Random numbers</u>
     * Copy the following short `bash` script in a file called `random_numbers.bash`.
+
 ```{bash}
 #!/usr/bin/bash
 seq 1 1000 | shuf | head -$1
 ```
-    This script outputs **random intergers from 1 to 1000**: the number of integers selected is given as the **first argument**.
+
+This script outputs **random intergers from 1 to 1000**: the number of integers selected is given as the **first argument**.
     * Write a recipe for an image:
         * Based on **centos:7**
         * That will execute this script (with `bash`) when it is run, giving it **2** as a default argument (i.e. **outputs 2 random integers**): the default can be changed as the image is run.
@@ -1169,7 +1171,7 @@ docker run random_numbers 10
 
 
 
-### Additional commands
+## Additional commands
 
 * **docker inspect**: Get details from containers (both running and stopped). Things such as IPs, volumes, etc.
 
