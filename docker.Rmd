@@ -112,8 +112,8 @@ docker search blast
 Too many results? You can apply some filters:
 
 * Minimum number of **stars**: `docker search blast --filter stars=5`
-* The image is an **official build**: `docker search blast --filter is-official=true`
-* The image is an **automated build**: `docker search blast --filter is-automated=true`
+* The image is an [**official build**](https://docs.docker.com/docker-hub/official_images/): `docker search blast --filter is-official=true`
+* The image is an [**automated build**](https://docs.docker.com/docker-hub/builds/): `docker search blast --filter is-automated=true`
 
 ```{bash}
 # Apply one filter
