@@ -749,7 +749,7 @@ Syntax: **`--file` / `-f`**
 **IMPORTANT**: Avoid contexts (directories) over-populated with files (even if not actually used in the recipe).
 
 ```{block2, type='rdmtip'}
-In order to avoid that some directories or files are inspected or included (e.g, with **CP** command in Dockerfile), you can use .dockerignore file to specify which paths should be avoided. More information at: https://codefresh.io/docker-tutorial/not-ignore-dockerignore-2/
+In order to avoid that some directories or files are inspected or included (e.g, with **COPY** command in Dockerfile), you can use .dockerignore file to specify which paths should be avoided. More information at: https://codefresh.io/docker-tutorial/not-ignore-dockerignore-2/
 ```
 
 You can define a specific name for the image during the build process.
@@ -1326,7 +1326,7 @@ Example query from the browser:
 http://mymachine-address-here:3838/?file=B7_input_s_chr19.fastq
 
 ```{block2, type='rmdnote'}
-As commented in previous sections, the context is the place from where Docker will start the build process. Keep it in mind when defining the paths when using commands such as **CP** in the recipe.
+As commented in previous sections, the context is the place from where Docker will start the build process. Keep it in mind when defining the paths when using commands such as **COPY** in the recipe.
 ```
 
 ```{block2, type='rmdnote'}
