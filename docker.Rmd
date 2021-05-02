@@ -594,7 +594,7 @@ Different operating systems have different tools to fetch and install packages:
 
 | Operating System | Format | Tool(s) |
 | :-----: | :-----: | :-----: |
-| [Debian](https://packages.debian.org) / Ubuntu / Linux Mint / Raspbian | .deb | apt, apt-cache, apt-get, dpkg |
+| [Debian](https://packages.debian.org) / [Ubuntu](https://packages.ubuntu.com/) / Linux Mint / Raspbian | .deb | apt, apt-cache, apt-get, dpkg |
 | [CentOS](https://centos.pkgs.org/) (RedHat) | .rpm | yum |
 | Fedora (RedHat) | .rpm | dnf |
 | FreeBSD | .txz | make, pkg |
@@ -645,11 +645,15 @@ It is an important option in the context of Docker: it means that you *answer ye
 
 [Conda](https://docs.conda.io/en/latest/) is an open source package management system and environment management system that runs on Windows, macOS and Linux. Conda allows to quickly find, install, run and update packages and their dependencies.
 
+**Popular Conda repositories:**
+
 * [Anaconda](https://anaconda.org/anaconda/repo)
 * [Conda-forge](https://conda-forge.org/feedstocks/)
 * [Bioconda](https://anaconda.org/bioconda/repo)
 
-
+```{block2, type='rdmtip'}
+If interested in using Conda, you may be interested in this Docker image: https://hub.docker.com/r/continuumio/miniconda3
+```
 
 ## Docker recipes
 
