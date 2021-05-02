@@ -414,7 +414,7 @@ RUN apt install -y wget</code></pre>
 <p><strong>IMPORTANT</strong>: Avoid contexts (directories) over-populated with files (even if not actually used in the recipe).</p>
 
 <div class="rdmtip">
-In order to avoid that some directories or files are inspected or included (e.g, with <strong>CP</strong> command in Dockerfile), you can use .dockerignore file to specify which paths should be avoided. More information at: <a href="https://codefresh.io/docker-tutorial/not-ignore-dockerignore-2/" class="uri">https://codefresh.io/docker-tutorial/not-ignore-dockerignore-2/</a>
+In order to avoid that some directories or files are inspected or included (e.g, with <strong>COPY</strong> command in Dockerfile), you can use .dockerignore file to specify which paths should be avoided. More information at: <a href="https://codefresh.io/docker-tutorial/not-ignore-dockerignore-2/" class="uri">https://codefresh.io/docker-tutorial/not-ignore-dockerignore-2/</a>
 </div>
 
 <p>You can define a specific name for the image during the build process.</p>
