@@ -203,13 +203,16 @@ As we have seen before, you can run `docker images` in the terminal to see a lis
 
 * Repository.
 * Tag.
-* Unique image ID.
+* Unique image ID (Digest).
 * Creation date.
 * Image size.
 
 
 <img src="docs/images/docker_images_list.png" width="650/">
 
+```{block2, type='rmdnote'}
+Notice that for some images, such as Ubuntu, the same version tag hosts several Unique Image IDs (Digest). Each ID corresponds to a build for a specific Operating System or Architecture. Docker clients automatically retrieves the suitable one when using ***docker pull***. If the OS/Architecture from the client is not present, an error is raised. 
+```
 
 <center><h4 style="background-color: #e6fadc; display: inline-block;">**HANDS-ON**</h4></center>
 
