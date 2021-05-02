@@ -63,23 +63,6 @@ docker run --help
 
 <img src="docs/images/docker_run_help.png" width="750/">
 
-
-<center><h4 style="background-color: #e6fadc; display: inline-block;">**HANDS-ON**</h4></center>
-
-What are the following commands doing?
-
-* `docker images`
-* `docker export`
-
-<details>
-<summary>
-<h5 style="background-color: #e6fadc; display: inline-block;">*Answer*</h5>
-</summary>
-here
-</details>
-
-
-
 ## Using existing images
 
 ### Getting started
@@ -211,7 +194,7 @@ As we have seen before, you can run `docker images` in the terminal to see a lis
 <img src="docs/images/docker_images_list.png" width="650/">
 
 ```{block2, type='rmdnote'}
-Notice that for some images, such as Ubuntu, the same version tag hosts several Unique Image IDs (Digest). Each ID corresponds to a build for a specific Operating System or Architecture. Docker clients automatically retrieves the suitable one when using ***docker pull***. If the OS/Architecture from the client is not present, an error is raised. 
+Notice that for some images, such as Ubuntu, the same version tag hosts several Unique Image IDs (Digest). Each ID corresponds to a build for a specific Operating System or Architecture. Docker clients automatically retrieves the suitable one when using ***docker pull***. If the OS/Architecture from the client is not present, an error is raised.
 ```
 
 <center><h4 style="background-color: #e6fadc; display: inline-block;">**HANDS-ON**</h4></center>
