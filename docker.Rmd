@@ -638,7 +638,7 @@ It is an important option in the context of Docker: it means that you *answer ye
 * [Bioconda](https://anaconda.org/bioconda/repo)
 
 ```{block2, type='rdmtip'}
-If interested in using Conda, you may be interested in this Docker image: https://hub.docker.com/r/continuumio/miniconda3
+If interested in using Conda, you can choose this Docker image: https://hub.docker.com/r/continuumio/miniconda3
 ```
 
 ## Docker recipes
