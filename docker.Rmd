@@ -1168,7 +1168,7 @@ docker run random_numbers 10
 
 
 
-### Additional commands
+## Additional commands
 
 * **docker inspect**: Get details from containers (both running and stopped). Things such as IPs, volumes, etc.
 
