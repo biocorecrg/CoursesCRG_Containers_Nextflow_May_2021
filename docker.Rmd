@@ -209,7 +209,7 @@ Notice that for some images, such as Ubuntu, the same version tag hosts several 
 <h5 style="background-color: #e6fadc; display: inline-block;">*Answer*</h5>
 </summary>
 
-```
+```{bash}
 # Pull the blast image
 docker pull biocontainers/blast:2.2.31
 
@@ -598,13 +598,13 @@ During this course, we will build images based on **Ubuntu** and **CentOS**.
 
 * In **Ubuntu**:
 
-```
+```{bash}
 apt-get update && apt-get upgrade -y
 ```
 
 In **CentOS**:
 
-```
+```{bash}
 yum check-update && yum update -y
 ```
 
@@ -612,14 +612,14 @@ yum check-update && yum update -y
 
 * In **Ubuntu**:
 
-```
+```{bash}
 apt search libxml2
 apt install -y libxml2-dev
 ```
 
 * In **CentOS**:
 
-```
+```{bash}
 yum search libxml2
 yum install -y libxml2-devel.x86_64
 ```
@@ -887,19 +887,19 @@ RUN apt install -y python${PyVersion}
 
 Build the image to get the default version of Python:
 
-```
+```{bash}
 docker build -t py27 -f Dockerfile_ARG .
 ```
 
 Build the image to install the version 3.8 of Python instead (via the `--build-arg` option):
 
-```
+```{bash}
 docker build --build-arg PyVersion=3.8 -t py38 -f Dockerfile_ARG .
 ```
 
 Run the image and check if Python of the correct version is installed:
 
-```
+```{bash}
 docker run py27 python2.7 --help
 docker run py38 python3.8 --help
 ```
@@ -933,19 +933,19 @@ Save the above recipe in **Dockerfile_hello**.
 <br>
 Build:
 
-```
+```{bash}
 docker build -f Dockerfile_hello -t helloimage .
 ```
 
 Run without an argument:
 
-```
+```{bash}
 docker run helloimage
 ```
 
 Now run with an argument:
 
-```
+```{bash}
 docker run helloimage "nice"
 ```
 
@@ -971,7 +971,7 @@ CMD ["https://cdn.wp.nginx.com/wp-content/uploads/2016/07/docker-swarm-hero2.png
 
 Build the image:
 
-```
+```{bash}
 docker build -f Dockerfile_ubuntu .
 ```
 
@@ -1069,13 +1069,13 @@ CMD ["I love containers"]
 
 Build:
 
-```
+```{bash}
 docker build --file Dockerfile_figlet -t mytest .
 ```
 
 Run the image:
 
-```
+```{bash}
 # with no argument
 docker run mytest
 
@@ -1099,13 +1099,13 @@ CMD ["I love containers"]
 
 Build the image.
 
-```
+```{bash}
 docker build --no-cache --file Dockerfile_figlet -t mytestfiglet .
 ```
 
 Run the new image, with the default parameter, then with **"Docker course"** as an argument.
 
-```
+```{bash}
 # run with no argument
 docker run mytestfiglet
 
@@ -1156,7 +1156,7 @@ CMD ["2"]
 
 Build and run:
 
-```
+```{bash}
 docker build -f Dockerfile_RN -t random_numbers .
 docker run random_numbers
 docker run random_numbers 10
@@ -1191,7 +1191,7 @@ Good for long-term reproducibility and for critical production environments:
 <h5 style="background-color: #e6fadc; display: inline-block;">*Answer*</h5>
 </summary>
 
-```
+```{bash}
 docker save -o random_numbers.tar random_numbers
 ```
 
@@ -1206,7 +1206,7 @@ Syntax: `--volume/-v host:container`
 
 <br> We can pull the following image to illustrate:
 
-```
+```{bash}
 docker pull biocontainers/fastqc:v0.11.9_cv7
 ```
 
@@ -1239,7 +1239,7 @@ docker exec -ti fastqc_container /bin/bash
 <h5 style="background-color: #e6fadc; display: inline-block;">*Answer*</h5>
 </summary>
 
-```
+```{bash}
 # Download test fastq files (manually or using the following commands) and place them in "datatest":
 wget -O - https://github.com/biocorecrg/CoursesCRG_Containers_Nextflow_May_2021/blob/main/testdata/B7_H3K4me1_s_chr19.fastq.gz?raw=true > datatest/B7_H3K4me1_s_chr19.fastq.gz
 wget -O - https://github.com/biocorecrg/CoursesCRG_Containers_Nextflow_May_2021/blob/main/testdata/B7_input_s_chr19.fastq.gz?raw=true > datatest/B7_input_s_chr19.fastq.gz
@@ -1309,7 +1309,7 @@ We work in a dummy FASTQC Web service
 
 We place ```B7_input_s_chr19.fastq.gz``` file from available datasets in ```$HOME/myscratch```
 
-```
+```{bash}
 mkdir -p $HOME/myscratch
 
 cp testdata/* $HOME/myscratch
@@ -1394,7 +1394,7 @@ knitr::include_graphics('docs/images/dockerhub-create.png')
 
 We use one image we have in our system and we add a tag that matches our repository name.
 
-```
+```{bash}
 docker pull biocontainers/fastqc:v0.11.9_cv7
 
 Status: Downloaded newer image for biocontainers/fastqc:v0.11.9_cv7
@@ -1412,7 +1412,7 @@ toniher/fastqc-example   latest              e5e3008d2bd1        6 months ago   
 
 Then we push that new added tag and in shortly you will see in Docker Hub page.
 
-```
+```{bash}
 docker push toniher/fastqc-example:latest
 ```
 
@@ -1425,7 +1425,7 @@ As already noted, default registry is Docker Hub. If using another one, it is ne
 
 * Create a Github repository
 
-* Add a Dockerfile (any of the ones used in the course). Keep in mind that if the recipe requires files (e.g., processed with **CP**) you will need to upload them and place them in a way compatible with the context you choose.
+* Add a Dockerfile (any of the ones used in the course). Keep in mind that if the recipe requires files (e.g., processed with **COPY**) you will need to upload them and place them in a way compatible with the context you choose.
 
 * Configure an automated build from Docker Hub
 
@@ -1486,7 +1486,7 @@ EXPOSE 8081
 ENTRYPOINT ["php", "-S", "0.0.0.0:8081"]
 ```
 
-```
+```{bash}
 docker run -d -v $HOME/db:/blastdb -p 80:8081 --name myblast blastwww
 ```
 
