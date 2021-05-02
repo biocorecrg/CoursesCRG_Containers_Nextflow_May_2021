@@ -296,12 +296,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Default ones, no need to mount them explicitly (for 3.7.x): <code>$HOME</code> , <code>/sys:/sys</code> , <code>/proc:/proc</code>, <code>/tmp:/tmp</code>, <code>/var/tmp:/var/tmp</code>, <code>/etc/resolv.conf:/etc/resolv.conf</code>, <code>/etc/passwd:/etc/passwd</code>, and <code>$PWD</code> <a href="https://sylabs.io/guides/3.7/user-guide/bind_paths_and_mounts.html">https://sylabs.io/guides/3.7/user-guide/bind_paths_and_mounts.html</a></li>
 </ul>
 <p>For others, need to be done explicitly (syntax: host:container)</p>
-<pre><code>mkdir testdir
-touch testdir/testout
-singularity shell -e -B ./testdir:/scratch fastqc-multi-bowtie.sif
-&gt; touch /scratch/testin
-&gt; exit
-ls -l testdir</code></pre>
+<div class="sourceCode" id="cb114"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb114-1"><a href="bind-paths-aka-volumes.html#cb114-1"></a>    <span class="fu">mkdir</span> testdir</span>
+<span id="cb114-2"><a href="bind-paths-aka-volumes.html#cb114-2"></a>    <span class="fu">touch</span> testdir/testout</span>
+<span id="cb114-3"><a href="bind-paths-aka-volumes.html#cb114-3"></a>    <span class="ex">singularity</span> shell -e -B ./testdir:/scratch fastqc-multi-bowtie.sif</span>
+<span id="cb114-4"><a href="bind-paths-aka-volumes.html#cb114-4"></a>    <span class="op">&gt;</span> <span class="fu">touch</span> /scratch/testin</span>
+<span id="cb114-5"><a href="bind-paths-aka-volumes.html#cb114-5"></a>    <span class="op">&gt;</span> <span class="bu">exit</span></span>
+<span id="cb114-6"><a href="bind-paths-aka-volumes.html#cb114-6"></a>    <span class="fu">ls</span> -l testdir</span></code></pre></div>
 </div>
             </section>
 

@@ -295,7 +295,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="singularity-shell" class="section level3">
 <h3><span class="header-section-number">4.3.1</span> Singularity shell</h3>
 <p>The straight-forward exploratory approach, equivalent to <code>docker run -ti myimage /bin/shell</code>. But with a more handy syntax.</p>
-<pre><code>singularity shell fastqc-multi-bowtie.sif</code></pre>
+<div class="sourceCode" id="cb107"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb107-1"><a href="run-and-execution-process.html#cb107-1"></a>    <span class="ex">singularity</span> shell fastqc-multi-bowtie.sif</span></code></pre></div>
 
 <div class="rmdnote">
 Move around the directories and notice the different isolation approach compared to Docker. You can access most of the host filesystem.
@@ -305,38 +305,38 @@ Move around the directories and notice the different isolation approach compared
 <div id="singularity-exec" class="section level3">
 <h3><span class="header-section-number">4.3.2</span> Singularity exec</h3>
 <p>That is the most common way to execute Singularity (equivalent to <code>docker exec</code>). That would be the normal approach in HPC environments.</p>
-<pre><code>singularity exec fastqc-multi-bowtie.sif fastqc</code></pre>
+<div class="sourceCode" id="cb108"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb108-1"><a href="run-and-execution-process.html#cb108-1"></a>    <span class="ex">singularity</span> exec fastqc-multi-bowtie.sif fastqc</span></code></pre></div>
 </div>
 <div id="singularity-run" class="section level3">
 <h3><span class="header-section-number">4.3.3</span> Singularity run</h3>
 <p>This executes runscript from recipe definition (equivalent to <code>docker run</code>). Not so common for HPC uses. More for instances (servers).</p>
-<pre><code>singularity run fastqc-multi-bowtie.sif</code></pre>
+<div class="sourceCode" id="cb109"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb109-1"><a href="run-and-execution-process.html#cb109-1"></a>    <span class="ex">singularity</span> run fastqc-multi-bowtie.sif</span></code></pre></div>
 </div>
 <div id="environment-control" class="section level3">
 <h3><span class="header-section-number">4.3.4</span> Environment control</h3>
 <p>By default Singularity inherits our profile environment (e.g., PATH environment variable). This may be convenient for some circumstances, but it can also lead to unexpected problems if you are not aware, when your own environment clashes with the default one from the image.</p>
-<pre><code>singularity shell -e fastqc-multi-bowtie.sif
-
-singularity exec -e fastqc-multi-bowtie.sif fastqc
-
-singularity run -e fastqc-multi-bowtie.sif</code></pre>
+<div class="sourceCode" id="cb110"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb110-1"><a href="run-and-execution-process.html#cb110-1"></a>    <span class="ex">singularity</span> shell -e fastqc-multi-bowtie.sif</span>
+<span id="cb110-2"><a href="run-and-execution-process.html#cb110-2"></a></span>
+<span id="cb110-3"><a href="run-and-execution-process.html#cb110-3"></a>    <span class="ex">singularity</span> exec -e fastqc-multi-bowtie.sif fastqc</span>
+<span id="cb110-4"><a href="run-and-execution-process.html#cb110-4"></a></span>
+<span id="cb110-5"><a href="run-and-execution-process.html#cb110-5"></a>    <span class="ex">singularity</span> run -e fastqc-multi-bowtie.sif</span></code></pre></div>
 <p>Compare <code>env</code> command with and without -e modifier.</p>
-<pre><code>singularity exec fastqc-multi-bowtie.sif env
-singularity exec -e fastqc-multi-bowtie.sif env</code></pre>
+<div class="sourceCode" id="cb111"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb111-1"><a href="run-and-execution-process.html#cb111-1"></a>    <span class="ex">singularity</span> exec fastqc-multi-bowtie.sif env</span>
+<span id="cb111-2"><a href="run-and-execution-process.html#cb111-2"></a>    <span class="ex">singularity</span> exec -e fastqc-multi-bowtie.sif env</span></code></pre></div>
 </div>
 <div id="execute-from-sandboxed-images-directories" class="section level3">
 <h3><span class="header-section-number">4.3.5</span> Execute from sandboxed images / directories</h3>
-<pre><code>singularity exec ./sandbox ls -l /etc/myetc.conf
-# We can see file created in the directory before
-singularity exec ./sandbox bash -c &#39;apt-get update &amp;&amp; apt-get install python&#39;
-# We cannot install python
-singularity exec --writable ./sandbox bash -c &#39;apt-get update &amp;&amp; apt-get install python&#39;
-# We needed to add writable parameter</code></pre>
+<div class="sourceCode" id="cb112"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb112-1"><a href="run-and-execution-process.html#cb112-1"></a>    <span class="ex">singularity</span> exec ./sandbox ls -l /etc/myetc.conf</span>
+<span id="cb112-2"><a href="run-and-execution-process.html#cb112-2"></a>    <span class="co"># We can see file created in the directory before</span></span>
+<span id="cb112-3"><a href="run-and-execution-process.html#cb112-3"></a>    <span class="ex">singularity</span> exec ./sandbox bash -c <span class="st">&#39;apt-get update &amp;&amp; apt-get install python&#39;</span></span>
+<span id="cb112-4"><a href="run-and-execution-process.html#cb112-4"></a>    <span class="co"># We cannot install python</span></span>
+<span id="cb112-5"><a href="run-and-execution-process.html#cb112-5"></a>    <span class="ex">singularity</span> exec --writable ./sandbox bash -c <span class="st">&#39;apt-get update &amp;&amp; apt-get install python&#39;</span></span>
+<span id="cb112-6"><a href="run-and-execution-process.html#cb112-6"></a>    <span class="co"># We needed to add writable parameter</span></span></code></pre></div>
 </div>
 <div id="execute-straight-from-a-registry" class="section level3">
 <h3><span class="header-section-number">4.3.6</span> Execute straight from a registry</h3>
 <p>Image is actually downloaded (and if a Docker one, converted) and stored in Singularity cache directory.</p>
-<pre><code>singularity exec docker://ncbi/blast:2.10.1 blastp -version</code></pre>
+<div class="sourceCode" id="cb113"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb113-1"><a href="run-and-execution-process.html#cb113-1"></a>    <span class="ex">singularity</span> exec docker://ncbi/blast:2.10.1 blastp -version</span></code></pre></div>
 </div>
 </div>
             </section>
