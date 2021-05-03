@@ -352,6 +352,40 @@ More sophisticated kinds of volumes (which are handled by Docker daemon) are exp
 <strong><em>bash -c</em></strong> stands for executing from the provided string.
 </div>
 
+<center>
+<h4 style="background-color: #e6fadc; display: inline-block;">
+<strong>HANDS-ON</strong>
+</h4>
+</center>
+<ol style="list-style-type: decimal">
+<li>Copy the 2 FASTA files from the <a href="https://github.com/biocorecrg/CoursesCRG_Containers_Nextflow_May_2021/tree/main/testdata/blast">Github repository</a> and place them in mounted directory.</li>
+<li>Run <code>blastp</code> inside the container against each other: <code>blastp -query /scratch/O75976.fasta -subject /scratch/Q90240.fasta</code></li>
+<li>Run <code>blastp</code> outside the container and get the result. Do with exec and do all at once with run</li>
+</ol>
+<details>
+<summary>
+<h5 style="background-color: #e6fadc; display: inline-block;">
+<em>Answer</em>
+</h5>
+<p></summary></p>
+<div class="sourceCode" id="cb83"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb83-1"><a href="volumes.html#cb83-1"></a><span class="co"># Let&#39;s create the container and we dettach it</span></span>
+<span id="cb83-2"><a href="volumes.html#cb83-2"></a><span class="ex">docker</span> run --detach -ti --volume <span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span>/datatest:/scratch --name blastp_test ncbi/blast:2.10.1</span>
+<span id="cb83-3"><a href="volumes.html#cb83-3"></a></span>
+<span id="cb83-4"><a href="volumes.html#cb83-4"></a><span class="co"># Execute container interactively and run blastp</span></span>
+<span id="cb83-5"><a href="volumes.html#cb83-5"></a><span class="ex">docker</span> exec -ti blastp_test /bin/bash</span>
+<span id="cb83-6"><a href="volumes.html#cb83-6"></a><span class="op">&gt;</span> <span class="ex">blastp</span> -query /scratch/O75976.fasta -subject /scratch/Q90240.fasta <span class="op">&gt;</span> /scratch/insideout.txt</span>
+<span id="cb83-7"><a href="volumes.html#cb83-7"></a></span>
+<span id="cb83-8"><a href="volumes.html#cb83-8"></a><span class="co"># Run from outside and retrieve in different ways</span></span>
+<span id="cb83-9"><a href="volumes.html#cb83-9"></a><span class="ex">docker</span> exec -ti blastp_test blastp -query /scratch/O75976.fasta -subject /scratch/Q90240.fasta</span>
+<span id="cb83-10"><a href="volumes.html#cb83-10"></a></span>
+<span id="cb83-11"><a href="volumes.html#cb83-11"></a><span class="ex">docker</span> exec -ti blastp_test blastp -query /scratch/O75976.fasta -subject /scratch/Q90240.fasta <span class="op">&gt;</span> out.txt</span>
+<span id="cb83-12"><a href="volumes.html#cb83-12"></a></span>
+<span id="cb83-13"><a href="volumes.html#cb83-13"></a><span class="ex">docker</span> exec -ti blastp_test blastp -query /scratch/O75976.fasta -subject /scratch/Q90240.fasta -out /scratch/outagain.txt</span>
+<span id="cb83-14"><a href="volumes.html#cb83-14"></a></span>
+<span id="cb83-15"><a href="volumes.html#cb83-15"></a><span class="ex">docker</span> run --volume <span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span>/datatest:/scratch --name blastp1 ncbi/blast:2.10.1 blastp -query /scratch/O75976.fasta -subject /scratch/Q90240.fasta <span class="op">&gt;</span> out2.txt</span>
+<span id="cb83-16"><a href="volumes.html#cb83-16"></a></span>
+<span id="cb83-17"><a href="volumes.html#cb83-17"></a><span class="ex">docker</span> run --volume <span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span>/datatest:/scratch --name blastp2 ncbi/blast:2.10.1 blastp -query /scratch/O75976.fasta -subject /scratch/Q90240.fasta -out /scratch/outagain2.txt</span></code></pre></div>
+</details>
 </div>
             </section>
 

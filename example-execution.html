@@ -292,27 +292,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">4.5</span> Example execution:</h2>
 <p>Using the 2 fastqc available files, process them outside and inside the mounted directory.</p>
 <p>Let’s use our <code>fastqc.sif</code> image file and we place it in $HOME</p>
-<div class="sourceCode" id="cb114"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb114-1"><a href="example-execution.html#cb114-1"></a><span class="co"># Let&#39;s create a dummy directory</span></span>
-<span id="cb114-2"><a href="example-execution.html#cb114-2"></a><span class="fu">mkdir</span> <span class="va">$HOME</span>/scratch</span>
-<span id="cb114-3"><a href="example-execution.html#cb114-3"></a></span>
-<span id="cb114-4"><a href="example-execution.html#cb114-4"></a><span class="co"># Let&#39;s copy contents of testdata in scratch</span></span>
-<span id="cb114-5"><a href="example-execution.html#cb114-5"></a></span>
-<span id="cb114-6"><a href="example-execution.html#cb114-6"></a><span class="ex">singularity</span> exec fastqc.sif fastqc scratch/*fastq.gz</span>
-<span id="cb114-7"><a href="example-execution.html#cb114-7"></a></span>
-<span id="cb114-8"><a href="example-execution.html#cb114-8"></a><span class="co"># Check you have some HTMLs there. Remove them</span></span>
-<span id="cb114-9"><a href="example-execution.html#cb114-9"></a><span class="fu">rm</span> scratch/*html</span>
-<span id="cb114-10"><a href="example-execution.html#cb114-10"></a></span>
-<span id="cb114-11"><a href="example-execution.html#cb114-11"></a><span class="co"># Let&#39;s use shell</span></span>
-<span id="cb114-12"><a href="example-execution.html#cb114-12"></a><span class="ex">singularity</span> shell fastqc.sif</span>
-<span id="cb114-13"><a href="example-execution.html#cb114-13"></a><span class="op">&gt;</span> <span class="bu">cd</span> scratch</span>
-<span id="cb114-14"><a href="example-execution.html#cb114-14"></a><span class="op">&gt;</span> <span class="ex">fastqc</span> *fastq.gz</span>
-<span id="cb114-15"><a href="example-execution.html#cb114-15"></a><span class="op">&gt;</span> <span class="bu">exit</span></span>
-<span id="cb114-16"><a href="example-execution.html#cb114-16"></a></span>
-<span id="cb114-17"><a href="example-execution.html#cb114-17"></a><span class="co"># Check you have some HTMLs there. Remove them</span></span>
-<span id="cb114-18"><a href="example-execution.html#cb114-18"></a><span class="ex">singularity</span> exec -B ./scratch:/fastqcdir fastqc.sif fastqc /fastqcdir/*fastq.gz</span>
-<span id="cb114-19"><a href="example-execution.html#cb114-19"></a></span>
-<span id="cb114-20"><a href="example-execution.html#cb114-20"></a><span class="co"># What happens here!</span></span>
-<span id="cb114-21"><a href="example-execution.html#cb114-21"></a><span class="ex">singularity</span> exec -B ./scratch:/fastqcdir fastqc.sif bash -c <span class="st">&#39;fastqc /fastqcdir/*fastq.gz&#39;</span></span></code></pre></div>
+<div class="sourceCode" id="cb115"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb115-1"><a href="example-execution.html#cb115-1"></a><span class="co"># Let&#39;s create a dummy directory</span></span>
+<span id="cb115-2"><a href="example-execution.html#cb115-2"></a><span class="fu">mkdir</span> <span class="va">$HOME</span>/scratch</span>
+<span id="cb115-3"><a href="example-execution.html#cb115-3"></a></span>
+<span id="cb115-4"><a href="example-execution.html#cb115-4"></a><span class="co"># Let&#39;s copy contents of testdata in scratch</span></span>
+<span id="cb115-5"><a href="example-execution.html#cb115-5"></a></span>
+<span id="cb115-6"><a href="example-execution.html#cb115-6"></a><span class="ex">singularity</span> exec fastqc.sif fastqc scratch/*fastq.gz</span>
+<span id="cb115-7"><a href="example-execution.html#cb115-7"></a></span>
+<span id="cb115-8"><a href="example-execution.html#cb115-8"></a><span class="co"># Check you have some HTMLs there. Remove them</span></span>
+<span id="cb115-9"><a href="example-execution.html#cb115-9"></a><span class="fu">rm</span> scratch/*html</span>
+<span id="cb115-10"><a href="example-execution.html#cb115-10"></a></span>
+<span id="cb115-11"><a href="example-execution.html#cb115-11"></a><span class="co"># Let&#39;s use shell</span></span>
+<span id="cb115-12"><a href="example-execution.html#cb115-12"></a><span class="ex">singularity</span> shell fastqc.sif</span>
+<span id="cb115-13"><a href="example-execution.html#cb115-13"></a><span class="op">&gt;</span> <span class="bu">cd</span> scratch</span>
+<span id="cb115-14"><a href="example-execution.html#cb115-14"></a><span class="op">&gt;</span> <span class="ex">fastqc</span> *fastq.gz</span>
+<span id="cb115-15"><a href="example-execution.html#cb115-15"></a><span class="op">&gt;</span> <span class="bu">exit</span></span>
+<span id="cb115-16"><a href="example-execution.html#cb115-16"></a></span>
+<span id="cb115-17"><a href="example-execution.html#cb115-17"></a><span class="co"># Check you have some HTMLs there. Remove them</span></span>
+<span id="cb115-18"><a href="example-execution.html#cb115-18"></a><span class="ex">singularity</span> exec -B ./scratch:/fastqcdir fastqc.sif fastqc /fastqcdir/*fastq.gz</span>
+<span id="cb115-19"><a href="example-execution.html#cb115-19"></a></span>
+<span id="cb115-20"><a href="example-execution.html#cb115-20"></a><span class="co"># What happens here!</span></span>
+<span id="cb115-21"><a href="example-execution.html#cb115-21"></a><span class="ex">singularity</span> exec -B ./scratch:/fastqcdir fastqc.sif bash -c <span class="st">&#39;fastqc /fastqcdir/*fastq.gz&#39;</span></span></code></pre></div>
 </div>
             </section>
 

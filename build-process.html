@@ -300,18 +300,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="docker-hub" class="section level5">
 <h5><span class="header-section-number">4.2.1.1.1</span> Docker Hub</h5>
 <p><a href="https://hub.docker.com/r/biocontainers/fastqc">https://hub.docker.com/r/biocontainers/fastqc</a></p>
-<div class="sourceCode" id="cb93"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb93-1"><a href="build-process.html#cb93-1"></a>    <span class="ex">singularity</span> build fastqc-0.11.9_cv7.sif docker://biocontainers/fastqc:v0.11.9_cv7</span></code></pre></div>
+<div class="sourceCode" id="cb94"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb94-1"><a href="build-process.html#cb94-1"></a>    <span class="ex">singularity</span> build fastqc-0.11.9_cv7.sif docker://biocontainers/fastqc:v0.11.9_cv7</span></code></pre></div>
 </div>
 <div id="biocontainers" class="section level5">
 <h5><span class="header-section-number">4.2.1.1.2</span> Biocontainers</h5>
 <div id="via-quay.io" class="section level6">
 <h6><span class="header-section-number">4.2.1.1.2.1</span> Via quay.io</h6>
 <p><a href="https://quay.io/repository/biocontainers/fastqc">https://quay.io/repository/biocontainers/fastqc</a></p>
-<div class="sourceCode" id="cb94"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb94-1"><a href="build-process.html#cb94-1"></a>    <span class="ex">singularity</span> build fastqc-0.11.9.sif docker://quay.io/biocontainers/fastqc:0.11.9--0</span></code></pre></div>
+<div class="sourceCode" id="cb95"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb95-1"><a href="build-process.html#cb95-1"></a>    <span class="ex">singularity</span> build fastqc-0.11.9.sif docker://quay.io/biocontainers/fastqc:0.11.9--0</span></code></pre></div>
 </div>
 <div id="via-galaxy-project-prebuilt-images" class="section level6">
 <h6><span class="header-section-number">4.2.1.1.2.2</span> Via Galaxy project prebuilt images</h6>
-<div class="sourceCode" id="cb95"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb95-1"><a href="build-process.html#cb95-1"></a>    <span class="ex">singularity</span> pull --name fastqc-0.11.9.sif https://depot.galaxyproject.org/singularity/fastqc:0.11.9--0</span></code></pre></div>
+<div class="sourceCode" id="cb96"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb96-1"><a href="build-process.html#cb96-1"></a>    <span class="ex">singularity</span> pull --name fastqc-0.11.9.sif https://depot.galaxyproject.org/singularity/fastqc:0.11.9--0</span></code></pre></div>
 
 <div class="rmdnote">
 Galaxy project provides all Bioinformatics software from Biocontainers initiative as Singularity prebuilt images. If download and conversion time of images is an issue for you, this is likely the best option if working in the biomedical field.
@@ -330,15 +330,15 @@ Galaxy project provides all Bioinformatics software from Biocontainers initiativ
 <div id="docker-daemon" class="section level4">
 <h4><span class="header-section-number">4.2.1.2</span> Docker Daemon</h4>
 <p>If you create your own images (as we did during the course) and you don’t want to share them publicly (and you have not access to any private image registry, either), you can convert your locally built Docker images into Singularity image files.</p>
-<div class="sourceCode" id="cb96"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb96-1"><a href="build-process.html#cb96-1"></a>        <span class="ex">singularity</span> build fastqc-web-0.11.9.sif docker-daemon://fastqcwww</span></code></pre></div>
+<div class="sourceCode" id="cb97"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb97-1"><a href="build-process.html#cb97-1"></a>        <span class="ex">singularity</span> build fastqc-web-0.11.9.sif docker-daemon://fastqcwww</span></code></pre></div>
 </div>
 </div>
 <div id="sandboxing" class="section level3">
 <h3><span class="header-section-number">4.2.2</span> Sandboxing</h3>
 <p>Instead of generating an image file, it is actually possible to use a whole directory with its contents. This is handy when specific changes may be needed.</p>
-<div class="sourceCode" id="cb97"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb97-1"><a href="build-process.html#cb97-1"></a>     <span class="ex">singularity</span> build --sandbox ./sandbox docker://ubuntu:18.04</span>
-<span id="cb97-2"><a href="build-process.html#cb97-2"></a>     <span class="fu">touch</span> sandbox/etc/myetc.conf</span>
-<span id="cb97-3"><a href="build-process.html#cb97-3"></a>     <span class="ex">singularity</span> build sandbox.sif ./sandbox</span></code></pre></div>
+<div class="sourceCode" id="cb98"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb98-1"><a href="build-process.html#cb98-1"></a>     <span class="ex">singularity</span> build --sandbox ./sandbox docker://ubuntu:18.04</span>
+<span id="cb98-2"><a href="build-process.html#cb98-2"></a>     <span class="fu">touch</span> sandbox/etc/myetc.conf</span>
+<span id="cb98-3"><a href="build-process.html#cb98-3"></a>     <span class="ex">singularity</span> build sandbox.sif ./sandbox</span></code></pre></div>
 
 <div class="rmdnote">
 Apart from testing or debugging, as we commented with Docker, we don’t recommend this approach because it makes reproducibility more difficult.
@@ -362,7 +362,7 @@ From: biocontainers/fastqc:v0.11.9_cv7
 
 %post
     echo &quot;Image built&quot;</code></pre>
-<div class="sourceCode" id="cb99"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb99-1"><a href="build-process.html#cb99-1"></a>    <span class="fu">sudo</span> singularity build fastqc.sif docker.singularity</span></code></pre></div>
+<div class="sourceCode" id="cb100"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb100-1"><a href="build-process.html#cb100-1"></a>    <span class="fu">sudo</span> singularity build fastqc.sif docker.singularity</span></code></pre></div>
 
 <div class="rmdtip">
 The command %runscript would be equivalent to ENTRYPOINT/CMD in Docker. It is only triggered when using <code>singularity run</code>. This is useful if you want to hide from the user the complexity of a command-line path or an included custom script.
@@ -408,7 +408,7 @@ Include: build-essential curl python python-dev openjdk-11-jdk bzip2 zip unzip
 %labels
     Maintainer Biocorecrg
 Version 0.1.0</code></pre>
-<div class="sourceCode" id="cb101"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb101-1"><a href="build-process.html#cb101-1"></a>    <span class="fu">sudo</span> singularity build fastqc-multi-bowtie.sif debootstrap.singularity</span></code></pre></div>
+<div class="sourceCode" id="cb102"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb102-1"><a href="build-process.html#cb102-1"></a>    <span class="fu">sudo</span> singularity build fastqc-multi-bowtie.sif debootstrap.singularity</span></code></pre></div>
 
 <div class="rmdtip">
 The available deboostrap recipes depend on the version you have installed in the system. Check at: <code>/usr/share/debootstrap/scripts/</code> for more details. For Debian, instead of Ubuntu, you can replace mirrorURL with <a href="https://ftp.debian.org/debian/" class="uri">https://ftp.debian.org/debian/</a> More details at: <a href="https://sylabs.io/guides/3.7/user-guide/appendix.html#build-debootstrap" class="uri">https://sylabs.io/guides/3.7/user-guide/appendix.html#build-debootstrap</a>
@@ -427,11 +427,11 @@ It’s possible to sign cryptographically your images, so third parties can veri
 <ul>
 <li>We need to create a <a href="Sylabs%20Cloud">https://cloud.sylabs.io/</a> account first.</li>
 </ul>
-<div class="sourceCode" id="cb102"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb102-1"><a href="build-process.html#cb102-1"></a>    <span class="ex">singularity</span> remote login</span></code></pre></div>
+<div class="sourceCode" id="cb103"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb103-1"><a href="build-process.html#cb103-1"></a>    <span class="ex">singularity</span> remote login</span></code></pre></div>
 <ul>
 <li>In order to use it our username and passwords we generate a token at <a href="https://cloud.sylabs.io/auth/tokens" class="uri">https://cloud.sylabs.io/auth/tokens</a> and copy its contents to a file (e.g., <code>singularity.token</code>). Then we use in the command-line below:</li>
 </ul>
-<div class="sourceCode" id="cb103"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb103-1"><a href="build-process.html#cb103-1"></a>    <span class="ex">singularity</span> remote login --tokenfile singularity.token</span></code></pre></div>
+<div class="sourceCode" id="cb104"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb104-1"><a href="build-process.html#cb104-1"></a>    <span class="ex">singularity</span> remote login --tokenfile singularity.token</span></code></pre></div>
 <details>
 <summary>
 <h5>
@@ -450,11 +450,11 @@ For safety reasons, remove the token from Cloud Sylabs interface after the cours
 <ul>
 <li>Once we are authenticated with our access token, we can <strong>build an image</strong>:</li>
 </ul>
-<div class="sourceCode" id="cb104"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb104-1"><a href="build-process.html#cb104-1"></a>    <span class="ex">singularity</span> build --remote focal.sif docker://ubuntu:focal</span></code></pre></div>
+<div class="sourceCode" id="cb105"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb105-1"><a href="build-process.html#cb105-1"></a>    <span class="ex">singularity</span> build --remote focal.sif docker://ubuntu:focal</span></code></pre></div>
 <ul>
 <li>Since we are already authenticated, we can take advantage to push a Singularity image in our account, similarly to what we did with Docker. We use <code>-U</code> so we do not sign the image.</li>
 </ul>
-<div class="sourceCode" id="cb105"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb105-1"><a href="build-process.html#cb105-1"></a>    <span class="ex">singularity</span> push -U focal.sif library://toniher/test/focal.sif:latest</span></code></pre></div>
+<div class="sourceCode" id="cb106"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb106-1"><a href="build-process.html#cb106-1"></a>    <span class="ex">singularity</span> push -U focal.sif library://toniher/test/focal.sif:latest</span></code></pre></div>
 
 <div class="rmdtip">
 IMPORTANT: Unless it is not defined in advance as private from Cloud Sylabs interface, pushed image will be public and there does not seem an easy way to turn it private.
