@@ -126,6 +126,9 @@ docker search blast --filter stars=2
 docker search blast --filter is-automated=true --filter stars=2
 ```
 
+[https://vsupalov.com/docker-latest-tag/](https://vsupalov.com/docker-latest-tag/) to read more about the latest tag
+
+
 <center><h4 style="background-color: #e6fadc; display: inline-block;">**HANDS-ON**</h4></center>
 
 Use `docker search` to find a Docker image for the keyword `ubuntu`. Using the filters, answer the following questions:
