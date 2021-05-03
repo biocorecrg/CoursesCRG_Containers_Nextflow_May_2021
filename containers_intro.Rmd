@@ -63,6 +63,7 @@ Source: https://sysopsio.wordpress.com/2016/09/09/jails-in-linux/
 
 ### Additions in Linux kernel
 
+* First version: 2008
 * cgroups (control groups), before "process containers"
 	* isolate resource usage (CPU, memory, disk I/O, network, etc.) of a collection of processes
 * Linux namespaces
