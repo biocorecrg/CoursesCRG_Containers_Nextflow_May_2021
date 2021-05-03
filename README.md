@@ -40,17 +40,17 @@ About Nextflow:
 * Develop a Nextflow pipeline from scratch.
 * Run pipeline in diverse computational environments (local, HPC, cloud )
 
-### Prerequisite
+### Prerequisite / technical requirements
 
 Being comfortable working with the CLI (command-line interface) in a Linux-based environment.
 Applicants are not expected to have used neither Linux containers nor Nextflow workflows before.
 
-Practitioners will need to connect during the course to a remove server via the "ssh" protocotoñ. You can learn about it here: https://www.hostinger.com/tutorials/ssh-tutorial-how-does-ssh-work
+Practitioners will need to connect during the course to a remove server via the "ssh" protocotol. You can learn about it [here](https://www.hostinger.com/tutorials/ssh-tutorial-how-does-ssh-work)
 
-Those who follow the coursw should be able to use a command-line/screen-oriented text editor (such as nano or vi/vim, which are already available in the server) or to be able to use an editor able to connect remotely. For sake of information, below the basics of "nano":
+Those who follow the course should be able to use a command-line/screen-oriented text editor (such as nano or vi/vim, which are already available in the server) or to be able to use an editor able to connect remotely. For sake of information, below the basics of "nano":
 https://wiki.gentoo.org/wiki/Nano/Basics_Guide
 
-For some parts of the course, having a [GitHub account](https://github.com/join), a [Docker Hub](https://hub.docker.com/signup) and a [Sylabs Cloud](https://cloud.sylabs.io) account are recommended.
+For some parts of the course, having a [GitHub account](https://github.com/join), a [Docker Hub](https://hub.docker.com/signup) and a [Sylabs Cloud](https://cloud.sylabs.io) accounts are recommended.
 
 ## Dates, time, location
 
@@ -123,5 +123,5 @@ For some parts of the course, having a [GitHub account](https://github.com/join)
 
 ## Acknowledgements
 
-* Bookdown
-* ELIXIR Workshop hackathon
+* [Bookdown](https://bookdown.org/). The publication system for our course pages.
+* [ELIXIR Workshop Hackathon](https://github.com/vibbits/containers-workflow-hackathon). Joined initiative with other colleagues to exchange materials for courses and approaches for courses like this.

@@ -7,6 +7,7 @@
 A Container can be seen as a **minimal virtual environment** that can be used in any Linux-compatible machine (and beyond).
 
 Using containers is time- and resource-saving as they allow:
+
 * Controlling for software installation and dependencies.
 * Reproducibility of the analysis.
 
@@ -45,8 +46,8 @@ Containers allow us to use **exactly the same versions of the tools**.
 
 || Virtualisation | Containerisation |
 | :------ | :------------: | :--------------: |
-| PROS | * Very similar to a full OS <br> * With current solutions, high OS diversity| * No need of full OS installation (less space) <br> * Faster than virtual machines <br> * Easier automation <br> * Current solutions allow easier distribution of recipes. More portability.|
-| CONS | * Need of more space and resources <br> * Slower than containers <br> * Not as good automating | * Some cases might not be exactly the same as a full OS <br> * With current solutions, still less OS diversity |
+| PROS | Very similar to a full OS. <br> With current solutions, high OS diversity. | No need of full OS installation (less space). <br> Faster than virtual machines. <br> Easier automation. <br> Current solutions allow easier distribution of recipes. <br> Better portability.|
+| CONS | Need more space and resources. <br> Slower than containers. <br> Not that good automation. | Some cases might not be exactly the same as a full OS. <br> Still less OS diversity, even with current solutions. |
 
 ## History of containers
 
@@ -62,10 +63,12 @@ Source: https://sysopsio.wordpress.com/2016/09/09/jails-in-linux/
 
 ### Additions in Linux kernel
 
+* First version: 2008
 * cgroups (control groups), before "process containers"
 	* isolate resource usage (CPU, memory, disk I/O, network, etc.) of a collection of processes
 * Linux namespaces
 	* one set of kernel resources restrict to one set of processes
 
 <img src="docs/images/linux-vs-docker-comparison-architecture-docker-lxc.png" width="600" />
+
 Source: https://sysopsio.wordpress.com/2016/09/09/jails-in-linux/

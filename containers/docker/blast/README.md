@@ -1,5 +1,7 @@
 # Docker
 
+Many different ways to builr a Blast Docker image
+
 ```bash
 docker build -t blast-debian -f Dockerfile.apt .
 
@@ -45,21 +47,21 @@ docker run -v /home/user/db:/blastdb blast-debian:custom blastp -query /blastdb/
 Let's download Swissprot
 
 ```bash
+# If not there create a DB dir
+mkdir $HOME/db
+
 cd $HOME/db
 
 curl http://ftp.ncbi.nlm.nih.gov/blast/db/FASTA/swissprot.gz -o swissprot.gz
 
 gunzip swissprot.gz
-```
 
-Let's format the FASTA file
+# Let's format the FASTA file
 
-```bash
-cd $HOME/db
 docker run -v /home/user/db:/blastdb  blast-debian:custom makeblastdb -dbtype prot -parse_seqids -in /blastdb/swissprot
 ```
 
-We can retrive a FASTA sequence by ID
+We can retrieve a FASTA sequence by ID
 
 ```bash
 docker run -v /home/user/db:/blastdb  blast-debian:custom blastdbcmd -dbtype prot -db swissprot -entry O75976

@@ -3,7 +3,7 @@ FROM debian:stretch
 # File Author / Maintainer
 MAINTAINER Toni Hermoso Pulido <toni.hermoso@crg.eu>
 
-ARG BLAST_VERSION=2.7.1
+ARG BLAST_VERSION=2.10.1
 
 RUN apt-get update; apt-get install -y curl;
 

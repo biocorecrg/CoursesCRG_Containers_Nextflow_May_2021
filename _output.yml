@@ -6,9 +6,9 @@ bookdown::gitbook:
     toc:
       collapse: section
       before: |
-        <li><a href="./">Courses@CRG 2021</a></li>
+        <li><a href="./">Courses@CRG 2021 - Containers and Nextflow</a></li>
       after: |
-        <li><a href="https://biocore.crg.eu/wiki/Main_Page" target="blank">BIOINFORMATICS CORE @ CRG</a></li>
+        <li><a href="https://biocore.crg.eu/" target="blank">BIOINFORMATICS CORE @ CRG</a></li>
     download: ["pdf", "epub"]
     search: yes
 bookdown::html_book:

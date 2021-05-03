@@ -23,7 +23,7 @@ Include: build-essential curl python python-dev openjdk-11-jdk bzip2 zip unzip
     cd /usr/local; rm bowtie-${BOWTIE_VERSION}-linux-x86_64.zip
     cd /usr/local/bin; ln -s ../bowtie-${BOWTIE_VERSION}--linux-x86_64/bowtie* .
 
-    curl --fail --silent --show-error --location --remote-name  https://bootstrap.pypa.io/get-pip.py
+    curl --fail --silent --show-error --location --remote-name  https://bootstrap.pypa.io/pip/2.7/get-pip.py
     python get-pip.py
 
     pip install numpy matplotlib

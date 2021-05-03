@@ -255,6 +255,107 @@ This is the Biocore's NF test pipeline
 Enjoy!
 ```
 
+## EXERCISE 4 
+- Look at [EXERCISE 3](https://biocorecrg.github.io/CoursesCRG_Containers_Nextflow_May_2021/exercise-3.html). Can you make a configuration for that script with a new label for handling failing processes? 
+
+<details>
+<summary>
+<h5>*Answer*</h5>
+</summary>
+
+The process should become:
+
+```{java, eval=FALSE, echo=TRUE}
+
+process reverseSequence {
+    tag "$seq"                  
+    publishDir "output"
+	label 'ignorefail'
+	
+    input:
+    path seq
+
+    output:
+    path "all.rev"
+
+    script:
+    """
+    cat ${seq} | AAAAA '{if (\$1~">") {print \$0} else system("echo " \$0 " |rev")}' > all.rev
+    """
+}
+```
+
+while the nextflow.config file 
+
+```{java, eval=FALSE, echo=TRUE}
+
+process {
+     withLabel: 'ignorefail'
+    {
+		errorStrategy = 'ignore' 
+     }   
+}
+```
+
+</details>
+
+- Look at test2. Can you make a configuration for that script with a new label for handling failing processes by retrying 3 times and incrementing the time? You can give very low time (10 / 15 seconds) for the fastqc process so it would fail at beginning. 
+
+<details>
+<summary>
+<h5>*Answer*</h5>
+</summary>
+
+The process should become:
+
+```{java, eval=FALSE, echo=TRUE}
+
+process fastQC {
+    publishDir fastqcOutputFolder  			// where (and whether) to publish the results
+    tag { reads }  							// during the execution prints the indicated variable for follow-up
+    label 'keep_trying' 
+
+    input:
+    path reads   							// it defines the input of the process. It sets values from a channel
+
+    output:									// It defines the output of the process (i.e. files) and send to a new channel
+   	path "*_fastqc.*"
+
+    script:									// here you have the execution of the script / program. Basically is the command line
+    """
+        fastqc ${reads} 
+    """
+}
+```
+
+while the nextflow.config file 
+
+```{java, eval=FALSE, echo=TRUE}
+includeConfig "$baseDir/params.config"
+
+ 
+process {
+     //containerOptions = { workflow.containerEngine == "docker" ? '-u $(id -u):$(id -g)': null}
+     memory='0.6G'
+     cpus='1'
+     time='6h'
+
+     withLabel: 'keep_trying'	
+   	{ 
+ 		time = { 10.second * task.attempt }
+     	errorStrategy = 'retry' 
+    	maxRetries = 3	
+    } 	
+
+}
+
+process.container = 'biocorecrg/c4lwg-2018:latest'
+singularity.cacheDir = "$baseDir/singularity"
+
+```
+</details>
+
+
 ## Using Singularity
 We recommend to use Singularity instead of docker in HPC environments. This can be done by just using the Nextflow parameter **-with-singularity** and  without touching the code. Nextflow will take care of pulling, converting and storing the image for you. This will be done just once and then nextflow will use the stored image for further executions.
 Within the AWS main node both Docker and singularity are available. Within the AWS batch we only have docker.
@@ -535,6 +636,18 @@ export NXF_OPTS="-Xms50m -Xmx500m"
 
 ```
 
+## EXERCISE 5 
+Modify the test3.nf file to make two different subworkflows: one for fastqc + bowtie alingnment and one for a new fastqc analysis of the aligned files produced by bowtie. For convenience you can use the multiqc config file called config.yaml in the multiqc process.
+
+<details>
+<summary>
+<h5>*Answer*</h5>
+</summary>
+Solution in the file test3_2.nf
+</details>
+
+
+
 ## Modules and re-usage of the code
 A great advance of the new DLS2 is to allow the modularization of the code. In particular you can move a named workflow within a module and keep it apart for being accessed from different pipelines. Looking at the test4 folder will give you an idea of what is the code using modules.
 
@@ -719,7 +832,7 @@ singularity.cacheDir = "$baseDir/singularity"
 
 **IMPORTANT: you will need to specify a default image when you want to run nextflow -with-docker or -with-singularity and you have containers defined inside the modules**
 
-## EXERCISE 4 
+## EXERCISE 6 
 Try to make a module wrapper of the bowtie tool and change the script accordingly as the test3.
 
 <details>

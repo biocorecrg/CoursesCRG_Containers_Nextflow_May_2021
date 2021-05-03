@@ -1,0 +1,9 @@
+FROM ubuntu:18.04
+
+MAINTAINER Name Surname <name.surname@mail.com>
+
+RUN apt-get update && apt-get upgrade -y
+RUN apt-get install -y figlet
+
+ENTRYPOINT ["figlet"]
+CMD ["I love containers"]

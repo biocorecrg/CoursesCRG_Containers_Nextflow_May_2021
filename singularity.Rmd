@@ -53,52 +53,79 @@ knitr::opts_chunk$set(echo = TRUE, eval = FALSE, warning = FALSE)
 
 ### Examples
 
+There are different ways to generate Singularity image files. The most common way is so far thanks to existing Docker images already present in public registries.
+
 #### Through registries
 
-* Docker Hub
+##### Docker Hub
 
 [https://hub.docker.com/r/biocontainers/fastqc](https://hub.docker.com/r/biocontainers/fastqc)
 
+```{bash}
     singularity build fastqc-0.11.9_cv7.sif docker://biocontainers/fastqc:v0.11.9_cv7
+```
 
+##### Biocontainers
 
-* Biocontainers
-
-**Via quay.io**
+###### Via quay.io
 
 [https://quay.io/repository/biocontainers/fastqc](https://quay.io/repository/biocontainers/fastqc)
 
+```{bash}
     singularity build fastqc-0.11.9.sif docker://quay.io/biocontainers/fastqc:0.11.9--0
+```
 
-**Via Galaxy project prebuilt images**
+###### Via Galaxy project prebuilt images
 
+```{bash}
     singularity pull --name fastqc-0.11.9.sif https://depot.galaxyproject.org/singularity/fastqc:0.11.9--0
+```
 
-* Docker Daemon (local Docker image)
+```{block2, type='rmdnote'}
+Galaxy project provides all Bioinformatics software from Biocontainers initiative as Singularity prebuilt images. If download and conversion time of images is an issue for you, this is likely the best option if working in the biomedical field.
+```
+
+##### Sylabs registry
+
+Not as popular so far, but it provides fast download of images.
+
+* [https://cloud.sylabs.io/library](https://cloud.sylabs.io/library)
 
 
-      singularity build fastqc-web-0.11.9.sif docker-daemon://fastqcwww
+#### Docker Daemon
 
-* Also Singularity registries (not so popular so far)
-  * [https://cloud.sylabs.io/library](https://cloud.sylabs.io/library)
+If you create your own images (as we did during the course) and you don't want to share them publicly (and you have not access to any private image registry, either), you can convert your locally built Docker images into Singularity image files.
+
+```{bash}
+        singularity build fastqc-web-0.11.9.sif docker-daemon://fastqcwww
+```
 
 ### Sandboxing
 
+Instead of generating an image file, it is actually possible to use a whole directory with its contents. This is handy when specific changes may be needed.
 
-
-```
+```{bash}
      singularity build --sandbox ./sandbox docker://ubuntu:18.04
      touch sandbox/etc/myetc.conf
      singularity build sandbox.sif ./sandbox
 ```
 
+```{block2, type='rmdnote'}
+Apart from testing or debugging, as we commented with Docker, we don't recommend this approach because it makes reproducibility more difficult.
+```
+
 ### Singularity recipes
 
-Saved in a *.sif* file?
+Singularity provides its own build system and recipe syntax. Despite it is actually possible to generate images from scratch (known as ***bootstraping***) thanks to these recipes, this is at time of writing far slower than converting from Docker ones. Docker has the advantage of saving every action line as a cached image. That is not happening with Singularity.
+
+When using recipes, it's mandatory to have administrator permissions (e.g., as beeing root or via **sudo**).
+
+In any case, it can still be useful to boostrap an image derived from a previously existing one. Below we provide two common approaches:
+
 
 #### Docker bootstrap
 
-*What does itmean (bootstrap)?*
+Instead of converting a Docker image into a Singularity one, it's possible to use one as a base one and modify it by using Singularity recipe syntax.
 
 ````
 BootStrap: docker
@@ -112,9 +139,17 @@ From: biocontainers/fastqc:v0.11.9_cv7
     echo "Image built"
 ````
 
+```{bash}
     sudo singularity build fastqc.sif docker.singularity
+```
+
+```{block2, type='rmdtip'}
+The command %runscript would be equivalent to ENTRYPOINT/CMD in Docker. It is only triggered when using ```singularity run```. This is useful if you want to hide from the user the complexity of a command-line path or an included custom script.
+```
 
 #### Debian bootstrap
+
+Alternatively, we can build the whole image from Debian/Ubuntu distribution. This will normally take a while.
 
 ```
 BootStrap: debootstrap
@@ -142,7 +177,7 @@ Include: build-essential curl python python-dev openjdk-11-jdk bzip2 zip unzip
     cd /usr/local; rm bowtie-${BOWTIE_VERSION}-linux-x86_64.zip
     cd /usr/local/bin; ln -s ../bowtie-${BOWTIE_VERSION}-linux-x86_64/bowtie* .
 
-    curl --fail --silent --show-error --location --remote-name  https://bootstrap.pypa.io/get-pip.py
+    curl --fail --silent --show-error --location --remote-name  https://bootstrap.pypa.io/pip/2.7/get-pip.py
     python get-pip.py
 
     pip install numpy matplotlib
@@ -155,15 +190,21 @@ Include: build-essential curl python python-dev openjdk-11-jdk bzip2 zip unzip
 Version 0.1.0
 ```
 
+```{bash}
     sudo singularity build fastqc-multi-bowtie.sif debootstrap.singularity
+```
+
+```{block2, type='rmdtip'}
+The available deboostrap recipes depend on the version you have installed in the system. Check at: ```/usr/share/debootstrap/scripts/``` for more details. For Debian, instead of Ubuntu, you can replace mirrorURL with https://ftp.debian.org/debian/ More details at: https://sylabs.io/guides/3.7/user-guide/appendix.html#build-debootstrap
+```
 
 ```{block2, type='rmdnote'}
 It's possible to sign cryptographically your images, so third parties can verify they are coming from their actual authors. This implies some matters beyond the scope of this course, but you have some details if interested at: https://sylabs.io/guides/3.7/user-guide/signNverify.html
 ```
 
-## Remote building
+### Remote building
 
-This allows us to build a Singularity image without using our own computer. This is convenient if your machine has not many resources.
+This allows us to build a Singularity image without using our own computer. This is convenient if your machine has not many resources or if you don't have administrator privileges.
 
 * We need to create a [https://cloud.sylabs.io/](Sylabs Cloud) account first.
 
@@ -211,54 +252,75 @@ As an interesting feature, you can actually sign your images after you pushed th
 More details at [https://sylabs.io/guides/3.7/user-guide/cloud_library.html](https://sylabs.io/guides/3.7/user-guide/cloud_library.html)
 ```
 
-
 ## Run and execution process
 
-## Singularity shell
+Once we have some image files (or directories) ready, we can run or favourite processes.
 
-Interactive shell.
+### Singularity shell
 
+The straight-forward exploratory approach, equivalent to ```docker run -ti myimage /bin/shell```. But with a more handy syntax.
+
+```{bash}
     singularity shell fastqc-multi-bowtie.sif
+```
+
+```{block2, type='rmdnote'}
+Move around the directories and notice the different isolation approach compared to Docker. You can access most of the host filesystem.
+```
 
 ### Singularity exec
 
-Execute commands. Common approach in HPC uses.
+That is the most common way to execute Singularity (equivalent to ```docker exec```). That would be the normal approach in HPC environments.
 
+```{bash}
     singularity exec fastqc-multi-bowtie.sif fastqc
+```
 
 ### Singularity run
 
-Execute runscript from recipe definition. Not so common for HPC uses. More for instances (servers).
+This executes runscript from recipe definition (equivalent to ```docker run```). Not so common for HPC uses. More for instances (servers).
 
+```{bash}
     singularity run fastqc-multi-bowtie.sif
-
+```
 
 ### Environment control
 
+By default Singularity inherits our profile environment (e.g., PATH environment variable). This may be convenient for some circumstances, but it can also lead to unexpected problems if you are not aware, when your own environment clashes with the default one from the image.
+
+```{bash}
     singularity shell -e fastqc-multi-bowtie.sif
 
     singularity exec -e fastqc-multi-bowtie.sif fastqc
 
     singularity run -e fastqc-multi-bowtie.sif
-
+```
 
 Compare ```env``` command with and without -e modifier.
 
+```{bash}
     singularity exec fastqc-multi-bowtie.sif env
     singularity exec -e fastqc-multi-bowtie.sif env
+```
 
 ### Execute from sandboxed images / directories
 
+```{bash}
     singularity exec ./sandbox ls -l /etc/myetc.conf
     # We can see file created in the directory before
     singularity exec ./sandbox bash -c 'apt-get update && apt-get install python'
     # We cannot install python
     singularity exec --writable ./sandbox bash -c 'apt-get update && apt-get install python'
     # We needed to add writable parameter
+```
 
 ### Execute straight from a registry
 
+Image is actually downloaded (and if a Docker one, converted) and stored in Singularity cache directory.
+
+```{bash}
     singularity exec docker://ncbi/blast:2.10.1 blastp -version
+```
 
 ## Bind paths (aka volumes)
 
@@ -268,21 +330,49 @@ Paths of host system mounted in the container
 
 For others, need to be done explicitly (syntax: host:container)
 
+```{bash}
     mkdir testdir
     touch testdir/testout
     singularity shell -e -B ./testdir:/scratch fastqc-multi-bowtie.sif
     > touch /scratch/testin
     > exit
     ls -l testdir
+```
 
-## Exercises:
+## Example execution:
 
-  Using the 2 fastqc available files, process them outside and inside the mounted directory.
+Using the 2 fastqc available files, process them outside and inside the mounted directory.
 
+Let's use our ```fastqc.sif``` image file and we place it in $HOME
+
+```{bash}
+# Let's create a dummy directory
+mkdir $HOME/scratch
+
+# Let's copy contents of testdata in scratch
+
+singularity exec fastqc.sif fastqc scratch/*fastq.gz
+
+# Check you have some HTMLs there. Remove them
+rm scratch/*html
+
+# Let's use shell
+singularity shell fastqc.sif
+> cd scratch
+> fastqc *fastq.gz
+> exit
+
+# Check you have some HTMLs there. Remove them
+singularity exec -B ./scratch:/fastqcdir fastqc.sif fastqc /fastqcdir/*fastq.gz
+
+# What happens here!
+singularity exec -B ./scratch:/fastqcdir fastqc.sif bash -c 'fastqc /fastqcdir/*fastq.gz'
+
+```
 
 ## Instances
 
-Also know as **services**. Despite Docker it is still more convenient for these tasks, it allows enabling thing such as webservices (e.g., via APIs) in HPC workflows.
+Also know as **services**. Despite Docker it is still more convenient for these tasks, it allows enabling thing such as webservices (e.g., via APIs) in HPC workflows. Instead of defining a **%runscript** block, we define a **%startscript** one. So, it would be possible to have both if needed.
 
 Simple example:
 
@@ -294,6 +384,7 @@ From: library/mariadb:10.3
         mysqld
 ```
 
+```{bash}
     sudo singularity build mariadb.sif mariadb.singularity
 
     mkdir -p testdir
@@ -309,7 +400,15 @@ From: library/mariadb:10.3
     singularity exec instance://mydb mysql -uroot
 
     singularity instance stop mydb
+```
 
+```{block2, type='rmdnote'}
+When exposing ports below 1024 in a LINUX machine, administrator (sudo) privileges are needed. Historical reference: https://www.w3.org/Daemon/User/Installation/PrivilegedPorts.html
+```
+
+```{block2, type='rmdtip'}
+Specially with instances (**but not only**), if you encounter some permission problems you may need to enable write permissions in the image. If you do not want changes to persist in the image, you may want to use the **--writable-tmpfs option**. Changes are stored in an in-memory temporary filesystem which is discarded as soon as the service stops. More details about special storage options with Singularity: https://sylabs.io/guides/3.7/user-guide/persistent_overlays.html
+```
 
 More information:
 
@@ -319,7 +418,9 @@ More information:
 
 ## Troubleshooting
 
+```{bash}
      singularity --help
+```
 
 ### Fakeroot
 
@@ -340,3 +441,188 @@ Normally at ```/etc/singularity/singularity.conf``` or similar (e.g preceded by 
 
 * It can only be modified by users with administration permissions
 * Worth noting ```bind path``` lines, which point default mounted directories in containers as commented in [bind paths section][Bind paths (aka volumes)]
+
+## Exercise 4 - Singularity running and building
+
+* Example running BLAST commands in different ways
+
+<details>
+<summary>
+<h5 style="background-color: #e6fadc; display: inline-block;">*Answer*</h5>
+</summary>
+Compare with the previous Docker examples
+
+First of all, let's generate a ```blast.sif``` image. We have plenty of ways to do this. One example below:
+
+```{bash}
+singularity build blast.sif docker://ncbi/blast:2.10.1
+```
+
+### Blast command-line (1)
+
+```{bash}
+# If not there create a DB dir
+mkdir $HOME/db
+
+cp blast.sif $HOME/db
+
+cd $HOME/db
+
+curl -L https://www.uniprot.org/uniprot/O75976.fasta -o O75976.fasta
+
+curl -L https://www.uniprot.org/uniprot/Q90240.fasta -o Q90240.fasta
+
+singularity exec blast.sif blastp -query O75976.fasta -subject Q90240.fasta
+
+# We can mount if we prefer (as we did with Docker), but it's not strictly necessary
+singularity exec -B /home/ec2-user/db:/blastdb blast.sif blastp -query /blastdb/O75976.fasta -subject /blastdb/Q90240.fasta > out.blast
+
+singularity exec -B /home/ec2-user/db:/blastdb blast.sif blastp -query /blastdb/O75976.fasta -subject /blastdb/Q90240.fasta -out /blastdb/output.blast
+```
+
+### Blast command-line (2)
+
+```{bash}
+# If not there create a DB dir
+mkdir $HOME/db
+
+cp blast.sif $HOME/db
+
+cd $HOME/db
+
+# Let's download Swissprot DB
+curl -L https://ftp.ncbi.nlm.nih.gov/blast/db/FASTA/swissprot.gz -o swissprot.gz
+
+gunzip swissprot.gz
+
+# Let format the Swissprot DB
+singularity exec blast.sif makeblastdb -dbtype prot -parse_seqids -in swissprot
+```
+
+We can retrieve a FASTA sequence by ID
+
+```{bash}
+singularity exec blast.sif blastdbcmd -dbtype prot -db swissprot -entry O75976
+```
+</details>
+
+* Example running nginx as a service (NGINX its actually the custom example in Singularity page)
+  * Build a NGINX image and run as an instance
+  * Retrieve NGINX version from the instance
+  * Share a simply HTML page
+
+
+<details>
+<summary>
+<h5 style="background-color: #e6fadc; display: inline-block;">*Answer*</h5>
+</summary>
+
+```
+# Example recipe from: https://sylabs.io/guides/3.7/user-guide/running_services.html
+
+Bootstrap: docker
+From: nginx:1.20
+Includecmd: no
+
+%startscript
+   nginx
+```
+
+We generate the image:
+
+```{bash}
+sudo singularity build nginx.sif nginx.singularity
+```
+
+Then, for using the instance. If you try as normal user:
+
+```{bash}
+(base) [ec2-user@ip-172-31-32-16 singularity]$ singularity instance start nginx.sif webserver
+2021/04/30 12:23:12 [warn] 15#15: the "user" directive makes sense only if the master process runs with super-user privileges, ignored in /etc/nginx/nginx.conf:2
+nginx: [warn] the "user" directive makes sense only if the master process runs with super-user privileges, ignored in /etc/nginx/nginx.conf:2
+2021/04/30 12:23:12 [emerg] 15#15: mkdir() "/var/cache/nginx/client_temp" failed (30: Read-only file system)
+nginx: [emerg] mkdir() "/var/cache/nginx/client_temp" failed (30: Read-only file system)
+
+INFO:    instance started successfully
+
+(base) [ec2-user@ip-172-31-32-16 singularity]$ singularity instance list
+INSTANCE NAME    PID      IP    IMAGE
+webserver        24350          /home/ec2-user/git/CoursesCRG_Containers_Nextflow_May_2021/containers/singularity/nginx.sif
+```
+
+If you try with sudo permissions:
+
+```{bash}
+(base) [ec2-user@ip-172-31-32-16 singularity]$ sudo singularity instance start nginx.sif webserver
+2021/04/30 12:24:47 [emerg] 15#15: mkdir() "/var/cache/nginx/client_temp" failed (30: Read-only file system)
+nginx: [emerg] mkdir() "/var/cache/nginx/client_temp" failed (30: Read-only file system)
+
+INFO:    instance started successfully
+
+(base) [ec2-user@ip-172-31-32-16 singularity]$ singularity instance list
+INSTANCE NAME    PID    IP    IMAGE
+
+(base) [ec2-user@ip-172-31-32-16 singularity]$ sudo singularity instance list
+INSTANCE NAME    PID      IP    IMAGE
+webserver        24409          /home/ec2-user/git/CoursesCRG_Containers_Nextflow_May_2021/containers/singularity/nginx.sif
+```
+
+For this case, it's necessary to allow writing in the image:
+
+```{bash}
+(base) [ec2-user@ip-172-31-32-16 singularity]$ sudo singularity instance start --writable-tmpfs nginx.sif webserver
+2021/04/30 12:26:53 [notice] 16#16: using the "epoll" event method
+2021/04/30 12:26:53 [notice] 16#16: nginx/1.20.0
+2021/04/30 12:26:53 [notice] 16#16: built by gcc 8.3.0 (Debian 8.3.0-6)
+2021/04/30 12:26:53 [notice] 16#16: OS: Linux 4.14.225-169.362.amzn2.x86_64
+2021/04/30 12:26:53 [notice] 16#16: getrlimit(RLIMIT_NOFILE): 65535:65535
+2021/04/30 12:26:53 [notice] 17#17: start worker processes
+2021/04/30 12:26:53 [notice] 17#17: start worker process 18
+
+INFO:    instance started successfully
+```
+
+You can check from the web browser if it worked pointing your machine.
+
+We can get the specific NGINX version this way:
+
+```{bash}
+sudo singularity exec instance://webserver nginx -version
+```
+
+
+For a custom HTML file:
+```{bash}
+mkdir -p $HOME/www
+
+cd $HOME/www
+```
+
+And we place a simply **index.html** file there:
+```{html}
+<html>
+        <body>
+                Hello world!
+        </body>
+</html>
+```
+
+We execute now the command mounting where HTMLs are stored.
+
+```{bash}
+(base) [ec2-user@ip-172-31-32-16 singularity]$ sudo singularity instance start -B /home/ec2-user/www:/usr/share/nginx/html --writable-tmpfs nginx.sif webserver
+2021/04/30 12:31:20 [notice] 15#15: using the "epoll" event method
+2021/04/30 12:31:20 [notice] 15#15: nginx/1.20.0
+2021/04/30 12:31:20 [notice] 15#15: built by gcc 8.3.0 (Debian 8.3.0-6)
+2021/04/30 12:31:20 [notice] 15#15: OS: Linux 4.14.225-169.362.amzn2.x86_64
+2021/04/30 12:31:20 [notice] 15#15: getrlimit(RLIMIT_NOFILE): 65535:65535
+2021/04/30 12:31:20 [notice] 16#16: start worker processes
+2021/04/30 12:31:20 [notice] 16#16: start worker process 17
+
+INFO:    instance started successfully
+```
+</details>
+
+```{block2, type='rmdtip'}
+NGINX is serving web pages by default at the following location: /usr/share/nginx/html
+```

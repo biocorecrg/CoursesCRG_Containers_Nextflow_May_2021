@@ -1,9 +1,9 @@
---- 
+---
 title: "Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines"
 
 author:
   - Sarah Bonnin^[CRG, sarah.bonnin@crg.eu], Luca Cozzuto^[CRG, luca.cozzuto@crg.eu], Toni Hermoso^[CRG, toni.hermoso@crg.eu], Julia Ponomarenko^[CRG, julia.ponomarenko@crg.eu]
- 
+
 site: bookdown::Containers_Nextflow_course
 output: bookdown::gitbook
 documentclass: book
@@ -16,24 +16,34 @@ link-citations: yes
 # Welcome and about the course
 
 This slow-paced hands-on course is designed for absolute beginners who want to start using containers and Nextflow pipelines to achieve reproducibility of data analysis. <br>
-Linux containers allow the storage of code and applications in an host-independent lightweight environment. They became a fast and popular way to share and deploy applications in different environments. <br>
-Nextflow is a powerful polyglot workflow language that, coupled with Docker and Singularity containers, provides a robust, scalable and reproducible way to run computational pipelines.
+Linux containers allow the storage of code and applications in a host-independent lightweight environment. They became a fast and popular way to share and deploy applications in different environments. <br>
+[Nextflow](https://www.nextflow.io) is a powerful polyglot workflow language that coupled with [Docker](https://www.docker.com/) and [Singularity](https://sylabs.io/singularity/) containers provides a robust, scalable and reproducible way to run computational pipelines.
+
+
 
 ## Meet the organizers and instructors
 
-[Damjana Kastelic]()
-[Anna Solé]()
+Check the [padlet](https://padlet.com/annasolea/nvp3rlxa0r37gud0)!
 
-[Toni Hermoso]()
-[Luca Cozzuto]()
-[Sarah Bonnin]()
-[Julia Ponomarenko]()
-[Emilio Palumbo]()
-[Alessio Vignoli]()
-[José Espinosa]()
-[Leila Mansouri]()
-[Athanasios Baltzis]()
+Contacts below:
 
+* CRG Training unit:
+    * [Damjana](mailto:damjana.kastelic@crg.eu)
+    * [Anna](mailto:anna.sole@crg.eu)
+
+* Main speakers:
+    * [Toni](mailto:toni.hermoso@crg.eu) (Containers)
+    * [Luca](mailto:luca.cozzuto@crg.eu) (Nextflow)
+
+* Instructors/helper:
+    * [Emilio](mailto:emilio.palumbo@crg.eu)
+    * [Jose](mailto:joseantonio.espinosa@crg.eu)
+    * [Alessio](mailto:alessio.vignoli@crg.eu)
+    * [Athanasios](mailto:athanasios.baltzis@crg.eu)
+    * [Leila](mailto:leila.mansouri@crg.eu)
+    * [Edgar](mailto:edgar.garriga@crg.eu)
+    * [Julia](mailto:julia.ponomarenko@crg.eu)
+    * [Sarah](mailto:sarah.bonnin@crg.eu)
 
 
 ## About the course
@@ -42,8 +52,10 @@ Nextflow is a powerful polyglot workflow language that, coupled with Docker and 
 
 The 4-day Containers and Nextflow course will train participants to use and build Docker and Singularity containers and Nextflow pipelines.
 It is designed to provide trainees with short and frequent hands-on sessions, while keeping theoretical sessions to a minimum.
-The course will be fully virtual via the Zoom platform.
-Trainees will work in a dedicated AWS Cloud9 environment.
+
+The course is delivered online via the [Zoom](https://zoom.us/) platform.
+
+Trainees will work in a dedicated [AWS environment](https://en.wikipedia.org/wiki/AWS).
 
 
 ### Learning objectives
@@ -52,9 +64,9 @@ About Linux containers:
 
 - Locate and fetch Docker/Singularity images from dedicated repositories.
 - Execute/Run a Docker/Singularity container from the command line.
-- Build Docker container from an existing recipe.
+- Build a Docker container from an existing recipe.
 - Design/Write a Docker recipe.
-- Convert Docker to Singularity image.
+- Convert Docker to a Singularity image.
 
 About Nextflow:
 
@@ -66,19 +78,45 @@ About Nextflow:
 - Develop a Nextflow pipeline from scratch.
 - Run pipeline in diverse computational environments (local, HPC, cloud )
 
-### Prerequisite, Dates, time, location
+### Prerequisite / technical requirements
 
-Being comfortable working with the CLI (command-line interface) in a Linux-based environment. 
-Applicants are not expected to have used neither Linux containers nor Nextflow workflows before.
+#### Prerequisite
 
-- Dates: May 2021: 
+* Being comfortable working with the CLI (command-line interface) in a Linux-based environment.
+* Applicants are not expected to have used Linux containers or Nextflow before.
+
+#### Technical requirements
+
+* You should be able to work in a terminal on your machine to access the cloud via ssh:
+    * on Linux and Mac operating systems it is there by default.
+    * on Windows, you could install a [Windows terminal](https://www.microsoft.com/en-us/p/windows-terminal/9n0dx20hk701?activetab=pivot:overviewtab) or an application like [putty](https://www.putty.org/).
+<br>
+If you are not familiar with the **ssh** protocol, you can learn about it <a href="https://www.hostinger.com/tutorials/ssh-tutorial-how-does-ssh-work" target="_blank">here</a>.
+<br>
+* You should also be able to use a **command-line/screen-oriented text editor** (such as nano or vi/vim) or to be able to use an editor able to connect remotely like Visual studio, emacs or bbedit. If you are not sure what text editor to use, we recommend that you <a href="https://wiki.gentoo.org/wiki/Nano/Basics_Guide" target="_blank">learn the basics of "nano"</a>.
+<br>
+* During the course, we will use the [**Slack**](https://slack.com) platform for discussion and troubleshooting. You can either [install the Slack app](https://slack.com/intl/en-es/help/categories/360000049043#download-slack) before the course, or you will be able to access Slack from a web browser.
+<br>
+* We also encourage you to create a [**Github account**](https://github.com/join) and an associated [**Docker hub account**](https://hub.docker.com/signup).
+
+#### Provided infrastructure
+
+Each participant will access a dedicated [Amazon EC2](https://en.wikipedia.org/wiki/Amazon_Elastic_Compute_Cloud) instance, using SSH. That instance runs [Amazon Linux 2](https://aws.amazon.com/amazon-linux-2/) with all the necessary software for the course.
+
+Every instance has a S3 bucket storage mounted at /mnt. If you need to save any file after the end of the 2nd day and in the end of the course, copy files there and then you can retrieve them via a web browser, using the URL *https://bucketname.s3.eu-central-1.amazonaws.com/copiedfile.txt*, where *bucketname* is the name of the directory in /mnt and *copiedfile.txt* is the name of the file to download.
+
+### Dates, time, location
+
+- Dates: May 2021:
  - Containers: Monday 3rd, Tuesday 4th
  - Nextflow: Monday 10th, Tuesday 11th
 - Time: 9:30-17:30:
   - Morning coffee break: 11:00-11:30am
-  - Lunch break: 1pm-2pm 
+  - Lunch break: 1pm-2pm
   - Afternoon coffee break: 3:30-4:00pm
 - Location: virtual, via Zoom.
+
+You can find all information in the dedicated course page of the [Moodle platform](https://moodle.crg.eu).
 
 ## Program
 
@@ -86,51 +124,50 @@ Applicants are not expected to have used neither Linux containers nor Nextflow w
 
 #### Day 1: Docker
 
-- Containers: introduction and history.
-- Docker hub: find existing containers.
-- Fetch (and build) an image from public registries (Docker Hub, Quay.io, etc.)
- - Discovery of different relevant base images
-  - Rocker, continuumio, biocontainers.pro.
-- Run Docker container based on an existing image (also run it interactively).
-- Work with volumes and ports.
-- Build an image from an existing recipe:
-  - Explain sections and keywords.
-  - Build options (e.g. cache or build variables).
-- Write a Docker recipe and build an image from it.
-- Upload image to registries.
+* Containers: introduction and history.
+* Docker hub: find existing containers.
+* Fetch (and build) an image from public registries (Docker Hub, Quay.io, etc.)
+ * Discover relevant base images
+* Run Docker container based on an existing image (also run it interactively).
+* Build an image from an existing recipe:
+  * Sections and keywords.
+  * Build options (e.g. cache or build variables).
+* Write a Docker recipe and build an image from it.
 
-#### Day 2: Singularity
+#### Day 2: Docker + Singularity
 
-- Singularity versus Docker.
- - Differences, pros and cons for each system. 
-- Fetch (and build) Singularity images.
- - Build from existing public registries.
- - Build from local Docker instances.
-- Run Singularity container (interactively).
-- Understanding and working with volumes.
-- Singularity build recipes.
-- Advanced features: services, etc.
+* Docker:
+  * Work with volumes and ports.
+  * Upload image to registries.
+* Singularity:
+  * Singularity versus Docker.
+    * Differences, pros and cons for each system.
+  * Fetch (and build) a Singularity images.
+    * Build from existing public registries.
+    * Build from local Docker instances.
+  * Run a Singularity container (interactively).
+  * Understanding and working with volumes.
+  * Singularity build recipes.
+  * Advanced features: services, etc.
 
 ### May 10-11: Nextflow
 
 #### Day 3: Understand the code, run, modify
 
-- Introduction to Nextflow
-- Scripting
+- Introduction to Nextflow.
+- Scripting.
 - Basic concepts:
-  - Channels, processes and workflows
-- The work folder and its structure
-- The log file
-- Resuming pipelines
+  - Channels, processes and workflows.
+- The work folder and its structure.
+- The log file.
+- Resuming pipelines.
 
 #### Day 4: Write and share
 
-- Decoupling configuration and main script
-- Run Nextflow with containers
-- Run Nextflow in a computing cluster (e.g. HPC)
-  - Definition of computing requirements and queues
-  - Profiles
-- Modules, subworkflows and reuse of the code
-- Share Nextflow pipelines and good practices 
-
-
+- Decoupling configuration and main script.
+- Run Nextflow with containers.
+- Run Nextflow on a computing cluster (e.g. HPC):
+  - Definition of computing requirements and queues.
+  - Profiles.
+- Modules, subworkflows, and how to reuse the code.
+- Share Nextflow pipelines.
