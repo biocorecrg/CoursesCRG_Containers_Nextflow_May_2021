@@ -365,10 +365,14 @@ CMD [&quot;I love containers&quot;]</code></pre>
 <p>This script outputs <strong>random intergers from 1 to 1000</strong>: the number of integers selected is given as the <strong>first argument</strong>.</p>
 <ul>
 <li>Write a recipe for an image:
-* Based on <strong>centos:7</strong>
-* That will execute this script (with <code>bash</code>) when it is run, giving it <strong>2</strong> as a default argument (i.e. <strong>outputs 2 random integers</strong>): the default can be changed as the image is run.</li>
+<ul>
+<li>Based on <strong>centos:7</strong></li>
+<li>That will execute this script (with <code>bash</code>) when it is run, giving it <strong>2</strong> as a default argument (i.e. <strong>outputs 2 random integers</strong>): the default can be changed as the image is run.</li>
+</ul></li>
 <li>Build the image.
-* Start a container with the default argument, then try it with another argument.</li>
+<ul>
+<li>Start a container with the default argument, then try it with another argument.</li>
+</ul></li>
 </ul>
 <details>
 <summary>
