@@ -341,7 +341,7 @@ Each container has a **unique ID**.
 Difference between `docker run` and `docker exec`:
 
 * `docker run` creates a temporary container, runs the command and stops the container.
-* `docker exec` needs an already running container to query the command (that is, a *detached* container).
+* `docker exec` needs an **already running container** to query the command (that is, a *detached* container).
 
 ```{bash}
 docker exec myubuntu uname -a
