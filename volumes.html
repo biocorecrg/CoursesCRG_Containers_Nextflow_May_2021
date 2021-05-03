@@ -307,6 +307,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb81-9"><a href="volumes.html#cb81-9"></a><span class="ex">docker</span> exec -ti fastqc_container /bin/bash</span>
 <span id="cb81-10"><a href="volumes.html#cb81-10"></a><span class="op">&gt;</span> <span class="fu">ls</span> -l /scratch</span>
 <span id="cb81-11"><a href="volumes.html#cb81-11"></a><span class="op">&gt;</span> <span class="bu">exit</span></span></code></pre></div>
+
+<div class="rmdnote">
+<p>Strictly speaking, these type of volumes we showed above are named <strong>bind mounts</strong>. If interested, there is a more powerful syntax available which allow you to control things such as turning them read-only (with <strong>–mount</strong>). More details here: <a href="https://docs.docker.com/storage/bind-mounts/" class="uri">https://docs.docker.com/storage/bind-mounts/</a></p>
+More sophisticated kinds of volumes (which are handled by Docker daemon) are explained here: <a href="https://docs.docker.com/storage/volumes/" class="uri">https://docs.docker.com/storage/volumes/</a>
+</div>
+
 <center>
 <h4 style="background-color: #e6fadc; display: inline-block;">
 <strong>HANDS-ON</strong>
