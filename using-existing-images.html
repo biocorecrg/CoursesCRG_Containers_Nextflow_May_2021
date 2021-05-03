@@ -482,6 +482,9 @@ We can start a container from the <strong>ubuntu tag 18.04 image</strong>, execu
 <span id="cb14-17"><a href="using-existing-images.html#cb14-17"></a>  <span class="co"># Exit the container.</span></span>
 <span id="cb14-18"><a href="using-existing-images.html#cb14-18"></a>  <span class="bu">exit</span></span></code></pre></div>
 </details>
+<blockquote>
+<p>Note about Docker inside Docker: <em>“Although running Docker inside Docker is generally not recommended, there are some legitimate use cases, such as development of Docker itself.”</em> <a href="https://hub.docker.com/_/docker">https://hub.docker.com/_/docker</a></p>
+</blockquote>
 <p>You can run the container as daemon (in background), instead of the default foreground running, with the <code>--detach</code> parameter:</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb15-1"><a href="using-existing-images.html#cb15-1"></a><span class="ex">docker</span> run --detach ubuntu:18.04 tail -f /dev/null</span></code></pre></div>
 <p>Run container as daemon (in background) with a given name:</p>
