@@ -362,12 +362,14 @@ CMD [&quot;I love containers&quot;]</code></pre>
 </ol>
 <div class="sourceCode" id="cb76"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb76-1"><a href="exercise-2-docker-recipes-and-build-images.html#cb76-1"></a><span class="co">#!/usr/bin/bash</span></span>
 <span id="cb76-2"><a href="exercise-2-docker-recipes-and-build-images.html#cb76-2"></a><span class="fu">seq</span> 1 1000 <span class="kw">|</span> <span class="ex">shuf</span> <span class="kw">|</span> <span class="fu">head</span> -<span class="va">$1</span></span></code></pre></div>
-<p>This script outputs <strong>random intergers from 1 to 1000</strong>: the number of integers selected is given as the <strong>first argument</strong>.
-* Write a recipe for an image:
+<p>This script outputs <strong>random intergers from 1 to 1000</strong>: the number of integers selected is given as the <strong>first argument</strong>.</p>
+<ul>
+<li>Write a recipe for an image:
 * Based on <strong>centos:7</strong>
-* That will execute this script (with <code>bash</code>) when it is run, giving it <strong>2</strong> as a default argument (i.e. <strong>outputs 2 random integers</strong>): the default can be changed as the image is run.
-* Build the image.
-* Start a container with the default argument, then try it with another argument.</p>
+* That will execute this script (with <code>bash</code>) when it is run, giving it <strong>2</strong> as a default argument (i.e. <strong>outputs 2 random integers</strong>): the default can be changed as the image is run.</li>
+<li>Build the image.
+* Start a container with the default argument, then try it with another argument.</li>
+</ul>
 <details>
 <summary>
 <h5 style="background-color: #e6fadc; display: inline-block;">
