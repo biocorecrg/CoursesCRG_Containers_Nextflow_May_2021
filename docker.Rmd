@@ -1290,6 +1290,38 @@ docker exec fastqc_container_test bash -c 'ls /scratch/*gz'
 ***bash -c*** stands for executing from the provided string.
 ```
 
+<center><h4 style="background-color: #e6fadc; display: inline-block;">**HANDS-ON**</h4></center>
+
+1. Copy the 2 FASTA files from the [Github repository](https://github.com/biocorecrg/CoursesCRG_Containers_Nextflow_May_2021/tree/main/testdata/blast) and place them in mounted directory.
+2. Run ```blastp``` inside the container against each other: `blastp -query /scratch/O75976.fasta -subject /scratch/Q90240.fasta`
+3. Run ```blastp``` outside the container and get the result. Do with exec and do all at once with run
+
+<details>
+<summary>
+<h5 style="background-color: #e6fadc; display: inline-block;">*Answer*</h5>
+</summary>
+```{bash}
+# Let's create the container and we dettach it
+docker run --detach -ti --volume $(pwd)/datatest:/scratch --name blastp_test ncbi/blast:2.10.1
+
+# Execute container interactively and run blastp
+docker exec -ti blastp_test /bin/bash
+> blastp -query /scratch/O75976.fasta -subject /scratch/Q90240.fasta > /scratch/insideout.txt
+
+# Run from outside and retrieve in different ways
+docker exec -ti blastp_test blastp -query /scratch/O75976.fasta -subject /scratch/Q90240.fasta
+
+docker exec -ti blastp_test blastp -query /scratch/O75976.fasta -subject /scratch/Q90240.fasta > out.txt
+
+docker exec -ti blastp_test blastp -query /scratch/O75976.fasta -subject /scratch/Q90240.fasta -out /scratch/outagain.txt
+
+docker run --volume $(pwd)/datatest:/scratch --name blastp1 ncbi/blast:2.10.1 blastp -query /scratch/O75976.fasta -subject /scratch/Q90240.fasta > out2.txt
+
+docker run --volume $(pwd)/datatest:/scratch --name blastp2 ncbi/blast:2.10.1 blastp -query /scratch/O75976.fasta -subject /scratch/Q90240.fasta -out /scratch/outagain2.txt
+
+```
+</details>
+
 ## Ports
 
 The same as with volumes, but with ports, to access Internet services.
