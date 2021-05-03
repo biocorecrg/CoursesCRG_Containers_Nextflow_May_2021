@@ -387,7 +387,13 @@ As we have seen before, you can run <code>docker images</code> in the terminal t
 <p><img src="docs/images/docker_images_list.png" width="650/"></p>
 
 <div class="rmdnote">
-Notice that for some images, such as Ubuntu, the same version tag hosts several Unique Image IDs (Digest). Each ID corresponds to a build for a specific Operating System or Architecture. Docker clients automatically retrieves the suitable one when using <strong><em>docker pull</em></strong>. If the OS/Architecture from the client is not present, an error is raised.
+<p>Notice that for some images, such as Ubuntu, the same version tag hosts several Unique Image IDs (Digest). Each ID corresponds to a build for a specific Operating System or Architecture. Docker clients automatically retrieves the suitable one when using <strong><em>docker pull</em></strong>. If the OS/Architecture from the client is not present, an error is raised.</p>
+<strong>IMPORTANT:</strong> Digest ID present in Docker hub is <strong>NOT</strong> the same (or a shortened version) of the Image ID you can see when doing <strong>docker images</strong>. Details: <a href="https://stackoverflow.com/questions/56364643/whats-the-difference-between-a-docker-images-image-id-and-its-digest" class="uri">https://stackoverflow.com/questions/56364643/whats-the-difference-between-a-docker-images-image-id-and-its-digest</a>
+</div>
+
+
+<div class="rmdtip">
+It is actually possible, and it can be advisable for reproducibility reasons, to pull an image with a specific digest ID. Example: docker pull <a href="mailto:ubuntu@sha256" class="email">ubuntu@sha256</a>:86ac87f73641c920fb42cc9612d4fb57b5626b56ea2a19b894d0673fd5b4f2e9
 </div>
 
 <center>
