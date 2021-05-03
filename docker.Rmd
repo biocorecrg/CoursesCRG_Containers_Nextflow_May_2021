@@ -202,7 +202,7 @@ As we have seen before, you can run `docker images` in the terminal to see a lis
 ```{block2, type='rmdnote'}
 Notice that for some images, such as Ubuntu, the same version tag hosts several Unique Image IDs (Digest). Each ID corresponds to a build for a specific Operating System or Architecture. Docker clients automatically retrieves the suitable one when using ***docker pull***. If the OS/Architecture from the client is not present, an error is raised.
 
-**IMPORTANT:** Digest ID present in Docker hub is **NOT** the same (or a shortened version) of the Image ID you can see when doing **docker images**. Details: https://stackoverflow.com/questions/56364643/whats-the-difference-between-a-docker-images-image-id-and-its-digest   
+**IMPORTANT:** Digest ID present in Docker hub is **NOT** the same (or a shortened version) of the Image ID you can see when doing **docker images**. Details: https://stackoverflow.com/questions/56364643/whats-the-difference-between-a-docker-images-image-id-and-its-digest
 ```
 
 ```{block2, type='rmdtip'}
@@ -1244,6 +1244,13 @@ docker exec -ti fastqc_container /bin/bash
 > ls -l /scratch
 > exit
 ```
+
+```{block2, type='rmdnote'}
+Strictly speaking, these type of volumes we showed above are named **bind mounts**. If interested, there is a more powerful syntax available which allow you to control things such as turning them read-only (with **--mount**). More details here: https://docs.docker.com/storage/bind-mounts/
+
+More sophisticated kinds of volumes (which are handled by Docker daemon) are explained here: https://docs.docker.com/storage/volumes/
+```
+
 
 <center><h4 style="background-color: #e6fadc; display: inline-block;">**HANDS-ON**</h4></center>
 
