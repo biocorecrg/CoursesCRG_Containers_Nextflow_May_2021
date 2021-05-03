@@ -637,13 +637,13 @@ export NXF_OPTS="-Xms50m -Xmx500m"
 ```
 
 ## EXERCISE 5 
-Try to make a module wrapper of the bowtie tool and change the script accordingly as the test3.
+Modify the test3.nf file to make two different subworkflows: one for fastqc + bowtie alingnment and one for a new fastqc analysis of the aligned files produced by bowtie. For convenience you can use the multiqc config file called config.yaml in the multiqc process.
 
 <details>
 <summary>
 <h5>*Answer*</h5>
 </summary>
-Solution in the folder test5
+Solution in the file test3_2.nf
 </details>
 
 
