@@ -304,6 +304,8 @@ docker run -ti biocontainers/blast:2.2.31
 
 </details>
 
+>Note about Docker inside Docker: *"Although running Docker inside Docker is generally not recommended, there are some legitimate use cases, such as development of Docker itself."* [https://hub.docker.com/_/docker](https://hub.docker.com/_/docker)
+
 
 You can run the container as daemon (in background), instead of the default foreground running, with the `--detach` parameter:
 
