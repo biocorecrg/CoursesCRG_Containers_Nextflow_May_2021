@@ -1193,15 +1193,17 @@ docker run random_numbers 10
 
 Good for long-term reproducibility and for critical production environments:
 
-* **docker save**: Save an image into a tar archive.
+* **docker save**: Save an image into an image tar archive.
 
-* **docker export**: Save a container into a tar archive.
+* **docker load**: Load an image tar archive to become an image.
 
-* **docker import**: Import a tar archive into an image.
+* **docker export**: Save a container filesystem into a tar archive.
+
+* **docker import**: Import a filesystem tar archive into an image (you need to specify a target tag).
 
 <center><h4 style="background-color: #e6fadc; display: inline-block;">**HANDS-ON**</h4></center>
 
-* Save a previously created image into a **tar archive** (Look at the command's options for help)
+* Save a previously created image into a **tar archive** (Look at the command's options for help). Remove the original image and recover it again.
 
 <details>
 <summary>
@@ -1209,11 +1211,27 @@ Good for long-term reproducibility and for critical production environments:
 </summary>
 
 ```{bash}
+# Let's save the image in a tar
 docker save -o random_numbers.tar random_numbers
+
+# Remove the original image
+docker rmi random_numbers
+
+# Check existing images now
+docker images
+
+# Recover it
+docker load < random_numbers.tar
+
+# Check now images
+docker images
 ```
 
 </details>
 
+```{block2, type='rmdnote'}
+If you check the tar archives generated thanks to **save** with the ones using **export**, you will notice they do not look the same. The former ones ressemble more what you will find in /var/lib/docker (that is where Docker daemon stores its data) and it includes metadata information (so it is not necessary to specify an image tag). On the other hand, tar files generated with **export** they simply contantain the image filesystem. You lost that way a lot of metadata associated to the original image, such as the tags, but also things such as ENTRYPOINT and CMD instructions.
+```
 
 ## Volumes
 
