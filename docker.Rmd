@@ -1342,31 +1342,54 @@ docker run --volume $(pwd)/datatest:/scratch --name blastp2 ncbi/blast:2.10.1 bl
 
 ## Ports
 
-The same as with volumes, but with ports, to access Internet services.
+The same as with volumes, but with ports, they are used to enable Internet services.
 
 Syntax: ``--publish/-p host:container``
 
+In the example below we use NGINX, a popular web server that, by default, exposes the port 80.
+
 
 ```{bash}
+# We start the web server in the background
 docker run --detach --name webserver nginx
+
+# We test with curl if port 80 is available from our host machine
 curl localhost:80
+
+# We then check inside the container
 docker exec webserver curl localhost:80
+
+# We remove the container
 docker rm -f webserver
 
 ```
 
 ```{bash}
+# We start the web server in the background. We use **publish** to map the ports from the container to the host
 docker run --detach --name webserver --publish 80:80 nginx
+
+# We test if port 80 is available from our host machine
 curl localhost:80
+
+# We remove the container
 docker rm -f webserver
 ```
 
 ```{bash}
-docker run --detach --name webserver -p 8080:80 nginx
+# We start the web server in the background. We use **publish** to map the ports from the container to the host. Now instead of mapping to 80 in the host, we map to another one (3838 for instance).
+docker run --detach --name webserver -p 3838:80 nginx
+
+# We test if port 80 is available from our host machine
 curl localhost:80
-curl localhost:8080
+
+# We test if the different mapped port is available from our host machine
+curl localhost:3838
+
+# We repeat the check, but now inside the container
 docker exec webserver curl localhost:80
-docker exec webserver curl localhost:8080
+docker exec webserver curl localhost:3838
+
+# We remove the container
 docker rm -f webserver
 ```
 
