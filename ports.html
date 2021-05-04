@@ -290,21 +290,43 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="ports" class="section level2">
 <h2><span class="header-section-number">3.9</span> Ports</h2>
-<p>The same as with volumes, but with ports, to access Internet services.</p>
+<p>The same as with volumes, but with ports, they are used to enable Internet services.</p>
 <p>Syntax: <code>--publish/-p host:container</code></p>
-<div class="sourceCode" id="cb84"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb84-1"><a href="ports.html#cb84-1"></a><span class="ex">docker</span> run --detach --name webserver nginx</span>
-<span id="cb84-2"><a href="ports.html#cb84-2"></a><span class="ex">curl</span> localhost:80</span>
-<span id="cb84-3"><a href="ports.html#cb84-3"></a><span class="ex">docker</span> exec webserver curl localhost:80</span>
-<span id="cb84-4"><a href="ports.html#cb84-4"></a><span class="ex">docker</span> rm -f webserver</span></code></pre></div>
-<div class="sourceCode" id="cb85"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb85-1"><a href="ports.html#cb85-1"></a><span class="ex">docker</span> run --detach --name webserver --publish 80:80 nginx</span>
-<span id="cb85-2"><a href="ports.html#cb85-2"></a><span class="ex">curl</span> localhost:80</span>
-<span id="cb85-3"><a href="ports.html#cb85-3"></a><span class="ex">docker</span> rm -f webserver</span></code></pre></div>
-<div class="sourceCode" id="cb86"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb86-1"><a href="ports.html#cb86-1"></a><span class="ex">docker</span> run --detach --name webserver -p 8080:80 nginx</span>
-<span id="cb86-2"><a href="ports.html#cb86-2"></a><span class="ex">curl</span> localhost:80</span>
-<span id="cb86-3"><a href="ports.html#cb86-3"></a><span class="ex">curl</span> localhost:8080</span>
-<span id="cb86-4"><a href="ports.html#cb86-4"></a><span class="ex">docker</span> exec webserver curl localhost:80</span>
-<span id="cb86-5"><a href="ports.html#cb86-5"></a><span class="ex">docker</span> exec webserver curl localhost:8080</span>
-<span id="cb86-6"><a href="ports.html#cb86-6"></a><span class="ex">docker</span> rm -f webserver</span></code></pre></div>
+<p>In the example below we use NGINX, a popular web server that, by default, exposes the port 80.</p>
+<div class="sourceCode" id="cb84"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb84-1"><a href="ports.html#cb84-1"></a><span class="co"># We start the web server in the background</span></span>
+<span id="cb84-2"><a href="ports.html#cb84-2"></a><span class="ex">docker</span> run --detach --name webserver nginx</span>
+<span id="cb84-3"><a href="ports.html#cb84-3"></a></span>
+<span id="cb84-4"><a href="ports.html#cb84-4"></a><span class="co"># We test with curl if port 80 is available from our host machine</span></span>
+<span id="cb84-5"><a href="ports.html#cb84-5"></a><span class="ex">curl</span> localhost:80</span>
+<span id="cb84-6"><a href="ports.html#cb84-6"></a></span>
+<span id="cb84-7"><a href="ports.html#cb84-7"></a><span class="co"># We then check inside the container</span></span>
+<span id="cb84-8"><a href="ports.html#cb84-8"></a><span class="ex">docker</span> exec webserver curl localhost:80</span>
+<span id="cb84-9"><a href="ports.html#cb84-9"></a></span>
+<span id="cb84-10"><a href="ports.html#cb84-10"></a><span class="co"># We remove the container</span></span>
+<span id="cb84-11"><a href="ports.html#cb84-11"></a><span class="ex">docker</span> rm -f webserver</span></code></pre></div>
+<div class="sourceCode" id="cb85"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb85-1"><a href="ports.html#cb85-1"></a><span class="co"># We start the web server in the background. We use **publish** to map the ports from the container to the host</span></span>
+<span id="cb85-2"><a href="ports.html#cb85-2"></a><span class="ex">docker</span> run --detach --name webserver --publish 80:80 nginx</span>
+<span id="cb85-3"><a href="ports.html#cb85-3"></a></span>
+<span id="cb85-4"><a href="ports.html#cb85-4"></a><span class="co"># We test if port 80 is available from our host machine</span></span>
+<span id="cb85-5"><a href="ports.html#cb85-5"></a><span class="ex">curl</span> localhost:80</span>
+<span id="cb85-6"><a href="ports.html#cb85-6"></a></span>
+<span id="cb85-7"><a href="ports.html#cb85-7"></a><span class="co"># We remove the container</span></span>
+<span id="cb85-8"><a href="ports.html#cb85-8"></a><span class="ex">docker</span> rm -f webserver</span></code></pre></div>
+<div class="sourceCode" id="cb86"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb86-1"><a href="ports.html#cb86-1"></a><span class="co"># We start the web server in the background. We use **publish** to map the ports from the container to the host. Now instead of mapping to 80 in the host, we map to another one (3838 for instance).</span></span>
+<span id="cb86-2"><a href="ports.html#cb86-2"></a><span class="ex">docker</span> run --detach --name webserver -p 3838:80 nginx</span>
+<span id="cb86-3"><a href="ports.html#cb86-3"></a></span>
+<span id="cb86-4"><a href="ports.html#cb86-4"></a><span class="co"># We test if port 80 is available from our host machine</span></span>
+<span id="cb86-5"><a href="ports.html#cb86-5"></a><span class="ex">curl</span> localhost:80</span>
+<span id="cb86-6"><a href="ports.html#cb86-6"></a></span>
+<span id="cb86-7"><a href="ports.html#cb86-7"></a><span class="co"># We test if the different mapped port is available from our host machine</span></span>
+<span id="cb86-8"><a href="ports.html#cb86-8"></a><span class="ex">curl</span> localhost:3838</span>
+<span id="cb86-9"><a href="ports.html#cb86-9"></a></span>
+<span id="cb86-10"><a href="ports.html#cb86-10"></a><span class="co"># We repeat the check, but now inside the container</span></span>
+<span id="cb86-11"><a href="ports.html#cb86-11"></a><span class="ex">docker</span> exec webserver curl localhost:80</span>
+<span id="cb86-12"><a href="ports.html#cb86-12"></a><span class="ex">docker</span> exec webserver curl localhost:3838</span>
+<span id="cb86-13"><a href="ports.html#cb86-13"></a></span>
+<span id="cb86-14"><a href="ports.html#cb86-14"></a><span class="co"># We remove the container</span></span>
+<span id="cb86-15"><a href="ports.html#cb86-15"></a><span class="ex">docker</span> rm -f webserver</span></code></pre></div>
 
 <div class="rdmtip">
 You can check the website also from your web browser at: <a href="http://mymachine-address-here/" class="uri">http://mymachine-address-here/</a> (port 80 by default). Replace your mymachine-address-here for machine provided address or 127.0.0.1/localhost in case you were trying it from your own machine.
