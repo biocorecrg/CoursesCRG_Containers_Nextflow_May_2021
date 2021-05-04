@@ -1,4 +1,4 @@
-fig:unnamed-chunk-82
+fig:unnamed-chunk-83
 welcome-and-about-the-course
 meet-the-organizers-and-instructors
 about-the-course

@@ -297,9 +297,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p>Good for long-term reproducibility and for critical production environments:</p>
 <ul>
-<li><p><strong>docker save</strong>: Save an image into a tar archive.</p></li>
-<li><p><strong>docker export</strong>: Save a container into a tar archive.</p></li>
-<li><p><strong>docker import</strong>: Import a tar archive into an image.</p></li>
+<li><p><strong>docker save</strong>: Save an image into an image tar archive.</p></li>
+<li><p><strong>docker load</strong>: Load an image tar archive to become an image.</p></li>
+<li><p><strong>docker export</strong>: Save a container filesystem into a tar archive.</p></li>
+<li><p><strong>docker import</strong>: Import a filesystem tar archive into an image (you need to specify a target tag).</p></li>
 </ul>
 <center>
 <h4 style="background-color: #e6fadc; display: inline-block;">
@@ -307,7 +308,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </h4>
 </center>
 <ul>
-<li>Save a previously created image into a <strong>tar archive</strong> (Look at the command’s options for help)</li>
+<li>Save a previously created image into a <strong>tar archive</strong> (Look at the command’s options for help). Remove the original image and recover it again.</li>
 </ul>
 <details>
 <summary>
@@ -315,8 +316,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <em>Answer</em>
 </h5>
 <p></summary></p>
-<div class="sourceCode" id="cb79"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb79-1"><a href="additional-commands.html#cb79-1"></a><span class="ex">docker</span> save -o random_numbers.tar random_numbers</span></code></pre></div>
+<div class="sourceCode" id="cb79"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb79-1"><a href="additional-commands.html#cb79-1"></a><span class="co"># Let&#39;s save the image in a tar</span></span>
+<span id="cb79-2"><a href="additional-commands.html#cb79-2"></a><span class="ex">docker</span> save -o random_numbers.tar random_numbers</span>
+<span id="cb79-3"><a href="additional-commands.html#cb79-3"></a></span>
+<span id="cb79-4"><a href="additional-commands.html#cb79-4"></a><span class="co"># Remove the original image</span></span>
+<span id="cb79-5"><a href="additional-commands.html#cb79-5"></a><span class="ex">docker</span> rmi random_numbers</span>
+<span id="cb79-6"><a href="additional-commands.html#cb79-6"></a></span>
+<span id="cb79-7"><a href="additional-commands.html#cb79-7"></a><span class="co"># Check existing images now</span></span>
+<span id="cb79-8"><a href="additional-commands.html#cb79-8"></a><span class="ex">docker</span> images</span>
+<span id="cb79-9"><a href="additional-commands.html#cb79-9"></a></span>
+<span id="cb79-10"><a href="additional-commands.html#cb79-10"></a><span class="co"># Recover it</span></span>
+<span id="cb79-11"><a href="additional-commands.html#cb79-11"></a><span class="ex">docker</span> load <span class="op">&lt;</span> random_numbers.tar</span>
+<span id="cb79-12"><a href="additional-commands.html#cb79-12"></a></span>
+<span id="cb79-13"><a href="additional-commands.html#cb79-13"></a><span class="co"># Check now images</span></span>
+<span id="cb79-14"><a href="additional-commands.html#cb79-14"></a><span class="ex">docker</span> images</span></code></pre></div>
 </details>
+
+<div class="rmdnote">
+If you check the tar archives generated thanks to <strong>save</strong> with the ones using <strong>export</strong>, you will notice they do not look the same. The former ones ressemble more what you will find in /var/lib/docker (that is where Docker daemon stores its data) and it includes metadata information (so it is not necessary to specify an image tag). On the other hand, tar files generated with <strong>export</strong> they simply contantain the image filesystem. You lost that way a lot of metadata associated to the original image, such as the tags, but also things such as ENTRYPOINT and CMD instructions.
+</div>
+
 </div>
             </section>
 
