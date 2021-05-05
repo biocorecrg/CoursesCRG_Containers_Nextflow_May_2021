@@ -49,6 +49,7 @@ BIOCORE@CRG - N F TESTPIPE  ~  version ${version}
 =============================================
 reads                           : ${params.reads}
 reference                       : ${params.reference}
+outdir                          : ${params.outdir}
 """
 
 // this prints the help in case you use --help parameter in the command line and it stops the pipeline
@@ -62,9 +63,9 @@ if (params.help) {
 /*
  * Defining the output folders.
  */
-fastqcOutputFolder    = "ouptut_fastqc"
-alnOutputFolder       = "ouptut_aln"
-multiqcOutputFolder   = "ouptut_multiQC"
+fastqcOutputFolder    = "${params.outdir}/ouptut_fastqc"
+alnOutputFolder       = "${params.outdir}/ouptut_aln"
+multiqcOutputFolder   = "${params.outdir}/ouptut_multiQC"
 
 
 /* Reading the file list and creating a "Channel": a queue that connects different channels.
