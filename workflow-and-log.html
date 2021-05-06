@@ -329,14 +329,14 @@ Let’s add a workflow to our code:</p>
 <span id="cb145-31"><a href="workflow-and-log.html#cb145-31"></a> result.<span class="fu">view</span>()</span>
 <span id="cb145-32"><a href="workflow-and-log.html#cb145-32"></a>}</span></code></pre></div>
 <p>We can run the script this time sending the execution in the background (with the <code>-bg</code> option) and saving the log in the file <code>log.txt</code>.</p>
-<div class="sourceCode" id="cb146"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb146-1"><a href="workflow-and-log.html#cb146-1"></a><span class="ex">nextflow</span> run test.nf -bg <span class="op">&gt;</span> log.txt</span></code></pre></div>
+<div class="sourceCode" id="cb146"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb146-1"><a href="workflow-and-log.html#cb146-1"></a><span class="ex">nextflow</span> run test1.nf -bg <span class="op">&gt;</span> log.txt</span></code></pre></div>
 <div id="nextflow-log" class="section level3">
 <h3><span class="header-section-number">5.7.1</span> Nextflow log</h3>
 <p>Let’s inspect now the log file:</p>
 <div class="sourceCode" id="cb147"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb147-1"><a href="workflow-and-log.html#cb147-1"></a><span class="fu">cat</span> log.txt</span>
 <span id="cb147-2"><a href="workflow-and-log.html#cb147-2"></a></span>
 <span id="cb147-3"><a href="workflow-and-log.html#cb147-3"></a><span class="ex">N</span> E X T F L O W  ~  version 20.07.1</span>
-<span id="cb147-4"><a href="workflow-and-log.html#cb147-4"></a><span class="ex">Launching</span> <span class="kw">`</span><span class="ex">test.nf</span><span class="kw">`</span> [high_fermat] - revision: b129d66e57</span>
+<span id="cb147-4"><a href="workflow-and-log.html#cb147-4"></a><span class="ex">Launching</span> <span class="kw">`</span><span class="ex">test1.nf</span><span class="kw">`</span> [high_fermat] - revision: b129d66e57</span>
 <span id="cb147-5"><a href="workflow-and-log.html#cb147-5"></a>[<span class="ex">6a</span>/<span class="ex">2dfcaf</span>] Submitted process <span class="op">&gt;</span> printHello (hola)</span>
 <span id="cb147-6"><a href="workflow-and-log.html#cb147-6"></a>[<span class="ex">24</span>/<span class="ex">a286da</span>] Submitted process <span class="op">&gt;</span> printHello (hello)</span>
 <span id="cb147-7"><a href="workflow-and-log.html#cb147-7"></a>[<span class="ex">04</span>/<span class="ex">e733db</span>] Submitted process <span class="op">&gt;</span> printHello (bonjour)</span>
@@ -443,12 +443,12 @@ Let’s add a workflow to our code:</p>
 <p>You can see that with the previous code you can execute two workflows containing the same process. <br>
 We can add the <strong>collect</strong> operator to the second workflow that collects the output from different executions and returns the resulting list <strong>as a sole emission</strong>.</p>
 <p>Let’s run the code:</p>
-<div class="sourceCode" id="cb152"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb152-1"><a href="workflow-and-log.html#cb152-1"></a><span class="ex">nextflow</span> run test.nf -bg <span class="op">&gt;</span> log2</span>
+<div class="sourceCode" id="cb152"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb152-1"><a href="workflow-and-log.html#cb152-1"></a><span class="ex">nextflow</span> run test1.nf -bg <span class="op">&gt;</span> log2</span>
 <span id="cb152-2"><a href="workflow-and-log.html#cb152-2"></a></span>
 <span id="cb152-3"><a href="workflow-and-log.html#cb152-3"></a><span class="fu">cat</span> log2</span>
 <span id="cb152-4"><a href="workflow-and-log.html#cb152-4"></a></span>
 <span id="cb152-5"><a href="workflow-and-log.html#cb152-5"></a><span class="ex">N</span> E X T F L O W  ~  version 20.07.1</span>
-<span id="cb152-6"><a href="workflow-and-log.html#cb152-6"></a><span class="ex">Launching</span> <span class="kw">`</span><span class="ex">test.nf</span><span class="kw">`</span> [irreverent_davinci] - revision: 25a5511d1d</span>
+<span id="cb152-6"><a href="workflow-and-log.html#cb152-6"></a><span class="ex">Launching</span> <span class="kw">`</span><span class="ex">test1.nf</span><span class="kw">`</span> [irreverent_davinci] - revision: 25a5511d1d</span>
 <span id="cb152-7"><a href="workflow-and-log.html#cb152-7"></a>[<span class="ex">de</span>/<span class="ex">105b97</span>] Submitted process <span class="op">&gt;</span> first_pipeline:printHello (hello)</span>
 <span id="cb152-8"><a href="workflow-and-log.html#cb152-8"></a>[<span class="ex">ba</span>/<span class="ex">051c23</span>] Submitted process <span class="op">&gt;</span> first_pipeline:printHello (bonjour)</span>
 <span id="cb152-9"><a href="workflow-and-log.html#cb152-9"></a>[<span class="ex">1f</span>/<span class="ex">9b41b2</span>] Submitted process <span class="op">&gt;</span> second_pipeline:printHello (hello)</span>

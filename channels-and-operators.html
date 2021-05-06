@@ -299,7 +299,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>A <u>value channel</u> a.k.a. singleton channel is bound to a single value and it can be read unlimited times without consuming its content.</li>
 </ul>
 <p>An <u>operator</u> is a method that reshapes or connects different channels applying some rules.</p>
-<p>We can write a very simple Nextflow script: save the following piece of code in the <code>test.nf</code> file:</p>
+<p>We can write a very simple Nextflow script: save the following piece of code in the <code>test0.nf</code> file:</p>
 <div class="sourceCode" id="cb136"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb136-1"><a href="channels-and-operators.html#cb136-1"></a>#!/usr/bin/env nextflow</span>
 <span id="cb136-2"><a href="channels-and-operators.html#cb136-2"></a></span>
 <span id="cb136-3"><a href="channels-and-operators.html#cb136-3"></a><span class="co">// This is a comment</span></span>
@@ -323,10 +323,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb136-21"><a href="channels-and-operators.html#cb136-21"></a>str.<span class="fu">view</span>()</span></code></pre></div>
 <p>Once the file is saved, execute it with:</p>
 <div class="sourceCode" id="cb137"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb137-1"><a href="channels-and-operators.html#cb137-1"></a></span>
-<span id="cb137-2"><a href="channels-and-operators.html#cb137-2"></a><span class="ex">nextflow</span> run test.nf</span>
+<span id="cb137-2"><a href="channels-and-operators.html#cb137-2"></a><span class="ex">nextflow</span> run test0.nf</span>
 <span id="cb137-3"><a href="channels-and-operators.html#cb137-3"></a></span>
 <span id="cb137-4"><a href="channels-and-operators.html#cb137-4"></a><span class="ex">N</span> E X T F L O W  ~  version 20.07.1</span>
-<span id="cb137-5"><a href="channels-and-operators.html#cb137-5"></a><span class="ex">Launching</span> <span class="kw">`</span><span class="ex">test.nf</span><span class="kw">`</span> [agitated_avogadro] - revision: 61a595c5bf</span>
+<span id="cb137-5"><a href="channels-and-operators.html#cb137-5"></a><span class="ex">Launching</span> <span class="kw">`</span><span class="ex">test0.nf</span><span class="kw">`</span> [agitated_avogadro] - revision: 61a595c5bf</span>
 <span id="cb137-6"><a href="channels-and-operators.html#cb137-6"></a><span class="ex">hello</span></span>
 <span id="cb137-7"><a href="channels-and-operators.html#cb137-7"></a><span class="ex">hola</span></span>
 <span id="cb137-8"><a href="channels-and-operators.html#cb137-8"></a><span class="ex">bonjour</span></span></code></pre></div>
