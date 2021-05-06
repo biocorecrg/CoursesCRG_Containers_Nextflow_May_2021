@@ -388,7 +388,7 @@ We can run the script this time sending the execution in the background (with th
 nextflow run test.nf -bg > log.txt
 ```
 
-## Nextflow log
+### Nextflow log
 
 Let's inspect now the log file:
 
