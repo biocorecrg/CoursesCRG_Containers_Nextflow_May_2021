@@ -218,6 +218,32 @@ You can see that the default mode to publish the results in Nextflow is soft lin
 
 **IMPORTANT: You can also "move" the results but this is not suggested for files that will be needed for other processes. This will likely disrupt your pipeline.**
 
+We can copy the output files to our S3 bucket to be accessed via web. Your bucket is mounted in **/mnt** 
+
+```{bash, eval=FALSE, echo=TRUE}
+ls /mnt
+
+/mnt/class-bucket-1
+
+```
+
+Your number can be different (i.e. class-bucket-2, class-bucket-3, etc) since we have one bucket per student. Let's copy the multiqc_output.html file there and let's change the privileges.
+
+```{bash, eval=FALSE, echo=TRUE}
+cp ouptut_multiQC/multiqc_output.html /mnt/class-bucket-1
+
+sudo chmod 775 /mnt/class-bucket-1/multiqc_output.html 
+```
+
+Now you can see via browser at at:
+
+```{bash, eval=FALSE, echo=TRUE}
+http://class-bucket-1.s3.eu-central-1.amazonaws.com/multiqc_report.html
+```
+
+Of course again we need to change **class-bucket-1** with your own number.
+
+
 ## Adding a help section for the whole pipeline
 
 In this example we also describe another good practice: the use of the **--help** parameter. At the beginning of the pipeline we can write:
@@ -440,12 +466,24 @@ BIOCORE@CRG - N F TESTPIPE  ~  version ${version}
 =============================================
 reads                           : ${params.reads}
 reference                       : ${params.reference}
+outdir                          : ${params.outdir}
+
 """
 
 reference = file(params.reference)
 ```
 
-We generate in this way a **singleton channel** called **reference** which content is never consumed and can be indefinitely used.  
+We generate in this way a **singleton channel** called **reference** which content is never consumed and can be indefinitely used. We also add a path specifying where to place the output files.
+
+```{java, eval=FALSE, echo=TRUE}
+/*
+ * Defining the output folders.
+ */
+fastqcOutputFolder    = "${params.outdir}/ouptut_fastqc"
+alnOutputFolder       = "${params.outdir}/ouptut_aln"
+multiqcOutputFolder   = "${params.outdir}/ouptut_multiQC"
+
+```
 
 We add two more processes. The first one is for the indexing of the reference:
 
@@ -633,7 +671,12 @@ Sometimes you can find that the Nextflow process itself is very memory intensive
 
 ```{bash, eval=FALSE, echo=TRUE}
 export NXF_OPTS="-Xms50m -Xmx500m"
+```
 
+Again we can copy the output file to the bucket. We can also tell nextflow to direclty copy the output file to the S3 bucket. Just changing the parameter **outdir** in the params file will allow this:
+
+```{java, eval=FALSE, echo=TRUE}
+outdir          = "s3://class-bucket-1/results"
 ```
 
 ## EXERCISE 5 
