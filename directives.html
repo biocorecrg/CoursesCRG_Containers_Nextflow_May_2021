@@ -314,13 +314,13 @@ For instance, they can affect the way a process stages in and out the input and 
 <span id="cb163-17"><a href="directives.html#cb163-17"></a>    cat ${seq} | awk &#39;{<span class="kw">if</span> (\$<span class="dv">1</span>~<span class="st">&quot;&gt;&quot;</span>) {print \$<span class="dv">0</span>} <span class="kw">else</span> <span class="fu">system</span>(<span class="st">&quot;echo &quot;</span> \$<span class="dv">0</span> <span class="st">&quot; |rev&quot;</span>)}&#39; &gt; all.<span class="fu">rev</span></span>
 <span id="cb163-18"><a href="directives.html#cb163-18"></a>    <span class="st">&quot;&quot;&quot;</span></span>
 <span id="cb163-19"><a href="directives.html#cb163-19"></a>}</span></code></pre></div>
-<p>We can also use <strong>storeDir</strong> in case we want to have a permanent cache. <br>
-The process is executed only if the output files do not exist in the folder specified by <strong>storeDir</strong>.<br>
-When the output files exist, the process execution is skipped and these files are used as the actual process result.<br>
-For example, this can be useful if we don’t want to generate indexes each time and we prefer to reuse them.
+<p>We can also use <strong>storeDir</strong> in case we want to have a permanent cache. <br></p>
+<p>The process is executed only if the output files do not exist in the folder specified by <strong>storeDir</strong>.<br>
+When the output files exist, the process execution is skipped and these files are used as the actual process result.<br></p>
+<p>For example, this can be useful if we don’t want to generate indexes each time and we prefer to reuse them.
 <br>
-We can also indicate what to do in case a process fails.<br>
-The default is to stop the pipeline and to raise an error. But we can also skip the process using this directive:</p>
+We can also indicate what to do in case a process fails.<br></p>
+<p>The default is to stop the pipeline and to raise an error. But we can also skip the process using this directive:</p>
 <div class="sourceCode" id="cb164"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb164-1"><a href="directives.html#cb164-1"></a>errorStrategy &#39;ignore&#39;</span></code></pre></div>
 <p>or retry a number of times changing something like the memory available or the maximum execution time. <br>
 This time we need a number of directives:</p>

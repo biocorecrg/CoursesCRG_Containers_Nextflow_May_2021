@@ -292,8 +292,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="workflow" class="section level2">
 <h2><span class="header-section-number">5.7</span> Workflow</h2>
-<p>The code as it is will not produce anything, because you need another part that will actually <strong>call the process</strong> and connect it to the input channel.<br>
-This part is called a <strong>workflow</strong>. So let’s modify our code:</p>
+<p>The code as it is will not produce anything, because another part is needed that will actually <strong>call the process</strong> and connect it to the input channel.<br></p>
+<p>This part is called a <strong>workflow</strong>.<br>
+Let’s add a workflow to our code:</p>
 <div class="sourceCode" id="cb145"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb145-1"><a href="workflow.html#cb145-1"></a>#!/usr/bin/env nextflow</span>
 <span id="cb145-2"><a href="workflow.html#cb145-2"></a></span>
 <span id="cb145-3"><a href="workflow.html#cb145-3"></a>nextflow.<span class="fu">enable</span>.<span class="fu">dsl</span>=<span class="dv">2</span></span>

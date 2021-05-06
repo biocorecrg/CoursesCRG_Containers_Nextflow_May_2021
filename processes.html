@@ -292,7 +292,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="processes" class="section level2">
 <h2><span class="header-section-number">5.6</span> Processes</h2>
-<p>Let’s add now a process to our previous script <code>test.nf</code>:</p>
+<p>Let’s add a process to the previous script <code>test.nf</code>:</p>
 <div class="sourceCode" id="cb144"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb144-1"><a href="processes.html#cb144-1"></a>#!/usr/bin/env nextflow</span>
 <span id="cb144-2"><a href="processes.html#cb144-2"></a></span>
 <span id="cb144-3"><a href="processes.html#cb144-3"></a>nextflow.<span class="fu">enable</span>.<span class="fu">dsl</span>=<span class="dv">2</span></span>
@@ -321,10 +321,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb144-26"><a href="processes.html#cb144-26"></a>   echo ${str_in} in Italian is ciao</span>
 <span id="cb144-27"><a href="processes.html#cb144-27"></a>   <span class="st">&quot;&quot;&quot;</span></span>
 <span id="cb144-28"><a href="processes.html#cb144-28"></a>}</span></code></pre></div>
-<p>The process can be seen as a function and is composed by:
-- An <strong>input</strong> part where the input channels are defined.
-- An <strong>output</strong> part where we specify what to store as a result, that will be sent to other processes or published as final result.
-- A <strong>script</strong> part where we have the block of code to be executed using data from the input channel, and that will produce the output for the ouput channel. <br>Any kind of code / command line can be run here, as it is <strong>language agnostic</strong>. <br>NOTE: <em>You can have some trouble with escaping some characters: in that case, it is better to save the code into a file and call that file as a program.</em></p>
+<p>The process can be seen as a function that is composed of:</p>
+<ul>
+<li>An <strong>input</strong> part where the input channels are defined.</li>
+<li>An <strong>output</strong> part where we specify what to store as a result, that will be sent to other processes or published as final result.</li>
+<li>A <strong>script</strong> part where we have the block of code to be executed using data from the input channel, and that will produce the output for the ouput channel. <br>Any kind of code / command line can be run there, as it is <strong>language agnostic</strong>. <br>NOTE: <em>You can have some trouble with escaping some characters: in that case, it is better to save the code into a file and call that file as a program.</em></li>
+</ul>
 <p>Before the input, you can indicate a <strong>tag</strong> that will be reported in the log. This is quite useful for <u>logging / debugging</u>.</p>
 </div>
             </section>

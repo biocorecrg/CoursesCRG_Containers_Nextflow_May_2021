@@ -305,44 +305,44 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb147-10"><a href="nextflow-log.html#cb147-10"></a><span class="ex">hello</span> in Italian is ciao</span>
 <span id="cb147-11"><a href="nextflow-log.html#cb147-11"></a></span>
 <span id="cb147-12"><a href="nextflow-log.html#cb147-12"></a><span class="ex">bonjour</span> in Italian is ciao</span></code></pre></div>
-<p>The <strong>tag</strong> allows us to see that the process <strong>printHello</strong> was launched three times on the hola, hello and bonjour values contained in the input channel. <br>
-At the start of each row, there is an <u>alphanumeric code</u>:</p>
+<p>The <strong>tag</strong> allows us to see that the process <strong>printHello</strong> was launched <u>three times</u> on the hola, hello and bonjour values contained in the input channel. <br></p>
+<p>At the start of each row, there is an <u>alphanumeric code</u>:</p>
 <p><strong>[6a/2dfcaf]</strong> Submitted process &gt; printHello (hola)</p>
-<p>This code indicates also the path in which is process is “isolated” and where the corresponding temporary files are kep in the <strong>work</strong> directory. <br>
-Let’s have a look inside that folder:</p>
+<p>This code indicates <strong>the path</strong> in which theprocess is “isolated” and where the corresponding temporary files are kept in the <strong>work</strong> directory. <br></p>
+<p>Let’s have a look inside that folder:</p>
 <div class="sourceCode" id="cb148"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb148-1"><a href="nextflow-log.html#cb148-1"></a><span class="co"># Show the folder&#39;s full name</span></span>
-<span id="cb148-2"><a href="nextflow-log.html#cb148-2"></a></span>
-<span id="cb148-3"><a href="nextflow-log.html#cb148-3"></a><span class="bu">echo</span> work/6a/2dfcaf*</span>
-<span id="cb148-4"><a href="nextflow-log.html#cb148-4"></a>  <span class="ex">work/6a/2dfcafc01350f475c60b2696047a87</span></span>
-<span id="cb148-5"><a href="nextflow-log.html#cb148-5"></a></span>
-<span id="cb148-6"><a href="nextflow-log.html#cb148-6"></a><span class="co"># List was is inside the folder</span></span>
+<span id="cb148-2"><a href="nextflow-log.html#cb148-2"></a><span class="bu">echo</span> work/6a/2dfcaf*</span>
+<span id="cb148-3"><a href="nextflow-log.html#cb148-3"></a>  <span class="ex">work/6a/2dfcafc01350f475c60b2696047a87</span></span>
+<span id="cb148-4"><a href="nextflow-log.html#cb148-4"></a></span>
+<span id="cb148-5"><a href="nextflow-log.html#cb148-5"></a><span class="co"># List was is inside the folder</span></span>
+<span id="cb148-6"><a href="nextflow-log.html#cb148-6"></a><span class="fu">ls</span> -alht work/6a/2dfcaf*</span>
 <span id="cb148-7"><a href="nextflow-log.html#cb148-7"></a></span>
-<span id="cb148-8"><a href="nextflow-log.html#cb148-8"></a><span class="fu">ls</span> -alht work/6a/2dfcaf*</span>
-<span id="cb148-9"><a href="nextflow-log.html#cb148-9"></a></span>
-<span id="cb148-10"><a href="nextflow-log.html#cb148-10"></a><span class="ex">total</span> 40</span>
-<span id="cb148-11"><a href="nextflow-log.html#cb148-11"></a><span class="ex">-rw-r--r--</span>  1 lcozzuto  staff     1B Oct  7 13:39 .exitcode</span>
-<span id="cb148-12"><a href="nextflow-log.html#cb148-12"></a><span class="ex">drwxr-xr-x</span>  9 lcozzuto  staff   288B Oct  7 13:39 .</span>
-<span id="cb148-13"><a href="nextflow-log.html#cb148-13"></a><span class="ex">-rw-r--r--</span>  1 lcozzuto  staff    24B Oct  7 13:39 .command.log</span>
-<span id="cb148-14"><a href="nextflow-log.html#cb148-14"></a><span class="ex">-rw-r--r--</span>  1 lcozzuto  staff    24B Oct  7 13:39 .command.out</span>
-<span id="cb148-15"><a href="nextflow-log.html#cb148-15"></a><span class="ex">-rw-r--r--</span>  1 lcozzuto  staff     0B Oct  7 13:39 .command.err</span>
-<span id="cb148-16"><a href="nextflow-log.html#cb148-16"></a><span class="ex">-rw-r--r--</span>  1 lcozzuto  staff     0B Oct  7 13:39 .command.begin</span>
-<span id="cb148-17"><a href="nextflow-log.html#cb148-17"></a><span class="ex">-rw-r--r--</span>  1 lcozzuto  staff    45B Oct  7 13:39 .command.sh</span>
-<span id="cb148-18"><a href="nextflow-log.html#cb148-18"></a><span class="ex">-rw-r--r--</span>  1 lcozzuto  staff   2.5K Oct  7 13:39 .command.run</span>
-<span id="cb148-19"><a href="nextflow-log.html#cb148-19"></a><span class="ex">drwxr-xr-x</span>  3 lcozzuto  staff    96B Oct  7 13:39 ..</span></code></pre></div>
-<p>You see a lot of “hidden” files:
-- <strong>.exitcode</strong>, contains 0 if everything is ok, another value if there was a problem.
-- <strong>.command.log</strong>, contains the log of the command execution. It is often identical to <code>.command.out</code>
-- <strong>.command.out</strong>, contains the standard output of the command execution
-- <strong>.command.err</strong>, contains the standard error of the command execution
-- <strong>.command.begin</strong>, contains what has to be executed before <code>.command.sh</code>
-- <strong>.command.sh</strong>, contains the block of code indicated in the process
-- <strong>.command.run</strong>, contains the code made by nextflow for the execution of <code>.command.sh</code>, and contains environmental variables, eventual invocations of linux containers etc.</p>
+<span id="cb148-8"><a href="nextflow-log.html#cb148-8"></a><span class="ex">total</span> 40</span>
+<span id="cb148-9"><a href="nextflow-log.html#cb148-9"></a><span class="ex">-rw-r--r--</span>  1 lcozzuto  staff     1B Oct  7 13:39 .exitcode</span>
+<span id="cb148-10"><a href="nextflow-log.html#cb148-10"></a><span class="ex">drwxr-xr-x</span>  9 lcozzuto  staff   288B Oct  7 13:39 .</span>
+<span id="cb148-11"><a href="nextflow-log.html#cb148-11"></a><span class="ex">-rw-r--r--</span>  1 lcozzuto  staff    24B Oct  7 13:39 .command.log</span>
+<span id="cb148-12"><a href="nextflow-log.html#cb148-12"></a><span class="ex">-rw-r--r--</span>  1 lcozzuto  staff    24B Oct  7 13:39 .command.out</span>
+<span id="cb148-13"><a href="nextflow-log.html#cb148-13"></a><span class="ex">-rw-r--r--</span>  1 lcozzuto  staff     0B Oct  7 13:39 .command.err</span>
+<span id="cb148-14"><a href="nextflow-log.html#cb148-14"></a><span class="ex">-rw-r--r--</span>  1 lcozzuto  staff     0B Oct  7 13:39 .command.begin</span>
+<span id="cb148-15"><a href="nextflow-log.html#cb148-15"></a><span class="ex">-rw-r--r--</span>  1 lcozzuto  staff    45B Oct  7 13:39 .command.sh</span>
+<span id="cb148-16"><a href="nextflow-log.html#cb148-16"></a><span class="ex">-rw-r--r--</span>  1 lcozzuto  staff   2.5K Oct  7 13:39 .command.run</span>
+<span id="cb148-17"><a href="nextflow-log.html#cb148-17"></a><span class="ex">drwxr-xr-x</span>  3 lcozzuto  staff    96B Oct  7 13:39 ..</span></code></pre></div>
+<p>You see a lot of “hidden” files:</p>
+<ul>
+<li><strong>.exitcode</strong>, contains 0 if everything is ok, another value if there was a problem.</li>
+<li><strong>.command.log</strong>, contains the log of the command execution. It is often identical to <code>.command.out</code></li>
+<li><strong>.command.out</strong>, contains the standard output of the command execution</li>
+<li><strong>.command.err</strong>, contains the standard error of the command execution</li>
+<li><strong>.command.begin</strong>, contains what has to be executed before <code>.command.sh</code></li>
+<li><strong>.command.sh</strong>, contains the block of code indicated in the process</li>
+<li><strong>.command.run</strong>, contains the code made by nextflow for the execution of <code>.command.sh</code>, and contains environmental variables, eventual invocations of linux containers etc.</li>
+</ul>
 <p>For instance the content of <code>.command.sh</code> is:</p>
 <div class="sourceCode" id="cb149"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb149-1"><a href="nextflow-log.html#cb149-1"></a><span class="fu">cat</span> work/6a/2dfcaf*/.command.sh</span>
 <span id="cb149-2"><a href="nextflow-log.html#cb149-2"></a></span>
 <span id="cb149-3"><a href="nextflow-log.html#cb149-3"></a><span class="co">#!/bin/bash -ue</span></span>
 <span id="cb149-4"><a href="nextflow-log.html#cb149-4"></a><span class="bu">echo</span> hola in Italian is ciao</span></code></pre></div>
-<p>And the content of .command.out is</p>
+<p>And the content of <code>.command.out</code> is</p>
 <div class="sourceCode" id="cb150"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb150-1"><a href="nextflow-log.html#cb150-1"></a><span class="fu">cat</span> work/6a/2dfcaf*/.command.out</span>
 <span id="cb150-2"><a href="nextflow-log.html#cb150-2"></a></span>
 <span id="cb150-3"><a href="nextflow-log.html#cb150-3"></a><span class="ex">hola</span> in Italian is ciao</span></code></pre></div>
@@ -370,7 +370,7 @@ Let’s have a look inside that folder:</p>
 <span id="cb151-21"><a href="nextflow-log.html#cb151-21"></a>}</span>
 <span id="cb151-22"><a href="nextflow-log.html#cb151-22"></a></span>
 <span id="cb151-23"><a href="nextflow-log.html#cb151-23"></a><span class="co">/*</span></span>
-<span id="cb151-24"><a href="nextflow-log.html#cb151-24"></a><span class="co"> * A workflow can be named as a function and receives an input using the take keyword</span></span>
+<span id="cb151-24"><a href="nextflow-log.html#cb151-24"></a><span class="co"> * A workflow can be named as a function and receive an input using the take keyword</span></span>
 <span id="cb151-25"><a href="nextflow-log.html#cb151-25"></a><span class="co"> */</span></span>
 <span id="cb151-26"><a href="nextflow-log.html#cb151-26"></a></span>
 <span id="cb151-27"><a href="nextflow-log.html#cb151-27"></a>workflow first_pipeline {</span>
