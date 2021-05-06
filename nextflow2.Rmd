@@ -45,7 +45,8 @@ process {
 ...
 ```
 
-Then we have the resources needed for a class of processes in particular labeled with **bigmem**
+Then we have the resources needed for a class of processes in particular labeled with **bigmem** (i.e. the default options will be overridden)
+
 ```
      withLabel: 'bigmem'
    	{
@@ -54,7 +55,7 @@ Then we have the resources needed for a class of processes in particular labeled
 	} 	
 ```
 
-If we have a look at the process **fastQC** within the test2.nf file, we can see the use of the label.
+If we have a look at process **fastQC** in the [test2.nf file](https://github.com/biocorecrg/CoursesCRG_Containers_Nextflow_May_2021/tree/main/nextflow/test2), we can see the use of the label.
 
 ```{java, eval=FALSE, echo=TRUE}
 /*
@@ -70,14 +71,16 @@ process fastQC {
 ...
 ```
 
-The latest two rows of the config file indicates which container needs to be used. In this case, it assumes has to be pulled from [DockerHub](https://hub.docker.com/). In case you want to use singularity you can indicate where to store the local image by using the **singularity.cacheDir** setting
+The last two rows of the config file indicate which container needs to be used. <br>
+In this example, it is pulling it from [DockerHub](https://hub.docker.com/). <br>
+In case you want to use a singularity container, you can indicate where to store the local image by using the **singularity.cacheDir** option.
 
 ```{java, eval=FALSE, echo=TRUE}
 process.container = 'biocorecrg/c4lwg-2018:latest'
 singularity.cacheDir = "$baseDir/singularity"
 ```
 
-Let's now launch the script test2.nf
+Let's now launch the script test2.nf.
 
 ```{java, eval=FALSE, echo=TRUE}
 cd test2;
