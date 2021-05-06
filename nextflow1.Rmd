@@ -441,7 +441,7 @@ cat work/6a/2dfcaf*/.command.out
 hola in Italian is ciao
 ```
 
-You can also name workflows as they were collections of processes. For instance we can write:
+You can also give a name to workflows, so that you can combine them in the main workflow. For instance we can write:
 
 ```{java, eval=FALSE, echo=TRUE}
 #!/usr/bin/env nextflow
