@@ -794,7 +794,7 @@ Here we have two simple processes:
 
 The input path is fed as a parameter using the script parameters **${seq}**
 
-```
+```{bash, eval=FALSE, echo=TRUE}
 params.inputfile
 ```
 
