@@ -293,11 +293,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="share-nextflow-pipelines-and-good-practices" class="section level2">
 <h2><span class="header-section-number">6.12</span> Share Nextflow pipelines and good practices</h2>
-<p>Nextflow supports a number of code sharing platforms: BitBucket, GitHub, and GitLab. This feature allows you to run pipelines by just pointing to an online repository without caring about downloading etc. The default platform is GitHub, so we will use this repository as an example.</p>
+<p>Nextflow supports a number of code sharing platforms: <strong>BitBucket</strong>, <strong>GitHub</strong>, and <strong>GitLab</strong>. <br>
+This feature allows to run pipelines by just pointing to an online repository without caring about downloading etc. <br>
+The default platform is <strong>GitHub</strong>, so we will use this repository as an example.</p>
 <p>Let’s create a new repository with a unique name:</p>
 <p><img src="docs/images/git_1.png" width="300px" /></p>
 <p><img src="docs/images/git_2.png" width="800px" /></p>
-<p>And then let’s clone it in one of our test folder. Let’s choose the 5. We can get the url path by clicking like on the figure:</p>
+<p>And then let’s clone it in one of our test folder. Let’s choose <strong>test5</strong>. We can get the url path by clicking like on the figure:</p>
 <p><img src="docs/images/git_3.png" width="800px" /></p>
 <div class="sourceCode" id="cb222"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb222-1"><a href="share-nextflow-pipelines-and-good-practices.html#cb222-1"></a><span class="fu">git</span> clone https://github.com/lucacozzuto/test_course.git</span>
 <span id="cb222-2"><a href="share-nextflow-pipelines-and-good-practices.html#cb222-2"></a><span class="ex">Cloning</span> into <span class="st">&#39;test_course&#39;</span>...</span>
@@ -305,7 +307,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb222-4"><a href="share-nextflow-pipelines-and-good-practices.html#cb222-4"></a><span class="ex">remote</span>: Counting objects: 100% (3/3), <span class="kw">done</span><span class="ex">.</span></span>
 <span id="cb222-5"><a href="share-nextflow-pipelines-and-good-practices.html#cb222-5"></a><span class="ex">remote</span>: Total 3 (delta 0), <span class="ex">reused</span> 0 (delta 0), <span class="ex">pack-reused</span> 0</span>
 <span id="cb222-6"><a href="share-nextflow-pipelines-and-good-practices.html#cb222-6"></a><span class="ex">Unpacking</span> objects: 100% (3/3), <span class="kw">done</span><span class="ex">.</span></span></code></pre></div>
-<p>So now we have an almost empty folder named <strong>test_course</strong>. We can just move or copy our files there:</p>
+<p>We have an almost empty folder named <strong>test_course</strong>. We can just move or copy our files there:</p>
 <div class="sourceCode" id="cb223"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb223-1"><a href="share-nextflow-pipelines-and-good-practices.html#cb223-1"></a><span class="fu">cp</span> *.* lib -r test_course/ </span>
 <span id="cb223-2"><a href="share-nextflow-pipelines-and-good-practices.html#cb223-2"></a><span class="bu">cd</span> test_course</span>
 <span id="cb223-3"><a href="share-nextflow-pipelines-and-good-practices.html#cb223-3"></a></span>
@@ -359,7 +361,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb224-36"><a href="share-nextflow-pipelines-and-good-practices.html#cb224-36"></a><span class="ex">Total</span> 9 (delta 0), <span class="ex">reused</span> 0 (delta 0)</span>
 <span id="cb224-37"><a href="share-nextflow-pipelines-and-good-practices.html#cb224-37"></a><span class="ex">To</span> https://github.com/lucacozzuto/test_course.git</span>
 <span id="cb224-38"><a href="share-nextflow-pipelines-and-good-practices.html#cb224-38"></a>   <span class="ex">bbd6a44..7681f85</span>  main -<span class="op">&gt;</span> main</span></code></pre></div>
-<p>So if we go again on the GitHub website we can see that eveything has been uploaded.</p>
+<p>If we go back to the GitHub website we can see that eveything has been uploaded.</p>
 <p><img src="docs/images/git_2.png" width="800px" /></p>
 <p>Now we can remove that folder and go in the home folder.</p>
 <div class="sourceCode" id="cb225"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb225-1"><a href="share-nextflow-pipelines-and-good-practices.html#cb225-1"></a><span class="fu">rm</span> -fr test_course</span>
@@ -368,12 +370,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb226"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb226-1"><a href="share-nextflow-pipelines-and-good-practices.html#cb226-1"></a><span class="ex">nextflow</span> run lucacozzuto/test_course -with-docker -r main \</span>
 <span id="cb226-2"><a href="share-nextflow-pipelines-and-good-practices.html#cb226-2"></a>--reads <span class="st">&quot;/home/ec2-user/git/CoursesCRG_Containers_Nextflow_May_2021/nextflow/nextflow/testdata/*.fastq.gz&quot;</span> \</span>
 <span id="cb226-3"><a href="share-nextflow-pipelines-and-good-practices.html#cb226-3"></a>--reference <span class="st">&quot;/home/ec2-user/git/CoursesCRG_Containers_Nextflow_May_2021/nextflow/nextflow/testdata/chr19.fasta.gz&quot;</span></span></code></pre></div>
-<p>As you can see we just use the repository name and two nextflow parameters:
-- -with-docker, for using Docker
-- -r, for using a specific branch. In this case the <strong>main</strong> branch.
-Then we pass to the pipelines the path of our input files:
-- –reads
-- –reference</p>
+<p>As you can see we just use the repository name and two Nextflow parameters:</p>
+<ul>
+<li><code>-with-docker</code>, for using Docker</li>
+<li><code>-r</code>, for using a specific branch. In this case the <strong>main</strong> branch.
+Then we pass to the pipelines the path of our input files:</li>
+<li><code>--reads</code></li>
+<li><code>--reference</code></li>
+</ul>
 <div class="sourceCode" id="cb227"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb227-1"><a href="share-nextflow-pipelines-and-good-practices.html#cb227-1"></a></span>
 <span id="cb227-2"><a href="share-nextflow-pipelines-and-good-practices.html#cb227-2"></a><span class="ex">N</span> E X T F L O W  ~  version 20.10.0</span>
 <span id="cb227-3"><a href="share-nextflow-pipelines-and-good-practices.html#cb227-3"></a><span class="ex">Pulling</span> lucacozzuto/test_course ...</span>
@@ -396,19 +400,20 @@ Then we pass to the pipelines the path of our input files:
 <span id="cb227-20"><a href="share-nextflow-pipelines-and-good-practices.html#cb227-20"></a><span class="ex">Duration</span>    : 1m 26s</span>
 <span id="cb227-21"><a href="share-nextflow-pipelines-and-good-practices.html#cb227-21"></a><span class="ex">CPU</span> hours   : (a few seconds)</span>
 <span id="cb227-22"><a href="share-nextflow-pipelines-and-good-practices.html#cb227-22"></a><span class="ex">Succeeded</span>   : 5</span></code></pre></div>
-<p>As you can see as first step, Nextflow pulls down the required version of the pipeline and it stores it at:</p>
+<p>As a first step, Nextflow pulls down the required version of the pipeline and it stores it in:</p>
 <div class="sourceCode" id="cb228"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb228-1"><a href="share-nextflow-pipelines-and-good-practices.html#cb228-1"></a><span class="ex">/home/ec2-user/.nextflow/assets/lucacozzuto/test_course/</span></span></code></pre></div>
-<p>then it pulls the docker image and run the pipeline.</p>
-<p>You can use the Nextflow’s command <strong>list</strong> that show you the number of pipelines installed in your environment and the command <strong>info</strong> for fetching some useful information.</p>
+<p>then it pulls the Docker image and runs the pipeline.</p>
+<p>You can use the Nextflow’s command <strong>list</strong> that shows the number of pipelines installed in your environment and the command <strong>info</strong> for fetching some useful information.</p>
 <div class="sourceCode" id="cb229"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb229-1"><a href="share-nextflow-pipelines-and-good-practices.html#cb229-1"></a><span class="ex">nextflow</span> list</span>
 <span id="cb229-2"><a href="share-nextflow-pipelines-and-good-practices.html#cb229-2"></a><span class="ex">lucacozzuto/test_course</span></span>
 <span id="cb229-3"><a href="share-nextflow-pipelines-and-good-practices.html#cb229-3"></a><span class="ex">...</span></span></code></pre></div>
 <div class="sourceCode" id="cb230"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb230-1"><a href="share-nextflow-pipelines-and-good-practices.html#cb230-1"></a><span class="ex">nextflow</span> info lucacozzuto/test_course</span>
-<span id="cb230-2"><a href="share-nextflow-pipelines-and-good-practices.html#cb230-2"></a> <span class="ex">project</span> name: lucacozzuto/test_course</span>
-<span id="cb230-3"><a href="share-nextflow-pipelines-and-good-practices.html#cb230-3"></a> <span class="ex">repository</span>  : https://github.com/lucacozzuto/test_course</span>
-<span id="cb230-4"><a href="share-nextflow-pipelines-and-good-practices.html#cb230-4"></a> <span class="bu">local</span> <span class="va">path</span>  : /home/ec2-user/.nextflow/assets/lucacozzuto/test_course</span>
-<span id="cb230-5"><a href="share-nextflow-pipelines-and-good-practices.html#cb230-5"></a> <span class="ex">main</span> script : main.nf</span>
-<span id="cb230-6"><a href="share-nextflow-pipelines-and-good-practices.html#cb230-6"></a> <span class="ex">revision</span>    : * main</span></code></pre></div>
+<span id="cb230-2"><a href="share-nextflow-pipelines-and-good-practices.html#cb230-2"></a></span>
+<span id="cb230-3"><a href="share-nextflow-pipelines-and-good-practices.html#cb230-3"></a> <span class="ex">project</span> name: lucacozzuto/test_course</span>
+<span id="cb230-4"><a href="share-nextflow-pipelines-and-good-practices.html#cb230-4"></a> <span class="ex">repository</span>  : https://github.com/lucacozzuto/test_course</span>
+<span id="cb230-5"><a href="share-nextflow-pipelines-and-good-practices.html#cb230-5"></a> <span class="bu">local</span> <span class="va">path</span>  : /home/ec2-user/.nextflow/assets/lucacozzuto/test_course</span>
+<span id="cb230-6"><a href="share-nextflow-pipelines-and-good-practices.html#cb230-6"></a> <span class="ex">main</span> script : main.nf</span>
+<span id="cb230-7"><a href="share-nextflow-pipelines-and-good-practices.html#cb230-7"></a> <span class="ex">revision</span>    : * main</span></code></pre></div>
 <p>Finally you can update, view or delete a project by using the Nextflow commands <strong>pull</strong>, <strong>view</strong> and <strong>drop</strong>.</p>
 <div class="sourceCode" id="cb231"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb231-1"><a href="share-nextflow-pipelines-and-good-practices.html#cb231-1"></a><span class="ex">nextflow</span> view lucacozzuto/test_course</span>
 <span id="cb231-2"><a href="share-nextflow-pipelines-and-good-practices.html#cb231-2"></a></span>
