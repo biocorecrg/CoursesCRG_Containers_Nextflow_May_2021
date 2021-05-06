@@ -294,13 +294,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="exercise-2" class="section level2">
 <h2><span class="header-section-number">5.8</span> EXERCISE 2</h2>
 <ul>
-<li>Change the pipeline for producing files instead of standard output:
+<li>Change the pipeline for producing files instead of <a href="https://www.nextflow.io/docs/latest/dsl2.html#process-outputs">standard output</a>:
 <ul>
-<li>You can write another process to handle the fact that you have a list in the workflow2.</li>
-<li>You need also to specify within the workflow what to output using <strong>emit</strong> keyword.</li>
+<li>You can write another process to handle the fact that you have a list in the workflow2 (<code>workflow second_pipeline</code>).</li>
+<li>You need also to specify within the workflow what to output using the <a href="https://www.nextflow.io/docs/latest/dsl2.html?#workflow-outputs"><strong>emit</strong> keyword</a>.</li>
 </ul></li>
 </ul>
-<p>See here <a href="https://www.nextflow.io/docs/latest/dsl2.html?#workflow-outputs"><strong>emit</strong></a></p>
 <details>
 <summary>
 <h5 style="background-color: #e6fadc; display: inline-block;">
@@ -380,7 +379,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb153-71"><a href="exercise-2.html#cb153-71"></a>}</span></code></pre></div>
 </details>
 <ul>
-<li>Change the pipeline to use only one process to handle both the cases (one element or a list), you can choose the elements from a list using the positional keys (i.e. list[0], list[1], etc…)</li>
+<li>Change the pipeline to use only one process to handle both the cases (either one element or a list).<br> You can choose the elements from a list using the positional keys (i.e. list[0], list[1], etc…)</li>
 </ul>
 <details>
 <summary>
