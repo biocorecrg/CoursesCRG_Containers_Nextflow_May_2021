@@ -5,56 +5,62 @@ A DSL for data-driven computational pipelines. [www.nextflow.io](https://www.nex
 knitr::include_graphics('docs/images/nextflow_logo_deep.png')
 ```
 
-## What is Nextflow?
+## Introduction
+
+### What is Nextflow?
 
 ```{r, out.width="600px", echo=FALSE, eval = TRUE, fig.link='https://www.nextflow.io'}
 knitr::include_graphics('docs/images/nextf_groovy.png')
 ```
 
-[Nextflow](https://www.nextflow.io) is a domain specific language for workflow orchestration that stems from [Groovy](https://groovy-lang.org/). It enables scalable and reproducible workflows using software containers. It was developed at [CRG](www.crg.eu) in the Lab of Cedric Notredame by Paolo Di Tommaso [https://github.com/pditommaso](https://github.com/pditommaso). The Nextflow documentantion is [available here](https://www.nextflow.io/docs/latest/) and you can ask help to the community using their [gitter channel](https://gitter.im/nextflow-io/nextflow)
+[Nextflow](https://www.nextflow.io) is a domain specific language for workflow orchestration that stems from [Groovy](https://groovy-lang.org/). It enables scalable and reproducible workflows using software containers. <br>
+It was developed at the [CRG](www.crg.eu) in the Lab of Cedric Notredame by Paolo Di Tommaso [https://github.com/pditommaso](https://github.com/pditommaso). <br>
+The Nextflow documentation is [available here](https://www.nextflow.io/docs/latest/) and you can ask help to the community using their [gitter channel](https://gitter.im/nextflow-io/nextflow)
 
-Nextflow has been currently upgrade from DLS1 version to DLS2. In this course we will use exclusively DLS2.  
+Nextflow has been upgraded in 2020 from DSL1 (Domain-Specific Language) version to DSL2. In this course we will use exclusively DSL2.  
 
-## What is Nextflow for?
-It is for making pipelines without caring about parallelization, dependencies, intermediate file names, data structures, handling exceptions, resuming executions etc. It was published in [Nature Biotechnology in 2017](https://pubmed.ncbi.nlm.nih.gov/28398311/).
+### What is Nextflow for?
+
+It is for making pipelines without caring about parallelization, dependencies, intermediate file names, data structures, handling exceptions, resuming executions etc. 
+<br>
+It was published in [Nature Biotechnology in 2017](https://pubmed.ncbi.nlm.nih.gov/28398311/).
 
 
 ```{r, out.width="600px", echo=FALSE, eval = TRUE, fig.link='https://pubmed.ncbi.nlm.nih.gov/28398311/'}
 knitr::include_graphics('docs/images/NF_pub.png')
 ```
 
-There is a growing number of publication mentioning Nextflow in PubMed, since many bioinformaticians are starting to write their pipeline in Nextflow.
+There is a growing number of publications mentioning Nextflow in PubMed, since many bioinformaticians are starting to write their pipeline with Nextflow.
 
 
 ```{r, out.width="600px", echo=FALSE, eval = TRUE, fig.link='https://pubmed.ncbi.nlm.nih.gov/?term=nextflow&timeline=expanded&sort=pubdate&sort_order=asc'}
 knitr::include_graphics('docs/images/NF_mentioning.png')
 ```
 
-Here a curated list of [Nextflow pipelines](https://github.com/nextflow-io/awesome-nextflow)
+Here is a curated list of [Nextflow pipelines](https://github.com/nextflow-io/awesome-nextflow).
 
-And here a group of pipelines written in a collaborative way from project [NF-core](https://nf-co.re/pipelines)
+And here is a group of pipelines written in a collaborative way from the [NF-core](https://nf-co.re/pipelines) project.
 
-Some pipelines written in Nextflow are being used for SARS-Cov-2 analysis like:
+Some pipelines written in Nextflow are used for SARS-Cov-2 analysis, for example:
 
-- the one from the [artic Network](https://artic.network/ncov-2019): [ncov2019-artic-nf](https://github.com/connor-lab/ncov2019-artic-nf)
-- the one used from the [CRG / EGA viral Beacon](https://covid19beacon.crg.eu/info), [Master of Pores](https://github.com/biocorecrg/master_of_pores)
-- the nf-core pipeline [viralrecon](https://nf-co.re/viralrecon)
+- the [artic Network](https://artic.network/ncov-2019) pipeline: [ncov2019-artic-nf](https://github.com/connor-lab/ncov2019-artic-nf).
+- the [CRG / EGA viral Beacon](https://covid19beacon.crg.eu/info) pipeline: [Master of Pores](https://github.com/biocorecrg/master_of_pores).
+- the nf-core pipeline: [viralrecon](https://nf-co.re/viralrecon).
 
-etc. 
 
-## Main advantages
+### Main advantages
 
-- Fast prototyping
+- **Fast prototyping**
 
-You can quickly write a small pipeline that can be expanded incrementally. Each task is independent and can be easily added to other ones.
-You can reuse your scripts and tools without rewriting / adapting them.
-- Reproducibility
+You can quickly write a small pipeline that can be **expanded incrementally**.<br> **Each task is independent** and can be easily added to other ones.<br>You can reuse your scripts and tools without rewriting / adapting them.
 
-Nextflow supports Docker and Singularity containers technology. Their use will make the pipelines reproducible in any unix environment. Nextflow is integrated with GitHub code sharing platform so you can call directly a specific version of pipeline from a repository, download it and use it on the fly.
+- **Reproducibility**
 
-- Portable
+Nextflow supports **Docker and Singularity** containers technology. Their use will make the pipelines reproducible in any Unix environment. <br>Nextflow is integrated with **GitHub code sharing platform**, so you can call directly a specific version of pipeline from a repository, download it and use it on the fly.
 
-Nextflow can be executed on multiple platforms without modifiying the code. It supports several schedulers such as SGE, LSF, SLURM, PBS and HTCondor and  cloud platforms like Kubernetes, Amazon AWS and Google Cloud.
+- **Portability**
+
+Nextflow can be executed on **multiple platforms** without modifiying the code. It supports several schedulers such as **SGE, LSF, SLURM, PBS and HTCondor** and cloud platforms like **Kubernetes, Amazon AWS and Google Cloud**.
 
 ```{r, out.width="600px", echo=FALSE, eval = TRUE }
 knitr::include_graphics('docs/images/executors.png')
@@ -62,37 +68,41 @@ knitr::include_graphics('docs/images/executors.png')
 
 - Scalability
 
-Nextflow is based on the dataflow programming model which simplifies writing complex pipelines. The tool takes care of parallelizing the processes without additional written code. The resulting applications are inherently parallel and can scale-up or scale-out, transparently, without having to adapt to a specific platform architecture.
+Nextflow is based on the **dataflow programming model** which simplifies writing complex pipelines. <br>The tool takes care of **parallelizing the processes** without additional written code. <br>The resulting applications are inherently parallel and can scale-up or scale-out, transparently, without having to adapt to a specific platform architecture.
 
 - Resumable, thanks to continuous checkpoints
 
-All the intermediate results produced during the pipeline execution are automatically tracked. For each process a temporary folder is created and is cached (or not) once resuming an execution.
+All the intermediate results produced during the pipeline execution are automatically tracked. <br>For each process **a temporary folder is created and is cached (or not) once resuming an execution**.
 
 ## Workflow structure
-The workflows can be repesented as graphs where the nodes are the **processes** and the edges are the **channels**.
-The **processes** are block of code that can be executed such as scripts or programs, while the **channels** are asynchronous queue able to connect processess among them via input / output.
+
+The workflows can be represented as graphs where the nodes are the **processes** and the edges are the **channels**.<br>
+The **processes** are blocks of code that can be executed - such as scripts or programs - while the **channels** are asynchronous queues able to **connect processess among them via input / output**.
 
 
 ```{r, out.width="600px", echo=FALSE, eval = TRUE }
 knitr::include_graphics('docs/images/wf_example.png')
 ```
 
-Each process is independent from the other and can be run in parallel depending on the number of elements in a channel. In the previous example the processes A, B and C can be run in parallel and only at their end the process D is triggered.
+Processes are independent from one another and can be run in parallel depending on the number of elements in a channel. <br>
+In the previous example, processes A, B and C can be run in parallel and only when they **all** end can process D be triggered.
 
 ## Installation
-We need at least Java version 8.
+
+Java version 8 (minimum) is needed for Nextflow installation.
 
 ```{bash, eval=FALSE, echo=TRUE}
 java -version
 ```
 
-Then we can install it by typing:
+Then we can install it with:
 
 ```{bash, eval=FALSE, echo=TRUE}
 curl -s https://get.nextflow.io | bash
 ```
 
-This will create an executable called nextflow that can be moved to /usr/local/bin or where we prefer. We can finally test using:
+This will create an executable called `nextflow` that can be moved, for example, to `/usr/local/bin`.<br>
+We can test that the installation was successful with using:
 
 ```{bash, eval=FALSE, echo=TRUE}
 ./nextflow run hello
@@ -112,13 +122,14 @@ Hello world!
 Hola world!
 ```
 
-This command download from the a github repository and it runs the test script hello.
+This command downloads the pipeline from the `nextflow-io` [github repository](https://github.com/nextflow-io) and runs the test script `hello`.
 
 ## Channels and Operators
-- A queue channel is a non-blocking unidirectional [FIFO](https://en.wikipedia.org/wiki/FIFO_(computing_and_electronics)) (First In, First Out) queue which connects two processes or operators. 
-- A value channel a.k.a. singleton channel is bound to a single value and it can be read unlimited times without consuming its content.
 
-An operator is a method that reshape or connect different channels applying some rules.
+- A <u>queue channel</u> is a non-blocking unidirectional [FIFO](https://en.wikipedia.org/wiki/FIFO_(computing_and_electronics)) (First In, First Out) queue which **connects two processes or operators**. 
+- A <u>value channel</u> a.k.a. singleton channel is bound to a single value and it can be read unlimited times without consuming its content.
+
+An <u>operator</u> is a method that reshapes or connects different channels applying some rules.
 
 We can make a very simple Nextflow script by writing this code in a file (test.nf):
 
@@ -146,25 +157,27 @@ str = Channel.from('hello', 'hola', 'bonjour')
 str.view()
 ```
 
-Then to execute it you can just run:
+Save the file, then to execute it with:
 
 ```{bash, eval=FALSE, echo=TRUE}
 
-$nextflow run test.nf
+nextflow run test.nf
+
 N E X T F L O W  ~  version 20.07.1
 Launching `test.nf` [agitated_avogadro] - revision: 61a595c5bf
 hello
 hola
 bonjour
 ```
-As you can see the **Channel** is just a collection of values, but it can be also a collection of file paths.
-Let's create three files:
+As you can see the **Channel** is just a collection of values, but it can be also a collection of **file paths**.
+<br>
+Let's create three empty files with the `touch` command:
 
 ```{bash, eval=FALSE, echo=TRUE}
 touch aa.txt bb.txt cc.txt
 ```
 
-And let's create another script:
+And let's create another script (test2.nf):
 
 ```{java, eval=FALSE, echo=TRUE}
 #!/usr/bin/env nextflow
@@ -178,13 +191,16 @@ nextflow.enable.dsl=2
 
 Channel
     .fromPath( "*.txt" )
-    .set {my_fyles}
+    .set {my_files}
 
-my_fyles.view()
+my_files.view()
 ```
+
+We can now execute `test2.nf`:
 
 ```{bash, eval=FALSE, echo=TRUE}
 nextflow run test2.nf
+
 N E X T F L O W  ~  version 20.07.1
 Launching `test2.nf` [condescending_hugle] - revision: f513c0fac3
 /home/ec2-user/git/CoursesCRG_Containers_Nextflow_May_2021/nextflow/aa.txt
@@ -192,10 +208,11 @@ Launching `test2.nf` [condescending_hugle] - revision: f513c0fac3
 /home/ec2-user/git/CoursesCRG_Containers_Nextflow_May_2021/nextflow/cc.txt
 ```
 
-Once executed we can see that a folder named **work** is generated. In that folder Nextflow will store the intermediate files generated by the processes.
+Once executed, we can see that a folder named **work** is generated.<br>Nextflow stores in this folder the intermediate files generated by the processes.
 
 ## EXERCISE 1
-- Let's create couple of files (like paired end reads) and let's try to read it as they were a tuple.
+
+- Let's create couple of files (like paired-end reads) and let's try to read it as they were a [tuple](https://www.nextflow.io/docs/latest/process.html?highlight=tuple#input-of-type-tuple).
 
 First create a couple of files:
 
@@ -208,7 +225,7 @@ See here [fromFilePairs](https://www.nextflow.io/docs/latest/channel.html#fromfi
 
 <details>
 <summary>
-<h5>*Answer*</h5>
+<h5 style="background-color: #e6fadc; display: inline-block;">*Answer*</h5>
 </summary>
 
 ```{java, eval=FALSE, echo=TRUE}
@@ -223,24 +240,25 @@ nextflow.enable.dsl=2
 
 Channel
     .fromFilePairs( "aaa_{1,2}.txt" )
-    .set {my_fyles}
+    .set {my_files}
 
-my_fyles.view()
+my_files.view()
 ```
 
 </details>
 
 
-- Try to reshape the input channel using different operatoes by generating:
+- Try to reshape the input channel using different operators by generating:
   - A single emission
   - A channel with each possible file combination
   - A tuple with a custom id, i.e. something like ["id", ["aa.txt", "bb.txt", "cc.txt"]]
 
 See here the list of [Operators](https://www.nextflow.io/docs/latest/operator.html#) available. 
 
+
 <details>
 <summary>
-<h5>*Answer*</h5>
+<h5 style="background-color: #e6fadc; display: inline-block;">*Answer*</h5>
 </summary>
 
 ```{java, eval=FALSE, echo=TRUE}
@@ -248,20 +266,21 @@ See here the list of [Operators](https://www.nextflow.io/docs/latest/operator.ht
 nextflow.enable.dsl=2
 
 Channel
-    .fromPath( "*.txt").set {my_fyles}
+    .fromPath( "*.txt").set {my_files}
 
-my_fyles.collect().view()
-my_fyles.combine(my_fyles).view()
-my_fyles.collect().map{
+my_files.collect().view()
+my_files.combine(my_files).view()
+my_files.collect().map{
 	["id", it]
 }.view()
-my_fyles.view()
+my_files.view()
 ```
+
 </details>
 
 ## Processes
 
-Let's add now a process to our previous script test.nf:
+Let's add now a process to our previous script `test.nf`:
 
 ```{java, eval=FALSE, echo=TRUE}
 #!/usr/bin/env nextflow
@@ -271,9 +290,9 @@ nextflow.enable.dsl=2
 str = Channel.from('hello', 'hola', 'bonjour')
 
 /*
- * Creates a process which receive an input channel containing values
+ * Creates a process which receives an input channel containing values
  * Each value emitted by the channel triggers the execution
- * of the process. The process stdout is caputured and send over
+ * of the process. The process stdout is captured and sent over
  * the another channel.
  */
 
@@ -295,16 +314,16 @@ process printHello {
 ```
 
 The process can be seen as a function and is composed by:
-- An **input** part where the input channels are defined
-- An **output** part where we indicates what to store as a result that will be sent to other processes or published as final result
-- A **script** part where we have the block of code to be executed with the data from the input channel and will produce the output for the ouput channel. You can run any kind of code / command line there, it is language agnostic. You can have some trouble with escaping some characters, in that case is better to wrap your code in a file and call it as a program.
+	- An **input** part where the input channels are defined.
+	- An **output** part where we specify what to store as a result, that will be sent to other processes or published as final result.
+	- A **script** part where we have the block of code to be executed using data from the input channel, and that will produce the output for the ouput channel. <br>Any kind of code / command line can be run here, as it is **language agnostic**. <br>NOTE: *You can have some trouble with escaping some characters: in that case, it is better to save the code into a file and call that file as a program.*
 
-Before the input you can indicate a **tag** that will be reported in the log. This is quite useful for logging / debugging.
+Before the input, you can indicate a **tag** that will be reported in the log. This is quite useful for <u>logging / debugging</u>.
 
 ## Workflow
 
-The code as it is will not produce anything, because you need another part that actually call the process and connect it to the input channel.
-This part is called a **workflow**. So let's change our code:
+The code as it is will not produce anything, because you need another part that will actually **call the process** and connect it to the input channel.<br>
+This part is called a **workflow**. So let's modify our code:
 
 ```{java, eval=FALSE, echo=TRUE}
 #!/usr/bin/env nextflow
@@ -330,9 +349,9 @@ process printHello {
 }
 
 /*
- * A workflow consist of a number of invocations of processes
+ * A workflow consists of a number of invocations of processes
  * where they are fed with the expected input channels
- * as they were cutom functions. You can only invoke a process once per workflow.
+ * as if they were custom functions. You can only invoke a process once per workflow.
  */
 
 workflow {
@@ -340,17 +359,20 @@ workflow {
  result.view()
 }
 ```
-We can run the script this time sending the execution in background and sending the log to a file.
+
+We can run the script this time sending the execution in the background (with the `-bg` option) and saving the log in the file `log.txt`.
 
 ```{bash, eval=FALSE, echo=TRUE}
 nextflow run test.nf -bg > log.txt
 ```
 
 ## Nextflow log
+
 Let's inspect now the log file:
 
 ```{bash, eval=FALSE, echo=TRUE}
 cat log.txt
+
 N E X T F L O W  ~  version 20.07.1
 Launching `test.nf` [high_fermat] - revision: b129d66e57
 [6a/2dfcaf] Submitted process > printHello (hola)
@@ -362,19 +384,25 @@ hello in Italian is ciao
 
 bonjour in Italian is ciao
 ```
-The **tag** allows us to see that the process **printHello** was launched three times on hola, hello and bonjour values contained in the input channel. In each row there is a code before:
+
+The **tag** allows us to see that the process **printHello** was launched three times on the hola, hello and bonjour values contained in the input channel. <br>
+At the start of each row, there is an <u>alphanumeric code</u>:
 
 **[6a/2dfcaf]** Submitted process > printHello (hola)
 
-This code indicates also the path in which is process is "isolated" and where you have the temporary files. Let's have a look:
+This code indicates also the path in which is process is "isolated" and where the corresponding temporary files are kep in the **work** directory. <br>
+Let's have a look inside that folder:
 
 ```{bash, eval=FALSE, echo=TRUE}
+# Show the folder's full name
+
 echo work/6a/2dfcaf*
-work/6a/2dfcafc01350f475c60b2696047a87
+  work/6a/2dfcafc01350f475c60b2696047a87
+
+# List was is inside the folder
 
 ls -alht work/6a/2dfcaf*
 
-ls -alht work/6a/2dfcaf*
 total 40
 -rw-r--r--  1 lcozzuto  staff     1B Oct  7 13:39 .exitcode
 drwxr-xr-x  9 lcozzuto  staff   288B Oct  7 13:39 .
@@ -386,19 +414,21 @@ drwxr-xr-x  9 lcozzuto  staff   288B Oct  7 13:39 .
 -rw-r--r--  1 lcozzuto  staff   2.5K Oct  7 13:39 .command.run
 drwxr-xr-x  3 lcozzuto  staff    96B Oct  7 13:39 ..
 ```
-You see a lot of "hidden" files:
-- **.exitcode**, contains 0 if everything is ok, another value if there was a problem.
-- **.command.log**, contains the log of the command execution. Often is identical to .command.out
-- **.command.out**, contains the standard output of the command execution
-- **.command.err**, contains the standard error of the command execution
-- **.command.begin**, contains what has to be executed before .command.sh
-- **.command.sh**, contains the block of code indicated in the process
-- **.command.run**, contains the code made by nextflow for the execution of .command.sh and contains environmental variables, eventual invocations of linux containers etc.
 
-For instance the content of .command.sh is:
+You see a lot of "hidden" files:
+	- **.exitcode**, contains 0 if everything is ok, another value if there was a problem.
+	- **.command.log**, contains the log of the command execution. It is often identical to `.command.out`
+	- **.command.out**, contains the standard output of the command execution
+	- **.command.err**, contains the standard error of the command execution
+	- **.command.begin**, contains what has to be executed before `.command.sh`
+	- **.command.sh**, contains the block of code indicated in the process
+	- **.command.run**, contains the code made by nextflow for the execution of `.command.sh`, and contains environmental variables, eventual invocations of linux containers etc.
+
+For instance the content of `.command.sh` is:
 
 ```{bash, eval=FALSE, echo=TRUE}
 cat work/6a/2dfcaf*/.command.sh
+
 #!/bin/bash -ue
 echo hola in Italian is ciao
 ```
@@ -407,6 +437,7 @@ And the content of .command.out is
 
 ```{bash, eval=FALSE, echo=TRUE}
 cat work/6a/2dfcaf*/.command.out
+
 hola in Italian is ciao
 ```
 
@@ -436,7 +467,7 @@ process printHello {
 }
 
 /*
- * A workflow can be named as a function and receive an input using the take keyword
+ * A workflow can be named as a function and receives an input using the take keyword
  */
 
 workflow first_pipeline {
@@ -447,7 +478,7 @@ workflow first_pipeline {
 
 
 /*
- * You can re-use the previous processes an combine as you prefer
+ * You can re-use the previous processes and combine as you prefer
  */
 
 workflow second_pipeline {
@@ -468,7 +499,8 @@ workflow {
 
 ```
 
-You can see that with the previous code you can execute two workflows containing the same process. We add the **collect** operator to the second workflow that collects the output from different executions and return the resulting list as a sole emission.
+You can see that with the previous code you can execute two workflows containing the same process. <br>
+We can add the **collect** operator to the second workflow that collects the output from different executions and returns the resulting list **as a sole emission**.
 
 Let's run the code:
 
@@ -477,7 +509,6 @@ nextflow run test.nf -bg > log2
 
 cat log2
 
-cat log2
 N E X T F L O W  ~  version 20.07.1
 Launching `test.nf` [irreverent_davinci] - revision: 25a5511d1d
 [de/105b97] Submitted process > first_pipeline:printHello (hello)
@@ -497,13 +528,16 @@ hola in Italian is ciao
 ```
 
 ## EXERCISE 2
- - Change the pipeline for producing files instead of standard output. You can write another process to handle the fact that you have a list in the workflow2. You need also to specify within the workflow what to output using **emit** keyword.
+
+ - Change the pipeline for producing files instead of standard output:
+   * You can write another process to handle the fact that you have a list in the workflow2. 
+   * You need also to specify within the workflow what to output using **emit** keyword.
 
 See here [**emit**](https://www.nextflow.io/docs/latest/dsl2.html?#workflow-outputs)
 
 <details>
 <summary>
-<h5>*Answer*</h5>
+<h5 style="background-color: #e6fadc; display: inline-block;">*Answer*</h5>
 </summary>
 
 
@@ -584,11 +618,11 @@ workflow {
 </details>
 
 
-- Change the pipeline to use only one process to handle both the cases (one element or a list), you can chose the elements from a list using the positional keys (i.e. list[0], list[1], etc...)
+- Change the pipeline to use only one process to handle both the cases (one element or a list), you can choose the elements from a list using the positional keys (i.e. list[0], list[1], etc...)
 
 <details>
 <summary>
-<h5>*Answer*</h5>
+<h5 style="background-color: #e6fadc; display: inline-block;">*Answer*</h5>
 </summary>
 
 
@@ -664,7 +698,7 @@ We can feed the channel that is generated by a process to another process in the
 
 nextflow.enable.dsl=2
 
-// this can be overridden by using --inputfile OTHERFILENAME
+// the default "$baseDir/testdata/test.fa" can be overridden by using --inputfile OTHERFILENAME
 params.inputfile = "$baseDir/testdata/test.fa"
 
 // the "file method" returns a file system object given a file path string  
@@ -741,20 +775,21 @@ The input path is fed as a parameter using the script parameters **${seq}**
 params.inputfile
 ```
 
-In this way this value can be overridden when calling the script in this way:
+This value can be overridden when calling the script:
 
 ```{bash, eval=FALSE, echo=TRUE}
 nextflow run test.nf --inputfile another_input.fa
 ```
 
-The workflow part connects the two processes so that the output of the first process is fed to the second one.
+The workflow part connects the two processes so that <u>the output of the first process is fed as an input to the second one</u>.
 
-During the execution Nextflow creates a number of temporary folders and this time will make also a soft link to the original input file. Then it will store output files locally.
+During the execution Nextflow creates a number of temporary folders, and will this time also create a soft link to the original input file. It will then store output files locally.
 
-The output file is then linked in other folders for being used as input from other processes. In this way there are no clashes and each process is nicely isolated from the others.
+The output file is then linked in other folders for being used as input from other processes. <br>This avoids clashes and each process is nicely isolated from the others.
 
 ```{bash, eval=FALSE, echo=TRUE}
 nextflow run test.nf -bg
+
 N E X T F L O W  ~  version 20.07.1
 Launching `test.nf` [sad_newton] - revision: 82e66714e4
 [09/53e071] Submitted process > splitSequences
@@ -765,10 +800,11 @@ Launching `test.nf` [sad_newton] - revision: 82e66714e4
 [fe/0a8640] Submitted process > reverseSequence ([seq_1, seq_2, seq_3])
 ```
 
-if we inspect the content of work/09/53e071* generated by the process **splitSequences**
+We can inspect the content of `work/09/53e071*` generated by the process **splitSequences**:
 
 ```{bash, eval=FALSE, echo=TRUE}
 ls -l work/09/53e071*
+
 total 24
 -rw-r--r--  1 lcozzuto  staff  29 Oct  8 19:16 seq_1
 -rw-r--r--  1 lcozzuto  staff  33 Oct  8 19:16 seq_2
@@ -776,10 +812,13 @@ total 24
 lrwxr-xr-x  1 lcozzuto  staff  69 Oct  8 19:16 test.fa -> /home/ec2-user/git/CoursesCRG_Containers_Nextflow_May_2021/nextflow/nextflow/testdata/test.fa
 ```
 
-we have the file test.fa that is a soft link to the orinal input. And inspecting work/fe/0a8640* that is generated by the process **reverseSequence** reveals that the files generated by **splitSequences** are now linked as input.
+File `test.fa` is a *soft link* to the original input. 
+<br>
+If now we inspect `work/fe/0a8640*` that is generated by the process **reverseSequence**, we see that the files generated by **splitSequences** are now linked as input.
 
 ```{bash, eval=FALSE, echo=TRUE}
 ls -l work/fe/0a8640*
+
 total 8
 -rw-r--r--  1 lcozzuto  staff  89 Oct  8 19:16 all.rev
 lrwxr-xr-x  1 lcozzuto  staff  97 Oct  8 19:16 seq_1 -> /home/ec2-user/git/CoursesCRG_Containers_Nextflow_May_2021/nextflow/nextflow/work/09/53e071d286ed66f4020869c8977b59/seq_1
@@ -789,7 +828,7 @@ lrwxr-xr-x  1 lcozzuto  staff  97 Oct  8 19:16 seq_3 -> /home/ec2-user/git/Cours
 
 **IMPORTANT: Nextflow will randomly generate temporary folders so they will be named differently in your execution!!!**
 
-At this point we can make two different workflows so that we show how the new DSL allows reusing of the code.
+At this point we can make two different workflows to demonstrate how the new DSL allows reusing of the code.
 
 ```{java, eval=FALSE, echo=TRUE}
 #!/usr/bin/env nextflow
@@ -867,12 +906,14 @@ workflow {
 }
 
 ```
+
 The first workflow will just run like the previous script, while the second will "flatten" the output of the first process and will launch the second process on each single sequence.
 
-The **reverseSequence** processes of the second workflow will run in parallel if you have enough processors or you are in a cluster environment with a scheduler supported by Nextflow.
+The **reverseSequence** processes of the second workflow will run in parallel if you have enough processors, or if you are running the script in a cluster environment with a scheduler supported by Nextflow.
 
 ```{bash, eval=FALSE, echo=TRUE}
 nextflow run test1.nf -bg
+
 C02WX1XFHV2Q:nextflow lcozzuto$ N E X T F L O W  ~  version 20.07.1
 Launching `test.nf` [insane_plateau] - revision: d33befe154
 [bd/f4e9a6] Submitted process > flow1:splitSequences
@@ -885,9 +926,10 @@ Launching `test.nf` [insane_plateau] - revision: d33befe154
 
 ## Directives
 
-The **directives** are declarations blocks that can provide optional settings to a process. For instance they can affect the way a process stage in and out the input and ouptut files ([**stageInMode**](https://www.nextflow.io/docs/latest/process.html#stageinmode) and [**stageOutMode**](https://www.nextflow.io/docs/latest/process.html#stageoutmode) or they can indicate which files has to be considered a final result and to be published in which folder ([**publishDir**](https://www.nextflow.io/docs/latest/process.html#publishdir)).
+The **directives** are declaration blocks that can provide optional settings to a process. <br>
+For instance, they can affect the way a process stages in and out the input and output files ([**stageInMode**](https://www.nextflow.io/docs/latest/process.html#stageinmode) and [**stageOutMode**](https://www.nextflow.io/docs/latest/process.html#stageoutmode)), or they can indicate which file has to be considered a final result and in which folder it should be published ([**publishDir**](https://www.nextflow.io/docs/latest/process.html#publishdir)).
 
-We can add the directive publishDir to our previous example:
+We can add the directive `publishDir` to our previous example:
 
 
 ```{java, eval=FALSE, echo=TRUE}
@@ -912,17 +954,20 @@ process reverseSequence {
 }
 ```
 
-We can also use **storeDir** in case we want to have a permanent cache. Basically the process is executed only if the output files do not exist in the folder specified by **storeDir**. 
-When the output files exist the process execution is skipped and these files are used as the actual process result.
-As an example this can be useful in case we don't want to generate indexes each time and we prefer to reuse them.
-
-We can also indicate what to do in case a process fail. The default is to stop the pipeline and to raise an error. But we can also skip the process using this directive:
+We can also use **storeDir** in case we want to have a permanent cache. <br>
+The process is executed only if the output files do not exist in the folder specified by **storeDir**.<br> 
+When the output files exist, the process execution is skipped and these files are used as the actual process result.<br>
+For example, this can be useful if we don't want to generate indexes each time and we prefer to reuse them.
+<br>
+We can also indicate what to do in case a process fails.<br>
+The default is to stop the pipeline and to raise an error. But we can also skip the process using this directive:
 
 ```{java, eval=FALSE, echo=TRUE}
 errorStrategy 'ignore'
 ```
 
-or retry a number of times changing something like the memory available or the maximum execution time. This time we need a number of directives:
+or retry a number of times changing something like the memory available or the maximum execution time. <br>
+This time we need a number of directives:
 
 
 ```{java, eval=FALSE, echo=TRUE}
@@ -935,10 +980,12 @@ or retry a number of times changing something like the memory available or the m
 
 ## Resuming your pipeline
 
-You can resume the execution after the code modification using the parameter **-resume**. Nextflow is smart enough to cache the execution since input and output were not changed.
+You can resume the execution after the code modification using the parameter **-resume**. <br>
+Nextflow is smart enough to cache the execution since input and output were not changed.
 
 ```{bash, eval=FALSE, echo=TRUE}
 nextflow run test.nf -bg -resume
+
 N E X T F L O W  ~  version 20.07.1
 Launching `test.nf` [determined_celsius] - revision: eaf5b4d673
 [bd/f4e9a6] Cached process > flow1:splitSequences
@@ -950,9 +997,10 @@ Launching `test.nf` [determined_celsius] - revision: eaf5b4d673
 /home/ec2-user/git/CoursesCRG_Containers_Nextflow_May_2021/nextflow/nextflow/work/33/a6fc72786d042cacf733034d501691/all.rev
 ```
 
-**IMPORTANT: Nextflow parameters are with one hyphen (-resume) while pipeline parameters are with two (--inputfile)**
+**IMPORTANT: Nextflow parameters are with one hyphen** (`-resume`) **while pipeline parameters are with two** (`--inputfile`)
 
-Sometimes you might want to resume a previous run of your pipeline. For doing so you need to extract the job id of that run. You can do this by using the command **nextflow log**
+Sometimes you might want to resume a previous run of your pipeline. <br>
+For doing so you need to extract the job id of that run. You can do this by using the command `nextflow log`
 
 ```{bash, eval=FALSE, echo=TRUE}
 nextflow log
@@ -966,7 +1014,7 @@ TIMESTAMP          	DURATION	RUN NAME           	STATUS	REVISION ID	SESSION ID  
 2020-10-08 19:56:30	2.8s    	determined_celsius 	OK    	eaf5b4d673 	b359f32c-254f-4271-95bb-6a91b281dc6d	nextflow run test.nf -bg -resume
 ```
 
-You can then resume the state of your execution using the **SESSION ID** in this way:
+You can then resume the state of your execution using the **SESSION ID**:
 
 ```{bash, eval=FALSE, echo=TRUE}
 nextflow run -resume 0a19b60d-d5fe-4a26-9e01-7a63d0a1d300 test.nf
@@ -980,17 +1028,19 @@ cache = 'deep' // Cache keys are created indexing input files content.
 cache = 'lenient' // (Best in HPC and shared file systems) Cache keys are created indexing input files path and size attributes
 ```
 
-**IMPORTANT On some shared file systems you might have inconsistent files timestamps. So cache lenient prevent you from unwanted restarting of cached processes.**
+**IMPORTANT On some shared file systems you might have inconsistent file timestamps. So cache lenient prevents you from unwanted restarting of cached processes.**
 
 ## EXERCISE 3
+
 Try to make the previous pipeline resilient to the failing of a process and store the results in order to skip the process execution when launched again.
 
-First make the process reverseSequence failing by creating a mistake in the command line, then add the directive to the process.
+First make the process `reverseSequence` failing by creating a mistake in the command line, then add the directive to the process.
 
 <details>
 <summary>
-<h5>*Answer*</h5>
+<h5 style="background-color: #e6fadc; display: inline-block;">*Answer*</h5>
 </summary>
+
 	
 ```{java, eval=FALSE, echo=TRUE}
 /*
@@ -1018,16 +1068,14 @@ process reverseSequence {
 </details>
 
 Write the first workflow using pipes. Nextflow DLS2 allows you to use pipes for connecting channels via input / output.
-See documentation here:
-
-[https://www.nextflow.io/docs/latest/dsl2.html#pipes](https://www.nextflow.io/docs/latest/dsl2.html#pipes)
+<br>See the [documentation on pipes](https://www.nextflow.io/docs/latest/dsl2.html#pipes).
 
 
 <details>
 <summary>
-<h5>*Answer*</h5>
+<h5 style="background-color: #e6fadc; display: inline-block;">*Answer*</h5>
 </summary>
-	
+
 ```{java, eval=FALSE, echo=TRUE}
 workflow flow1 {
     take: sequences
@@ -1037,8 +1085,5 @@ workflow flow1 {
 ```
 	
 </details>
-
-
-
 
 
