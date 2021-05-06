@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>5.12 Resuming your pipeline | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines</title>
-  <meta name="description" content="5.12 Resuming your pipeline | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
+  <title>5.11 Resuming your pipeline | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines</title>
+  <meta name="description" content="5.11 Resuming your pipeline | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="5.12 Resuming your pipeline | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
+  <meta property="og:title" content="5.11 Resuming your pipeline | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="5.12 Resuming your pipeline | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
+  <meta name="twitter:title" content="5.11 Resuming your pipeline | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
   
   
   
@@ -246,13 +246,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.4" data-path="channels-and-operators.html"><a href="channels-and-operators.html"><i class="fa fa-check"></i><b>5.4</b> Channels and Operators</a></li>
 <li class="chapter" data-level="5.5" data-path="exercise-1.html"><a href="exercise-1.html"><i class="fa fa-check"></i><b>5.5</b> EXERCISE 1</a></li>
 <li class="chapter" data-level="5.6" data-path="processes.html"><a href="processes.html"><i class="fa fa-check"></i><b>5.6</b> Processes</a></li>
-<li class="chapter" data-level="5.7" data-path="workflow.html"><a href="workflow.html"><i class="fa fa-check"></i><b>5.7</b> Workflow</a></li>
-<li class="chapter" data-level="5.8" data-path="nextflow-log.html"><a href="nextflow-log.html"><i class="fa fa-check"></i><b>5.8</b> Nextflow log</a></li>
-<li class="chapter" data-level="5.9" data-path="exercise-2.html"><a href="exercise-2.html"><i class="fa fa-check"></i><b>5.9</b> EXERCISE 2</a></li>
-<li class="chapter" data-level="5.10" data-path="more-complex-scripts.html"><a href="more-complex-scripts.html"><i class="fa fa-check"></i><b>5.10</b> More complex scripts</a></li>
-<li class="chapter" data-level="5.11" data-path="directives.html"><a href="directives.html"><i class="fa fa-check"></i><b>5.11</b> Directives</a></li>
-<li class="chapter" data-level="5.12" data-path="resuming-your-pipeline.html"><a href="resuming-your-pipeline.html"><i class="fa fa-check"></i><b>5.12</b> Resuming your pipeline</a></li>
-<li class="chapter" data-level="5.13" data-path="exercise-3.html"><a href="exercise-3.html"><i class="fa fa-check"></i><b>5.13</b> EXERCISE 3</a></li>
+<li class="chapter" data-level="5.7" data-path="workflow.html"><a href="workflow.html"><i class="fa fa-check"></i><b>5.7</b> Workflow</a><ul>
+<li class="chapter" data-level="5.7.1" data-path="workflow.html"><a href="workflow.html#nextflow-log"><i class="fa fa-check"></i><b>5.7.1</b> Nextflow log</a></li>
+</ul></li>
+<li class="chapter" data-level="5.8" data-path="exercise-2.html"><a href="exercise-2.html"><i class="fa fa-check"></i><b>5.8</b> EXERCISE 2</a></li>
+<li class="chapter" data-level="5.9" data-path="more-complex-scripts.html"><a href="more-complex-scripts.html"><i class="fa fa-check"></i><b>5.9</b> More complex scripts</a></li>
+<li class="chapter" data-level="5.10" data-path="directives.html"><a href="directives.html"><i class="fa fa-check"></i><b>5.10</b> Directives</a></li>
+<li class="chapter" data-level="5.11" data-path="resuming-your-pipeline.html"><a href="resuming-your-pipeline.html"><i class="fa fa-check"></i><b>5.11</b> Resuming your pipeline</a></li>
+<li class="chapter" data-level="5.12" data-path="exercise-3.html"><a href="exercise-3.html"><i class="fa fa-check"></i><b>5.12</b> EXERCISE 3</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="nextflow-day-2.html"><a href="nextflow-day-2.html"><i class="fa fa-check"></i><b>6</b> Nextflow day 2</a><ul>
 <li class="chapter" data-level="6.1" data-path="decoupling-resources-parameters-and-nextflow-script.html"><a href="decoupling-resources-parameters-and-nextflow-script.html"><i class="fa fa-check"></i><b>6.1</b> Decoupling resources, parameters and nextflow script</a><ul>
@@ -291,7 +292,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="resuming-your-pipeline" class="section level2">
-<h2><span class="header-section-number">5.12</span> Resuming your pipeline</h2>
+<h2><span class="header-section-number">5.11</span> Resuming your pipeline</h2>
 <p>You can resume the execution after the code modification using the parameter <strong>-resume</strong>. <br>
 Nextflow is smart enough to cache the execution since input and output were not changed.</p>
 <div class="sourceCode" id="cb166"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb166-1"><a href="resuming-your-pipeline.html#cb166-1"></a><span class="ex">nextflow</span> run test.nf -bg -resume</span>
