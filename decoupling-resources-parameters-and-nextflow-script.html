@@ -452,6 +452,17 @@ We can indicate which process and which output can be considered the final outpu
 <span id="cb182-22"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb182-22"></a>    publishDir multiqcOutputFolder, mode: &#39;copy&#39;    <span class="co">// this time do not link but copy the output file</span></span></code></pre></div>
 <p>You can see that the default mode to publish the results in Nextflow is soft linking. You can change this behaviour by specifying the mode as indicated in the <strong>multiQC</strong> process.</p>
 <p><strong>IMPORTANT: You can also “move” the results but this is not suggested for files that will be needed for other processes. This will likely disrupt your pipeline.</strong></p>
+<p>We can copy the output files to our S3 bucket to be accessed via web. Your bucket is mounted in <strong>/mnt</strong></p>
+<div class="sourceCode" id="cb183"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb183-1"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb183-1"></a><span class="fu">ls</span> /mnt</span>
+<span id="cb183-2"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb183-2"></a></span>
+<span id="cb183-3"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb183-3"></a><span class="ex">/mnt/class-bucket-1</span></span></code></pre></div>
+<p>Your number can be different (i.e. class-bucket-2, class-bucket-3, etc) since we have one bucket per student. Let’s copy the multiqc_output.html file there and let’s change the privileges.</p>
+<div class="sourceCode" id="cb184"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb184-1"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb184-1"></a><span class="fu">cp</span> ouptut_multiQC/multiqc_output.html /mnt/class-bucket-1</span>
+<span id="cb184-2"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb184-2"></a></span>
+<span id="cb184-3"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb184-3"></a><span class="fu">sudo</span> chmod 775 /mnt/class-bucket-1/multiqc_output.html </span></code></pre></div>
+<p>Now you can see via browser at at:</p>
+<div class="sourceCode" id="cb185"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb185-1"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb185-1"></a><span class="ex">http</span>://class-bucket-1.s3.eu-central-1.amazonaws.com/multiqc_report.html</span></code></pre></div>
+<p>Of course again we need to change <strong>class-bucket-1</strong> with your own number.</p>
 </div>
 </div>
             </section>

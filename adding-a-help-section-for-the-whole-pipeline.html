@@ -291,32 +291,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="adding-a-help-section-for-the-whole-pipeline" class="section level2">
 <h2><span class="header-section-number">6.2</span> Adding a help section for the whole pipeline</h2>
 <p>In this example we also describe another good practice: the use of the <strong>–help</strong> parameter. At the beginning of the pipeline we can write:</p>
-<div class="sourceCode" id="cb183"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb183-1"><a href="adding-a-help-section-for-the-whole-pipeline.html#cb183-1"></a></span>
-<span id="cb183-2"><a href="adding-a-help-section-for-the-whole-pipeline.html#cb183-2"></a>params.<span class="fu">help</span>             = <span class="kw">false</span>    <span class="co">// this prevents a warning of undefined parameter</span></span>
-<span id="cb183-3"><a href="adding-a-help-section-for-the-whole-pipeline.html#cb183-3"></a></span>
-<span id="cb183-4"><a href="adding-a-help-section-for-the-whole-pipeline.html#cb183-4"></a><span class="co">// this prints the input parameters</span></span>
-<span id="cb183-5"><a href="adding-a-help-section-for-the-whole-pipeline.html#cb183-5"></a>log.<span class="fu">info</span> <span class="st">&quot;&quot;&quot;</span></span>
-<span id="cb183-6"><a href="adding-a-help-section-for-the-whole-pipeline.html#cb183-6"></a>BIOCORE<span class="at">@CRG</span> - N F TESTPIPE  ~  version ${version}</span>
-<span id="cb183-7"><a href="adding-a-help-section-for-the-whole-pipeline.html#cb183-7"></a>=============================================</span>
-<span id="cb183-8"><a href="adding-a-help-section-for-the-whole-pipeline.html#cb183-8"></a>reads                           : ${params.<span class="fu">reads</span>}</span>
-<span id="cb183-9"><a href="adding-a-help-section-for-the-whole-pipeline.html#cb183-9"></a><span class="st">&quot;&quot;&quot;</span></span>
-<span id="cb183-10"><a href="adding-a-help-section-for-the-whole-pipeline.html#cb183-10"></a></span>
-<span id="cb183-11"><a href="adding-a-help-section-for-the-whole-pipeline.html#cb183-11"></a><span class="co">// this prints the help in case you use --help parameter in the command line and it stops the pipeline</span></span>
-<span id="cb183-12"><a href="adding-a-help-section-for-the-whole-pipeline.html#cb183-12"></a><span class="kw">if</span> (params.<span class="fu">help</span>) {</span>
-<span id="cb183-13"><a href="adding-a-help-section-for-the-whole-pipeline.html#cb183-13"></a>    log.<span class="fu">info</span> &#39;This is the Biocore\&#39;s NF test pipeline&#39;</span>
-<span id="cb183-14"><a href="adding-a-help-section-for-the-whole-pipeline.html#cb183-14"></a>    log.<span class="fu">info</span> &#39;Enjoy!&#39;</span>
-<span id="cb183-15"><a href="adding-a-help-section-for-the-whole-pipeline.html#cb183-15"></a>    log.<span class="fu">info</span> <span class="ch">&#39;\n&#39;</span></span>
-<span id="cb183-16"><a href="adding-a-help-section-for-the-whole-pipeline.html#cb183-16"></a>    exit <span class="dv">1</span></span>
-<span id="cb183-17"><a href="adding-a-help-section-for-the-whole-pipeline.html#cb183-17"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb186"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb186-1"><a href="adding-a-help-section-for-the-whole-pipeline.html#cb186-1"></a></span>
+<span id="cb186-2"><a href="adding-a-help-section-for-the-whole-pipeline.html#cb186-2"></a>params.<span class="fu">help</span>             = <span class="kw">false</span>    <span class="co">// this prevents a warning of undefined parameter</span></span>
+<span id="cb186-3"><a href="adding-a-help-section-for-the-whole-pipeline.html#cb186-3"></a></span>
+<span id="cb186-4"><a href="adding-a-help-section-for-the-whole-pipeline.html#cb186-4"></a><span class="co">// this prints the input parameters</span></span>
+<span id="cb186-5"><a href="adding-a-help-section-for-the-whole-pipeline.html#cb186-5"></a>log.<span class="fu">info</span> <span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb186-6"><a href="adding-a-help-section-for-the-whole-pipeline.html#cb186-6"></a>BIOCORE<span class="at">@CRG</span> - N F TESTPIPE  ~  version ${version}</span>
+<span id="cb186-7"><a href="adding-a-help-section-for-the-whole-pipeline.html#cb186-7"></a>=============================================</span>
+<span id="cb186-8"><a href="adding-a-help-section-for-the-whole-pipeline.html#cb186-8"></a>reads                           : ${params.<span class="fu">reads</span>}</span>
+<span id="cb186-9"><a href="adding-a-help-section-for-the-whole-pipeline.html#cb186-9"></a><span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb186-10"><a href="adding-a-help-section-for-the-whole-pipeline.html#cb186-10"></a></span>
+<span id="cb186-11"><a href="adding-a-help-section-for-the-whole-pipeline.html#cb186-11"></a><span class="co">// this prints the help in case you use --help parameter in the command line and it stops the pipeline</span></span>
+<span id="cb186-12"><a href="adding-a-help-section-for-the-whole-pipeline.html#cb186-12"></a><span class="kw">if</span> (params.<span class="fu">help</span>) {</span>
+<span id="cb186-13"><a href="adding-a-help-section-for-the-whole-pipeline.html#cb186-13"></a>    log.<span class="fu">info</span> &#39;This is the Biocore\&#39;s NF test pipeline&#39;</span>
+<span id="cb186-14"><a href="adding-a-help-section-for-the-whole-pipeline.html#cb186-14"></a>    log.<span class="fu">info</span> &#39;Enjoy!&#39;</span>
+<span id="cb186-15"><a href="adding-a-help-section-for-the-whole-pipeline.html#cb186-15"></a>    log.<span class="fu">info</span> <span class="ch">&#39;\n&#39;</span></span>
+<span id="cb186-16"><a href="adding-a-help-section-for-the-whole-pipeline.html#cb186-16"></a>    exit <span class="dv">1</span></span>
+<span id="cb186-17"><a href="adding-a-help-section-for-the-whole-pipeline.html#cb186-17"></a>}</span></code></pre></div>
 <p>so launching the pipeline with <strong>–help</strong> will show you just the parameters and the help.</p>
-<div class="sourceCode" id="cb184"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb184-1"><a href="adding-a-help-section-for-the-whole-pipeline.html#cb184-1"></a>nextflow run test2.<span class="fu">nf</span> --help</span>
-<span id="cb184-2"><a href="adding-a-help-section-for-the-whole-pipeline.html#cb184-2"></a>N E X T F L O W  ~  version <span class="fl">20.07.</span><span class="dv">1</span></span>
-<span id="cb184-3"><a href="adding-a-help-section-for-the-whole-pipeline.html#cb184-3"></a>Launching `test2.<span class="fu">nf</span>` [mad_elion] - revision: e3a80b15a2</span>
-<span id="cb184-4"><a href="adding-a-help-section-for-the-whole-pipeline.html#cb184-4"></a>BIOCORE<span class="at">@CRG</span> - N F TESTPIPE  ~  version <span class="fl">1.</span><span class="dv">0</span></span>
-<span id="cb184-5"><a href="adding-a-help-section-for-the-whole-pipeline.html#cb184-5"></a>=============================================</span>
-<span id="cb184-6"><a href="adding-a-help-section-for-the-whole-pipeline.html#cb184-6"></a>reads                           : /home/ec2-user/git/CoursesCRG_Containers_Nextflow_May_<span class="dv">2021</span>/nextflow/nextflow/test2/../testdata<span class="co">/*.fastq.gz</span></span>
-<span id="cb184-7"><a href="adding-a-help-section-for-the-whole-pipeline.html#cb184-7"></a><span class="co">This is the Biocore&#39;s NF test pipeline</span></span>
-<span id="cb184-8"><a href="adding-a-help-section-for-the-whole-pipeline.html#cb184-8"></a><span class="co">Enjoy!</span></span></code></pre></div>
+<div class="sourceCode" id="cb187"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb187-1"><a href="adding-a-help-section-for-the-whole-pipeline.html#cb187-1"></a>nextflow run test2.<span class="fu">nf</span> --help</span>
+<span id="cb187-2"><a href="adding-a-help-section-for-the-whole-pipeline.html#cb187-2"></a>N E X T F L O W  ~  version <span class="fl">20.07.</span><span class="dv">1</span></span>
+<span id="cb187-3"><a href="adding-a-help-section-for-the-whole-pipeline.html#cb187-3"></a>Launching `test2.<span class="fu">nf</span>` [mad_elion] - revision: e3a80b15a2</span>
+<span id="cb187-4"><a href="adding-a-help-section-for-the-whole-pipeline.html#cb187-4"></a>BIOCORE<span class="at">@CRG</span> - N F TESTPIPE  ~  version <span class="fl">1.</span><span class="dv">0</span></span>
+<span id="cb187-5"><a href="adding-a-help-section-for-the-whole-pipeline.html#cb187-5"></a>=============================================</span>
+<span id="cb187-6"><a href="adding-a-help-section-for-the-whole-pipeline.html#cb187-6"></a>reads                           : /home/ec2-user/git/CoursesCRG_Containers_Nextflow_May_<span class="dv">2021</span>/nextflow/nextflow/test2/../testdata<span class="co">/*.fastq.gz</span></span>
+<span id="cb187-7"><a href="adding-a-help-section-for-the-whole-pipeline.html#cb187-7"></a><span class="co">This is the Biocore&#39;s NF test pipeline</span></span>
+<span id="cb187-8"><a href="adding-a-help-section-for-the-whole-pipeline.html#cb187-8"></a><span class="co">Enjoy!</span></span></code></pre></div>
 </div>
             </section>
 

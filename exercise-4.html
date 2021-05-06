@@ -300,31 +300,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </h5>
 <p></summary></p>
 <p>The process should become:</p>
-<div class="sourceCode" id="cb185"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb185-1"><a href="exercise-4.html#cb185-1"></a></span>
-<span id="cb185-2"><a href="exercise-4.html#cb185-2"></a>process reverseSequence {</span>
-<span id="cb185-3"><a href="exercise-4.html#cb185-3"></a>    tag <span class="st">&quot;$seq&quot;</span>                  </span>
-<span id="cb185-4"><a href="exercise-4.html#cb185-4"></a>    publishDir <span class="st">&quot;output&quot;</span></span>
-<span id="cb185-5"><a href="exercise-4.html#cb185-5"></a>    label &#39;ignorefail&#39;</span>
-<span id="cb185-6"><a href="exercise-4.html#cb185-6"></a>    </span>
-<span id="cb185-7"><a href="exercise-4.html#cb185-7"></a>    input:</span>
-<span id="cb185-8"><a href="exercise-4.html#cb185-8"></a>    path seq</span>
-<span id="cb185-9"><a href="exercise-4.html#cb185-9"></a></span>
-<span id="cb185-10"><a href="exercise-4.html#cb185-10"></a>    output:</span>
-<span id="cb185-11"><a href="exercise-4.html#cb185-11"></a>    path <span class="st">&quot;all.rev&quot;</span></span>
-<span id="cb185-12"><a href="exercise-4.html#cb185-12"></a></span>
-<span id="cb185-13"><a href="exercise-4.html#cb185-13"></a>    script:</span>
-<span id="cb185-14"><a href="exercise-4.html#cb185-14"></a>    <span class="st">&quot;&quot;&quot;</span></span>
-<span id="cb185-15"><a href="exercise-4.html#cb185-15"></a>    cat ${seq} | AAAAA &#39;{<span class="kw">if</span> (\$<span class="dv">1</span>~<span class="st">&quot;&gt;&quot;</span>) {print \$<span class="dv">0</span>} <span class="kw">else</span> <span class="fu">system</span>(<span class="st">&quot;echo &quot;</span> \$<span class="dv">0</span> <span class="st">&quot; |rev&quot;</span>)}&#39; &gt; all.<span class="fu">rev</span></span>
-<span id="cb185-16"><a href="exercise-4.html#cb185-16"></a>    <span class="st">&quot;&quot;&quot;</span></span>
-<span id="cb185-17"><a href="exercise-4.html#cb185-17"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb188"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb188-1"><a href="exercise-4.html#cb188-1"></a></span>
+<span id="cb188-2"><a href="exercise-4.html#cb188-2"></a>process reverseSequence {</span>
+<span id="cb188-3"><a href="exercise-4.html#cb188-3"></a>    tag <span class="st">&quot;$seq&quot;</span>                  </span>
+<span id="cb188-4"><a href="exercise-4.html#cb188-4"></a>    publishDir <span class="st">&quot;output&quot;</span></span>
+<span id="cb188-5"><a href="exercise-4.html#cb188-5"></a>    label &#39;ignorefail&#39;</span>
+<span id="cb188-6"><a href="exercise-4.html#cb188-6"></a>    </span>
+<span id="cb188-7"><a href="exercise-4.html#cb188-7"></a>    input:</span>
+<span id="cb188-8"><a href="exercise-4.html#cb188-8"></a>    path seq</span>
+<span id="cb188-9"><a href="exercise-4.html#cb188-9"></a></span>
+<span id="cb188-10"><a href="exercise-4.html#cb188-10"></a>    output:</span>
+<span id="cb188-11"><a href="exercise-4.html#cb188-11"></a>    path <span class="st">&quot;all.rev&quot;</span></span>
+<span id="cb188-12"><a href="exercise-4.html#cb188-12"></a></span>
+<span id="cb188-13"><a href="exercise-4.html#cb188-13"></a>    script:</span>
+<span id="cb188-14"><a href="exercise-4.html#cb188-14"></a>    <span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb188-15"><a href="exercise-4.html#cb188-15"></a>    cat ${seq} | AAAAA &#39;{<span class="kw">if</span> (\$<span class="dv">1</span>~<span class="st">&quot;&gt;&quot;</span>) {print \$<span class="dv">0</span>} <span class="kw">else</span> <span class="fu">system</span>(<span class="st">&quot;echo &quot;</span> \$<span class="dv">0</span> <span class="st">&quot; |rev&quot;</span>)}&#39; &gt; all.<span class="fu">rev</span></span>
+<span id="cb188-16"><a href="exercise-4.html#cb188-16"></a>    <span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb188-17"><a href="exercise-4.html#cb188-17"></a>}</span></code></pre></div>
 <p>while the nextflow.config file</p>
-<div class="sourceCode" id="cb186"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb186-1"><a href="exercise-4.html#cb186-1"></a></span>
-<span id="cb186-2"><a href="exercise-4.html#cb186-2"></a>process {</span>
-<span id="cb186-3"><a href="exercise-4.html#cb186-3"></a>     withLabel: &#39;ignorefail&#39;</span>
-<span id="cb186-4"><a href="exercise-4.html#cb186-4"></a>    {</span>
-<span id="cb186-5"><a href="exercise-4.html#cb186-5"></a>        errorStrategy = &#39;ignore&#39; </span>
-<span id="cb186-6"><a href="exercise-4.html#cb186-6"></a>     }   </span>
-<span id="cb186-7"><a href="exercise-4.html#cb186-7"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb189"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb189-1"><a href="exercise-4.html#cb189-1"></a></span>
+<span id="cb189-2"><a href="exercise-4.html#cb189-2"></a>process {</span>
+<span id="cb189-3"><a href="exercise-4.html#cb189-3"></a>     withLabel: &#39;ignorefail&#39;</span>
+<span id="cb189-4"><a href="exercise-4.html#cb189-4"></a>    {</span>
+<span id="cb189-5"><a href="exercise-4.html#cb189-5"></a>        errorStrategy = &#39;ignore&#39; </span>
+<span id="cb189-6"><a href="exercise-4.html#cb189-6"></a>     }   </span>
+<span id="cb189-7"><a href="exercise-4.html#cb189-7"></a>}</span></code></pre></div>
 </details>
 <ul>
 <li>Look at test2. Can you make a configuration for that script with a new label for handling failing processes by retrying 3 times and incrementing the time? You can give very low time (10 / 15 seconds) for the fastqc process so it would fail at beginning.</li>
@@ -336,44 +336,44 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </h5>
 <p></summary></p>
 <p>The process should become:</p>
-<div class="sourceCode" id="cb187"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb187-1"><a href="exercise-4.html#cb187-1"></a></span>
-<span id="cb187-2"><a href="exercise-4.html#cb187-2"></a>process fastQC {</span>
-<span id="cb187-3"><a href="exercise-4.html#cb187-3"></a>    publishDir fastqcOutputFolder           <span class="co">// where (and whether) to publish the results</span></span>
-<span id="cb187-4"><a href="exercise-4.html#cb187-4"></a>    tag { reads }                           <span class="co">// during the execution prints the indicated variable for follow-up</span></span>
-<span id="cb187-5"><a href="exercise-4.html#cb187-5"></a>    label &#39;keep_trying&#39; </span>
-<span id="cb187-6"><a href="exercise-4.html#cb187-6"></a></span>
-<span id="cb187-7"><a href="exercise-4.html#cb187-7"></a>    input:</span>
-<span id="cb187-8"><a href="exercise-4.html#cb187-8"></a>    path reads                              <span class="co">// it defines the input of the process. It sets values from a channel</span></span>
-<span id="cb187-9"><a href="exercise-4.html#cb187-9"></a></span>
-<span id="cb187-10"><a href="exercise-4.html#cb187-10"></a>    output:                                 <span class="co">// It defines the output of the process (i.e. files) and send to a new channel</span></span>
-<span id="cb187-11"><a href="exercise-4.html#cb187-11"></a>    path <span class="st">&quot;*_fastqc.*&quot;</span></span>
-<span id="cb187-12"><a href="exercise-4.html#cb187-12"></a></span>
-<span id="cb187-13"><a href="exercise-4.html#cb187-13"></a>    script:                                 <span class="co">// here you have the execution of the script / program. Basically is the command line</span></span>
-<span id="cb187-14"><a href="exercise-4.html#cb187-14"></a>    <span class="st">&quot;&quot;&quot;</span></span>
-<span id="cb187-15"><a href="exercise-4.html#cb187-15"></a>        fastqc ${reads} </span>
-<span id="cb187-16"><a href="exercise-4.html#cb187-16"></a>    <span class="st">&quot;&quot;&quot;</span></span>
-<span id="cb187-17"><a href="exercise-4.html#cb187-17"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb190"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb190-1"><a href="exercise-4.html#cb190-1"></a></span>
+<span id="cb190-2"><a href="exercise-4.html#cb190-2"></a>process fastQC {</span>
+<span id="cb190-3"><a href="exercise-4.html#cb190-3"></a>    publishDir fastqcOutputFolder           <span class="co">// where (and whether) to publish the results</span></span>
+<span id="cb190-4"><a href="exercise-4.html#cb190-4"></a>    tag { reads }                           <span class="co">// during the execution prints the indicated variable for follow-up</span></span>
+<span id="cb190-5"><a href="exercise-4.html#cb190-5"></a>    label &#39;keep_trying&#39; </span>
+<span id="cb190-6"><a href="exercise-4.html#cb190-6"></a></span>
+<span id="cb190-7"><a href="exercise-4.html#cb190-7"></a>    input:</span>
+<span id="cb190-8"><a href="exercise-4.html#cb190-8"></a>    path reads                              <span class="co">// it defines the input of the process. It sets values from a channel</span></span>
+<span id="cb190-9"><a href="exercise-4.html#cb190-9"></a></span>
+<span id="cb190-10"><a href="exercise-4.html#cb190-10"></a>    output:                                 <span class="co">// It defines the output of the process (i.e. files) and send to a new channel</span></span>
+<span id="cb190-11"><a href="exercise-4.html#cb190-11"></a>    path <span class="st">&quot;*_fastqc.*&quot;</span></span>
+<span id="cb190-12"><a href="exercise-4.html#cb190-12"></a></span>
+<span id="cb190-13"><a href="exercise-4.html#cb190-13"></a>    script:                                 <span class="co">// here you have the execution of the script / program. Basically is the command line</span></span>
+<span id="cb190-14"><a href="exercise-4.html#cb190-14"></a>    <span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb190-15"><a href="exercise-4.html#cb190-15"></a>        fastqc ${reads} </span>
+<span id="cb190-16"><a href="exercise-4.html#cb190-16"></a>    <span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb190-17"><a href="exercise-4.html#cb190-17"></a>}</span></code></pre></div>
 <p>while the nextflow.config file</p>
-<div class="sourceCode" id="cb188"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb188-1"><a href="exercise-4.html#cb188-1"></a>includeConfig <span class="st">&quot;$baseDir/params.config&quot;</span></span>
-<span id="cb188-2"><a href="exercise-4.html#cb188-2"></a></span>
-<span id="cb188-3"><a href="exercise-4.html#cb188-3"></a> </span>
-<span id="cb188-4"><a href="exercise-4.html#cb188-4"></a>process {</span>
-<span id="cb188-5"><a href="exercise-4.html#cb188-5"></a>     <span class="co">//containerOptions = { workflow.containerEngine == &quot;docker&quot; ? &#39;-u $(id -u):$(id -g)&#39;: null}</span></span>
-<span id="cb188-6"><a href="exercise-4.html#cb188-6"></a>     memory=&#39;<span class="fl">0.</span>6G&#39;</span>
-<span id="cb188-7"><a href="exercise-4.html#cb188-7"></a>     cpus=<span class="ch">&#39;1&#39;</span></span>
-<span id="cb188-8"><a href="exercise-4.html#cb188-8"></a>     time=&#39;6h&#39;</span>
-<span id="cb188-9"><a href="exercise-4.html#cb188-9"></a></span>
-<span id="cb188-10"><a href="exercise-4.html#cb188-10"></a>     withLabel: &#39;keep_trying&#39;   </span>
-<span id="cb188-11"><a href="exercise-4.html#cb188-11"></a>    { </span>
-<span id="cb188-12"><a href="exercise-4.html#cb188-12"></a>        time = { <span class="fl">10.</span>second * task.<span class="fu">attempt</span> }</span>
-<span id="cb188-13"><a href="exercise-4.html#cb188-13"></a>        errorStrategy = &#39;retry&#39; </span>
-<span id="cb188-14"><a href="exercise-4.html#cb188-14"></a>        maxRetries = <span class="dv">3</span>  </span>
-<span id="cb188-15"><a href="exercise-4.html#cb188-15"></a>    }   </span>
-<span id="cb188-16"><a href="exercise-4.html#cb188-16"></a></span>
-<span id="cb188-17"><a href="exercise-4.html#cb188-17"></a>}</span>
-<span id="cb188-18"><a href="exercise-4.html#cb188-18"></a></span>
-<span id="cb188-19"><a href="exercise-4.html#cb188-19"></a>process.<span class="fu">container</span> = &#39;biocorecrg/c4lwg-<span class="dv">2018</span>:latest&#39;</span>
-<span id="cb188-20"><a href="exercise-4.html#cb188-20"></a>singularity.<span class="fu">cacheDir</span> = <span class="st">&quot;$baseDir/singularity&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb191"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb191-1"><a href="exercise-4.html#cb191-1"></a>includeConfig <span class="st">&quot;$baseDir/params.config&quot;</span></span>
+<span id="cb191-2"><a href="exercise-4.html#cb191-2"></a></span>
+<span id="cb191-3"><a href="exercise-4.html#cb191-3"></a> </span>
+<span id="cb191-4"><a href="exercise-4.html#cb191-4"></a>process {</span>
+<span id="cb191-5"><a href="exercise-4.html#cb191-5"></a>     <span class="co">//containerOptions = { workflow.containerEngine == &quot;docker&quot; ? &#39;-u $(id -u):$(id -g)&#39;: null}</span></span>
+<span id="cb191-6"><a href="exercise-4.html#cb191-6"></a>     memory=&#39;<span class="fl">0.</span>6G&#39;</span>
+<span id="cb191-7"><a href="exercise-4.html#cb191-7"></a>     cpus=<span class="ch">&#39;1&#39;</span></span>
+<span id="cb191-8"><a href="exercise-4.html#cb191-8"></a>     time=&#39;6h&#39;</span>
+<span id="cb191-9"><a href="exercise-4.html#cb191-9"></a></span>
+<span id="cb191-10"><a href="exercise-4.html#cb191-10"></a>     withLabel: &#39;keep_trying&#39;   </span>
+<span id="cb191-11"><a href="exercise-4.html#cb191-11"></a>    { </span>
+<span id="cb191-12"><a href="exercise-4.html#cb191-12"></a>        time = { <span class="fl">10.</span>second * task.<span class="fu">attempt</span> }</span>
+<span id="cb191-13"><a href="exercise-4.html#cb191-13"></a>        errorStrategy = &#39;retry&#39; </span>
+<span id="cb191-14"><a href="exercise-4.html#cb191-14"></a>        maxRetries = <span class="dv">3</span>  </span>
+<span id="cb191-15"><a href="exercise-4.html#cb191-15"></a>    }   </span>
+<span id="cb191-16"><a href="exercise-4.html#cb191-16"></a></span>
+<span id="cb191-17"><a href="exercise-4.html#cb191-17"></a>}</span>
+<span id="cb191-18"><a href="exercise-4.html#cb191-18"></a></span>
+<span id="cb191-19"><a href="exercise-4.html#cb191-19"></a>process.<span class="fu">container</span> = &#39;biocorecrg/c4lwg-<span class="dv">2018</span>:latest&#39;</span>
+<span id="cb191-20"><a href="exercise-4.html#cb191-20"></a>singularity.<span class="fu">cacheDir</span> = <span class="st">&quot;$baseDir/singularity&quot;</span></span></code></pre></div>
 </details>
 </div>
             </section>
