@@ -789,8 +789,8 @@ workflow {
 
 Here we have two simple processes:
 
-- the former splits the input fasta file in single sequences
-- the latter is able to reverse the position of the sequences.
+- the former splits the input fasta file into **single sequences**.
+- the latter is able to **reverse the position of the sequences**.
 
 The input path is fed as a parameter using the script parameters **${seq}**
 
@@ -798,6 +798,9 @@ The input path is fed as a parameter using the script parameters **${seq}**
 params.inputfile
 ```
 
+*Note: you can get the file "test.fa" from the [githu repository of the course](https://github.com/biocorecrg/CoursesCRG_Containers_Nextflow_May_2021/tree/main/testdata)*
+
+<br>
 This value can be overridden when calling the script:
 
 ```{bash, eval=FALSE, echo=TRUE}
@@ -808,7 +811,7 @@ The workflow part connects the two processes so that <u>the output of the first 
 
 During the execution Nextflow creates a number of temporary folders, and will this time also create a soft link to the original input file. It will then store output files locally.
 
-The output file is then linked in other folders for being used as input from other processes. <br>This avoids clashes and each process is nicely isolated from the others.
+The output file is then *linked* in other folders for being used as input from other processes. <br>This avoids clashes and each process is nicely isolated from the others.
 
 ```{bash, eval=FALSE, echo=TRUE}
 nextflow run test.nf -bg
@@ -947,10 +950,10 @@ Launching `test.nf` [insane_plateau] - revision: d33befe154
 
 ## Directives
 
-The **directives** are declaration blocks that can provide optional settings to a process. <br>
+The [**directives**](https://www.nextflow.io/docs/latest/process.html#directives) are declaration blocks that can provide optional settings to a process. <br>
 For instance, they can affect the way a process stages in and out the input and output files ([**stageInMode**](https://www.nextflow.io/docs/latest/process.html#stageinmode) and [**stageOutMode**](https://www.nextflow.io/docs/latest/process.html#stageoutmode)), or they can indicate which file has to be considered a final result and in which folder it should be published ([**publishDir**](https://www.nextflow.io/docs/latest/process.html#publishdir)).
 
-We can add the directive `publishDir` to our previous example:
+We can add the directive [`publishDir`](https://www.nextflow.io/docs/latest/process.html#publishdir) to our previous example:
 
 
 ```{java, eval=FALSE, echo=TRUE}
@@ -959,7 +962,7 @@ We can add the directive `publishDir` to our previous example:
  */
  
 process reverseSequence {
-    tag "$seq"                                          // during the execution prints the indicated variable for follow-up
+    tag "$seq" // during the execution prints the indicated variable for follow-up
     publishDir "output"
 
     input:
@@ -975,7 +978,7 @@ process reverseSequence {
 }
 ```
 
-We can also use **storeDir** in case we want to have a permanent cache. <br>
+We can also use [`storeDir`](https://www.nextflow.io/docs/latest/process.html#storedir) in case we want to have a permanent cache. <br>
 
 The process is executed only if the output files do not exist in the folder specified by **storeDir**.<br> 
 When the output files exist, the process execution is skipped and these files are used as the actual process result.<br>
@@ -984,7 +987,7 @@ For example, this can be useful if we don't want to generate indexes each time a
 <br>
 We can also indicate what to do in case a process fails.<br>
 
-The default is to stop the pipeline and to raise an error. But we can also skip the process using this directive:
+The default is to stop the pipeline and to raise an error. But we can also skip the process using the [`errorStrategy`](https://www.nextflow.io/docs/latest/process.html#errorstrategy) directive:
 
 ```{java, eval=FALSE, echo=TRUE}
 errorStrategy 'ignore'
