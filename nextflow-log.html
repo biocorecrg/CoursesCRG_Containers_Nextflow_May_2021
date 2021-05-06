@@ -308,7 +308,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The <strong>tag</strong> allows us to see that the process <strong>printHello</strong> was launched <u>three times</u> on the hola, hello and bonjour values contained in the input channel. <br></p>
 <p>At the start of each row, there is an <u>alphanumeric code</u>:</p>
 <p><strong>[6a/2dfcaf]</strong> Submitted process &gt; printHello (hola)</p>
-<p>This code indicates <strong>the path</strong> in which theprocess is “isolated” and where the corresponding temporary files are kept in the <strong>work</strong> directory. <br></p>
+<p>This code indicates <strong>the path</strong> in which the process is “isolated” and where the corresponding temporary files are kept in the <strong>work</strong> directory. <br></p>
+<p><strong>IMPORTANT: Nextflow will randomly generate temporary folders so they will be named differently in your execution!!!</strong></p>
 <p>Let’s have a look inside that folder:</p>
 <div class="sourceCode" id="cb148"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb148-1"><a href="nextflow-log.html#cb148-1"></a><span class="co"># Show the folder&#39;s full name</span></span>
 <span id="cb148-2"><a href="nextflow-log.html#cb148-2"></a><span class="bu">echo</span> work/6a/2dfcaf*</span>

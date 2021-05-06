@@ -320,13 +320,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb142-14"><a href="exercise-1.html#cb142-14"></a>my_files.<span class="fu">view</span>()</span></code></pre></div>
 </details>
 <ul>
-<li>Try to reshape the input channel using different operators by generating:
-<ul>
-<li>A <strong>single emission</strong>.</li>
-<li>A channel with each possible file combination</li>
-<li>A tuple with a custom id, i.e. something like [“id”, [“aa.txt”, “bb.txt”, “cc.txt”]]</li>
-</ul></li>
+<li>For the second part of this exercise, We can start again from <code>.fromPath</code> and read the previous 3 <code>.txt</code> files (“aa.txt”, “bb.txt”, “cc.txt”) into the input channel.</li>
 </ul>
+<p><br>
+Try to reshape the input channel using different operators by generating:
+- A <strong>single emission</strong>.
+- A channel with each possible file combination
+- A tuple with a custom id, i.e. something like [“id”, [“aa.txt”, “bb.txt”, “cc.txt”]]</p>
 <p>See here the list of <a href="https://www.nextflow.io/docs/latest/operator.html#">Operators</a> available.</p>
 <details>
 <summary>
@@ -338,25 +338,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb143-2"><a href="exercise-1.html#cb143-2"></a>nextflow.<span class="fu">enable</span>.<span class="fu">dsl</span>=<span class="dv">2</span></span>
 <span id="cb143-3"><a href="exercise-1.html#cb143-3"></a></span>
 <span id="cb143-4"><a href="exercise-1.html#cb143-4"></a><span class="bu">Channel</span></span>
-<span id="cb143-5"><a href="exercise-1.html#cb143-5"></a>    .<span class="fu">fromPath</span>( <span class="st">&quot;*.txt&quot;</span>)</span>
+<span id="cb143-5"><a href="exercise-1.html#cb143-5"></a>    .<span class="fu">fromPath</span>(<span class="st">&quot;{aa,bb,cc}.txt&quot;</span>)</span>
 <span id="cb143-6"><a href="exercise-1.html#cb143-6"></a>    .<span class="fu">set</span> {my_files}</span>
 <span id="cb143-7"><a href="exercise-1.html#cb143-7"></a></span>
 <span id="cb143-8"><a href="exercise-1.html#cb143-8"></a>my_files</span>
 <span id="cb143-9"><a href="exercise-1.html#cb143-9"></a>    .<span class="fu">collect</span>()</span>
 <span id="cb143-10"><a href="exercise-1.html#cb143-10"></a>    .<span class="fu">view</span>()</span>
-<span id="cb143-11"><a href="exercise-1.html#cb143-11"></a><span class="co">//can also be written as: my_files.collect().view()</span></span>
-<span id="cb143-12"><a href="exercise-1.html#cb143-12"></a>my_files</span>
-<span id="cb143-13"><a href="exercise-1.html#cb143-13"></a>    .<span class="fu">combine</span>(my_files)</span>
-<span id="cb143-14"><a href="exercise-1.html#cb143-14"></a>    .<span class="fu">view</span>()</span>
-<span id="cb143-15"><a href="exercise-1.html#cb143-15"></a></span>
-<span id="cb143-16"><a href="exercise-1.html#cb143-16"></a>my_files</span>
-<span id="cb143-17"><a href="exercise-1.html#cb143-17"></a>    .<span class="fu">collect</span>()</span>
-<span id="cb143-18"><a href="exercise-1.html#cb143-18"></a>    .<span class="fu">map</span>{</span>
-<span id="cb143-19"><a href="exercise-1.html#cb143-19"></a>    [<span class="st">&quot;id&quot;</span>, it]</span>
-<span id="cb143-20"><a href="exercise-1.html#cb143-20"></a>    }</span>
-<span id="cb143-21"><a href="exercise-1.html#cb143-21"></a>    .<span class="fu">view</span>()</span>
-<span id="cb143-22"><a href="exercise-1.html#cb143-22"></a></span>
-<span id="cb143-23"><a href="exercise-1.html#cb143-23"></a>my_files.<span class="fu">view</span>()</span></code></pre></div>
+<span id="cb143-11"><a href="exercise-1.html#cb143-11"></a><span class="co">// You can also write it as: my_files.collect().view()</span></span>
+<span id="cb143-12"><a href="exercise-1.html#cb143-12"></a></span>
+<span id="cb143-13"><a href="exercise-1.html#cb143-13"></a>my_files</span>
+<span id="cb143-14"><a href="exercise-1.html#cb143-14"></a>    .<span class="fu">combine</span>(my_files)</span>
+<span id="cb143-15"><a href="exercise-1.html#cb143-15"></a>    .<span class="fu">view</span>()</span>
+<span id="cb143-16"><a href="exercise-1.html#cb143-16"></a></span>
+<span id="cb143-17"><a href="exercise-1.html#cb143-17"></a>my_files</span>
+<span id="cb143-18"><a href="exercise-1.html#cb143-18"></a>    .<span class="fu">collect</span>()</span>
+<span id="cb143-19"><a href="exercise-1.html#cb143-19"></a>    .<span class="fu">map</span>{</span>
+<span id="cb143-20"><a href="exercise-1.html#cb143-20"></a>    [<span class="st">&quot;id&quot;</span>, it]</span>
+<span id="cb143-21"><a href="exercise-1.html#cb143-21"></a>    }</span>
+<span id="cb143-22"><a href="exercise-1.html#cb143-22"></a>    .<span class="fu">view</span>()</span></code></pre></div>
 </details>
 </div>
             </section>
