@@ -554,11 +554,9 @@ hola in Italian is ciao
 
 ## EXERCISE 2
 
- - Change the pipeline for producing files instead of standard output:
-   * You can write another process to handle the fact that you have a list in the workflow2. 
-   * You need also to specify within the workflow what to output using **emit** keyword.
-
-See here [**emit**](https://www.nextflow.io/docs/latest/dsl2.html?#workflow-outputs)
+ - Change the pipeline for producing files instead of [standard output](https://www.nextflow.io/docs/latest/dsl2.html#process-outputs):
+   * You can write another process to handle the fact that you have a list in the workflow2 (`workflow second_pipeline`). 
+   * You need also to specify within the workflow what to output using the [**emit** keyword](https://www.nextflow.io/docs/latest/dsl2.html?#workflow-outputs).
 
 <details>
 <summary>
@@ -643,7 +641,7 @@ workflow {
 </details>
 
 
-- Change the pipeline to use only one process to handle both the cases (one element or a list), you can choose the elements from a list using the positional keys (i.e. list[0], list[1], etc...)
+- Change the pipeline to use only one process to handle both the cases (either one element or a list).<br> You can choose the elements from a list using the positional keys (i.e. list[0], list[1], etc...)
 
 <details>
 <summary>
