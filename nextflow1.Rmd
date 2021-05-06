@@ -340,7 +340,7 @@ The process can be seen as a function that is composed of:
 
 Before the input, you can indicate a **tag** that will be reported in the log. This is quite useful for <u>logging / debugging</u>.
 
-## Workflow
+## Workflow and log
 
 The code as it is will not produce anything, because another part is needed that will actually **call the process** and connect it to the input channel.<br>
 
