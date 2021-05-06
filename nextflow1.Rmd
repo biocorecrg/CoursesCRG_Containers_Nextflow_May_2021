@@ -136,7 +136,7 @@ There are different types of channels:
 
 An <u>operator</u> is a method that reshapes or connects different channels applying some rules.
 
-We can write a very simple Nextflow script: save the following piece of code in the `test.nf` file:
+We can write a very simple Nextflow script: save the following piece of code in the `test0.nf` file:
 
 ```{java, eval=FALSE, echo=TRUE}
 #!/usr/bin/env nextflow
@@ -166,10 +166,10 @@ Once the file is saved, execute it with:
 
 ```{bash, eval=FALSE, echo=TRUE}
 
-nextflow run test.nf
+nextflow run test0.nf
 
 N E X T F L O W  ~  version 20.07.1
-Launching `test.nf` [agitated_avogadro] - revision: 61a595c5bf
+Launching `test0.nf` [agitated_avogadro] - revision: 61a595c5bf
 hello
 hola
 bonjour
@@ -299,7 +299,7 @@ my_files
 
 ## Processes
 
-Let's add a process to the previous script `test.nf`:
+Let's add a process to the previous script `test0.nf` and let's call it test1.nf
 
 ```{java, eval=FALSE, echo=TRUE}
 #!/usr/bin/env nextflow
@@ -385,7 +385,7 @@ workflow {
 We can run the script this time sending the execution in the background (with the `-bg` option) and saving the log in the file `log.txt`.
 
 ```{bash, eval=FALSE, echo=TRUE}
-nextflow run test.nf -bg > log.txt
+nextflow run test1.nf -bg > log.txt
 ```
 
 ### Nextflow log
@@ -396,7 +396,7 @@ Let's inspect now the log file:
 cat log.txt
 
 N E X T F L O W  ~  version 20.07.1
-Launching `test.nf` [high_fermat] - revision: b129d66e57
+Launching `test1.nf` [high_fermat] - revision: b129d66e57
 [6a/2dfcaf] Submitted process > printHello (hola)
 [24/a286da] Submitted process > printHello (hello)
 [04/e733db] Submitted process > printHello (bonjour)
@@ -530,12 +530,12 @@ We can add the **collect** operator to the second workflow that collects the out
 Let's run the code:
 
 ```{bash, eval=FALSE, echo=TRUE}
-nextflow run test.nf -bg > log2
+nextflow run test1.nf -bg > log2
 
 cat log2
 
 N E X T F L O W  ~  version 20.07.1
-Launching `test.nf` [irreverent_davinci] - revision: 25a5511d1d
+Launching `test1.nf` [irreverent_davinci] - revision: 25a5511d1d
 [de/105b97] Submitted process > first_pipeline:printHello (hello)
 [ba/051c23] Submitted process > first_pipeline:printHello (bonjour)
 [1f/9b41b2] Submitted process > second_pipeline:printHello (hello)
@@ -804,7 +804,7 @@ params.inputfile
 This value can be overridden when calling the script:
 
 ```{bash, eval=FALSE, echo=TRUE}
-nextflow run test.nf --inputfile another_input.fa
+nextflow run test1.nf --inputfile another_input.fa
 ```
 
 The workflow part connects the two processes so that <u>the output of the first process is fed as an input to the second one</u>.
@@ -814,10 +814,10 @@ During the execution Nextflow creates a number of temporary folders, and will th
 The output file is then *linked* in other folders for being used as input from other processes. <br>This avoids clashes and each process is nicely isolated from the others.
 
 ```{bash, eval=FALSE, echo=TRUE}
-nextflow run test.nf -bg
+nextflow run test1.nf -bg
 
 N E X T F L O W  ~  version 20.07.1
-Launching `test.nf` [sad_newton] - revision: 82e66714e4
+Launching `test1.nf` [sad_newton] - revision: 82e66714e4
 [09/53e071] Submitted process > splitSequences
 [/home/ec2-user/git/CoursesCRG_Containers_Nextflow_May_2021/nextflow/nextflow/work/09/53e071d286ed66f4020869c8977b59/seq_1, /home/ec2-user/git/CoursesCRG_Containers_Nextflow_May_2021/nextflow/nextflow/work/09/53e071d286ed66f4020869c8977b59/seq_2, /home/ec2-user/git/CoursesCRG_Containers_Nextflow_May_2021/nextflow/nextflow/work/09/53e071d286ed66f4020869c8977b59/seq_3]
 /home/ec2-user/git/CoursesCRG_Containers_Nextflow_May_2021/nextflow/nextflow/work/09/53e071d286ed66f4020869c8977b59/seq_1
@@ -939,7 +939,7 @@ The **reverseSequence** process of the second workflow will run in parallel if y
 nextflow run test1.nf -bg
 
 C02WX1XFHV2Q:nextflow lcozzuto$ N E X T F L O W  ~  version 20.07.1
-Launching `test.nf` [insane_plateau] - revision: d33befe154
+Launching `test1.nf` [insane_plateau] - revision: d33befe154
 [bd/f4e9a6] Submitted process > flow1:splitSequences
 [37/d790ab] Submitted process > flow2:splitSequences
 [33/a6fc72] Submitted process > flow1:reverseSequence ([seq_1, seq_2, seq_3])
@@ -1012,10 +1012,10 @@ You can resume the execution after the code modification using the parameter **-
 Nextflow is smart enough to cache the execution since input and output were not changed.
 
 ```{bash, eval=FALSE, echo=TRUE}
-nextflow run test.nf -bg -resume
+nextflow run test1.nf -bg -resume
 
 N E X T F L O W  ~  version 20.07.1
-Launching `test.nf` [determined_celsius] - revision: eaf5b4d673
+Launching `test1.nf` [determined_celsius] - revision: eaf5b4d673
 [bd/f4e9a6] Cached process > flow1:splitSequences
 [37/d790ab] Cached process > flow2:splitSequences
 [93/c7b1c6] Cached process > flow2:reverseSequence (seq_3)
@@ -1034,18 +1034,18 @@ For doing so you need to extract the job id of that run. You can do this by usin
 nextflow log
 
 TIMESTAMP          	DURATION	RUN NAME           	STATUS	REVISION ID	SESSION ID                          	COMMAND                         
-2020-10-06 14:49:09	2s      	agitated_avogadro  	OK    	61a595c5bf 	4a7a8a4b-9bdb-4b15-9cc6-1b2cabe9a938	nextflow run test.nf            
-2020-10-08 19:14:38	2.8s    	sick_edison        	OK    	82e66714e4 	4fabb863-2038-47b4-bac0-19e71f93f284	nextflow run test.nf -bg        
-2020-10-08 19:16:03	3s      	sad_newton         	OK    	82e66714e4 	2d13e9f8-1ba6-422d-9087-5c6c9731a795	nextflow run test.nf -bg        
-2020-10-08 19:30:59	2.3s    	disturbed_wozniak  	OK    	d33befe154 	0a19b60d-d5fe-4a26-9e01-7a63d0a1d300	nextflow run test.nf -bg        
-2020-10-08 19:35:52	2.5s    	insane_plateau     	OK    	d33befe154 	b359f32c-254f-4271-95bb-6a91b281dc6d	nextflow run test.nf -bg        
-2020-10-08 19:56:30	2.8s    	determined_celsius 	OK    	eaf5b4d673 	b359f32c-254f-4271-95bb-6a91b281dc6d	nextflow run test.nf -bg -resume
+2020-10-06 14:49:09	2s      	agitated_avogadro  	OK    	61a595c5bf 	4a7a8a4b-9bdb-4b15-9cc6-1b2cabe9a938	nextflow run test1.nf            
+2020-10-08 19:14:38	2.8s    	sick_edison        	OK    	82e66714e4 	4fabb863-2038-47b4-bac0-19e71f93f284	nextflow run test1.nf -bg        
+2020-10-08 19:16:03	3s      	sad_newton         	OK    	82e66714e4 	2d13e9f8-1ba6-422d-9087-5c6c9731a795	nextflow run test1.nf -bg        
+2020-10-08 19:30:59	2.3s    	disturbed_wozniak  	OK    	d33befe154 	0a19b60d-d5fe-4a26-9e01-7a63d0a1d300	nextflow run test1.nf -bg        
+2020-10-08 19:35:52	2.5s    	insane_plateau     	OK    	d33befe154 	b359f32c-254f-4271-95bb-6a91b281dc6d	nextflow run test1.nf -bg        
+2020-10-08 19:56:30	2.8s    	determined_celsius 	OK    	eaf5b4d673 	b359f32c-254f-4271-95bb-6a91b281dc6d	nextflow run test1.nf -bg -resume
 ```
 
 You can then resume the state of your execution using the **SESSION ID**:
 
 ```{bash, eval=FALSE, echo=TRUE}
-nextflow run -resume 0a19b60d-d5fe-4a26-9e01-7a63d0a1d300 test.nf
+nextflow run -resume 0a19b60d-d5fe-4a26-9e01-7a63d0a1d300 test1.nf
 ```
 
 Nextflow's cache can be disabled for a specific process adding setting the directive **cache** to **false**. You can also choose three caching methods:
