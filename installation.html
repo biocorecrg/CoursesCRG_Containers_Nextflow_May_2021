@@ -292,13 +292,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="installation" class="section level2">
 <h2><span class="header-section-number">5.3</span> Installation</h2>
+<p><em>Note that Nextflow is already installed on the machines for the training!</em>
+<br></p>
 <p>Java version 8 (minimum) is needed for Nextflow installation.</p>
 <div class="sourceCode" id="cb133"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb133-1"><a href="installation.html#cb133-1"></a><span class="ex">java</span> -version</span></code></pre></div>
 <p>Then we can install Nextflow with:</p>
 <div class="sourceCode" id="cb134"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb134-1"><a href="installation.html#cb134-1"></a><span class="ex">curl</span> -s https://get.nextflow.io <span class="kw">|</span> <span class="fu">bash</span></span></code></pre></div>
 <p>This will create the <code>nextflow</code> executable that can be moved, for example, to <code>/usr/local/bin</code>.<br>
 We can test that the installation was successful with:</p>
-<div class="sourceCode" id="cb135"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb135-1"><a href="installation.html#cb135-1"></a><span class="ex">./nextflow</span> run hello</span>
+<div class="sourceCode" id="cb135"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb135-1"><a href="installation.html#cb135-1"></a><span class="ex">nextflow</span> run hello</span>
 <span id="cb135-2"><a href="installation.html#cb135-2"></a></span>
 <span id="cb135-3"><a href="installation.html#cb135-3"></a><span class="ex">N</span> E X T F L O W  ~  version 20.07.1</span>
 <span id="cb135-4"><a href="installation.html#cb135-4"></a><span class="ex">Pulling</span> nextflow-io/hello ...</span>

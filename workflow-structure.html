@@ -293,7 +293,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="workflow-structure" class="section level2">
 <h2><span class="header-section-number">5.2</span> Workflow structure</h2>
 <p>The workflows can be represented as graphs where the nodes are the <strong>processes</strong> and the edges are the <strong>channels</strong>.<br>
-The <strong>processes</strong> are blocks of code that can be executed - such as scripts or programs - while the <strong>channels</strong> are asynchronous queues able to <strong>connect processess among them via input / output</strong>.</p>
+The <strong>processes</strong> are blocks of code that can be executed - such as scripts or programs - while the <strong>channels</strong> are asynchronous queues able to <strong>connect processes among them via input / output</strong>.</p>
 <p><img src="docs/images/wf_example.png" width="600px" /></p>
 <p>Processes are independent from one another and can be run in parallel depending on the number of elements in a channel. <br>
 In the previous example, processes A, B and C can be run in parallel and only when they <strong>all</strong> end can process D be triggered.</p>

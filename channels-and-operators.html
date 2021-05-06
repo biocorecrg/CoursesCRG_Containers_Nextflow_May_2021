@@ -347,7 +347,8 @@ Let’s create three empty files with the <code>touch</code> command:</p>
 <span id="cb139-11"><a href="channels-and-operators.html#cb139-11"></a>    .<span class="fu">fromPath</span>( <span class="st">&quot;*.txt&quot;</span> )</span>
 <span id="cb139-12"><a href="channels-and-operators.html#cb139-12"></a>    .<span class="fu">set</span> {my_files}</span>
 <span id="cb139-13"><a href="channels-and-operators.html#cb139-13"></a></span>
-<span id="cb139-14"><a href="channels-and-operators.html#cb139-14"></a>my_files.<span class="fu">view</span>()</span></code></pre></div>
+<span id="cb139-14"><a href="channels-and-operators.html#cb139-14"></a><span class="co">// We can use the view() operator again to see the content of channel &quot;my_files&quot;</span></span>
+<span id="cb139-15"><a href="channels-and-operators.html#cb139-15"></a>my_files.<span class="fu">view</span>()</span></code></pre></div>
 <p>We can now execute <code>test2.nf</code>:</p>
 <div class="sourceCode" id="cb140"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb140-1"><a href="channels-and-operators.html#cb140-1"></a><span class="ex">nextflow</span> run test2.nf</span>
 <span id="cb140-2"><a href="channels-and-operators.html#cb140-2"></a></span>
