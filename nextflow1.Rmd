@@ -950,6 +950,7 @@ Launching `test.nf` [insane_plateau] - revision: d33befe154
 
 ## Directives
 
+
 The [**directives**](https://www.nextflow.io/docs/latest/process.html#directives) are declaration blocks that can provide optional settings to a process. <br>
 For instance, they can affect the way a process stages in and out the input and output files ([**stageInMode**](https://www.nextflow.io/docs/latest/process.html#stageinmode) and [**stageOutMode**](https://www.nextflow.io/docs/latest/process.html#stageoutmode)), or they can indicate which file has to be considered a final result and in which folder it should be published ([**publishDir**](https://www.nextflow.io/docs/latest/process.html#publishdir)).
 
