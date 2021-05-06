@@ -100,6 +100,7 @@ exercise-4---singularity-running-and-building
 blast-command-line-1
 blast-command-line-2
 nextflow-day-1
+introduction
 what-is-nextflow
 what-is-nextflow-for
 main-advantages
