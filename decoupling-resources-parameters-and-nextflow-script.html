@@ -324,13 +324,13 @@ You can label your processes to make a link with the definitions in the nextflow
 <span id="cb173-3"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb173-3"></a>     <span class="va">cpus=</span><span class="st">&#39;1&#39;</span></span>
 <span id="cb173-4"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb173-4"></a>     <span class="va">time=</span><span class="st">&#39;6h&#39;</span></span>
 <span id="cb173-5"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb173-5"></a><span class="ex">...</span></span></code></pre></div>
-<p>Then we have the resources needed for a class of processes in particular labeled with <strong>bigmem</strong></p>
+<p>Then we have the resources needed for a class of processes in particular labeled with <strong>bigmem</strong> (i.e. the default options will be overridden)</p>
 <pre><code>     withLabel: &#39;bigmem&#39;
     {
         memory=&#39;0.7G&#39;
         cpus=&#39;1&#39;
     }   </code></pre>
-<p>If we have a look at the process <strong>fastQC</strong> within the test2.nf file, we can see the use of the label.</p>
+<p>If we have a look at process <strong>fastQC</strong> in the <a href="https://github.com/biocorecrg/CoursesCRG_Containers_Nextflow_May_2021/tree/main/nextflow/test2">test2.nf file</a>, we can see the use of the label.</p>
 <div class="sourceCode" id="cb175"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb175-1"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb175-1"></a><span class="co">/*</span></span>
 <span id="cb175-2"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb175-2"></a><span class="co"> * Process 1. Run FastQC on raw data.</span></span>
 <span id="cb175-3"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb175-3"></a><span class="co"> */</span></span>
@@ -342,10 +342,12 @@ You can label your processes to make a link with the definitions in the nextflow
 <span id="cb175-9"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb175-9"></a>    input:</span>
 <span id="cb175-10"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb175-10"></a>    path reads                              </span>
 <span id="cb175-11"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb175-11"></a>...</span></code></pre></div>
-<p>The latest two rows of the config file indicates which container needs to be used. In this case, it assumes has to be pulled from <a href="https://hub.docker.com/">DockerHub</a>. In case you want to use singularity you can indicate where to store the local image by using the <strong>singularity.cacheDir</strong> setting</p>
+<p>The last two rows of the config file indicate which container needs to be used. <br>
+In this example, it is pulling it from <a href="https://hub.docker.com/">DockerHub</a>. <br>
+In case you want to use a singularity container, you can indicate where to store the local image by using the <strong>singularity.cacheDir</strong> option.</p>
 <div class="sourceCode" id="cb176"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb176-1"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb176-1"></a>process.<span class="fu">container</span> = &#39;biocorecrg/c4lwg-<span class="dv">2018</span>:latest&#39;</span>
 <span id="cb176-2"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb176-2"></a>singularity.<span class="fu">cacheDir</span> = <span class="st">&quot;$baseDir/singularity&quot;</span></span></code></pre></div>
-<p>Let’s now launch the script test2.nf</p>
+<p>Let’s now launch the script test2.nf.</p>
 <div class="sourceCode" id="cb177"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb177-1"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb177-1"></a>cd test2;</span>
 <span id="cb177-2"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb177-2"></a>nextflow run test2.<span class="fu">nf</span></span>
 <span id="cb177-3"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb177-3"></a></span>
