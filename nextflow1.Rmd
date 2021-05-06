@@ -77,7 +77,7 @@ All the intermediate results produced during the pipeline execution are automati
 ## Workflow structure
 
 The workflows can be represented as graphs where the nodes are the **processes** and the edges are the **channels**.<br>
-The **processes** are blocks of code that can be executed - such as scripts or programs - while the **channels** are asynchronous queues able to **connect processess among them via input / output**.
+The **processes** are blocks of code that can be executed - such as scripts or programs - while the **channels** are asynchronous queues able to **connect processes among them via input / output**.
 
 
 ```{r, out.width="600px", echo=FALSE, eval = TRUE }
@@ -88,6 +88,9 @@ Processes are independent from one another and can be run in parallel depending 
 In the previous example, processes A, B and C can be run in parallel and only when they **all** end can process D be triggered.
 
 ## Installation
+
+*Note that Nextflow is already installed on the machines for the training!*
+<br>
 
 Java version 8 (minimum) is needed for Nextflow installation.
 
@@ -105,7 +108,7 @@ This will create the `nextflow` executable that can be moved, for example, to `/
 We can test that the installation was successful with:
 
 ```{bash, eval=FALSE, echo=TRUE}
-./nextflow run hello
+nextflow run hello
 
 N E X T F L O W  ~  version 20.07.1
 Pulling nextflow-io/hello ...
@@ -195,6 +198,7 @@ Channel
     .fromPath( "*.txt" )
     .set {my_files}
 
+// We can use the view() operator again to see the content of channel "my_files"
 my_files.view()
 ```
 
@@ -214,7 +218,7 @@ Once executed, we can see that a folder named **work** is generated: Nextflow st
 
 ## EXERCISE 1
 
-- Let's create a couple of files (e.g. paired-end reads) and let's try to read them as a [tuple](https://www.nextflow.io/docs/latest/process.html?highlight=tuple#input-of-type-tuple).
+- Let's create a couple of files (e.g. paired-end reads) and let's try to read them as a tuple.
 
 First create a couple of empty files:
 
@@ -251,7 +255,7 @@ my_files.view()
 
 
 - Try to reshape the input channel using different operators by generating:
-  - A single emission
+  - A **single emission**.
   - A channel with each possible file combination
   - A tuple with a custom id, i.e. something like ["id", ["aa.txt", "bb.txt", "cc.txt"]]
 
@@ -268,13 +272,24 @@ See here the list of [Operators](https://www.nextflow.io/docs/latest/operator.ht
 nextflow.enable.dsl=2
 
 Channel
-    .fromPath( "*.txt").set {my_files}
+    .fromPath( "*.txt")
+    .set {my_files}
 
-my_files.collect().view()
-my_files.combine(my_files).view()
-my_files.collect().map{
+my_files
+    .collect()
+    .view()
+//can also be written as: my_files.collect().view()
+my_files
+    .combine(my_files)
+    .view()
+
+my_files
+    .collect()
+    .map{
 	["id", it]
-}.view()
+	}
+    .view()
+
 my_files.view()
 ```
 
