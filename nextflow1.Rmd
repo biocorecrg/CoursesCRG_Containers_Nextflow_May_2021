@@ -253,8 +253,10 @@ my_files.view()
 
 </details>
 
+- For the second part of this exercise, We can start again from `.fromPath` and read the previous 3 `.txt` files ("aa.txt", "bb.txt", "cc.txt") into the input channel.
 
-- Try to reshape the input channel using different operators by generating:
+<br>
+Try to reshape the input channel using different operators by generating:
   - A **single emission**.
   - A channel with each possible file combination
   - A tuple with a custom id, i.e. something like ["id", ["aa.txt", "bb.txt", "cc.txt"]]
@@ -272,13 +274,14 @@ See here the list of [Operators](https://www.nextflow.io/docs/latest/operator.ht
 nextflow.enable.dsl=2
 
 Channel
-    .fromPath( "*.txt")
+    .fromPath("{aa,bb,cc}.txt")
     .set {my_files}
 
 my_files
     .collect()
     .view()
-//can also be written as: my_files.collect().view()
+// You can also write it as: my_files.collect().view()
+
 my_files
     .combine(my_files)
     .view()
@@ -289,11 +292,10 @@ my_files
 	["id", it]
 	}
     .view()
-
-my_files.view()
 ```
 
 </details>
+
 
 ## Processes
 
@@ -411,7 +413,9 @@ At the start of each row, there is an <u>alphanumeric code</u>:
 
 **[6a/2dfcaf]** Submitted process > printHello (hola)
 
-This code indicates **the path** in which theprocess is "isolated" and where the corresponding temporary files are kept in the **work** directory. <br>
+This code indicates **the path** in which the process is "isolated" and where the corresponding temporary files are kept in the **work** directory. <br>
+
+**IMPORTANT: Nextflow will randomly generate temporary folders so they will be named differently in your execution!!!**
 
 Let's have a look inside that folder:
 
@@ -846,8 +850,6 @@ lrwxr-xr-x  1 lcozzuto  staff  97 Oct  8 19:16 seq_1 -> /home/ec2-user/git/Cours
 lrwxr-xr-x  1 lcozzuto  staff  97 Oct  8 19:16 seq_2 -> /home/ec2-user/git/CoursesCRG_Containers_Nextflow_May_2021/nextflow/nextflow/work/09/53e071d286ed66f4020869c8977b59/seq_2
 lrwxr-xr-x  1 lcozzuto  staff  97 Oct  8 19:16 seq_3 -> /home/ec2-user/git/CoursesCRG_Containers_Nextflow_May_2021/nextflow/nextflow/work/09/53e071d286ed66f4020869c8977b59/seq_3
 ```
-
-**IMPORTANT: Nextflow will randomly generate temporary folders so they will be named differently in your execution!!!**
 
 At this point we can make two different workflows to demonstrate how the new DSL allows reusing of the code.
 
