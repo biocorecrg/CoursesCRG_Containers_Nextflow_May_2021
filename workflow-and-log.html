@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>5.7 Workflow | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines</title>
-  <meta name="description" content="5.7 Workflow | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
+  <title>5.7 Workflow and log | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines</title>
+  <meta name="description" content="5.7 Workflow and log | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="5.7 Workflow | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
+  <meta property="og:title" content="5.7 Workflow and log | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="5.7 Workflow | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
+  <meta name="twitter:title" content="5.7 Workflow and log | Courses @ CRG: Reproducible research and data analysis with Linux containers and Nextflow pipelines" />
   
   
   
@@ -246,8 +246,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.4" data-path="channels-and-operators.html"><a href="channels-and-operators.html"><i class="fa fa-check"></i><b>5.4</b> Channels and Operators</a></li>
 <li class="chapter" data-level="5.5" data-path="exercise-1.html"><a href="exercise-1.html"><i class="fa fa-check"></i><b>5.5</b> EXERCISE 1</a></li>
 <li class="chapter" data-level="5.6" data-path="processes.html"><a href="processes.html"><i class="fa fa-check"></i><b>5.6</b> Processes</a></li>
-<li class="chapter" data-level="5.7" data-path="workflow.html"><a href="workflow.html"><i class="fa fa-check"></i><b>5.7</b> Workflow</a><ul>
-<li class="chapter" data-level="5.7.1" data-path="workflow.html"><a href="workflow.html#nextflow-log"><i class="fa fa-check"></i><b>5.7.1</b> Nextflow log</a></li>
+<li class="chapter" data-level="5.7" data-path="workflow-and-log.html"><a href="workflow-and-log.html"><i class="fa fa-check"></i><b>5.7</b> Workflow and log</a><ul>
+<li class="chapter" data-level="5.7.1" data-path="workflow-and-log.html"><a href="workflow-and-log.html#nextflow-log"><i class="fa fa-check"></i><b>5.7.1</b> Nextflow log</a></li>
 </ul></li>
 <li class="chapter" data-level="5.8" data-path="exercise-2.html"><a href="exercise-2.html"><i class="fa fa-check"></i><b>5.8</b> EXERCISE 2</a></li>
 <li class="chapter" data-level="5.9" data-path="more-complex-scripts.html"><a href="more-complex-scripts.html"><i class="fa fa-check"></i><b>5.9</b> More complex scripts</a></li>
@@ -291,83 +291,83 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="workflow" class="section level2">
-<h2><span class="header-section-number">5.7</span> Workflow</h2>
+<div id="workflow-and-log" class="section level2">
+<h2><span class="header-section-number">5.7</span> Workflow and log</h2>
 <p>The code as it is will not produce anything, because another part is needed that will actually <strong>call the process</strong> and connect it to the input channel.<br></p>
 <p>This part is called a <strong>workflow</strong>.<br>
 Let’s add a workflow to our code:</p>
-<div class="sourceCode" id="cb145"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb145-1"><a href="workflow.html#cb145-1"></a>#!/usr/bin/env nextflow</span>
-<span id="cb145-2"><a href="workflow.html#cb145-2"></a></span>
-<span id="cb145-3"><a href="workflow.html#cb145-3"></a>nextflow.<span class="fu">enable</span>.<span class="fu">dsl</span>=<span class="dv">2</span></span>
-<span id="cb145-4"><a href="workflow.html#cb145-4"></a></span>
-<span id="cb145-5"><a href="workflow.html#cb145-5"></a>str = <span class="bu">Channel</span>.<span class="fu">from</span>(&#39;hello&#39;, &#39;hola&#39;, &#39;bonjour&#39;)</span>
-<span id="cb145-6"><a href="workflow.html#cb145-6"></a></span>
-<span id="cb145-7"><a href="workflow.html#cb145-7"></a>process printHello {</span>
-<span id="cb145-8"><a href="workflow.html#cb145-8"></a></span>
-<span id="cb145-9"><a href="workflow.html#cb145-9"></a>   tag { str_in }</span>
-<span id="cb145-10"><a href="workflow.html#cb145-10"></a></span>
-<span id="cb145-11"><a href="workflow.html#cb145-11"></a>   input:        </span>
-<span id="cb145-12"><a href="workflow.html#cb145-12"></a>   val str_in</span>
-<span id="cb145-13"><a href="workflow.html#cb145-13"></a></span>
-<span id="cb145-14"><a href="workflow.html#cb145-14"></a>   output:        </span>
-<span id="cb145-15"><a href="workflow.html#cb145-15"></a>   stdout</span>
-<span id="cb145-16"><a href="workflow.html#cb145-16"></a></span>
-<span id="cb145-17"><a href="workflow.html#cb145-17"></a>   script:        </span>
-<span id="cb145-18"><a href="workflow.html#cb145-18"></a>   <span class="st">&quot;&quot;&quot;</span></span>
-<span id="cb145-19"><a href="workflow.html#cb145-19"></a>   echo ${str_in} in Italian is ciao</span>
-<span id="cb145-20"><a href="workflow.html#cb145-20"></a>   <span class="st">&quot;&quot;&quot;</span></span>
-<span id="cb145-21"><a href="workflow.html#cb145-21"></a>}</span>
-<span id="cb145-22"><a href="workflow.html#cb145-22"></a></span>
-<span id="cb145-23"><a href="workflow.html#cb145-23"></a><span class="co">/*</span></span>
-<span id="cb145-24"><a href="workflow.html#cb145-24"></a><span class="co"> * A workflow consists of a number of invocations of processes</span></span>
-<span id="cb145-25"><a href="workflow.html#cb145-25"></a><span class="co"> * where they are fed with the expected input channels</span></span>
-<span id="cb145-26"><a href="workflow.html#cb145-26"></a><span class="co"> * as if they were custom functions. You can only invoke a process once per workflow.</span></span>
-<span id="cb145-27"><a href="workflow.html#cb145-27"></a><span class="co"> */</span></span>
-<span id="cb145-28"><a href="workflow.html#cb145-28"></a></span>
-<span id="cb145-29"><a href="workflow.html#cb145-29"></a>workflow {</span>
-<span id="cb145-30"><a href="workflow.html#cb145-30"></a> result = <span class="fu">printHello</span>(str)</span>
-<span id="cb145-31"><a href="workflow.html#cb145-31"></a> result.<span class="fu">view</span>()</span>
-<span id="cb145-32"><a href="workflow.html#cb145-32"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb145"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb145-1"><a href="workflow-and-log.html#cb145-1"></a>#!/usr/bin/env nextflow</span>
+<span id="cb145-2"><a href="workflow-and-log.html#cb145-2"></a></span>
+<span id="cb145-3"><a href="workflow-and-log.html#cb145-3"></a>nextflow.<span class="fu">enable</span>.<span class="fu">dsl</span>=<span class="dv">2</span></span>
+<span id="cb145-4"><a href="workflow-and-log.html#cb145-4"></a></span>
+<span id="cb145-5"><a href="workflow-and-log.html#cb145-5"></a>str = <span class="bu">Channel</span>.<span class="fu">from</span>(&#39;hello&#39;, &#39;hola&#39;, &#39;bonjour&#39;)</span>
+<span id="cb145-6"><a href="workflow-and-log.html#cb145-6"></a></span>
+<span id="cb145-7"><a href="workflow-and-log.html#cb145-7"></a>process printHello {</span>
+<span id="cb145-8"><a href="workflow-and-log.html#cb145-8"></a></span>
+<span id="cb145-9"><a href="workflow-and-log.html#cb145-9"></a>   tag { str_in }</span>
+<span id="cb145-10"><a href="workflow-and-log.html#cb145-10"></a></span>
+<span id="cb145-11"><a href="workflow-and-log.html#cb145-11"></a>   input:        </span>
+<span id="cb145-12"><a href="workflow-and-log.html#cb145-12"></a>   val str_in</span>
+<span id="cb145-13"><a href="workflow-and-log.html#cb145-13"></a></span>
+<span id="cb145-14"><a href="workflow-and-log.html#cb145-14"></a>   output:        </span>
+<span id="cb145-15"><a href="workflow-and-log.html#cb145-15"></a>   stdout</span>
+<span id="cb145-16"><a href="workflow-and-log.html#cb145-16"></a></span>
+<span id="cb145-17"><a href="workflow-and-log.html#cb145-17"></a>   script:        </span>
+<span id="cb145-18"><a href="workflow-and-log.html#cb145-18"></a>   <span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb145-19"><a href="workflow-and-log.html#cb145-19"></a>   echo ${str_in} in Italian is ciao</span>
+<span id="cb145-20"><a href="workflow-and-log.html#cb145-20"></a>   <span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb145-21"><a href="workflow-and-log.html#cb145-21"></a>}</span>
+<span id="cb145-22"><a href="workflow-and-log.html#cb145-22"></a></span>
+<span id="cb145-23"><a href="workflow-and-log.html#cb145-23"></a><span class="co">/*</span></span>
+<span id="cb145-24"><a href="workflow-and-log.html#cb145-24"></a><span class="co"> * A workflow consists of a number of invocations of processes</span></span>
+<span id="cb145-25"><a href="workflow-and-log.html#cb145-25"></a><span class="co"> * where they are fed with the expected input channels</span></span>
+<span id="cb145-26"><a href="workflow-and-log.html#cb145-26"></a><span class="co"> * as if they were custom functions. You can only invoke a process once per workflow.</span></span>
+<span id="cb145-27"><a href="workflow-and-log.html#cb145-27"></a><span class="co"> */</span></span>
+<span id="cb145-28"><a href="workflow-and-log.html#cb145-28"></a></span>
+<span id="cb145-29"><a href="workflow-and-log.html#cb145-29"></a>workflow {</span>
+<span id="cb145-30"><a href="workflow-and-log.html#cb145-30"></a> result = <span class="fu">printHello</span>(str)</span>
+<span id="cb145-31"><a href="workflow-and-log.html#cb145-31"></a> result.<span class="fu">view</span>()</span>
+<span id="cb145-32"><a href="workflow-and-log.html#cb145-32"></a>}</span></code></pre></div>
 <p>We can run the script this time sending the execution in the background (with the <code>-bg</code> option) and saving the log in the file <code>log.txt</code>.</p>
-<div class="sourceCode" id="cb146"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb146-1"><a href="workflow.html#cb146-1"></a><span class="ex">nextflow</span> run test.nf -bg <span class="op">&gt;</span> log.txt</span></code></pre></div>
+<div class="sourceCode" id="cb146"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb146-1"><a href="workflow-and-log.html#cb146-1"></a><span class="ex">nextflow</span> run test.nf -bg <span class="op">&gt;</span> log.txt</span></code></pre></div>
 <div id="nextflow-log" class="section level3">
 <h3><span class="header-section-number">5.7.1</span> Nextflow log</h3>
 <p>Let’s inspect now the log file:</p>
-<div class="sourceCode" id="cb147"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb147-1"><a href="workflow.html#cb147-1"></a><span class="fu">cat</span> log.txt</span>
-<span id="cb147-2"><a href="workflow.html#cb147-2"></a></span>
-<span id="cb147-3"><a href="workflow.html#cb147-3"></a><span class="ex">N</span> E X T F L O W  ~  version 20.07.1</span>
-<span id="cb147-4"><a href="workflow.html#cb147-4"></a><span class="ex">Launching</span> <span class="kw">`</span><span class="ex">test.nf</span><span class="kw">`</span> [high_fermat] - revision: b129d66e57</span>
-<span id="cb147-5"><a href="workflow.html#cb147-5"></a>[<span class="ex">6a</span>/<span class="ex">2dfcaf</span>] Submitted process <span class="op">&gt;</span> printHello (hola)</span>
-<span id="cb147-6"><a href="workflow.html#cb147-6"></a>[<span class="ex">24</span>/<span class="ex">a286da</span>] Submitted process <span class="op">&gt;</span> printHello (hello)</span>
-<span id="cb147-7"><a href="workflow.html#cb147-7"></a>[<span class="ex">04</span>/<span class="ex">e733db</span>] Submitted process <span class="op">&gt;</span> printHello (bonjour)</span>
-<span id="cb147-8"><a href="workflow.html#cb147-8"></a><span class="ex">hola</span> in Italian is ciao</span>
-<span id="cb147-9"><a href="workflow.html#cb147-9"></a></span>
-<span id="cb147-10"><a href="workflow.html#cb147-10"></a><span class="ex">hello</span> in Italian is ciao</span>
-<span id="cb147-11"><a href="workflow.html#cb147-11"></a></span>
-<span id="cb147-12"><a href="workflow.html#cb147-12"></a><span class="ex">bonjour</span> in Italian is ciao</span></code></pre></div>
+<div class="sourceCode" id="cb147"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb147-1"><a href="workflow-and-log.html#cb147-1"></a><span class="fu">cat</span> log.txt</span>
+<span id="cb147-2"><a href="workflow-and-log.html#cb147-2"></a></span>
+<span id="cb147-3"><a href="workflow-and-log.html#cb147-3"></a><span class="ex">N</span> E X T F L O W  ~  version 20.07.1</span>
+<span id="cb147-4"><a href="workflow-and-log.html#cb147-4"></a><span class="ex">Launching</span> <span class="kw">`</span><span class="ex">test.nf</span><span class="kw">`</span> [high_fermat] - revision: b129d66e57</span>
+<span id="cb147-5"><a href="workflow-and-log.html#cb147-5"></a>[<span class="ex">6a</span>/<span class="ex">2dfcaf</span>] Submitted process <span class="op">&gt;</span> printHello (hola)</span>
+<span id="cb147-6"><a href="workflow-and-log.html#cb147-6"></a>[<span class="ex">24</span>/<span class="ex">a286da</span>] Submitted process <span class="op">&gt;</span> printHello (hello)</span>
+<span id="cb147-7"><a href="workflow-and-log.html#cb147-7"></a>[<span class="ex">04</span>/<span class="ex">e733db</span>] Submitted process <span class="op">&gt;</span> printHello (bonjour)</span>
+<span id="cb147-8"><a href="workflow-and-log.html#cb147-8"></a><span class="ex">hola</span> in Italian is ciao</span>
+<span id="cb147-9"><a href="workflow-and-log.html#cb147-9"></a></span>
+<span id="cb147-10"><a href="workflow-and-log.html#cb147-10"></a><span class="ex">hello</span> in Italian is ciao</span>
+<span id="cb147-11"><a href="workflow-and-log.html#cb147-11"></a></span>
+<span id="cb147-12"><a href="workflow-and-log.html#cb147-12"></a><span class="ex">bonjour</span> in Italian is ciao</span></code></pre></div>
 <p>The <strong>tag</strong> allows us to see that the process <strong>printHello</strong> was launched <u>three times</u> on the hola, hello and bonjour values contained in the input channel. <br></p>
 <p>At the start of each row, there is an <u>alphanumeric code</u>:</p>
 <p><strong>[6a/2dfcaf]</strong> Submitted process &gt; printHello (hola)</p>
 <p>This code indicates <strong>the path</strong> in which the process is “isolated” and where the corresponding temporary files are kept in the <strong>work</strong> directory. <br></p>
 <p><strong>IMPORTANT: Nextflow will randomly generate temporary folders so they will be named differently in your execution!!!</strong></p>
 <p>Let’s have a look inside that folder:</p>
-<div class="sourceCode" id="cb148"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb148-1"><a href="workflow.html#cb148-1"></a><span class="co"># Show the folder&#39;s full name</span></span>
-<span id="cb148-2"><a href="workflow.html#cb148-2"></a><span class="bu">echo</span> work/6a/2dfcaf*</span>
-<span id="cb148-3"><a href="workflow.html#cb148-3"></a>  <span class="ex">work/6a/2dfcafc01350f475c60b2696047a87</span></span>
-<span id="cb148-4"><a href="workflow.html#cb148-4"></a></span>
-<span id="cb148-5"><a href="workflow.html#cb148-5"></a><span class="co"># List was is inside the folder</span></span>
-<span id="cb148-6"><a href="workflow.html#cb148-6"></a><span class="fu">ls</span> -alht work/6a/2dfcaf*</span>
-<span id="cb148-7"><a href="workflow.html#cb148-7"></a></span>
-<span id="cb148-8"><a href="workflow.html#cb148-8"></a><span class="ex">total</span> 40</span>
-<span id="cb148-9"><a href="workflow.html#cb148-9"></a><span class="ex">-rw-r--r--</span>  1 lcozzuto  staff     1B Oct  7 13:39 .exitcode</span>
-<span id="cb148-10"><a href="workflow.html#cb148-10"></a><span class="ex">drwxr-xr-x</span>  9 lcozzuto  staff   288B Oct  7 13:39 .</span>
-<span id="cb148-11"><a href="workflow.html#cb148-11"></a><span class="ex">-rw-r--r--</span>  1 lcozzuto  staff    24B Oct  7 13:39 .command.log</span>
-<span id="cb148-12"><a href="workflow.html#cb148-12"></a><span class="ex">-rw-r--r--</span>  1 lcozzuto  staff    24B Oct  7 13:39 .command.out</span>
-<span id="cb148-13"><a href="workflow.html#cb148-13"></a><span class="ex">-rw-r--r--</span>  1 lcozzuto  staff     0B Oct  7 13:39 .command.err</span>
-<span id="cb148-14"><a href="workflow.html#cb148-14"></a><span class="ex">-rw-r--r--</span>  1 lcozzuto  staff     0B Oct  7 13:39 .command.begin</span>
-<span id="cb148-15"><a href="workflow.html#cb148-15"></a><span class="ex">-rw-r--r--</span>  1 lcozzuto  staff    45B Oct  7 13:39 .command.sh</span>
-<span id="cb148-16"><a href="workflow.html#cb148-16"></a><span class="ex">-rw-r--r--</span>  1 lcozzuto  staff   2.5K Oct  7 13:39 .command.run</span>
-<span id="cb148-17"><a href="workflow.html#cb148-17"></a><span class="ex">drwxr-xr-x</span>  3 lcozzuto  staff    96B Oct  7 13:39 ..</span></code></pre></div>
+<div class="sourceCode" id="cb148"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb148-1"><a href="workflow-and-log.html#cb148-1"></a><span class="co"># Show the folder&#39;s full name</span></span>
+<span id="cb148-2"><a href="workflow-and-log.html#cb148-2"></a><span class="bu">echo</span> work/6a/2dfcaf*</span>
+<span id="cb148-3"><a href="workflow-and-log.html#cb148-3"></a>  <span class="ex">work/6a/2dfcafc01350f475c60b2696047a87</span></span>
+<span id="cb148-4"><a href="workflow-and-log.html#cb148-4"></a></span>
+<span id="cb148-5"><a href="workflow-and-log.html#cb148-5"></a><span class="co"># List was is inside the folder</span></span>
+<span id="cb148-6"><a href="workflow-and-log.html#cb148-6"></a><span class="fu">ls</span> -alht work/6a/2dfcaf*</span>
+<span id="cb148-7"><a href="workflow-and-log.html#cb148-7"></a></span>
+<span id="cb148-8"><a href="workflow-and-log.html#cb148-8"></a><span class="ex">total</span> 40</span>
+<span id="cb148-9"><a href="workflow-and-log.html#cb148-9"></a><span class="ex">-rw-r--r--</span>  1 lcozzuto  staff     1B Oct  7 13:39 .exitcode</span>
+<span id="cb148-10"><a href="workflow-and-log.html#cb148-10"></a><span class="ex">drwxr-xr-x</span>  9 lcozzuto  staff   288B Oct  7 13:39 .</span>
+<span id="cb148-11"><a href="workflow-and-log.html#cb148-11"></a><span class="ex">-rw-r--r--</span>  1 lcozzuto  staff    24B Oct  7 13:39 .command.log</span>
+<span id="cb148-12"><a href="workflow-and-log.html#cb148-12"></a><span class="ex">-rw-r--r--</span>  1 lcozzuto  staff    24B Oct  7 13:39 .command.out</span>
+<span id="cb148-13"><a href="workflow-and-log.html#cb148-13"></a><span class="ex">-rw-r--r--</span>  1 lcozzuto  staff     0B Oct  7 13:39 .command.err</span>
+<span id="cb148-14"><a href="workflow-and-log.html#cb148-14"></a><span class="ex">-rw-r--r--</span>  1 lcozzuto  staff     0B Oct  7 13:39 .command.begin</span>
+<span id="cb148-15"><a href="workflow-and-log.html#cb148-15"></a><span class="ex">-rw-r--r--</span>  1 lcozzuto  staff    45B Oct  7 13:39 .command.sh</span>
+<span id="cb148-16"><a href="workflow-and-log.html#cb148-16"></a><span class="ex">-rw-r--r--</span>  1 lcozzuto  staff   2.5K Oct  7 13:39 .command.run</span>
+<span id="cb148-17"><a href="workflow-and-log.html#cb148-17"></a><span class="ex">drwxr-xr-x</span>  3 lcozzuto  staff    96B Oct  7 13:39 ..</span></code></pre></div>
 <p>You see a lot of “hidden” files:</p>
 <ul>
 <li><strong>.exitcode</strong>, contains 0 if everything is ok, another value if there was a problem.</li>
@@ -379,89 +379,89 @@ Let’s add a workflow to our code:</p>
 <li><strong>.command.run</strong>, contains the code made by nextflow for the execution of <code>.command.sh</code>, and contains environmental variables, eventual invocations of linux containers etc.</li>
 </ul>
 <p>For instance the content of <code>.command.sh</code> is:</p>
-<div class="sourceCode" id="cb149"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb149-1"><a href="workflow.html#cb149-1"></a><span class="fu">cat</span> work/6a/2dfcaf*/.command.sh</span>
-<span id="cb149-2"><a href="workflow.html#cb149-2"></a></span>
-<span id="cb149-3"><a href="workflow.html#cb149-3"></a><span class="co">#!/bin/bash -ue</span></span>
-<span id="cb149-4"><a href="workflow.html#cb149-4"></a><span class="bu">echo</span> hola in Italian is ciao</span></code></pre></div>
+<div class="sourceCode" id="cb149"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb149-1"><a href="workflow-and-log.html#cb149-1"></a><span class="fu">cat</span> work/6a/2dfcaf*/.command.sh</span>
+<span id="cb149-2"><a href="workflow-and-log.html#cb149-2"></a></span>
+<span id="cb149-3"><a href="workflow-and-log.html#cb149-3"></a><span class="co">#!/bin/bash -ue</span></span>
+<span id="cb149-4"><a href="workflow-and-log.html#cb149-4"></a><span class="bu">echo</span> hola in Italian is ciao</span></code></pre></div>
 <p>And the content of <code>.command.out</code> is</p>
-<div class="sourceCode" id="cb150"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb150-1"><a href="workflow.html#cb150-1"></a><span class="fu">cat</span> work/6a/2dfcaf*/.command.out</span>
-<span id="cb150-2"><a href="workflow.html#cb150-2"></a></span>
-<span id="cb150-3"><a href="workflow.html#cb150-3"></a><span class="ex">hola</span> in Italian is ciao</span></code></pre></div>
+<div class="sourceCode" id="cb150"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb150-1"><a href="workflow-and-log.html#cb150-1"></a><span class="fu">cat</span> work/6a/2dfcaf*/.command.out</span>
+<span id="cb150-2"><a href="workflow-and-log.html#cb150-2"></a></span>
+<span id="cb150-3"><a href="workflow-and-log.html#cb150-3"></a><span class="ex">hola</span> in Italian is ciao</span></code></pre></div>
 <p>You can also give a name to workflows, so that you can combine them in the main workflow. For instance we can write:</p>
-<div class="sourceCode" id="cb151"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb151-1"><a href="workflow.html#cb151-1"></a>#!/usr/bin/env nextflow</span>
-<span id="cb151-2"><a href="workflow.html#cb151-2"></a></span>
-<span id="cb151-3"><a href="workflow.html#cb151-3"></a>nextflow.<span class="fu">enable</span>.<span class="fu">dsl</span>=<span class="dv">2</span></span>
-<span id="cb151-4"><a href="workflow.html#cb151-4"></a></span>
-<span id="cb151-5"><a href="workflow.html#cb151-5"></a>str = <span class="bu">Channel</span>.<span class="fu">from</span>(&#39;hello&#39;, &#39;hola&#39;, &#39;bonjour&#39;)</span>
-<span id="cb151-6"><a href="workflow.html#cb151-6"></a></span>
-<span id="cb151-7"><a href="workflow.html#cb151-7"></a>process printHello {</span>
-<span id="cb151-8"><a href="workflow.html#cb151-8"></a></span>
-<span id="cb151-9"><a href="workflow.html#cb151-9"></a>   tag { str_in }</span>
-<span id="cb151-10"><a href="workflow.html#cb151-10"></a></span>
-<span id="cb151-11"><a href="workflow.html#cb151-11"></a>   input:        </span>
-<span id="cb151-12"><a href="workflow.html#cb151-12"></a>   val str_in</span>
-<span id="cb151-13"><a href="workflow.html#cb151-13"></a></span>
-<span id="cb151-14"><a href="workflow.html#cb151-14"></a>   output:        </span>
-<span id="cb151-15"><a href="workflow.html#cb151-15"></a>   stdout</span>
-<span id="cb151-16"><a href="workflow.html#cb151-16"></a></span>
-<span id="cb151-17"><a href="workflow.html#cb151-17"></a>   script:        </span>
-<span id="cb151-18"><a href="workflow.html#cb151-18"></a>   <span class="st">&quot;&quot;&quot;</span></span>
-<span id="cb151-19"><a href="workflow.html#cb151-19"></a>   echo ${str_in} in Italian is ciao</span>
-<span id="cb151-20"><a href="workflow.html#cb151-20"></a>   <span class="st">&quot;&quot;&quot;</span></span>
-<span id="cb151-21"><a href="workflow.html#cb151-21"></a>}</span>
-<span id="cb151-22"><a href="workflow.html#cb151-22"></a></span>
-<span id="cb151-23"><a href="workflow.html#cb151-23"></a><span class="co">/*</span></span>
-<span id="cb151-24"><a href="workflow.html#cb151-24"></a><span class="co"> * A workflow can be named as a function and receive an input using the take keyword</span></span>
-<span id="cb151-25"><a href="workflow.html#cb151-25"></a><span class="co"> */</span></span>
-<span id="cb151-26"><a href="workflow.html#cb151-26"></a></span>
-<span id="cb151-27"><a href="workflow.html#cb151-27"></a>workflow first_pipeline {</span>
-<span id="cb151-28"><a href="workflow.html#cb151-28"></a>    take: str_input</span>
-<span id="cb151-29"><a href="workflow.html#cb151-29"></a>    main:</span>
-<span id="cb151-30"><a href="workflow.html#cb151-30"></a>    <span class="fu">printHello</span>(str_input).<span class="fu">view</span>()</span>
-<span id="cb151-31"><a href="workflow.html#cb151-31"></a>}</span>
-<span id="cb151-32"><a href="workflow.html#cb151-32"></a></span>
-<span id="cb151-33"><a href="workflow.html#cb151-33"></a></span>
-<span id="cb151-34"><a href="workflow.html#cb151-34"></a><span class="co">/*</span></span>
-<span id="cb151-35"><a href="workflow.html#cb151-35"></a><span class="co"> * You can re-use the previous processes and combine as you prefer</span></span>
-<span id="cb151-36"><a href="workflow.html#cb151-36"></a><span class="co"> */</span></span>
-<span id="cb151-37"><a href="workflow.html#cb151-37"></a></span>
-<span id="cb151-38"><a href="workflow.html#cb151-38"></a>workflow second_pipeline {</span>
-<span id="cb151-39"><a href="workflow.html#cb151-39"></a>    take: str_input</span>
-<span id="cb151-40"><a href="workflow.html#cb151-40"></a>    main:</span>
-<span id="cb151-41"><a href="workflow.html#cb151-41"></a>    <span class="fu">printHello</span>(str_input.<span class="fu">collect</span>()).<span class="fu">view</span>()</span>
-<span id="cb151-42"><a href="workflow.html#cb151-42"></a>}</span>
-<span id="cb151-43"><a href="workflow.html#cb151-43"></a></span>
-<span id="cb151-44"><a href="workflow.html#cb151-44"></a><span class="co">/*</span></span>
-<span id="cb151-45"><a href="workflow.html#cb151-45"></a><span class="co"> * You can then invoke the different named workflows in this way</span></span>
-<span id="cb151-46"><a href="workflow.html#cb151-46"></a><span class="co"> * passing the same input channel `str` to both  </span></span>
-<span id="cb151-47"><a href="workflow.html#cb151-47"></a><span class="co"> */</span></span>
-<span id="cb151-48"><a href="workflow.html#cb151-48"></a></span>
-<span id="cb151-49"><a href="workflow.html#cb151-49"></a>workflow {</span>
-<span id="cb151-50"><a href="workflow.html#cb151-50"></a>    <span class="fu">first_pipeline</span>(str)</span>
-<span id="cb151-51"><a href="workflow.html#cb151-51"></a>    <span class="fu">second_pipeline</span>(str)</span>
-<span id="cb151-52"><a href="workflow.html#cb151-52"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb151"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb151-1"><a href="workflow-and-log.html#cb151-1"></a>#!/usr/bin/env nextflow</span>
+<span id="cb151-2"><a href="workflow-and-log.html#cb151-2"></a></span>
+<span id="cb151-3"><a href="workflow-and-log.html#cb151-3"></a>nextflow.<span class="fu">enable</span>.<span class="fu">dsl</span>=<span class="dv">2</span></span>
+<span id="cb151-4"><a href="workflow-and-log.html#cb151-4"></a></span>
+<span id="cb151-5"><a href="workflow-and-log.html#cb151-5"></a>str = <span class="bu">Channel</span>.<span class="fu">from</span>(&#39;hello&#39;, &#39;hola&#39;, &#39;bonjour&#39;)</span>
+<span id="cb151-6"><a href="workflow-and-log.html#cb151-6"></a></span>
+<span id="cb151-7"><a href="workflow-and-log.html#cb151-7"></a>process printHello {</span>
+<span id="cb151-8"><a href="workflow-and-log.html#cb151-8"></a></span>
+<span id="cb151-9"><a href="workflow-and-log.html#cb151-9"></a>   tag { str_in }</span>
+<span id="cb151-10"><a href="workflow-and-log.html#cb151-10"></a></span>
+<span id="cb151-11"><a href="workflow-and-log.html#cb151-11"></a>   input:        </span>
+<span id="cb151-12"><a href="workflow-and-log.html#cb151-12"></a>   val str_in</span>
+<span id="cb151-13"><a href="workflow-and-log.html#cb151-13"></a></span>
+<span id="cb151-14"><a href="workflow-and-log.html#cb151-14"></a>   output:        </span>
+<span id="cb151-15"><a href="workflow-and-log.html#cb151-15"></a>   stdout</span>
+<span id="cb151-16"><a href="workflow-and-log.html#cb151-16"></a></span>
+<span id="cb151-17"><a href="workflow-and-log.html#cb151-17"></a>   script:        </span>
+<span id="cb151-18"><a href="workflow-and-log.html#cb151-18"></a>   <span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb151-19"><a href="workflow-and-log.html#cb151-19"></a>   echo ${str_in} in Italian is ciao</span>
+<span id="cb151-20"><a href="workflow-and-log.html#cb151-20"></a>   <span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb151-21"><a href="workflow-and-log.html#cb151-21"></a>}</span>
+<span id="cb151-22"><a href="workflow-and-log.html#cb151-22"></a></span>
+<span id="cb151-23"><a href="workflow-and-log.html#cb151-23"></a><span class="co">/*</span></span>
+<span id="cb151-24"><a href="workflow-and-log.html#cb151-24"></a><span class="co"> * A workflow can be named as a function and receive an input using the take keyword</span></span>
+<span id="cb151-25"><a href="workflow-and-log.html#cb151-25"></a><span class="co"> */</span></span>
+<span id="cb151-26"><a href="workflow-and-log.html#cb151-26"></a></span>
+<span id="cb151-27"><a href="workflow-and-log.html#cb151-27"></a>workflow first_pipeline {</span>
+<span id="cb151-28"><a href="workflow-and-log.html#cb151-28"></a>    take: str_input</span>
+<span id="cb151-29"><a href="workflow-and-log.html#cb151-29"></a>    main:</span>
+<span id="cb151-30"><a href="workflow-and-log.html#cb151-30"></a>    <span class="fu">printHello</span>(str_input).<span class="fu">view</span>()</span>
+<span id="cb151-31"><a href="workflow-and-log.html#cb151-31"></a>}</span>
+<span id="cb151-32"><a href="workflow-and-log.html#cb151-32"></a></span>
+<span id="cb151-33"><a href="workflow-and-log.html#cb151-33"></a></span>
+<span id="cb151-34"><a href="workflow-and-log.html#cb151-34"></a><span class="co">/*</span></span>
+<span id="cb151-35"><a href="workflow-and-log.html#cb151-35"></a><span class="co"> * You can re-use the previous processes and combine as you prefer</span></span>
+<span id="cb151-36"><a href="workflow-and-log.html#cb151-36"></a><span class="co"> */</span></span>
+<span id="cb151-37"><a href="workflow-and-log.html#cb151-37"></a></span>
+<span id="cb151-38"><a href="workflow-and-log.html#cb151-38"></a>workflow second_pipeline {</span>
+<span id="cb151-39"><a href="workflow-and-log.html#cb151-39"></a>    take: str_input</span>
+<span id="cb151-40"><a href="workflow-and-log.html#cb151-40"></a>    main:</span>
+<span id="cb151-41"><a href="workflow-and-log.html#cb151-41"></a>    <span class="fu">printHello</span>(str_input.<span class="fu">collect</span>()).<span class="fu">view</span>()</span>
+<span id="cb151-42"><a href="workflow-and-log.html#cb151-42"></a>}</span>
+<span id="cb151-43"><a href="workflow-and-log.html#cb151-43"></a></span>
+<span id="cb151-44"><a href="workflow-and-log.html#cb151-44"></a><span class="co">/*</span></span>
+<span id="cb151-45"><a href="workflow-and-log.html#cb151-45"></a><span class="co"> * You can then invoke the different named workflows in this way</span></span>
+<span id="cb151-46"><a href="workflow-and-log.html#cb151-46"></a><span class="co"> * passing the same input channel `str` to both  </span></span>
+<span id="cb151-47"><a href="workflow-and-log.html#cb151-47"></a><span class="co"> */</span></span>
+<span id="cb151-48"><a href="workflow-and-log.html#cb151-48"></a></span>
+<span id="cb151-49"><a href="workflow-and-log.html#cb151-49"></a>workflow {</span>
+<span id="cb151-50"><a href="workflow-and-log.html#cb151-50"></a>    <span class="fu">first_pipeline</span>(str)</span>
+<span id="cb151-51"><a href="workflow-and-log.html#cb151-51"></a>    <span class="fu">second_pipeline</span>(str)</span>
+<span id="cb151-52"><a href="workflow-and-log.html#cb151-52"></a>}</span></code></pre></div>
 <p>You can see that with the previous code you can execute two workflows containing the same process. <br>
 We can add the <strong>collect</strong> operator to the second workflow that collects the output from different executions and returns the resulting list <strong>as a sole emission</strong>.</p>
 <p>Let’s run the code:</p>
-<div class="sourceCode" id="cb152"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb152-1"><a href="workflow.html#cb152-1"></a><span class="ex">nextflow</span> run test.nf -bg <span class="op">&gt;</span> log2</span>
-<span id="cb152-2"><a href="workflow.html#cb152-2"></a></span>
-<span id="cb152-3"><a href="workflow.html#cb152-3"></a><span class="fu">cat</span> log2</span>
-<span id="cb152-4"><a href="workflow.html#cb152-4"></a></span>
-<span id="cb152-5"><a href="workflow.html#cb152-5"></a><span class="ex">N</span> E X T F L O W  ~  version 20.07.1</span>
-<span id="cb152-6"><a href="workflow.html#cb152-6"></a><span class="ex">Launching</span> <span class="kw">`</span><span class="ex">test.nf</span><span class="kw">`</span> [irreverent_davinci] - revision: 25a5511d1d</span>
-<span id="cb152-7"><a href="workflow.html#cb152-7"></a>[<span class="ex">de</span>/<span class="ex">105b97</span>] Submitted process <span class="op">&gt;</span> first_pipeline:printHello (hello)</span>
-<span id="cb152-8"><a href="workflow.html#cb152-8"></a>[<span class="ex">ba</span>/<span class="ex">051c23</span>] Submitted process <span class="op">&gt;</span> first_pipeline:printHello (bonjour)</span>
-<span id="cb152-9"><a href="workflow.html#cb152-9"></a>[<span class="ex">1f</span>/<span class="ex">9b41b2</span>] Submitted process <span class="op">&gt;</span> second_pipeline:printHello (hello)</span>
-<span id="cb152-10"><a href="workflow.html#cb152-10"></a>[<span class="ex">8d</span>/<span class="ex">270d93</span>] Submitted process <span class="op">&gt;</span> first_pipeline:printHello (hola)</span>
-<span id="cb152-11"><a href="workflow.html#cb152-11"></a>[<span class="ex">18</span>/<span class="ex">7b84c3</span>] Submitted process <span class="op">&gt;</span> second_pipeline:printHello (hola)</span>
-<span id="cb152-12"><a href="workflow.html#cb152-12"></a><span class="ex">hello</span> in Italian is ciao</span>
-<span id="cb152-13"><a href="workflow.html#cb152-13"></a></span>
-<span id="cb152-14"><a href="workflow.html#cb152-14"></a><span class="ex">bonjour</span> in Italian is ciao</span>
-<span id="cb152-15"><a href="workflow.html#cb152-15"></a></span>
-<span id="cb152-16"><a href="workflow.html#cb152-16"></a>[<span class="ex">0f</span>/<span class="ex">f78baf</span>] Submitted process <span class="op">&gt;</span> second_pipeline:printHello (bonjour)</span>
-<span id="cb152-17"><a href="workflow.html#cb152-17"></a><span class="ex">hola</span> in Italian is ciao</span>
-<span id="cb152-18"><a href="workflow.html#cb152-18"></a></span>
-<span id="cb152-19"><a href="workflow.html#cb152-19"></a>[<span class="st">&#39;hello in Italian is ciao\n&#39;</span>, <span class="st">&#39;hola in Italian is ciao\n&#39;</span>, <span class="st">&#39;bonjour in Italian is ciao\n&#39;</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb152"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb152-1"><a href="workflow-and-log.html#cb152-1"></a><span class="ex">nextflow</span> run test.nf -bg <span class="op">&gt;</span> log2</span>
+<span id="cb152-2"><a href="workflow-and-log.html#cb152-2"></a></span>
+<span id="cb152-3"><a href="workflow-and-log.html#cb152-3"></a><span class="fu">cat</span> log2</span>
+<span id="cb152-4"><a href="workflow-and-log.html#cb152-4"></a></span>
+<span id="cb152-5"><a href="workflow-and-log.html#cb152-5"></a><span class="ex">N</span> E X T F L O W  ~  version 20.07.1</span>
+<span id="cb152-6"><a href="workflow-and-log.html#cb152-6"></a><span class="ex">Launching</span> <span class="kw">`</span><span class="ex">test.nf</span><span class="kw">`</span> [irreverent_davinci] - revision: 25a5511d1d</span>
+<span id="cb152-7"><a href="workflow-and-log.html#cb152-7"></a>[<span class="ex">de</span>/<span class="ex">105b97</span>] Submitted process <span class="op">&gt;</span> first_pipeline:printHello (hello)</span>
+<span id="cb152-8"><a href="workflow-and-log.html#cb152-8"></a>[<span class="ex">ba</span>/<span class="ex">051c23</span>] Submitted process <span class="op">&gt;</span> first_pipeline:printHello (bonjour)</span>
+<span id="cb152-9"><a href="workflow-and-log.html#cb152-9"></a>[<span class="ex">1f</span>/<span class="ex">9b41b2</span>] Submitted process <span class="op">&gt;</span> second_pipeline:printHello (hello)</span>
+<span id="cb152-10"><a href="workflow-and-log.html#cb152-10"></a>[<span class="ex">8d</span>/<span class="ex">270d93</span>] Submitted process <span class="op">&gt;</span> first_pipeline:printHello (hola)</span>
+<span id="cb152-11"><a href="workflow-and-log.html#cb152-11"></a>[<span class="ex">18</span>/<span class="ex">7b84c3</span>] Submitted process <span class="op">&gt;</span> second_pipeline:printHello (hola)</span>
+<span id="cb152-12"><a href="workflow-and-log.html#cb152-12"></a><span class="ex">hello</span> in Italian is ciao</span>
+<span id="cb152-13"><a href="workflow-and-log.html#cb152-13"></a></span>
+<span id="cb152-14"><a href="workflow-and-log.html#cb152-14"></a><span class="ex">bonjour</span> in Italian is ciao</span>
+<span id="cb152-15"><a href="workflow-and-log.html#cb152-15"></a></span>
+<span id="cb152-16"><a href="workflow-and-log.html#cb152-16"></a>[<span class="ex">0f</span>/<span class="ex">f78baf</span>] Submitted process <span class="op">&gt;</span> second_pipeline:printHello (bonjour)</span>
+<span id="cb152-17"><a href="workflow-and-log.html#cb152-17"></a><span class="ex">hola</span> in Italian is ciao</span>
+<span id="cb152-18"><a href="workflow-and-log.html#cb152-18"></a></span>
+<span id="cb152-19"><a href="workflow-and-log.html#cb152-19"></a>[<span class="st">&#39;hello in Italian is ciao\n&#39;</span>, <span class="st">&#39;hola in Italian is ciao\n&#39;</span>, <span class="st">&#39;bonjour in Italian is ciao\n&#39;</span>]</span></code></pre></div>
 </div>
 </div>
             </section>

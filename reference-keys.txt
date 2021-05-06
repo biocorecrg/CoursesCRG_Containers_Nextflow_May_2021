@@ -109,7 +109,7 @@ installation
 channels-and-operators
 exercise-1
 processes
-workflow
+workflow-and-log
 nextflow-log
 exercise-2
 more-complex-scripts
