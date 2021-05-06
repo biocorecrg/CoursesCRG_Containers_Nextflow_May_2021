@@ -363,16 +363,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb155-67"><a href="more-complex-scripts.html#cb155-67"></a>}</span></code></pre></div>
 <p>Here we have two simple processes:</p>
 <ul>
-<li>the former splits the input fasta file in single sequences</li>
-<li>the latter is able to reverse the position of the sequences.</li>
+<li>the former splits the input fasta file into <strong>single sequences</strong>.</li>
+<li>the latter is able to <strong>reverse the position of the sequences</strong>.</li>
 </ul>
 <p>The input path is fed as a parameter using the script parameters <strong>${seq}</strong></p>
-<pre><code>params.inputfile</code></pre>
-<p>This value can be overridden when calling the script:</p>
+<div class="sourceCode" id="cb156"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb156-1"><a href="more-complex-scripts.html#cb156-1"></a><span class="ex">params.inputfile</span></span></code></pre></div>
+<p><em>Note: you can get the file “test.fa” from the <a href="https://github.com/biocorecrg/CoursesCRG_Containers_Nextflow_May_2021/tree/main/testdata">githu repository of the course</a></em></p>
+<p><br>
+This value can be overridden when calling the script:</p>
 <div class="sourceCode" id="cb157"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb157-1"><a href="more-complex-scripts.html#cb157-1"></a><span class="ex">nextflow</span> run test.nf --inputfile another_input.fa</span></code></pre></div>
 <p>The workflow part connects the two processes so that <u>the output of the first process is fed as an input to the second one</u>.</p>
 <p>During the execution Nextflow creates a number of temporary folders, and will this time also create a soft link to the original input file. It will then store output files locally.</p>
-<p>The output file is then linked in other folders for being used as input from other processes. <br>This avoids clashes and each process is nicely isolated from the others.</p>
+<p>The output file is then <em>linked</em> in other folders for being used as input from other processes. <br>This avoids clashes and each process is nicely isolated from the others.</p>
 <div class="sourceCode" id="cb158"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb158-1"><a href="more-complex-scripts.html#cb158-1"></a><span class="ex">nextflow</span> run test.nf -bg</span>
 <span id="cb158-2"><a href="more-complex-scripts.html#cb158-2"></a></span>
 <span id="cb158-3"><a href="more-complex-scripts.html#cb158-3"></a><span class="ex">N</span> E X T F L O W  ~  version 20.07.1</span>

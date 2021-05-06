@@ -293,15 +293,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="directives" class="section level2">
 <h2><span class="header-section-number">5.10</span> Directives</h2>
-<p>The <strong>directives</strong> are declaration blocks that can provide optional settings to a process. <br>
+<p>The <a href="https://www.nextflow.io/docs/latest/process.html#directives"><strong>directives</strong></a> are declaration blocks that can provide optional settings to a process. <br>
 For instance, they can affect the way a process stages in and out the input and output files (<a href="https://www.nextflow.io/docs/latest/process.html#stageinmode"><strong>stageInMode</strong></a> and <a href="https://www.nextflow.io/docs/latest/process.html#stageoutmode"><strong>stageOutMode</strong></a>), or they can indicate which file has to be considered a final result and in which folder it should be published (<a href="https://www.nextflow.io/docs/latest/process.html#publishdir"><strong>publishDir</strong></a>).</p>
-<p>We can add the directive <code>publishDir</code> to our previous example:</p>
+<p>We can add the directive <a href="https://www.nextflow.io/docs/latest/process.html#publishdir"><code>publishDir</code></a> to our previous example:</p>
 <div class="sourceCode" id="cb163"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb163-1"><a href="directives.html#cb163-1"></a><span class="co">/*</span></span>
 <span id="cb163-2"><a href="directives.html#cb163-2"></a><span class="co"> * Simple reverse the sequences</span></span>
 <span id="cb163-3"><a href="directives.html#cb163-3"></a><span class="co"> */</span></span>
 <span id="cb163-4"><a href="directives.html#cb163-4"></a> </span>
 <span id="cb163-5"><a href="directives.html#cb163-5"></a>process reverseSequence {</span>
-<span id="cb163-6"><a href="directives.html#cb163-6"></a>    tag <span class="st">&quot;$seq&quot;</span>                                          <span class="co">// during the execution prints the indicated variable for follow-up</span></span>
+<span id="cb163-6"><a href="directives.html#cb163-6"></a>    tag <span class="st">&quot;$seq&quot;</span> <span class="co">// during the execution prints the indicated variable for follow-up</span></span>
 <span id="cb163-7"><a href="directives.html#cb163-7"></a>    publishDir <span class="st">&quot;output&quot;</span></span>
 <span id="cb163-8"><a href="directives.html#cb163-8"></a></span>
 <span id="cb163-9"><a href="directives.html#cb163-9"></a>    input:</span>
@@ -315,13 +315,13 @@ For instance, they can affect the way a process stages in and out the input and 
 <span id="cb163-17"><a href="directives.html#cb163-17"></a>    cat ${seq} | awk &#39;{<span class="kw">if</span> (\$<span class="dv">1</span>~<span class="st">&quot;&gt;&quot;</span>) {print \$<span class="dv">0</span>} <span class="kw">else</span> <span class="fu">system</span>(<span class="st">&quot;echo &quot;</span> \$<span class="dv">0</span> <span class="st">&quot; |rev&quot;</span>)}&#39; &gt; all.<span class="fu">rev</span></span>
 <span id="cb163-18"><a href="directives.html#cb163-18"></a>    <span class="st">&quot;&quot;&quot;</span></span>
 <span id="cb163-19"><a href="directives.html#cb163-19"></a>}</span></code></pre></div>
-<p>We can also use <strong>storeDir</strong> in case we want to have a permanent cache. <br></p>
+<p>We can also use <a href="https://www.nextflow.io/docs/latest/process.html#storedir"><code>storeDir</code></a> in case we want to have a permanent cache. <br></p>
 <p>The process is executed only if the output files do not exist in the folder specified by <strong>storeDir</strong>.<br>
 When the output files exist, the process execution is skipped and these files are used as the actual process result.<br></p>
 <p>For example, this can be useful if we don’t want to generate indexes each time and we prefer to reuse them.
 <br>
 We can also indicate what to do in case a process fails.<br></p>
-<p>The default is to stop the pipeline and to raise an error. But we can also skip the process using this directive:</p>
+<p>The default is to stop the pipeline and to raise an error. But we can also skip the process using the <a href="https://www.nextflow.io/docs/latest/process.html#errorstrategy"><code>errorStrategy</code></a> directive:</p>
 <div class="sourceCode" id="cb164"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb164-1"><a href="directives.html#cb164-1"></a>errorStrategy &#39;ignore&#39;</span></code></pre></div>
 <p>or retry a number of times changing something like the memory available or the maximum execution time. <br>
 This time we need a number of directives:</p>
