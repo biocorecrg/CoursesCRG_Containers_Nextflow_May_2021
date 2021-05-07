@@ -76,7 +76,7 @@ process reverseSequence {
  
 	script:
     """
-    cat ${seq} | nawk '{if (\$1~">") {print \$0} else system("echo " \$0 " |rev")}' > all.rev
+    cat ${seq} | awk '{if (\$1~">") {print \$0} else system("echo " \$0 " |rev")}' > all.rev
     """
 }
 
