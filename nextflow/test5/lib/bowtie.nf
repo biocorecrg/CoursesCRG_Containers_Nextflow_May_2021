@@ -10,7 +10,7 @@ params.OUTPUT = "bowtie_output"
  */
 process bowtieIdx {
     container params.CONTAINER
-    tag { ref }
+    tag { "${ref}" }
     							
     input:
     path ref   							
@@ -32,7 +32,7 @@ process bowtieIdx {
 process bowtieAln {
     publishDir(params.OUTPUT, pattern: '*.sam')
     container params.CONTAINER
-    tag { reads }  							
+    tag { "${reads}" }  							
 
     input:
     tuple val(refname), path (ref_files)
