@@ -54,8 +54,11 @@ Then we have the resources needed for a class of processes in particular labeled
    	 	cpus='1'
 	} 	
 ```
+In the script [test2.nf file](https://github.com/biocorecrg/CoursesCRG_Containers_Nextflow_May_2021/tree/main/nextflow/test2) we have two processes that will run two programs:
+- [fastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/): a tool that calculates a number of quality control metrics on single fastq files.
+- [multiQC](https://multiqc.info/): an aggregator of results from bioinformatics tools and samples for generating a single report.
 
-If we have a look at process **fastQC** in the [test2.nf file](https://github.com/biocorecrg/CoursesCRG_Containers_Nextflow_May_2021/tree/main/nextflow/test2), we can see the use of the label.
+If we have a look at process **fastQC** we can see the use of the label.
 
 ```{java, eval=FALSE, echo=TRUE}
 /*
@@ -963,15 +966,26 @@ So we check the email:
 knitr::include_graphics('docs/images/tower1.png')
 ```
 
-We then follow the instructions exporting two environmental variables:
+We then go on getting started and follow the instructions for exporting two environmental variables:
 
 ```{r, out.width="800px", echo=FALSE, eval = TRUE }
 knitr::include_graphics('docs/images/tower2.png')
 ```
 
+You can then generate your token here: [https://tower.nf/tokens](https://tower.nf/tokens) and copy paste in your pipeline using this snippet in the configuration file
+
+```{java, eval=FALSE, echo=TRUE}
+tower {
+  accessToken = '<YOUR TOKEN>'
+  enabled = true
+}
+```
+
+or exporting those environmental variables:
+
 ```{bash, eval=FALSE, echo=TRUE}
 export TOWER_ACCESS_TOKEN=*******YOUR***TOKEN*****HERE*******
-export NXF_VER=20.09.1-edge 
+export NXF_VER=21.04.0
 ```
 
 we then launch the pipeline:
@@ -995,6 +1009,13 @@ We finally go to the tower website again:
 
 ```{r, out.width="800px", echo=FALSE, eval = TRUE }
 knitr::include_graphics('docs/images/tower3.png')
+```
+
+And in the end when the pipeline is finished we can also receive a mail.
+
+
+```{r, out.width="800px", echo=FALSE, eval = TRUE }
+knitr::include_graphics('docs/images/tower4.png')
 ```
 
 ## Share Nextflow pipelines and good practices
