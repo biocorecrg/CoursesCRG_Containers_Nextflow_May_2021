@@ -85,7 +85,7 @@ reference = file(params.reference)
  */
 process fastQC {
     publishDir fastqcOutputFolder  			
-    tag { reads }  							
+    tag { "${reads}" }  							
 
     input:
     path reads   							
@@ -103,7 +103,8 @@ process fastQC {
  * Process 2. Bowtie index
  */
 process bowtieIdx {
-    tag { ref }  							
+    tag { "${ref}" }  							
+
 
     input:
     path ref   							
@@ -125,7 +126,7 @@ process bowtieIdx {
 process bowtieAln {
     publishDir alnOutputFolder, pattern: '*.sam'
 
-    tag { reads }  							
+    tag { "${reads}" }  							
     label 'twocpus' 
 
     input:
