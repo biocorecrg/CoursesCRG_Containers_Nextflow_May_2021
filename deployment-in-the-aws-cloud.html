@@ -293,7 +293,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="deployment-in-the-aws-cloud" class="section level2">
 <h2><span class="header-section-number">6.7</span> Deployment in the AWS cloud</h2>
-<p>The final profile is for running the pipeline in the Amazon Cloud, known as Amazon Web Services or AWS. In particular we will use <strong>AWS Batch</strong> that allows the execution of containerised workloads in the Amazon cloud infrastructure.</p>
+<p>The final profile is for running the pipeline in the <strong>Amazon Cloud</strong>, known as Amazon Web Services or AWS. In particular we will use <strong>AWS Batch</strong> that allows the execution of containerised workloads in the Amazon cloud infrastructure.</p>
 <div class="sourceCode" id="cb207"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb207-1"><a href="deployment-in-the-aws-cloud.html#cb207-1"></a></span>
 <span id="cb207-2"><a href="deployment-in-the-aws-cloud.html#cb207-2"></a>   cloud {</span>
 <span id="cb207-3"><a href="deployment-in-the-aws-cloud.html#cb207-3"></a>    workDir = &#39;s3:<span class="co">//class-bucket-1/work&#39;</span></span>
@@ -319,10 +319,11 @@ Then we indicate that the working directory, that is normally written locally, s
 This is mandatory when running Nextflow on the cloud.<br>
 We can now launch the pipeline indicating <code>-profile cloud</code></p>
 <div class="sourceCode" id="cb208"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb208-1"><a href="deployment-in-the-aws-cloud.html#cb208-1"></a><span class="ex">nextflow</span> run test3.nf -bg -with-docker -profile cloud <span class="op">&gt;</span> log</span></code></pre></div>
-<p>We can see that there is no more a <strong>work</strong> folder because is on the AWS cloud and that the output is then copied locally.</p>
+<p>Note that there is no longer a <strong>work</strong> folder because, on the AWS cloud, the output is copied locally.</p>
 <p>Sometimes you can find that the Nextflow process itself is very memory intensive and the main node can run out of memory. To avoid this you can reduce the memory needed by setting an environmental variable:</p>
 <div class="sourceCode" id="cb209"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb209-1"><a href="deployment-in-the-aws-cloud.html#cb209-1"></a><span class="bu">export</span> <span class="va">NXF_OPTS=</span><span class="st">&quot;-Xms50m -Xmx500m&quot;</span></span></code></pre></div>
-<p>Again we can copy the output file to the bucket. We can also tell nextflow to direclty copy the output file to the S3 bucket. Just changing the parameter <strong>outdir</strong> in the params file will allow this:</p>
+<p>Again we can copy the output file to the bucket. <br>
+We can also tell Nextflow to directly copy the output file to the S3 bucket: to do so, change the parameter <strong>outdir</strong> in the params file:</p>
 <div class="sourceCode" id="cb210"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb210-1"><a href="deployment-in-the-aws-cloud.html#cb210-1"></a>outdir = <span class="st">&quot;s3://class-bucket-1/results&quot;</span></span></code></pre></div>
 </div>
             </section>

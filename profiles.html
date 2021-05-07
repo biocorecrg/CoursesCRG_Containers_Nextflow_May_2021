@@ -293,11 +293,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="profiles" class="section level2">
 <h2><span class="header-section-number">6.6</span> Profiles</h2>
-<p>For deploying a pipeline on a cluster environment or a cloud we need to indicate some information on the <strong>nextflow.config</strong> file.</p>
-<p>In particular we need to indicate the kind of <a href="https://www.nextflow.io/docs/latest/process.html#executor">executor</a> to be used. <br>
-In the Nextflow framework architecture, the executor indicates which is the <strong>batch-queuing system</strong> to use to submit jobs to the HPC or to the cloud. <br>
+<p>For deploying a pipeline in a cluster environment or a cloud, we need to add some information in the <strong>nextflow.config</strong> file.</p>
+<p>In particular we need to indicate the kind of <a href="https://www.nextflow.io/docs/latest/process.html#executor">executor</a> should be used. <br></p>
+<p>In the Nextflow framework architecture, the executor indicates which is the <strong>batch-queuing system</strong> to use to submit jobs to the HPC or to the cloud. <br>
 The executor is completely abstracted, so you can switch from SGE to SLURM just by changing this parameter in the configuration file.</p>
-<p>You can group different class of configuration or <strong>profiles</strong> within a single <strong>nextflow.config</strong> file. In this way that you can indicate at run time which executor and resources to use for a pipeline execution.</p>
+<p>You can group different classes of configuration or <strong>profiles</strong> within a single <strong>nextflow.config</strong> file.
+In this way that you can indicate at run time which executor and resources to use for a pipeline execution.</p>
 <p>Let’s inspect the <strong>nextflow.config</strong> file in <strong>test3</strong> folder. We can look at three different profiles:</p>
 <ul>
 <li>standard</li>
@@ -321,8 +322,8 @@ The executor is completely abstracted, so you can switch from SGE to SLURM just 
 <span id="cb205-14"><a href="profiles.html#cb205-14"></a>        }</span>
 <span id="cb205-15"><a href="profiles.html#cb205-15"></a>      }</span>
 <span id="cb205-16"><a href="profiles.html#cb205-16"></a>   }</span></code></pre></div>
-<p>As you can see we indicate explicitly the <strong>local</strong> executor. So this will be the default when running the pipeline indicating no profiles.</p>
-<p>The second one is <strong>cluster</strong></p>
+<p>As you can see we indicate explicitly the <strong>local</strong> executor. So this will be the default when running the pipeline indicating without specifying a profiles.</p>
+<p>The second one is <strong>cluster</strong>:</p>
 <div class="sourceCode" id="cb206"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb206-1"><a href="profiles.html#cb206-1"></a></span>
 <span id="cb206-2"><a href="profiles.html#cb206-2"></a>   cluster {</span>
 <span id="cb206-3"><a href="profiles.html#cb206-3"></a>     process {</span>
@@ -341,7 +342,7 @@ The executor is completely abstracted, so you can switch from SGE to SLURM just 
 <span id="cb206-16"><a href="profiles.html#cb206-16"></a>        }</span>
 <span id="cb206-17"><a href="profiles.html#cb206-17"></a>      }</span>
 <span id="cb206-18"><a href="profiles.html#cb206-18"></a>   }</span></code></pre></div>
-<p>This indicates that the system uses Sun Grid Engine as job scheduler and that we have different queues for small jobs and more intensive ones.</p>
+<p>This indicates that the system uses <strong>Sun Grid Engine</strong> as job scheduler and that we have different queues for small jobs and more intensive ones.</p>
 </div>
             </section>
 
