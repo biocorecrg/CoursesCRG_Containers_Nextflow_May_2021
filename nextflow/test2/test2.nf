@@ -61,8 +61,8 @@ if (params.help) {
 /*
  * Defining the output folders.
  */
-fastqcOutputFolder    = "output_fastqc"
-multiqcOutputFolder   = "output_multiQC"
+fastqcOutputFolder    = "ouptut_fastqc"
+multiqcOutputFolder   = "ouptut_multiQC"
 
 
 /* Reading the file list and creating a "Channel": a queue that connects different channels.
@@ -82,7 +82,7 @@ Channel
 process fastQC {
     publishDir fastqcOutputFolder  			// where (and whether) to publish the results
     tag { reads }  							// during the execution prints the indicated variable for follow-up
-    label 'bigmem' 
+    label 'keep_trying' 
 
     input:
     path reads   							// it defines the input of the process. It sets values from a channel
