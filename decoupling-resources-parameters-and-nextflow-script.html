@@ -330,7 +330,10 @@ You can label your processes to make a link with the definitions in the nextflow
         memory=&#39;0.7G&#39;
         cpus=&#39;1&#39;
     }   </code></pre>
-<p>If we have a look at process <strong>fastQC</strong> in the <a href="https://github.com/biocorecrg/CoursesCRG_Containers_Nextflow_May_2021/tree/main/nextflow/test2">test2.nf file</a>, we can see the use of the label.</p>
+<p>In the script <a href="https://github.com/biocorecrg/CoursesCRG_Containers_Nextflow_May_2021/tree/main/nextflow/test2">test2.nf file</a> we have two processes that will run two programs:
+- <a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">fastQC</a>: a tool that calculates a number of quality control metrics on single fastq files.
+- <a href="https://multiqc.info/">multiQC</a>: an aggregator of results from bioinformatics tools and samples for generating a single report.</p>
+<p>If we have a look at process <strong>fastQC</strong> we can see the use of the label.</p>
 <div class="sourceCode" id="cb175"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb175-1"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb175-1"></a><span class="co">/*</span></span>
 <span id="cb175-2"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb175-2"></a><span class="co"> * Process 1. Run FastQC on raw data.</span></span>
 <span id="cb175-3"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb175-3"></a><span class="co"> */</span></span>

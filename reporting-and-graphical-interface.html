@@ -308,25 +308,33 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="docs/images/tower0.png" width="800px" /></p>
 <p>So we check the email:</p>
 <p><img src="docs/images/tower1.png" width="800px" /></p>
-<p>We then follow the instructions exporting two environmental variables:</p>
+<p>We then go on getting started and follow the instructions for exporting two environmental variables:</p>
 <p><img src="docs/images/tower2.png" width="800px" /></p>
-<div class="sourceCode" id="cb220"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb220-1"><a href="reporting-and-graphical-interface.html#cb220-1"></a><span class="bu">export</span> <span class="va">TOWER_ACCESS_TOKEN=</span>*******<span class="va">YOUR</span>***<span class="va">TOKEN</span>*****<span class="va">HERE</span>*******</span>
-<span id="cb220-2"><a href="reporting-and-graphical-interface.html#cb220-2"></a><span class="bu">export</span> <span class="va">NXF_VER=</span>20.09.1-edge </span></code></pre></div>
+<p>You can then generate your token here: <a href="https://tower.nf/tokens">https://tower.nf/tokens</a> and copy paste in your pipeline using this snippet in the configuration file</p>
+<div class="sourceCode" id="cb220"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb220-1"><a href="reporting-and-graphical-interface.html#cb220-1"></a>tower {</span>
+<span id="cb220-2"><a href="reporting-and-graphical-interface.html#cb220-2"></a>  accessToken = &#39;&lt;YOUR TOKEN&gt;&#39;</span>
+<span id="cb220-3"><a href="reporting-and-graphical-interface.html#cb220-3"></a>  enabled = <span class="kw">true</span></span>
+<span id="cb220-4"><a href="reporting-and-graphical-interface.html#cb220-4"></a>}</span></code></pre></div>
+<p>or exporting those environmental variables:</p>
+<div class="sourceCode" id="cb221"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb221-1"><a href="reporting-and-graphical-interface.html#cb221-1"></a><span class="bu">export</span> <span class="va">TOWER_ACCESS_TOKEN=</span>*******<span class="va">YOUR</span>***<span class="va">TOKEN</span>*****<span class="va">HERE</span>*******</span>
+<span id="cb221-2"><a href="reporting-and-graphical-interface.html#cb221-2"></a><span class="bu">export</span> <span class="va">NXF_VER=</span>21.04.0</span></code></pre></div>
 <p>we then launch the pipeline:</p>
-<div class="sourceCode" id="cb221"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb221-1"><a href="reporting-and-graphical-interface.html#cb221-1"></a><span class="ex">nextflow</span> run test5.nf -with-singularity -with-tower -bg <span class="op">&gt;</span> log</span>
-<span id="cb221-2"><a href="reporting-and-graphical-interface.html#cb221-2"></a></span>
-<span id="cb221-3"><a href="reporting-and-graphical-interface.html#cb221-3"></a></span>
-<span id="cb221-4"><a href="reporting-and-graphical-interface.html#cb221-4"></a><span class="ex">CAPSULE</span>: Downloading dependency io.nextflow:nf-tower:jar:20.09.1-edge</span>
-<span id="cb221-5"><a href="reporting-and-graphical-interface.html#cb221-5"></a><span class="ex">CAPSULE</span>: Downloading dependency org.codehaus.groovy:groovy-nio:jar:3.0.5</span>
-<span id="cb221-6"><a href="reporting-and-graphical-interface.html#cb221-6"></a><span class="ex">CAPSULE</span>: Downloading dependency io.nextflow:nextflow:jar:20.09.1-edge</span>
-<span id="cb221-7"><a href="reporting-and-graphical-interface.html#cb221-7"></a><span class="ex">CAPSULE</span>: Downloading dependency io.nextflow:nf-httpfs:jar:20.09.1-edge</span>
-<span id="cb221-8"><a href="reporting-and-graphical-interface.html#cb221-8"></a><span class="ex">CAPSULE</span>: Downloading dependency org.codehaus.groovy:groovy-json:jar:3.0.5</span>
-<span id="cb221-9"><a href="reporting-and-graphical-interface.html#cb221-9"></a><span class="ex">CAPSULE</span>: Downloading dependency org.codehaus.groovy:groovy:jar:3.0.5</span>
-<span id="cb221-10"><a href="reporting-and-graphical-interface.html#cb221-10"></a><span class="ex">CAPSULE</span>: Downloading dependency io.nextflow:nf-amazon:jar:20.09.1-edge</span>
-<span id="cb221-11"><a href="reporting-and-graphical-interface.html#cb221-11"></a><span class="ex">CAPSULE</span>: Downloading dependency org.codehaus.groovy:groovy-templates:jar:3.0.5</span>
-<span id="cb221-12"><a href="reporting-and-graphical-interface.html#cb221-12"></a><span class="ex">CAPSULE</span>: Downloading dependency org.codehaus.groovy:groovy-xml:jar:3.0.5</span></code></pre></div>
+<div class="sourceCode" id="cb222"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb222-1"><a href="reporting-and-graphical-interface.html#cb222-1"></a><span class="ex">nextflow</span> run test5.nf -with-singularity -with-tower -bg <span class="op">&gt;</span> log</span>
+<span id="cb222-2"><a href="reporting-and-graphical-interface.html#cb222-2"></a></span>
+<span id="cb222-3"><a href="reporting-and-graphical-interface.html#cb222-3"></a></span>
+<span id="cb222-4"><a href="reporting-and-graphical-interface.html#cb222-4"></a><span class="ex">CAPSULE</span>: Downloading dependency io.nextflow:nf-tower:jar:20.09.1-edge</span>
+<span id="cb222-5"><a href="reporting-and-graphical-interface.html#cb222-5"></a><span class="ex">CAPSULE</span>: Downloading dependency org.codehaus.groovy:groovy-nio:jar:3.0.5</span>
+<span id="cb222-6"><a href="reporting-and-graphical-interface.html#cb222-6"></a><span class="ex">CAPSULE</span>: Downloading dependency io.nextflow:nextflow:jar:20.09.1-edge</span>
+<span id="cb222-7"><a href="reporting-and-graphical-interface.html#cb222-7"></a><span class="ex">CAPSULE</span>: Downloading dependency io.nextflow:nf-httpfs:jar:20.09.1-edge</span>
+<span id="cb222-8"><a href="reporting-and-graphical-interface.html#cb222-8"></a><span class="ex">CAPSULE</span>: Downloading dependency org.codehaus.groovy:groovy-json:jar:3.0.5</span>
+<span id="cb222-9"><a href="reporting-and-graphical-interface.html#cb222-9"></a><span class="ex">CAPSULE</span>: Downloading dependency org.codehaus.groovy:groovy:jar:3.0.5</span>
+<span id="cb222-10"><a href="reporting-and-graphical-interface.html#cb222-10"></a><span class="ex">CAPSULE</span>: Downloading dependency io.nextflow:nf-amazon:jar:20.09.1-edge</span>
+<span id="cb222-11"><a href="reporting-and-graphical-interface.html#cb222-11"></a><span class="ex">CAPSULE</span>: Downloading dependency org.codehaus.groovy:groovy-templates:jar:3.0.5</span>
+<span id="cb222-12"><a href="reporting-and-graphical-interface.html#cb222-12"></a><span class="ex">CAPSULE</span>: Downloading dependency org.codehaus.groovy:groovy-xml:jar:3.0.5</span></code></pre></div>
 <p>We finally go to the tower website again:</p>
 <p><img src="docs/images/tower3.png" width="800px" /></p>
+<p>And in the end when the pipeline is finished we can also receive a mail.</p>
+<p><img src="docs/images/tower4.png" width="800px" /></p>
 </div>
             </section>
 
