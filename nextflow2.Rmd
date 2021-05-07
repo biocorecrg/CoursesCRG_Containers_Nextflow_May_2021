@@ -66,7 +66,7 @@ If we have a look at process **fastQC** we can see the use of the label.
  */
 process fastQC {
     publishDir fastqcOutputFolder  		
-    tag { reads }  					
+    tag { "${reads}" }  					
     label 'bigmem'
 
     input:
@@ -304,7 +304,7 @@ The process should become:
 ```{java, eval=FALSE, echo=TRUE}
 
 process reverseSequence {
-    tag "$seq"                  
+    tag { "${seq}" }                  
     publishDir "output"
 	label 'ignorefail'
 	
@@ -348,7 +348,7 @@ The process should become:
 
 process fastQC {
     publishDir fastqcOutputFolder	// where (and whether) to publish the results
-    tag { reads } 	// during the execution prints the indicated variable for follow-up
+    tag { "${reads}" } 	// during the execution prints the indicated variable for follow-up
     label 'keep_trying' 
 
     input:
@@ -507,7 +507,7 @@ We add two more processes. The first one is for the indexing the reference genom
  * Process 2. Bowtie index
  */
 process bowtieIdx {
-    tag { ref }  							
+    tag { "${ref}" }  							
 
     input:
     path ref   							
@@ -538,7 +538,7 @@ The second process `bowtieAln` is the alignment step:
 process bowtieAln {
     publishDir alnOutputFolder, pattern: '*.sam'
 
-    tag { reads }  							
+    tag { "${reads}" }  							
     label 'twocpus'
 
     input:
@@ -803,7 +803,7 @@ params.OUTPUT = "fastqc_output"
 
 process qc {
     publishDir(params.OUTPUT, mode: 'copy')
-    tag { reads }
+    tag { "${reads}" }
     container params.CONTAINER
 
     input:
