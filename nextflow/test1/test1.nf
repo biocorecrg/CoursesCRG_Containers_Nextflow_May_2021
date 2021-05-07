@@ -64,8 +64,9 @@ process splitSequences {
  */
  
 process reverseSequence {
-    tag "$seq"  					// during the execution prints the indicated variable for follow-up
+    tag { "${seq}" }  					// during the execution prints the indicated variable for follow-up
     publishDir "output"
+	errorStrategy 'ignore'
 
     input:
     path seq 
@@ -75,7 +76,7 @@ process reverseSequence {
  
 	script:
     """
-    cat ${seq} | awk '{if (\$1~">") {print \$0} else system("echo " \$0 " |rev")}' > all.rev
+    cat ${seq} | nawk '{if (\$1~">") {print \$0} else system("echo " \$0 " |rev")}' > all.rev
     """
 }
 

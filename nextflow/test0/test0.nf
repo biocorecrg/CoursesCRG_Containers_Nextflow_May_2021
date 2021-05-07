@@ -40,7 +40,7 @@ str = Channel.from('hello', 'hola', 'bonjour')
  */
 
 process printHello {
-   tag { str_in }
+   tag { "${str_in}" }
    
    input:
    val str_in

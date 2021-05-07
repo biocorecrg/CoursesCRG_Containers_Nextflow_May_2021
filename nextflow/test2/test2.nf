@@ -81,8 +81,8 @@ Channel
  */
 process fastQC {
     publishDir fastqcOutputFolder  			// where (and whether) to publish the results
-    tag { reads }  							// during the execution prints the indicated variable for follow-up
-    label 'keep_trying' 
+    tag { "${reads}" }  							// during the execution prints the indicated variable for follow-up
+    label 'big_mem' 
 
     input:
     path reads   							// it defines the input of the process. It sets values from a channel
