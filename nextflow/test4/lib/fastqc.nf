@@ -7,7 +7,7 @@ params.OUTPUT = "fastqc_output"
 
 process fastqc {
     publishDir(params.OUTPUT, mode: 'copy')
-    tag { reads }
+    tag { "${reads}" }
     container params.CONTAINER
 
     input:
