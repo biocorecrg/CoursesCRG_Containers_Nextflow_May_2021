@@ -466,11 +466,11 @@ qsub .command.run
 
 ## Adding more steps
 
-We can make pipelines incrementally by adding more and more processes. 
+We can make pipelines incrementally complex by adding more and more processes. 
 Nextflow will take care of the dependencies between the input / output and of the parallelization.<br>
-Within the **test3** folder we have two more steps: the reference indexing and the read alignments with **bowtie** (http://bowtie-bio.sourceforge.net/index.shtml).
+Within the **test3** folder we have two more steps to add: the reference indexing and the read alignments with **bowtie** (http://bowtie-bio.sourceforge.net/index.shtml).
 
-So we add a new input for the reference sequence:
+We add a new input for the reference sequence:
 
 ```nextflow
 log.info """
@@ -485,7 +485,7 @@ outdir                          : ${params.outdir}
 reference = file(params.reference)
 ```
 
-We generate in this way a **singleton channel** called **reference** which content is never consumed and can be indefinitely used. We also add a path specifying where to place the output files.
+The **singleton channel** called **reference** is created. Its content is never consumed and can be indefinitely used. We also add a path specifying where to place the output files.
 
 ```{java, eval=FALSE, echo=TRUE}
 /*
@@ -497,7 +497,7 @@ multiqcOutputFolder   = "${params.outdir}/output_multiQC"
 
 ```
 
-We add two more processes. The first one is for the indexing the reference genome (with `bowtie-build`:
+We add two more processes. The first one is for the indexing the reference genome (with `bowtie-build`):
 
 ```{java, eval=FALSE, echo=TRUE}
 /*
@@ -521,12 +521,12 @@ process bowtieIdx {
 }
 ```
 
-Since bowtie indexing requires unzipped reference we **unzip** it then we build the reference and remove the unzipped file afterwards. <br>
+Since bowtie indexing requires unzipped reference fasta file, we first **gunzip** it, we then build the reference index, and we finally remove the unzipped file. <br>
 The output channel generated is organized as a **tuple**, i.e. a list of elements. <br>
 The first element of the list is the <u>name of the index as a value</u>, the second is a <u>list of files constituting the index</u>. <br>
-The former is needed for building the command line of the alignment step, the latter are the files needed for the alignment.  
+The former is needed for building the command line of the alignment step, the latter are the files needed for the alignment.
 
-The second process is the alignment step:
+The second process `bowtieAln` is the alignment step:
 
 ```{java, eval=FALSE, echo=TRUE}
 /*
@@ -556,7 +556,7 @@ process bowtieAln {
 There are two different input channels: the **index** and the **reads**.<br>
 The index name specified by **refname** is used for building the command line while the index files, indicated by **ref_files**, are just linked in the current directory by using the **path** qualifier.
 
-We also produced two kind of outputs: the **alignments** and the **logs**. The first one is the one we want to keep as a final result. So we specify this using the **publishDir** **pattern** parameter.
+We also produced two kind of outputs: the **alignments** and the **logs**.<br> The first one is the one we want to keep as a final result. So we specify this using the **pattern** parameter in **publishDir**.
 
 ```{java, eval=FALSE, echo=TRUE}
     publishDir alnOutputFolder, pattern: '*.sam'
@@ -586,13 +586,15 @@ So we passed the **samples_log** output to the multiqc process after mixing it w
 
 ## Profiles 
 
-For deploying a pipeline on a cluster environment or a cloud we need to indicate some information on the **nextflow.config** file. 
+For deploying a pipeline in a cluster environment or a cloud, we need to add some information in the **nextflow.config** file. 
 
-In particular we need to indicate the kind of [executor](https://www.nextflow.io/docs/latest/process.html#executor) to be used. <br>
+In particular we need to indicate the kind of [executor](https://www.nextflow.io/docs/latest/process.html#executor) should be used. <br>
+
 In the Nextflow framework architecture, the executor indicates which is the **batch-queuing system** to use to submit jobs to the HPC or to the cloud. <br>
 The executor is completely abstracted, so you can switch from SGE to SLURM just by changing this parameter in the configuration file.
 
-You can group different class of configuration or **profiles** within a single **nextflow.config** file. In this way that you can indicate at run time which executor and resources to use for a pipeline execution.
+You can group different classes of configuration or **profiles** within a single **nextflow.config** file. 
+In this way that you can indicate at run time which executor and resources to use for a pipeline execution.
 
 Let's inspect the **nextflow.config** file in **test3** folder. We can look at three different profiles:
 
@@ -621,9 +623,9 @@ profiles {
    }
  ```
  
-As you can see we indicate explicitly the **local** executor. So this will be the default when running the pipeline indicating no profiles.
+As you can see we indicate explicitly the **local** executor. So this will be the default when running the pipeline indicating without specifying a profiles.
 
-The second one is **cluster**
+The second one is **cluster**:
 
 ```{java, eval=FALSE, echo=TRUE}
 
@@ -646,12 +648,12 @@ The second one is **cluster**
    }
 ```
 
-This indicates that the system uses Sun Grid Engine as job scheduler and that we have different queues for small jobs and more intensive ones.
+This indicates that the system uses **Sun Grid Engine** as job scheduler and that we have different queues for small jobs and more intensive ones.
 
 
 ## Deployment in the AWS cloud 
 
-The final profile is for running the pipeline in the Amazon Cloud, known as Amazon Web Services or AWS. In particular we will use **AWS Batch** that allows the execution of containerised workloads in the Amazon cloud infrastructure.
+The final profile is for running the pipeline in the **Amazon Cloud**, known as Amazon Web Services or AWS. In particular we will use **AWS Batch** that allows the execution of containerised workloads in the Amazon cloud infrastructure.
 
 ```{java, eval=FALSE, echo=TRUE}
 
@@ -685,7 +687,7 @@ We can now launch the pipeline indicating `-profile cloud`
 nextflow run test3.nf -bg -with-docker -profile cloud > log
 ```
 
-We can see that there is no more a **work** folder because is on the AWS cloud and that the output is then copied locally. 
+Note that there is no longer a **work** folder because, on the AWS cloud, the output is copied locally. 
 
 Sometimes you can find that the Nextflow process itself is very memory intensive and the main node can run out of memory. To avoid this you can reduce the memory needed by setting an environmental variable:
 
@@ -693,7 +695,8 @@ Sometimes you can find that the Nextflow process itself is very memory intensive
 export NXF_OPTS="-Xms50m -Xmx500m"
 ```
 
-Again we can copy the output file to the bucket. We can also tell nextflow to direclty copy the output file to the S3 bucket. Just changing the parameter **outdir** in the params file will allow this:
+Again we can copy the output file to the bucket. <br>
+We can also tell Nextflow to directly copy the output file to the S3 bucket: to do so, change the parameter **outdir** in the params file:
 
 ```{java, eval=FALSE, echo=TRUE}
 outdir = "s3://class-bucket-1/results"
@@ -703,7 +706,7 @@ outdir = "s3://class-bucket-1/results"
 
 Modify the **test3.nf** file to make two different subworkflows: 
 
-* one for fastqc + bowtie alingnment
+* one for fastqc + bowtie alignment
 * one for a new fastqc analysis of the aligned files produced by bowtie. 
 
 For convenience you can use the multiqc config file called config.yaml in the multiqc process.
@@ -814,7 +817,7 @@ process qc {
 
 ```
 
-Module **fastqc** takes as **input** a channel with reads and produces as **output** the files generated by the fastq program.
+Module **fastqc** takes as **input** a channel with reads and produces as **output** the files generated by the fastqc program.
 
 The module is quite simple: it contains the directive `publishDir`, the tag, the container to be used and has a similar input, output and script session than seen previously.
 
@@ -844,7 +847,7 @@ While we keep the information of the container inside the module for better repr
 params.CONTAINER = = "quay.io/biocontainers/fastqc:0.11.9--0"
 ```
 
-Here you see that we are not using our own image but one provided by **biocontainers**. <br>
+Here you see that we are not using our own image but one provided by **biocontainers** stored in [quay](https://quay.io/). <br>
 Here you can find a list of fastqc images developed and stored by the biocontainers community [https://biocontainers.pro/#/tools/fastqc](https://biocontainers.pro/#/tools/fastqc).
 
 Let's have a look at the **multiqc.nf** module:
@@ -885,7 +888,7 @@ In case we want to use it we would need to change the main code in this way:
 include { multiqc } from "${baseDir}/lib/multiqc" addParams(OUTPUT: multiqcOutputFolder, LABEL="onecpu")
 ```
 
-This because we specified the label **onecpu** in out **nextflow.config** file:
+This is because we specified the label **onecpu** in out **nextflow.config** file:
 
 ```{java, eval=FALSE, echo=TRUE}
 includeConfig "$baseDir/params.config"
@@ -925,8 +928,7 @@ Solution in the folder test5
 
 ## Reporting and graphical interface
 
-Nextflow has an embedded function for reporting a number of informations about the resources needed by each job and the timing. <br>
-You can get a nice html report with parameter `-with-report`:
+Nextflow has an embedded function for reporting a number of informations about the resources needed by each job and the timing: you can get a nice html report with parameter `-with-report`:
 
 ```{java, eval=FALSE, echo=TRUE}
 nextflow run test5.nf -with-docker -bg -with-report > log
@@ -1090,7 +1092,7 @@ To https://github.com/lucacozzuto/test_course.git
 
 ```
 
-If we go back to the GitHub website we can see that eveything has been uploaded.
+If we go back to the GitHub website we can see that everything has been uploaded.
 
 ```{r, out.width="800px", echo=FALSE, eval = TRUE }
 knitr::include_graphics('docs/images/git_2.png')
@@ -1103,7 +1105,7 @@ rm -fr test_course
 cd $HOME
 ```
 
-And we can launch directly this pipeline by typing
+And we can launch directly this pipeline with:
 
 ```{bash, eval=FALSE, echo=TRUE}
 nextflow run lucacozzuto/test_course -with-docker -r main \
@@ -1116,6 +1118,7 @@ As you can see we just use the repository name and two Nextflow parameters:
 
 - `-with-docker`, for using Docker
 - `-r`, for using a specific branch. In this case the **main** branch.
+  <br>
 Then we pass to the pipelines the path of our input files:
 - `--reads`
 - `--reference`
@@ -1145,7 +1148,7 @@ CPU hours   : (a few seconds)
 Succeeded   : 5
 ```
 
-As a first step, Nextflow pulls down the required version of the pipeline and it stores it in:
+Nextflow first pulls down the required version of the pipeline and it stores it in:
 
 ```{bash, eval=FALSE, echo=TRUE}
 /home/ec2-user/.nextflow/assets/lucacozzuto/test_course/
@@ -1192,6 +1195,5 @@ nextflow view lucacozzuto/test_course
  *   CRG_Containers_NextFlow is distributed in the hope that it will be useful,
 [...]
 ```
-
 
 
