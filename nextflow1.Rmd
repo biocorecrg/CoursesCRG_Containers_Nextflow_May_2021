@@ -317,7 +317,7 @@ str = Channel.from('hello', 'hola', 'bonjour')
 
 process printHello {
 
-   tag { str_in } // this is for displaying the content of `str_in` in the log file
+   tag { "${str_in}" } // this is for displaying the content of `str_in` in the log file
 
    input:        
    val str_in
@@ -356,7 +356,7 @@ str = Channel.from('hello', 'hola', 'bonjour')
 
 process printHello {
 
-   tag { str_in }
+   tag { "${str_in}" }
 
    input:        
    val str_in
@@ -477,7 +477,7 @@ str = Channel.from('hello', 'hola', 'bonjour')
 
 process printHello {
 
-   tag { str_in }
+   tag { "${str_in}" }
 
    input:        
    val str_in
@@ -574,7 +574,7 @@ str = Channel.from('hello', 'hola', 'bonjour')
 
 process printHello {
 
-   tag { str_in }
+   tag { "${str_in}" }
 
    input:        
    val str_in
@@ -590,7 +590,7 @@ process printHello {
 
 process printHello2 {
 
-   tag { str_in }
+   tag { "${str_in}" }
 
    input:        
    val str_in
@@ -659,7 +659,7 @@ str = Channel.from('hello', 'hola', 'bonjour')
 
 process printHello {
 
-   tag { str_in }
+   tag { "${str_in}" }
 
    input:        
    val str_in
@@ -756,7 +756,7 @@ process splitSequences {
  */
 
 process reverseSequence {
-    tag "$seq"  				
+    tag { "${seq}" }  				
 
     input:
     path seq
@@ -895,7 +895,7 @@ process splitSequences {
  */
 
 process reverseSequence {
-    tag "$seq"  				
+    tag { "${seq}" }  				
 
     input:
     path seq
@@ -1076,7 +1076,7 @@ First make the process `reverseSequence` failing by creating a mistake in the co
  */
  
 process reverseSequence {
-    tag "$seq"  				
+    tag { "${seq}" }  				
     publishDir "output"
     errorStrategy 'ignore'
 
