@@ -305,7 +305,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The process should become:</p>
 <div class="sourceCode" id="cb188"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb188-1"><a href="exercise-4.html#cb188-1"></a></span>
 <span id="cb188-2"><a href="exercise-4.html#cb188-2"></a>process reverseSequence {</span>
-<span id="cb188-3"><a href="exercise-4.html#cb188-3"></a>    tag <span class="st">&quot;$seq&quot;</span>                  </span>
+<span id="cb188-3"><a href="exercise-4.html#cb188-3"></a>    tag { <span class="st">&quot;${seq}&quot;</span> }                  </span>
 <span id="cb188-4"><a href="exercise-4.html#cb188-4"></a>    publishDir <span class="st">&quot;output&quot;</span></span>
 <span id="cb188-5"><a href="exercise-4.html#cb188-5"></a>    label &#39;ignorefail&#39;</span>
 <span id="cb188-6"><a href="exercise-4.html#cb188-6"></a>    </span>
@@ -342,7 +342,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb190"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb190-1"><a href="exercise-4.html#cb190-1"></a></span>
 <span id="cb190-2"><a href="exercise-4.html#cb190-2"></a>process fastQC {</span>
 <span id="cb190-3"><a href="exercise-4.html#cb190-3"></a>    publishDir fastqcOutputFolder   <span class="co">// where (and whether) to publish the results</span></span>
-<span id="cb190-4"><a href="exercise-4.html#cb190-4"></a>    tag { reads }   <span class="co">// during the execution prints the indicated variable for follow-up</span></span>
+<span id="cb190-4"><a href="exercise-4.html#cb190-4"></a>    tag { <span class="st">&quot;${reads}&quot;</span> }  <span class="co">// during the execution prints the indicated variable for follow-up</span></span>
 <span id="cb190-5"><a href="exercise-4.html#cb190-5"></a>    label &#39;keep_trying&#39; </span>
 <span id="cb190-6"><a href="exercise-4.html#cb190-6"></a></span>
 <span id="cb190-7"><a href="exercise-4.html#cb190-7"></a>    input:</span>

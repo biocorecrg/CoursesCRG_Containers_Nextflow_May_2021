@@ -362,7 +362,7 @@ Let’s inspect the <strong>fastqc</strong> module:</p>
 <span id="cb212-7"><a href="modules-and-re-usage-of-the-code.html#cb212-7"></a></span>
 <span id="cb212-8"><a href="modules-and-re-usage-of-the-code.html#cb212-8"></a>process qc {</span>
 <span id="cb212-9"><a href="modules-and-re-usage-of-the-code.html#cb212-9"></a>    <span class="fu">publishDir</span>(params.<span class="fu">OUTPUT</span>, mode: &#39;copy&#39;)</span>
-<span id="cb212-10"><a href="modules-and-re-usage-of-the-code.html#cb212-10"></a>    tag { reads }</span>
+<span id="cb212-10"><a href="modules-and-re-usage-of-the-code.html#cb212-10"></a>    tag { <span class="st">&quot;${reads}&quot;</span> }</span>
 <span id="cb212-11"><a href="modules-and-re-usage-of-the-code.html#cb212-11"></a>    container params.<span class="fu">CONTAINER</span></span>
 <span id="cb212-12"><a href="modules-and-re-usage-of-the-code.html#cb212-12"></a></span>
 <span id="cb212-13"><a href="modules-and-re-usage-of-the-code.html#cb212-13"></a>    input:</span>

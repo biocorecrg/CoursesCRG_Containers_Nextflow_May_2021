@@ -339,7 +339,7 @@ You can label your processes to make a link with the definitions in the nextflow
 <span id="cb175-3"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb175-3"></a><span class="co"> */</span></span>
 <span id="cb175-4"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb175-4"></a>process fastQC {</span>
 <span id="cb175-5"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb175-5"></a>    publishDir fastqcOutputFolder       </span>
-<span id="cb175-6"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb175-6"></a>    tag { reads }                   </span>
+<span id="cb175-6"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb175-6"></a>    tag { <span class="st">&quot;${reads}&quot;</span> }                      </span>
 <span id="cb175-7"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb175-7"></a>    label &#39;bigmem&#39;</span>
 <span id="cb175-8"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb175-8"></a></span>
 <span id="cb175-9"><a href="decoupling-resources-parameters-and-nextflow-script.html#cb175-9"></a>    input:</span>

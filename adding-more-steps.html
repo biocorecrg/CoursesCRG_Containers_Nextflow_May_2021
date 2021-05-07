@@ -319,7 +319,7 @@ reference = file(params.reference)</code></pre>
 <span id="cb200-2"><a href="adding-more-steps.html#cb200-2"></a><span class="co"> * Process 2. Bowtie index</span></span>
 <span id="cb200-3"><a href="adding-more-steps.html#cb200-3"></a><span class="co"> */</span></span>
 <span id="cb200-4"><a href="adding-more-steps.html#cb200-4"></a>process bowtieIdx {</span>
-<span id="cb200-5"><a href="adding-more-steps.html#cb200-5"></a>    tag { ref }                             </span>
+<span id="cb200-5"><a href="adding-more-steps.html#cb200-5"></a>    tag { <span class="st">&quot;${ref}&quot;</span> }                            </span>
 <span id="cb200-6"><a href="adding-more-steps.html#cb200-6"></a></span>
 <span id="cb200-7"><a href="adding-more-steps.html#cb200-7"></a>    input:</span>
 <span id="cb200-8"><a href="adding-more-steps.html#cb200-8"></a>    path ref                            </span>
@@ -345,7 +345,7 @@ The former is needed for building the command line of the alignment step, the la
 <span id="cb201-4"><a href="adding-more-steps.html#cb201-4"></a>process bowtieAln {</span>
 <span id="cb201-5"><a href="adding-more-steps.html#cb201-5"></a>    publishDir alnOutputFolder, pattern: &#39;*.<span class="fu">sam</span>&#39;</span>
 <span id="cb201-6"><a href="adding-more-steps.html#cb201-6"></a></span>
-<span id="cb201-7"><a href="adding-more-steps.html#cb201-7"></a>    tag { reads }                           </span>
+<span id="cb201-7"><a href="adding-more-steps.html#cb201-7"></a>    tag { <span class="st">&quot;${reads}&quot;</span> }                              </span>
 <span id="cb201-8"><a href="adding-more-steps.html#cb201-8"></a>    label &#39;twocpus&#39;</span>
 <span id="cb201-9"><a href="adding-more-steps.html#cb201-9"></a></span>
 <span id="cb201-10"><a href="adding-more-steps.html#cb201-10"></a>    input:</span>
