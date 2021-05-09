@@ -234,12 +234,12 @@ ls /mnt
 
 ```
 
-Your number can be different (i.e. class-bucket-2, class-bucket-3, etc) since we have one bucket per student. Let's copy the **multiqc_output.html** file there and let's change the privileges.
+Your number can be different (i.e. class-bucket-2, class-bucket-3, etc) since we have one bucket per student. Let's copy the **multiqc_report.html** file there and let's change the privileges.
 
 ```{bash, eval=FALSE, echo=TRUE}
-cp output_multiQC/multiqc_output.html /mnt/class-bucket-1
+cp output_multiQC/multiqc_report.html /mnt/class-bucket-1
 
-sudo chmod 775 /mnt/class-bucket-1/multiqc_output.html 
+sudo chmod 775 /mnt/class-bucket-1/multiqc_report.html 
 ```
 
 Now you can see via browser at at:
